@@ -60,47 +60,47 @@ const filteredPosts = await Promise.all(
 
 <style>
 	.archive-section {
-		max-width: var(--wide-width);
+		max-width: var(--container-max);
 		margin: 0 auto;
-		padding: var(--spacing-12) var(--spacing-6);
+		padding: 48px 24px;
 	}
 
 	.archive-header {
-		margin-bottom: var(--spacing-12);
-		padding-bottom: var(--spacing-8);
-		border-bottom: 1px solid var(--color-border-subtle);
+		margin-bottom: 48px;
+		padding-bottom: 32px;
+		border-bottom: 1px solid rgba(30,30,30,0.1);
 	}
 
 	.archive-label {
 		display: block;
-		font-size: var(--font-size-xs);
+		font-size: 12px;
 		font-weight: 500;
 		color: var(--color-accent);
 		text-transform: uppercase;
-		letter-spacing: var(--tracking-wider);
-		margin-bottom: var(--spacing-2);
+		letter-spacing: 0.08em;
+		margin-bottom: 8px;
 	}
 
 	.archive-title {
-		font-size: var(--font-size-4xl);
+		font-size: 40px;
 		font-weight: 700;
-		letter-spacing: var(--tracking-tight);
-		margin-bottom: var(--spacing-2);
+		letter-spacing: -0.02em;
+		margin-bottom: 8px;
 	}
 
 	.archive-count {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
+		font-size: 14px;
+		color: rgba(30,30,30,0.5);
 	}
 
 	.posts-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: var(--spacing-12) var(--spacing-8);
+		gap: 48px 32px;
 	}
 
 	.no-posts {
-		color: var(--color-muted);
+		color: rgba(30,30,30,0.5);
 	}
 
 	@media (max-width: 900px) {

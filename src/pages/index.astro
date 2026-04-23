@@ -1,450 +1,391 @@
 ---
-import { getEmDashCollection, getEntryTerms, getSiteSettings } from "emdash";
-import { Image } from "emdash/ui";
+/**
+ * Homepage — pixel-perfect clone, semantic HTML, mobile-first CSS.
+ *
+ * Sections (matching original Elementor structure):
+ * 1. Hero — min-height 100vh-150px, cubo-home.svg bg, fadeIn animations
+ * 2. "Tecnología que impulsa tu negocio" — dark (#1E1E1E) bg, 2-col
+ * 3. Cloudflare Partner — centered bordered card, logo + 3 features
+ * 4. "Áreas de especialización" — 2-col (sticky header + stacking pastel cards)
+ * 5. CTA — dark bg, heading at 70% width, button
+ */
 import Base from "../layouts/Base.astro";
-import PostCard from "../components/PostCard.astro";
-import { getReadingTime } from "../utils/reading-time";
-import { resolveBlogSiteIdentity } from "../utils/site-identity";
 
-const { entries: posts, cacheHint } = await getEmDashCollection("posts");
-const { siteTitle, siteTagline } = resolveBlogSiteIdentity(await getSiteSettings());
-
+const cacheHint = { maxAge: 3600 };
 Astro.cache.set(cacheHint);
-
-const sortedPosts = posts.toSorted((a, b) => {
-	const dateA = a.data.publishedAt?.getTime() ?? 0;
-	const dateB = b.data.publishedAt?.getTime() ?? 0;
-	return dateB - dateA;
-});
-
-// Find the first post with a featured image for the hero
-const featuredPost = sortedPosts.find((p) => p.data.featured_image);
-const featuredIndex = featuredPost ? sortedPosts.indexOf(featuredPost) : -1;
-
-// Get remaining posts (exclude featured if found, limit to 6 for grid)
-const gridPosts = sortedPosts.filter((_, i) => i !== featuredIndex).slice(0, 6);
-
-// Total posts shown = featured (if any) + grid posts
-const totalShown = (featuredPost ? 1 : 0) + gridPosts.length;
-const hasMorePosts = sortedPosts.length > totalShown;
-
-// Fetch tags for featured post (bylines are already hydrated by getEmDashCollection)
-let featuredTags: Array<{ slug: string; label: string }> = [];
-const featuredBylines = featuredPost?.data.bylines ?? [];
-if (featuredPost) {
-	const tags = await getEntryTerms("posts", featuredPost.data.id, "tag");
-	featuredTags = tags.map((t) => ({ slug: t.slug, label: t.label }));
-}
-
-// Fetch tags for grid posts (bylines are already hydrated by getEmDashCollection)
-const gridPostsWithTags = await Promise.all(
-	gridPosts.map(async (post) => {
-		const tags = await getEntryTerms("posts", post.data.id, "tag");
-		const bylines = post.data.bylines ?? [];
-		return {
-			post,
-			tags: tags.map((t) => ({ slug: t.slug, label: t.label })),
-			bylines,
-		};
-	})
-);
-
-// Format date helper
-function formatDate(date: Date | null | undefined) {
-	if (!date) return null;
-	return date.toLocaleDateString("en-US", {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	});
-}
 ---
 
-<Base title={siteTitle} description={siteTagline}>
-	{
-		posts.length === 0 ? (
-			<section class="empty-state">
-				<h2>No posts yet</h2>
-				<p>Create your first post in the admin panel.</p>
-				<a href="/_emdash/admin/content/posts/new" class="btn">
-					Create a post
-				</a>
-			</section>
-		) : (
-			<div class="home-content">
-				{/* Featured Post - Side by side */}
-				{featuredPost && (
-					<section class="featured-section">
-						<div class="featured-grid">
-							<a href={`/posts/${featuredPost.id}`} class="featured-image-link">
-								<div class="featured-image">
-									<Image image={featuredPost.data.featured_image} />
-								</div>
-							</a>
-							<div class="featured-content">
-								<div class="featured-meta">
-									{featuredBylines.length > 0 && (
-										<>
-											<div class="featured-bylines">
-												{featuredBylines.slice(0, 2).map((credit, index) => (
-													<>
-														{index > 0 && <span class="byline-sep">,</span>}
-														<span class="featured-byline">
-															{credit.byline.avatarMediaId && (
-																<img
-																	src={`/_emdash/api/media/file/${credit.byline.avatarMediaId}`}
-																	alt={credit.byline.displayName}
-																	class="featured-byline-avatar"
-																/>
-															)}
-															<span class="featured-byline-name">
-																{credit.byline.displayName}
-															</span>
-														</span>
-													</>
-												))}
-												{featuredBylines.length > 2 && (
-													<span class="byline-more">
-														+{featuredBylines.length - 2}
-													</span>
-												)}
-											</div>
-											<span class="meta-dot" />
-										</>
-									)}
-									{formatDate(featuredPost.data.publishedAt) && (
-										<time>{formatDate(featuredPost.data.publishedAt)}</time>
-									)}
-									<span class="meta-dot" />
-									<span>
-										{getReadingTime(featuredPost.data.content)} min read
-									</span>
-								</div>
-								<a
-									href={`/posts/${featuredPost.id}`}
-									class="featured-title-link"
-								>
-									<h1 class="featured-title">{featuredPost.data.title}</h1>
-								</a>
-								{featuredPost.data.excerpt && (
-									<p class="featured-excerpt">{featuredPost.data.excerpt}</p>
-								)}
-								{featuredTags.length > 0 && (
-									<div class="featured-tags">
-										{featuredTags.map((tag) => (
-											<a href={`/tag/${tag.slug}`} class="featured-tag">
-												{tag.label}
-											</a>
-										))}
-									</div>
-								)}
-							</div>
-						</div>
-					</section>
-				)}
-
-				{/* Latest Posts */}
-				{gridPostsWithTags.length > 0 && (
-					<section class="posts-section">
-						<header class="section-header">
-							<h2 class="section-title">Latest</h2>
-							{hasMorePosts && (
-								<a href="/posts" class="section-link">
-									View all
-								</a>
-							)}
-						</header>
-						<div class="posts-grid">
-							{gridPostsWithTags.map(({ post, tags, bylines }) => (
-								<PostCard
-									title={post.data.title ?? "Untitled"}
-									excerpt={post.data.excerpt}
-									featuredImage={post.data.featured_image}
-									href={`/posts/${post.id}`}
-									date={post.data.publishedAt ?? undefined}
-									readingTime={getReadingTime(post.data.content)}
-									tags={tags}
-									bylines={bylines}
-								/>
-							))}
-						</div>
-					</section>
-				)}
+<Base
+	title="Ingeniería de Sistemas, Integración y Seguridad Edge"
+	description="Construimos arquitecturas completas capa a capa. Ingeniería Greenfield, integración de sistemas, comercio electrónico y seguridad edge."
+>
+	<!-- ══════ SECTION 1: HERO ══════ -->
+	<section class="s-hero" aria-label="Introducción">
+		<div class="container s-hero__inner">
+			<h1>Ingeniería de Sistemas, Integración y Seguridad Edge</h1>
+			<p class="text-sub s-hero__kicker">
+				Construimos arquitecturas completas <span class="marked"><strong>capa a capa</strong></span>
+			</p>
+			<div class="s-hero__body">
+				<p>Cimentamos con ingeniería <em>Greenfield</em> sólida, conectamos sistemas de forma resiliente, impulsamos el negocio con plataformas de comercio electrónico y blindamos el perímetro con seguridad edge.</p>
+				<p>Gestionamos tu tecnología como un activo estratégico unificado, robusto y gobernable.</p>
 			</div>
-		)
-	}
+			<a href="#areas-especializacion" class="btn btn-dark">Nuestros servicios</a>
+		</div>
+	</section>
+
+	<!-- ══════ SECTION 2: TECNOLOGÍA QUE IMPULSA TU NEGOCIO ══════ -->
+	<section class="s-tech" aria-label="Tecnología que impulsa tu negocio">
+		<div class="container s-tech__inner">
+			<div class="s-tech__col-left">
+				<h2>~ Tecnología que impulsa tu negocio</h2>
+			</div>
+			<div class="s-tech__col-right">
+				<p class="text-sub s-tech__subtitle">Somos un equipo pequeño de <span class="marked">ingenieros</span></p>
+				<p class="s-tech__body">Huimos de las metodologías rígidas y nos centramos en entender el contexto de cada proyecto. Aplicamos juicio técnico y cuidamos la calidad de los entregables porque creemos que es la única forma sostenible de construir software.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════ SECTION 3: CLOUDFLARE PARTNER ══════ -->
+	<section class="s-cf" aria-label="Cloudflare Partner">
+		<div class="container s-cf__wrapper">
+			<article class="s-cf__card">
+				<img
+					src="https://www.serverstartup.io/wp-content/uploads/logo-cloudflare.svg"
+					alt="Cloudflare"
+					width="268"
+					class="s-cf__logo"
+					loading="lazy"
+				/>
+				<h3>Cloudflare Partner oficial</h3>
+				<p class="text-body s-cf__desc">Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare</p>
+
+				<div class="s-cf__features" role="list">
+					<div class="s-cf__feature" role="listitem">
+						<h4>CDN global</h4>
+						<p class="text-body">para mejorar la velocidad de carga</p>
+					</div>
+					<div class="s-cf__feature" role="listitem">
+						<h4>WAF y Zero Trust</h4>
+						<p class="text-body">para reforzar la seguridad</p>
+					</div>
+					<div class="s-cf__feature" role="listitem">
+						<h4>Workers y Edge Computing</h4>
+						<p class="text-body">para arquitecturas modernas y flexibles</p>
+					</div>
+				</div>
+
+				<a href="/cdn-waf-seguridad-edge-cloudflare" class="btn btn-dark">Descubre más sobre Cloudflare</a>
+			</article>
+		</div>
+	</section>
+
+	<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN ══════ -->
+	<section class="s-areas" id="areas-especializacion" aria-label="Áreas de especialización">
+		<div class="container s-areas__inner">
+			<!-- Left: sticky header -->
+			<div class="s-areas__header">
+				<h2>~ Áreas de especialización</h2>
+				<p class="text-sub">Abarcamos todas las capas del entorno tecnológico, desde la base de datos hasta la seguridad en la nube.</p>
+			</div>
+
+			<!-- Right: stacking cards -->
+			<div class="s-areas__cards" role="list">
+				<article class="area-card card1" style="background-color: var(--color-card-blue);" role="listitem">
+					<h3>Comercio electrónico</h3>
+					<p class="text-body">Infraestructuras optimizadas para plataformas como SAP Commerce Cloud u Ocado Smart Platform. Creamos entornos escalables y preparados para un alto volumen de tráfico.</p>
+					<a href="/comercio-electronico" class="area-card__arrow" aria-label="Ver comercio electrónico">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</a>
+				</article>
+
+				<article class="area-card card2" style="background-color: var(--color-card-yellow);" role="listitem">
+					<h3>CDN, WAF &amp; Edge Security</h3>
+					<p class="text-body">Aumenta la velocidad y seguridad de tu web con Cloudflare. Configuramos CDN, WAF y sistemas Zero Trust para proteger y optimizar tus aplicaciones.</p>
+					<a href="/cdn-waf-seguridad-edge-cloudflare" class="area-card__arrow" aria-label="Ver CDN, WAF y Edge Security">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</a>
+				</article>
+
+				<article class="area-card card3" style="background-color: var(--color-card-teal);" role="listitem">
+					<h3>Big Data &amp; Cloud Analytics</h3>
+					<p class="text-body">Arquitecturas de datos en Google Cloud Platform con dbt, BigQuery y Dataflow. Transformamos la información en decisiones útiles para tu negocio.</p>
+					<a href="/big-data-cloud-analytics" class="area-card__arrow" aria-label="Ver Big Data y Cloud Analytics">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</a>
+				</article>
+
+				<article class="area-card card4" style="background-color: var(--color-card-pink);" role="listitem">
+					<h3>Integración de sistemas</h3>
+					<p class="text-body">Conectamos sistemas complejos mediante Apache Camel, Talend o Gravitee API Manager, garantizando fluidez y trazabilidad.</p>
+					<a href="/integracion-de-sistemas" class="area-card__arrow" aria-label="Ver Integración de sistemas">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</a>
+				</article>
+
+				<article class="area-card card5" style="background-color: var(--color-card-green);" role="listitem">
+					<h3>Desarrollo backend a medida</h3>
+					<p class="text-body">APIs, microservicios y soluciones escalables. Diseñamos sistemas sólidos, listos para evolucionar contigo.</p>
+					<a href="/ingenieria-greenfield-y-sistemas-criticos" class="area-card__arrow" aria-label="Ver Desarrollo backend a medida">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</a>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════ SECTION 5: CTA ══════ -->
+	<section class="s-cta" aria-label="Contacta con nosotros">
+		<div class="container s-cta__inner">
+			<h2 class="s-cta__heading">¿Listo para optimizar tu infraestructura digital?</h2>
+			<p class="text-sub s-cta__subtitle">Hablemos de ingeniero a ingeniero, con el negocio en el centro.</p>
+			<p class="text-body s-cta__body">Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo. Sin comerciales, solo soluciones.</p>
+			<a href="/contacto" class="btn btn-light">Contacta ahora</a>
+		</div>
+	</section>
 </Base>
 
 <style>
-	.home-content {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: var(--spacing-16) var(--spacing-6);
+	/* ═══ HERO — mobile-first ═══ */
+	.s-hero {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		min-height: auto;
+		padding: 16px 0 40px;
+		/* Offset for fixed header */
+		padding-top: calc(80px + 16px);
+		background-image: url("https://www.serverstartup.io/wp-content/uploads/cubo-home.svg");
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: auto;
 	}
 
-	/* Featured Section - Side by side */
-	.featured-section {
-		margin-bottom: var(--spacing-16);
+	.s-hero__kicker {
+		margin-top: var(--widget-spacing);
 	}
 
-	.featured-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--spacing-8);
-		align-items: center;
+	.s-hero__body {
+		margin-top: 24px;
+	}
+	.s-hero__body p {
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 26px;
+		margin-block-end: 12px;
 	}
 
-	.featured-image-link {
-		grid-column: 1 / 3;
-		display: block;
-		/* Extend to viewport edge, but cap at -6rem minimum extension */
-		margin-left: min(
-			-6rem,
-			calc(-1 * (var(--spacing-6) + (100vw - var(--wide-width)) / 2))
-		);
+	.s-hero .btn {
+		margin-top: 32px;
 	}
 
-	.featured-image {
-		overflow: hidden;
-		border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-		background: var(--color-surface);
+	@media (min-width: 768px) {
+		.s-hero {
+			padding: 0;
+			padding-top: 0;
+			min-height: calc(100vh - 150px);
+		}
 	}
 
-	.featured-image img {
+	/* ═══ TECH SECTION — dark bg, 2-col ═══ */
+	.s-tech {
+		background-color: var(--color-primary);
+		padding: 32px 0;
+	}
+
+	.s-tech__inner {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	.s-tech__col-left h2 {
+		color: var(--color-secondary);
+	}
+
+	.s-tech__subtitle {
+		color: var(--color-secondary);
+	}
+
+	.s-tech__body {
+		color: var(--color-secondary);
+		margin-top: 16px;
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 26px;
+	}
+
+	@media (min-width: 768px) {
+		.s-tech { padding: 40px 0; }
+		.s-tech__inner { flex-direction: row; align-items: center; gap: 40px; }
+		.s-tech__col-left,
+		.s-tech__col-right { flex: 1; }
+	}
+
+	@media (min-width: 1025px) {
+		.s-tech { padding: 80px 0; }
+	}
+
+	/* ═══ CLOUDFLARE SECTION — centered bordered card ═══ */
+	.s-cf {
+		padding: 40px 0;
+	}
+
+	.s-cf__wrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	.s-cf__card {
 		width: 100%;
-		height: auto;
-		aspect-ratio: 4 / 3;
-		object-fit: cover;
-		transition: transform 0.4s ease;
-	}
-
-	.featured-image-link:hover .featured-image img,
-	.featured-grid:has(.featured-title-link:hover) .featured-image img {
-		transform: scale(1.02);
-	}
-
-	.featured-content {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-4);
-	}
-
-	.featured-meta {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		column-gap: var(--spacing-3);
-		row-gap: var(--spacing-1);
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-	}
-
-	.meta-dot {
-		width: 3px;
-		height: 3px;
-		border-radius: 50%;
-		background: var(--color-muted);
-	}
-
-	/* Featured bylines */
-	.featured-bylines {
-		display: flex;
-		align-items: center;
-		gap: 2px;
-	}
-
-	.featured-byline {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--spacing-2);
-	}
-
-	.featured-byline-avatar {
-		width: var(--avatar-size-md);
-		height: var(--avatar-size-md);
-		border-radius: 50%;
-		object-fit: cover;
-	}
-
-	.featured-byline-name {
-		font-weight: 500;
-		color: var(--color-text-secondary);
-	}
-
-	.byline-sep {
-		color: var(--color-muted);
-		margin-right: 2px;
-	}
-
-	.byline-more {
-		font-size: var(--font-size-xs);
-		color: var(--color-muted);
-		margin-left: 2px;
-	}
-
-	.featured-title-link {
-		text-decoration: none;
-		color: inherit;
-	}
-
-	.featured-title {
-		font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
-		font-weight: 700;
-		line-height: var(--leading-tight);
-		letter-spacing: var(--tracking-tight);
-		transition: color var(--transition-fast);
-	}
-
-	.featured-title-link:hover .featured-title,
-	.featured-grid:has(.featured-image-link:hover) .featured-title {
-		color: var(--color-accent);
-	}
-
-	.featured-excerpt {
-		font-size: var(--font-size-lg);
-		line-height: var(--leading-relaxed);
-		color: var(--color-text-secondary);
-	}
-
-	.featured-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--spacing-2);
-		margin-top: var(--spacing-2);
-	}
-
-	.featured-tag {
-		display: inline-block;
-		padding: var(--spacing-1) var(--spacing-3);
-		font-size: var(--font-size-sm);
-		color: var(--color-text-secondary);
-		background: var(--color-surface);
-		border-radius: var(--radius);
-		text-decoration: none;
-		transition:
-			color var(--transition-fast),
-			background var(--transition-fast);
-	}
-
-	.featured-tag:hover {
-		color: var(--color-text);
-		background: var(--color-border);
-	}
-
-	/* Section header */
-	.section-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		margin-bottom: var(--spacing-8);
-		padding-bottom: var(--spacing-4);
-		border-bottom: 1px solid var(--color-border-subtle);
-	}
-
-	.section-title {
-		font-size: var(--font-size-sm);
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: var(--tracking-wider);
-		color: var(--color-muted);
-	}
-
-	.section-link {
-		font-size: var(--font-size-sm);
-		color: var(--color-accent);
-		text-decoration: none;
-		transition: color var(--transition-fast);
-	}
-
-	.section-link:hover {
-		color: var(--color-accent-hover);
-	}
-
-	/* Posts Grid */
-	.posts-section {
-	}
-
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--spacing-12) var(--spacing-8);
-	}
-
-	/* Empty State */
-	.empty-state {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: var(--spacing-3);
+		border: 1px solid var(--color-primary);
+		padding: 32px;
 		text-align: center;
-		padding: var(--spacing-20) var(--spacing-6);
-		max-width: 400px;
-		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
-	.empty-state h2 {
-		font-size: var(--font-size-2xl);
-		font-weight: 600;
+	.s-cf__logo {
+		margin-bottom: 24px;
 	}
 
-	.empty-state p {
-		color: var(--color-muted);
+	.s-cf__desc {
+		margin-top: 24px;
 	}
 
-	.btn {
-		display: inline-block;
-		margin-top: var(--spacing-4);
-		padding: var(--spacing-3) var(--spacing-6);
-		background: var(--color-accent);
-		color: var(--color-on-accent);
+	.s-cf__features {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin: 32px 0;
+		width: 100%;
+	}
+
+	.s-cf__feature {
+		text-align: center;
+	}
+
+	.s-cf__feature p {
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 26px;
+	}
+
+	@media (min-width: 768px) {
+		.s-cf { padding: 80px 0; }
+		.s-cf__card { width: 90%; max-width: 1000px; }
+		.s-cf__features { flex-direction: row; gap: 6px; }
+		.s-cf__feature { flex: 1; }
+	}
+
+	@media (min-width: 1025px) {
+		.s-cf__card { width: 80%; }
+	}
+
+	/* ═══ ÁREAS — 2-col with sticky cards ═══ */
+	.s-areas {
+		padding: 40px 0;
+	}
+
+	.s-areas__inner {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.s-areas__header .text-sub {
+		margin-top: var(--widget-spacing);
+	}
+
+	.s-areas__cards {
+		display: flex;
+		flex-direction: column;
+		gap: 120px;
+	}
+
+	/* Individual cards */
+	.area-card {
+		border-radius: var(--card-radius);
+		box-shadow: var(--card-shadow);
+		padding: 24px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.area-card h3 {
+		margin-bottom: 0;
+	}
+
+	.area-card .text-body {
+		margin-top: 0;
+	}
+
+	.area-card__arrow {
+		display: flex;
+		justify-content: flex-end;
+		color: var(--color-primary);
+		margin-top: 16px;
 		text-decoration: none;
-		border-radius: var(--radius);
-		font-size: var(--font-size-sm);
-		font-weight: 500;
-		transition: background var(--transition-fast);
 	}
 
-	.btn:hover {
-		background: var(--color-accent-hover);
+	@media (min-width: 768px) {
+		.s-areas { padding: 80px 0; }
+		.s-areas__inner { flex-direction: row; gap: 60px; }
+
+		.s-areas__header {
+			flex: 0 0 auto;
+			max-width: 400px;
+			position: sticky;
+			top: 120px;
+			align-self: flex-start;
+			z-index: 1;
+		}
+
+		.s-areas__cards {
+			flex: 1;
+			gap: 300px;
+		}
+
+		/* Sticky positions (from custom.css — exact values) */
+		.card1 { position: sticky; top: calc(50% - 150px); z-index: 1; }
+		.card2 { position: sticky; top: calc(50% - 130px); z-index: 2; }
+		.card3 { position: sticky; top: calc(50% - 110px); z-index: 3; }
+		.card4 { position: sticky; top: calc(50% - 90px);  z-index: 4; }
+		.card5 { position: sticky; top: calc(50% - 70px);  z-index: 5; }
 	}
 
-	/* Responsive */
-	@media (max-width: 900px) {
-		.home-content {
-			padding: var(--spacing-6) var(--spacing-4) var(--spacing-12);
-		}
-
-		.featured-image-link {
-			margin-left: 0;
-		}
-
-		.featured-grid {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-6);
-		}
-
-		.featured-image {
-			border-radius: var(--radius-lg);
-		}
-
-		.featured-image img {
-			aspect-ratio: 16 / 9;
-		}
-
-		.posts-grid {
-			grid-template-columns: repeat(2, 1fr);
-			gap: var(--spacing-8) var(--spacing-6);
-		}
+	/* ═══ CTA — dark bg ═══ */
+	.s-cta {
+		background-color: var(--color-primary);
+		padding: 80px 0;
 	}
 
-	@media (max-width: 600px) {
-		.featured-title {
-			font-size: var(--font-size-2xl);
-		}
+	.s-cta__heading {
+		color: var(--color-secondary);
+		width: 100%;
+	}
 
-		.posts-grid {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-8);
-		}
+	.s-cta__subtitle {
+		color: var(--color-secondary);
+	}
+
+	.s-cta__body {
+		color: var(--color-secondary);
+		margin-top: 16px;
+	}
+
+	.s-cta .btn {
+		margin-top: 32px;
+	}
+
+	@media (min-width: 768px) {
+		.s-cta__heading { width: 70%; }
+	}
+
+	@media (min-width: 1025px) {
+		.s-cta { padding: 80px 0; }
 	}
 </style>

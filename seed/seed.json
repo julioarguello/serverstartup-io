@@ -2,17 +2,70 @@
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
 	"meta": {
-		"name": "Blog Starter",
-		"description": "A blog with posts and pages",
-		"author": "EmDash"
+		"name": "Server Startup",
+		"description": "Consultoría tecnológica y arquitectura backend",
+		"author": "Server Startup"
 	},
 
 	"settings": {
-		"title": "My Blog",
-		"tagline": "Thoughts on building for the web"
+		"title": "Server Startup",
+		"tagline": "Ingeniería de Sistemas, Integración y Seguridad Edge"
 	},
 
 	"collections": [
+		{
+			"slug": "elementor_library",
+			"label": "Elementor Library",
+			"labelSingular": "Elementor Block",
+			"supports": ["revisions"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string" },
+				{ "slug": "content", "label": "Content", "type": "portableText" }
+			]
+		},
+		{
+			"slug": "members",
+			"label": "Miembros",
+			"labelSingular": "Miembro",
+			"supports": ["revisions", "search"],
+			"fields": [
+				{ "slug": "title", "label": "Nombre", "type": "string", "required": true, "searchable": true },
+				{ "slug": "featured_image", "label": "Foto", "type": "image" },
+				{ "slug": "excerpt", "label": "Rol", "type": "text" },
+				{ "slug": "content", "label": "Biografía", "type": "portableText" }
+			]
+		},
+		{
+			"slug": "services",
+			"label": "Servicios",
+			"labelSingular": "Servicio",
+			"supports": ["drafts", "revisions", "search", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Icon/Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Short Description",
+					"type": "text"
+				}
+			]
+		},
 		{
 			"slug": "posts",
 			"label": "Posts",
@@ -113,11 +166,15 @@
 	"menus": [
 		{
 			"name": "primary",
-			"label": "Primary Navigation",
+			"label": "Navegación principal",
 			"items": [
-				{ "type": "custom", "label": "Home", "url": "/" },
-				{ "type": "custom", "label": "About", "url": "/pages/about" },
-				{ "type": "custom", "label": "Posts", "url": "/posts" }
+				{ "type": "custom", "label": "Ingeniería Greenfield", "url": "/ingenieria-greenfield-y-sistemas-criticos" },
+				{ "type": "custom", "label": "Integración", "url": "/integracion-de-sistemas" },
+				{ "type": "custom", "label": "E-commerce", "url": "/comercio-electronico" },
+				{ "type": "custom", "label": "Big Data", "url": "/big-data-cloud-analytics" },
+				{ "type": "custom", "label": "CDN", "url": "/cdn-waf-seguridad-edge-cloudflare" },
+				{ "type": "custom", "label": "Quiénes somos", "url": "/quienes-somos" },
+				{ "type": "custom", "label": "Contacto", "url": "/contacto" }
 			]
 		}
 	],
@@ -235,6 +292,118 @@
 	],
 
 	"content": {
+		"services": [
+			{
+				"id": "svc-greenfield",
+				"slug": "ingenieria-greenfield-y-sistemas-criticos",
+				"status": "published",
+				"data": {
+					"title": "Ingeniería Greenfield y Sistemas Críticos",
+					"excerpt": "Diseñamos, construimos y operamos infraestructuras desde cero para aplicaciones críticas.",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Diseñamos y construimos desde cero sistemas que no pueden fallar. Infraestructuras greenfield con foco en rendimiento, escalabilidad y disponibilidad para aplicaciones de misión crítica." }] }
+					]
+				}
+			},
+			{
+				"id": "svc-integracion",
+				"slug": "integracion-de-sistemas",
+				"status": "published",
+				"data": {
+					"title": "Integración de sistemas",
+					"excerpt": "Conectamos tus sistemas heredados con plataformas modernas mediante APIs y mensajería.",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Conectamos los sistemas que hacen funcionar tu negocio. APIs REST, GraphQL, mensajería asíncrona con Kafka, RabbitMQ y pipelines de datos en tiempo real." }] }
+					]
+				}
+			},
+			{
+				"id": "svc-ecommerce",
+				"slug": "comercio-electronico",
+				"status": "published",
+				"data": {
+					"title": "E-commerce",
+					"excerpt": "Consultoría técnica para plataformas de comercio electrónico de alto rendimiento.",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Infraestructura técnica para plataformas e-commerce de alto rendimiento. Catálogos masivos, checkout optimizado y escalabilidad horizontal." }] }
+					]
+				}
+			},
+			{
+				"id": "svc-bigdata",
+				"slug": "big-data-cloud-analytics",
+				"status": "published",
+				"data": {
+					"title": "Big Data & Cloud Analytics",
+					"excerpt": "Arquitecturas de datos en la nube para procesamiento masivo y analytics en tiempo real.",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Arquitecturas de datos en la nube para decisiones basadas en evidencia. BigQuery, Snowflake, dbt, Airflow, streaming y dashboards analíticos." }] }
+					]
+				}
+			},
+			{
+				"id": "svc-cdn",
+				"slug": "cdn-waf-seguridad-edge-cloudflare",
+				"status": "published",
+				"data": {
+					"title": "CDN, WAF y Seguridad Edge",
+					"excerpt": "Partners certificados de Cloudflare. Rendimiento y seguridad en el edge.",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Partners certificados de Cloudflare. Implementamos y optimizamos Workers, Pages, R2, D1, CDN, WAF y Zero Trust para nuestros clientes." }] }
+					]
+				}
+			}
+		],
+		"members": [
+			{
+				"id": "member-julio",
+				"slug": "julio-arguello",
+				"status": "published",
+				"data": {
+					"title": "Julio Argüello",
+					"excerpt": "Fundador & Lead Architect",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Arquitecto de sistemas con más de 15 años de experiencia en infraestructura cloud, sistemas distribuidos y consultoría tecnológica." }] }
+					]
+				}
+			},
+			{
+				"id": "member-ariadna",
+				"slug": "ariadna",
+				"status": "published",
+				"data": {
+					"title": "Ariadna",
+					"excerpt": "Backend Engineer",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Ingeniera backend especializada en microservicios, APIs y sistemas de mensajería." }] }
+					]
+				}
+			},
+			{
+				"id": "member-raul",
+				"slug": "raul",
+				"status": "published",
+				"data": {
+					"title": "Raúl",
+					"excerpt": "Data Engineer",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Ingeniero de datos con experiencia en BigQuery, dbt, pipelines ETL y arquitecturas de datos en la nube." }] }
+					]
+				}
+			},
+			{
+				"id": "member-daniel",
+				"slug": "daniel",
+				"status": "published",
+				"data": {
+					"title": "Daniel",
+					"excerpt": "Cloud & DevOps Engineer",
+					"content": [
+						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Ingeniero cloud y DevOps especializado en GCP, Cloudflare, infraestructura como código y CI/CD." }] }
+					]
+				}
+			}
+		],
 		"pages": [
 			{
 				"id": "about",

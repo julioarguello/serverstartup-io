@@ -1,108 +1,184 @@
 /*
-  theme.css -- override any :root variable here to retheme the blog.
+ * Server Startup — Design System
+ * EXACT values extracted from Elementor Kit (post-8.css).
+ * Mobile-first: base = mobile, @media (min-width:768px) = tablet, @media (min-width:1025px) = desktop.
+ */
 
-  This is the only file you need to edit to customize the site's visual
-  appearance. All defaults are listed below as comments. Uncomment and
-  change any value to override it.
-
-  Base.astro puts its defaults inside @layer base, so declarations here
-  (which are unlayered) always take priority -- no specificity tricks needed.
-
-  Note: this template defines explicit dark mode colors in Base.astro.
-  Overriding light-mode --color-* variables here won't affect dark mode.
-  To customize dark mode, also override --color-* variables inside a
-  @media (prefers-color-scheme: dark) block and/or in the :root.dark rule.
-*/
-
+/* ─────────────────────────────────────────
+   Design Tokens
+   ───────────────────────────────────────── */
 :root {
-	/* --- Colors ---
-	--color-bg: #ffffff;
-	--color-bg-subtle: #fafafa;
-	--color-text: #1a1a1a;
-	--color-text-secondary: #525252;
-	--color-muted: #8b8b8b;
-	--color-border: #e5e5e5;
-	--color-border-subtle: #f0f0f0;
-	--color-surface: #f7f7f7;
-	--color-accent: #0066cc;
-	--color-accent-hover: #0052a3;
-	--color-on-accent: white;
-	--color-accent-ring: color-mix(in srgb, var(--color-accent) 25%, transparent);
-	*/
+	/* Brand colors (kit-8 globals) */
+	--color-primary: #1E1E1E;
+	--color-secondary: #FFFFFF;
+	--color-text: #1E1E1E;
+	--color-accent: #1E1E1E;
 
-	/* --- Type scale ---
-	--font-size-xs: 0.8125rem;
-	--font-size-sm: 0.875rem;
-	--font-size-base: 1rem;
-	--font-size-lg: 1.125rem;
-	--font-size-xl: 1.25rem;
-	--font-size-2xl: 1.5rem;
-	--font-size-3xl: 2rem;
-	--font-size-4xl: 2.5rem;
-	--font-size-5xl: 3.5rem;
-	*/
+	/* Service card pastel palette */
+	--color-card-blue: #B5E6F7;
+	--color-card-yellow: #FDEBB6;
+	--color-card-teal: #BFEDEE;
+	--color-card-pink: #ECDCE3;
+	--color-card-green: #C5EFCD;
 
-	/* --- Line heights ---
-	--leading-tight: 1.15;
-	--leading-snug: 1.3;
-	--leading-normal: 1.5;
-	--leading-relaxed: 1.7;
-	*/
+	/* Interactions */
+	--color-btn-hover: #CACACA;
+	--color-btn-cta-hover: #E7EAED;
+	--color-marked: rgba(206, 212, 218, 0.50);
 
-	/* --- Letter spacing ---
-	--tracking-tight: -0.03em;    used on h1 and large titles
-	--tracking-snug: -0.02em;     used on h2–h6, site/card titles
-	--tracking-wide: 0.06em;      used on meta labels, TOC/widget titles
-	--tracking-wider: 0.08em;     used on footer headings, section labels
-	*/
+	/* Typography */
+	--font-family: "Alexandria", sans-serif;
 
-	/* --- Spacing ---
-	--spacing-1: 0.25rem;
-	--spacing-2: 0.5rem;
-	--spacing-3: 0.75rem;
-	--spacing-4: 1rem;
-	--spacing-5: 1.25rem;
-	--spacing-6: 1.5rem;
-	--spacing-8: 2rem;
-	--spacing-10: 2.5rem;
-	--spacing-12: 3rem;
-	--spacing-16: 4rem;
-	--spacing-20: 5rem;
-	--spacing-24: 6rem;
-	*/
+	/* Layout */
+	--container-max: 1440px;
+	--section-padding: 80px;
+	--card-radius: 24px;
+	--card-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+	--widget-spacing: 20px;
+}
 
-	/* --- Layout ---
-	--content-width: 680px;       article/page body column width
-	--wide-width: 1200px;         max container width (home, archives)
-	--gutter-width: 200px;        right sidebar column (TOC) on article pages
-	--meta-col-width: 180px;      left meta column on article pages
-	--nav-height: 64px;           sticky header height
-	--search-input-width: 180px;  nav search box width
-	*/
+/* ─────────────────────────────────────────
+   Global Reset
+   ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-	/* --- Borders & radius ---
-	--radius: 4px;
-	--radius-lg: 8px;
-	*/
+html { scroll-behavior: smooth; }
 
-	/* --- Transitions ---
-	--transition-fast: 120ms ease;
-	--transition-base: 180ms ease;
-	*/
+body {
+	font-family: var(--font-family);
+	font-size: 16px;             /* mobile base */
+	font-weight: 300;
+	line-height: 22px;           /* mobile base */
+	color: var(--color-text);
+	background: var(--color-secondary);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 
-	/* --- Avatars ---
-	--avatar-size-xs: 18px;    card byline avatars
-	--avatar-size-sm: 20px;    post list byline avatars
-	--avatar-size-md: 24px;    featured post byline avatars
-	--avatar-size-lg: 32px;    single post byline avatars
-	*/
+/* ─────────────────────────────────────────
+   Typography — mobile-first (exact kit values)
+   ───────────────────────────────────────── */
+h1 { font-family: var(--font-family); font-size: 48px; font-weight: 700; line-height: 56px; color: var(--color-primary); }
+h2 { font-family: var(--font-family); font-size: 40px; font-weight: 700; line-height: 48px; color: var(--color-primary); }
+h3 { font-family: var(--font-family); font-size: 24px; font-weight: 700; line-height: 30px; color: var(--color-primary); }
+h4 { font-family: var(--font-family); font-size: 22px; font-weight: 400; line-height: 30px; color: var(--color-primary); }
+h5 { font-family: var(--font-family); font-size: 20px; font-weight: 700; line-height: 26px; color: var(--color-primary); }
+h6 { font-family: var(--font-family); font-size: 18px; font-weight: 700; line-height: 24px; color: var(--color-primary); }
 
-	/* --- Shadows ---
-	--shadow-dropdown: 0 8px 30px rgba(0, 0, 0, 0.12);
-	--shadow-btn-active: 0 1px 2px rgba(0, 0, 0, 0.05);
-	*/
+p { margin-block-end: 0; font-weight: 300; }
+a { color: var(--color-text); text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+ul, ol { list-style: none; }
 
-	/* --- Misc ---
-	--tag-padding-y: 2px;    vertical padding on tag pills
-	*/
+/* Tablet typography */
+@media (min-width: 768px) {
+	body { font-size: 20px; line-height: 28px; }
+	h1 { font-size: 64px; line-height: 72px; }
+	h2 { font-size: 48px; line-height: 56px; }
+	h3 { font-size: 32px; line-height: 40px; }
+	h4 { font-size: 20px; line-height: 28px; }
+}
+
+/* Desktop typography */
+@media (min-width: 1025px) {
+	h1 { font-size: 72px; line-height: 80px; }
+	h2 { font-size: 64px; line-height: 72px; }
+}
+
+/* ─────────────────────────────────────────
+   Utility Classes
+   ───────────────────────────────────────── */
+
+/* Subtitle style (typography-8a6bdf0) — mobile inherits */
+.text-sub {
+	font-family: var(--font-family);
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 26px;
+}
+@media (min-width: 768px) {
+	.text-sub { font-size: 24px; line-height: 32px; }
+}
+
+/* Body text style (typography-efb39b7) */
+.text-body {
+	font-family: var(--font-family);
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 26px;
+}
+
+/* Highlighted text (from custom CSS) */
+.marked {
+	background-color: var(--color-marked);
+	padding: 0 5px;
+}
+
+/* ─────────────────────────────────────────
+   Buttons — exact from kit
+   ───────────────────────────────────────── */
+.btn {
+	display: inline-block;
+	font-family: var(--font-family);
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 22px;
+	padding: 16px;
+	border: none;
+	border-radius: 0;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-dark {
+	background-color: var(--color-primary);
+	color: var(--color-secondary);
+}
+.btn-dark:hover,
+.btn-dark:focus-visible {
+	background-color: var(--color-btn-cta-hover);
+	color: var(--color-primary);
+}
+
+.btn-light {
+	background-color: var(--color-secondary);
+	color: var(--color-primary);
+}
+.btn-light:hover,
+.btn-light:focus-visible {
+	background-color: var(--color-btn-cta-hover);
+	color: var(--color-primary);
+}
+
+/* ─────────────────────────────────────────
+   Layout Containers
+   ───────────────────────────────────────── */
+.container {
+	max-width: var(--container-max);
+	margin: 0 auto;
+	padding-inline: 16px;
+	width: 100%;
+}
+@media (min-width: 768px) {
+	.container { padding-inline: 20px; }
+}
+
+/* Screen reader only — accessible hidden */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
 }

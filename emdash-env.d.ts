@@ -5,6 +5,32 @@
 
 import type { ContentBylineCredit, PortableTextBlock } from "emdash";
 
+export interface ElementorBlock {
+  id: string;
+  slug: string | null;
+  status: string;
+  title?: string;
+  content?: PortableTextBlock[];
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
+export interface Miembro {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
+  excerpt?: string;
+  content?: PortableTextBlock[];
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
 export interface Page {
   id: string;
   slug: string | null;
@@ -31,9 +57,26 @@ export interface Post {
   bylines?: ContentBylineCredit[];
 }
 
+export interface Servicio {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
+  content?: PortableTextBlock[];
+  excerpt?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
 declare module "emdash" {
   interface EmDashCollections {
+    elementor_library: ElementorBlock;
+    members: Miembro;
     pages: Page;
     posts: Post;
+    services: Servicio;
   }
 }

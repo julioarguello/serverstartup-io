@@ -1,0 +1,140 @@
+---
+/**
+ * Contacto page — matches original WordPress layout:
+ * - Hero with h1 "Contacto"
+ * - Description + bullet list of services
+ * - 3 contact methods (WhatsApp, Teléfono, Email) with diagonal arrow icons
+ * - Footer with trust logos + grid
+ */
+import Base from "../layouts/Base.astro";
+Astro.cache.set({ maxAge: 86400 });
+---
+
+<Base
+	title="Contacto"
+	description="Contacta con Server Startup. Consultoría tecnológica, arquitectura backend y seguridad edge."
+>
+	<section class="s-contact" aria-label="Formulario de contacto">
+		<div class="container s-contact__inner">
+			<h1>Contacto</h1>
+			<p class="text-body s-contact__intro">
+				Si tienes un proyecto en marcha o quieres mejorar tu infraestructura actual, estamos aquí para ayudarte.
+			</p>
+			<p class="text-body">Cuéntanos qué necesitas:</p>
+			<ul class="s-contact__list">
+				<li>Auditorías y consultoría técnica.</li>
+				<li>Diseño o mejora de arquitectura backend.</li>
+				<li>Optimización de rendimiento y seguridad.</li>
+				<li>Integración entre sistemas o migración a la nube.</li>
+			</ul>
+
+			<div class="s-contact__methods" role="list">
+				<a href="https://wa.me/34666666666" target="_blank" rel="noopener" class="s-contact__method" role="listitem" aria-label="Contactar por WhatsApp">
+					<span class="s-contact__method-label">WhatsApp</span>
+					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					<span class="s-contact__method-value">666 66 66 66</span>
+				</a>
+
+				<a href="tel:+34666666666" class="s-contact__method" role="listitem" aria-label="Llamar por teléfono">
+					<span class="s-contact__method-label">Teléfono</span>
+					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					<span class="s-contact__method-value">666 66 66 66</span>
+				</a>
+
+				<a href="mailto:info@serverstartup.com" class="s-contact__method" role="listitem" aria-label="Enviar email">
+					<span class="s-contact__method-label">Email</span>
+					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					<span class="s-contact__method-value">info@serverstartup.com</span>
+				</a>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.s-contact {
+		padding: calc(80px + 24px) 0 60px;
+	}
+
+	.s-contact__inner h1 {
+		margin-bottom: var(--widget-spacing);
+	}
+
+	.s-contact__intro {
+		margin-bottom: 8px;
+	}
+
+	.s-contact__list {
+		list-style: disc;
+		padding-left: 24px;
+		margin-top: 8px;
+		margin-bottom: 48px;
+	}
+
+	.s-contact__list li {
+		font-family: var(--font-family);
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 28px;
+	}
+
+	/* ── Contact methods ── */
+	.s-contact__methods {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.s-contact__method {
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		text-decoration: none;
+		color: var(--color-primary);
+		transition: color 0.2s;
+	}
+
+	.s-contact__method:hover {
+		color: rgba(30, 30, 30, 0.7);
+	}
+
+	.s-contact__method-label {
+		font-family: var(--font-family);
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 24px;
+	}
+
+	.s-contact__arrow {
+		width: 24px;
+		height: 24px;
+		margin: 4px 0;
+	}
+
+	.s-contact__method-value {
+		font-family: var(--font-family);
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 26px;
+	}
+
+	@media (min-width: 768px) {
+		.s-contact {
+			padding: 0;
+			min-height: calc(100vh - 200px);
+			display: flex;
+			align-items: center;
+		}
+
+		.s-contact__methods {
+			flex-direction: row;
+			gap: 48px;
+		}
+	}
+</style>
