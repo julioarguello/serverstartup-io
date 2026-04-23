@@ -23,113 +23,104 @@ const postsWithTags = await Promise.all(
 );
 
 const formatDate = (date: Date) =>
-	date.toLocaleDateString("en-US", {
+	date.toLocaleDateString("es-ES", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
 	});
 ---
 
-<Base title="All Posts" description="Browse all blog posts">
+<Base title="Artículos" description="Blog de Server Startup. Artículos sobre arquitectura backend, cloud y tecnología.">
 	<div class="posts-page">
-		<header class="page-header">
-			<h1 class="page-title">All Posts</h1>
-			<p class="page-description">
-				{posts.length}
-				{posts.length === 1 ? "article" : "articles"}
-			</p>
-		</header>
+		<div class="container">
+			<header class="page-header">
+				<h1>Artículos</h1>
+				<p class="text-body page-count">
+					{posts.length}
+					{posts.length === 1 ? "artículo" : "artículos"}
+				</p>
+			</header>
 
-		{
-			sortedPosts.length === 0 ? (
-				<p class="empty">No posts yet.</p>
-			) : (
-				<div class="posts-list">
-					{postsWithTags.map(({ post, tags, bylines }) => (
-						<article class="post-item">
-							<a href={`/posts/${post.id}`} class="post-link">
-								<div class="post-meta">
-									{bylines.length > 0 && (
-										<>
-											<div class="post-bylines">
-												{bylines.slice(0, 2).map((credit, index) => (
-													<>
-														{index > 0 && <span class="byline-sep">,</span>}
-														<span class="post-byline">
-															{credit.byline.avatarMediaId && (
-																<img
-																	src={`/_emdash/api/media/file/${credit.byline.avatarMediaId}`}
-																	alt={credit.byline.displayName}
-																	class="post-byline-avatar"
-																/>
-															)}
-															<span class="post-byline-name">
-																{credit.byline.displayName}
+			{
+				sortedPosts.length === 0 ? (
+					<p class="text-body empty">Aún no hay artículos publicados.</p>
+				) : (
+					<div class="posts-list">
+						{postsWithTags.map(({ post, tags, bylines }) => (
+							<article class="post-item">
+								<a href={`/posts/${post.id}`} class="post-link">
+									<div class="post-meta">
+										{bylines.length > 0 && (
+											<>
+												<div class="post-bylines">
+													{bylines.slice(0, 2).map((credit, index) => (
+														<>
+															{index > 0 && <span class="byline-sep">,</span>}
+															<span class="post-byline">
+																{credit.byline.avatarMediaId && (
+																	<img
+																		src={`/_emdash/api/media/file/${credit.byline.avatarMediaId}`}
+																		alt={credit.byline.displayName}
+																		class="post-byline-avatar"
+																	/>
+																)}
+																<span class="post-byline-name">
+																	{credit.byline.displayName}
+																</span>
 															</span>
-														</span>
-													</>
-												))}
-												{bylines.length > 2 && (
-													<span class="byline-more">+{bylines.length - 2}</span>
-												)}
-											</div>
-											<span class="meta-dot" />
-										</>
+														</>
+													))}
+													{bylines.length > 2 && (
+														<span class="byline-more">+{bylines.length - 2}</span>
+													)}
+												</div>
+												<span class="meta-dot" />
+											</>
+										)}
+										{post.data.publishedAt && (
+											<time>{formatDate(post.data.publishedAt)}</time>
+										)}
+										{post.data.publishedAt && <span class="meta-dot" />}
+										<span>{getReadingTime(post.data.content)} min</span>
+									</div>
+									<h2 class="post-title">{post.data.title}</h2>
+									{post.data.excerpt && (
+										<p class="post-excerpt">{post.data.excerpt}</p>
 									)}
-									{post.data.publishedAt && (
-										<time>{formatDate(post.data.publishedAt)}</time>
-									)}
-									{post.data.publishedAt && <span class="meta-dot" />}
-									<span>{getReadingTime(post.data.content)} min read</span>
-								</div>
-								<h2 class="post-title">{post.data.title}</h2>
-								{post.data.excerpt && (
-									<p class="post-excerpt">{post.data.excerpt}</p>
+								</a>
+								{tags.length > 0 && (
+									<div class="post-tags">
+										{tags.slice(0, 3).map((t) => (
+											<a href={`/tag/${t.slug}`} class="post-tag">
+												{t.label}
+											</a>
+										))}
+									</div>
 								)}
-							</a>
-							{tags.length > 0 && (
-								<div class="post-tags">
-									{tags.slice(0, 3).map((t) => (
-										<a href={`/tag/${t.slug}`} class="post-tag">
-											{t.label}
-										</a>
-									))}
-								</div>
-							)}
-						</article>
-					))}
-				</div>
-			)
-		}
+							</article>
+						))}
+					</div>
+				)
+			}
+		</div>
 	</div>
 </Base>
 
 <style>
 	.posts-page {
-		max-width: var(--content-width);
-		margin: 0 auto;
-		padding: var(--spacing-8) var(--spacing-6) var(--spacing-16);
+		padding: calc(80px + 40px) 0 80px;
 	}
 
 	.page-header {
-		margin-bottom: var(--spacing-12);
+		margin-bottom: 48px;
 	}
 
-	.page-title {
-		font-size: var(--font-size-4xl);
-		font-weight: 700;
-		letter-spacing: var(--tracking-tight);
-		margin-bottom: var(--spacing-2);
-	}
-
-	.page-description {
-		font-size: var(--font-size-lg);
-		color: var(--color-muted);
+	.page-count {
+		color: rgba(30, 30, 30, 0.5);
 	}
 
 	.empty {
-		color: var(--color-muted);
-		font-size: var(--font-size-lg);
+		color: rgba(30, 30, 30, 0.5);
 	}
 
 	.posts-list {
@@ -138,8 +129,8 @@ const formatDate = (date: Date) =>
 	}
 
 	.post-item {
-		padding: var(--spacing-8) 0;
-		border-bottom: 1px solid var(--color-border-subtle);
+		padding: 32px 0;
+		border-bottom: 1px solid rgba(30, 30, 30, 0.1);
 	}
 
 	.post-item:first-child {
@@ -159,17 +150,17 @@ const formatDate = (date: Date) =>
 	.post-meta {
 		display: flex;
 		align-items: center;
-		gap: var(--spacing-3);
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-2);
+		gap: 12px;
+		font-size: 14px;
+		color: rgba(30, 30, 30, 0.5);
+		margin-bottom: 8px;
 	}
 
 	.meta-dot {
 		width: 3px;
 		height: 3px;
 		border-radius: 50%;
-		background: var(--color-muted);
+		background: rgba(30, 30, 30, 0.5);
 	}
 
 	/* Post bylines */
@@ -182,87 +173,76 @@ const formatDate = (date: Date) =>
 	.post-byline {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--spacing-1);
+		gap: 4px;
 	}
 
 	.post-byline-avatar {
-		width: var(--avatar-size-sm);
-		height: var(--avatar-size-sm);
+		width: 28px;
+		height: 28px;
 		border-radius: 50%;
 		object-fit: cover;
 	}
 
 	.post-byline-name {
 		font-weight: 500;
-		color: var(--color-text-secondary);
+		color: rgba(30, 30, 30, 0.7);
 	}
 
 	.byline-sep {
-		color: var(--color-muted);
+		color: rgba(30, 30, 30, 0.5);
 		margin-right: 2px;
 	}
 
 	.byline-more {
-		font-size: var(--font-size-xs);
-		color: var(--color-muted);
+		font-size: 12px;
+		color: rgba(30, 30, 30, 0.5);
 		margin-left: 2px;
 	}
 
 	.post-title {
-		font-size: var(--font-size-2xl);
+		font-size: 24px;
 		font-weight: 600;
-		line-height: var(--leading-snug);
-		letter-spacing: var(--tracking-snug);
-		margin-bottom: var(--spacing-2);
-		transition: color var(--transition-fast);
+		line-height: 30px;
+		letter-spacing: -0.01em;
+		margin-bottom: 8px;
+		transition: color 0.2s;
 	}
 
 	.post-link:hover .post-title {
-		color: var(--color-accent);
+		color: rgba(30, 30, 30, 0.7);
 	}
 
 	.post-excerpt {
-		font-size: var(--font-size-lg);
-		line-height: var(--leading-relaxed);
-		color: var(--color-text-secondary);
+		font-size: 18px;
+		line-height: 24px;
+		color: rgba(30, 30, 30, 0.7);
 	}
 
 	.post-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--spacing-2);
-		margin-top: var(--spacing-4);
+		gap: 8px;
+		margin-top: 16px;
 	}
 
 	.post-tag {
 		display: inline-block;
-		padding: var(--tag-padding-y) var(--spacing-3);
-		font-size: var(--font-size-sm);
-		color: var(--color-text-secondary);
-		background: var(--color-surface);
-		border-radius: var(--radius);
+		padding: 4px 12px;
+		font-size: 14px;
+		color: rgba(30, 30, 30, 0.7);
+		background: #f5f5f5;
+		border-radius: 4px;
 		text-decoration: none;
-		transition:
-			color var(--transition-fast),
-			background var(--transition-fast);
+		transition: color 0.2s, background 0.2s;
 	}
 
 	.post-tag:hover {
 		color: var(--color-text);
-		background: var(--color-border);
+		background: #e8e8e8;
 	}
 
-	@media (max-width: 600px) {
-		.posts-page {
-			padding: var(--spacing-6) var(--spacing-4) var(--spacing-12);
-		}
-
-		.page-title {
-			font-size: var(--font-size-3xl);
-		}
-
-		.post-title {
-			font-size: var(--font-size-xl);
-		}
+	@media (min-width: 768px) {
+		.posts-page { padding: 160px 0 80px; }
+		.post-title { font-size: 28px; line-height: 34px; }
 	}
 </style>

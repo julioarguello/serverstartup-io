@@ -27,36 +27,36 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 ---
 
 <Base
-	title={query ? `Search: ${query}` : "Search"}
-	description="Search blog posts"
+	title={query ? `Buscar: ${query}` : "Buscar"}
+	description="Busca en el blog de Server Startup"
 >
-	<section class="search-page">
-		<h1 class="search-title">Search</h1>
+	<section class="search-page" aria-label="Buscar">
+		<div class="container search-inner">
+			<h1>Buscar</h1>
 
-		<form method="get" action="/search" class="search-form">
-			<input
-				type="search"
-				name="q"
-				value={query}
-				placeholder="Search posts..."
-				class="search-input"
-				autofocus
-			/>
-			<button type="submit" class="search-button">Search</button>
-		</form>
+			<form method="get" action="/search" class="search-form" role="search">
+				<label for="search-input" class="sr-only">Buscar artículos</label>
+				<input
+					type="search"
+					id="search-input"
+					name="q"
+					value={query}
+					placeholder="Buscar artículos..."
+					class="search-input"
+					autofocus
+				/>
+				<button type="submit" class="btn btn-dark">Buscar</button>
+			</form>
 
-		{
-			query && (
+			{query && (
 				<p class="search-summary">
 					{results.length === 0
-						? `No results for "${query}"`
-						: `${results.length} result${results.length === 1 ? "" : "s"} for "${query}"`}
+						? `Sin resultados para "${query}"`
+						: `${results.length} resultado${results.length === 1 ? "" : "s"} para "${query}"`}
 				</p>
-			)
-		}
+			)}
 
-		{
-			results.length > 0 && (
+			{results.length > 0 && (
 				<div class="search-results">
 					{results.map((post) => (
 						<PostCard
@@ -69,73 +69,63 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 						/>
 					))}
 				</div>
-			)
-		}
+			)}
 
-		{!query && <p class="search-hint">Enter a search term to find posts.</p>}
+			{!query && <p class="text-body search-hint">Introduce un término para buscar artículos.</p>}
+		</div>
 	</section>
 </Base>
 
 <style>
 	.search-page {
-		max-width: var(--max-width);
-		margin: 0 auto;
-		padding: var(--spacing-8) var(--spacing-6) var(--spacing-16);
+		padding: calc(80px + 40px) 0 80px;
 	}
 
-	.search-title {
-		font-size: var(--font-size-2xl);
-		margin-bottom: var(--spacing-6);
+	.search-inner h1 {
+		margin-bottom: 24px;
 	}
 
 	.search-form {
 		display: flex;
-		gap: var(--spacing-2);
-		margin-bottom: var(--spacing-8);
+		gap: 8px;
+		margin-bottom: 32px;
 	}
 
 	.search-input {
 		flex: 1;
-		padding: var(--spacing-2) var(--spacing-4);
-		font-size: var(--font-size-base);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-		background: var(--color-bg);
+		padding: 12px 16px;
+		font-family: var(--font-family);
+		font-size: 18px;
+		font-weight: 300;
+		border: 1px solid var(--color-primary);
+		border-radius: 0;
+		background: var(--color-secondary);
 		color: var(--color-text);
 	}
 
 	.search-input:focus {
-		outline: none;
-		border-color: var(--color-accent);
-	}
-
-	.search-button {
-		padding: var(--spacing-2) var(--spacing-6);
-		font-size: var(--font-size-base);
-		background: var(--color-accent);
-		color: var(--color-on-accent);
-		border: none;
-		border-radius: var(--radius);
-		cursor: pointer;
-		font-weight: 500;
-	}
-
-	.search-button:hover {
-		opacity: 0.9;
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
 	}
 
 	.search-summary {
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-6);
+		font-size: 18px;
+		font-weight: 300;
+		color: rgba(30, 30, 30, 0.6);
+		margin-bottom: 24px;
 	}
 
 	.search-hint {
-		color: var(--color-muted);
+		color: rgba(30, 30, 30, 0.6);
 	}
 
 	.search-results {
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-8);
+		gap: 32px;
+	}
+
+	@media (min-width: 768px) {
+		.search-page { padding: 160px 0 80px; }
 	}
 </style>

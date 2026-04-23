@@ -1,0 +1,207 @@
+---
+/**
+ * Quiénes Somos — matches original WordPress layout:
+ * 1. Hero — h1 "Quiénes somos", subtitle "modelo boutique", body text
+ * 2. "~ El equipo" — dark bg, 4-col grid of team member cards (photo + name + role + bio)
+ * 3. Values — dark bg, text about supporting innovation
+ * 4. Trust logos + footer
+ */
+import { getEmDashCollection } from "emdash";
+import Base from "../layouts/Base.astro";
+
+const { entries: members, cacheHint } = await getEmDashCollection("members", {
+	limit: 50,
+	orderBy: { title: "asc" },
+});
+Astro.cache.set(cacheHint);
+---
+
+<Base
+	title="Quiénes somos"
+	description="El equipo de Server Startup. Ingenieros especializados en arquitectura backend, cloud y sistemas distribuidos."
+>
+	<!-- ══════ HERO ══════ -->
+	<section class="s-hero" aria-label="Quiénes somos">
+		<div class="container s-hero__inner">
+			<h1>Quiénes somos</h1>
+			<p class="text-sub s-hero__subtitle">
+				No somos una consultora generalista, trabajamos con un <span class="marked"><strong>modelo boutique</strong></span>
+			</p>
+			<div class="s-hero__body">
+				<p>Somos profesionales con más de 15 años de experiencia, nos centramos en aquello que dominamos: <strong>arquitectura backend, rendimiento y seguridad en la nube</strong>. Este enfoque nos permite ofrecer soluciones más precisas, rápidas y adaptadas a cada entorno.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════ TEAM — dark bg, 4-col grid ══════ -->
+	<section class="s-team" aria-label="El equipo">
+		<div class="container s-team__inner">
+			<h2>~ El equipo</h2>
+			<div class="s-team__grid" role="list">
+				{members.length > 0 ? (
+					members.map((member) => (
+						<article class="team-card" role="listitem">
+							<div class="team-card__photo">
+								{member.data.featured_image?.src
+									? <img src={member.data.featured_image.src} alt={member.data.title} loading="lazy" />
+									: <div class="team-card__placeholder">{member.data.title?.charAt(0) || "?"}</div>
+								}
+							</div>
+							<h3 class="team-card__name">{member.data.title}</h3>
+							{member.data.excerpt && <p class="team-card__role">{member.data.excerpt}</p>}
+						</article>
+					))
+				) : (
+					/* Fallback team members for when CMS has no data */
+					<>
+						<article class="team-card" role="listitem">
+							<div class="team-card__photo"><div class="team-card__placeholder">J</div></div>
+							<h3 class="team-card__name">Julio Argüello</h3>
+							<p class="team-card__role">CEO</p>
+							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+						</article>
+						<article class="team-card" role="listitem">
+							<div class="team-card__photo"><div class="team-card__placeholder">A</div></div>
+							<h3 class="team-card__name">Ariadna Cisneros</h3>
+							<p class="team-card__role">CTO</p>
+							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+						</article>
+						<article class="team-card" role="listitem">
+							<div class="team-card__photo"><div class="team-card__placeholder">R</div></div>
+							<h3 class="team-card__name">Raúl Espejo</h3>
+							<p class="team-card__role">Ciberseguridad</p>
+							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+						</article>
+						<article class="team-card" role="listitem">
+							<div class="team-card__photo"><div class="team-card__placeholder">D</div></div>
+							<h3 class="team-card__name">Daniel Carretero</h3>
+							<p class="team-card__role">Lead Architect</p>
+							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+						</article>
+					</>
+				)}
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════ VALUES — dark bg ══════ -->
+	<section class="s-values" aria-label="Nuestros valores">
+		<div class="container s-values__inner">
+			<p class="text-body s-values__text">En Server Startup creemos en apoyar a quienes comparten nuestra visión de esfuerzo, innovación y superación.<br/>Por eso colaboramos con equipos y proyectos que aplican la misma mentalidad que guía nuestro trabajo diario.</p>
+		</div>
+	</section>
+</Base>
+
+<style>
+	/* ═══ HERO ═══ */
+	.s-hero {
+		padding: calc(80px + 24px) 0 60px;
+	}
+
+	.s-hero__subtitle {
+		margin-top: var(--widget-spacing);
+	}
+
+	.s-hero__body {
+		margin-top: 16px;
+		max-width: 700px;
+	}
+
+	.s-hero__body p {
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 26px;
+	}
+
+	@media (min-width: 768px) {
+		.s-hero { padding: 160px 0 80px; }
+	}
+
+	/* ═══ TEAM — dark bg ═══ */
+	.s-team {
+		background-color: var(--color-primary);
+		padding: 40px 0;
+	}
+
+	.s-team__inner h2 {
+		color: var(--color-secondary);
+		margin-bottom: 40px;
+	}
+
+	.s-team__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 32px;
+	}
+
+	.team-card {
+		text-align: left;
+	}
+
+	.team-card__photo {
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+		background: #3a3a3a;
+		margin-bottom: 16px;
+	}
+
+	.team-card__photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.team-card__placeholder {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 48px;
+		font-weight: 600;
+		color: rgba(255, 255, 255, 0.3);
+		background: #3a3a3a;
+	}
+
+	.team-card__name {
+		color: var(--color-secondary);
+		font-size: 20px;
+		font-weight: 700;
+		margin-bottom: 2px;
+	}
+
+	.team-card__role {
+		color: var(--color-secondary);
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 22px;
+		margin-bottom: 8px;
+	}
+
+	.team-card__bio {
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 20px;
+	}
+
+	@media (min-width: 768px) {
+		.s-team { padding: 80px 0; }
+		.s-team__grid {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 40px;
+		}
+	}
+
+	/* ═══ VALUES — dark bg ═══ */
+	.s-values {
+		background-color: var(--color-primary);
+		padding: 60px 0 80px;
+	}
+
+	.s-values__text {
+		color: var(--color-secondary);
+		max-width: 700px;
+	}
+</style>

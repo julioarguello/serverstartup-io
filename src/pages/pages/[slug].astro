@@ -35,19 +35,19 @@ Astro.cache.set(cacheHint);
 
 <style>
 	.page-article {
-		max-width: var(--max-width);
+		max-width: var(--container-max);
 		margin: 0 auto;
-		padding: var(--spacing-16) var(--spacing-6) var(--spacing-16);
+		padding: 64px 24px 64px;
 	}
 
 	.page-header {
-		margin-bottom: var(--spacing-8);
+		margin-bottom: 32px;
 	}
 
 	.page-title {
-		font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+		font-size: clamp(28px, 4vw, 40px);
 		font-weight: 700;
-		line-height: var(--leading-tight);
+		line-height: 1.2;
 	}
 
 	.page-content :global(p) {
@@ -55,40 +55,40 @@ Astro.cache.set(cacheHint);
 	}
 
 	.page-content :global(h2) {
-		font-size: var(--font-size-2xl);
+		font-size: 28px;
 		margin-top: 2em;
 		margin-bottom: 0.75em;
 	}
 
 	.page-content :global(h3) {
-		font-size: var(--font-size-xl);
+		font-size: 22px;
 		margin-top: 1.75em;
 		margin-bottom: 0.5em;
 	}
 
 	.page-content :global(blockquote) {
 		margin: 1.5em 0;
-		padding-left: var(--spacing-6);
-		border-left: 3px solid var(--color-border);
-		color: var(--color-muted);
+		padding-left: 24px;
+		border-left: 3px solid rgba(30,30,30,0.15);
+		color: rgba(30,30,30,0.5);
 	}
 
 	.page-content :global(pre) {
 		margin: 1.5em 0;
-		padding: var(--spacing-4);
-		background: var(--color-surface);
-		border-radius: var(--radius);
+		padding: 16px;
+		background: #f5f5f5;
+		border-radius: 4px;
 		overflow-x: auto;
-		font-family: var(--font-mono);
-		font-size: var(--font-size-sm);
+		font-family: monospace;
+		font-size: 14px;
 	}
 
 	.page-content :global(code) {
-		font-family: var(--font-mono);
+		font-family: monospace;
 		font-size: 0.9em;
-		background: var(--color-surface);
+		background: #f5f5f5;
 		padding: 0.15em 0.3em;
-		border-radius: var(--radius);
+		border-radius: 4px;
 	}
 
 	.page-content :global(pre code) {
@@ -99,7 +99,7 @@ Astro.cache.set(cacheHint);
 	.page-content :global(ul),
 	.page-content :global(ol) {
 		margin-bottom: 1.5em;
-		padding-left: var(--spacing-5);
+		padding-left: 20px;
 	}
 
 	.page-content :global(li) {
