@@ -1,0 +1,47 @@
+---
+/**
+ * CTA Global — shared call-to-action block.
+ *
+ * Fetches the "cta_global" widget area from EmDash and renders:
+ *   - Widget title → h2 heading
+ *   - PT content blocks (excluding last link block) → subtitle/body paragraphs
+ *   - Last PT block with a link mark → button
+ *
+ * Fallback to hardcoded values if the widget area is not seeded.
+ */
+import { getWidgetArea } from "emdash";
+
+const ctaArea = await getWidgetArea("cta_global");
+const ctaWidget = ctaArea?.widgets[0];
+
+// Heading from widget title
+const heading = ctaWidget?.title || "¿Listo para optimizar tu infraestructura digital?";
+
+// Extract body paragraphs and button from PT content
+const blocks = ctaWidget?.content || [];
+
+// Separate text blocks from the button block (last block with a link markDef)
+const lastBlock = blocks[blocks.length - 1];
+const hasLink = lastBlock?.markDefs?.some((m: any) => m._type === "link");
+
+const textBlocks = hasLink ? blocks.slice(0, -1) : blocks;
+
+// Extract button label and URL from the link block
+const buttonLabel = hasLink
+	? lastBlock.children?.map((c: any) => c.text).join("") || "Contacta ahora"
+	: "Contacta ahora";
+const buttonUrl = hasLink
+	? lastBlock.markDefs?.find((m: any) => m._type === "link")?.href || "/contacto"
+	: "/contacto";
+---
+
+<section class="s-cta" aria-label="Contacta con nosotros">
+	<div class="container s-cta__inner">
+		<h2 class="s-cta__heading">{heading}</h2>
+		{textBlocks.map((block: any) => {
+			const text = block.children?.map((c: any) => c.text).join("") || "";
+			return text ? <p class="text-sub s-cta__subtitle">{text}</p> : null;
+		})}
+		<a href={buttonUrl} class="btn btn-light">{buttonLabel}</a>
+	</div>
+</section>

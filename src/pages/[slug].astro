@@ -12,6 +12,7 @@
 import { getEmDashEntry } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
+import CtaGlobal from "../components/CtaGlobal.astro";
 
 const { slug } = Astro.params;
 const { entry, cacheHint } = await getEmDashEntry("services", slug!);
@@ -53,14 +54,8 @@ const ctaLabel = (entry.data as any).cta_label || "Contacta ahora";
 		</section>
 	)}
 
-	<!-- ══════ CTA ══════ -->
-	<section class="s-cta" aria-label="Contacta con nosotros">
-		<div class="container s-cta__inner">
-			<h2 class="s-cta__heading">¿Listo para optimizar tu infraestructura digital?</h2>
-			<p class="text-sub s-cta__subtitle">Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo.</p>
-			<a href="/contacto" class="btn btn-light">Contacta ahora</a>
-		</div>
-	</section>
+	<!-- ══════ CTA (from cta_global widget) ══════ -->
+	<CtaGlobal />
 </Base>
 
 <style define:vars={{ accentColor }}>

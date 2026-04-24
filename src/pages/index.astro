@@ -7,14 +7,15 @@
  *   - hero: blocks before first h2
  *   - "~ Tecnología que impulsa tu negocio": h2 + body
  *   - "~ Áreas de especialización": h2 + subtitle
- *   - "~ CTA": h2 + heading + subtitle + body
  *
+ * CTA block sourced from cta_global widget area (issue #5).
  * Service cards and footer list derived from services collection.
  * Section 3 (Cloudflare) remains template-driven (issue #6).
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
+import CtaGlobal from "../components/CtaGlobal.astro";
 
 const { entry, cacheHint } = await getEmDashEntry("pages", "home");
 if (!entry) return Astro.redirect("/404");
@@ -52,12 +53,7 @@ if (currentSection.heading || currentSection.blocks.length > 0) {
 const heroSection = sections[0]; // blocks before first h2
 const techSection = sections.find((s) => s.heading.includes("Tecnología"));
 const areasSection = sections.find((s) => s.heading.includes("Áreas"));
-const ctaSection = sections.find((s) => s.heading.includes("CTA"));
 
-// Extract CTA content: first block = heading, second = subtitle, third = body
-const ctaHeading = ctaSection?.blocks[0]?.children?.map((c: any) => c.text).join("") || "¿Listo para optimizar tu infraestructura digital?";
-const ctaSubtitle = ctaSection?.blocks[1]?.children?.map((c: any) => c.text).join("") || "";
-const ctaBody = ctaSection?.blocks[2]?.children?.map((c: any) => c.text).join("") || "";
 
 // Extract tech subtitle (first block with marks) and body (second block)
 const techSubtitleBlock = techSection?.blocks[0];
@@ -174,15 +170,8 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 		</div>
 	</section>
 
-	<!-- ══════ SECTION 5: CTA ══════ -->
-	<section class="s-cta" aria-label="Contacta con nosotros">
-		<div class="container s-cta__inner">
-			<h2 class="s-cta__heading">{ctaHeading}</h2>
-			{ctaSubtitle && <p class="text-sub s-cta__subtitle">{ctaSubtitle}</p>}
-			{ctaBody && <p class="text-body s-cta__body">{ctaBody}</p>}
-			<a href="/contacto" class="btn btn-light">Contacta ahora</a>
-		</div>
-	</section>
+	<!-- ══════ SECTION 5: CTA (from cta_global widget) ══════ -->
+	<CtaGlobal />
 </Base>
 
 
