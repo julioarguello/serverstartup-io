@@ -20,10 +20,13 @@ interface Props {
 
 const { title, description, robots } = Astro.props;
 
-const [settings, menu, { entries: serviceEntries }] = await Promise.all([
+const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }] = await Promise.all([
 	getSiteSettings(),
 	getMenu("primary"),
 	getEmDashCollection("services", {
+		orderBy: { created_at: "asc" },
+	}),
+	getEmDashCollection("partners", {
 		orderBy: { created_at: "asc" },
 	}),
 ]);
@@ -48,13 +51,13 @@ const secondaryItems = menuItems.slice(5);
 
 
 
-const trustLogos = [
-	{ src: "/assets/logo-cloudflare.svg", alt: "Cloudflare" },
-	{ src: "/assets/logo-cloudflare.svg", alt: "Cloudflare" },
-	{ src: "/assets/logo-cloudflare.svg", alt: "Cloudflare" },
-	{ src: "/assets/logo-cloudflare.svg", alt: "Cloudflare" },
-	{ src: "/assets/logo-cloudflare.svg", alt: "Cloudflare" },
-];
+// Trust logos from partners collection (featured = true)
+const trustLogos = (partnerEntries ?? [])
+	.filter((p: any) => p.data.featured === true || p.data.featured === 1)
+	.map((p: any) => ({
+		src: p.data.featured_image?.src || "/assets/logo-cloudflare.svg",
+		alt: p.data.featured_image?.alt || (p.data as any).title || "Partner",
+	}));
 ---
 
 <html lang="es">

@@ -1,0 +1,77 @@
+---
+/**
+ * CloudflarePartner — renders the featured partner card section.
+ *
+ * Fetches the first partner entry with Portable Text content and renders:
+ * - Partner logo from featured_image
+ * - h3 heading + description from PT blocks
+ * - Feature list (h4 + p pairs) from PT blocks
+ * - CTA button from cta_label field, linking to partner slug
+ */
+import { getEmDashCollection } from "emdash";
+
+const { entries: allPartners } = await getEmDashCollection("partners", {
+	orderBy: { created_at: "asc" },
+});
+
+// The "featured" partner with full content = Cloudflare card
+const featuredPartner = (allPartners ?? []).find(
+	(p: any) => p.data.content && p.data.content.length > 0
+);
+
+if (!featuredPartner) return;
+
+const d = featuredPartner.data as any;
+const logo = d.featured_image;
+const ctaLabel = d.cta_label;
+const ctaHref = `/${featuredPartner.id}`;
+
+// Parse PT blocks into heading, description, and features
+const blocks = d.content || [];
+const h3Block = blocks.find((b: any) => b.style === "h3");
+const heading = h3Block?.children?.[0]?.text || d.title;
+
+// First normal block = description
+const normalBlocks = blocks.filter((b: any) => b.style === "normal");
+const description = normalBlocks[0]?.children?.[0]?.text || d.excerpt || "";
+
+// h4 + normal pairs = features
+const h4Blocks = blocks.filter((b: any) => b.style === "h4");
+const features = h4Blocks.map((h4: any, i: number) => ({
+	title: h4.children?.[0]?.text || "",
+	desc: normalBlocks[i + 1]?.children?.[0]?.text || "",
+}));
+---
+
+<section class="s-cf" aria-label="Cloudflare Partner">
+	<div class="container s-cf__wrapper">
+		<article class="s-cf__card">
+			{logo && (
+				<img
+					src={logo.src}
+					alt={logo.alt || d.title}
+					width="268"
+					class="s-cf__logo"
+					loading="lazy"
+				/>
+			)}
+			<h3>{heading}</h3>
+			{description && <p class="text-body s-cf__desc">{description}</p>}
+
+			{features.length > 0 && (
+				<div class="s-cf__features" role="list">
+					{features.map((f: { title: string; desc: string }) => (
+						<div class="s-cf__feature" role="listitem">
+							<h4>{f.title}</h4>
+							<p class="text-body">{f.desc}</p>
+						</div>
+					))}
+				</div>
+			)}
+
+			{ctaLabel && (
+				<a href={ctaHref} class="btn btn-dark">{ctaLabel}</a>
+			)}
+		</article>
+	</div>
+</section>

@@ -10,9 +10,10 @@
  *
  * CTA block sourced from cta_global widget area (issue #5).
  * Service cards and footer list derived from services collection.
- * Section 3 (Cloudflare) remains template-driven (issue #6).
+ * Section 3 (Cloudflare Partner) driven by partners collection (issue #6).
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
+import CloudflarePartner from "../components/CloudflarePartner.astro";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
@@ -108,39 +109,8 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 		</section>
 	)}
 
-	<!-- ══════ SECTION 3: CLOUDFLARE PARTNER (template-driven, issue #6) ══════ -->
-	<section class="s-cf" aria-label="Cloudflare Partner">
-		<div class="container s-cf__wrapper">
-			<article class="s-cf__card">
-				<img
-					src="/assets/logo-cloudflare.svg"
-					alt="Cloudflare"
-					width="268"
-					class="s-cf__logo"
-					loading="lazy"
-				/>
-				<h3>Cloudflare Partner oficial</h3>
-				<p class="text-body s-cf__desc">Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare</p>
-
-				<div class="s-cf__features" role="list">
-					<div class="s-cf__feature" role="listitem">
-						<h4>CDN global</h4>
-						<p class="text-body">para mejorar la velocidad de carga</p>
-					</div>
-					<div class="s-cf__feature" role="listitem">
-						<h4>WAF y Zero Trust</h4>
-						<p class="text-body">para reforzar la seguridad</p>
-					</div>
-					<div class="s-cf__feature" role="listitem">
-						<h4>Workers y Edge Computing</h4>
-						<p class="text-body">para arquitecturas modernas y flexibles</p>
-					</div>
-				</div>
-
-				<a href="/cdn-waf-seguridad-edge-cloudflare" class="btn btn-dark">Descubre más sobre Cloudflare</a>
-			</article>
-		</div>
-	</section>
+	<!-- ══════ SECTION 3: CLOUDFLARE PARTNER (CMS-driven) ══════ -->
+	<CloudflarePartner />
 
 	<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN (CMS-driven) ══════ -->
 	<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || "Áreas de especialización"}>
