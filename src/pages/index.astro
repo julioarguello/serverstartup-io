@@ -9,10 +9,10 @@
  *   - "~ Áreas de especialización": h2 + subtitle
  *   - "~ CTA": h2 + heading + subtitle + body
  *
- * Sections 3 (Cloudflare) and 4 cards (services) remain template-driven
- * pending issues #4 and #6.
+ * Service cards and footer list derived from services collection.
+ * Section 3 (Cloudflare) remains template-driven (issue #6).
  */
-import { getEmDashEntry } from "emdash";
+import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 
@@ -21,6 +21,12 @@ if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
+
+// Fetch services collection for cards and footer
+const { entries: serviceEntries } = await getEmDashCollection("services", {
+	orderBy: { created_at: "asc" },
+});
+const services = serviceEntries ?? [];
 
 // Split PT content by h2 headings into named sections
 type Section = { heading: string; blocks: any[] };
@@ -140,7 +146,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 		</div>
 	</section>
 
-	<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN (cards template-driven, issue #4) ══════ -->
+	<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN (CMS-driven) ══════ -->
 	<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || "Áreas de especialización"}>
 		<div class="container s-areas__inner">
 			<!-- Left: sticky header -->
@@ -149,47 +155,21 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 				<p class="text-sub">{areasSubtitle}</p>
 			</div>
 
-			<!-- Right: stacking cards (template-driven, issue #4) -->
+			<!-- Right: stacking cards from services collection -->
 			<div class="s-areas__cards" role="list">
-				<article class="area-card card1" style="background-color: var(--color-card-blue);" role="listitem">
-					<h3>Comercio electrónico</h3>
-					<p class="text-body">Infraestructuras optimizadas para plataformas como SAP Commerce Cloud u Ocado Smart Platform. Creamos entornos escalables y preparados para un alto volumen de tráfico.</p>
-					<a href="/comercio-electronico" class="area-card__arrow" aria-label="Ver comercio electrónico">
-						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
-				</article>
-
-				<article class="area-card card2" style="background-color: var(--color-card-yellow);" role="listitem">
-					<h3>CDN, WAF &amp; Edge Security</h3>
-					<p class="text-body">Aumenta la velocidad y seguridad de tu web con Cloudflare. Configuramos CDN, WAF y sistemas Zero Trust para proteger y optimizar tus aplicaciones.</p>
-					<a href="/cdn-waf-seguridad-edge-cloudflare" class="area-card__arrow" aria-label="Ver CDN, WAF y Edge Security">
-						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
-				</article>
-
-				<article class="area-card card3" style="background-color: var(--color-card-teal);" role="listitem">
-					<h3>Big Data &amp; Cloud Analytics</h3>
-					<p class="text-body">Arquitecturas de datos en Google Cloud Platform con dbt, BigQuery y Dataflow. Transformamos la información en decisiones útiles para tu negocio.</p>
-					<a href="/big-data-cloud-analytics" class="area-card__arrow" aria-label="Ver Big Data y Cloud Analytics">
-						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
-				</article>
-
-				<article class="area-card card4" style="background-color: var(--color-card-pink);" role="listitem">
-					<h3>Integración de sistemas</h3>
-					<p class="text-body">Conectamos sistemas complejos mediante Apache Camel, Talend o Gravitee API Manager, garantizando fluidez y trazabilidad.</p>
-					<a href="/integracion-de-sistemas" class="area-card__arrow" aria-label="Ver Integración de sistemas">
-						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
-				</article>
-
-				<article class="area-card card5" style="background-color: var(--color-card-green);" role="listitem">
-					<h3>Desarrollo backend a medida</h3>
-					<p class="text-body">APIs, microservicios y soluciones escalables. Diseñamos sistemas sólidos, listos para evolucionar contigo.</p>
-					<a href="/ingenieria-greenfield-y-sistemas-criticos" class="area-card__arrow" aria-label="Ver Desarrollo backend a medida">
-						<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
-				</article>
+				{services.map((svc, i) => {
+					const d = svc.data as any;
+					const cardColor = d.color || '#BFEDEE';
+					return (
+						<article class={`area-card card${i + 1}`} style={`background-color: ${cardColor};`} role="listitem">
+							<h3>{d.title}</h3>
+							<p class="text-body">{d.excerpt}</p>
+							<a href={`/${svc.id}`} class="area-card__arrow" aria-label={`Ver ${d.title}`}>
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+							</a>
+						</article>
+					);
+				})}
 			</div>
 		</div>
 	</section>

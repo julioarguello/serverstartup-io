@@ -67,6 +67,7 @@ export interface Servicio {
   content?: PortableTextBlock[];
   excerpt?: string;
   cta_label?: string;
+  color?: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
