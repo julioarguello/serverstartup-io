@@ -180,6 +180,44 @@
 					"type": "text"
 				}
 			]
+		},
+		{
+			"slug": "partners",
+			"label": "Partners",
+			"labelSingular": "Partner",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Logo",
+					"type": "image"
+				},
+				{
+					"slug": "excerpt",
+					"label": "Description",
+					"type": "text"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText"
+				},
+				{
+					"slug": "cta_label",
+					"label": "CTA Label",
+					"type": "string"
+				},
+				{
+					"slug": "featured",
+					"label": "Show in trust logos",
+					"type": "boolean"
+				}
+			]
 		}
 	],
 	"taxonomies": [
@@ -1644,6 +1682,157 @@
 							]
 						}
 					]
+				}
+			}
+		],
+		"partners": [
+			{
+				"id": "partner-cloudflare",
+				"slug": "cloudflare",
+				"status": "published",
+				"data": {
+					"title": "Cloudflare",
+					"featured_image": {
+						"src": "/assets/logo-cloudflare.svg",
+						"alt": "Cloudflare"
+					},
+					"excerpt": "Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare",
+					"content": [
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cloudflare Partner oficial"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h4",
+							"children": [
+								{
+									"_type": "span",
+									"text": "CDN global"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "para mejorar la velocidad de carga"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h4",
+							"children": [
+								{
+									"_type": "span",
+									"text": "WAF y Zero Trust"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "para reforzar la seguridad"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h4",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Workers y Edge Computing"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "para arquitecturas modernas y flexibles"
+								}
+							]
+						}
+					],
+					"cta_label": "Descubre más sobre Cloudflare",
+					"featured": true
+				}
+			},
+			{
+				"id": "partner-cloudflare-2",
+				"slug": "cloudflare-2",
+				"status": "published",
+				"data": {
+					"title": "Cloudflare",
+					"featured_image": {
+						"src": "/assets/logo-cloudflare.svg",
+						"alt": "Cloudflare"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "partner-cloudflare-3",
+				"slug": "cloudflare-3",
+				"status": "published",
+				"data": {
+					"title": "Cloudflare",
+					"featured_image": {
+						"src": "/assets/logo-cloudflare.svg",
+						"alt": "Cloudflare"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "partner-cloudflare-4",
+				"slug": "cloudflare-4",
+				"status": "published",
+				"data": {
+					"title": "Cloudflare",
+					"featured_image": {
+						"src": "/assets/logo-cloudflare.svg",
+						"alt": "Cloudflare"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "partner-cloudflare-5",
+				"slug": "cloudflare-5",
+				"status": "published",
+				"data": {
+					"title": "Cloudflare",
+					"featured_image": {
+						"src": "/assets/logo-cloudflare.svg",
+						"alt": "Cloudflare"
+					},
+					"featured": true
 				}
 			}
 		]
