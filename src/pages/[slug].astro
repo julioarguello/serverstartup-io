@@ -20,15 +20,8 @@ Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
 
-// Theme colors per slug — matching original Elementor cube tints
-const themeColors: Record<string, string> = {
-	"comercio-electronico": "#B5E6F7",
-	"cdn-waf-seguridad-edge-cloudflare": "#FDEBB6",
-	"big-data-cloud-analytics": "#BFEDEE",
-	"integracion-de-sistemas": "#ECDCE3",
-	"ingenieria-greenfield-y-sistemas-criticos": "#C5EFCD",
-};
-const accentColor = themeColors[slug!] || "#BFEDEE";
+// Theme color from CMS entry (fallback to teal)
+const accentColor = (entry.data as any).color || "#BFEDEE";
 
 // CTA label from CMS (fallback to generic)
 const ctaLabel = (entry.data as any).cta_label || "Contacta ahora";

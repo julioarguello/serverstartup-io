@@ -106,6 +106,11 @@
 					"slug": "cta_label",
 					"label": "CTA Label",
 					"type": "string"
+				},
+				{
+					"slug": "color",
+					"label": "Card Color",
+					"type": "string"
 				}
 			]
 		},
@@ -412,56 +417,12 @@
 	"content": {
 		"services": [
 			{
-				"id": "svc-greenfield",
-				"slug": "ingenieria-greenfield-y-sistemas-criticos",
-				"status": "published",
-				"data": {
-					"title": "Ingeniería Greenfield y Sistemas Críticos",
-					"excerpt": "Diseñamos, construimos y operamos infraestructuras desde cero para aplicaciones críticas.",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Diseñamos y construimos desde cero sistemas que no pueden fallar. Infraestructuras greenfield con foco en rendimiento, escalabilidad y disponibilidad para aplicaciones de misión crítica."
-								}
-							]
-						}
-					],
-					"cta_label": "Hablemos de tu proyecto"
-				}
-			},
-			{
-				"id": "svc-integracion",
-				"slug": "integracion-de-sistemas",
-				"status": "published",
-				"data": {
-					"title": "Integración de sistemas",
-					"excerpt": "Conectamos tus sistemas heredados con plataformas modernas mediante APIs y mensajería.",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Conectamos los sistemas que hacen funcionar tu negocio. APIs REST, GraphQL, mensajería asíncrona con Kafka, RabbitMQ y pipelines de datos en tiempo real."
-								}
-							]
-						}
-					],
-					"cta_label": "Solicita una evaluación de tus integraciones"
-				}
-			},
-			{
 				"id": "svc-ecommerce",
 				"slug": "comercio-electronico",
 				"status": "published",
 				"data": {
-					"title": "E-commerce",
-					"excerpt": "Consultoría técnica para plataformas de comercio electrónico de alto rendimiento.",
+					"title": "Comercio electrónico",
+					"excerpt": "Infraestructuras optimizadas para plataformas como SAP Commerce Cloud u Ocado Smart Platform. Creamos entornos escalables y preparados para un alto volumen de tráfico.",
 					"content": [
 						{
 							"_type": "block",
@@ -474,29 +435,8 @@
 							]
 						}
 					],
-					"cta_label": "Solicita una auditoría de tu tienda online"
-				}
-			},
-			{
-				"id": "svc-bigdata",
-				"slug": "big-data-cloud-analytics",
-				"status": "published",
-				"data": {
-					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Arquitecturas de datos en la nube para procesamiento masivo y analytics en tiempo real.",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Arquitecturas de datos en la nube para decisiones basadas en evidencia. BigQuery, Snowflake, dbt, Airflow, streaming y dashboards analíticos."
-								}
-							]
-						}
-					],
-					"cta_label": "Solicita una evaluación de tus datos"
+					"cta_label": "Solicita una auditoría de tu tienda online",
+					"color": "#B5E6F7"
 				}
 			},
 			{
@@ -504,8 +444,8 @@
 				"slug": "cdn-waf-seguridad-edge-cloudflare",
 				"status": "published",
 				"data": {
-					"title": "CDN, WAF y Seguridad Edge",
-					"excerpt": "Partners certificados de Cloudflare. Rendimiento y seguridad en el edge.",
+					"title": "CDN, WAF & Edge Security",
+					"excerpt": "Aumenta la velocidad y seguridad de tu web con Cloudflare. Configuramos CDN, WAF y sistemas Zero Trust para proteger y optimizar tus aplicaciones.",
 					"content": [
 						{
 							"_type": "block",
@@ -518,7 +458,77 @@
 							]
 						}
 					],
-					"cta_label": "Audita tu seguridad edge"
+					"cta_label": "Audita tu seguridad edge",
+					"color": "#FDEBB6"
+				}
+			},
+			{
+				"id": "svc-bigdata",
+				"slug": "big-data-cloud-analytics",
+				"status": "published",
+				"data": {
+					"title": "Big Data & Cloud Analytics",
+					"excerpt": "Arquitecturas de datos en Google Cloud Platform con dbt, BigQuery y Dataflow. Transformamos la información en decisiones útiles para tu negocio.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Arquitecturas de datos en la nube para decisiones basadas en evidencia. BigQuery, Snowflake, dbt, Airflow, streaming y dashboards analíticos."
+								}
+							]
+						}
+					],
+					"cta_label": "Solicita una evaluación de tus datos",
+					"color": "#BFEDEE"
+				}
+			},
+			{
+				"id": "svc-integracion",
+				"slug": "integracion-de-sistemas",
+				"status": "published",
+				"data": {
+					"title": "Integración de sistemas",
+					"excerpt": "Conectamos sistemas complejos mediante Apache Camel, Talend o Gravitee API Manager, garantizando fluidez y trazabilidad.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Conectamos los sistemas que hacen funcionar tu negocio. APIs REST, GraphQL, mensajería asíncrona con Kafka, RabbitMQ y pipelines de datos en tiempo real."
+								}
+							]
+						}
+					],
+					"cta_label": "Solicita una evaluación de tus integraciones",
+					"color": "#ECDCE3"
+				}
+			},
+			{
+				"id": "svc-greenfield",
+				"slug": "ingenieria-greenfield-y-sistemas-criticos",
+				"status": "published",
+				"data": {
+					"title": "Desarrollo backend a medida",
+					"excerpt": "APIs, microservicios y soluciones escalables. Diseñamos sistemas sólidos, listos para evolucionar contigo.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Diseñamos y construimos desde cero sistemas que no pueden fallar. Infraestructuras greenfield con foco en rendimiento, escalabilidad y disponibilidad para aplicaciones de misión crítica."
+								}
+							]
+						}
+					],
+					"cta_label": "Hablemos de tu proyecto",
+					"color": "#C5EFCD"
 				}
 			}
 		],
