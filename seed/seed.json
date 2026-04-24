@@ -6,40 +6,78 @@
 		"description": "Consultoría tecnológica y arquitectura backend",
 		"author": "Server Startup"
 	},
-
 	"settings": {
 		"title": "Server Startup",
-		"tagline": "Ingeniería de Sistemas, Integración y Seguridad Edge"
+		"tagline": "Ingeniería de Sistemas, Integración y Seguridad Edge",
+		"phone": "+34666666666",
+		"phoneDisplay": "666 66 66 66",
+		"email": "info@serverstartup.com",
+		"whatsapp": "https://wa.me/34666666666"
 	},
-
 	"collections": [
 		{
 			"slug": "elementor_library",
 			"label": "Elementor Library",
 			"labelSingular": "Elementor Block",
-			"supports": ["revisions"],
+			"supports": [
+				"revisions"
+			],
 			"fields": [
-				{ "slug": "title", "label": "Title", "type": "string" },
-				{ "slug": "content", "label": "Content", "type": "portableText" }
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText"
+				}
 			]
 		},
 		{
 			"slug": "members",
 			"label": "Miembros",
 			"labelSingular": "Miembro",
-			"supports": ["revisions", "search"],
+			"supports": [
+				"revisions",
+				"search"
+			],
 			"fields": [
-				{ "slug": "title", "label": "Nombre", "type": "string", "required": true, "searchable": true },
-				{ "slug": "featured_image", "label": "Foto", "type": "image" },
-				{ "slug": "excerpt", "label": "Rol", "type": "text" },
-				{ "slug": "content", "label": "Biografía", "type": "portableText" }
+				{
+					"slug": "title",
+					"label": "Nombre",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Foto",
+					"type": "image"
+				},
+				{
+					"slug": "excerpt",
+					"label": "Rol",
+					"type": "text"
+				},
+				{
+					"slug": "content",
+					"label": "Biografía",
+					"type": "portableText"
+				}
 			]
 		},
 		{
 			"slug": "services",
 			"label": "Servicios",
 			"labelSingular": "Servicio",
-			"supports": ["drafts", "revisions", "search", "seo"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"search",
+				"seo"
+			],
 			"fields": [
 				{
 					"slug": "title",
@@ -63,6 +101,11 @@
 					"slug": "excerpt",
 					"label": "Short Description",
 					"type": "text"
+				},
+				{
+					"slug": "cta_label",
+					"label": "CTA Label",
+					"type": "string"
 				}
 			]
 		},
@@ -70,7 +113,12 @@
 			"slug": "posts",
 			"label": "Posts",
 			"labelSingular": "Post",
-			"supports": ["drafts", "revisions", "search", "seo"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"search",
+				"seo"
+			],
 			"commentsEnabled": true,
 			"fields": [
 				{
@@ -102,7 +150,11 @@
 			"slug": "pages",
 			"label": "Pages",
 			"labelSingular": "Page",
-			"supports": ["drafts", "revisions", "search"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"search"
+			],
 			"fields": [
 				{
 					"slug": "title",
@@ -116,22 +168,37 @@
 					"label": "Content",
 					"type": "portableText",
 					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text"
 				}
 			]
 		}
 	],
-
 	"taxonomies": [
 		{
 			"name": "category",
 			"label": "Categories",
 			"labelSingular": "Category",
 			"hierarchical": true,
-			"collections": ["posts"],
+			"collections": [
+				"posts"
+			],
 			"terms": [
-				{ "slug": "development", "label": "Development" },
-				{ "slug": "design", "label": "Design" },
-				{ "slug": "notes", "label": "Notes" }
+				{
+					"slug": "development",
+					"label": "Development"
+				},
+				{
+					"slug": "design",
+					"label": "Design"
+				},
+				{
+					"slug": "notes",
+					"label": "Notes"
+				}
 			]
 		},
 		{
@@ -139,16 +206,29 @@
 			"label": "Tags",
 			"labelSingular": "Tag",
 			"hierarchical": false,
-			"collections": ["posts"],
+			"collections": [
+				"posts"
+			],
 			"terms": [
-				{ "slug": "webdev", "label": "Web Development" },
-				{ "slug": "opinion", "label": "Opinion" },
-				{ "slug": "tools", "label": "Tools" },
-				{ "slug": "creativity", "label": "Creativity" }
+				{
+					"slug": "webdev",
+					"label": "Web Development"
+				},
+				{
+					"slug": "opinion",
+					"label": "Opinion"
+				},
+				{
+					"slug": "tools",
+					"label": "Tools"
+				},
+				{
+					"slug": "creativity",
+					"label": "Creativity"
+				}
 			]
 		}
 	],
-
 	"bylines": [
 		{
 			"id": "byline-editorial",
@@ -162,23 +242,49 @@
 			"isGuest": true
 		}
 	],
-
 	"menus": [
 		{
 			"name": "primary",
 			"label": "Navegación principal",
 			"items": [
-				{ "type": "custom", "label": "Ingeniería Greenfield", "url": "/ingenieria-greenfield-y-sistemas-criticos" },
-				{ "type": "custom", "label": "Integración", "url": "/integracion-de-sistemas" },
-				{ "type": "custom", "label": "E-commerce", "url": "/comercio-electronico" },
-				{ "type": "custom", "label": "Big Data", "url": "/big-data-cloud-analytics" },
-				{ "type": "custom", "label": "CDN", "url": "/cdn-waf-seguridad-edge-cloudflare" },
-				{ "type": "custom", "label": "Quiénes somos", "url": "/quienes-somos" },
-				{ "type": "custom", "label": "Contacto", "url": "/contacto" }
+				{
+					"type": "custom",
+					"label": "Ingeniería Greenfield",
+					"url": "/ingenieria-greenfield-y-sistemas-criticos"
+				},
+				{
+					"type": "custom",
+					"label": "Integración",
+					"url": "/integracion-de-sistemas"
+				},
+				{
+					"type": "custom",
+					"label": "E-commerce",
+					"url": "/comercio-electronico"
+				},
+				{
+					"type": "custom",
+					"label": "Big Data",
+					"url": "/big-data-cloud-analytics"
+				},
+				{
+					"type": "custom",
+					"label": "CDN",
+					"url": "/cdn-waf-seguridad-edge-cloudflare"
+				},
+				{
+					"type": "custom",
+					"label": "Quiénes somos",
+					"url": "/quienes-somos"
+				},
+				{
+					"type": "custom",
+					"label": "Contacto",
+					"url": "/contacto"
+				}
 			]
 		}
 	],
-
 	"widgetAreas": [
 		{
 			"name": "sidebar",
@@ -244,19 +350,28 @@
 			]
 		}
 	],
-
 	"sections": [
 		{
 			"slug": "newsletter-signup",
 			"title": "Newsletter Signup",
 			"description": "A call-to-action block for newsletter subscriptions",
-			"keywords": ["newsletter", "subscribe", "email", "cta"],
+			"keywords": [
+				"newsletter",
+				"subscribe",
+				"email",
+				"cta"
+			],
 			"source": "theme",
 			"content": [
 				{
 					"_type": "block",
 					"style": "h3",
-					"children": [{ "_type": "span", "text": "Stay in the loop" }]
+					"children": [
+						{
+							"_type": "span",
+							"text": "Stay in the loop"
+						}
+					]
 				},
 				{
 					"_type": "block",
@@ -274,7 +389,11 @@
 			"slug": "about-author",
 			"title": "About the Author",
 			"description": "Brief author bio for use in posts or pages",
-			"keywords": ["author", "bio", "about"],
+			"keywords": [
+				"author",
+				"bio",
+				"about"
+			],
 			"source": "theme",
 			"content": [
 				{
@@ -290,7 +409,6 @@
 			]
 		}
 	],
-
 	"content": {
 		"services": [
 			{
@@ -301,8 +419,18 @@
 					"title": "Ingeniería Greenfield y Sistemas Críticos",
 					"excerpt": "Diseñamos, construimos y operamos infraestructuras desde cero para aplicaciones críticas.",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Diseñamos y construimos desde cero sistemas que no pueden fallar. Infraestructuras greenfield con foco en rendimiento, escalabilidad y disponibilidad para aplicaciones de misión crítica." }] }
-					]
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Diseñamos y construimos desde cero sistemas que no pueden fallar. Infraestructuras greenfield con foco en rendimiento, escalabilidad y disponibilidad para aplicaciones de misión crítica."
+								}
+							]
+						}
+					],
+					"cta_label": "Hablemos de tu proyecto"
 				}
 			},
 			{
@@ -313,8 +441,18 @@
 					"title": "Integración de sistemas",
 					"excerpt": "Conectamos tus sistemas heredados con plataformas modernas mediante APIs y mensajería.",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Conectamos los sistemas que hacen funcionar tu negocio. APIs REST, GraphQL, mensajería asíncrona con Kafka, RabbitMQ y pipelines de datos en tiempo real." }] }
-					]
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Conectamos los sistemas que hacen funcionar tu negocio. APIs REST, GraphQL, mensajería asíncrona con Kafka, RabbitMQ y pipelines de datos en tiempo real."
+								}
+							]
+						}
+					],
+					"cta_label": "Solicita una evaluación de tus integraciones"
 				}
 			},
 			{
@@ -325,8 +463,18 @@
 					"title": "E-commerce",
 					"excerpt": "Consultoría técnica para plataformas de comercio electrónico de alto rendimiento.",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Infraestructura técnica para plataformas e-commerce de alto rendimiento. Catálogos masivos, checkout optimizado y escalabilidad horizontal." }] }
-					]
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Infraestructura técnica para plataformas e-commerce de alto rendimiento. Catálogos masivos, checkout optimizado y escalabilidad horizontal."
+								}
+							]
+						}
+					],
+					"cta_label": "Solicita una auditoría de tu tienda online"
 				}
 			},
 			{
@@ -337,8 +485,18 @@
 					"title": "Big Data & Cloud Analytics",
 					"excerpt": "Arquitecturas de datos en la nube para procesamiento masivo y analytics en tiempo real.",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Arquitecturas de datos en la nube para decisiones basadas en evidencia. BigQuery, Snowflake, dbt, Airflow, streaming y dashboards analíticos." }] }
-					]
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Arquitecturas de datos en la nube para decisiones basadas en evidencia. BigQuery, Snowflake, dbt, Airflow, streaming y dashboards analíticos."
+								}
+							]
+						}
+					],
+					"cta_label": "Solicita una evaluación de tus datos"
 				}
 			},
 			{
@@ -349,8 +507,18 @@
 					"title": "CDN, WAF y Seguridad Edge",
 					"excerpt": "Partners certificados de Cloudflare. Rendimiento y seguridad en el edge.",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Partners certificados de Cloudflare. Implementamos y optimizamos Workers, Pages, R2, D1, CDN, WAF y Zero Trust para nuestros clientes." }] }
-					]
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Partners certificados de Cloudflare. Implementamos y optimizamos Workers, Pages, R2, D1, CDN, WAF y Zero Trust para nuestros clientes."
+								}
+							]
+						}
+					],
+					"cta_label": "Audita tu seguridad edge"
 				}
 			}
 		],
@@ -363,7 +531,16 @@
 					"title": "Julio Argüello",
 					"excerpt": "Fundador & Lead Architect",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Arquitecto de sistemas con más de 15 años de experiencia en infraestructura cloud, sistemas distribuidos y consultoría tecnológica." }] }
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Arquitecto de sistemas con más de 15 años de experiencia en infraestructura cloud, sistemas distribuidos y consultoría tecnológica."
+								}
+							]
+						}
 					]
 				}
 			},
@@ -375,7 +552,16 @@
 					"title": "Ariadna",
 					"excerpt": "Backend Engineer",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Ingeniera backend especializada en microservicios, APIs y sistemas de mensajería." }] }
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ingeniera backend especializada en microservicios, APIs y sistemas de mensajería."
+								}
+							]
+						}
 					]
 				}
 			},
@@ -387,7 +573,16 @@
 					"title": "Raúl",
 					"excerpt": "Data Engineer",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Ingeniero de datos con experiencia en BigQuery, dbt, pipelines ETL y arquitecturas de datos en la nube." }] }
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ingeniero de datos con experiencia en BigQuery, dbt, pipelines ETL y arquitecturas de datos en la nube."
+								}
+							]
+						}
 					]
 				}
 			},
@@ -399,18 +594,28 @@
 					"title": "Daniel",
 					"excerpt": "Cloud & DevOps Engineer",
 					"content": [
-						{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Ingeniero cloud y DevOps especializado en GCP, Cloudflare, infraestructura como código y CI/CD." }] }
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ingeniero cloud y DevOps especializado en GCP, Cloudflare, infraestructura como código y CI/CD."
+								}
+							]
+						}
 					]
 				}
 			}
 		],
 		"pages": [
 			{
-				"id": "about",
-				"slug": "about",
+				"id": "page-quienes-somos",
+				"slug": "quienes-somos",
 				"status": "published",
 				"data": {
-					"title": "About",
+					"title": "Quiénes somos",
+					"excerpt": "El equipo de Server Startup. Ingenieros especializados en arquitectura backend, cloud y sistemas distribuidos.",
 					"content": [
 						{
 							"_type": "block",
@@ -418,7 +623,14 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "A place for writing about software, design, and the occasional stray thought. No posting schedule, no newsletter funnel. Just things I wanted to write down."
+									"text": "No somos una consultora generalista, trabajamos con un "
+								},
+								{
+									"_type": "span",
+									"text": "modelo boutique",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						},
@@ -428,7 +640,254 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Built with Astro and EmDash. The source is open if you want to see how it works."
+									"text": "Somos profesionales con más de 15 años de experiencia, nos centramos en aquello que dominamos: "
+								},
+								{
+									"_type": "span",
+									"text": "arquitectura backend, rendimiento y seguridad en la nube",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Este enfoque nos permite ofrecer soluciones más precisas, rápidas y adaptadas a cada entorno."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Nuestros valores"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "En Server Startup creemos en apoyar a quienes comparten nuestra visión de esfuerzo, innovación y superación. Por eso colaboramos con equipos y proyectos que aplican la misma mentalidad que guía nuestro trabajo diario."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-contacto",
+				"slug": "contacto",
+				"status": "published",
+				"data": {
+					"title": "Contacto",
+					"excerpt": "Contacta con Server Startup. Consultoría tecnológica, arquitectura backend y seguridad edge.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Si tienes un proyecto en marcha o quieres mejorar tu infraestructura actual, estamos aquí para ayudarte."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cuéntanos qué necesitas:"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"listItem": "bullet",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Auditorías y consultoría técnica."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"listItem": "bullet",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Diseño o mejora de arquitectura backend."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"listItem": "bullet",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Optimización de rendimiento y seguridad."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"listItem": "bullet",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Integración entre sistemas o migración a la nube."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-privacidad",
+				"slug": "politica-de-privacidad",
+				"status": "published",
+				"data": {
+					"title": "Política de privacidad",
+					"excerpt": "Política de privacidad de Server Startup.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "De conformidad con el Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Responsable del tratamiento"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server Startup — info@serverstartup.com"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Finalidad"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Los datos recabados a través del formulario de contacto serán tratados con la finalidad de gestionar su consulta."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Legitimación"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "La base legal para el tratamiento de sus datos es el consentimiento del interesado."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Destinatarios"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "No se cederán datos a terceros, salvo obligación legal."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Derechos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Puede ejercer sus derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiendo a info@serverstartup.com."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cookies"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Este sitio web no utiliza cookies de seguimiento o publicidad."
 								}
 							]
 						}
@@ -475,7 +934,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "What survives" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "What survives"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -510,12 +974,21 @@
 					]
 				},
 				"bylines": [
-					{ "byline": "byline-editorial" },
-					{ "byline": "byline-guest", "roleLabel": "Guest essay" }
+					{
+						"byline": "byline-editorial"
+					},
+					{
+						"byline": "byline-guest",
+						"roleLabel": "Guest essay"
+					}
 				],
 				"taxonomies": {
-					"category": ["development"],
-					"tag": ["opinion"]
+					"category": [
+						"development"
+					],
+					"tag": [
+						"opinion"
+					]
 				}
 			},
 			{
@@ -556,7 +1029,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "The performance argument" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "The performance argument"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -580,10 +1058,19 @@
 						}
 					]
 				},
-				"bylines": [{ "byline": "byline-editorial" }],
+				"bylines": [
+					{
+						"byline": "byline-editorial"
+					}
+				],
 				"taxonomies": {
-					"category": ["development"],
-					"tag": ["webdev", "opinion"]
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev",
+						"opinion"
+					]
 				}
 			},
 			{
@@ -624,7 +1111,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "The fear of being wrong" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "The fear of being wrong"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -649,8 +1141,12 @@
 					]
 				},
 				"taxonomies": {
-					"category": ["notes"],
-					"tag": ["opinion"]
+					"category": [
+						"notes"
+					],
+					"tag": [
+						"opinion"
+					]
 				}
 			},
 			{
@@ -691,7 +1187,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "The Unix philosophy, revisited" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "The Unix philosophy, revisited"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -716,8 +1217,12 @@
 					]
 				},
 				"taxonomies": {
-					"category": ["development"],
-					"tag": ["tools"]
+					"category": [
+						"development"
+					],
+					"tag": [
+						"tools"
+					]
 				}
 			},
 			{
@@ -758,7 +1263,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Embracing the box" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Embracing the box"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -783,8 +1293,12 @@
 					]
 				},
 				"taxonomies": {
-					"category": ["design"],
-					"tag": ["creativity"]
+					"category": [
+						"design"
+					],
+					"tag": [
+						"creativity"
+					]
 				}
 			},
 			{
@@ -825,7 +1339,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Why side projects matter" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Why side projects matter"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -850,8 +1369,12 @@
 					]
 				},
 				"taxonomies": {
-					"category": ["development"],
-					"tag": ["creativity"]
+					"category": [
+						"development"
+					],
+					"tag": [
+						"creativity"
+					]
 				}
 			},
 			{
@@ -892,7 +1415,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Removing as a feature" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Removing as a feature"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -917,8 +1445,12 @@
 					]
 				},
 				"taxonomies": {
-					"category": ["notes"],
-					"tag": ["opinion"]
+					"category": [
+						"notes"
+					],
+					"tag": [
+						"opinion"
+					]
 				}
 			},
 			{

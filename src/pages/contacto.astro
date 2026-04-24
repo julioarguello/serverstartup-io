@@ -1,56 +1,64 @@
 ---
 /**
- * Contacto page — matches original WordPress layout:
+ * Contacto page — layout in template, content + contact data from CMS.
  * - Hero with h1 "Contacto"
- * - Description + bullet list of services
- * - 3 contact methods (WhatsApp, Teléfono, Email) with diagonal arrow icons
- * - Footer with trust logos + grid
+ * - Content from CMS (intro text + bullet list)
+ * - 3 contact methods (WhatsApp, Teléfono, Email) — data from site settings
  */
+import { getEmDashEntry, getSiteSettings } from "emdash";
+import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
-Astro.cache.set({ maxAge: 86400 });
+
+const { entry, cacheHint } = await getEmDashEntry("pages", "contacto");
+if (!entry) return Astro.redirect("/404");
+Astro.cache.set(cacheHint);
+
+const { title, content, excerpt } = entry.data;
+const settings = await getSiteSettings();
+
+// Contact info from site settings (fallback to hardcoded for safety)
+const phone = (settings as any).phone || "+34666666666";
+const phoneDisplay = (settings as any).phoneDisplay || "666 66 66 66";
+const email = (settings as any).email || "info@serverstartup.com";
+const whatsapp = (settings as any).whatsapp || `https://wa.me/${phone.replace('+', '')}`;
 ---
 
 <Base
-	title="Contacto"
-	description="Contacta con Server Startup. Consultoría tecnológica, arquitectura backend y seguridad edge."
+	title={title}
+	description={excerpt || `${title} — Server Startup`}
 >
-	<section class="s-contact" aria-label="Formulario de contacto">
+	<section class="s-contact" aria-label={title}>
 		<div class="container s-contact__inner">
-			<h1>Contacto</h1>
-			<p class="text-body s-contact__intro">
-				Si tienes un proyecto en marcha o quieres mejorar tu infraestructura actual, estamos aquí para ayudarte.
-			</p>
-			<p class="text-body">Cuéntanos qué necesitas:</p>
-			<ul class="s-contact__list">
-				<li>Auditorías y consultoría técnica.</li>
-				<li>Diseño o mejora de arquitectura backend.</li>
-				<li>Optimización de rendimiento y seguridad.</li>
-				<li>Integración entre sistemas o migración a la nube.</li>
-			</ul>
+			<h1>{title}</h1>
+			{content && (
+				<div class="s-contact__content">
+					<PortableText value={content} />
+				</div>
+			)}
 
 			<div class="s-contact__methods" role="list">
-				<a href="https://wa.me/34666666666" target="_blank" rel="noopener" class="s-contact__method" role="listitem" aria-label="Contactar por WhatsApp">
+				<a href={whatsapp} target="_blank" rel="noopener" class="s-contact__method" role="listitem" aria-label="Contactar por WhatsApp">
 					<span class="s-contact__method-label">WhatsApp</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
-					<span class="s-contact__method-value">666 66 66 66</span>
+					<span class="s-contact__method-value">{phoneDisplay}</span>
 				</a>
 
-				<a href="tel:+34666666666" class="s-contact__method" role="listitem" aria-label="Llamar por teléfono">
+				<a href={`tel:${phone}`} class="s-contact__method" role="listitem" aria-label="Llamar por teléfono">
 					<span class="s-contact__method-label">Teléfono</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
-					<span class="s-contact__method-value">666 66 66 66</span>
+					<span class="s-contact__method-value">{phoneDisplay}</span>
 				</a>
 
-				<a href="mailto:info@serverstartup.com" class="s-contact__method" role="listitem" aria-label="Enviar email">
+				<a href={`mailto:${email}`} class="s-contact__method" role="listitem" aria-label="Enviar email">
 					<span class="s-contact__method-label">Email</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
-					<span class="s-contact__method-value">info@serverstartup.com</span>
+					<span class="s-contact__method-value">{email}</span>
 				</a>
 			</div>
 		</div>
@@ -66,21 +74,26 @@ Astro.cache.set({ maxAge: 86400 });
 		margin-bottom: var(--widget-spacing);
 	}
 
-	.s-contact__intro {
-		margin-bottom: 8px;
-	}
-
-	.s-contact__list {
-		list-style: disc;
-		padding-left: 24px;
-		margin-top: 8px;
+	.s-contact__content {
 		margin-bottom: 48px;
 	}
 
-	.s-contact__list li {
-		font-family: var(--font-family);
+	.s-contact__content :global(p) {
 		font-size: 20px;
 		font-weight: 300;
+		line-height: 28px;
+	}
+
+	.s-contact__content :global(ul) {
+		list-style: disc;
+		padding-left: 24px;
+		margin-top: 8px;
+	}
+
+	.s-contact__content :global(li) {
+		font-family: var(--font-family);
+		font-size: 20px;
+		font-weight: 400;
 		line-height: 28px;
 	}
 

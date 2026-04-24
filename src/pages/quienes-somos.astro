@@ -1,35 +1,55 @@
 ---
 /**
- * Quiénes Somos — matches original WordPress layout:
- * 1. Hero — h1 "Quiénes somos", subtitle "modelo boutique", body text
- * 2. "~ El equipo" — dark bg, 4-col grid of team member cards (photo + name + role + bio)
- * 3. Values — dark bg, text about supporting innovation
- * 4. Trust logos + footer
+ * Quiénes Somos — hero text from CMS, team members from CMS collection.
+ * 1. Hero — h1 + body from pages/quienes-somos content
+ * 2. "~ El equipo" — dark bg, 4-col grid of team member cards from members collection
+ * 3. Values — text from CMS content (h2 + paragraph at end of page content)
  */
-import { getEmDashCollection } from "emdash";
+import { getEmDashEntry, getEmDashCollection } from "emdash";
+import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 
-const { entries: members, cacheHint } = await getEmDashCollection("members", {
+const { entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos");
+if (!entry) return Astro.redirect("/404");
+Astro.cache.set(cacheHint);
+
+const { title, content, excerpt } = entry.data;
+
+const { entries: members } = await getEmDashCollection("members", {
 	limit: 50,
 	orderBy: { title: "asc" },
 });
-Astro.cache.set(cacheHint);
+
+// Split content: first blocks are hero, blocks after "~ Nuestros valores" h2 are the values section
+const heroBlocks: any[] = [];
+const valuesBlocks: any[] = [];
+let inValues = false;
+for (const block of content || []) {
+	if (block._type === 'block' && block.style === 'h2') {
+		inValues = true;
+		continue; // skip the h2 itself, we render it in the template
+	}
+	if (inValues) {
+		valuesBlocks.push(block);
+	} else {
+		heroBlocks.push(block);
+	}
+}
 ---
 
 <Base
-	title="Quiénes somos"
-	description="El equipo de Server Startup. Ingenieros especializados en arquitectura backend, cloud y sistemas distribuidos."
+	title={title}
+	description={excerpt || `${title} — Server Startup`}
 >
 	<!-- ══════ HERO ══════ -->
-	<section class="s-hero" aria-label="Quiénes somos">
+	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
-			<h1>Quiénes somos</h1>
-			<p class="text-sub s-hero__subtitle">
-				No somos una consultora generalista, trabajamos con un <span class="marked"><strong>modelo boutique</strong></span>
-			</p>
-			<div class="s-hero__body">
-				<p>Somos profesionales con más de 15 años de experiencia, nos centramos en aquello que dominamos: <strong>arquitectura backend, rendimiento y seguridad en la nube</strong>. Este enfoque nos permite ofrecer soluciones más precisas, rápidas y adaptadas a cada entorno.</p>
-			</div>
+			<h1>{title}</h1>
+			{heroBlocks.length > 0 && (
+				<div class="s-hero__body">
+					<PortableText value={heroBlocks} />
+				</div>
+			)}
 		</div>
 	</section>
 
@@ -38,58 +58,30 @@ Astro.cache.set(cacheHint);
 		<div class="container s-team__inner">
 			<h2>~ El equipo</h2>
 			<div class="s-team__grid" role="list">
-				{members.length > 0 ? (
-					members.map((member) => (
-						<article class="team-card" role="listitem">
-							<div class="team-card__photo">
-								{member.data.featured_image?.src
-									? <img src={member.data.featured_image.src} alt={member.data.title} loading="lazy" />
-									: <div class="team-card__placeholder">{member.data.title?.charAt(0) || "?"}</div>
-								}
-							</div>
-							<h3 class="team-card__name">{member.data.title}</h3>
-							{member.data.excerpt && <p class="team-card__role">{member.data.excerpt}</p>}
-						</article>
-					))
-				) : (
-					/* Fallback team members for when CMS has no data */
-					<>
-						<article class="team-card" role="listitem">
-							<div class="team-card__photo"><div class="team-card__placeholder">J</div></div>
-							<h3 class="team-card__name">Julio Argüello</h3>
-							<p class="team-card__role">CEO</p>
-							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-						</article>
-						<article class="team-card" role="listitem">
-							<div class="team-card__photo"><div class="team-card__placeholder">A</div></div>
-							<h3 class="team-card__name">Ariadna Cisneros</h3>
-							<p class="team-card__role">CTO</p>
-							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-						</article>
-						<article class="team-card" role="listitem">
-							<div class="team-card__photo"><div class="team-card__placeholder">R</div></div>
-							<h3 class="team-card__name">Raúl Espejo</h3>
-							<p class="team-card__role">Ciberseguridad</p>
-							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-						</article>
-						<article class="team-card" role="listitem">
-							<div class="team-card__photo"><div class="team-card__placeholder">D</div></div>
-							<h3 class="team-card__name">Daniel Carretero</h3>
-							<p class="team-card__role">Lead Architect</p>
-							<p class="team-card__bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-						</article>
-					</>
-				)}
+				{members.map((member) => (
+					<article class="team-card" role="listitem">
+						<div class="team-card__photo">
+							{member.data.featured_image?.src
+								? <img src={member.data.featured_image.src} alt={member.data.title} loading="lazy" />
+								: <div class="team-card__placeholder">{member.data.title?.charAt(0) || "?"}</div>
+							}
+						</div>
+						<h3 class="team-card__name">{member.data.title}</h3>
+						{member.data.excerpt && <p class="team-card__role">{member.data.excerpt}</p>}
+					</article>
+				))}
 			</div>
 		</div>
 	</section>
 
 	<!-- ══════ VALUES — dark bg ══════ -->
-	<section class="s-values" aria-label="Nuestros valores">
-		<div class="container s-values__inner">
-			<p class="text-body s-values__text">En Server Startup creemos en apoyar a quienes comparten nuestra visión de esfuerzo, innovación y superación.<br/>Por eso colaboramos con equipos y proyectos que aplican la misma mentalidad que guía nuestro trabajo diario.</p>
-		</div>
-	</section>
+	{valuesBlocks.length > 0 && (
+		<section class="s-values" aria-label="Nuestros valores">
+			<div class="container s-values__inner">
+				<PortableText value={valuesBlocks} />
+			</div>
+		</section>
+	)}
 </Base>
 
 <style>
@@ -98,16 +90,12 @@ Astro.cache.set(cacheHint);
 		padding: calc(80px + 24px) 0 60px;
 	}
 
-	.s-hero__subtitle {
-		margin-top: var(--widget-spacing);
-	}
-
 	.s-hero__body {
 		margin-top: 16px;
 		max-width: 700px;
 	}
 
-	.s-hero__body p {
+	.s-hero__body :global(p) {
 		font-size: 20px;
 		font-weight: 300;
 		line-height: 26px;
@@ -179,13 +167,6 @@ Astro.cache.set(cacheHint);
 		margin-bottom: 8px;
 	}
 
-	.team-card__bio {
-		color: rgba(255, 255, 255, 0.8);
-		font-size: 14px;
-		font-weight: 300;
-		line-height: 20px;
-	}
-
 	@media (min-width: 768px) {
 		.s-team { padding: 80px 0; }
 		.s-team__grid {
@@ -200,8 +181,11 @@ Astro.cache.set(cacheHint);
 		padding: 60px 0 80px;
 	}
 
-	.s-values__text {
+	.s-values__inner :global(p) {
 		color: var(--color-secondary);
 		max-width: 700px;
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 26px;
 	}
 </style>

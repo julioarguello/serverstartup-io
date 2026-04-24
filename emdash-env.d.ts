@@ -37,6 +37,7 @@ export interface Page {
   status: string;
   title: string;
   content?: PortableTextBlock[];
+  excerpt?: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
@@ -65,6 +66,7 @@ export interface Servicio {
   featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
   content?: PortableTextBlock[];
   excerpt?: string;
+  cta_label?: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
