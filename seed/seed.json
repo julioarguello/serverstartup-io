@@ -353,6 +353,58 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "cta_global",
+			"label": "CTA Global",
+			"description": "Call-to-action block shared across homepage and service pages",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "¿Listo para optimizar tu infraestructura digital?",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Hablemos de ingeniero a ingeniero, con el negocio en el centro."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cta-button",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contacta ahora",
+									"marks": ["cta-link"]
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "cta-link",
+									"href": "/contacto"
+								}
+							]
+						}
+					]
+				}
+			]
 		}
 	],
 	"sections": [
@@ -723,46 +775,6 @@
 								{
 									"_type": "span",
 									"text": "Abarcamos todas las capas del entorno tecnológico, desde la base de datos hasta la seguridad en la nube."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "~ CTA"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "¿Listo para optimizar tu infraestructura digital?"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Hablemos de ingeniero a ingeniero, con el negocio en el centro."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo. Sin comerciales, solo soluciones."
 								}
 							]
 						}
