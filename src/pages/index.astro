@@ -1,53 +1,112 @@
 ---
 /**
- * Homepage — pixel-perfect clone, semantic HTML, mobile-first CSS.
+ * Homepage — CMS-driven content, pixel-perfect layout.
  *
- * Sections (matching original Elementor structure):
- * 1. Hero — min-height 100vh-150px, cubo-home.svg bg, fadeIn animations
- * 2. "Tecnología que impulsa tu negocio" — dark (#1E1E1E) bg, 2-col
- * 3. Cloudflare Partner — centered bordered card, logo + 3 features
- * 4. "Áreas de especialización" — 2-col (sticky header + stacking pastel cards)
- * 5. CTA — dark bg, heading at 70% width, button
+ * Content source: pages/home (EmDash CMS)
+ * PT sections split by h2 headings:
+ *   - hero: blocks before first h2
+ *   - "~ Tecnología que impulsa tu negocio": h2 + body
+ *   - "~ Áreas de especialización": h2 + subtitle
+ *   - "~ CTA": h2 + heading + subtitle + body
+ *
+ * Sections 3 (Cloudflare) and 4 cards (services) remain template-driven
+ * pending issues #4 and #6.
  */
+import { getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 
-const cacheHint = { maxAge: 3600 };
+const { entry, cacheHint } = await getEmDashEntry("pages", "home");
+if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
+
+const { title, content, excerpt } = entry.data;
+
+// Split PT content by h2 headings into named sections
+type Section = { heading: string; blocks: any[] };
+const sections: Section[] = [];
+let currentSection: Section = { heading: "", blocks: [] };
+
+for (const block of content || []) {
+	if (block._type === "block" && block.style === "h2") {
+		if (currentSection.heading || currentSection.blocks.length > 0) {
+			sections.push(currentSection);
+		}
+		const headingText = block.children?.map((c: any) => c.text).join("") || "";
+		currentSection = { heading: headingText, blocks: [] };
+	} else {
+		currentSection.blocks.push(block);
+	}
+}
+if (currentSection.heading || currentSection.blocks.length > 0) {
+	sections.push(currentSection);
+}
+
+// Named section extraction
+const heroSection = sections[0]; // blocks before first h2
+const techSection = sections.find((s) => s.heading.includes("Tecnología"));
+const areasSection = sections.find((s) => s.heading.includes("Áreas"));
+const ctaSection = sections.find((s) => s.heading.includes("CTA"));
+
+// Extract CTA content: first block = heading, second = subtitle, third = body
+const ctaHeading = ctaSection?.blocks[0]?.children?.map((c: any) => c.text).join("") || "¿Listo para optimizar tu infraestructura digital?";
+const ctaSubtitle = ctaSection?.blocks[1]?.children?.map((c: any) => c.text).join("") || "";
+const ctaBody = ctaSection?.blocks[2]?.children?.map((c: any) => c.text).join("") || "";
+
+// Extract tech subtitle (first block with marks) and body (second block)
+const techSubtitleBlock = techSection?.blocks[0];
+const techBodyBlock = techSection?.blocks[1];
+
+// Extract areas subtitle
+const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text).join("") || "";
 ---
 
 <Base
-	title="Ingeniería de Sistemas, Integración y Seguridad Edge"
-	description="Construimos arquitecturas completas capa a capa. Ingeniería Greenfield, integración de sistemas, comercio electrónico y seguridad edge."
+	title={title}
+	description={excerpt || `${title} — Server Startup`}
 >
 	<!-- ══════ SECTION 1: HERO ══════ -->
 	<section class="s-hero" aria-label="Introducción">
 		<div class="container s-hero__inner">
-			<h1>Ingeniería de Sistemas, Integración y Seguridad Edge</h1>
-			<p class="text-sub s-hero__kicker">
-				Construimos arquitecturas completas <span class="marked"><strong>capa a capa</strong></span>
-			</p>
-			<div class="s-hero__body">
-				<p>Cimentamos con ingeniería <em>Greenfield</em> sólida, conectamos sistemas de forma resiliente, impulsamos el negocio con plataformas de comercio electrónico y blindamos el perímetro con seguridad edge.</p>
-				<p>Gestionamos tu tecnología como un activo estratégico unificado, robusto y gobernable.</p>
-			</div>
+			<h1>{title}</h1>
+			{heroSection?.blocks.length > 0 && (
+				<div class="s-hero__kicker">
+					<PortableText value={[heroSection.blocks[0]]} />
+				</div>
+			)}
+			{heroSection?.blocks.length > 1 && (
+				<div class="s-hero__body">
+					<PortableText value={heroSection.blocks.slice(1)} />
+				</div>
+			)}
 			<a href="#areas-especializacion" class="btn btn-dark">Nuestros servicios</a>
 		</div>
 	</section>
 
 	<!-- ══════ SECTION 2: TECNOLOGÍA QUE IMPULSA TU NEGOCIO ══════ -->
-	<section class="s-tech" aria-label="Tecnología que impulsa tu negocio">
-		<div class="container s-tech__inner">
-			<div class="s-tech__col-left">
-				<h2>~ Tecnología que impulsa tu negocio</h2>
+	{techSection && (
+		<section class="s-tech" aria-label={techSection.heading}>
+			<div class="container s-tech__inner">
+				<div class="s-tech__col-left">
+					<h2>{techSection.heading}</h2>
+				</div>
+				<div class="s-tech__col-right">
+					{techSubtitleBlock && (
+						<div class="s-tech__subtitle-wrap">
+							<PortableText value={[techSubtitleBlock]} />
+						</div>
+					)}
+					{techBodyBlock && (
+						<div class="s-tech__body-wrap">
+							<PortableText value={[techBodyBlock]} />
+						</div>
+					)}
+				</div>
 			</div>
-			<div class="s-tech__col-right">
-				<p class="text-sub s-tech__subtitle">Somos un equipo pequeño de <span class="marked">ingenieros</span></p>
-				<p class="s-tech__body">Huimos de las metodologías rígidas y nos centramos en entender el contexto de cada proyecto. Aplicamos juicio técnico y cuidamos la calidad de los entregables porque creemos que es la única forma sostenible de construir software.</p>
-			</div>
-		</div>
-	</section>
+		</section>
+	)}
 
-	<!-- ══════ SECTION 3: CLOUDFLARE PARTNER ══════ -->
+	<!-- ══════ SECTION 3: CLOUDFLARE PARTNER (template-driven, issue #6) ══════ -->
 	<section class="s-cf" aria-label="Cloudflare Partner">
 		<div class="container s-cf__wrapper">
 			<article class="s-cf__card">
@@ -81,16 +140,16 @@ Astro.cache.set(cacheHint);
 		</div>
 	</section>
 
-	<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN ══════ -->
-	<section class="s-areas" id="areas-especializacion" aria-label="Áreas de especialización">
+	<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN (cards template-driven, issue #4) ══════ -->
+	<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || "Áreas de especialización"}>
 		<div class="container s-areas__inner">
 			<!-- Left: sticky header -->
 			<div class="s-areas__header">
-				<h2>~ Áreas de especialización</h2>
-				<p class="text-sub">Abarcamos todas las capas del entorno tecnológico, desde la base de datos hasta la seguridad en la nube.</p>
+				<h2>{areasSection?.heading || "~ Áreas de especialización"}</h2>
+				<p class="text-sub">{areasSubtitle}</p>
 			</div>
 
-			<!-- Right: stacking cards -->
+			<!-- Right: stacking cards (template-driven, issue #4) -->
 			<div class="s-areas__cards" role="list">
 				<article class="area-card card1" style="background-color: var(--color-card-blue);" role="listitem">
 					<h3>Comercio electrónico</h3>
@@ -138,13 +197,14 @@ Astro.cache.set(cacheHint);
 	<!-- ══════ SECTION 5: CTA ══════ -->
 	<section class="s-cta" aria-label="Contacta con nosotros">
 		<div class="container s-cta__inner">
-			<h2 class="s-cta__heading">¿Listo para optimizar tu infraestructura digital?</h2>
-			<p class="text-sub s-cta__subtitle">Hablemos de ingeniero a ingeniero, con el negocio en el centro.</p>
-			<p class="text-body s-cta__body">Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo. Sin comerciales, solo soluciones.</p>
+			<h2 class="s-cta__heading">{ctaHeading}</h2>
+			{ctaSubtitle && <p class="text-sub s-cta__subtitle">{ctaSubtitle}</p>}
+			{ctaBody && <p class="text-body s-cta__body">{ctaBody}</p>}
 			<a href="/contacto" class="btn btn-light">Contacta ahora</a>
 		</div>
 	</section>
 </Base>
+
 
 <style>
 	/* ═══ HERO — mobile-first ═══ */
@@ -165,6 +225,12 @@ Astro.cache.set(cacheHint);
 
 	.s-hero__kicker {
 		margin-top: var(--widget-spacing);
+	}
+
+	.s-hero__kicker :global(p) {
+		font-size: var(--text-sub-size, 26px);
+		font-weight: var(--text-sub-weight, 500);
+		line-height: var(--text-sub-lh, 30px);
 	}
 
 	.s-hero__body {
@@ -205,11 +271,14 @@ Astro.cache.set(cacheHint);
 		color: var(--color-secondary);
 	}
 
-	.s-tech__subtitle {
+	.s-tech__subtitle-wrap :global(p) {
 		color: var(--color-secondary);
+		font-size: var(--text-sub-size, 26px);
+		font-weight: var(--text-sub-weight, 500);
+		line-height: var(--text-sub-lh, 30px);
 	}
 
-	.s-tech__body {
+	.s-tech__body-wrap :global(p) {
 		color: var(--color-secondary);
 		margin-top: 16px;
 		font-size: 20px;

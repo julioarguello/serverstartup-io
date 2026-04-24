@@ -610,6 +610,156 @@
 		],
 		"pages": [
 			{
+				"id": "page-home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Ingeniería de Sistemas, Integración y Seguridad Edge",
+					"excerpt": "Construimos arquitecturas completas capa a capa. Ingeniería Greenfield, integración de sistemas, comercio electrónico y seguridad edge.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Construimos arquitecturas completas "
+								},
+								{
+									"_type": "span",
+									"text": "capa a capa",
+									"marks": ["strong"]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cimentamos con ingeniería "
+								},
+								{
+									"_type": "span",
+									"text": "Greenfield",
+									"marks": ["em"]
+								},
+								{
+									"_type": "span",
+									"text": " sólida, conectamos sistemas de forma resiliente, impulsamos el negocio con plataformas de comercio electrónico y blindamos el perímetro con seguridad edge."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Gestionamos tu tecnología como un activo estratégico unificado, robusto y gobernable."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Tecnología que impulsa tu negocio"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Somos un equipo pequeño de "
+								},
+								{
+									"_type": "span",
+									"text": "ingenieros",
+									"marks": ["strong"]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Huimos de las metodologías rígidas y nos centramos en entender el contexto de cada proyecto. Aplicamos juicio técnico y cuidamos la calidad de los entregables porque creemos que es la única forma sostenible de construir software."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Áreas de especialización"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Abarcamos todas las capas del entorno tecnológico, desde la base de datos hasta la seguridad en la nube."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ CTA"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "¿Listo para optimizar tu infraestructura digital?"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Hablemos de ingeniero a ingeniero, con el negocio en el centro."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo. Sin comerciales, solo soluciones."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
 				"id": "page-quienes-somos",
 				"slug": "quienes-somos",
 				"status": "published",
