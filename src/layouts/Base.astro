@@ -26,6 +26,11 @@ const [settings, menu] = await Promise.all([
 ]);
 
 const identity = resolveBlogSiteIdentity(settings);
+
+// Contact info from site settings
+const phone = (settings as any).phone || "+34666666666";
+const phoneDisplay = (settings as any).phoneDisplay || "666 66 66 66";
+const email = (settings as any).email || "info@serverstartup.com";
 const pageTitle = title
 	? `${title} — ${identity.siteTitle}`
 	: identity.siteTitle;
@@ -192,8 +197,8 @@ const trustLogos = [
 					<h5>Somos partners</h5>
 					<ul class="footer-list">
 						<li><a href="/quienes-somos">Quiénes somos</a></li>
-						<li>email@email.com</li>
-						<li><a href="tel:+34666666666">666 66 66 66</a></li>
+						<li>{email}</li>
+						<li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>
 					</ul>
 					<a href="/contacto" class="btn btn-dark footer-cta">Contacta ahora</a>
 				</div>
@@ -410,6 +415,7 @@ const trustLogos = [
 	}
 	.footer-trust__title {
 		margin-bottom: 24px;
+		font-style: italic;
 	}
 	.trust-logos {
 		display: flex;

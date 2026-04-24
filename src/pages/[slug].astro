@@ -30,15 +30,8 @@ const themeColors: Record<string, string> = {
 };
 const accentColor = themeColors[slug!] || "#BFEDEE";
 
-// CTA button text per service
-const ctaLabels: Record<string, string> = {
-	"comercio-electronico": "Solicita una auditoría de tu tienda online",
-	"cdn-waf-seguridad-edge-cloudflare": "Audita tu seguridad edge",
-	"big-data-cloud-analytics": "Solicita una evaluación de tus datos",
-	"integracion-de-sistemas": "Solicita una evaluación de tus integraciones",
-	"ingenieria-greenfield-y-sistemas-criticos": "Hablemos de tu proyecto",
-};
-const ctaLabel = ctaLabels[slug!] || "Contacta ahora";
+// CTA label from CMS (fallback to generic)
+const ctaLabel = (entry.data as any).cta_label || "Contacta ahora";
 ---
 
 <Base

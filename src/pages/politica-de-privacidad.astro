@@ -1,42 +1,28 @@
 ---
 /**
- * Política de privacidad — legal page.
+ * Política de privacidad — legal page, content from CMS.
  * noindex, nofollow.
  */
+import { getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
-Astro.cache.set({ maxAge: 86400 });
+
+const { entry, cacheHint } = await getEmDashEntry("pages", "politica-de-privacidad");
+if (!entry) return Astro.redirect("/404");
+Astro.cache.set(cacheHint);
+
+const { title, content, excerpt } = entry.data;
 ---
 
 <Base
-	title="Política de privacidad"
-	description="Política de privacidad de Server Startup."
+	title={title}
+	description={excerpt || `${title} — Server Startup`}
 	robots="noindex, nofollow"
 >
-	<section class="legal" aria-label="Política de privacidad">
+	<section class="legal" aria-label={title}>
 		<div class="container legal-inner">
-			<h1>Política de privacidad</h1>
-			<p class="text-sub legal-intro">
-				De conformidad con el Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018
-				de Protección de Datos Personales y garantía de los derechos digitales.
-			</p>
-
-			<h2>Responsable del tratamiento</h2>
-			<p>Server Startup<br />info@serverstartup.com</p>
-
-			<h2>Finalidad</h2>
-			<p>Los datos recabados a través del formulario de contacto serán tratados con la finalidad de gestionar su consulta.</p>
-
-			<h2>Legitimación</h2>
-			<p>La base legal para el tratamiento de sus datos es el consentimiento del interesado.</p>
-
-			<h2>Destinatarios</h2>
-			<p>No se cederán datos a terceros, salvo obligación legal.</p>
-
-			<h2>Derechos</h2>
-			<p>Puede ejercer sus derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiendo a info@serverstartup.com.</p>
-
-			<h2>Cookies</h2>
-			<p>Este sitio web no utiliza cookies de seguimiento o publicidad.</p>
+			<h1>{title}</h1>
+			{content && <PortableText value={content} />}
 		</div>
 	</section>
 </Base>
@@ -54,17 +40,13 @@ Astro.cache.set({ maxAge: 86400 });
 		margin-bottom: 24px;
 	}
 
-	.legal h2 {
+	.legal :global(h2) {
 		font-size: 22px;
 		margin-top: 32px;
 		margin-bottom: 8px;
 	}
 
-	.legal-intro {
-		margin-bottom: 32px;
-	}
-
-	.legal p {
+	.legal :global(p) {
 		font-size: 20px;
 		font-weight: 300;
 		line-height: 26px;
