@@ -60,7 +60,7 @@ const trustLogos = (partnerEntries ?? [])
 	}));
 ---
 
-<html lang="es">
+<html lang={Astro.currentLocale || "es"}>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
