@@ -9,7 +9,7 @@
  *
  * Each service has a color-themed cube background SVG.
  */
-import { getEmDashEntry } from "emdash";
+import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
@@ -19,13 +19,16 @@ const { entry, cacheHint } = await getEmDashEntry("services", slug!);
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
 
+const settings = await getSiteSettings();
+const defaultCtaLabel = (settings as any).defaultCtaLabel || "Contacta ahora";
+
 const { title, content, excerpt } = entry.data;
 
 // Theme color from CMS entry (fallback to teal)
 const accentColor = (entry.data as any).color || "#BFEDEE";
 
-// CTA label from CMS (fallback to generic)
-const ctaLabel = (entry.data as any).cta_label || "Contacta ahora";
+// CTA label from CMS (fallback to site settings default)
+const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
 ---
 
 <Base

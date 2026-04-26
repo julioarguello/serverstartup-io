@@ -10,6 +10,7 @@
  */
 import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
+import { getUiLabels } from "../utils/ui-labels";
 import "../styles/theme.css";
 
 interface Props {
@@ -20,7 +21,7 @@ interface Props {
 
 const { title, description, robots } = Astro.props;
 
-const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }] = await Promise.all([
+const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }, labels] = await Promise.all([
 	getSiteSettings(),
 	getMenu("primary"),
 	getEmDashCollection("services", {
@@ -29,6 +30,7 @@ const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }]
 	getEmDashCollection("partners", {
 		orderBy: { created_at: "asc" },
 	}),
+	getUiLabels(),
 ]);
 
 const services = serviceEntries ?? [];
@@ -39,6 +41,14 @@ const identity = resolveBlogSiteIdentity(settings);
 const phone = (settings as any).phone || "+34666666666";
 const phoneDisplay = (settings as any).phoneDisplay || "666 66 66 66";
 const email = (settings as any).email || "info@serverstartup.com";
+const defaultCtaLabel = (settings as any).defaultCtaLabel || "Contacta ahora";
+
+// Footer headings from CMS (ui_labels widget area)
+const trustTitle = labels.get("footer_headings", "trust_title", "Confían en nosotros");
+const servicesTitle = labels.get("footer_headings", "services_title", "Áreas de especialización");
+const partnersTitle = labels.get("footer_headings", "partners_title", "Somos partners");
+const contactTitle = labels.get("footer_headings", "contact_title", "Contacto");
+const aboutUsLabel = labels.get("footer_headings", "about_us", "Quiénes somos");
 const pageTitle = title
 	? `${title} — ${identity.siteTitle}`
 	: identity.siteTitle;
@@ -141,7 +151,7 @@ const trustLogos = (partnerEntries ?? [])
 		<!-- Trust logos carousel -->
 		<section class="footer-trust" aria-label="Empresas que confían en nosotros">
 			<div class="container">
-				<h4 class="footer-trust__title">Confían en nosotros</h4>
+				<h4 class="footer-trust__title">{trustTitle}</h4>
 				<div class="trust-logos" role="list" aria-label="Logos de clientes">
 					{trustLogos.map((logo) => (
 						<img
@@ -174,7 +184,7 @@ const trustLogos = (partnerEntries ?? [])
 
 				<!-- Col 2: Services -->
 				<div class="footer-col">
-					<h5>Áreas de especialización</h5>
+					<h5>{servicesTitle}</h5>
 					<ul class="footer-list">
 						{services.map((svc) => (
 							<li><a href={`/${svc.id}`}>{(svc.data as any).title}</a></li>
@@ -184,7 +194,7 @@ const trustLogos = (partnerEntries ?? [])
 
 				<!-- Col 3: Partner -->
 				<div class="footer-col">
-					<h5>Somos partners</h5>
+					<h5>{partnersTitle}</h5>
 					<img
 						src="/assets/logo-cloudflare.svg"
 						alt="Cloudflare Partner"
@@ -195,13 +205,13 @@ const trustLogos = (partnerEntries ?? [])
 
 				<!-- Col 4: Contact -->
 				<div class="footer-col">
-					<h5>Somos partners</h5>
+					<h5>{contactTitle}</h5>
 					<ul class="footer-list">
-						<li><a href="/quienes-somos">Quiénes somos</a></li>
+						<li><a href="/quienes-somos">{aboutUsLabel}</a></li>
 						<li>{email}</li>
 						<li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>
 					</ul>
-					<a href="/contacto" class="btn btn-dark footer-cta">Contacta ahora</a>
+					<a href="/contacto" class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
 				</div>
 			</div>
 		</div>

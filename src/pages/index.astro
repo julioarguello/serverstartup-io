@@ -17,6 +17,7 @@ import CloudflarePartner from "../components/CloudflarePartner.astro";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
+import { getUiLabels } from "../utils/ui-labels";
 
 const { entry, cacheHint } = await getEmDashEntry("pages", "home");
 if (!entry) return Astro.redirect("/404");
@@ -29,6 +30,9 @@ const { entries: serviceEntries } = await getEmDashCollection("services", {
 	orderBy: { created_at: "asc" },
 });
 const services = serviceEntries ?? [];
+
+const labels = await getUiLabels();
+const heroServicesBtn = labels.get("footer_headings", "hero_services_btn", "Nuestros servicios");
 
 // Split PT content by h2 headings into named sections
 type Section = { heading: string; blocks: any[] };
@@ -82,7 +86,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 					<PortableText value={heroSection.blocks.slice(1)} />
 				</div>
 			)}
-			<a href="#areas-especializacion" class="btn btn-dark">Nuestros servicios</a>
+			<a href="#areas-especializacion" class="btn btn-dark">{heroServicesBtn}</a>
 		</div>
 	</section>
 
@@ -113,11 +117,11 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 	<CloudflarePartner />
 
 	<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN (CMS-driven) ══════ -->
-	<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || "Áreas de especialización"}>
+	<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || labels.get("footer_headings", "services_title", "Áreas de especialización")}>
 		<div class="container s-areas__inner">
 			<!-- Left: sticky header -->
 			<div class="s-areas__header">
-				<h2>{areasSection?.heading || "~ Áreas de especialización"}</h2>
+				<h2>{areasSection?.heading || `~ ${labels.get("footer_headings", "services_title", "Áreas de especialización")}`}</h2>
 				<p class="text-sub">{areasSubtitle}</p>
 			</div>
 
