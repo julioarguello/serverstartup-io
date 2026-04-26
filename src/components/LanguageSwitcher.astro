@@ -1,0 +1,68 @@
+---
+/**
+ * LanguageSwitcher — toggle between ES / EN.
+ *
+ * Shows the *other* locale as a link. Clicking switches to that locale's
+ * equivalent URL (prefixed for non-default, root for default).
+ *
+ * Astro i18n routing:
+ *   - ES (default): /quienes-somos
+ *   - EN: /en/about-us
+ */
+const currentLocale = Astro.currentLocale || "es";
+const currentPath = Astro.url.pathname;
+
+// Build the alternate URL
+let altLocale: string;
+let altPath: string;
+let altLabel: string;
+
+if (currentLocale === "es") {
+	altLocale = "en";
+	altLabel = "EN";
+	// For ES → EN: prefix with /en/
+	// Strip any trailing slash for clean path building
+	const cleanPath = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
+	altPath = `/en${cleanPath}`;
+} else {
+	altLocale = "es";
+	altLabel = "ES";
+	// For EN → ES: remove /en prefix
+	altPath = currentPath.replace(/^\/en/, "") || "/";
+}
+---
+
+<a
+	href={altPath}
+	class="lang-switch"
+	aria-label={`Switch to ${altLocale === "en" ? "English" : "Español"}`}
+	hreflang={altLocale}
+>
+	{altLabel}
+</a>
+
+<style>
+	.lang-switch {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 2.25rem;
+		height: 2.25rem;
+		padding: 0 0.5rem;
+		border: 1px solid var(--color-border, #e0e0e0);
+		border-radius: 6px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: var(--color-text, #1a1a1a);
+		background: transparent;
+		text-decoration: none;
+		transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.lang-switch:hover {
+		background: var(--color-primary, #1a1a1a);
+		color: var(--color-bg, #fff);
+		border-color: var(--color-primary, #1a1a1a);
+	}
+</style>
