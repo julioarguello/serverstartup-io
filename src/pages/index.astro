@@ -20,7 +20,8 @@ import CtaGlobal from "../components/CtaGlobal.astro";
 import { getUiLabels } from "../utils/ui-labels";
 import { t } from "../i18n/ui";
 
-const { entry, cacheHint } = await getEmDashEntry("pages", "home");
+const locale = Astro.currentLocale || "es";
+const { entry, cacheHint } = await getEmDashEntry("pages", "home", { locale });
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
 
@@ -29,6 +30,7 @@ const { title, content, excerpt } = entry.data;
 // Fetch services collection for cards and footer
 const { entries: serviceEntries } = await getEmDashCollection("services", {
 	orderBy: { created_at: "asc" },
+	locale,
 });
 const services = serviceEntries ?? [];
 
@@ -57,8 +59,8 @@ if (currentSection.heading || currentSection.blocks.length > 0) {
 
 // Named section extraction
 const heroSection = sections[0]; // blocks before first h2
-const techSection = sections.find((s) => s.heading.includes("Tecnología"));
-const areasSection = sections.find((s) => s.heading.includes("Áreas"));
+const techSection = sections.find((s) => s.heading.includes("Tecnología") || s.heading.includes("Technology"));
+const areasSection = sections.find((s) => s.heading.includes("Áreas") || s.heading.includes("Areas"));
 
 
 // Extract tech subtitle (first block with marks) and body (second block)

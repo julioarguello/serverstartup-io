@@ -1,0 +1,73 @@
+---
+/**
+ * English dynamic service/page route — /en/[slug]
+ * Mirrors [slug].astro but queries locale="en" content.
+ */
+import { getEmDashEntry, getSiteSettings } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+import CtaGlobal from "../../components/CtaGlobal.astro";
+import { t } from "../../i18n/ui";
+
+const { slug } = Astro.params;
+const locale = "en";
+
+// Try services first, then pages
+let entry: any = null;
+let cacheHint: any = null;
+
+const svcResult = await getEmDashEntry("services", slug!, { locale });
+if (svcResult.entry) {
+	entry = svcResult.entry;
+	cacheHint = svcResult.cacheHint;
+} else {
+	const pageResult = await getEmDashEntry("pages", slug!, { locale });
+	if (pageResult.entry) {
+		entry = pageResult.entry;
+		cacheHint = pageResult.cacheHint;
+	}
+}
+
+if (!entry) return Astro.redirect("/404");
+if (cacheHint) Astro.cache.set(cacheHint);
+
+const settings = await getSiteSettings();
+const defaultCtaLabel = (settings as any).defaultCtaLabel || "Contact us";
+
+const { title, content, excerpt } = entry.data;
+const accentColor = (entry.data as any).color || "#BFEDEE";
+const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
+---
+
+<Base
+	title={title}
+	description={excerpt || `${title} — Server Startup`}
+>
+	<section class="s-hero" aria-label={title}>
+		<div class="container s-hero__inner">
+			<h1>{title}</h1>
+			{excerpt && (
+				<div class="s-hero__body">
+					<p class="text-body">{excerpt}</p>
+				</div>
+			)}
+			<a href="/en/contact" class="btn btn-dark">{ctaLabel}</a>
+		</div>
+	</section>
+
+	{content && (
+		<section class="s-content" aria-label={t("aria.content")}>
+			<div class="container s-content__inner">
+				<PortableText value={content} />
+			</div>
+		</section>
+	)}
+
+	<CtaGlobal />
+</Base>
+
+<style define:vars={{ accentColor }}>
+	.s-hero {
+		background-color: var(--accentColor);
+	}
+</style>

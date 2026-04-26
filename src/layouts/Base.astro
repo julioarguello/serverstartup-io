@@ -11,7 +11,8 @@
 import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
-import { t } from "../i18n/ui";
+import { t, setLocale } from "../i18n/ui";
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import "../styles/theme.css";
 
 interface Props {
@@ -21,12 +22,15 @@ interface Props {
 }
 
 const { title, description, robots } = Astro.props;
+const locale = Astro.currentLocale || "es";
+setLocale(locale);
 
 const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }, labels] = await Promise.all([
 	getSiteSettings(),
 	getMenu("primary"),
 	getEmDashCollection("services", {
 		orderBy: { created_at: "asc" },
+		locale,
 	}),
 	getEmDashCollection("partners", {
 		orderBy: { created_at: "asc" },
@@ -97,6 +101,8 @@ const trustLogos = (partnerEntries ?? [])
 					class="logo-img"
 				/>
 			</a>
+			<div class="header-actions">
+				<LanguageSwitcher />
 			<button
 				type="button"
 				class="menu-toggle"
@@ -114,6 +120,7 @@ const trustLogos = (partnerEntries ?? [])
 					aria-hidden="true"
 				/>
 			</button>
+			</div>
 		</div>
 	</header>
 
@@ -300,6 +307,12 @@ const trustLogos = (partnerEntries ?? [])
 		align-items: center;
 		justify-content: space-between;
 		padding-block: 16px;
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
 	}
 
 	.logo-img {

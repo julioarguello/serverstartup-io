@@ -433,7 +433,9 @@
 								{
 									"_type": "span",
 									"text": "Contacta ahora",
-									"marks": ["cta-link"]
+									"marks": [
+										"cta-link"
+									]
 								}
 							],
 							"markDefs": [
@@ -461,37 +463,67 @@
 							"_type": "block",
 							"style": "normal",
 							"_key": "trust_title",
-							"children": [{"_type": "span", "text": "Confían en nosotros"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Confían en nosotros"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "services_title",
-							"children": [{"_type": "span", "text": "Áreas de especialización"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Áreas de especialización"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "partners_title",
-							"children": [{"_type": "span", "text": "Somos partners"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Somos partners"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "hero_services_btn",
-							"children": [{"_type": "span", "text": "Nuestros servicios"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Nuestros servicios"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "contact_title",
-							"children": [{"_type": "span", "text": "Contacto"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contacto"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "about_us",
-							"children": [{"_type": "span", "text": "Quiénes somos"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Quiénes somos"
+								}
+							]
 						}
 					]
 				},
@@ -503,19 +535,34 @@
 							"_type": "block",
 							"style": "normal",
 							"_key": "error_title",
-							"children": [{"_type": "span", "text": "Página no encontrada"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Página no encontrada"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "error_body",
-							"children": [{"_type": "span", "text": "La página que buscas no existe."}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "La página que buscas no existe."
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "error_cta",
-							"children": [{"_type": "span", "text": "Volver al inicio"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Volver al inicio"
+								}
+							]
 						}
 					]
 				},
@@ -527,43 +574,78 @@
 							"_type": "block",
 							"style": "normal",
 							"_key": "search_title",
-							"children": [{"_type": "span", "text": "Buscar"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Buscar"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "search_label",
-							"children": [{"_type": "span", "text": "Buscar artículos"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Buscar artículos"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "search_placeholder",
-							"children": [{"_type": "span", "text": "Buscar artículos..."}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Buscar artículos..."
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "search_hint",
-							"children": [{"_type": "span", "text": "Introduce un término para buscar artículos."}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Introduce un término para buscar artículos."
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "search_no_results",
-							"children": [{"_type": "span", "text": "Sin resultados para"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Sin resultados para"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "search_results",
-							"children": [{"_type": "span", "text": "resultado(s) para"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "resultado(s) para"
+								}
+							]
 						},
 						{
 							"_type": "block",
 							"style": "normal",
 							"_key": "search_description",
-							"children": [{"_type": "span", "text": "Busca en el blog de Server Startup"}]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Busca en el blog de Server Startup"
+								}
+							]
 						}
 					]
 				}
@@ -652,7 +734,8 @@
 					],
 					"cta_label": "Solicita una auditoría de tu tienda online",
 					"color": "#B5E6F7"
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "svc-cdn",
@@ -675,7 +758,8 @@
 					],
 					"cta_label": "Audita tu seguridad edge",
 					"color": "#FDEBB6"
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "svc-bigdata",
@@ -698,7 +782,8 @@
 					],
 					"cta_label": "Solicita una evaluación de tus datos",
 					"color": "#BFEDEE"
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "svc-integracion",
@@ -721,7 +806,8 @@
 					],
 					"cta_label": "Solicita una evaluación de tus integraciones",
 					"color": "#ECDCE3"
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "svc-greenfield",
@@ -744,6 +830,127 @@
 					],
 					"cta_label": "Hablemos de tu proyecto",
 					"color": "#C5EFCD"
+				},
+				"locale": "es"
+			},
+			{
+				"id": "svc-ecommerce-en",
+				"slug": "e-commerce",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "svc-ecommerce",
+				"data": {
+					"title": "E-Commerce",
+					"excerpt": "Scalable e-commerce platforms designed for performance and conversion.",
+					"cta_label": "Contact us",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We design and implement end-to-end e-commerce solutions."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "svc-cdn-en",
+				"slug": "cdn-waf-edge-security-cloudflare",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "svc-cdn",
+				"data": {
+					"title": "CDN, WAF & Edge Security",
+					"excerpt": "Edge security architecture with Cloudflare: CDN, WAF, DDoS protection and Zero Trust.",
+					"cta_label": "Contact us",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We design and implement edge security architectures with Cloudflare."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "svc-bigdata-en",
+				"slug": "big-data-cloud-analytics",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "svc-bigdata",
+				"data": {
+					"title": "Big Data & Cloud Analytics",
+					"excerpt": "Data engineering, cloud analytics and BI platforms for data-driven decisions.",
+					"cta_label": "Contact us",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We build data platforms for analytics and business intelligence."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "svc-integracion-en",
+				"slug": "systems-integration",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "svc-integracion",
+				"data": {
+					"title": "Systems Integration",
+					"excerpt": "Enterprise systems integration: ESB, API management and middleware.",
+					"cta_label": "Contact us",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We integrate enterprise systems with modern middleware and API management."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "svc-greenfield-en",
+				"slug": "greenfield-engineering-critical-systems",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "svc-greenfield",
+				"data": {
+					"title": "Custom Backend Development",
+					"excerpt": "Greenfield backend engineering for mission-critical systems.",
+					"cta_label": "Contact us",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We design and build mission-critical backend systems from scratch."
+								}
+							]
+						}
+					]
 				}
 			}
 		],
@@ -767,7 +974,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "member-ariadna",
@@ -788,7 +996,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "member-raul",
@@ -809,7 +1018,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "member-daniel",
@@ -830,7 +1040,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			}
 		],
 		"pages": [
@@ -853,7 +1064,9 @@
 								{
 									"_type": "span",
 									"text": "capa a capa",
-									"marks": ["strong"]
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						},
@@ -868,7 +1081,9 @@
 								{
 									"_type": "span",
 									"text": "Greenfield",
-									"marks": ["em"]
+									"marks": [
+										"em"
+									]
 								},
 								{
 									"_type": "span",
@@ -907,7 +1122,9 @@
 								{
 									"_type": "span",
 									"text": "ingenieros",
-									"marks": ["strong"]
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						},
@@ -942,7 +1159,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "page-quienes-somos",
@@ -1011,7 +1229,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "page-contacto",
@@ -1086,7 +1305,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "page-privacidad",
@@ -1227,6 +1447,242 @@
 							]
 						}
 					]
+				},
+				"locale": "es"
+			},
+			{
+				"id": "page-home-en",
+				"slug": "home",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "page-home",
+				"data": {
+					"title": "Systems Engineering, Integration & Edge Security",
+					"excerpt": "We build complete architectures layer by layer. Greenfield engineering, systems integration, e-commerce and edge security.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We build complete architectures "
+								},
+								{
+									"_type": "span",
+									"text": "layer by layer",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We lay solid "
+								},
+								{
+									"_type": "span",
+									"text": "Greenfield",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " foundations, connect systems resiliently, drive business with e-commerce platforms and secure the perimeter with edge security."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We manage your technology as a unified, robust and governable strategic asset."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Technology that drives your business"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We are a small team of "
+								},
+								{
+									"_type": "span",
+									"text": "engineers",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We avoid rigid methodologies and focus on understanding each project's context. We apply technical judgement and care about deliverable quality because we believe it's the only sustainable way to build software."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Areas of expertise"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We cover every layer of the technology stack, from databases to cloud security."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-about-en",
+				"slug": "about-us",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "page-quienes-somos",
+				"data": {
+					"title": "About us",
+					"excerpt": "The Server Startup team. Engineers specialised in backend architecture, cloud and distributed systems.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We are not a generalist consultancy; we work with a "
+								},
+								{
+									"_type": "span",
+									"text": "boutique model",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We are professionals with over 15 years of experience, focused on what we master: "
+								},
+								{
+									"_type": "span",
+									"text": "backend architecture, performance and cloud security",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". This approach lets us deliver more precise, faster and tailored solutions for every environment."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Our values"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We believe in transparency, technical rigour and long-term partnerships. Every project we take on is an opportunity to build something that lasts."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-contact-en",
+				"slug": "contact",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "page-contacto",
+				"data": {
+					"title": "Contact",
+					"excerpt": "Get in touch with Server Startup.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contact us and we'll get back to you as soon as possible."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-privacy-en",
+				"slug": "privacy-policy",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "page-privacidad",
+				"data": {
+					"title": "Privacy policy",
+					"excerpt": "Server Startup privacy policy.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This page describes our privacy policy."
+								}
+							]
+						}
+					]
 				}
 			}
 		],
@@ -1324,7 +1780,8 @@
 					"tag": [
 						"opinion"
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "post-2",
@@ -1406,7 +1863,8 @@
 						"webdev",
 						"opinion"
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "post-3",
@@ -1482,7 +1940,8 @@
 					"tag": [
 						"opinion"
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "post-4",
@@ -1558,7 +2017,8 @@
 					"tag": [
 						"tools"
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "post-5",
@@ -1634,7 +2094,8 @@
 					"tag": [
 						"creativity"
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "post-6",
@@ -1710,7 +2171,8 @@
 					"tag": [
 						"creativity"
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "post-7",
@@ -1786,7 +2248,8 @@
 					"tag": [
 						"opinion"
 					]
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "post-draft",
@@ -1807,7 +2270,8 @@
 							]
 						}
 					]
-				}
+				},
+				"locale": "es"
 			}
 		],
 		"partners": [
@@ -1906,7 +2370,8 @@
 					],
 					"cta_label": "Descubre más sobre Cloudflare",
 					"featured": true
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "partner-cloudflare-2",
@@ -1919,7 +2384,8 @@
 						"alt": "Cloudflare"
 					},
 					"featured": true
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "partner-cloudflare-3",
@@ -1932,7 +2398,8 @@
 						"alt": "Cloudflare"
 					},
 					"featured": true
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "partner-cloudflare-4",
@@ -1945,7 +2412,8 @@
 						"alt": "Cloudflare"
 					},
 					"featured": true
-				}
+				},
+				"locale": "es"
 			},
 			{
 				"id": "partner-cloudflare-5",
@@ -1958,7 +2426,8 @@
 						"alt": "Cloudflare"
 					},
 					"featured": true
-				}
+				},
+				"locale": "es"
 			}
 		]
 	}
