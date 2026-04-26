@@ -11,7 +11,7 @@
 import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
-import { t, setLocale } from "../i18n/ui";
+import { t, loadAriaLabels } from "../i18n/ui";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import "../styles/theme.css";
 
@@ -23,7 +23,7 @@ interface Props {
 
 const { title, description, robots } = Astro.props;
 const locale = Astro.currentLocale || "es";
-setLocale(locale);
+await loadAriaLabels(locale);
 
 const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }, labels] = await Promise.all([
 	getSiteSettings(),
@@ -35,7 +35,7 @@ const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries },
 	getEmDashCollection("partners", {
 		orderBy: { created_at: "asc" },
 	}),
-	getUiLabels(),
+	getUiLabels(locale),
 ]);
 
 const services = serviceEntries ?? [];
@@ -92,7 +92,7 @@ const trustLogos = (partnerEntries ?? [])
 	<!-- ═══ HEADER — sticky, white bar, logo left, hamburger right ═══ -->
 	<header class="site-header" id="site-header" role="banner">
 		<div class="container header-inner">
-			<a href="/" class="header-logo" aria-label={t("aria.go_home")}>
+			<a href="/" class="header-logo" aria-label={t("go_home")}>
 				<img
 					src="/assets/logo.svg"
 					alt="Server Startup"
@@ -109,7 +109,7 @@ const trustLogos = (partnerEntries ?? [])
 				id="menu-trigger"
 				aria-expanded="false"
 				aria-controls="menu-dialog"
-				aria-label={t("aria.open_menu")}
+				aria-label={t("open_menu")}
 			>
 				<img
 					src="/assets/menu.svg"
@@ -129,15 +129,15 @@ const trustLogos = (partnerEntries ?? [])
 	<dialog
 		class="menu-dialog"
 		id="menu-dialog"
-		aria-label={t("aria.main_menu")}
+		aria-label={t("main_menu")}
 	>
 		<button
 			type="button"
 			class="menu-close"
 			id="menu-close"
-			aria-label={t("aria.close_menu")}
+			aria-label={t("close_menu")}
 		>✕</button>
-		<nav aria-label={t("aria.main_nav")}>
+		<nav aria-label={t("main_nav")}>
 			<ul class="menu-list" role="list">
 				{serviceItems.map((item) => (
 					<li><a href={item.url} class="menu-link">{item.label}</a></li>
@@ -157,10 +157,10 @@ const trustLogos = (partnerEntries ?? [])
 	<!-- ═══ FOOTER ═══ -->
 	<footer class="site-footer" role="contentinfo">
 		<!-- Trust logos carousel -->
-		<section class="footer-trust" aria-label={t("aria.trust_section")}>
+		<section class="footer-trust" aria-label={t("trust_section")}>
 			<div class="container">
 				<h4 class="footer-trust__title">{trustTitle}</h4>
-				<div class="trust-logos" role="list" aria-label={t("aria.trust_logos")}>
+				<div class="trust-logos" role="list" aria-label={t("trust_logos")}>
 					{trustLogos.map((logo) => (
 						<img
 							src={logo.src}
@@ -179,7 +179,7 @@ const trustLogos = (partnerEntries ?? [])
 			<div class="container footer-grid">
 				<!-- Col 1: Logo -->
 				<div class="footer-col">
-					<a href="/" aria-label={t("aria.go_home")}>
+					<a href="/" aria-label={t("go_home")}>
 						<img
 							src="/assets/logo-vertical.png"
 							alt="Server Startup"

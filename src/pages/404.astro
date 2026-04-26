@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { getUiLabels } from "../utils/ui-labels";
 
-const labels = await getUiLabels();
+const labels = await getUiLabels(Astro.currentLocale || "es");
 const errorTitle = labels.get("error_page", "error_title", "Página no encontrada");
 const errorBody = labels.get("error_page", "error_body", "La página que buscas no existe.");
 const errorCta = labels.get("error_page", "error_cta", "Volver al inicio");
