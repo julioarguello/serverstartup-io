@@ -451,8 +451,8 @@
 			]
 		},
 		{
-			"name": "ui_labels",
-			"label": "UI Labels",
+			"name": "ui_labels_es",
+			"label": "UI Labels (Español)",
 			"description": "Translatable UI micro-copy: footer headings, error pages, search page, and button labels",
 			"widgets": [
 				{
@@ -648,6 +648,549 @@
 							]
 						}
 					]
+				},
+				{
+					"title": "aria_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "go_home",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server Startup — Ir al inicio"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "open_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Abrir menú de navegación"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "close_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cerrar menú"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "main_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Menú principal"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "main_nav",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Navegación principal"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "trust_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Empresas que confían en nosotros"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "trust_logos",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Logos de clientes"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_intro",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Introducción"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "content",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contenido"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cta_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contacta con nosotros"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_partner",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cloudflare Partner"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "team_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El equipo"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "values_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Nuestros valores"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "view_service",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ver {title}"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "toc",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tabla de contenidos"
+								}
+							]
+						}
+					],
+					"type": "content"
+				}
+			]
+		},
+		{
+			"name": "ui_labels_en",
+			"label": "UI Labels (English)",
+			"description": "English UI micro-copy — footer headings, error page, search, aria-labels",
+			"widgets": [
+				{
+					"title": "footer_headings",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "trust_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Trusted by"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "services_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Areas of expertise"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "partners_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We are partners"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_services_btn",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Our services"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "contact_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contact"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "about_us",
+							"children": [
+								{
+									"_type": "span",
+									"text": "About us"
+								}
+							]
+						}
+					],
+					"type": "content"
+				},
+				{
+					"title": "error_page",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Page not found"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_body",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The page you are looking for does not exist."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_cta",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Back to home"
+								}
+							]
+						}
+					],
+					"type": "content"
+				},
+				{
+					"title": "search_page",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Search"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_label",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Search articles"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_placeholder",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Search articles..."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_hint",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Enter a term to search articles."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_no_results",
+							"children": [
+								{
+									"_type": "span",
+									"text": "No results for"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_results",
+							"children": [
+								{
+									"_type": "span",
+									"text": "result(s) for"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_description",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Search the Server Startup blog"
+								}
+							]
+						}
+					],
+					"type": "content"
+				},
+				{
+					"title": "aria_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "go_home",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server Startup — Go to homepage"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "open_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Open navigation menu"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "close_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Close menu"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "main_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Main menu"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "main_nav",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Main navigation"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "trust_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Companies that trust us"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "trust_logos",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Client logos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_intro",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Introduction"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "content",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Content"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cta_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contact us"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_partner",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cloudflare Partner"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "team_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The team"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "values_section",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Our values"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "view_service",
+							"children": [
+								{
+									"_type": "span",
+									"text": "View {title}"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "toc",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Table of contents"
+								}
+							]
+						}
+					],
+					"type": "content"
 				}
 			]
 		}

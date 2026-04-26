@@ -34,7 +34,7 @@ const { entries: serviceEntries } = await getEmDashCollection("services", {
 });
 const services = serviceEntries ?? [];
 
-const labels = await getUiLabels();
+const labels = await getUiLabels(locale);
 const heroServicesBtn = labels.get("footer_headings", "hero_services_btn", "Nuestros servicios");
 
 // Split PT content by h2 headings into named sections
@@ -76,7 +76,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 	description={excerpt || `${title} — Server Startup`}
 >
 	<!-- ══════ SECTION 1: HERO ══════ -->
-	<section class="s-hero" aria-label={t("aria.hero_intro")}>
+	<section class="s-hero" aria-label={t("hero_intro")}>
 		<div class="container s-hero__inner">
 			<h1>{title}</h1>
 			{heroSection?.blocks.length > 0 && (
@@ -137,7 +137,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 						<article class={`area-card card${i + 1}`} style={`background-color: ${cardColor};`} role="listitem">
 							<h3>{d.title}</h3>
 							<p class="text-body">{d.excerpt}</p>
-							<a href={`/${svc.id}`} class="area-card__arrow" aria-label={t("aria.view_service", { title: d.title })}>
+							<a href={`/${svc.id}`} class="area-card__arrow" aria-label={t("view_service", { title: d.title })}>
 								<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
 							</a>
 						</article>

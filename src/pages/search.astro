@@ -11,7 +11,7 @@ const query = Astro.url.searchParams.get("q")?.trim() || "";
 
 const [{ entries: allPosts }, labels] = await Promise.all([
 	getEmDashCollection("posts"),
-	getUiLabels(),
+	getUiLabels(Astro.currentLocale || "es"),
 ]);
 
 // CMS-driven search labels
