@@ -91,7 +91,7 @@ const dateIso = date?.toISOString() ?? null;
 				}
 				{formattedDate && <time datetime={dateIso || undefined}>{formattedDate}</time>}
 				{formattedDate && readingTime && <span class="meta-dot" />}
-				{readingTime && <span>{readingTime} min</span>}
+				{readingTime && <span>{readingTime} {locale === "en" ? "min read" : "min de lectura"}</span>}
 			</div>
 			<h2 class="card-title">{title}</h2>
 			{excerpt && <p class="card-excerpt">{excerpt}</p>}

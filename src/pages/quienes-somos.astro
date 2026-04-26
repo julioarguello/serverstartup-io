@@ -8,6 +8,7 @@
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
+import { getUiLabels } from "../utils/ui-labels";
 const t = (Astro.locals as any).t;
 
 const locale = Astro.currentLocale || "es";
@@ -21,6 +22,9 @@ const { entries: members } = await getEmDashCollection("members", {
 	limit: 50,
 	orderBy: { title: "asc" },
 });
+
+const labels = await getUiLabels(locale);
+const teamHeading = labels.get("footer_headings", "team_title", locale === "en" ? "~ The team" : "~ El equipo");
 
 // Split content: first blocks are hero, blocks after "~ Nuestros valores" h2 are the values section
 const heroBlocks: any[] = [];
@@ -58,7 +62,7 @@ for (const block of content || []) {
 	<!-- ══════ TEAM — dark bg, 4-col grid ══════ -->
 	<section class="s-team" aria-label={t("team_section")}>
 		<div class="container s-team__inner">
-			<h2>~ El equipo</h2>
+			<h2>{teamHeading}</h2>
 			<div class="s-team__grid" role="list">
 				{members.map((member) => (
 					<article class="team-card" role="listitem">

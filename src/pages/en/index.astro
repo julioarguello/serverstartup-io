@@ -1,135 +1,21 @@
 ---
 /**
  * English homepage — /en
- * Mirrors index.astro but queries locale="en" content from CMS.
+ * Thin wrapper around HomepageContent component.
+ * All layout logic lives in HomepageContent.astro (DRY).
  */
-import { getEmDashEntry, getEmDashCollection } from "emdash";
-import CloudflarePartner from "../../components/CloudflarePartner.astro";
-import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
-import CtaGlobal from "../../components/CtaGlobal.astro";
-import { getUiLabels } from "../../utils/ui-labels";
-const t = (Astro.locals as any).t;
+import HomepageContent from "../../components/HomepageContent.astro";
+import { getEmDashEntry } from "emdash";
 
 const locale = "en";
-const { entry, cacheHint } = await getEmDashEntry("pages", "home", { locale });
-if (!entry) return Astro.redirect("/404");
-Astro.cache.set(cacheHint);
-
-const { title, content, excerpt } = entry.data;
-
-const { entries: serviceEntries } = await getEmDashCollection("services", {
-	orderBy: { created_at: "asc" },
-	locale,
-});
-const services = serviceEntries ?? [];
-
-const labels = await getUiLabels(locale);
-const heroServicesBtn = labels.get("footer_headings", "hero_services_btn", "Our services");
-
-// Split PT content by h2 headings into named sections
-type Section = { heading: string; blocks: any[] };
-const sections: Section[] = [];
-let currentSection: Section = { heading: "", blocks: [] };
-
-for (const block of content || []) {
-	if (block._type === "block" && block.style === "h2") {
-		if (currentSection.heading || currentSection.blocks.length > 0) {
-			sections.push(currentSection);
-		}
-		const headingText = block.children?.map((c: any) => c.text).join("") || "";
-		currentSection = { heading: headingText, blocks: [] };
-	} else {
-		currentSection.blocks.push(block);
-	}
-}
-if (currentSection.heading || currentSection.blocks.length > 0) {
-	sections.push(currentSection);
-}
-
-const heroSection = sections[0];
-const techSection = sections.find((s) => s.heading.includes("Technology") || s.heading.includes("Tecnología"));
-const areasSection = sections.find((s) => s.heading.includes("Areas") || s.heading.includes("Áreas"));
-
-const techSubtitleBlock = techSection?.blocks[0];
-const techBodyBlock = techSection?.blocks[1];
-const areasSubtitle = areasSection?.blocks[0]?.children?.[0]?.text || "";
+const { entry } = await getEmDashEntry("pages", "home", { locale });
+const { title, excerpt } = entry?.data ?? { title: "Server Startup", excerpt: "" };
 ---
 
 <Base
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 >
-	<!-- ══════ SECTION 1: HERO ══════ -->
-	<section class="s-hero" aria-label={t("hero_intro")}>
-		<div class="container s-hero__inner">
-			<h1>{title}</h1>
-			{heroSection?.blocks.length > 0 && (
-				<div class="s-hero__kicker">
-					<PortableText value={[heroSection.blocks[0]]} />
-				</div>
-			)}
-			{heroSection?.blocks.length > 1 && (
-				<div class="s-hero__body">
-					<PortableText value={heroSection.blocks.slice(1)} />
-				</div>
-			)}
-			<a href="#areas-especializacion" class="btn btn-dark">{heroServicesBtn}</a>
-		</div>
-	</section>
-
-	<!-- ══════ SECTION 2: TECHNOLOGY ══════ -->
-	{techSection && (
-		<section class="s-tech" aria-label={techSection.heading}>
-			<div class="container s-tech__inner">
-				<div class="s-tech__col-left">
-					<h2>{techSection.heading}</h2>
-				</div>
-				<div class="s-tech__col-right">
-					{techSubtitleBlock && (
-						<div class="s-tech__subtitle-wrap">
-							<PortableText value={[techSubtitleBlock]} />
-						</div>
-					)}
-					{techBodyBlock && (
-						<div class="s-tech__body-wrap">
-							<PortableText value={[techBodyBlock]} />
-						</div>
-					)}
-				</div>
-			</div>
-		</section>
-	)}
-
-	<!-- ══════ SECTION 3: CLOUDFLARE PARTNER ══════ -->
-	<CloudflarePartner />
-
-	<!-- ══════ SECTION 4: AREAS OF EXPERTISE ══════ -->
-	<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || "Areas of expertise"}>
-		<div class="container s-areas__inner">
-			<div class="s-areas__header">
-				<h2>{areasSection?.heading || "~ Areas of expertise"}</h2>
-				<p class="text-sub">{areasSubtitle}</p>
-			</div>
-
-			<div class="s-areas__cards" role="list">
-				{services.map((svc, i) => {
-					const d = svc.data as any;
-					const cardColor = d.color || '#BFEDEE';
-					return (
-						<article class={`area-card card${i + 1}`} style={`background-color: ${cardColor};`} role="listitem">
-							<h3>{d.title}</h3>
-							<p class="text-body">{d.excerpt}</p>
-							<a href={`/en/${svc.id}`} class="area-card__arrow" aria-label={t("view_service", { title: d.title })}>
-								<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-							</a>
-						</article>
-					);
-				})}
-			</div>
-		</div>
-	</section>
-
-	<!-- ══════ CTA ══════ -->
-	<CtaGlobal />
+	<HomepageContent />
 </Base>

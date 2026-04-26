@@ -61,6 +61,7 @@ export function getReadingTime(content: PortableTextBlock[] | undefined): number
 /**
  * Format reading time for display
  */
-export function formatReadingTime(minutes: number): string {
-	return `${minutes} min read`;
+export function formatReadingTime(minutes: number, locale: string = "es"): string {
+	const suffix = locale === "en" ? "min read" : "min de lectura";
+	return `${minutes} ${suffix}`;
 }

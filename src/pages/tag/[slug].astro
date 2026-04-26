@@ -4,6 +4,8 @@ import Base from "../../layouts/Base.astro";
 import PostCard from "../../components/PostCard.astro";
 import { getReadingTime } from "../../utils/reading-time";
 
+const locale = Astro.currentLocale || "es";
+
 const slug = decodeSlug(Astro.params.slug);
 const term = slug ? await getTerm("tag", slug) : null;
 
@@ -31,7 +33,7 @@ const filteredPosts = await Promise.all(
 >
 	<section class="archive-section">
 		<header class="archive-header">
-			<span class="archive-label">Tag</span>
+			<span class="archive-label">{locale === "en" ? "Tag" : "Etiqueta"}</span>
 			<h1 class="archive-title">{term.label}</h1>
 			<p class="archive-count">
 				{filteredPosts.length}
@@ -41,7 +43,7 @@ const filteredPosts = await Promise.all(
 
 		{
 			filteredPosts.length === 0 ? (
-				<p class="no-posts">No posts with this tag yet.</p>
+				<p class="no-posts">{locale === "en" ? "No posts with this tag yet." : "No hay posts con esta etiqueta."}</p>
 			) : (
 				<div class="posts-grid">
 					{filteredPosts.map(({ post, tags }) => (
@@ -53,6 +55,7 @@ const filteredPosts = await Promise.all(
 							date={post.data.publishedAt ?? undefined}
 							readingTime={getReadingTime(post.data.content)}
 							tags={tags.map((t) => ({ slug: t.slug, label: t.label }))}
+							locale={locale}
 						/>
 					))}
 				</div>
@@ -62,59 +65,5 @@ const filteredPosts = await Promise.all(
 </Base>
 
 <style>
-	.archive-section {
-		max-width: var(--container-max);
-		margin: 0 auto;
-		padding: 48px 24px;
-	}
-
-	.archive-header {
-		margin-bottom: 48px;
-		padding-bottom: 32px;
-		border-bottom: 1px solid rgba(30,30,30,0.1);
-	}
-
-	.archive-label {
-		display: block;
-		font-size: 12px;
-		font-weight: 500;
-		color: var(--color-accent);
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		margin-bottom: 8px;
-	}
-
-	.archive-title {
-		font-size: 40px;
-		font-weight: 700;
-		letter-spacing: -0.02em;
-		margin-bottom: 8px;
-	}
-
-	.archive-count {
-		font-size: 14px;
-		color: rgba(30,30,30,0.5);
-	}
-
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 48px 32px;
-	}
-
-	.no-posts {
-		color: rgba(30,30,30,0.5);
-	}
-
-	@media (max-width: 900px) {
-		.posts-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 600px) {
-		.posts-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+	@import "../../styles/archive.css";
 </style>
