@@ -11,6 +11,7 @@ interface Props {
 	readingTime?: number;
 	tags?: Array<{ slug: string; label: string }>;
 	bylines?: ContentBylineCredit[];
+	locale?: string;
 }
 
 const {
@@ -22,15 +23,18 @@ const {
 	readingTime,
 	tags,
 	bylines,
+	locale = "es",
 } = Astro.props;
 
+const dateLocale = locale === "en" ? "en-US" : "es-ES";
 const formattedDate = date
-	? date.toLocaleDateString("es-ES", {
+	? date.toLocaleDateString(dateLocale, {
 			year: "numeric",
 			month: "short",
 			day: "numeric",
 		})
 	: null;
+const dateIso = date?.toISOString() ?? null;
 ---
 
 <article class="post-card">
@@ -85,7 +89,7 @@ const formattedDate = date
 						</>
 					)
 				}
-				{formattedDate && <time>{formattedDate}</time>}
+				{formattedDate && <time datetime={dateIso || undefined}>{formattedDate}</time>}
 				{formattedDate && readingTime && <span class="meta-dot" />}
 				{readingTime && <span>{readingTime} min</span>}
 			</div>

@@ -31,6 +31,11 @@ export type UiLabels = {
 	 * @param fallback - Optional fallback if the label is not found
 	 */
 	get(widgetTitle: string, blockKey: string, fallback?: string): string;
+	/**
+	 * Get all labels for a widget as a key→value record.
+	 * @param widgetTitle - The widget's title (e.g. "aria_labels")
+	 */
+	getAll(widgetTitle: string): Record<string, string>;
 };
 
 const DEFAULT_LOCALE = "es";
@@ -64,9 +69,21 @@ export async function getUiLabels(locale: string = DEFAULT_LOCALE): Promise<UiLa
 		}
 	}
 
+	const prefix = (widgetTitle: string) => `${widgetTitle}:`;
+
 	return {
 		get(widgetTitle: string, blockKey: string, fallback = ""): string {
 			return map.get(`${widgetTitle}:${blockKey}`) || fallback;
+		},
+		getAll(widgetTitle: string): Record<string, string> {
+			const result: Record<string, string> = {};
+			const p = prefix(widgetTitle);
+			for (const [key, value] of map.entries()) {
+				if (key.startsWith(p)) {
+					result[key.slice(p.length)] = value;
+				}
+			}
+			return result;
 		},
 	};
 }
