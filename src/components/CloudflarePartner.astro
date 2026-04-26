@@ -9,7 +9,7 @@
  * - CTA button from cta_label field, linking to partner slug
  */
 import { getEmDashCollection } from "emdash";
-import { t } from "../i18n/ui";
+const t = (Astro.locals as any).t;
 
 const { entries: allPartners } = await getEmDashCollection("partners", {
 	orderBy: { created_at: "asc" },

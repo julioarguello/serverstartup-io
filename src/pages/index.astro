@@ -18,7 +18,7 @@ import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
 import { getUiLabels } from "../utils/ui-labels";
-import { t } from "../i18n/ui";
+const t = (Astro.locals as any).t;
 
 const locale = Astro.currentLocale || "es";
 const { entry, cacheHint } = await getEmDashEntry("pages", "home", { locale });
