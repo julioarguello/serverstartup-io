@@ -11,6 +11,7 @@
 import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
+import { t } from "../i18n/ui";
 import "../styles/theme.css";
 
 interface Props {
@@ -87,7 +88,7 @@ const trustLogos = (partnerEntries ?? [])
 	<!-- ═══ HEADER — sticky, white bar, logo left, hamburger right ═══ -->
 	<header class="site-header" id="site-header" role="banner">
 		<div class="container header-inner">
-			<a href="/" class="header-logo" aria-label="Server Startup — Ir al inicio">
+			<a href="/" class="header-logo" aria-label={t("aria.go_home")}>
 				<img
 					src="/assets/logo.svg"
 					alt="Server Startup"
@@ -102,7 +103,7 @@ const trustLogos = (partnerEntries ?? [])
 				id="menu-trigger"
 				aria-expanded="false"
 				aria-controls="menu-dialog"
-				aria-label="Abrir menú de navegación"
+				aria-label={t("aria.open_menu")}
 			>
 				<img
 					src="/assets/menu.svg"
@@ -121,15 +122,15 @@ const trustLogos = (partnerEntries ?? [])
 	<dialog
 		class="menu-dialog"
 		id="menu-dialog"
-		aria-label="Menú principal"
+		aria-label={t("aria.main_menu")}
 	>
 		<button
 			type="button"
 			class="menu-close"
 			id="menu-close"
-			aria-label="Cerrar menú"
+			aria-label={t("aria.close_menu")}
 		>✕</button>
-		<nav aria-label="Navegación principal">
+		<nav aria-label={t("aria.main_nav")}>
 			<ul class="menu-list" role="list">
 				{serviceItems.map((item) => (
 					<li><a href={item.url} class="menu-link">{item.label}</a></li>
@@ -149,10 +150,10 @@ const trustLogos = (partnerEntries ?? [])
 	<!-- ═══ FOOTER ═══ -->
 	<footer class="site-footer" role="contentinfo">
 		<!-- Trust logos carousel -->
-		<section class="footer-trust" aria-label="Empresas que confían en nosotros">
+		<section class="footer-trust" aria-label={t("aria.trust_section")}>
 			<div class="container">
 				<h4 class="footer-trust__title">{trustTitle}</h4>
-				<div class="trust-logos" role="list" aria-label="Logos de clientes">
+				<div class="trust-logos" role="list" aria-label={t("aria.trust_logos")}>
 					{trustLogos.map((logo) => (
 						<img
 							src={logo.src}
@@ -171,7 +172,7 @@ const trustLogos = (partnerEntries ?? [])
 			<div class="container footer-grid">
 				<!-- Col 1: Logo -->
 				<div class="footer-col">
-					<a href="/" aria-label="Server Startup — Ir al inicio">
+					<a href="/" aria-label={t("aria.go_home")}>
 						<img
 							src="/assets/logo-vertical.png"
 							alt="Server Startup"

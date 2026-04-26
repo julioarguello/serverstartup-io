@@ -13,6 +13,7 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
+import { t } from "../i18n/ui";
 
 const { slug } = Astro.params;
 const { entry, cacheHint } = await getEmDashEntry("services", slug!);
@@ -50,7 +51,7 @@ const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
 
 	<!-- ══════ CONTENT — dark bg section + portable text ══════ -->
 	{content && (
-		<section class="s-content" aria-label="Contenido">
+		<section class="s-content" aria-label={t("aria.content")}>
 			<div class="container s-content__inner">
 				<PortableText value={content} />
 			</div>
