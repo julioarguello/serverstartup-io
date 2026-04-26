@@ -8,9 +8,10 @@
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
-import { t } from "../i18n/ui";
+const t = (Astro.locals as any).t;
 
-const { entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos");
+const locale = Astro.currentLocale || "es";
+const { entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos", { locale });
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
 

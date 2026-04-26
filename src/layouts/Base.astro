@@ -11,7 +11,7 @@
 import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
-import { t, loadAriaLabels } from "../i18n/ui";
+
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import "../styles/theme.css";
 
@@ -23,7 +23,7 @@ interface Props {
 
 const { title, description, robots } = Astro.props;
 const locale = Astro.currentLocale || "es";
-await loadAriaLabels(locale);
+const t = (Astro.locals as any).t;
 
 const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }, labels] = await Promise.all([
 	getSiteSettings(),
@@ -64,7 +64,8 @@ const menuItems = menu?.items ?? [];
 const serviceItems = menuItems.slice(0, 5);
 const secondaryItems = menuItems.slice(5);
 
-
+// Locale-aware URL prefix ("" for ES default, "/en" for English)
+const localePrefix = locale === "es" ? "" : `/${locale}`;
 
 // Trust logos from partners collection (featured = true)
 const trustLogos = (partnerEntries ?? [])
@@ -73,6 +74,13 @@ const trustLogos = (partnerEntries ?? [])
 		src: p.data.featured_image?.src || "/assets/logo-cloudflare.svg",
 		alt: p.data.featured_image?.alt || (p.data as any).title || "Partner",
 	}));
+
+// Alternate locale URL for hreflang (simple prefix swap)
+const currentPath = Astro.url.pathname;
+const altLocale = locale === "es" ? "en" : "es";
+const altPath = locale === "es"
+	? `/en${currentPath === "/" ? "/" : currentPath}`
+	: currentPath.replace(/^\/en/, "") || "/";
 ---
 
 <html lang={Astro.currentLocale || "es"}>
@@ -82,9 +90,8 @@ const trustLogos = (partnerEntries ?? [])
 	<title>{pageTitle}</title>
 	<meta name="description" content={pageDescription} />
 	{robots && <meta name="robots" content={robots} />}
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap" rel="stylesheet" />
+	<link rel="alternate" hreflang={altLocale} href={altPath} />
+	<link rel="alternate" hreflang={locale} href={currentPath} />
 	<link rel="icon" href="/assets/favicon.png" sizes="32x32" />
 </head>
 <body>
@@ -195,7 +202,7 @@ const trustLogos = (partnerEntries ?? [])
 					<h5>{servicesTitle}</h5>
 					<ul class="footer-list">
 						{services.map((svc) => (
-							<li><a href={`/${svc.id}`}>{(svc.data as any).title}</a></li>
+							<li><a href={`${localePrefix}/${svc.id}`}>{(svc.data as any).title}</a></li>
 						))}
 					</ul>
 				</div>
@@ -215,11 +222,11 @@ const trustLogos = (partnerEntries ?? [])
 				<div class="footer-col">
 					<h5>{contactTitle}</h5>
 					<ul class="footer-list">
-						<li><a href="/quienes-somos">{aboutUsLabel}</a></li>
+						<li><a href={`${localePrefix}/quienes-somos`}>{aboutUsLabel}</a></li>
 						<li>{email}</li>
 						<li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>
 					</ul>
-					<a href="/contacto" class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
+					<a href={`${localePrefix}/contacto`} class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
 				</div>
 			</div>
 		</div>

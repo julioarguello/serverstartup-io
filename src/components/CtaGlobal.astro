@@ -10,7 +10,7 @@
  * Fallback to hardcoded values if the widget area is not seeded.
  */
 import { getWidgetArea, getSiteSettings } from "emdash";
-import { t } from "../i18n/ui";
+const t = (Astro.locals as any).t;
 
 const ctaArea = await getWidgetArea("cta_global");
 const ctaWidget = ctaArea?.widgets[0];

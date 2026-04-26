@@ -13,10 +13,11 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
-import { t } from "../i18n/ui";
+const t = (Astro.locals as any).t;
 
 const { slug } = Astro.params;
-const { entry, cacheHint } = await getEmDashEntry("services", slug!);
+const locale = Astro.currentLocale || "es";
+const { entry, cacheHint } = await getEmDashEntry("services", slug!, { locale });
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
 
