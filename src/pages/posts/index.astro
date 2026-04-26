@@ -82,7 +82,7 @@ const formatDate = (date: Date) =>
 											<time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
 										)}
 										{post.data.publishedAt && <span class="meta-dot" />}
-										<span>{getReadingTime(post.data.content)} min</span>
+										<span>{getReadingTime(post.data.content)} {(Astro.currentLocale || "es") === "en" ? "min read" : "min de lectura"}</span>
 									</div>
 									<h2 class="post-title">{post.data.title}</h2>
 									{post.data.excerpt && (

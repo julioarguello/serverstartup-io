@@ -1,0 +1,60 @@
+/* ═══ Shared Archive Layout Styles ═══ 
+ * Used by category/[slug].astro and tag/[slug].astro
+ * Extracted to avoid duplicating 50+ lines of identical CSS (DRY).
+ */
+
+.archive-section {
+	max-width: var(--container-max);
+	margin: 0 auto;
+	padding: 48px 24px;
+}
+
+.archive-header {
+	margin-bottom: 48px;
+	padding-bottom: 32px;
+	border-bottom: 1px solid rgba(30,30,30,0.1);
+}
+
+.archive-label {
+	display: block;
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--color-accent);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	margin-bottom: 8px;
+}
+
+.archive-title {
+	font-size: 40px;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	margin-bottom: 8px;
+}
+
+.archive-count {
+	font-size: 14px;
+	color: rgba(30,30,30,0.5);
+}
+
+.posts-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 48px 32px;
+}
+
+.no-posts {
+	color: rgba(30,30,30,0.5);
+}
+
+@media (max-width: 900px) {
+	.posts-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.posts-grid {
+		grid-template-columns: 1fr;
+	}
+}
