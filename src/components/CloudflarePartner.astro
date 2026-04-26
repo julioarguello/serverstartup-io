@@ -9,6 +9,7 @@
  * - CTA button from cta_label field, linking to partner slug
  */
 import { getEmDashCollection } from "emdash";
+import { t } from "../i18n/ui";
 
 const { entries: allPartners } = await getEmDashCollection("partners", {
 	orderBy: { created_at: "asc" },
@@ -43,7 +44,7 @@ const features = h4Blocks.map((h4: any, i: number) => ({
 }));
 ---
 
-<section class="s-cf" aria-label="Cloudflare Partner">
+<section class="s-cf" aria-label={t("aria.cf_partner")}>
 	<div class="container s-cf__wrapper">
 		<article class="s-cf__card">
 			{logo && (

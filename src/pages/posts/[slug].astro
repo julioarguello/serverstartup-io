@@ -18,6 +18,7 @@ import Base from "../../layouts/Base.astro";
 import PostCard from "../../components/PostCard.astro";
 import { getReadingTime } from "../../utils/reading-time";
 import { resolveBlogSiteIdentity } from "../../utils/site-identity";
+import { t } from "../../i18n/ui";
 
 const slug = decodeSlug(Astro.params.slug);
 
@@ -236,7 +237,7 @@ const publishDate =
 			{/* Right gutter: TOC + Sidebar widgets */}
 			<aside class="article-sidebar">
 				<div class="sidebar-sticky">
-					<nav class="toc" aria-label="Table of contents">
+					<nav class="toc" aria-label={t("aria.toc")}>
 						<h4 class="toc-title">On this page</h4>
 						<div class="toc-content" id="toc-content">
 							<!-- Populated by JS -->

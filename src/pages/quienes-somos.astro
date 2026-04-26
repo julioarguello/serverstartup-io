@@ -8,6 +8,7 @@
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
+import { t } from "../i18n/ui";
 
 const { entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos");
 if (!entry) return Astro.redirect("/404");
@@ -54,7 +55,7 @@ for (const block of content || []) {
 	</section>
 
 	<!-- ══════ TEAM — dark bg, 4-col grid ══════ -->
-	<section class="s-team" aria-label="El equipo">
+	<section class="s-team" aria-label={t("aria.team_section")}>
 		<div class="container s-team__inner">
 			<h2>~ El equipo</h2>
 			<div class="s-team__grid" role="list">
@@ -76,7 +77,7 @@ for (const block of content || []) {
 
 	<!-- ══════ VALUES — dark bg ══════ -->
 	{valuesBlocks.length > 0 && (
-		<section class="s-values" aria-label="Nuestros valores">
+		<section class="s-values" aria-label={t("aria.values_section")}>
 			<div class="container s-values__inner">
 				<PortableText value={valuesBlocks} />
 			</div>

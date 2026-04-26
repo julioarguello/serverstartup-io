@@ -1,0 +1,17 @@
+{
+	"aria.go_home": "Server Startup — Go to homepage",
+	"aria.open_menu": "Open navigation menu",
+	"aria.close_menu": "Close menu",
+	"aria.main_menu": "Main menu",
+	"aria.main_nav": "Main navigation",
+	"aria.trust_section": "Companies that trust us",
+	"aria.trust_logos": "Client logos",
+	"aria.hero_intro": "Introduction",
+	"aria.content": "Content",
+	"aria.cta_section": "Contact us",
+	"aria.cf_partner": "Cloudflare Partner",
+	"aria.team_section": "The team",
+	"aria.values_section": "Our values",
+	"aria.view_service": "View {title}",
+	"aria.toc": "Table of contents"
+}

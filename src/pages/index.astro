@@ -18,6 +18,7 @@ import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
 import { getUiLabels } from "../utils/ui-labels";
+import { t } from "../i18n/ui";
 
 const { entry, cacheHint } = await getEmDashEntry("pages", "home");
 if (!entry) return Astro.redirect("/404");
@@ -73,7 +74,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 	description={excerpt || `${title} — Server Startup`}
 >
 	<!-- ══════ SECTION 1: HERO ══════ -->
-	<section class="s-hero" aria-label="Introducción">
+	<section class="s-hero" aria-label={t("aria.hero_intro")}>
 		<div class="container s-hero__inner">
 			<h1>{title}</h1>
 			{heroSection?.blocks.length > 0 && (
@@ -134,7 +135,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 						<article class={`area-card card${i + 1}`} style={`background-color: ${cardColor};`} role="listitem">
 							<h3>{d.title}</h3>
 							<p class="text-body">{d.excerpt}</p>
-							<a href={`/${svc.id}`} class="area-card__arrow" aria-label={`Ver ${d.title}`}>
+							<a href={`/${svc.id}`} class="area-card__arrow" aria-label={t("aria.view_service", { title: d.title })}>
 								<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
 							</a>
 						</article>
