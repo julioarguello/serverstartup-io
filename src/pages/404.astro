@@ -6,13 +6,15 @@ const labels = await getUiLabels(Astro.currentLocale || "es");
 const errorTitle = labels.get("error_page", "error_title", "Página no encontrada");
 const errorBody = labels.get("error_page", "error_body", "La página que buscas no existe.");
 const errorCta = labels.get("error_page", "error_cta", "Volver al inicio");
+const locale = Astro.currentLocale || "es";
+const homeHref = locale === "es" ? "/" : `/${locale}/`;
 ---
 
 <Base title={errorTitle} robots="noindex, nofollow">
 	<div class="not-found">
 		<h1>404</h1>
 		<p class="text-body">{errorBody}</p>
-		<a href="/" class="btn btn-dark">{errorCta}</a>
+		<a href={homeHref} class="btn btn-dark">{errorCta}</a>
 	</div>
 </Base>
 

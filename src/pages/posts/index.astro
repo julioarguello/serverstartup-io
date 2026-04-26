@@ -22,8 +22,9 @@ const postsWithTags = await Promise.all(
 	})
 );
 
+const dateLocale = (Astro.currentLocale || "es") === "en" ? "en-US" : "es-ES";
 const formatDate = (date: Date) =>
-	date.toLocaleDateString("es-ES", {
+	date.toLocaleDateString(dateLocale, {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
@@ -78,7 +79,7 @@ const formatDate = (date: Date) =>
 											</>
 										)}
 										{post.data.publishedAt && (
-											<time>{formatDate(post.data.publishedAt)}</time>
+											<time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
 										)}
 										{post.data.publishedAt && <span class="meta-dot" />}
 										<span>{getReadingTime(post.data.content)} min</span>

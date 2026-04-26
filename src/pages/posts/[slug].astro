@@ -93,12 +93,14 @@ const otherPostsWithTags = await Promise.all(
 	})
 );
 
+const dateLocale = Astro.currentLocale === "en" ? "en-US" : "es-ES";
 const publishDate =
-	post.data.publishedAt?.toLocaleDateString("en-US", {
+	post.data.publishedAt?.toLocaleDateString(dateLocale, {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
 	}) ?? null;
+const publishDateIso = post.data.publishedAt?.toISOString() ?? null;
 ---
 
 <Base
@@ -209,7 +211,7 @@ const publishDate =
 						{
 							publishDate && (
 								<>
-									<time>{publishDate}</time>
+									<time datetime={publishDateIso || undefined}>{publishDate}</time>
 									<span class="meta-dot" />
 								</>
 							)

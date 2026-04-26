@@ -2,17 +2,23 @@
 /**
  * CTA Global — shared call-to-action block.
  *
- * Fetches the "cta_global" widget area from EmDash and renders:
+ * Fetches the locale-scoped "cta_global_{locale}" widget area and renders:
  *   - Widget title → h2 heading
  *   - PT content blocks (excluding last link block) → subtitle/body paragraphs
  *   - Last PT block with a link mark → button
  *
- * Fallback to hardcoded values if the widget area is not seeded.
+ * Falls back to "cta_global" (Spanish default) if locale variant not found.
  */
 import { getWidgetArea, getSiteSettings } from "emdash";
 const t = (Astro.locals as any).t;
+const locale = Astro.currentLocale || "es";
+const localePrefix = locale === "es" ? "" : `/${locale}`;
 
-const ctaArea = await getWidgetArea("cta_global");
+// Query locale-scoped widget area with fallback
+let ctaArea = await getWidgetArea(`cta_global_${locale}`);
+if (!ctaArea?.widgets?.length && locale !== "es") {
+	ctaArea = await getWidgetArea("cta_global");
+}
 const ctaWidget = ctaArea?.widgets[0];
 const settings = await getSiteSettings();
 const defaultCtaLabel = (settings as any).defaultCtaLabel || "Contacta ahora";
@@ -34,8 +40,8 @@ const buttonLabel = hasLink
 	? lastBlock.children?.map((c: any) => c.text).join("") || defaultCtaLabel
 	: defaultCtaLabel;
 const buttonUrl = hasLink
-	? lastBlock.markDefs?.find((m: any) => m._type === "link")?.href || "/contacto"
-	: "/contacto";
+	? lastBlock.markDefs?.find((m: any) => m._type === "link")?.href || `${localePrefix}/contacto`
+	: `${localePrefix}/contacto`;
 ---
 
 <section class="s-cta" aria-label={t("cta_section")}>
