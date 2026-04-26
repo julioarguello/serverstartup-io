@@ -18,6 +18,13 @@
 			"bucket_name": "www-serverstartup-io","preview_bucket_name": "www-serverstartup-io",
 		},
 	],
+	// KV Namespace for Astro sessions
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "3d255fdb73a9480b9010cdb5eb7ff4cb",
+		},
+	],
 	// Worker Loader for plugin sandboxing
 	"worker_loaders": [
 		{

@@ -5,10 +5,23 @@ import { getEmDashCollection } from "emdash";
 import Base from "../layouts/Base.astro";
 import PostCard from "../components/PostCard.astro";
 import { getReadingTime, extractText } from "../utils/reading-time";
+import { getUiLabels } from "../utils/ui-labels";
 
 const query = Astro.url.searchParams.get("q")?.trim() || "";
 
-const { entries: allPosts } = await getEmDashCollection("posts");
+const [{ entries: allPosts }, labels] = await Promise.all([
+	getEmDashCollection("posts"),
+	getUiLabels(),
+]);
+
+// CMS-driven search labels
+const searchTitle = labels.get("search_page", "search_title", "Buscar");
+const searchLabel = labels.get("search_page", "search_label", "Buscar artículos");
+const searchPlaceholder = labels.get("search_page", "search_placeholder", "Buscar artículos...");
+const searchHint = labels.get("search_page", "search_hint", "Introduce un término para buscar artículos.");
+const searchNoResults = labels.get("search_page", "search_no_results", "Sin resultados para");
+const searchResults = labels.get("search_page", "search_results", "resultado(s) para");
+const searchDescription = labels.get("search_page", "search_description", "Busca en el blog de Server Startup");
 
 // Simple search: match query against title, excerpt, and content
 function matchesQuery(post: (typeof allPosts)[0], q: string): boolean {
@@ -27,32 +40,32 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 ---
 
 <Base
-	title={query ? `Buscar: ${query}` : "Buscar"}
-	description="Busca en el blog de Server Startup"
+	title={query ? `${searchTitle}: ${query}` : searchTitle}
+	description={searchDescription}
 >
-	<section class="search-page" aria-label="Buscar">
+	<section class="search-page" aria-label={searchTitle}>
 		<div class="container search-inner">
-			<h1>Buscar</h1>
+			<h1>{searchTitle}</h1>
 
 			<form method="get" action="/search" class="search-form" role="search">
-				<label for="search-input" class="sr-only">Buscar artículos</label>
+				<label for="search-input" class="sr-only">{searchLabel}</label>
 				<input
 					type="search"
 					id="search-input"
 					name="q"
 					value={query}
-					placeholder="Buscar artículos..."
+					placeholder={searchPlaceholder}
 					class="search-input"
 					autofocus
 				/>
-				<button type="submit" class="btn btn-dark">Buscar</button>
+				<button type="submit" class="btn btn-dark">{searchTitle}</button>
 			</form>
 
 			{query && (
 				<p class="search-summary">
 					{results.length === 0
-						? `Sin resultados para "${query}"`
-						: `${results.length} resultado${results.length === 1 ? "" : "s"} para "${query}"`}
+						? `${searchNoResults} "${query}"`
+						: `${results.length} ${searchResults} "${query}"`}
 				</p>
 			)}
 
@@ -71,7 +84,7 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 				</div>
 			)}
 
-			{!query && <p class="text-body search-hint">Introduce un término para buscar artículos.</p>}
+			{!query && <p class="text-body search-hint">{searchHint}</p>}
 		</div>
 	</section>
 </Base>

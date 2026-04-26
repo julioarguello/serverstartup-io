@@ -1,12 +1,18 @@
 ---
 import Base from "../layouts/Base.astro";
+import { getUiLabels } from "../utils/ui-labels";
+
+const labels = await getUiLabels();
+const errorTitle = labels.get("error_page", "error_title", "Página no encontrada");
+const errorBody = labels.get("error_page", "error_body", "La página que buscas no existe.");
+const errorCta = labels.get("error_page", "error_cta", "Volver al inicio");
 ---
 
-<Base title="Página no encontrada" robots="noindex, nofollow">
+<Base title={errorTitle} robots="noindex, nofollow">
 	<div class="not-found">
 		<h1>404</h1>
-		<p class="text-body">La página que buscas no existe.</p>
-		<a href="/" class="btn btn-dark">Volver al inicio</a>
+		<p class="text-body">{errorBody}</p>
+		<a href="/" class="btn btn-dark">{errorCta}</a>
 	</div>
 </Base>
 

@@ -9,10 +9,12 @@
  *
  * Fallback to hardcoded values if the widget area is not seeded.
  */
-import { getWidgetArea } from "emdash";
+import { getWidgetArea, getSiteSettings } from "emdash";
 
 const ctaArea = await getWidgetArea("cta_global");
 const ctaWidget = ctaArea?.widgets[0];
+const settings = await getSiteSettings();
+const defaultCtaLabel = (settings as any).defaultCtaLabel || "Contacta ahora";
 
 // Heading from widget title
 const heading = ctaWidget?.title || "¿Listo para optimizar tu infraestructura digital?";
@@ -28,8 +30,8 @@ const textBlocks = hasLink ? blocks.slice(0, -1) : blocks;
 
 // Extract button label and URL from the link block
 const buttonLabel = hasLink
-	? lastBlock.children?.map((c: any) => c.text).join("") || "Contacta ahora"
-	: "Contacta ahora";
+	? lastBlock.children?.map((c: any) => c.text).join("") || defaultCtaLabel
+	: defaultCtaLabel;
 const buttonUrl = hasLink
 	? lastBlock.markDefs?.find((m: any) => m._type === "link")?.href || "/contacto"
 	: "/contacto";

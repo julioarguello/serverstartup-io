@@ -12,7 +12,11 @@
 		"phone": "+34666666666",
 		"phoneDisplay": "666 66 66 66",
 		"email": "info@serverstartup.com",
-		"whatsapp": "https://wa.me/34666666666"
+		"whatsapp": "https://wa.me/34666666666",
+		"defaultCtaLabel": "Contacta ahora",
+		"contactWhatsappLabel": "WhatsApp",
+		"contactPhoneLabel": "Teléfono",
+		"contactEmailLabel": "Email"
 	},
 	"collections": [
 		{
@@ -439,6 +443,127 @@
 									"href": "/contacto"
 								}
 							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ui_labels",
+			"label": "UI Labels",
+			"description": "Translatable UI micro-copy: footer headings, error pages, search page, and button labels",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "footer_headings",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "trust_title",
+							"children": [{"_type": "span", "text": "Confían en nosotros"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "services_title",
+							"children": [{"_type": "span", "text": "Áreas de especialización"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "partners_title",
+							"children": [{"_type": "span", "text": "Somos partners"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_services_btn",
+							"children": [{"_type": "span", "text": "Nuestros servicios"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "contact_title",
+							"children": [{"_type": "span", "text": "Contacto"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "about_us",
+							"children": [{"_type": "span", "text": "Quiénes somos"}]
+						}
+					]
+				},
+				{
+					"type": "content",
+					"title": "error_page",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_title",
+							"children": [{"_type": "span", "text": "Página no encontrada"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_body",
+							"children": [{"_type": "span", "text": "La página que buscas no existe."}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_cta",
+							"children": [{"_type": "span", "text": "Volver al inicio"}]
+						}
+					]
+				},
+				{
+					"type": "content",
+					"title": "search_page",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_title",
+							"children": [{"_type": "span", "text": "Buscar"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_label",
+							"children": [{"_type": "span", "text": "Buscar artículos"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_placeholder",
+							"children": [{"_type": "span", "text": "Buscar artículos..."}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_hint",
+							"children": [{"_type": "span", "text": "Introduce un término para buscar artículos."}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_no_results",
+							"children": [{"_type": "span", "text": "Sin resultados para"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_results",
+							"children": [{"_type": "span", "text": "resultado(s) para"}]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_description",
+							"children": [{"_type": "span", "text": "Busca en el blog de Server Startup"}]
 						}
 					]
 				}

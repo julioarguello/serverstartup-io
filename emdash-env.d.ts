@@ -44,6 +44,22 @@ export interface Page {
   bylines?: ContentBylineCredit[];
 }
 
+export interface Partner {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
+  excerpt?: string;
+  content?: PortableTextBlock[];
+  cta_label?: string;
+  featured?: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
 export interface Post {
   id: string;
   slug: string | null;
@@ -79,6 +95,7 @@ declare module "emdash" {
     elementor_library: ElementorBlock;
     members: Miembro;
     pages: Page;
+    partners: Partner;
     posts: Post;
     services: Servicio;
   }
