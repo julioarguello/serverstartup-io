@@ -5,6 +5,14 @@
  * Shows the *other* locale as a link. Clicking switches to that locale's
  * equivalent URL (prefixed for non-default, root for default).
  *
+ * Strategy:
+ *   1. Try simple prefix swap (works for most pages with same slug)
+ *   2. If the slug could differ between locales (e.g., quienes-somos vs about-us),
+ *      the prefix swap is the best-effort fallback. True CMS-level slug
+ *      resolution would require an async lookup here. For now, we provide
+ *      a safe fallback to the alternate locale's homepage if the swap is
+ *      likely to 404 (heuristic: non-matching patterns).
+ *
  * Astro i18n routing:
  *   - ES (default): /quienes-somos
  *   - EN: /en/about-us
@@ -21,7 +29,6 @@ if (currentLocale === "es") {
 	altLocale = "en";
 	altLabel = "EN";
 	// For ES → EN: prefix with /en/
-	// Strip any trailing slash for clean path building
 	const cleanPath = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
 	altPath = `/en${cleanPath}`;
 } else {
@@ -29,6 +36,13 @@ if (currentLocale === "es") {
 	altLabel = "ES";
 	// For EN → ES: remove /en prefix
 	altPath = currentPath.replace(/^\/en/, "") || "/";
+}
+
+// Safety: certain ES-only routes have no EN equivalent — fallback to /en/
+// This covers special routes like /posts/*, /search, /category/*, /tag/*
+const esOnlyPrefixes = ["/posts", "/search", "/category", "/tag", "/rss.xml"];
+if (currentLocale === "es" && esOnlyPrefixes.some(p => currentPath.startsWith(p))) {
+	altPath = "/en/";
 }
 ---
 

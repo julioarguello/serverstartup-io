@@ -47,7 +47,7 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 		<div class="container search-inner">
 			<h1>{searchTitle}</h1>
 
-			<form method="get" action="/search" class="search-form" role="search">
+			<form method="get" action={`${(Astro.currentLocale || "es") === "es" ? "" : `/${Astro.currentLocale}`}/search`} class="search-form" role="search">
 				<label for="search-input" class="sr-only">{searchLabel}</label>
 				<input
 					type="search"

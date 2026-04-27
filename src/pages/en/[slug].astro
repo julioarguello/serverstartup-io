@@ -66,8 +66,6 @@ const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
 	<CtaGlobal />
 </Base>
 
-<style define:vars={{ accentColor }}>
-	.s-hero {
-		background-color: var(--accentColor);
-	}
+<style is:global define:vars={{ accentColor }}>
+	@import "../../styles/service.css";
 </style>

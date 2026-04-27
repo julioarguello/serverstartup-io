@@ -19,9 +19,10 @@ interface Props {
 	title?: string;
 	description?: string;
 	robots?: string;
+	content?: { collection: string; id: string; slug: string };
 }
 
-const { title, description, robots } = Astro.props;
+const { title, description, robots, content: editableContent } = Astro.props;
 const locale = Astro.currentLocale || "es";
 const t = (Astro.locals as any).t;
 
@@ -93,6 +94,7 @@ const altPath = locale === "es"
 	<link rel="alternate" hreflang={altLocale} href={altPath} />
 	<link rel="alternate" hreflang={locale} href={currentPath} />
 	<link rel="icon" href="/assets/favicon.png" sizes="32x32" />
+	<link rel="alternate" type="application/rss+xml" title={`${identity.siteTitle} — RSS`} href="/rss.xml" />
 </head>
 <body>
 
@@ -421,15 +423,15 @@ const altPath = locale === "es"
 	.menu-link:hover {
 		color: rgba(30, 30, 30, 0.75);
 	}
-	.menu-link--secondary {
-		font-size: 22px !important;
-		line-height: 30px !important;
+	.menu-list .menu-link--secondary {
+		font-size: 22px;
+		line-height: 30px;
 	}
 
 	@media (min-width: 768px) {
 		.menu-list { padding: 80px 20px 40px; max-width: var(--container-max); margin: 0 auto; }
 		.menu-link { font-size: 48px; line-height: 54px; }
-		.menu-link--secondary { font-size: 32px !important; line-height: 40px !important; }
+		.menu-list .menu-link--secondary { font-size: 32px; line-height: 40px; }
 		.menu-close { right: 56px; }
 	}
 
