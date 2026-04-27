@@ -33,6 +33,21 @@ const emailLabel = (settings as any).contactEmailLabel || "Email";
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 >
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "LocalBusiness",
+		"name": "Server Startup",
+		"description": excerpt || `${title} — Server Startup`,
+		"url": Astro.site ? Astro.site.href : "https://www.serverstartup.io",
+		"telephone": phone,
+		"email": email,
+		"contactPoint": [{
+			"@type": "ContactPoint",
+			"telephone": phone,
+			"contactType": "customer service",
+			"availableLanguage": ["Spanish", "English"]
+		}]
+	})} />
 	<section class="s-contact" aria-label={title}>
 		<div class="container s-contact__inner">
 			<h1>{title}</h1>
