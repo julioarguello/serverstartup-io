@@ -14,6 +14,6 @@ import { loadAriaLabels, type TFunction } from "./i18n/ui";
 export const onRequest = defineMiddleware(async ({ locals, currentLocale }, next) => {
 	const locale = currentLocale || "es";
 	const t = await loadAriaLabels(locale);
-	(locals as any).t = t;
+	locals.t = t;
 	return next();
 });

@@ -20,7 +20,7 @@ import CloudflarePartner from "./CloudflarePartner.astro";
 import { PortableText } from "emdash/ui";
 import CtaGlobal from "./CtaGlobal.astro";
 import { getUiLabels } from "../utils/ui-labels";
-const t = (Astro.locals as any).t;
+const t = Astro.locals.t;
 
 const locale = Astro.currentLocale || "es";
 const localePrefix = locale === "es" ? "" : `/${locale}`;
@@ -130,7 +130,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 		<!-- Right: stacking cards from services collection -->
 		<div class="s-areas__cards" role="list">
 			{services.map((svc, i) => {
-				const d = svc.data as any;
+				const d = svc.data;
 				const cardColor = d.color || '#BFEDEE';
 				return (
 					<article class={`area-card card${i + 1}`} style={`background-color: ${cardColor};`} role="listitem">

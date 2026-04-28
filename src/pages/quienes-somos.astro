@@ -9,7 +9,7 @@ import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import { getUiLabels } from "../utils/ui-labels";
-const t = (Astro.locals as any).t;
+const t = Astro.locals.t;
 
 const locale = Astro.currentLocale || "es";
 const { entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos", { locale });

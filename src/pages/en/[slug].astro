@@ -7,7 +7,8 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import CtaGlobal from "../../components/CtaGlobal.astro";
-const t = (Astro.locals as any).t;
+import type { SiteSettings } from "../../types";
+const t = Astro.locals.t;
 
 const { slug } = Astro.params;
 const locale = "en";
@@ -32,11 +33,11 @@ if (!entry) return Astro.redirect("/404");
 if (cacheHint) Astro.cache.set(cacheHint);
 
 const settings = await getSiteSettings();
-const defaultCtaLabel = (settings as any).defaultCtaLabel || "Contact us";
+const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contact us";
 
 const { title, content, excerpt } = entry.data;
-const accentColor = (entry.data as any).color || "#BFEDEE";
-const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
+const accentColor = entry.data.color || "#BFEDEE";
+const ctaLabel = entry.data.cta_label || defaultCtaLabel;
 ---
 
 <Base
