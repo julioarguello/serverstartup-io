@@ -4,3 +4,4 @@ dist
 uploads
 data.db
 .env
+.wrangler
