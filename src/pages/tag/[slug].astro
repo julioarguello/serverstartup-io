@@ -13,10 +13,11 @@ if (!term) {
 	return Astro.redirect("/404");
 }
 
-const { entries: posts } = await getEmDashCollection("posts", {
+const { entries: posts, cacheHint } = await getEmDashCollection("posts", {
 	where: { tag: term.slug },
 	orderBy: { published_at: "desc" },
 });
+Astro.cache.set(cacheHint);
 
 // Fetch tags for display on each post card
 const filteredPosts = await Promise.all(
