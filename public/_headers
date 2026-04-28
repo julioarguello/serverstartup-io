@@ -1,0 +1,20 @@
+# Static asset caching — served by Cloudflare Workers Assets
+# See: https://developers.cloudflare.com/workers/static-assets/headers/
+
+# Hashed assets (Vite output) — immutable, 1 year
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static images & fonts — long cache, revalidate weekly
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Favicons & manifest — moderate cache
+/favicon*
+  Cache-Control: public, max-age=86400
+
+/site.webmanifest
+  Cache-Control: public, max-age=86400

@@ -7,6 +7,7 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import CtaGlobal from "../../components/CtaGlobal.astro";
+import type { EntryResult, CacheHint } from "emdash";
 import type { SiteSettings } from "../../types";
 const t = Astro.locals.t;
 
@@ -14,8 +15,8 @@ const { slug } = Astro.params;
 const locale = "en";
 
 // Try services first, then pages
-let entry: any = null;
-let cacheHint: any = null;
+let entry: EntryResult<Record<string, unknown>>["entry"] = null;
+let cacheHint: CacheHint | null = null;
 
 const svcResult = await getEmDashEntry("services", slug!, { locale });
 if (svcResult.entry) {
