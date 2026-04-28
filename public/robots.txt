@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /_emdash/
+
+Sitemap: https://www.serverstartup.io/sitemap-index.xml

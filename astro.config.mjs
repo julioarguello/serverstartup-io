@@ -1,5 +1,6 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import { d1, r2, sandbox } from "@emdash-cms/cloudflare";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
 import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
@@ -7,6 +8,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
 export default defineConfig({
+	site: "https://www.serverstartup.io",
 	output: "server",
 	i18n: {
 		defaultLocale: "es",
@@ -29,6 +31,13 @@ export default defineConfig({
 			sandboxed: [webhookNotifierPlugin()],
 			sandboxRunner: sandbox(),
 			marketplace: "https://marketplace.emdashcms.com",
+		}),
+		sitemap({
+			i18n: {
+				defaultLocale: "es",
+				locales: { es: "es-ES", en: "en-US" },
+			},
+			filter: (page) => !page.includes("/_emdash/"),
 		}),
 	],
 	fonts: [
