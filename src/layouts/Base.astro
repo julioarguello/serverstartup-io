@@ -19,10 +19,11 @@ interface Props {
 	title?: string;
 	description?: string;
 	robots?: string;
+	image?: string;
 	content?: { collection: string; id: string; slug: string };
 }
 
-const { title, description, robots, content: editableContent } = Astro.props;
+const { title, description, robots, image, content: editableContent } = Astro.props;
 const locale = Astro.currentLocale || "es";
 const t = (Astro.locals as any).t;
 
@@ -76,12 +77,17 @@ const trustLogos = (partnerEntries ?? [])
 		alt: p.data.featured_image?.alt || (p.data as any).title || "Partner",
 	}));
 
-// Alternate locale URL for hreflang (simple prefix swap)
+// Alternate locale URL for hreflang (absolute URLs per Google spec)
 const currentPath = Astro.url.pathname;
 const altLocale = locale === "es" ? "en" : "es";
 const altPath = locale === "es"
 	? `/en${currentPath === "/" ? "/" : currentPath}`
 	: currentPath.replace(/^\/en/, "") || "/";
+const siteOrigin = Astro.site?.origin || "https://www.serverstartup.io";
+const canonicalUrl = `${siteOrigin}${currentPath}`;
+const altUrl = `${siteOrigin}${altPath}`;
+const defaultUrl = locale === "es" ? canonicalUrl : altUrl;
+const ogImage = image || `${siteOrigin}/assets/logo-vertical.png`;
 ---
 
 <html lang={Astro.currentLocale || "es"}>
@@ -91,8 +97,21 @@ const altPath = locale === "es"
 	<title>{pageTitle}</title>
 	<meta name="description" content={pageDescription} />
 	{robots && <meta name="robots" content={robots} />}
-	<link rel="alternate" hreflang={altLocale} href={altPath} />
-	<link rel="alternate" hreflang={locale} href={currentPath} />
+	<link rel="canonical" href={canonicalUrl} />
+	<link rel="alternate" hreflang={locale} href={canonicalUrl} />
+	<link rel="alternate" hreflang={altLocale} href={altUrl} />
+	<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDescription} />
+	<meta property="og:url" content={canonicalUrl} />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:locale" content={locale === "es" ? "es_ES" : "en_US"} />
+	<meta property="og:site_name" content={identity.siteTitle} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDescription} />
+	<meta name="twitter:image" content={ogImage} />
 	<link rel="icon" href="/assets/favicon.png" sizes="32x32" />
 	<link rel="alternate" type="application/rss+xml" title={`${identity.siteTitle} — RSS`} href="/rss.xml" />
 </head>
