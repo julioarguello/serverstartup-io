@@ -9,7 +9,7 @@
  * - CTA button from cta_label field, linking to partner slug
  */
 import { getEmDashCollection } from "emdash";
-const t = (Astro.locals as any).t;
+const t = Astro.locals.t;
 
 const { entries: allPartners } = await getEmDashCollection("partners", {
 	orderBy: { created_at: "asc" },
@@ -17,12 +17,12 @@ const { entries: allPartners } = await getEmDashCollection("partners", {
 
 // The "featured" partner with full content = Cloudflare card
 const featuredPartner = (allPartners ?? []).find(
-	(p: any) => p.data.content && p.data.content.length > 0
+	(p) => p.data.content && p.data.content.length > 0
 );
 
 if (!featuredPartner) return;
 
-const d = featuredPartner.data as any;
+const d = featuredPartner.data;
 const logo = d.featured_image;
 const ctaLabel = d.cta_label;
 const locale = Astro.currentLocale || "es";

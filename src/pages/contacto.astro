@@ -8,6 +8,7 @@
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
+import type { SiteSettings } from "../types";
 
 const locale = Astro.currentLocale || "es";
 const { entry, cacheHint } = await getEmDashEntry("pages", "contacto", { locale });
@@ -15,18 +16,18 @@ if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
-const settings = await getSiteSettings();
+const settings = await getSiteSettings() as SiteSettings;
 
 // Contact info from site settings (fallback to hardcoded for safety)
-const phone = (settings as any).phone || "+34666666666";
-const phoneDisplay = (settings as any).phoneDisplay || "666 66 66 66";
-const email = (settings as any).email || "info@serverstartup.com";
-const whatsapp = (settings as any).whatsapp || `https://wa.me/${phone.replace('+', '')}`;
+const phone = settings.phone || "+34666666666";
+const phoneDisplay = settings.phoneDisplay || "666 66 66 66";
+const email = settings.email || "info@serverstartup.com";
+const whatsapp = settings.whatsapp || `https://wa.me/${phone.replace('+', '')}`;
 
 // Contact method labels from site settings
-const whatsappLabel = (settings as any).contactWhatsappLabel || "WhatsApp";
-const phoneLabel = (settings as any).contactPhoneLabel || "Teléfono";
-const emailLabel = (settings as any).contactEmailLabel || "Email";
+const whatsappLabel = settings.contactWhatsappLabel || "WhatsApp";
+const phoneLabel = settings.contactPhoneLabel || "Teléfono";
+const emailLabel = settings.contactEmailLabel || "Email";
 ---
 
 <Base

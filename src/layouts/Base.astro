@@ -11,6 +11,7 @@
 import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
+import type { SiteSettings } from "../types";
 
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import "../styles/theme.css";
@@ -25,7 +26,7 @@ interface Props {
 
 const { title, description, robots, image, content: editableContent } = Astro.props;
 const locale = Astro.currentLocale || "es";
-const t = (Astro.locals as any).t;
+const t = Astro.locals.t;
 
 const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }, labels] = await Promise.all([
 	getSiteSettings(),
@@ -45,10 +46,11 @@ const services = serviceEntries ?? [];
 const identity = resolveBlogSiteIdentity(settings);
 
 // Contact info from site settings
-const phone = (settings as any).phone || "+34666666666";
-const phoneDisplay = (settings as any).phoneDisplay || "666 66 66 66";
-const email = (settings as any).email || "info@serverstartup.com";
-const defaultCtaLabel = (settings as any).defaultCtaLabel || "Contacta ahora";
+const s = settings as SiteSettings;
+const phone = s.phone || "+34666666666";
+const phoneDisplay = s.phoneDisplay || "666 66 66 66";
+const email = s.email || "info@serverstartup.com";
+const defaultCtaLabel = s.defaultCtaLabel || "Contacta ahora";
 
 // Footer headings from CMS (ui_labels widget area)
 const trustTitle = labels.get("footer_headings", "trust_title", "Confían en nosotros");
@@ -61,20 +63,24 @@ const pageTitle = title
 	: identity.siteTitle;
 const pageDescription = description || identity.siteTagline;
 
-// Menu items — first 5 are services, last 2 are secondary
+// Menu items — classify by matching against services collection slugs
 const menuItems = menu?.items ?? [];
-const serviceItems = menuItems.slice(0, 5);
-const secondaryItems = menuItems.slice(5);
+const serviceSlugs = new Set(services.map((s) => s.id));
+const serviceItems = menuItems.filter((item) => {
+	const slug = item.url?.replace(/^\//, "").replace(/\/$/, "");
+	return slug && serviceSlugs.has(slug);
+});
+const secondaryItems = menuItems.filter((item) => !serviceItems.includes(item));
 
 // Locale-aware URL prefix ("" for ES default, "/en" for English)
 const localePrefix = locale === "es" ? "" : `/${locale}`;
 
 // Trust logos from partners collection (featured = true)
 const trustLogos = (partnerEntries ?? [])
-	.filter((p: any) => p.data.featured === true || p.data.featured === 1)
-	.map((p: any) => ({
+	.filter((p) => p.data.featured === true || p.data.featured === 1)
+	.map((p) => ({
 		src: p.data.featured_image?.src || "/assets/logo-cloudflare.svg",
-		alt: p.data.featured_image?.alt || (p.data as any).title || "Partner",
+		alt: p.data.featured_image?.alt || p.data.title || "Partner",
 	}));
 
 // Alternate locale URL for hreflang (absolute URLs per Google spec)
@@ -223,7 +229,7 @@ const ogImage = image || `${siteOrigin}/assets/logo-vertical.png`;
 					<h5>{servicesTitle}</h5>
 					<ul class="footer-list">
 						{services.map((svc) => (
-							<li><a href={`${localePrefix}/${svc.id}`}>{(svc.data as any).title}</a></li>
+							<li><a href={`${localePrefix}/${svc.id}`}>{svc.data.title}</a></li>
 						))}
 					</ul>
 				</div>
