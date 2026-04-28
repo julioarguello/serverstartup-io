@@ -28,7 +28,7 @@ const { title, description, robots, image, content: editableContent } = Astro.pr
 const locale = Astro.currentLocale || "es";
 const t = Astro.locals.t;
 
-const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries }, labels] = await Promise.all([
+const [settings, menu, servicesResult, partnersResult, labels] = await Promise.all([
 	getSiteSettings(),
 	getMenu("primary"),
 	getEmDashCollection("services", {
@@ -41,6 +41,12 @@ const [settings, menu, { entries: serviceEntries }, { entries: partnerEntries },
 	getUiLabels(locale),
 ]);
 
+// Merge layout-level cacheHints so CDN invalidation covers footer data
+if (servicesResult.cacheHint) Astro.cache.set(servicesResult.cacheHint);
+if (partnersResult.cacheHint) Astro.cache.set(partnersResult.cacheHint);
+
+const { entries: serviceEntries } = servicesResult;
+const { entries: partnerEntries } = partnersResult;
 const services = serviceEntries ?? [];
 
 const identity = resolveBlogSiteIdentity(settings);
