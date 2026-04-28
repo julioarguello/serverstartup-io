@@ -44,6 +44,11 @@ const {
 const locale = Astro.currentLocale || "es";
 const t = Astro.locals.t;
 
+// Note: services and partners are also queried in HomepageContent.astro and
+// CloudflarePartner.astro. This duplication is intentional — Astro does not
+// support passing data through <slot/> to child components. EmDash caches
+// query results at the request level, so the database is hit only once per
+// collection per request. The overhead is negligible.
 const [settings, menu, servicesResult, partnersResult, labels] = await Promise.all([
 	getSiteSettings(),
 	getMenu("primary"),
