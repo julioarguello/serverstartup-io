@@ -1,18 +1,15 @@
 ---
 export const prerender = false;
 
-import { getEmDashCollection } from "emdash";
+import { search } from "emdash";
 import Base from "../layouts/Base.astro";
 import PostCard from "../components/PostCard.astro";
-import { getReadingTime, extractText } from "../utils/reading-time";
+import { getReadingTime } from "../utils/reading-time";
 import { getUiLabels } from "../utils/ui-labels";
 
 const query = Astro.url.searchParams.get("q")?.trim() || "";
-
-const [{ entries: allPosts }, labels] = await Promise.all([
-	getEmDashCollection("posts"),
-	getUiLabels(Astro.currentLocale || "es"),
-]);
+const locale = Astro.currentLocale || "es";
+const labels = await getUiLabels(locale);
 
 // CMS-driven search labels
 const searchTitle = labels.get("search_page", "search_title", "Buscar");
@@ -23,20 +20,11 @@ const searchNoResults = labels.get("search_page", "search_no_results", "Sin resu
 const searchResults = labels.get("search_page", "search_results", "resultado(s) para");
 const searchDescription = labels.get("search_page", "search_description", "Busca en el blog de Server Startup");
 
-// Simple search: match query against title, excerpt, and content
-function matchesQuery(post: (typeof allPosts)[0], q: string): boolean {
-	if (!q) return false;
-	const lower = q.toLowerCase();
-	const title = (post.data.title || "").toLowerCase();
-	const excerpt = (post.data.excerpt || "").toLowerCase();
-	// Extract plain text from portable text blocks (avoids matching on _type, _key, etc.)
-	const content = extractText(post.data.content).toLowerCase();
-	return (
-		title.includes(lower) || excerpt.includes(lower) || content.includes(lower)
-	);
-}
-
-const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
+// Use EmDash's FTS5-backed search instead of loading all posts into memory.
+// This delegates filtering to the database, avoiding O(n × m) substring scans.
+const results = query
+	? (await search(query, { collections: ["posts"], locale, limit: 20 })).items
+	: [];
 ---
 
 <Base
@@ -47,7 +35,7 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 		<div class="container search-inner">
 			<h1>{searchTitle}</h1>
 
-			<form method="get" action={`${(Astro.currentLocale || "es") === "es" ? "" : `/${Astro.currentLocale}`}/search`} class="search-form" role="search">
+			<form method="get" action={`${locale === "es" ? "" : `/${locale}`}/search`} class="search-form" role="search">
 				<label for="search-input" class="sr-only">{searchLabel}</label>
 				<input
 					type="search"
@@ -71,14 +59,10 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 
 			{results.length > 0 && (
 				<div class="search-results">
-					{results.map((post) => (
+					{results.map((result) => (
 						<PostCard
-							title={post.data.title}
-							excerpt={post.data.excerpt}
-							featuredImage={post.data.featured_image}
-							href={`/posts/${post.id}`}
-							date={post.data.publishedAt ?? undefined}
-							readingTime={getReadingTime(post.data.content)}
+							title={result.title || ""}
+							href={`/posts/${result.slug || result.id}`}
 						/>
 					))}
 				</div>

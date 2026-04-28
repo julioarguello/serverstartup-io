@@ -1,23 +1,17 @@
 ---
 /**
- * EN Search page — thin re-export of the root search page.
- * Astro routing will set currentLocale = "en" for this path,
- * and the shared logic (getUiLabels, form action) already handles i18n.
+ * EN Search page — locale-aware wrapper.
+ * Uses EmDash's FTS5-backed search() for efficient database-side filtering.
  */
 export const prerender = false;
 
-import { getEmDashCollection } from "emdash";
+import { search } from "emdash";
 import Base from "../../layouts/Base.astro";
 import PostCard from "../../components/PostCard.astro";
-import { getReadingTime, extractText } from "../../utils/reading-time";
 import { getUiLabels } from "../../utils/ui-labels";
 
 const query = Astro.url.searchParams.get("q")?.trim() || "";
-
-const [{ entries: allPosts }, labels] = await Promise.all([
-	getEmDashCollection("posts"),
-	getUiLabels("en"),
-]);
+const labels = await getUiLabels("en");
 
 const searchTitle = labels.get("search_page", "search_title", "Search");
 const searchLabel = labels.get("search_page", "search_label", "Search articles");
@@ -27,16 +21,10 @@ const searchNoResults = labels.get("search_page", "search_no_results", "No resul
 const searchResults = labels.get("search_page", "search_results", "result(s) for");
 const searchDescription = labels.get("search_page", "search_description", "Search Server Startup blog");
 
-function matchesQuery(post: (typeof allPosts)[0], q: string): boolean {
-	if (!q) return false;
-	const lower = q.toLowerCase();
-	const title = (post.data.title || "").toLowerCase();
-	const excerpt = (post.data.excerpt || "").toLowerCase();
-	const content = extractText(post.data.content).toLowerCase();
-	return title.includes(lower) || excerpt.includes(lower) || content.includes(lower);
-}
-
-const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
+// Use EmDash's FTS5-backed search instead of loading all posts into memory.
+const results = query
+	? (await search(query, { collections: ["posts"], locale: "en", limit: 20 })).items
+	: [];
 ---
 
 <Base
@@ -71,14 +59,10 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 
 			{results.length > 0 && (
 				<div class="search-results">
-					{results.map((post) => (
+					{results.map((result) => (
 						<PostCard
-							title={post.data.title}
-							excerpt={post.data.excerpt}
-							featuredImage={post.data.featured_image}
-							href={`/posts/${post.id}`}
-							date={post.data.publishedAt ?? undefined}
-							readingTime={getReadingTime(post.data.content)}
+							title={result.title || ""}
+							href={`/posts/${result.slug || result.id}`}
 						/>
 					))}
 				</div>

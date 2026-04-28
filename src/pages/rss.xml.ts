@@ -8,7 +8,11 @@ export const GET: APIRoute = async ({ site, url, currentLocale }) => {
 	const siteUrl = site?.toString() || url.origin;
 	const { siteTitle, siteTagline } = resolveBlogSiteIdentity(await getSiteSettings());
 
-	const { entries: posts } = await getEmDashCollection("posts", {
+	// Note: cacheHint is captured but cannot be used — APIRoutes don't have
+	// Astro.cache. The manual Cache-Control header below (max-age=3600) serves
+	// as the fallback TTL for CDN/Worker caching. Proactive invalidation on
+	// publish is not available for API routes; the 1-hour TTL is acceptable.
+	const { entries: posts, cacheHint: _cacheHint } = await getEmDashCollection("posts", {
 		orderBy: { published_at: "desc" },
 		limit: 20,
 	});
