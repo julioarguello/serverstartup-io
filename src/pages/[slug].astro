@@ -50,7 +50,7 @@ const localePrefix = locale === "es" ? "" : `/${locale}`;
 					<p class="text-body">{excerpt}</p>
 				</div>
 			)}
-			<a href={`${localePrefix}/contacto`} class="btn btn-dark">{ctaLabel}</a>
+			<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark">{ctaLabel}</a>
 		</div>
 	</section>
 

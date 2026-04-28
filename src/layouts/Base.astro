@@ -280,11 +280,11 @@ const resolvedOgType = ogType || "website";
 				<div class="footer-col">
 					<h5>{contactTitle}</h5>
 					<ul class="footer-list">
-						<li><a href={`${localePrefix}/quienes-somos`}>{aboutUsLabel}</a></li>
+						<li><a href={`${localePrefix}/${locale === "en" ? "about-us" : "quienes-somos"}`}>{aboutUsLabel}</a></li>
 						<li><a href={`mailto:${email}`}>{email}</a></li>
 						<li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>
 					</ul>
-					<a href={`${localePrefix}/contacto`} class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
+					<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
 				</div>
 			</div>
 		</div>

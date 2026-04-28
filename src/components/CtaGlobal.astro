@@ -40,9 +40,10 @@ const textBlocks = hasLink ? blocks.slice(0, -1) : blocks;
 const buttonLabel = hasLink
 	? lastBlock.children?.map((c: any) => c.text).join("") || defaultCtaLabel
 	: defaultCtaLabel;
+const contactPath = `${localePrefix}/${locale === "en" ? "contact" : "contacto"}`;
 const buttonUrl = hasLink
-	? lastBlock.markDefs?.find((m: any) => m._type === "link")?.href || `${localePrefix}/contacto`
-	: `${localePrefix}/contacto`;
+	? lastBlock.markDefs?.find((m: any) => m._type === "link")?.href || contactPath
+	: contactPath;
 ---
 
 <section class="s-cta" aria-label={t("cta_section")}>
