@@ -13,7 +13,9 @@ import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
 import type { SiteSettings } from "../types";
 
-import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import MenuDialog from "../components/MenuDialog.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import "../styles/theme.css";
 
 interface Props {
@@ -154,162 +156,30 @@ const resolvedOgType = ogType || "website";
 </head>
 <body>
 
-	<!-- ═══ HEADER — sticky, white bar, logo left, hamburger right ═══ -->
-	<header class="site-header" id="site-header" role="banner">
-		<div class="container header-inner">
-			<a href="/" class="header-logo" aria-label={t("go_home")}>
-				<img
-					src="/assets/logo.svg"
-					alt="Server Startup"
-					width="396"
-					height="68"
-					class="logo-img"
-				/>
-			</a>
-			<div class="header-actions">
-				<LanguageSwitcher />
-			<button
-				type="button"
-				class="menu-toggle"
-				id="menu-trigger"
-				aria-expanded="false"
-				aria-controls="menu-dialog"
-				aria-label={t("open_menu")}
-			>
-				<img
-					src="/assets/menu.svg"
-					alt=""
-					width="60"
-					height="60"
-					class="menu-icon"
-					aria-hidden="true"
-				/>
-			</button>
-			</div>
-		</div>
-	</header>
+	<SiteHeader />
 
-	<!-- ═══ MENU DIALOG — fullscreen slide-in from right ═══ -->
-	<div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
-	<dialog
-		class="menu-dialog"
-		id="menu-dialog"
-		aria-label={t("main_menu")}
-	>
-		<button
-			type="button"
-			class="menu-close"
-			id="menu-close"
-			aria-label={t("close_menu")}
-		>✕</button>
-		<nav aria-label={t("main_nav")}>
-			<ul class="menu-list" role="list">
-				{serviceItems.map((item) => (
-					<li><a href={item.url} class="menu-link">{item.label}</a></li>
-				))}
-				{secondaryItems.map((item) => (
-					<li><a href={item.url} class="menu-link menu-link--secondary">{item.label}</a></li>
-				))}
-			</ul>
-		</nav>
-	</dialog>
+	<MenuDialog serviceItems={serviceItems} secondaryItems={secondaryItems} />
 
 	<!-- ═══ MAIN CONTENT ═══ -->
 	<main id="content">
 		<slot />
 	</main>
 
-	<!-- ═══ FOOTER ═══ -->
-	<footer class="site-footer" role="contentinfo">
-		<!-- Trust logos carousel -->
-		<section class="footer-trust" aria-label={t("trust_section")}>
-			<div class="container">
-				<h4 class="footer-trust__title">{trustTitle}</h4>
-				<div class="trust-logos" role="list" aria-label={t("trust_logos")}>
-					{trustLogos.map((logo) => (
-						<img
-							src={logo.src}
-							alt={logo.alt}
-							class="trust-logo"
-							loading="lazy"
-							role="listitem"
-						/>
-					))}
-				</div>
-			</div>
-		</section>
-
-		<!-- 4-column footer grid -->
-		<div class="footer-main">
-			<div class="container footer-grid">
-				<!-- Col 1: Logo -->
-				<div class="footer-col">
-					<a href="/" aria-label={t("go_home")}>
-						<img
-							src="/assets/logo-vertical.png"
-							alt="Server Startup"
-							class="footer-logo-img"
-							width="250"
-							loading="lazy"
-						/>
-					</a>
-				</div>
-
-				<!-- Col 2: Services -->
-				<div class="footer-col">
-					<h5>{servicesTitle}</h5>
-					<ul class="footer-list">
-						{services.map((svc) => (
-							<li><a href={`${localePrefix}/${svc.id}`}>{svc.data.title}</a></li>
-						))}
-					</ul>
-				</div>
-
-				<!-- Col 3: Partner -->
-				<div class="footer-col">
-					<h5>{partnersTitle}</h5>
-					{trustLogos.length > 0 ? (
-						trustLogos.map((logo) => (
-							<img
-								src={logo.src}
-								alt={logo.alt}
-								class="footer-partner-logo"
-								loading="lazy"
-							/>
-						))
-					) : (
-						<img
-							src="/assets/logo-cloudflare.svg"
-							alt="Cloudflare Partner"
-							class="footer-partner-logo"
-							loading="lazy"
-						/>
-					)}
-				</div>
-
-				<!-- Col 4: Contact -->
-				<div class="footer-col">
-					<h5>{contactTitle}</h5>
-					<ul class="footer-list">
-						<li><a href={`${localePrefix}/${locale === "en" ? "about-us" : "quienes-somos"}`}>{aboutUsLabel}</a></li>
-						<li><a href={`mailto:${email}`}>{email}</a></li>
-						<li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>
-					</ul>
-					<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Kit Digital banner -->
-		<div class="footer-banner">
-			<img
-				src="/assets/kit-digital-banner.jpg"
-				alt="Programa Kit Digital — Financiado por los fondos Next Generation de la Unión Europea"
-				class="footer-banner-img"
-				loading="lazy"
-			/>
-		</div>
-	</footer>
+	<SiteFooter
+		trustTitle={trustTitle}
+		servicesTitle={servicesTitle}
+		partnersTitle={partnersTitle}
+		contactTitle={contactTitle}
+		aboutUsLabel={aboutUsLabel}
+		defaultCtaLabel={defaultCtaLabel}
+		email={email}
+		phone={phone}
+		phoneDisplay={phoneDisplay}
+		trustLogos={trustLogos}
+		services={services}
+		localePrefix={localePrefix}
+		locale={locale}
+	/>
 
 	<!-- ═══ SCRIPTS ═══ -->
 	<script>
@@ -359,241 +229,3 @@ const resolvedOgType = ogType || "website";
 	</script>
 </body>
 </html>
-
-<style is:global>
-	/* ═══════════════════════════════════════════
-	   HEADER — mobile-first
-	   ═══════════════════════════════════════════ */
-	.site-header {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 100;
-		background-color: var(--color-secondary);
-		transition: box-shadow 0.3s;
-	}
-
-	.site-header.is-sticky {
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-	}
-
-	.header-inner {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding-block: 16px;
-	}
-
-	.header-actions {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.logo-img {
-		width: 250px;
-		height: auto;
-	}
-
-	.menu-toggle {
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-		line-height: 0;
-	}
-
-	.menu-icon {
-		width: 48px;
-		height: 48px;
-	}
-
-	@media (min-width: 768px) {
-		.logo-img { width: 350px; }
-		.menu-icon { width: 60px; height: 60px; }
-	}
-
-	/* ═══════════════════════════════════════════
-	   MENU DIALOG — fullscreen slide-in from right
-	   ═══════════════════════════════════════════ */
-	.menu-backdrop {
-		position: fixed;
-		inset: 0;
-		background: rgba(0, 0, 0, 0.3);
-		z-index: 199;
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 0.5s;
-	}
-	.menu-backdrop.is-open {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	.menu-dialog {
-		position: fixed;
-		top: 0;
-		right: 0;
-		width: 100vw;
-		height: 100vh;
-		max-width: 100vw;
-		max-height: 100vh;
-		background: var(--color-secondary);
-		border: none;
-		z-index: 200;
-		transform: translateX(100%);
-		transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		overflow-y: auto;
-		padding: 0;
-		margin: 0;
-	}
-	.menu-dialog::backdrop {
-		background: transparent;
-	}
-	.menu-dialog.is-open {
-		transform: translateX(0);
-	}
-
-	.menu-close {
-		position: fixed;
-		top: 32px;
-		right: 32px;
-		z-index: 201;
-		background: none;
-		border: none;
-		font-size: 32px;
-		cursor: pointer;
-		color: var(--color-primary);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.menu-list {
-		padding: 80px 16px 40px;
-		display: flex;
-		flex-direction: column;
-		gap: 32px;
-	}
-
-	.menu-link {
-		font-family: var(--font-family);
-		font-size: 32px;
-		font-weight: 600;
-		line-height: 40px;
-		color: var(--color-primary);
-		text-decoration: none;
-		display: block;
-		transition: color 0.3s;
-	}
-	.menu-link:hover {
-		color: rgba(30, 30, 30, 0.75);
-	}
-	.menu-list .menu-link--secondary {
-		font-size: 22px;
-		line-height: 30px;
-	}
-
-	@media (min-width: 768px) {
-		.menu-list { padding: 80px 20px 40px; max-width: var(--container-max); margin: 0 auto; }
-		.menu-link { font-size: 48px; line-height: 54px; }
-		.menu-list .menu-link--secondary { font-size: 32px; line-height: 40px; }
-		.menu-close { right: 56px; }
-	}
-
-	/* ═══════════════════════════════════════════
-	   FOOTER — mobile-first
-	   ═══════════════════════════════════════════ */
-	.site-footer {
-		background: var(--color-secondary);
-	}
-
-	/* Trust logos */
-	.footer-trust {
-		text-align: center;
-		padding: 48px 0 0;
-	}
-	.footer-trust__title {
-		margin-bottom: 24px;
-		font-style: italic;
-	}
-	.trust-logos {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 16px;
-		flex-wrap: wrap;
-	}
-	.trust-logo {
-		height: 60px;
-		width: auto;
-		object-fit: contain;
-	}
-	@media (min-width: 768px) {
-		.trust-logos { gap: 40px; }
-		.trust-logo { height: 100px; }
-	}
-
-	/* Footer grid */
-	.footer-main {
-		border-top: 1px solid rgba(30, 30, 30, 0.48);
-		border-bottom: 1px solid rgba(30, 30, 30, 0.48);
-		margin-top: 48px;
-		padding: 40px 0;
-	}
-	.footer-grid {
-		display: flex;
-		flex-direction: column;
-		gap: 32px;
-		align-items: flex-start;
-	}
-	.footer-col h5 {
-		margin-bottom: 16px;
-	}
-	.footer-logo-img {
-		width: 180px;
-		height: auto;
-	}
-	.footer-list {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-	}
-	.footer-list,
-	.footer-list a {
-		font-family: var(--font-family);
-		font-size: 18px;
-		font-weight: 300;
-		line-height: 26px;
-		color: var(--color-primary);
-	}
-	.footer-partner-logo {
-		max-width: 200px;
-		margin-top: 8px;
-	}
-	.footer-cta {
-		margin-top: 32px;
-	}
-
-	@media (min-width: 768px) {
-		.footer-grid {
-			flex-direction: row;
-			gap: 40px;
-		}
-		.footer-col {
-			flex: 1;
-		}
-		.footer-logo-img { width: 250px; }
-	}
-
-	/* Kit Digital banner */
-	.footer-banner {
-		padding: 0;
-		margin: 0;
-	}
-	.footer-banner-img {
-		width: 100%;
-		display: block;
-	}
-</style>

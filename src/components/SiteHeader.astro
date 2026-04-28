@@ -1,0 +1,98 @@
+---
+/**
+ * SiteHeader — sticky white bar with logo, language switcher, hamburger.
+ * Extracted from Base.astro for maintainability.
+ */
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const t = Astro.locals.t;
+---
+
+<header class="site-header" id="site-header" role="banner">
+	<div class="container header-inner">
+		<a href="/" class="header-logo" aria-label={t("go_home")}>
+			<img
+				src="/assets/logo.svg"
+				alt="Server Startup"
+				width="396"
+				height="68"
+				class="logo-img"
+			/>
+		</a>
+		<div class="header-actions">
+			<LanguageSwitcher />
+		<button
+			type="button"
+			class="menu-toggle"
+			id="menu-trigger"
+			aria-expanded="false"
+			aria-controls="menu-dialog"
+			aria-label={t("open_menu")}
+		>
+			<img
+				src="/assets/menu.svg"
+				alt=""
+				width="60"
+				height="60"
+				class="menu-icon"
+				aria-hidden="true"
+			/>
+		</button>
+		</div>
+	</div>
+</header>
+
+<style is:global>
+	/* ═══════════════════════════════════════════
+	   HEADER — mobile-first
+	   ═══════════════════════════════════════════ */
+	.site-header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		background-color: var(--color-secondary);
+		transition: box-shadow 0.3s;
+	}
+
+	.site-header.is-sticky {
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+	}
+
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-block: 16px;
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.logo-img {
+		width: 250px;
+		height: auto;
+	}
+
+	.menu-toggle {
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		line-height: 0;
+	}
+
+	.menu-icon {
+		width: 48px;
+		height: 48px;
+	}
+
+	@media (min-width: 768px) {
+		.logo-img { width: 350px; }
+		.menu-icon { width: 60px; height: 60px; }
+	}
+</style>
