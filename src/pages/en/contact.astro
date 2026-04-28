@@ -1,32 +1,27 @@
 ---
 /**
- * Contacto page — layout in template, content + contact data from CMS.
- * - Hero with h1 "Contacto"
- * - Content from CMS (intro text + bullet list)
- * - 3 contact methods (WhatsApp, Teléfono, Email) — data from site settings
+ * Contact page (EN) — mirrors contacto.astro but queries locale="en".
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
-import Base from "../layouts/Base.astro";
-import type { SiteSettings } from "../types";
+import Base from "../../layouts/Base.astro";
+import type { SiteSettings } from "../../types";
 
-const locale = Astro.currentLocale || "es";
+const locale = "en";
 const { entry, cacheHint } = await getEmDashEntry("pages", "contacto", { locale });
-if (!entry) return Astro.redirect("/404");
+if (!entry) return Astro.redirect("/en/");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
 const settings = await getSiteSettings() as SiteSettings;
 
-// Contact info from site settings (fallback to hardcoded for safety)
 const phone = settings.phone || "+34666666666";
 const phoneDisplay = settings.phoneDisplay || "666 66 66 66";
 const email = settings.email || "info@serverstartup.com";
 const whatsapp = settings.whatsapp || `https://wa.me/${phone.replace('+', '')}`;
 
-// Contact method labels from site settings
 const whatsappLabel = settings.contactWhatsappLabel || "WhatsApp";
-const phoneLabel = settings.contactPhoneLabel || "Teléfono";
+const phoneLabel = settings.contactPhoneLabel || "Phone";
 const emailLabel = settings.contactEmailLabel || "Email";
 ---
 
@@ -34,21 +29,6 @@ const emailLabel = settings.contactEmailLabel || "Email";
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 >
-	<script type="application/ld+json" set:html={JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "LocalBusiness",
-		"name": "Server Startup",
-		"description": excerpt || `${title} — Server Startup`,
-		"url": Astro.site ? Astro.site.href : "https://www.serverstartup.io",
-		"telephone": phone,
-		"email": email,
-		"contactPoint": [{
-			"@type": "ContactPoint",
-			"telephone": phone,
-			"contactType": "customer service",
-			"availableLanguage": ["Spanish", "English"]
-		}]
-	})} />
 	<section class="s-contact" aria-label={title}>
 		<div class="container s-contact__inner">
 			<h1>{title}</h1>
@@ -59,7 +39,7 @@ const emailLabel = settings.contactEmailLabel || "Email";
 			)}
 
 			<div class="s-contact__methods" role="list">
-				<a href={whatsapp} target="_blank" rel="noopener" class="s-contact__method" role="listitem" aria-label={`${whatsappLabel}`}>
+				<a href={whatsapp} target="_blank" rel="noopener" class="s-contact__method" role="listitem" aria-label={whatsappLabel}>
 					<span class="s-contact__method-label">{whatsappLabel}</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -67,7 +47,7 @@ const emailLabel = settings.contactEmailLabel || "Email";
 					<span class="s-contact__method-value">{phoneDisplay}</span>
 				</a>
 
-				<a href={`tel:${phone}`} class="s-contact__method" role="listitem" aria-label={`${phoneLabel}`}>
+				<a href={`tel:${phone}`} class="s-contact__method" role="listitem" aria-label={phoneLabel}>
 					<span class="s-contact__method-label">{phoneLabel}</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -75,7 +55,7 @@ const emailLabel = settings.contactEmailLabel || "Email";
 					<span class="s-contact__method-value">{phoneDisplay}</span>
 				</a>
 
-				<a href={`mailto:${email}`} class="s-contact__method" role="listitem" aria-label={`${emailLabel}`}>
+				<a href={`mailto:${email}`} class="s-contact__method" role="listitem" aria-label={emailLabel}>
 					<span class="s-contact__method-label">{emailLabel}</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -88,5 +68,5 @@ const emailLabel = settings.contactEmailLabel || "Email";
 </Base>
 
 <style>
-	@import "../styles/contact.css";
+	@import "../../styles/contact.css";
 </style>

@@ -1,19 +1,16 @@
 ---
 /**
- * Quiénes Somos — hero text from CMS, team members from CMS collection.
- * 1. Hero — h1 + body from pages/quienes-somos content
- * 2. "~ El equipo" — dark bg, 4-col grid of team member cards from members collection
- * 3. Values — text from CMS content (h2 + paragraph at end of page content)
+ * About Us (EN) — mirrors quienes-somos.astro with locale="en".
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
-import Base from "../layouts/Base.astro";
-import { getUiLabels } from "../utils/ui-labels";
+import Base from "../../layouts/Base.astro";
+import { getUiLabels } from "../../utils/ui-labels";
 const t = Astro.locals.t;
 
-const locale = Astro.currentLocale || "es";
+const locale = "en";
 const { entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos", { locale });
-if (!entry) return Astro.redirect("/404");
+if (!entry) return Astro.redirect("/en/");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
@@ -24,16 +21,16 @@ const { entries: members } = await getEmDashCollection("members", {
 });
 
 const labels = await getUiLabels(locale);
-const teamHeading = labels.get("footer_headings", "team_title", locale === "en" ? "~ The team" : "~ El equipo");
+const teamHeading = labels.get("footer_headings", "team_title", "~ The team");
 
-// Split content: first blocks are hero, blocks after "~ Nuestros valores" h2 are the values section
+// Split content: first blocks are hero, blocks after h2 are the values section
 const heroBlocks: any[] = [];
 const valuesBlocks: any[] = [];
 let inValues = false;
 for (const block of content || []) {
 	if (block._type === 'block' && block.style === 'h2') {
 		inValues = true;
-		continue; // skip the h2 itself, we render it in the template
+		continue;
 	}
 	if (inValues) {
 		valuesBlocks.push(block);
@@ -91,5 +88,5 @@ for (const block of content || []) {
 </Base>
 
 <style>
-	@import "../styles/about.css";
+	@import "../../styles/about.css";
 </style>
