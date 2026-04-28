@@ -918,6 +918,18 @@
 							"style": "normal",
 							"_key": "no_posts_tag",
 							"children": [{ "_type": "span", "text": "No hay posts con esta etiqueta." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "post_singular",
+							"children": [{ "_type": "span", "text": "publicación" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "post_plural",
+							"children": [{ "_type": "span", "text": "publicaciones" }]
 						}
 					],
 					"type": "content"
@@ -1392,6 +1404,18 @@
 							"style": "normal",
 							"_key": "no_posts_tag",
 							"children": [{ "_type": "span", "text": "No posts with this tag yet." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "post_singular",
+							"children": [{ "_type": "span", "text": "post" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "post_plural",
+							"children": [{ "_type": "span", "text": "posts" }]
 						}
 					],
 					"type": "content"
