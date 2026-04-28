@@ -2,6 +2,7 @@
 import { getEmDashCollection, getEntryTerms } from "emdash";
 import Base from "../../layouts/Base.astro";
 import { getReadingTime } from "../../utils/reading-time";
+const t = Astro.locals.t;
 
 const { entries: posts, cacheHint } = await getEmDashCollection("posts");
 
@@ -31,20 +32,20 @@ const formatDate = (date: Date) =>
 	});
 ---
 
-<Base title="Artículos" description="Blog de Server Startup. Artículos sobre arquitectura backend, cloud y tecnología.">
+<Base title={t("articles_title")} description={t("articles_description")}>
 	<div class="posts-page">
 		<div class="container">
 			<header class="page-header">
-				<h1>Artículos</h1>
+				<h1>{t("articles_title")}</h1>
 				<p class="text-body page-count">
 					{posts.length}
-					{posts.length === 1 ? "artículo" : "artículos"}
+					{posts.length === 1 ? t("article_singular") : t("article_plural")}
 				</p>
 			</header>
 
 			{
 				sortedPosts.length === 0 ? (
-					<p class="text-body empty">Aún no hay artículos publicados.</p>
+					<p class="text-body empty">{t("no_articles")}</p>
 				) : (
 					<div class="posts-list">
 						{postsWithTags.map(({ post, tags, bylines }) => (
@@ -82,7 +83,7 @@ const formatDate = (date: Date) =>
 											<time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
 										)}
 										{post.data.publishedAt && <span class="meta-dot" />}
-										<span>{getReadingTime(post.data.content)} {(Astro.currentLocale || "es") === "en" ? "min read" : "min de lectura"}</span>
+										<span>{getReadingTime(post.data.content)} {t("min_read")}</span>
 									</div>
 									<h2 class="post-title">{post.data.title}</h2>
 									{post.data.excerpt && (
@@ -91,9 +92,9 @@ const formatDate = (date: Date) =>
 								</a>
 								{tags.length > 0 && (
 									<div class="post-tags">
-										{tags.slice(0, 3).map((t) => (
-											<a href={`/tag/${t.slug}`} class="post-tag">
-												{t.label}
+										{tags.slice(0, 3).map((tag) => (
+											<a href={`/tag/${tag.slug}`} class="post-tag">
+												{tag.label}
 											</a>
 										))}
 									</div>

@@ -816,6 +816,108 @@
 									"text": "Tabla de contenidos"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "author",
+							"children": [{ "_type": "span", "text": "Autor" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "authors",
+							"children": [{ "_type": "span", "text": "Autores" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "published",
+							"children": [{ "_type": "span", "text": "Publicado" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "reading_time",
+							"children": [{ "_type": "span", "text": "Tiempo de lectura" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tags",
+							"children": [{ "_type": "span", "text": "Etiquetas" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "min_read",
+							"children": [{ "_type": "span", "text": "min de lectura" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "on_this_page",
+							"children": [{ "_type": "span", "text": "En esta página" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "continue_reading",
+							"children": [{ "_type": "span", "text": "Continúa leyendo" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "articles_title",
+							"children": [{ "_type": "span", "text": "Artículos" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "articles_description",
+							"children": [{ "_type": "span", "text": "Blog de Server Startup. Artículos sobre arquitectura backend, cloud y tecnología." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "article_singular",
+							"children": [{ "_type": "span", "text": "artículo" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "article_plural",
+							"children": [{ "_type": "span", "text": "artículos" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "no_articles",
+							"children": [{ "_type": "span", "text": "Aún no hay artículos publicados." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tag_label",
+							"children": [{ "_type": "span", "text": "Etiqueta" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "posts_tagged",
+							"children": [{ "_type": "span", "text": "Posts con la etiqueta" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "all_posts_tagged",
+							"children": [{ "_type": "span", "text": "Todos los posts etiquetados con" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "no_posts_tag",
+							"children": [{ "_type": "span", "text": "No hay posts con esta etiqueta." }]
 						}
 					],
 					"type": "content"
@@ -1188,6 +1290,108 @@
 									"text": "Table of contents"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "author",
+							"children": [{ "_type": "span", "text": "Author" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "authors",
+							"children": [{ "_type": "span", "text": "Authors" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "published",
+							"children": [{ "_type": "span", "text": "Published" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "reading_time",
+							"children": [{ "_type": "span", "text": "Reading time" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tags",
+							"children": [{ "_type": "span", "text": "Tags" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "min_read",
+							"children": [{ "_type": "span", "text": "min read" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "on_this_page",
+							"children": [{ "_type": "span", "text": "On this page" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "continue_reading",
+							"children": [{ "_type": "span", "text": "Continue reading" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "articles_title",
+							"children": [{ "_type": "span", "text": "Articles" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "articles_description",
+							"children": [{ "_type": "span", "text": "Server Startup Blog. Articles on backend architecture, cloud, and technology." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "article_singular",
+							"children": [{ "_type": "span", "text": "article" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "article_plural",
+							"children": [{ "_type": "span", "text": "articles" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "no_articles",
+							"children": [{ "_type": "span", "text": "No articles published yet." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tag_label",
+							"children": [{ "_type": "span", "text": "Tag" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "posts_tagged",
+							"children": [{ "_type": "span", "text": "Posts tagged" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "all_posts_tagged",
+							"children": [{ "_type": "span", "text": "All posts tagged with" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "no_posts_tag",
+							"children": [{ "_type": "span", "text": "No posts with this tag yet." }]
 						}
 					],
 					"type": "content"

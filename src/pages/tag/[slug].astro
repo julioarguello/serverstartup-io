@@ -5,6 +5,7 @@ import PostCard from "../../components/PostCard.astro";
 import { getReadingTime } from "../../utils/reading-time";
 
 const locale = Astro.currentLocale || "es";
+const t = Astro.locals.t;
 
 const slug = decodeSlug(Astro.params.slug);
 const term = slug ? await getTerm("tag", slug) : null;
@@ -29,12 +30,12 @@ const filteredPosts = await Promise.all(
 ---
 
 <Base
-	title={`Posts tagged "${term.label}"`}
-	description={`All posts tagged with ${term.label}`}
+	title={`${t("posts_tagged")} "${term.label}"`}
+	description={`${t("all_posts_tagged")} ${term.label}`}
 >
 	<section class="archive-section">
 		<header class="archive-header">
-			<span class="archive-label">{locale === "en" ? "Tag" : "Etiqueta"}</span>
+			<span class="archive-label">{t("tag_label")}</span>
 			<h1 class="archive-title">{term.label}</h1>
 			<p class="archive-count">
 				{filteredPosts.length}
@@ -44,7 +45,7 @@ const filteredPosts = await Promise.all(
 
 		{
 			filteredPosts.length === 0 ? (
-				<p class="no-posts">{locale === "en" ? "No posts with this tag yet." : "No hay posts con esta etiqueta."}</p>
+				<p class="no-posts">{t("no_posts_tag")}</p>
 			) : (
 				<div class="posts-grid">
 					{filteredPosts.map(({ post, tags }) => (
