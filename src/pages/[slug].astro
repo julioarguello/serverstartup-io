@@ -32,6 +32,9 @@ const accentColor = entry.data.color || "#BFEDEE";
 
 // CTA label from CMS (fallback to site settings default)
 const ctaLabel = entry.data.cta_label || defaultCtaLabel;
+
+// Locale-aware URL prefix ("" for ES default, "/en" for English)
+const localePrefix = locale === "es" ? "" : `/${locale}`;
 ---
 
 <Base
@@ -47,7 +50,7 @@ const ctaLabel = entry.data.cta_label || defaultCtaLabel;
 					<p class="text-body">{excerpt}</p>
 				</div>
 			)}
-			<a href="/contacto" class="btn btn-dark">{ctaLabel}</a>
+			<a href={`${localePrefix}/contacto`} class="btn btn-dark">{ctaLabel}</a>
 		</div>
 	</section>
 
