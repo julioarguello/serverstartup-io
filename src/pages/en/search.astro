@@ -1,39 +1,39 @@
 ---
+/**
+ * EN Search page — thin re-export of the root search page.
+ * Astro routing will set currentLocale = "en" for this path,
+ * and the shared logic (getUiLabels, form action) already handles i18n.
+ */
 export const prerender = false;
 
 import { getEmDashCollection } from "emdash";
-import Base from "../layouts/Base.astro";
-import PostCard from "../components/PostCard.astro";
-import { getReadingTime, extractText } from "../utils/reading-time";
-import { getUiLabels } from "../utils/ui-labels";
+import Base from "../../layouts/Base.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getReadingTime, extractText } from "../../utils/reading-time";
+import { getUiLabels } from "../../utils/ui-labels";
 
 const query = Astro.url.searchParams.get("q")?.trim() || "";
 
 const [{ entries: allPosts }, labels] = await Promise.all([
 	getEmDashCollection("posts"),
-	getUiLabels(Astro.currentLocale || "es"),
+	getUiLabels("en"),
 ]);
 
-// CMS-driven search labels
-const searchTitle = labels.get("search_page", "search_title", "Buscar");
-const searchLabel = labels.get("search_page", "search_label", "Buscar artículos");
-const searchPlaceholder = labels.get("search_page", "search_placeholder", "Buscar artículos...");
-const searchHint = labels.get("search_page", "search_hint", "Introduce un término para buscar artículos.");
-const searchNoResults = labels.get("search_page", "search_no_results", "Sin resultados para");
-const searchResults = labels.get("search_page", "search_results", "resultado(s) para");
-const searchDescription = labels.get("search_page", "search_description", "Busca en el blog de Server Startup");
+const searchTitle = labels.get("search_page", "search_title", "Search");
+const searchLabel = labels.get("search_page", "search_label", "Search articles");
+const searchPlaceholder = labels.get("search_page", "search_placeholder", "Search articles...");
+const searchHint = labels.get("search_page", "search_hint", "Enter a term to search articles.");
+const searchNoResults = labels.get("search_page", "search_no_results", "No results for");
+const searchResults = labels.get("search_page", "search_results", "result(s) for");
+const searchDescription = labels.get("search_page", "search_description", "Search Server Startup blog");
 
-// Simple search: match query against title, excerpt, and content
 function matchesQuery(post: (typeof allPosts)[0], q: string): boolean {
 	if (!q) return false;
 	const lower = q.toLowerCase();
 	const title = (post.data.title || "").toLowerCase();
 	const excerpt = (post.data.excerpt || "").toLowerCase();
-	// Extract plain text from portable text blocks (avoids matching on _type, _key, etc.)
 	const content = extractText(post.data.content).toLowerCase();
-	return (
-		title.includes(lower) || excerpt.includes(lower) || content.includes(lower)
-	);
+	return title.includes(lower) || excerpt.includes(lower) || content.includes(lower);
 }
 
 const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
@@ -47,7 +47,7 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 		<div class="container search-inner">
 			<h1>{searchTitle}</h1>
 
-			<form method="get" action={`${(Astro.currentLocale || "es") === "es" ? "" : `/${Astro.currentLocale}`}/search`} class="search-form" role="search">
+			<form method="get" action="/en/search" class="search-form" role="search">
 				<label for="search-input" class="sr-only">{searchLabel}</label>
 				<input
 					type="search"
@@ -90,5 +90,5 @@ const results = query ? allPosts.filter((p) => matchesQuery(p, query)) : [];
 </Base>
 
 <style>
-	@import "../styles/search.css";
+	@import "../../styles/search.css";
 </style>
