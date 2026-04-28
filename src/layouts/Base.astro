@@ -106,7 +106,7 @@ const localePrefix = locale === "es" ? "" : `/${locale}`;
 const trustLogos = (partnerEntries ?? [])
 	.filter((p) => p.data.featured === true || p.data.featured === 1)
 	.map((p) => ({
-		src: p.data.featured_image?.src || "/assets/logo-cloudflare.svg",
+		src: p.data.featured_image?.src || "",
 		alt: p.data.featured_image?.alt || p.data.title || "Partner",
 	}));
 
@@ -268,12 +268,23 @@ const resolvedOgType = ogType || "website";
 				<!-- Col 3: Partner -->
 				<div class="footer-col">
 					<h5>{partnersTitle}</h5>
-					<img
-						src="/assets/logo-cloudflare.svg"
-						alt="Cloudflare Partner"
-						class="footer-partner-logo"
-						loading="lazy"
-					/>
+					{trustLogos.length > 0 ? (
+						trustLogos.map((logo) => (
+							<img
+								src={logo.src}
+								alt={logo.alt}
+								class="footer-partner-logo"
+								loading="lazy"
+							/>
+						))
+					) : (
+						<img
+							src="/assets/logo-cloudflare.svg"
+							alt="Cloudflare Partner"
+							class="footer-partner-logo"
+							loading="lazy"
+						/>
+					)}
 				</div>
 
 				<!-- Col 4: Contact -->
