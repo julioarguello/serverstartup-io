@@ -106,7 +106,7 @@ const localePrefix = locale === "es" ? "" : `/${locale}`;
 
 // Trust logos from partners collection (featured = true)
 const trustLogos = (partnerEntries ?? [])
-	.filter((p) => p.data.featured === true || p.data.featured === 1)
+	.filter((p) => Boolean(p.data.featured))
 	.map((p) => ({
 		src: p.data.featured_image?.src || "",
 		alt: p.data.featured_image?.alt || p.data.title || "Partner",

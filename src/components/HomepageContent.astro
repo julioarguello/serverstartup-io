@@ -46,7 +46,7 @@ type Section = { heading: string; blocks: any[] };
 const sections: Section[] = [];
 let currentSection: Section = { heading: "", blocks: [] };
 
-for (const block of content || []) {
+for (const block of (content as any[]) || []) {
 	if (block._type === "block" && block.style === "h2") {
 		if (currentSection.heading || currentSection.blocks.length > 0) {
 			sections.push(currentSection);
