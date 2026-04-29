@@ -930,6 +930,30 @@
 							"style": "normal",
 							"_key": "post_plural",
 							"children": [{ "_type": "span", "text": "publicaciones" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "category_label",
+							"children": [{ "_type": "span", "text": "Categoría" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "no_posts_category",
+							"children": [{ "_type": "span", "text": "No hay posts en esta categoría." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "posts_in",
+							"children": [{ "_type": "span", "text": "Posts de" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "all_posts_in",
+							"children": [{ "_type": "span", "text": "Todos los posts en" }]
 						}
 					],
 					"type": "content"
@@ -1416,6 +1440,30 @@
 							"style": "normal",
 							"_key": "post_plural",
 							"children": [{ "_type": "span", "text": "posts" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "category_label",
+							"children": [{ "_type": "span", "text": "Category" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "no_posts_category",
+							"children": [{ "_type": "span", "text": "No posts in this category yet." }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "posts_in",
+							"children": [{ "_type": "span", "text": "Posts in" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "all_posts_in",
+							"children": [{ "_type": "span", "text": "All posts in" }]
 						}
 					],
 					"type": "content"
