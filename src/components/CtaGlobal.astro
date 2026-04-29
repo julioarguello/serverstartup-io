@@ -28,7 +28,7 @@ const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contacta 
 const heading = ctaWidget?.title || "¿Listo para optimizar tu infraestructura digital?";
 
 // Extract body paragraphs and button from PT content
-const blocks = ctaWidget?.content || [];
+const blocks: any[] = ctaWidget?.content || [];
 
 // Separate text blocks from the button block (last block with a link markDef)
 const lastBlock = blocks[blocks.length - 1];

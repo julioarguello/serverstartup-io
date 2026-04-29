@@ -7,7 +7,7 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import CtaGlobal from "../../components/CtaGlobal.astro";
-import type { EntryResult, CacheHint } from "emdash";
+import type { CacheHint } from "emdash";
 import type { SiteSettings } from "../../types";
 const t = Astro.locals.t;
 
@@ -15,7 +15,7 @@ const { slug } = Astro.params;
 const locale = "en";
 
 // Try services first, then pages
-let entry: EntryResult<Record<string, unknown>>["entry"] = null;
+let entry: any = null;
 let cacheHint: CacheHint | null = null;
 
 const svcResult = await getEmDashEntry("services", slug!, { locale });
@@ -36,9 +36,9 @@ if (cacheHint) Astro.cache.set(cacheHint);
 const settings = await getSiteSettings();
 const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contact us";
 
-const { title, content, excerpt } = entry.data;
-const accentColor = entry.data.color || "#BFEDEE";
-const ctaLabel = entry.data.cta_label || defaultCtaLabel;
+const { title, content, excerpt } = entry.data as { title: string; content: any; excerpt: string; cta_label?: string; color?: string };
+const accentColor = (entry.data as any).color || "#BFEDEE";
+const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
 ---
 
 <Base
