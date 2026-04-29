@@ -38,12 +38,7 @@ if (currentLocale === "es") {
 	altPath = currentPath.replace(/^\/en/, "") || "/";
 }
 
-// Safety: certain ES-only routes have no EN equivalent — fallback to /en/
-// This covers special routes like /posts/*, /search, /category/*, /tag/*
-const esOnlyPrefixes = ["/posts", "/search", "/category", "/tag", "/rss.xml"];
-if (currentLocale === "es" && esOnlyPrefixes.some(p => currentPath.startsWith(p))) {
-	altPath = "/en/";
-}
+// All routes now have EN equivalents — no ES-only fallback needed
 ---
 
 <a

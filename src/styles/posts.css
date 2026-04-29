@@ -1,0 +1,138 @@
+.posts-page {
+	padding: calc(80px + 40px) 0 80px;
+}
+
+.page-header {
+	margin-bottom: 48px;
+}
+
+.page-count {
+	color: rgba(30, 30, 30, 0.5);
+}
+
+.empty {
+	color: rgba(30, 30, 30, 0.5);
+}
+
+.posts-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.post-item {
+	padding: 32px 0;
+	border-bottom: 1px solid rgba(30, 30, 30, 0.1);
+}
+
+.post-item:first-child {
+	padding-top: 0;
+}
+
+.post-item:last-child {
+	border-bottom: none;
+}
+
+.post-link {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
+.post-meta {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: 14px;
+	color: rgba(30, 30, 30, 0.5);
+	margin-bottom: 8px;
+}
+
+.meta-dot {
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: rgba(30, 30, 30, 0.5);
+}
+
+/* Post bylines */
+.post-bylines {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+
+.post-byline {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.post-byline-avatar {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.post-byline-name {
+	font-weight: 500;
+	color: rgba(30, 30, 30, 0.7);
+}
+
+.byline-sep {
+	color: rgba(30, 30, 30, 0.5);
+	margin-right: 2px;
+}
+
+.byline-more {
+	font-size: 12px;
+	color: rgba(30, 30, 30, 0.5);
+	margin-left: 2px;
+}
+
+.post-title {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 30px;
+	letter-spacing: -0.01em;
+	margin-bottom: 8px;
+	transition: color 0.2s;
+}
+
+.post-link:hover .post-title {
+	color: rgba(30, 30, 30, 0.7);
+}
+
+.post-excerpt {
+	font-size: 18px;
+	line-height: 24px;
+	color: rgba(30, 30, 30, 0.7);
+}
+
+.post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.post-tag {
+	display: inline-block;
+	padding: 4px 12px;
+	font-size: 14px;
+	color: rgba(30, 30, 30, 0.7);
+	background: #f5f5f5;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: color 0.2s, background 0.2s;
+}
+
+.post-tag:hover {
+	color: var(--color-text);
+	background: #e8e8e8;
+}
+
+@media (min-width: 768px) {
+	.posts-page { padding: 160px 0 80px; }
+	.post-title { font-size: 28px; line-height: 34px; }
+}

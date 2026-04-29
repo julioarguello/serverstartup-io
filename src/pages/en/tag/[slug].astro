@@ -1,0 +1,75 @@
+---
+/**
+ * English tag archive — /en/tag/[slug]
+ * Mirrors tag/[slug].astro with locale-aware links.
+ */
+import { getTerm, getEmDashCollection, getEntryTerms, decodeSlug } from "emdash";
+import Base from "../../../layouts/Base.astro";
+import PostCard from "../../../components/PostCard.astro";
+import { getReadingTime } from "../../../utils/reading-time";
+
+const locale = "en";
+const t = Astro.locals.t;
+
+const slug = decodeSlug(Astro.params.slug);
+const term = slug ? await getTerm("tag", slug) : null;
+
+if (!term) {
+	return Astro.redirect("/404");
+}
+
+const { entries: posts, cacheHint } = await getEmDashCollection("posts", {
+	where: { tag: term.slug },
+	orderBy: { published_at: "desc" },
+});
+Astro.cache.set(cacheHint);
+
+// Fetch tags for display on each post card
+const filteredPosts = await Promise.all(
+	posts.map(async (post) => {
+		const tags = await getEntryTerms("posts", post.data.id, "tag");
+		return { post, tags };
+	})
+);
+---
+
+<Base
+	title={`${t("posts_tagged")} "${term.label}"`}
+	description={`${t("all_posts_tagged")} ${term.label}`}
+>
+	<section class="archive-section">
+		<header class="archive-header">
+			<span class="archive-label">{t("tag_label")}</span>
+			<h1 class="archive-title">{term.label}</h1>
+			<p class="archive-count">
+				{filteredPosts.length}
+				{filteredPosts.length === 1 ? t("post_singular") : t("post_plural")}
+			</p>
+		</header>
+
+		{
+			filteredPosts.length === 0 ? (
+				<p class="no-posts">{t("no_posts_tag")}</p>
+			) : (
+				<div class="posts-grid">
+					{filteredPosts.map(({ post, tags }) => (
+						<PostCard
+							title={post.data.title}
+							excerpt={post.data.excerpt}
+							featuredImage={post.data.featured_image}
+							href={`/en/posts/${post.id}`}
+							date={post.data.publishedAt ?? undefined}
+							readingTime={getReadingTime(post.data.content)}
+							tags={tags.map((t) => ({ slug: t.slug, label: t.label }))}
+							locale={locale}
+						/>
+					))}
+				</div>
+			)
+		}
+	</section>
+</Base>
+
+<style>
+	@import "../../../styles/archive.css";
+</style>

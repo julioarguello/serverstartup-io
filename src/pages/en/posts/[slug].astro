@@ -1,4 +1,8 @@
 ---
+/**
+ * English post detail — /en/posts/[slug]
+ * Mirrors posts/[slug].astro with locale-aware links.
+ */
 import {
 	getEmDashEntry,
 	getEmDashCollection,
@@ -14,10 +18,10 @@ import {
 	CommentForm,
 	WidgetArea,
 } from "emdash/ui";
-import Base from "../../layouts/Base.astro";
-import PostCard from "../../components/PostCard.astro";
-import { getReadingTime } from "../../utils/reading-time";
-import { resolveBlogSiteIdentity } from "../../utils/site-identity";
+import Base from "../../../layouts/Base.astro";
+import PostCard from "../../../components/PostCard.astro";
+import { getReadingTime } from "../../../utils/reading-time";
+import { resolveBlogSiteIdentity } from "../../../utils/site-identity";
 const t = Astro.locals.t;
 
 const slug = decodeSlug(Astro.params.slug);
@@ -62,7 +66,7 @@ const { siteTitle } = resolveBlogSiteIdentity(await getSiteSettings());
 const seo = getSeoMeta(post, {
 	siteTitle,
 	siteUrl: Astro.url.origin,
-	path: `/posts/${slug}`,
+	path: `/en/posts/${slug}`,
 	defaultOgImage: featuredImageUrl,
 });
 
@@ -93,9 +97,8 @@ const otherPostsWithTags = await Promise.all(
 	})
 );
 
-const dateLocale = Astro.currentLocale === "en" ? "en-US" : "es-ES";
 const publishDate =
-	post.data.publishedAt?.toLocaleDateString(dateLocale, {
+	post.data.publishedAt?.toLocaleDateString("en-US", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
@@ -178,7 +181,7 @@ const publishDateIso = post.data.publishedAt?.toISOString() ?? null;
 								<span class="meta-label">{t("tags")}</span>
 								<div class="meta-tags">
 									{tags.map((tag) => (
-										<a href={`/tag/${tag.slug}`} class="meta-tag">
+										<a href={`/en/tag/${tag.slug}`} class="meta-tag">
 											{tag.label}
 										</a>
 									))}
@@ -265,7 +268,7 @@ const publishDateIso = post.data.publishedAt?.toISOString() ?? null;
 									title={p.data.title}
 									excerpt={p.data.excerpt}
 									featuredImage={p.data.featured_image}
-									href={`/posts/${p.id}`}
+									href={`/en/posts/${p.id}`}
 									date={p.data.publishedAt ?? undefined}
 									readingTime={getReadingTime(p.data.content)}
 									tags={postTags.map((t) => ({ slug: t.slug, label: t.label }))}
@@ -345,5 +348,5 @@ const publishDateIso = post.data.publishedAt?.toISOString() ?? null;
 </Base>
 
 <style>
-	@import "../../styles/post-detail.css";
+	@import "../../../styles/post-detail.css";
 </style>
