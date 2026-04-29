@@ -1,7 +1,11 @@
 ---
+/**
+ * English blog listing — /en/posts/
+ * Mirrors posts/index.astro with locale-aware links.
+ */
 import { getEmDashCollection, getEntryTerms } from "emdash";
-import Base from "../../layouts/Base.astro";
-import { getReadingTime } from "../../utils/reading-time";
+import Base from "../../../layouts/Base.astro";
+import { getReadingTime } from "../../../utils/reading-time";
 const t = Astro.locals.t;
 
 const { entries: posts, cacheHint } = await getEmDashCollection("posts");
@@ -23,9 +27,8 @@ const postsWithTags = await Promise.all(
 	})
 );
 
-const dateLocale = (Astro.currentLocale || "es") === "en" ? "en-US" : "es-ES";
 const formatDate = (date: Date) =>
-	date.toLocaleDateString(dateLocale, {
+	date.toLocaleDateString("en-US", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
@@ -50,7 +53,7 @@ const formatDate = (date: Date) =>
 					<div class="posts-list">
 						{postsWithTags.map(({ post, tags, bylines }) => (
 							<article class="post-item">
-								<a href={`/posts/${post.id}`} class="post-link">
+								<a href={`/en/posts/${post.id}`} class="post-link">
 									<div class="post-meta">
 										{bylines.length > 0 && (
 											<>
@@ -93,7 +96,7 @@ const formatDate = (date: Date) =>
 								{tags.length > 0 && (
 									<div class="post-tags">
 										{tags.slice(0, 3).map((tag) => (
-											<a href={`/tag/${tag.slug}`} class="post-tag">
+											<a href={`/en/tag/${tag.slug}`} class="post-tag">
 												{tag.label}
 											</a>
 										))}
@@ -109,5 +112,5 @@ const formatDate = (date: Date) =>
 </Base>
 
 <style>
-	@import "../../styles/posts.css";
+	@import "../../../styles/posts.css";
 </style>

@@ -1,0 +1,64 @@
+---
+/**
+ * English privacy policy — /en/privacy-policy
+ * Mirrors politica-de-privacidad.astro with EN locale.
+ * noindex, nofollow.
+ */
+import { getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+// Try EN slug first, fall back to ES slug with locale override
+const { entry, cacheHint } = await getEmDashEntry("pages", "privacy-policy", { locale: "en" });
+const fallback = entry ? null : await getEmDashEntry("pages", "politica-de-privacidad", { locale: "en" });
+const page = entry || fallback?.entry;
+
+if (!page) return Astro.redirect("/404");
+if (cacheHint) Astro.cache.set(cacheHint);
+if (fallback?.cacheHint) Astro.cache.set(fallback.cacheHint);
+
+const { title, content, excerpt } = page.data;
+---
+
+<Base
+	title={title}
+	description={excerpt || `${title} — Server Startup`}
+	robots="noindex, nofollow"
+>
+	<section class="legal" aria-label={title}>
+		<div class="container legal-inner">
+			<h1>{title}</h1>
+			{content && <PortableText value={content} />}
+		</div>
+	</section>
+</Base>
+
+<style>
+	.legal {
+		padding: calc(80px + 40px) 0 80px;
+	}
+
+	.legal-inner {
+		max-width: 700px;
+	}
+
+	.legal h1 {
+		margin-bottom: 24px;
+	}
+
+	.legal :global(h2) {
+		font-size: 22px;
+		margin-top: 32px;
+		margin-bottom: 8px;
+	}
+
+	.legal :global(p) {
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 26px;
+	}
+
+	@media (min-width: 768px) {
+		.legal { padding: 160px 0 80px; }
+	}
+</style>
