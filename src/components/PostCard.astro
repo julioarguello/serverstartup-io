@@ -101,7 +101,7 @@ const dateIso = date?.toISOString() ?? null;
 		tags && tags.length > 0 && (
 			<div class="card-tags">
 				{tags.slice(0, 2).map((tag) => (
-					<a href={`/tag/${tag.slug}`} class="card-tag">
+					<a href={`${locale === "en" ? "/en" : ""}/tag/${tag.slug}`} class="card-tag">
 						{tag.label}
 					</a>
 				))}

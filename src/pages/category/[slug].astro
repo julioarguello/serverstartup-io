@@ -5,6 +5,7 @@ import PostCard from "../../components/PostCard.astro";
 import { getReadingTime } from "../../utils/reading-time";
 
 const locale = Astro.currentLocale || "es";
+const t = Astro.locals.t;
 
 const slug = decodeSlug(Astro.params.slug);
 const term = slug ? await getTerm("category", slug) : null;
@@ -28,20 +29,20 @@ const filteredPosts = await Promise.all(
 );
 ---
 
-<Base title={`${locale === "en" ? `${term.label} posts` : `Posts de ${term.label}`}`} description={`${locale === "en" ? `All posts in ${term.label}` : `Todos los posts en ${term.label}`}`}>
+<Base title={`${t("posts_in")} ${term.label}`} description={`${t("all_posts_in")} ${term.label}`}>
 	<section class="archive-section">
 		<header class="archive-header">
-			<span class="archive-label">{locale === "en" ? "Category" : "Categoría"}</span>
+			<span class="archive-label">{t("category_label")}</span>
 			<h1 class="archive-title">{term.label}</h1>
 			<p class="archive-count">
 				{filteredPosts.length}
-				{filteredPosts.length === 1 ? "post" : "posts"}
+				{filteredPosts.length === 1 ? t("post_singular") : t("post_plural")}
 			</p>
 		</header>
 
 		{
 			filteredPosts.length === 0 ? (
-				<p class="no-posts">{locale === "en" ? "No posts in this category yet." : "No hay posts en esta categoría."}</p>
+				<p class="no-posts">{t("no_posts_category")}</p>
 			) : (
 				<div class="posts-grid">
 					{filteredPosts.map(({ post, tags }) => (
