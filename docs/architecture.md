@@ -132,22 +132,44 @@ All routes exist in both ES and EN:
 
 ## 5. SEO
 
+### 5.1 Meta Tags
+
 - **Canonical URLs** on all pages via `Base.astro`
 - **Open Graph + Twitter Card** meta tags (title, description, image, URL, type)
 - **hreflang** tags with absolute URLs and `x-default`
 - **RSS autodiscovery** `<link>` in `<head>`
-- **JSON-LD structured data** on contact page (`LocalBusiness`)
 - **`@astrojs/sitemap`** with i18n-aware sitemap
 - **`robots.txt`** with sitemap reference
 - **Article meta** — `publishedTime`, `modifiedTime` for blog posts via `getSeoMeta()`
 
-## 6. Caching
+### 5.2 JSON-LD Structured Data
+
+Centralized in `src/utils/jsonld.ts` — typed helper functions that consume CMS data:
+
+| Page type | Schema | Helper function |
+|:----------|:-------|:----------------|
+| Homepage (ES/EN) | `Organization` + `WebSite` | `homepageJsonLd()` |
+| Service detail (ES/EN) | `Service` | `serviceJsonLd()` |
+| About (ES/EN) | `AboutPage` + team members | `aboutJsonLd()` |
+| Contact (ES/EN) | `LocalBusiness` | `contactJsonLd()` |
+| Blog post (ES/EN) | `BlogPosting` | `blogPostJsonLd()` |
+
+All schemas use CMS data — no hardcoded strings. Validate with [Google Rich Results Test](https://search.google.com/test/rich-results).
+
+## 6. Analytics
+
+- **Cloudflare Web Analytics** via **Zaraz** (edge-injected, zero client-side JS)
+- Configured in Cloudflare Dashboard → Zaraz → Third-party tools
+- No code in `Base.astro` — Zaraz auto-injects on all proxied pages
+- Extensible: GA4, Meta Pixel, etc. can be added via dashboard without code changes
+
+## 7. Caching
 
 - Every page that queries CMS content **must** call `Astro.cache.set(cacheHint)`.
 - API routes (RSS) use `Cache-Control: public, max-age=3600` as fallback.
 - Cloudflare CDN provides edge caching. Static assets are served directly.
 
-## 7. Deployment
+## 8. Deployment
 
 - **Platform**: Cloudflare Workers
 - **Build**: `npm run build` → `dist/`
@@ -164,7 +186,7 @@ D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqli
 npx emdash seed seed/seed.json -d "$D1_DB"
 ```
 
-## 8. Security
+## 9. Security
 
 - MCP tokens **must not** be passed via CLI arguments (visible in `ps aux`)
 - Use environment variables or config files for secrets
