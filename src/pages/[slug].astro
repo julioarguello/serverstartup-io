@@ -43,6 +43,7 @@ const localePrefix = locale === "es" ? "" : `/${locale}`;
 	description={excerpt || `${title} — Server Startup`}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd({
+		siteUrl: Astro.site?.origin!,
 		name: title,
 		description: excerpt || `${title} — Server Startup`,
 		slug: slug!,

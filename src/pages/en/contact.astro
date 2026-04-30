@@ -31,6 +31,7 @@ const emailLabel = settings.contactEmailLabel || "Email";
 	description={excerpt || `${title} — Server Startup`}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(contactJsonLd({
+		siteUrl: Astro.site?.origin!,
 		description: excerpt || `${title} — Server Startup`,
 		phone,
 		email,

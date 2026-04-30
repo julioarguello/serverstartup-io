@@ -16,6 +16,7 @@ const { title, excerpt } = entry?.data ?? { title: "Server Startup", excerpt: ""
 const settings = await getSiteSettings() as SiteSettings;
 const description = excerpt || `${title} — Server Startup`;
 const schemas = homepageJsonLd({
+	siteUrl: Astro.site?.origin!,
 	description,
 	locale,
 	phone: settings.phone,
