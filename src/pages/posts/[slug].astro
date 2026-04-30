@@ -117,6 +117,7 @@ const publishDateIso = post.data.publishedAt?.toISOString() ?? null;
 	content={{ collection: "posts", id: post.data.id, slug }}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(blogPostJsonLd({
+		siteUrl: Astro.site?.origin!,
 		title: seo.title || post.data.title,
 		description: seo.description || post.data.excerpt || "",
 		slug,

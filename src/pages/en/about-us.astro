@@ -46,6 +46,7 @@ for (const block of content || []) {
 	description={excerpt || `${title} — Server Startup`}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(aboutJsonLd({
+		siteUrl: Astro.site?.origin!,
 		description: excerpt || `${title} — Server Startup`,
 		locale,
 		members: members.map((m) => ({

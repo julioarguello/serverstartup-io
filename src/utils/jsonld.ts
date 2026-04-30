@@ -3,22 +3,23 @@
  *
  * Each function returns a plain object ready to be serialized with JSON.stringify
  * and injected into a <script type="application/ld+json"> tag.
+ *
+ * `siteUrl` is always passed from the calling page via `Astro.site?.origin`
+ * (configured in astro.config.mjs) — never hardcoded here.
  */
 
-const SITE_URL = "https://www.serverstartup.io";
 const SITE_NAME = "Server Startup";
-const LOGO_URL = `${SITE_URL}/assets/logo-vertical.png`;
 
 // ─── Shared Organization object ────────────────────────────────────
 
-function organizationSchema(phone?: string, email?: string) {
+function organizationSchema(siteUrl: string, phone?: string, email?: string) {
 	return {
 		"@type": "Organization",
 		name: SITE_NAME,
-		url: SITE_URL,
+		url: siteUrl,
 		logo: {
 			"@type": "ImageObject",
-			url: LOGO_URL,
+			url: `${siteUrl}/assets/logo-vertical.png`,
 		},
 		...(phone && { telephone: phone }),
 		...(email && { contactPoint: [{
@@ -34,6 +35,7 @@ function organizationSchema(phone?: string, email?: string) {
 // ─── Homepage: Organization + WebSite ──────────────────────────────
 
 export interface HomepageJsonLdOptions {
+	siteUrl: string;
 	description: string;
 	locale: string;
 	phone?: string;
@@ -45,14 +47,14 @@ export function homepageJsonLd(opts: HomepageJsonLdOptions) {
 	return [
 		{
 			"@context": "https://schema.org",
-			...organizationSchema(opts.phone, opts.email),
+			...organizationSchema(opts.siteUrl, opts.phone, opts.email),
 			description: opts.description,
 		},
 		{
 			"@context": "https://schema.org",
 			"@type": "WebSite",
 			name: SITE_NAME,
-			url: `${SITE_URL}${localePrefix}/`,
+			url: `${opts.siteUrl}${localePrefix}/`,
 			inLanguage: opts.locale === "es" ? "es-ES" : "en-US",
 			publisher: {
 				"@type": "Organization",
@@ -65,6 +67,7 @@ export function homepageJsonLd(opts: HomepageJsonLdOptions) {
 // ─── Service detail page ───────────────────────────────────────────
 
 export interface ServiceJsonLdOptions {
+	siteUrl: string;
 	name: string;
 	description: string;
 	slug: string;
@@ -78,15 +81,15 @@ export function serviceJsonLd(opts: ServiceJsonLdOptions) {
 		"@type": "Service",
 		name: opts.name,
 		description: opts.description,
-		url: `${SITE_URL}${localePrefix}/${opts.slug}`,
-		provider: organizationSchema(),
+		url: `${opts.siteUrl}${localePrefix}/${opts.slug}`,
+		provider: organizationSchema(opts.siteUrl),
 		areaServed: {
 			"@type": "Place",
 			name: "Spain",
 		},
 		availableChannel: {
 			"@type": "ServiceChannel",
-			serviceUrl: `${SITE_URL}${localePrefix}/${opts.slug}`,
+			serviceUrl: `${opts.siteUrl}${localePrefix}/${opts.slug}`,
 		},
 	};
 }
@@ -94,6 +97,7 @@ export function serviceJsonLd(opts: ServiceJsonLdOptions) {
 // ─── About page ────────────────────────────────────────────────────
 
 export interface AboutJsonLdOptions {
+	siteUrl: string;
 	description: string;
 	locale: string;
 	members?: { name: string; role?: string; image?: string }[];
@@ -107,9 +111,9 @@ export function aboutJsonLd(opts: AboutJsonLdOptions) {
 		"@type": "AboutPage",
 		name: SITE_NAME,
 		description: opts.description,
-		url: `${SITE_URL}${localePrefix}${aboutPath}`,
+		url: `${opts.siteUrl}${localePrefix}${aboutPath}`,
 		mainEntity: {
-			...organizationSchema(),
+			...organizationSchema(opts.siteUrl),
 			...(opts.members && opts.members.length > 0 && {
 				member: opts.members.map((m) => ({
 					"@type": "Person",
@@ -125,6 +129,7 @@ export function aboutJsonLd(opts: AboutJsonLdOptions) {
 // ─── Contact page (LocalBusiness) ──────────────────────────────────
 
 export interface ContactJsonLdOptions {
+	siteUrl: string;
 	description: string;
 	phone: string;
 	email: string;
@@ -136,7 +141,7 @@ export function contactJsonLd(opts: ContactJsonLdOptions) {
 		"@type": "LocalBusiness",
 		name: SITE_NAME,
 		description: opts.description,
-		url: SITE_URL,
+		url: opts.siteUrl,
 		telephone: opts.phone,
 		email: opts.email,
 		contactPoint: [{
@@ -151,6 +156,7 @@ export function contactJsonLd(opts: ContactJsonLdOptions) {
 // ─── Blog post (BlogPosting) ───────────────────────────────────────
 
 export interface BlogPostJsonLdOptions {
+	siteUrl: string;
 	title: string;
 	description: string;
 	slug: string;
@@ -168,7 +174,7 @@ export function blogPostJsonLd(opts: BlogPostJsonLdOptions) {
 		"@type": "BlogPosting",
 		headline: opts.title,
 		description: opts.description,
-		url: `${SITE_URL}${localePrefix}/posts/${opts.slug}`,
+		url: `${opts.siteUrl}${localePrefix}/posts/${opts.slug}`,
 		...(opts.image && { image: opts.image }),
 		...(opts.publishedAt && { datePublished: opts.publishedAt.toISOString() }),
 		...(opts.updatedAt && { dateModified: opts.updatedAt.toISOString() }),
@@ -177,7 +183,7 @@ export function blogPostJsonLd(opts: BlogPostJsonLdOptions) {
 			name: SITE_NAME,
 			logo: {
 				"@type": "ImageObject",
-				url: LOGO_URL,
+				url: `${opts.siteUrl}/assets/logo-vertical.png`,
 			},
 		},
 		...(opts.authors && opts.authors.length > 0 && {
@@ -189,7 +195,7 @@ export function blogPostJsonLd(opts: BlogPostJsonLdOptions) {
 		}),
 		mainEntityOfPage: {
 			"@type": "WebPage",
-			"@id": `${SITE_URL}${localePrefix}/posts/${opts.slug}`,
+			"@id": `${opts.siteUrl}${localePrefix}/posts/${opts.slug}`,
 		},
 	};
 }
