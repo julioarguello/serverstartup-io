@@ -163,20 +163,35 @@ All schemas use CMS data — no hardcoded strings. Validate with [Google Rich Re
 - No code in `Base.astro` — Zaraz auto-injects on all proxied pages
 - Extensible: GA4, Meta Pixel, etc. can be added via dashboard without code changes
 
-## 7. Caching
+## 7. PWA (Progressive Web App)
+
+Basic PWA support via Web App Manifest — enables mobile home screen installation without a full service worker.
+
+| File | Purpose |
+|:-----|:--------|
+| `public/site.webmanifest` | App name, icons, theme color, display mode |
+| `public/assets/icon-192.png` | Home screen icon (192×192) |
+| `public/assets/icon-512.png` | Splash screen icon (512×512) |
+
+`Base.astro` includes:
+- `<link rel="manifest">` → manifest file
+- `<meta name="theme-color">` → `#1E1E1E` (matches `--color-primary`)
+- `<link rel="apple-touch-icon">` → iOS home screen icon
+
+## 8. Caching
 
 - Every page that queries CMS content **must** call `Astro.cache.set(cacheHint)`.
 - API routes (RSS) use `Cache-Control: public, max-age=3600` as fallback.
 - Cloudflare CDN provides edge caching. Static assets are served directly.
 
-## 8. Deployment
+## 9. Deployment
 
 - **Platform**: Cloudflare Workers
 - **Build**: `npm run build` → `dist/`
 - **Dev**: `npx emdash dev` (runs migrations, seeds, generates types)
 - **Admin**: `http://localhost:4321/_emdash/admin`
 
-### 7.1 D1 Seeding (CRITICAL)
+### 9.1 D1 Seeding (CRITICAL)
 
 `npx emdash seed` writes to `./data.db` by default. With `d1()` adapter, the dev server uses Wrangler's D1 emulator at `.wrangler/state/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite`.
 
@@ -186,8 +201,9 @@ D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqli
 npx emdash seed seed/seed.json -d "$D1_DB"
 ```
 
-## 9. Security
+## 10. Security
 
 - MCP tokens **must not** be passed via CLI arguments (visible in `ps aux`)
 - Use environment variables or config files for secrets
 - See `docs/security/mcp-token-exposure.md`
+
