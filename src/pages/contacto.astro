@@ -8,6 +8,7 @@
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
+import { contactJsonLd } from "../utils/jsonld";
 import type { SiteSettings } from "../types";
 
 const locale = Astro.currentLocale || "es";
@@ -34,21 +35,11 @@ const emailLabel = settings.contactEmailLabel || "Email";
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 >
-	<script type="application/ld+json" set:html={JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "LocalBusiness",
-		"name": "Server Startup",
-		"description": excerpt || `${title} — Server Startup`,
-		"url": Astro.site ? Astro.site.href : "https://www.serverstartup.io",
-		"telephone": phone,
-		"email": email,
-		"contactPoint": [{
-			"@type": "ContactPoint",
-			"telephone": phone,
-			"contactType": "customer service",
-			"availableLanguage": ["Spanish", "English"]
-		}]
-	})} />
+	<script type="application/ld+json" set:html={JSON.stringify(contactJsonLd({
+		description: excerpt || `${title} — Server Startup`,
+		phone,
+		email,
+	}))} />
 	<section class="s-contact" aria-label={title}>
 		<div class="container s-contact__inner">
 			<h1>{title}</h1>

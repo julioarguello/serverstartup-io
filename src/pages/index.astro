@@ -6,17 +6,30 @@
  */
 import Base from "../layouts/Base.astro";
 import HomepageContent from "../components/HomepageContent.astro";
-import { getEmDashEntry } from "emdash";
+import { getEmDashEntry, getSiteSettings } from "emdash";
+import { homepageJsonLd } from "../utils/jsonld";
+import type { SiteSettings } from "../types";
 
 const locale = Astro.currentLocale || "es";
 const { entry } = await getEmDashEntry("pages", "home", { locale });
 const { title, excerpt } = entry?.data ?? { title: "Server Startup", excerpt: "" };
+const settings = await getSiteSettings() as SiteSettings;
+const description = excerpt || `${title} — Server Startup`;
+const schemas = homepageJsonLd({
+	description,
+	locale,
+	phone: settings.phone,
+	email: settings.email,
+});
 ---
 
 <Base
 	title={title}
-	description={excerpt || `${title} — Server Startup`}
+	description={description}
 >
+	{schemas.map((schema) => (
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+	))}
 	<HomepageContent />
 </Base>
 
