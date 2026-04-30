@@ -5,6 +5,7 @@
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
+import { contactJsonLd } from "../../utils/jsonld";
 import type { SiteSettings } from "../../types";
 
 const locale = "en";
@@ -29,6 +30,11 @@ const emailLabel = settings.contactEmailLabel || "Email";
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 >
+	<script type="application/ld+json" set:html={JSON.stringify(contactJsonLd({
+		description: excerpt || `${title} — Server Startup`,
+		phone,
+		email,
+	}))} />
 	<section class="s-contact" aria-label={title}>
 		<div class="container s-contact__inner">
 			<h1>{title}</h1>

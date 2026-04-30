@@ -6,6 +6,7 @@ import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import { getUiLabels } from "../../utils/ui-labels";
+import { aboutJsonLd } from "../../utils/jsonld";
 const t = Astro.locals.t;
 
 const locale = "en";
@@ -44,6 +45,15 @@ for (const block of content || []) {
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 >
+	<script type="application/ld+json" set:html={JSON.stringify(aboutJsonLd({
+		description: excerpt || `${title} — Server Startup`,
+		locale,
+		members: members.map((m) => ({
+			name: m.data.title || "",
+			role: m.data.excerpt || undefined,
+			image: m.data.featured_image?.src || undefined,
+		})),
+	}))} />
 	<!-- ══════ HERO ══════ -->
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">

@@ -13,6 +13,7 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
+import { serviceJsonLd } from "../utils/jsonld";
 import type { SiteSettings } from "../types";
 const t = Astro.locals.t;
 
@@ -41,6 +42,12 @@ const localePrefix = locale === "es" ? "" : `/${locale}`;
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 >
+	<script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd({
+		name: title,
+		description: excerpt || `${title} — Server Startup`,
+		slug: slug!,
+		locale,
+	}))} />
 	<!-- ══════ HERO — full height, themed cube bg ══════ -->
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
