@@ -1,0 +1,18 @@
+TYPE: Image-to-Image Edit / Generation
+Input References: 
+1. `src/media/server_startup_architecture_sketch.png` (SIZE & GEOMETRY MASTER)
+2. `uploaded_image_1769234220890.png` (Logo Style Reference)
+
+PROMPT:
+Generate a Banner Image with aspect ratio 3.2:1 (1920x600 equiv).
+1. GEOMETRY (Keep this):
+    - **Dome Size**: Small, tight, compact cap (same as previous successful iteration).
+    - **Position**: "Calado" - overlapping the top of the cube nicely.
+2. CLEANUP (CRITICAL - DO NOT FAIL THIS):
+    - **REMOVE ALL PIPES**: The image must be completely free of pipes (no side pipes, no bottom pipes).
+    - **REMOVE GROUND**: No mountains, no floor lines. Floating in blue space.
+    - **REMOVE TEXT**: Delete "CDN & WAF". Keep ONLY "CLOUDFLARE" and "Server Startup".
+3. CONTENT:
+    - **Logo**: Cloudflare Orange Cloud + "CLOUDFLARE" text on top of the dome.
+    - **Cube**: Standard Server Startup cube underneath.
+4. VIBE: Clean, minimalist, protective. Just the Shield over the Server.

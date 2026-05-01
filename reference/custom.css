@@ -1,0 +1,145 @@
+		<style id="wp-custom-css">
+			.destacado {
+	color: #000;
+font-size: 28px;
+font-style: normal;
+font-weight: 400;
+line-height: 34px;
+}
+
+.marked {
+	background-color: rgba(206, 212, 218, 0.50);
+	padding:0px 5px;
+}
+
+
+.all-cards, .areas {
+display: flex;
+flex-direction: column; 
+}
+
+@media (min-width:767px) {
+
+.card1 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 150px); 
+}
+.card2 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 130px);
+}
+.card3 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 110px); 
+}
+.card4 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 90px); 
+}
+.card5 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 70px); 
+}
+	
+	}
+
+/* 
+@media (max-width:450px) {
+.card1 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 200px); 
+}
+.card2 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 180px);
+}
+.card3 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 160px); 
+}
+.card4 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 140px); 
+}
+.card5 {
+position: -webkit-sticky; 
+position: sticky;
+top: calc(50% - 120px); 
+}
+}
+ */
+
+
+
+
+.vertical-click-menu .elementor-nav-menu--main ul.sub-menu{
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  margin: 0 !important;            
+  min-width: 0 !important;
+  max-width: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+	margin-top: 24px !important;
+}
+
+.vertical-click-menu .elementor-nav-menu--main li.menu-item-has-children > ul.sub-menu{
+  display: none;
+}
+
+.vertical-click-menu .elementor-nav-menu--main li.submenu-open > ul.sub-menu{
+  display: block !important;
+}
+
+
+.vertical-click-menu .elementor-nav-menu--main ul.sub-menu a.elementor-sub-item{
+  margin-left: 8px !important;
+	margin-top:16px !important;
+}
+
+.vertical-click-menu .elementor-nav-menu--main a.has-submenu{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.vertical-click-menu 
+.elementor-nav-menu--main 
+a.has-submenu{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* clave */
+}
+
+.vertical-click-menu 
+.elementor-nav-menu--main 
+a.has-submenu .sub-arrow{
+  margin-left: 6px;
+}
+
+
+
+.menu-secondary-item a {
+	font-size:32px !important;
+	line-height:40px !important;
+}
+
+.contact-link .elementor-icon-box-wrapper {
+  display: inline-flex;
+  justify-content: flex-start;
+}
+
+.contact-link:hover .elementor-icon {
+  margin: -8px 0px 0px 12px;
+}		</style>

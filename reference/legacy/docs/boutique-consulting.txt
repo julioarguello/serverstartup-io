@@ -1,0 +1,21 @@
+Una consultora boutique de integración de sistemas no compite por volumen, sino por especialización y agilidad. Aquí tienes lo esencial:
+
+Rasgos Diferenciadores
+Hiper-especialización: Se enfocan en nichos específicos (ej. Salesforce, SAP, o sector Fintech) en lugar de ser generalistas.
+
+Talento Senior: Los proyectos son ejecutados por expertos con años de experiencia, no por consultores junior en formación.
+
+Agilidad y Pragmatismo: Estructuras planas que permiten tomar decisiones rápidas y soluciones adaptadas a la realidad del cliente, evitando el "copy-paste" metodológico.
+
+Cercanía: Relación de socios (partners) más que de simples proveedores; alta implicación de los socios de la consultora.
+
+Conocimientos Técnicos Clave
+Arquitectura de APIs y Microservicios: Dominio profundo de REST, GraphQL y el diseño de ecosistemas desacoplados.
+
+Middleware y iPaaS: Experiencia avanzada en herramientas como MuleSoft, Dell Boomi, Workato o Azure Integration Services.
+
+Ecosistemas Híbridos: Capacidad para conectar sistemas legacy (on-premise) con aplicaciones modernas en la nube (SaaS).
+
+Seguridad y Gobernanza de Datos: Conocimiento crítico sobre cómo mover datos de forma segura (encriptación, OAuth, cumplimiento normativo).
+
+En resumen: Una boutique de integración es un "cirujano especializado" que resuelve problemas de conectividad complejos donde las grandes firmas suelen ser demasiado lentas o genéricas.

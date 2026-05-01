@@ -1,0 +1,19 @@
+TYPE: Image-to-Image Edit / Generation
+Input Reference: src/media/server_startup_architecture_sketch.png (Original Master)
+
+PROMPT:
+Generate a Banner Image with aspect ratio 3.2:1 (1920x600 equiv).
+1. MASTER STYLE REFERENCE: Use 'server_startup_architecture_sketch.png' as the absolute source of truth for style, colors, and line work.
+2. CONTENT LAYOUT:
+    - **LEFT**: The **SAP Commerce** and **Ocado** logos.
+        - Arrangement: Stacked vertically or side-by-side, clearly visible.
+        - Colors: Original Standard Colors.
+    - **RIGHT**: The 'Server Startup' Cube with "Server Startup" text below it (Standard Colors).
+    - **CONNECTION**: White sketch pipes connecting the Ecommerce Logos (Left) to the Cube (Right).
+3. ALIGNMENT:
+    - Ecommerce Logos and Cube must be horizontally aligned (centered vertically relative to each other).
+    - Pipes flow horizontally. NO vertical downward pipes.
+4. EXCLUSIONS:
+    - REMOVE the GCP Hexagon.
+    - REMOVE the green mountains/terrain.
+5. GOAL: A clean, professional system architecture diagram showing the integration of Ecommerce platforms (SAP/Ocado) with Server Startup.

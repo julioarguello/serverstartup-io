@@ -5,3 +5,4 @@ uploads
 data.db
 .env
 .wrangler
+.stream.env

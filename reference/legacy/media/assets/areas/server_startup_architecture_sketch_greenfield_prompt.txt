@@ -1,0 +1,11 @@
+TYPE: Image-to-Image Edit / Inpainting
+INPUT SOURCE: src/media/server_startup_architecture_sketch.png
+
+PROMPT:
+Generate a Banner Image with aspect ratio 3.2:1 (1920x600 equiv).
+1. FORMAT: A wide, thin horizontal strip.
+2. COMPOSITION: Green sketchy mountains on left and right borders, sloping down to a low central valley.
+3. LOGO PLACEMENT: The 'Server Startup' Cube (white wireframe) sits VERY LOW, deep inside the central valley. It should look like it is resting on the ground between the mountains. It must NOT float high up.
+4. TEXT: 'Server Startup' text placed horizontally next to the cube (or overlaying the valley lines slightly) to save vertical space.
+5. REMOVE all upper pipes/domes. Keep it clean: just Mountains + Nested Cube.
+6. STYLE: Blue blueprint background. Organic sketch lines.

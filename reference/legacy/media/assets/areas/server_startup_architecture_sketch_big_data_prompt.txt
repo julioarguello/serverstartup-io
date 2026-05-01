@@ -1,0 +1,18 @@
+TYPE: Image-to-Image Edit / Generation
+Input Reference: src/media/server_startup_architecture_sketch.png (Original Master)
+
+PROMPT:
+Generate a Banner Image with aspect ratio 3.2:1 (1920x600 equiv).
+1. MASTER STYLE REFERENCE: Use 'server_startup_architecture_sketch.png' as the absolute source of truth for style, colors, and line work.
+2. CONTENT LAYOUT:
+    - **LEFT**: The original 'Server Startup' Cube.
+    - **TEXT**: The text "Server Startup" MUST appear below the Cube, exactly as in the original image.
+    - **RIGHT**: The Google Cloud Platform (GCP) Hexagon Logo (Standard Colors).
+    - **CONNECTION**: White sketch pipes connecting the Cube (Left) to the GCP Hexagon (Right).
+3. ALIGNMENT:
+    - Cube and GCP Hexagon must be horizontally aligned.
+    - Pipes flow horizontally. NO vertical downward pipes.
+4. EXCLUSIONS:
+    - REMOVE extra logos like SAP and Ocado.
+    - REMOVE the green mountains/terrain if present in the edit.
+5. GOAL: A clean, professional system architecture diagram showing the flow from Server Startup to Big Data (GCP).
