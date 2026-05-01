@@ -9,7 +9,8 @@
 | **Framework** | Astro 5.x (`output: "server"`) | SSR, routing, build |
 | **CMS** | EmDash CMS | Content management, admin UI at `/_emdash/admin` |
 | **Database** | Cloudflare D1 (SQLite) | CMS persistence |
-| **Storage** | Cloudflare R2 | Media/uploads |
+| **Storage** | Cloudflare R2 (`MEDIA` binding) | CMS images and uploads |
+| **Video** | Cloudflare Stream | Video hosting with adaptive bitrate |
 | **Hosting** | Cloudflare Workers | SSR runtime |
 | **Fonts** | Google Fonts (Alexandria, JetBrains Mono) | Astro font provider |
 | **Sitemap** | `@astrojs/sitemap` | Automatic sitemap generation |
@@ -163,7 +164,54 @@ All schemas use CMS data — no hardcoded strings. Validate with [Google Rich Re
 - No code in `Base.astro` — Zaraz auto-injects on all proxied pages
 - Extensible: GA4, Meta Pixel, etc. can be added via dashboard without code changes
 
-## 7. PWA (Progressive Web App)
+## 7. Media & Video Strategy
+
+### 7.1 Images — R2 via EmDash
+
+CMS images (featured images, inline media) are managed through the EmDash admin UI, which stores them in the R2 bucket bound as `MEDIA` in `wrangler.jsonc`. No manual R2 interaction is needed for CMS content.
+
+### 7.2 Video — Cloudflare Stream
+
+Videos are hosted on **Cloudflare Stream** — a managed platform with automatic transcoding (HLS/DASH), adaptive bitrate, and zero-config playback.
+
+| Aspect | Detail |
+|:-------|:-------|
+| **Dashboard** | Cloudflare → Stream → Videos |
+| **Account** | Server Startup (`d70cd71aecc76f94c73d7a6f3cc1265d`) |
+| **Pricing** | ~$5/1000 min stored + $1/1000 min delivered |
+| **Upload** | Dashboard UI or API (`CF_STREAM_TOKEN` in `.env`) |
+| **Registry** | `reference/legacy/media/STREAM-VIDEOS.md` |
+
+#### Upload via API
+
+```bash
+source .env
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/stream" \
+  -H "Authorization: Bearer ${CF_STREAM_TOKEN}" \
+  -F "file=@path/to/video.mp4" \
+  -F 'meta={"name":"descriptive-name"}'
+```
+
+#### Embed in Astro
+
+```html
+<iframe
+  src="https://customer-XXXX.cloudflarestream.com/{VIDEO_ID}/iframe"
+  style="border: none; width: 100%; aspect-ratio: 16/9;"
+  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+  allowfullscreen>
+</iframe>
+```
+
+#### Why Stream over R2 for video?
+
+- **Automatic transcoding** — no need to maintain multiple resolutions manually
+- **Adaptive bitrate** — optimal quality on any device/bandwidth
+- **Built-in player** — professional embed, no custom player code
+- **EmDash doesn't support video natively** — no video fields or player in the CMS
+- **R2 video serving** requires building your own encoding pipeline — disproportionate effort
+
+## 8. PWA (Progressive Web App)
 
 Basic PWA support via Web App Manifest — enables mobile home screen installation without a full service worker.
 
@@ -178,13 +226,13 @@ Basic PWA support via Web App Manifest — enables mobile home screen installati
 - `<meta name="theme-color">` → `#1E1E1E` (matches `--color-primary`)
 - `<link rel="apple-touch-icon">` → iOS home screen icon
 
-## 8. Caching
+## 9. Caching
 
 - Every page that queries CMS content **must** call `Astro.cache.set(cacheHint)`.
 - API routes (RSS) use `Cache-Control: public, max-age=3600` as fallback.
 - Cloudflare CDN provides edge caching. Static assets are served directly.
 
-## 9. Deployment
+## 10. Deployment
 
 - **Platform**: Cloudflare Workers
 - **Build**: `npm run build` → `dist/`
@@ -201,7 +249,7 @@ D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqli
 npx emdash seed seed/seed.json -d "$D1_DB"
 ```
 
-## 10. Security
+## 11. Security
 
 - MCP tokens **must not** be passed via CLI arguments (visible in `ps aux`)
 - Use environment variables or config files for secrets
