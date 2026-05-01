@@ -1,0 +1,9 @@
+Blueprint Style B (Sketchy Outline) - Refined.
+Background: Deep Navy Blue Blueprint texture.
+1. GROUND: Sketchy green contour lines (Greenfield Development).
+2. CENTER: Sketchy Technical drawing of the Server Startup Cube. The text 'Server Startup' (from the provided logo file) is sketched next to it/below it in white pencil style.
+3. INTERCONNECTIONS (Crucial): White sketchy pipes/lines rise from the green ground, PIERCE/PASS THROUGH the central Cube wireframe, and branch out upwards. This flow is visible and central.
+4. LEFT: 'SAP Commerce' and 'Ocado' logos (Sketchy outline + light wash). Label: 'E-Commerce'.
+5. TOP LEFT: Protective sketchy dome over E-Commerce. Cloudflare logo (Sketchy Orange). Label: 'CDN & WAF'.
+6. RIGHT: Google Cloud Platform logo (Sketchy colors). Label: 'Big Data'.
+Style: Hand-drawn architectural sketch, marker/pencil style. Organic lines.

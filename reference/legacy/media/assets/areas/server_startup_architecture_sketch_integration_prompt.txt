@@ -1,0 +1,12 @@
+TYPE: Image-to-Image Edit / Generation
+Input Reference: src/media/server_startup_architecture_sketch.png (Original Master)
+
+PROMPT:
+Generate a Banner Image with aspect ratio 3.2:1 (1920x600 equiv).
+1. STYLE: Deep Navy Blue Blueprint background.
+2. CENTER: Preserved 'Server Startup' Cube logo in its ORIGINAL FULL COLORS. Do NOT convert the logo to a white wireframe. It should stand out against the blue background.
+3. CONNECTIVITY: A simplified, elegant flow of white sketch lines passing behind or through the cube.
+4. PIPES/LINES: REDUCE CLUTTER. Use only a few significant connection lines (3-4 lines) to symbolize integration flow (left to right). Do not clutter the image with too many pipes.
+5. LAYOUT: Center the colorful logo strictly.
+6. BACKGROUND: Clean blue blueprint.
+7. VIBE: Professional, clean, integrated.

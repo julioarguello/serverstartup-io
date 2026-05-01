@@ -1,0 +1,9 @@
+A hyper-realistic, high-resolution banner image (aspect ratio 3.2:1).
+Subject: A direct, clean view of a modern terminal/console window.
+Text Content: '[INFO] org.apache.catalina.startup.Catalina.start Server startup in [2019] ms'
+Style: 
+- Background: Deep matte black (Hex #0c0c0c).
+- Font: Crisp, high-DPI monospace coding font (like Menlo, Consolas, or JetBrains Mono).
+- Coloring: '[INFO]' in cyan or blue. The class path in white/grey. 'Server startup in [2019] ms' in vivid green.
+- Aesthetics: Minimalist. Look like a high-quality screenshot from a Retina display. No heavy bloom, no cinematic angles, no blur. Just clean, sharp code.
+- Layout: Vertically centered, left-aligned or slightly centered with a blinking cursor block at the end.
