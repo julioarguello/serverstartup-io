@@ -1,13 +1,19 @@
 ---
 id: "01KQ2HXNVWJZ6S5X2XARV2A9AM"
-cta_label: "Request a data assessment"
+cta_label: "Let's talk data"
 ---
 
-Cloud data architectures for evidence-based decisions. BigQuery, dbt, Dataflow and production-grade ETL/ELT pipelines.
+Your data team fights fires, not builds insights. Reports arrive late, dashboards don't match the ERP, and nobody trusts the numbers. We've seen it. We build data architectures that govern the full cycle — from ingestion to analysis — connected to your operational systems.
 
-## Key Benefits
+## dbt ≠ pipeline
 
-- **Native BigQuery**: Serverless data warehouse with auto-scaling and predictable costs
-- **dbt pipelines**: Versioned, tested and documented transformations as code
-- **Real-time**: Streaming ingestion and processing with Dataflow and Pub/Sub
-- **Data governance**: End-to-end lineage, quality and access control
+Having dbt doesn't mean having governed data. We design data platforms on Google Cloud where every transformation is versioned, tested and documented:
+
+- **BigQuery**: serverless data warehouse, auto-scaling, predictable costs. Data lives where it's analyzed
+- **dbt**: transformations as code. Versioned in Git, with quality tests and full lineage for every metric
+- **Dataflow + Pub/Sub**: real-time ingestion and streaming processing for flows that can't wait
+- **Medallion architecture** (bronze / silver / gold): each layer has a purpose. Quality, lineage and access control end to end
+
+## Data connected to the business
+
+We don't build isolated data platforms. Our architectures connect BigQuery to SAP, to your ERP, to Cloudflare Analytics. One team. Four verticals. Zero handoffs.
