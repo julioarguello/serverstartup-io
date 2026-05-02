@@ -1538,7 +1538,7 @@
 				"status": "published",
 				"data": {
 					"title": "Comercio electrónico",
-					"excerpt": "Infraestructuras optimizadas para plataformas como SAP Commerce Cloud u Ocado Smart Platform. Creamos entornos escalables y preparados para un alto volumen de tráfico.",
+					"excerpt": "Tu catálogo tiene 50.000 SKUs y tu partner no sabe cómo se indexan. Parametrizamos SAP Commerce Cloud con la profundidad que solo da trabajar en el mismo proyecto durante años.",
 					"content": [
 						{
 							"_type": "block",
@@ -1546,12 +1546,12 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Infraestructura técnica para plataformas e-commerce de alto rendimiento. Catálogos masivos, checkout optimizado y escalabilidad horizontal."
+									"text": "En SAP hay 4.000 partners. Lo que no hay son tres ingenieros que conozcan tu catálogo, tu pipeline de precios y tu WAF al mismo tiempo. Nosotros parametrizamos SAP Commerce Cloud para Auchan desde hace 5 años."
 								}
 							]
 						}
 					],
-					"cta_label": "Solicita una auditoría de tu tienda online",
+					"cta_label": "Audita tu e-commerce",
 					"color": "#B5E6F7"
 				},
 				"locale": "es"
@@ -1562,7 +1562,7 @@
 				"status": "published",
 				"data": {
 					"title": "CDN, WAF & Edge Security",
-					"excerpt": "Aumenta la velocidad y seguridad de tu web con Cloudflare. Configuramos CDN, WAF y sistemas Zero Trust para proteger y optimizar tus aplicaciones.",
+					"excerpt": "Cloudflare está configurado. ¿Seguro de que está bien configurado? Diseñamos, desplegamos y mantenemos arquitecturas de seguridad perimetral en producción.",
 					"content": [
 						{
 							"_type": "block",
@@ -1570,12 +1570,12 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Partners certificados de Cloudflare. Implementamos y optimizamos Workers, Pages, R2, D1, CDN, WAF y Zero Trust para nuestros clientes."
+									"text": "Cloudflare está configurado. ¿Seguro de que está bien configurado? Sabemos por qué están esas WAF rules. Sabemos qué Workers ejecutan lógica de negocio y cuáles sobran. Diseñamos, desplegamos y mantenemos arquitecturas de seguridad perimetral en producción."
 								}
 							]
 						}
 					],
-					"cta_label": "Audita tu seguridad edge",
+					"cta_label": "Audita tu edge",
 					"color": "#FDEBB6"
 				},
 				"locale": "es"
@@ -1586,7 +1586,7 @@
 				"status": "published",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Arquitecturas de datos en Google Cloud Platform con dbt, BigQuery y Dataflow. Transformamos la información en decisiones útiles para tu negocio.",
+					"excerpt": "Tu equipo de datos apaga fuegos, no innova. Construimos arquitecturas de datos en Google Cloud que gobiernan el ciclo completo: ingesta, transformación, análisis.",
 					"content": [
 						{
 							"_type": "block",
@@ -1594,12 +1594,12 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Arquitecturas de datos en la nube para decisiones basadas en evidencia. BigQuery, Snowflake, dbt, Airflow, streaming y dashboards analíticos."
+									"text": "Tu equipo de datos apaga fuegos, no innova. Los informes llegan tarde, los dashboards no cuadran con el ERP y nadie se fía del número. Construimos arquitecturas de datos que gobiernan el ciclo completo, conectadas con tus sistemas operacionales."
 								}
 							]
 						}
 					],
-					"cta_label": "Solicita una evaluación de tus datos",
+					"cta_label": "Hablemos de tus datos",
 					"color": "#BFEDEE"
 				},
 				"locale": "es"
@@ -1610,7 +1610,7 @@
 				"status": "published",
 				"data": {
 					"title": "Integración de sistemas",
-					"excerpt": "Conectamos sistemas complejos mediante Apache Camel, Talend o Gravitee API Manager, garantizando fluidez y trazabilidad.",
+					"excerpt": "Orquestamos sistemas heterogéneos con Enterprise Integration Patterns. Apache Camel, Kafka, GCP. Tres ingenieros, sin capas de gestión.",
 					"content": [
 						{
 							"_type": "block",
@@ -1618,12 +1618,12 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Conectamos los sistemas que hacen funcionar tu negocio. APIs REST, GraphQL, mensajería asíncrona con Kafka, RabbitMQ y pipelines de datos en tiempo real."
+									"text": "Tu integración funciona... excepto cuando importa. El stock no cuadra, el pedido no llega al ERP y nadie sabe por qué. Lo hemos visto. Orquestamos sistemas heterogéneos con Enterprise Integration Patterns de verdad, no con diagramas de Visio."
 								}
 							]
 						}
 					],
-					"cta_label": "Solicita una evaluación de tus integraciones",
+					"cta_label": "Hablemos de integración",
 					"color": "#ECDCE3"
 				},
 				"locale": "es"
@@ -1634,7 +1634,7 @@
 				"status": "published",
 				"data": {
 					"title": "Desarrollo backend a medida",
-					"excerpt": "APIs, microservicios y soluciones escalables. Diseñamos sistemas sólidos, listos para evolucionar contigo.",
+					"excerpt": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Java 21+, Spring Boot, Quarkus.",
 					"content": [
 						{
 							"_type": "block",
@@ -1642,7 +1642,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Diseñamos y construimos desde cero sistemas que no pueden fallar. Infraestructuras greenfield con foco en rendimiento, escalabilidad y disponibilidad para aplicaciones de misión crítica."
+									"text": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Si tu cadena de valor necesita un motor específico que no existe, lo diseñamos."
 								}
 							]
 						}
@@ -1660,8 +1660,8 @@
 				"translationOf": "svc-ecommerce",
 				"data": {
 					"title": "E-Commerce",
-					"excerpt": "Scalable e-commerce platforms designed for performance and conversion.",
-					"cta_label": "Contact us",
+					"excerpt": "Your catalog has 50,000 SKUs and your partner doesn't know how they're indexed. We parameterize SAP Commerce Cloud with the depth that only comes from years on the same project.",
+					"cta_label": "Audit your e-commerce",
 					"content": [
 						{
 							"_type": "block",
@@ -1669,7 +1669,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We design and implement end-to-end e-commerce solutions."
+									"text": "SAP has 4,000 partners. What it doesn't have is three engineers who know your catalog, your pricing pipeline and your WAF at the same time. We've parameterized SAP Commerce Cloud for Auchan for 5 years."
 								}
 							]
 						}
@@ -1684,8 +1684,8 @@
 				"translationOf": "svc-cdn",
 				"data": {
 					"title": "CDN, WAF & Edge Security",
-					"excerpt": "Edge security architecture with Cloudflare: CDN, WAF, DDoS protection and Zero Trust.",
-					"cta_label": "Contact us",
+					"excerpt": "Your Cloudflare is configured. Are you sure it's configured right? We design, deploy and maintain edge security architectures in production.",
+					"cta_label": "Audit your edge",
 					"content": [
 						{
 							"_type": "block",
@@ -1693,7 +1693,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We design and implement edge security architectures with Cloudflare."
+									"text": "Your Cloudflare is configured. Are you sure it's configured right? We know why those WAF rules are there. We know which Workers run business logic and which ones are dead weight. We design, deploy and maintain edge security architectures in production."
 								}
 							]
 						}
@@ -1708,8 +1708,8 @@
 				"translationOf": "svc-bigdata",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Data engineering, cloud analytics and BI platforms for data-driven decisions.",
-					"cta_label": "Contact us",
+					"excerpt": "Your data team fights fires, not builds insights. We build data architectures on Google Cloud that govern the full cycle: ingestion, transformation, analysis.",
+					"cta_label": "Let's talk data",
 					"content": [
 						{
 							"_type": "block",
@@ -1717,7 +1717,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We build data platforms for analytics and business intelligence."
+									"text": "Your data team fights fires, not builds insights. Reports arrive late, dashboards don't match the ERP, and nobody trusts the numbers. We build data architectures that govern the full cycle, connected to your operational systems."
 								}
 							]
 						}
@@ -1732,8 +1732,8 @@
 				"translationOf": "svc-integracion",
 				"data": {
 					"title": "Systems Integration",
-					"excerpt": "Enterprise systems integration: ESB, API management and middleware.",
-					"cta_label": "Contact us",
+					"excerpt": "We orchestrate heterogeneous systems with real Enterprise Integration Patterns. Apache Camel, Kafka, GCP. Three engineers, no management layers.",
+					"cta_label": "Let's talk integration",
 					"content": [
 						{
 							"_type": "block",
@@ -1741,7 +1741,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We integrate enterprise systems with modern middleware and API management."
+									"text": "Your integration works — except when it matters. Orders don't reach the ERP, stock doesn't match, and nobody knows why. We've seen it. We orchestrate heterogeneous systems using real Enterprise Integration Patterns, not Visio diagrams."
 								}
 							]
 						}
@@ -1756,8 +1756,8 @@
 				"translationOf": "svc-greenfield",
 				"data": {
 					"title": "Custom Backend Development",
-					"excerpt": "Greenfield backend engineering for mission-critical systems.",
-					"cta_label": "Contact us",
+					"excerpt": "We're not a software factory. We build the critical components that commercial software can't cover. Java 21+, Spring Boot, Quarkus.",
+					"cta_label": "Let's talk about your project",
 					"content": [
 						{
 							"_type": "block",
@@ -1765,7 +1765,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We design and build mission-critical backend systems from scratch."
+									"text": "We're not a software factory. We build the critical components that commercial software can't cover. If your value chain needs a specific engine that doesn't exist, we design it."
 								}
 							]
 						}
