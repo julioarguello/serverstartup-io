@@ -3,19 +3,25 @@ id: "01KQCEY600ZMYMW6ERH7CS63DM"
 cta_label: "Hablemos de integración"
 ---
 
-Tu integración funciona... excepto cuando importa. El stock no cuadra, el pedido no llega al ERP y nadie sabe por qué. Lo hemos visto. Orquestamos sistemas heterogéneos con Enterprise Integration Patterns de verdad, no con diagramas de Visio.
+Mover datos de A a B es la parte fácil. El verdadero desafío de ingeniería es mantener la **continuidad operativa** en ecosistemas donde conviven tu `ERP`, plataformas `SaaS` y sistemas *legacy* intocables. Abordamos la integración con una regla: observabilidad absoluta. Si un flujo falla, la traza revela exactamente *dónde* y *por qué* antes de que haya impacto de negocio.
 
-## Diagrama ≠ integración
+## Conector ≠ Sistema integrado
 
-Tener un conector no es tener un sistema integrado. Diseñamos arquitecturas que conectan tu núcleo transaccional con ecosistemas cloud, cerrando el ciclo del dato entre sistemas operacionales y analíticos.
+Un simple *script* punto-a-punto es frágil. Una integración profesional de verdad **desacopla sistemas**: enruta inteligentemente, transforma al vuelo y aísla los fallos. Si el `ERP` se cae, los pedidos se encolan en *standby* y se procesan al volver. Cero pérdida de datos.
 
-- **Apache Camel** sobre Karaf o Quarkus: integración por código, +300 conectores, control total sobre mediación y transformación
-- **Mensajería asíncrona**: Kafka, Pub/Sub o ActiveMQ Artemis como backbone de comunicación desacoplada
-- **Cloud native**: Dataflow, Cloud Functions o Cloudflare Workers para lógica de integración en el edge
-- **APIs gobernadas**: diseño Contract First, seguridad con `OAuth 2.0` y `mTLS` desde el primer día
+- **Patrones `EIP` y Orquestación**: Enrutamiento complejo con [Apache Camel](https://camel.apache.org/), desplegado sobre [Karaf](https://karaf.apache.org/) (aislamiento `OSGi`) o [Quarkus](https://camel.apache.org/camel-quarkus/) (arranque sub-milisegundo). Implementamos consumidores idempotentes sin «cajas negras».
+- **Mensajería Asíncrona y Eventos**: *Backbones* tolerantes a fallos con [Kafka](https://kafka.apache.org/) y [ActiveMQ Artemis](https://activemq.apache.org/components/artemis/), o servicios gestionados como [Google Cloud Pub/Sub](https://cloud.google.com/pubsub) y [Cloudflare Queues](https://developers.cloudflare.com/queues/).
+- **Cómputo `Serverless`**: Lógica de integración elástica usando [Google Cloud Run](https://cloud.google.com/run) o directamente en el borde (*edge computing*) con [Cloudflare Workers](https://workers.cloudflare.com/).
+- **Data Engineering y `ETL`**: Movimiento pesado de datos con [Apache Hop](https://hop.apache.org/) o [Talend](https://www.talend.com/) para procesos *batch*, y canalizaciones unificadas con [Google Cloud Dataflow](https://cloud.google.com/dataflow).
+- **Gobierno de `APIs`**: Exposición segura mediante soluciones de `API Management` (como [Gravitee](https://www.gravitee.io/)) o [Cloudflare API Shield](https://developers.cloudflare.com/api-shield/).
+- **Observabilidad 360º**: Logs y métricas centralizadas en **`ELK`** (Elasticsearch, Logstash, Kibana). Trazabilidad exacta de cada mensaje, *de extremo a extremo*.
 
 ## Quién lo construye, responde
 
-Tres ingenieros. Los mismos tres. De principio a fin. No hay capas de gestión ni rotación de consultores. Quien diseña la integración es quien la despliega y quien responde cuando falla un viernes a las seis.
+> «Tu integración funciona... excepto cuando importa».
+ 
+El *stock* no cuadra, los pedidos se duplican y nadie sabe muy bien por qué. Lo hemos visto demasiadas veces.
 
-Monitorizamos los flujos de datos en producción. Detectamos cuellos de botella antes de que afecten al negocio. Y si algo se rompe, no abrimos un ticket: lo arreglamos.
+No somos arquitectos de PowerPoint. El equipo *senior* que diseña la topología en la pizarra es **el mismo** que luego escribe el código, afina los *brokers* y levanta el teléfono si algo falla un viernes a las seis (aunque cada vez fallan menos 😉). 
+
+Si se rompe, no abrimos un *ticket*: **lo arreglamos**.
