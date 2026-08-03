@@ -1869,8 +1869,8 @@
 				"slug": "home",
 				"status": "published",
 				"data": {
-					"title": "Ingeniería de Sistemas, Integración y Seguridad Edge",
-					"excerpt": "Construimos arquitecturas completas capa a capa. Ingeniería Greenfield, integración de sistemas, comercio electrónico y seguridad edge.",
+					"title": "Ingeniería de sistemas, integración y seguridad edge",
+					"excerpt": "Tres ingenieros senior para el backend, la integración, los datos y el edge. Un equipo. Cuatro verticales. Cero handoffs.",
 					"content": [
 						{
 							"_type": "block",
@@ -1878,11 +1878,43 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Construimos arquitecturas completas "
+									"text": "Cada sistema funciona. Lo difícil es que funcionen "
 								},
 								{
 									"_type": "span",
-									"text": "capa a capa",
+									"text": "juntos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Somos tres ingenieros "
+								},
+								{
+									"_type": "span",
+									"text": "senior",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ": diseñamos el backend, conectamos los sistemas, gobernamos los datos y defendemos el edge. "
+								},
+								{
+									"_type": "span",
+									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
 									"marks": [
 										"strong"
 									]
@@ -1895,28 +1927,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cimentamos con ingeniería "
-								},
-								{
-									"_type": "span",
-									"text": "Greenfield",
-									"marks": [
-										"em"
-									]
-								},
-								{
-									"_type": "span",
-									"text": " sólida, conectamos sistemas de forma resiliente, impulsamos el negocio con plataformas de comercio electrónico y blindamos el perímetro con seguridad edge."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Gestionamos tu tecnología como un activo estratégico unificado, robusto y gobernable."
+									"text": "Desde 2019, con la misma regla: quien diseña tu arquitectura escribe el código y responde si algo falla."
 								}
 							]
 						},
@@ -1926,7 +1937,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Tecnología que impulsa tu negocio"
+									"text": "~ Tecnología sin ceremonia"
 								}
 							]
 						},
@@ -1936,11 +1947,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Somos un equipo pequeño de "
-								},
-								{
-									"_type": "span",
-									"text": "ingenieros",
+									"text": "No escalamos. Profundizamos.",
 									"marks": [
 										"strong"
 									]
@@ -1953,7 +1960,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Huimos de las metodologías rígidas y nos centramos en entender el contexto de cada proyecto. Aplicamos juicio técnico y cuidamos la calidad de los entregables porque creemos que es la única forma sostenible de construir software."
+									"text": "Huimos de las metodologías rígidas: entendemos el contexto de cada proyecto y aplicamos criterio. Pocos clientes, máxima implicación. Si algo no es buena idea, te lo decimos antes de facturarlo."
 								}
 							]
 						},
@@ -1973,7 +1980,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Abarcamos todas las capas del entorno tecnológico, desde la base de datos hasta la seguridad en la nube."
+									"text": "De los cimientos al escudo: backend, integración, e-commerce, datos y edge. Todas las capas, las mismas tres personas."
 								}
 							]
 						}
@@ -2276,8 +2283,8 @@
 				"locale": "en",
 				"translationOf": "page-home",
 				"data": {
-					"title": "Systems Engineering, Integration & Edge Security",
-					"excerpt": "We build complete architectures layer by layer. Greenfield engineering, systems integration, e-commerce and edge security.",
+					"title": "Systems engineering, integration and edge security",
+					"excerpt": "Three senior engineers across backend, integration, data and edge. One team. Four verticals. Zero handoffs.",
 					"content": [
 						{
 							"_type": "block",
@@ -2285,11 +2292,43 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We build complete architectures "
+									"text": "Every system works. The hard part is making them work "
 								},
 								{
 									"_type": "span",
-									"text": "layer by layer",
+									"text": "together",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We're three "
+								},
+								{
+									"_type": "span",
+									"text": "senior",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " engineers: we design the backend, connect the systems, govern the data and defend the edge. "
+								},
+								{
+									"_type": "span",
+									"text": "One team. Four verticals. Zero handoffs.",
 									"marks": [
 										"strong"
 									]
@@ -2302,28 +2341,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We lay solid "
-								},
-								{
-									"_type": "span",
-									"text": "Greenfield",
-									"marks": [
-										"em"
-									]
-								},
-								{
-									"_type": "span",
-									"text": " foundations, connect systems resiliently, drive business with e-commerce platforms and secure the perimeter with edge security."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "We manage your technology as a unified, robust and governable strategic asset."
+									"text": "Since 2019, one rule: whoever designs your architecture writes the code — and answers when something breaks."
 								}
 							]
 						},
@@ -2333,7 +2351,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Technology that drives your business"
+									"text": "~ Technology, minus the ceremony"
 								}
 							]
 						},
@@ -2343,11 +2361,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We are a small team of "
-								},
-								{
-									"_type": "span",
-									"text": "engineers",
+									"text": "We don't scale. We go deeper.",
 									"marks": [
 										"strong"
 									]
@@ -2360,7 +2374,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We avoid rigid methodologies and focus on understanding each project's context. We apply technical judgement and care about deliverable quality because we believe it's the only sustainable way to build software."
+									"text": "We skip rigid methodologies: we learn each project's context and use judgement. Few clients, full involvement. If something is a bad idea, we'll say so before billing for it."
 								}
 							]
 						},
@@ -2380,7 +2394,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We cover every layer of the technology stack, from databases to cloud security."
+									"text": "From foundations to shield: backend, integration, e-commerce, data and edge. Every layer, the same three people."
 								}
 							]
 						}
