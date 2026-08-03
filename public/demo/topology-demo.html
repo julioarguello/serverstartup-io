@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integration Topology — Live Demo | Server Startup</title>
+    <meta name="description" content="Interactive integration topology visualization. Real-time lineage tracing across ERP, WMS, CRM, eCommerce, and analytics systems.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="topology-demo.css">
+</head>
+<body>
+    <!-- Filter Panel -->
+    <div id="uiPanel" class="filter-panel glass-panel">
+        <div>
+            <div class="filter-title">Integration Topology</div>
+            <div class="filter-subtitle" style="margin-top:4px">Live Demo · Server Startup</div>
+        </div>
+
+        <div class="search-wrapper">
+            <div id="ghostHint" class="ghost-hint"></div>
+            <input id="nodeSearch" class="search-input" type="text" placeholder="Search flows, systems…" autocomplete="off" spellcheck="false">
+        </div>
+
+        <div id="typeFilterBar" class="type-filter-bar">
+            <span class="type-pill" data-type="route" style="background:rgba(129,140,248,0.15);color:#818cf8;border-color:rgba(129,140,248,0.3)">Route</span>
+            <span class="type-pill" data-type="job" style="background:rgba(251,146,60,0.15);color:#fb923c;border-color:rgba(251,146,60,0.3)">Job</span>
+            <span class="type-pill" data-type="api" style="background:rgba(52,211,153,0.15);color:#34d399;border-color:rgba(52,211,153,0.3)">API</span>
+            <span class="type-pill" data-type="queue" style="background:rgba(251,191,36,0.15);color:#fbbf24;border-color:rgba(251,191,36,0.3)">Queue</span>
+            <span class="type-pill" data-type="gcs" style="background:rgba(56,189,248,0.15);color:#38bdf8;border-color:rgba(56,189,248,0.3)">GCS</span>
+            <span class="type-pill" data-type="gbq" style="background:rgba(244,114,182,0.15);color:#f472b6;border-color:rgba(244,114,182,0.3)">BigQuery</span>
+            <span class="type-pill" data-type="database" style="background:rgba(167,139,250,0.15);color:#a78bfa;border-color:rgba(167,139,250,0.3)">Database</span>
+            <span class="type-pill" data-type="sftp" style="background:rgba(148,163,184,0.15);color:#94a3b8;border-color:rgba(148,163,184,0.3)">SFTP</span>
+        </div>
+
+        <div class="filter-subtitle">Components</div>
+        <div id="searchResults" class="search-results"></div>
+
+        <div id="instrLegend" class="instructions"></div>
+
+        <div class="branding">
+            <div class="branding-text">
+                Built by <a href="https://serverstartup.io" target="_blank" rel="noopener">Server Startup</a>
+                · Apache Camel · D3.js
+            </div>
+        </div>
+    </div>
+
+    <!-- Graph Area -->
+    <div id="graphArea" class="graph-area">
+        <button id="panelToggle" class="panel-toggle" aria-label="Toggle panel">✕</button>
+        <svg id="main-graph"></svg>
+        <div id="tooltip" class="tooltip glass-panel"></div>
+        <div class="graph-toolbar">
+            <button id="fitBtn" class="btn-tool">Fit</button>
+            <button id="zoomSelectedBtn" class="btn-tool">Zoom Selected</button>
+            <button id="resetViewBtn" class="btn-tool">Reset</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="topology-demo-data.js"></script>
+    <script src="topology-demo-engine.js"></script>
+</body>
+</html>
