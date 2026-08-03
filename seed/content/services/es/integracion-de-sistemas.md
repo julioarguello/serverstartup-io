@@ -3,7 +3,7 @@ id: "01KQCEY600ZMYMW6ERH7CS63DM"
 cta_label: "Hablemos de integración"
 ---
 
-Mover datos de A a B es la parte fácil. El verdadero desafío de ingeniería es mantener la **continuidad operativa** en ecosistemas donde conviven tu `ERP`, plataformas `SaaS` y sistemas *legacy* intocables. Abordamos la integración con una regla: observabilidad absoluta. Si un flujo falla, la traza revela exactamente *dónde* y *por qué* antes de que haya impacto de negocio.
+Mover datos de A a B es la parte fácil. El verdadero desafío de ingeniería es mantener la **continuidad operativa** en ecosistemas donde conviven tu `ERP`, plataformas `SaaS` y sistemas *legacy* intocables. Abordamos la integración con una regla: observabilidad absoluta. Si un flujo falla, la traza revela exactamente *dónde*, *cuándo* y *por qué*.
 
 ## Conector ≠ Sistema integrado
 
@@ -22,6 +22,6 @@ Un simple *script* punto-a-punto es frágil. Una integración profesional de ver
  
 El *stock* no cuadra, los pedidos se duplican y nadie sabe muy bien por qué. Lo hemos visto demasiadas veces.
 
-No somos arquitectos de PowerPoint. El equipo *senior* que diseña la topología en la pizarra es **el mismo** que luego escribe el código, afina los *brokers* y levanta el teléfono si algo falla un viernes a las seis (aunque cada vez fallan menos 😉). 
+No somos _"arquitectos de PowerPoint"_. El equipo *senior* que diseña la topología en la pizarra es **el mismo** que luego escribe el código, afina los *brokers* y levanta el teléfono si algo falla un viernes a las seis (aunque ya no falle 😉). 
 
 Si se rompe, no abrimos un *ticket*: **lo arreglamos**.
