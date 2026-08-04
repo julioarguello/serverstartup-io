@@ -1910,7 +1910,7 @@
 								},
 								{
 									"_type": "span",
-									"text": ": diseñamos el backend, conectamos los sistemas, gobernamos los datos y defendemos el edge. "
+									"text": ". Los mismos que escriben tu backend conectan el ERP con la tienda online, montan el dato en BigQuery y afinan el WAF de Cloudflare. "
 								},
 								{
 									"_type": "span",
@@ -1927,7 +1927,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Desde 2019, con la misma regla: quien diseña tu arquitectura escribe el código y responde si algo falla."
+									"text": "Trabajamos así desde 2019. Quien diseña tu arquitectura escribe el código. Y da la cara si algo se rompe."
 								}
 							]
 						},
@@ -1960,7 +1960,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Huimos de las metodologías rígidas: entendemos el contexto de cada proyecto y aplicamos criterio. Pocos clientes, máxima implicación. Si algo no es buena idea, te lo decimos antes de facturarlo."
+									"text": "Metodologías, las justas. Entendemos el contexto de cada proyecto y aplicamos criterio. Pocos clientes, máxima implicación. Si algo no es buena idea, te lo decimos antes de facturarlo."
 								}
 							]
 						},
@@ -1980,7 +1980,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "De los cimientos al escudo: backend, integración, e-commerce, datos y edge. Todas las capas, las mismas tres personas."
+									"text": "Backend, integración, e-commerce, datos y edge. Todas las capas, las mismas tres personas."
 								}
 							]
 						}
@@ -2324,7 +2324,7 @@
 								},
 								{
 									"_type": "span",
-									"text": " engineers: we design the backend, connect the systems, govern the data and defend the edge. "
+									"text": " engineers. The same three who write your backend wire the ERP to the storefront, model the data in BigQuery and tune the Cloudflare WAF. "
 								},
 								{
 									"_type": "span",
@@ -2341,7 +2341,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Since 2019, one rule: whoever designs your architecture writes the code — and answers when something breaks."
+									"text": "We've worked this way since 2019. Whoever designs your architecture writes the code. And owns it when something breaks."
 								}
 							]
 						},
@@ -2374,7 +2374,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We skip rigid methodologies: we learn each project's context and use judgement. Few clients, full involvement. If something is a bad idea, we'll say so before billing for it."
+									"text": "Just enough process. We learn each project's context and use judgement. Few clients, full involvement. If something is a bad idea, we say so before we bill for it."
 								}
 							]
 						},
@@ -2394,7 +2394,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "From foundations to shield: backend, integration, e-commerce, data and edge. Every layer, the same three people."
+									"text": "Backend, integration, e-commerce, data and edge. Every layer, the same three people."
 								}
 							]
 						}
