@@ -1788,7 +1788,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Arquitecto de sistemas con más de 15 años de experiencia en infraestructura cloud, sistemas distribuidos y consultoría tecnológica."
+									"text": "Arquitecto de software. Integración con Apache Camel, middleware para Ocado, dbt y Cloudflare Workers. Quince años largos entre hybris y producción."
 								}
 							]
 						}
@@ -1797,12 +1797,12 @@
 				"locale": "es"
 			},
 			{
-				"id": "member-ariadna",
-				"slug": "ariadna",
+				"id": "member-ignacio",
+				"slug": "ignacio-ibaseta",
 				"status": "published",
 				"data": {
-					"title": "Ariadna",
-					"excerpt": "Backend Engineer",
+					"title": "Ignacio Ibaseta",
+					"excerpt": "Data Platform & Terraform Engineer",
 					"content": [
 						{
 							"_type": "block",
@@ -1810,29 +1810,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ingeniera backend especializada en microservicios, APIs y sistemas de mensajería."
-								}
-							]
-						}
-					]
-				},
-				"locale": "es"
-			},
-			{
-				"id": "member-raul",
-				"slug": "raul",
-				"status": "published",
-				"data": {
-					"title": "Raúl",
-					"excerpt": "Data Engineer",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Ingeniero de datos con experiencia en BigQuery, dbt, pipelines ETL y arquitecturas de datos en la nube."
+									"text": "Terraform, GCP y la infraestructura como código de la plataforma de datos. Los cimientos que hacen que el dato sea fiable."
 								}
 							]
 						}
@@ -1842,11 +1820,11 @@
 			},
 			{
 				"id": "member-daniel",
-				"slug": "daniel",
+				"slug": "daniel-sio",
 				"status": "published",
 				"data": {
-					"title": "Daniel",
-					"excerpt": "Cloud & DevOps Engineer",
+					"title": "Daniel Sío",
+					"excerpt": "E-commerce Operations Engineer",
 					"content": [
 						{
 							"_type": "block",
@@ -1854,7 +1832,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ingeniero cloud y DevOps especializado en GCP, Cloudflare, infraestructura como código y CI/CD."
+									"text": "Operativa de e-commerce sobre Ocado y evolutivos de plataforma. Automatización, CI y el dato del día a día en dbt."
 								}
 							]
 						}
@@ -1994,7 +1972,7 @@
 				"status": "published",
 				"data": {
 					"title": "Quiénes somos",
-					"excerpt": "El equipo de Server Startup. Ingenieros especializados en arquitectura backend, cloud y sistemas distribuidos.",
+					"excerpt": "Tres ingenieros senior, los mismos de principio a fin. Backend, integración, datos y edge desde Getxo, desde 2019.",
 					"content": [
 						{
 							"_type": "block",
@@ -2002,11 +1980,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "No somos una consultora generalista, trabajamos con un "
-								},
-								{
-									"_type": "span",
-									"text": "modelo boutique",
+									"text": "Tres ingenieros. Los mismos tres. De principio a fin.",
 									"marks": [
 										"strong"
 									]
@@ -2019,18 +1993,17 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Somos profesionales con más de 15 años de experiencia, nos centramos en aquello que dominamos: "
-								},
+									"text": "La sociedad existe desde 2019, y cada uno de nosotros lleva más de quince años en producción. Ser pocos es una elección. Pocos clientes, máxima implicación y ningún junior aprendiendo con tu presupuesto."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
 								{
 									"_type": "span",
-									"text": "arquitectura backend, rendimiento y seguridad en la nube",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": ". Este enfoque nos permite ofrecer soluciones más precisas, rápidas y adaptadas a cada entorno."
+									"text": "Trabajamos dentro de tu equipo, no desde fuera. El middleware que conecta tu ERP con la tienda, el WAF que para el tráfico malo, el modelo de dbt que cierra las ventas del día. Ese es nuestro sitio."
 								}
 							]
 						},
@@ -2050,7 +2023,30 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "En Server Startup creemos en apoyar a quienes comparten nuestra visión de esfuerzo, innovación y superación. Por eso colaboramos con equipos y proyectos que aplican la misma mentalidad que guía nuestro trabajo diario."
+									"text": "Pocas cosas, bien hechas. Preferimos decir que no a entregar tarde. Si un proyecto no encaja con lo que dominamos, te lo decimos en la primera reunión."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Sin inversores. Sin deuda. Sin prisa. La empresa se sostiene con su trabajo, y eso nos permite elegir proyectos complejos y relaciones largas."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -2409,7 +2405,7 @@
 				"translationOf": "page-quienes-somos",
 				"data": {
 					"title": "About us",
-					"excerpt": "The Server Startup team. Engineers specialised in backend architecture, cloud and distributed systems.",
+					"excerpt": "Three senior engineers, the same three start to finish. Backend, integration, data and edge, from Getxo, since 2019.",
 					"content": [
 						{
 							"_type": "block",
@@ -2417,11 +2413,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We are not a generalist consultancy; we work with a "
-								},
-								{
-									"_type": "span",
-									"text": "boutique model",
+									"text": "Three engineers. The same three. Start to finish.",
 									"marks": [
 										"strong"
 									]
@@ -2434,18 +2426,17 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We are professionals with over 15 years of experience, focused on what we master: "
-								},
+									"text": "The company dates from 2019, and each of us has fifteen-plus years in production. Staying small is a choice. Few clients, deep involvement, and no junior learning on your budget."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
 								{
 									"_type": "span",
-									"text": "backend architecture, performance and cloud security",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": ". This approach lets us deliver more precise, faster and tailored solutions for every environment."
+									"text": "We work inside your team, not around it. The middleware wiring your ERP to the storefront, the WAF stopping bad traffic, the dbt model that closes the day's sales. That's where you'll find us."
 								}
 							]
 						},
@@ -2465,7 +2456,30 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We believe in transparency, technical rigour and long-term partnerships. Every project we take on is an opportunity to build something that lasts."
+									"text": "Few things, done well. We'd rather say no than deliver late. If a project doesn't fit what we're good at, we tell you in the first meeting."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "No investors. No debt. No hurry. The company runs on its own work, which lets us pick complex projects and long relationships."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "One team. Four verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
