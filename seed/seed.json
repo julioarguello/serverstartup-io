@@ -11,7 +11,7 @@
 		"tagline": "Ingeniería de Sistemas, Integración y Seguridad Edge",
 		"phone": "+34666666666",
 		"phoneDisplay": "666 66 66 66",
-		"email": "info@serverstartup.com",
+		"email": "ventas@serverstartup.io",
 		"whatsapp": "https://wa.me/34666666666",
 		"defaultCtaLabel": "Cuéntanos tu proyecto",
 		"contactWhatsappLabel": "WhatsApp",
@@ -2181,7 +2181,7 @@
 				"status": "published",
 				"data": {
 					"title": "Política de privacidad",
-					"excerpt": "Política de privacidad de Server Startup.",
+					"excerpt": "Pocos datos y explicados claro. Responsable, finalidades y tus derechos, sin letra pequeña.",
 					"content": [
 						{
 							"_type": "block",
@@ -2189,7 +2189,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "De conformidad con el Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales."
+									"text": "Tratamos pocos datos y lo contamos en pocas líneas. Esta política cumple el RGPD y la Ley Orgánica 3/2018 (LOPDGDD)."
 								}
 							]
 						},
@@ -2209,7 +2209,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Server Startup — info@serverstartup.com"
+									"text": "Server Startup S.L., CIF B95944807. Para cualquier asunto de datos, escríbenos a ventas@serverstartup.io."
 								}
 							]
 						},
@@ -2219,7 +2219,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Finalidad"
+									"text": "Qué datos tratamos"
 								}
 							]
 						},
@@ -2229,7 +2229,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Los datos recabados a través del formulario de contacto serán tratados con la finalidad de gestionar su consulta."
+									"text": "Los que nos envías tú al escribirnos por correo o WhatsApp. Tu dirección, tu nombre si lo firmas y lo que nos cuentes. La web no tiene formularios ni cuentas de usuario."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Para qué"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Para responderte. No usamos tus datos para publicidad ni te incorporamos a listas de correo."
 								}
 							]
 						},
@@ -2249,7 +2269,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "La base legal para el tratamiento de sus datos es el consentimiento del interesado."
+									"text": "Tu consentimiento al escribirnos y, si acabamos trabajando juntos, la ejecución de ese contrato."
 								}
 							]
 						},
@@ -2269,7 +2289,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "No se cederán datos a terceros, salvo obligación legal."
+									"text": "No cedemos tus datos a terceros salvo obligación legal. El correo funciona sobre Google Workspace, que actúa como encargado del tratamiento."
 								}
 							]
 						},
@@ -2279,7 +2299,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Derechos"
+									"text": "Conservación"
 								}
 							]
 						},
@@ -2289,7 +2309,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Puede ejercer sus derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiendo a info@serverstartup.com."
+									"text": "Guardamos la correspondencia mientras haga falta para atenderla, y lo que exija la normativa fiscal cuando hay factura de por medio."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tus derechos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Acceso, rectificación, supresión, limitación, portabilidad y oposición. Escríbenos y lo resolvemos. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es)."
 								}
 							]
 						},
@@ -2309,7 +2349,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Este sitio web no utiliza cookies de seguimiento o publicidad."
+									"text": "Esta web no usa cookies de seguimiento ni de publicidad. La analítica (Cloudflare Web Analytics) funciona sin cookies y sin identificarte."
 								}
 							]
 						}
@@ -2583,7 +2623,7 @@
 				"translationOf": "page-privacidad",
 				"data": {
 					"title": "Privacy policy",
-					"excerpt": "Server Startup privacy policy.",
+					"excerpt": "Very little data, plainly explained. Controller, purposes and your rights, no fine print.",
 					"content": [
 						{
 							"_type": "block",
@@ -2591,7 +2631,167 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "This page describes our privacy policy."
+									"text": "We process very little data, and we explain it in a few lines. This policy follows the GDPR and Spain's Organic Law 3/2018 (LOPDGDD)."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Data controller"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server Startup S.L., tax ID B95944807. For anything data-related, write to ventas@serverstartup.io."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "What we process"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Whatever you send us by email or WhatsApp. Your address, your name if you sign it, and what you tell us. The site has no forms and no user accounts."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Why"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "To answer you. We don't use your data for advertising and we don't add you to mailing lists."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Legal basis"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Your consent when you write to us and, if we end up working together, the performance of that contract."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Recipients"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We don't share your data with third parties unless the law requires it. Our email runs on Google Workspace, which acts as a data processor."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Retention"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We keep correspondence for as long as it takes to handle it, plus whatever tax law requires when an invoice is involved."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Your rights"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Access, rectification, erasure, restriction, portability and objection. Write to us and we'll sort it out. You can also complain to the Spanish supervisory authority (aepd.es)."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cookies"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This site uses no tracking or advertising cookies. Analytics (Cloudflare Web Analytics) works without cookies and without identifying you."
 								}
 							]
 						}
