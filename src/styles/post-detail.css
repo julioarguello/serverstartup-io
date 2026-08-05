@@ -70,7 +70,7 @@
 		padding: 4px 8px;
 		font-size: 12px;
 		color: rgba(30,30,30,0.7);
-		background: #f5f5f5;
+		background: var(--color-surface);
 		border-radius: 4px;
 		text-decoration: none;
 		transition:
@@ -186,7 +186,7 @@
 		margin: 2em 0;
 		padding: 16px 24px;
 		border-left: 3px solid rgba(30,30,30,0.15);
-		background: #fafafa;
+		background: var(--color-surface-soft);
 		border-radius: 0 4px 4px 0;
 		color: rgba(30,30,30,0.7);
 		font-style: italic;
@@ -195,7 +195,7 @@
 	.article-content :global(pre) {
 		margin: 2em 0;
 		padding: 20px;
-		background: #f5f5f5;
+		background: var(--color-surface);
 		border: 1px solid rgba(30,30,30,0.15);
 		border-radius: var(--card-radius);
 		overflow-x: auto;
@@ -207,7 +207,7 @@
 	.article-content :global(code) {
 		font-family: monospace;
 		font-size: 0.9em;
-		background: #f5f5f5;
+		background: var(--color-surface);
 		padding: 0.2em 0.4em;
 		border-radius: 4px;
 	}
@@ -396,7 +396,7 @@
 	.sidebar-widgets :global(.widget-categories__count) {
 		font-size: 12px;
 		color: rgba(30,30,30,0.5);
-		background: #f5f5f5;
+		background: var(--color-surface);
 		padding: 4px 8px;
 		border-radius: 4px;
 	}
@@ -420,7 +420,7 @@
 		padding: 4px 12px;
 		font-size: 14px;
 		color: rgba(30,30,30,0.7);
-		background: #f5f5f5;
+		background: var(--color-surface);
 		border-radius: 4px;
 		text-decoration: none;
 		transition:
@@ -496,7 +496,7 @@
 	.sidebar-widgets :global(.widget-archives__count) {
 		font-size: 12px;
 		color: rgba(30,30,30,0.5);
-		background: #f5f5f5;
+		background: var(--color-surface);
 		padding: 4px 8px;
 		border-radius: 4px;
 	}
@@ -533,13 +533,13 @@
 
 	.article-comments :global(.ec-comment-form-field input),
 	.article-comments :global(.ec-comment-form-field textarea) {
-		background: #f5f5f5 !important;
+		background: var(--color-surface) !important;
 		border-color: rgba(30,30,30,0.15) !important;
 		color: var(--color-text) !important;
 	}
 
 	.article-comments :global(.ec-comment-user-info) {
-		background: #f5f5f5 !important;
+		background: var(--color-surface) !important;
 		border-color: rgba(30,30,30,0.15) !important;
 	}
 
@@ -550,7 +550,7 @@
 
 	/* More posts section */
 	.more-posts {
-		background: #fafafa;
+		background: var(--color-surface-soft);
 		padding: 64px 0;
 		margin-top: 64px;
 	}
