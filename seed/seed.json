@@ -627,7 +627,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "La página que buscas no existe."
+									"text": "Esta página no existe. Puede que el enlace sea viejo o que hayamos movido algo de sitio."
 								}
 							]
 						},
@@ -1136,7 +1136,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "The page you are looking for does not exist."
+									"text": "This page doesn't exist. The link may be old, or we moved something around."
 								}
 							]
 						},
