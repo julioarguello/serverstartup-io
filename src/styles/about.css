@@ -43,7 +43,7 @@
 	width: 100%;
 	aspect-ratio: 4 / 3;
 	overflow: hidden;
-	background: #3a3a3a;
+	background: var(--color-ink-soft);
 	margin-bottom: 16px;
 }
 
@@ -62,7 +62,7 @@
 	font-size: 48px;
 	font-weight: 600;
 	color: rgba(255, 255, 255, 0.3);
-	background: #3a3a3a;
+	background: var(--color-ink-soft);
 }
 
 .team-card__name {
