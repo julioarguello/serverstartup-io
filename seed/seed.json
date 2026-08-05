@@ -13,7 +13,7 @@
 		"phoneDisplay": "666 66 66 66",
 		"email": "info@serverstartup.com",
 		"whatsapp": "https://wa.me/34666666666",
-		"defaultCtaLabel": "Contacta ahora",
+		"defaultCtaLabel": "Cuéntanos tu proyecto",
 		"contactWhatsappLabel": "WhatsApp",
 		"contactPhoneLabel": "Teléfono",
 		"contactEmailLabel": "Email"
@@ -388,7 +388,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "A blog about software, design, and the occasional stray thought."
+									"text": "Ingeniería de sistemas, integración y seguridad edge. Tres ingenieros senior en Getxo, desde 2019."
 								}
 							]
 						}
@@ -398,12 +398,12 @@
 		},
 		{
 			"name": "cta_global",
-			"label": "CTA Global",
-			"description": "Call-to-action block shared across homepage and service pages",
+			"label": "CTA Global (fallback)",
+			"description": "Fallback call-to-action block; locale variants live in cta_global_es / cta_global_en",
 			"widgets": [
 				{
 					"type": "content",
-					"title": "¿Listo para optimizar tu infraestructura digital?",
+					"title": "Hablemos de ingeniero a ingeniero.",
 					"content": [
 						{
 							"_type": "block",
@@ -411,17 +411,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Hablemos de ingeniero a ingeniero, con el negocio en el centro."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo."
+									"text": "Trae el problema como esté. Te responde quien va a escribir el código."
 								}
 							]
 						},
@@ -432,7 +422,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Contacta ahora",
+									"text": "Cuéntanos tu proyecto",
 									"marks": [
 										"cta-link"
 									]
@@ -443,6 +433,94 @@
 									"_type": "link",
 									"_key": "cta-link",
 									"href": "/contacto"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cta_global_es",
+			"label": "CTA Global (ES)",
+			"description": "Call-to-action block shared across homepage and service pages (Spanish)",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "Hablemos de ingeniero a ingeniero.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Trae el problema como esté. Te responde quien va a escribir el código."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cta-button",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cuéntanos tu proyecto",
+									"marks": [
+										"cta-link"
+									]
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "cta-link",
+									"href": "/contacto"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cta_global_en",
+			"label": "CTA Global (EN)",
+			"description": "Call-to-action block shared across homepage and service pages (English)",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "Let's talk, engineer to engineer.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Bring the problem as it is. You'll hear back from the person who'll write the code."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cta-button",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tell us about your project",
+									"marks": [
+										"cta-link"
+									]
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "cta-link",
+									"href": "/en/contact"
 								}
 							]
 						}
