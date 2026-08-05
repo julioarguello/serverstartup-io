@@ -22,10 +22,10 @@ if (!ctaArea?.widgets?.length && locale !== "es") {
 }
 const ctaWidget = ctaArea?.widgets[0];
 const settings = await getSiteSettings();
-const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contacta ahora";
+const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Cuéntanos tu proyecto";
 
 // Heading from widget title
-const heading = ctaWidget?.title || "¿Listo para optimizar tu infraestructura digital?";
+const heading = ctaWidget?.title || (locale === "en" ? "Let's talk, engineer to engineer." : "Hablemos de ingeniero a ingeniero.");
 
 // Extract body paragraphs and button from PT content
 const blocks: any[] = ctaWidget?.content || [];
