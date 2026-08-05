@@ -8,7 +8,7 @@
 	},
 	"settings": {
 		"title": "Server Startup",
-		"tagline": "Ingeniería de Sistemas, Integración y Seguridad Edge",
+		"tagline": "Ingeniería de sistemas, integración y seguridad edge",
 		"phone": "+34666666666",
 		"phoneDisplay": "666 66 66 66",
 		"email": "ventas@serverstartup.io",
@@ -1639,7 +1639,7 @@
 				"slug": "cdn-waf-seguridad-edge-cloudflare",
 				"status": "published",
 				"data": {
-					"title": "CDN, WAF & Edge Security",
+					"title": "CDN, WAF y seguridad edge",
 					"excerpt": "Cloudflare está configurado. ¿Seguro de que está bien configurado? Diseñamos, desplegamos y mantenemos arquitecturas de seguridad perimetral en producción.",
 					"content": [
 						{
@@ -1664,7 +1664,7 @@
 				"status": "published",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Tu equipo de datos apaga fuegos, no innova. Construimos arquitecturas de datos en Google Cloud que gobiernan el ciclo completo: ingesta, transformación, análisis.",
+					"excerpt": "Tu equipo de datos apaga fuegos, no innova. Construimos plataformas en Google Cloud que gobiernan el dato desde la ingesta hasta el análisis.",
 					"content": [
 						{
 							"_type": "block",
@@ -1711,7 +1711,7 @@
 				"slug": "ingenieria-greenfield-y-sistemas-criticos",
 				"status": "published",
 				"data": {
-					"title": "Desarrollo backend a medida",
+					"title": "Ingeniería Greenfield y sistemas críticos",
 					"excerpt": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Java 21+, Spring Boot, Quarkus.",
 					"content": [
 						{
@@ -1737,7 +1737,7 @@
 				"locale": "en",
 				"translationOf": "svc-ecommerce",
 				"data": {
-					"title": "E-Commerce",
+					"title": "E-commerce",
 					"excerpt": "Your catalog has 50,000 SKUs and your partner doesn't know how they're indexed. We parameterize SAP Commerce Cloud with the depth that only comes from years on the same project.",
 					"cta_label": "Audit your e-commerce",
 					"content": [
@@ -1786,7 +1786,7 @@
 				"translationOf": "svc-bigdata",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Your data team fights fires, not builds insights. We build data architectures on Google Cloud that govern the full cycle: ingestion, transformation, analysis.",
+					"excerpt": "Your data team fights fires all week. We build platforms on Google Cloud that govern data from ingestion to analysis.",
 					"cta_label": "Let's talk data",
 					"content": [
 						{
@@ -1833,7 +1833,7 @@
 				"locale": "en",
 				"translationOf": "svc-greenfield",
 				"data": {
-					"title": "Custom Backend Development",
+					"title": "Greenfield engineering & critical systems",
 					"excerpt": "We're not a software factory. We build the critical components that commercial software can't cover. Java 21+, Spring Boot, Quarkus.",
 					"cta_label": "Let's talk about your project",
 					"content": [
