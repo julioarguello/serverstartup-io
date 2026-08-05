@@ -2060,7 +2060,7 @@
 				"status": "published",
 				"data": {
 					"title": "Contacto",
-					"excerpt": "Contacta con Server Startup. Consultoría tecnológica, arquitectura backend y seguridad edge.",
+					"excerpt": "Hablemos de tu proyecto. Te responde uno de los tres ingenieros, sin comerciales de por medio.",
 					"content": [
 						{
 							"_type": "block",
@@ -2068,7 +2068,18 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Si tienes un proyecto en marcha o quieres mejorar tu infraestructura actual, estamos aquí para ayudarte."
+									"text": "Escríbenos. Te responde uno de los tres ingenieros, "
+								},
+								{
+									"_type": "span",
+									"text": "porque no hay nadie más",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
 								}
 							]
 						},
@@ -2078,51 +2089,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cuéntanos qué necesitas:"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Auditorías y consultoría técnica."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Diseño o mejora de arquitectura backend."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Optimización de rendimiento y seguridad."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Integración entre sistemas o migración a la nube."
+									"text": "Cuéntanos qué se te rompe, qué quieres montar o qué te preocupa del sistema que ya tienes. Una respuesta honesta no compromete a nada."
 								}
 							]
 						}
@@ -2494,7 +2461,7 @@
 				"translationOf": "page-contacto",
 				"data": {
 					"title": "Contact",
-					"excerpt": "Get in touch with Server Startup.",
+					"excerpt": "Let's talk. One of the three engineers answers, with no salespeople in between.",
 					"content": [
 						{
 							"_type": "block",
@@ -2502,7 +2469,28 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Contact us and we'll get back to you as soon as possible."
+									"text": "Write to us. One of the three engineers answers, "
+								},
+								{
+									"_type": "span",
+									"text": "because there is no one else",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tell us what's breaking, what you want to build, or what worries you about the system you already run. An honest answer costs nothing."
 								}
 							]
 						}
