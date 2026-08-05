@@ -3,17 +3,17 @@ id: "01KQ2HXNVWJZ6S5X2XARV2A9AM"
 cta_label: "Let's talk data"
 ---
 
-Your data team fights fires, not builds insights. Reports arrive late, dashboards don't match the ERP, and nobody trusts the numbers. We've seen it. We build data architectures that govern the full cycle — from ingestion to analysis — connected to your operational systems.
+Your data team fights fires all week. Reports arrive late, the numbers don't match the ERP, and nobody knows where the data goes wrong. We've seen it. We build platforms that govern data from ingestion to analysis, connected to your operational systems.
 
 ## dbt ≠ pipeline
 
-Having dbt doesn't mean having governed data. We design data platforms on Google Cloud where every transformation is versioned, tested and documented:
+Having dbt doesn't mean having governed data. We design platforms on Google Cloud where every transformation is versioned, tested and documented.
 
-- **BigQuery**: serverless data warehouse, auto-scaling, predictable costs. Data lives where it's analyzed
-- **dbt**: transformations as code. Versioned in Git, with quality tests and full lineage for every metric
-- **Dataflow + Pub/Sub**: real-time ingestion and streaming processing for flows that can't wait
-- **Medallion architecture** (bronze / silver / gold): each layer has a purpose. Quality, lineage and access control end to end
+- The warehouse is **BigQuery**. No servers to babysit, predictable costs, data living where it gets analyzed.
+- Transformations are **dbt** code, versioned in Git with full lineage for every metric. Our largest platform runs 111 models and 1,646 tests.
+- Real-time ingestion with Dataflow and Pub/Sub for the flows that can't wait.
+- A three-layer medallion architecture, each layer with its purpose and its access control.
 
 ## Data connected to the business
 
-We don't build isolated data platforms. Our architectures connect BigQuery to SAP, to your ERP, to Cloudflare Analytics. One team. Four verticals. Zero handoffs.
+We don't build isolated data platforms. We connect BigQuery to SAP, to your ERP, and to the edge. **One team. Four verticals. Zero handoffs.**
