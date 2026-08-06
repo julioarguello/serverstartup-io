@@ -4,13 +4,13 @@
  * Mirrors [slug].astro but queries locale="en" content.
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
-import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import CtaGlobal from "../../components/CtaGlobal.astro";
+import ServiceInstrument from "../../components/service/ServiceInstrument.astro";
 import { serviceJsonLd } from "../../utils/jsonld";
+import { getUiLabels } from "../../utils/ui-labels";
 import type { CacheHint } from "emdash";
 import type { SiteSettings } from "../../types";
-const t = Astro.locals.t;
 
 const { slug } = Astro.params;
 const locale = "en";
@@ -35,11 +35,12 @@ if (!entry) return Astro.redirect("/404");
 if (cacheHint) Astro.cache.set(cacheHint);
 
 const settings = await getSiteSettings();
-const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contact us";
+const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Tell us about your project";
 
 const { title, content, excerpt } = entry.data as { title: string; content: any; excerpt: string; cta_label?: string; color?: string };
 const accentColor = (entry.data as any).color || "#BFEDEE";
 const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
+const labels = await getUiLabels(locale);
 ---
 
 <Base
@@ -53,24 +54,37 @@ const ctaLabel = (entry.data as any).cta_label || defaultCtaLabel;
 		slug: slug!,
 		locale,
 	}))} />
+	<!-- ══════ HERO — compact, solid cube glyph in the discipline color ══════ -->
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
-			<h1>{title}</h1>
-			{excerpt && (
-				<div class="s-hero__body">
-					<p class="text-body">{excerpt}</p>
-				</div>
-			)}
-			<a href="/en/contact" class="btn btn-dark">{ctaLabel}</a>
+			<div class="s-hero__copy">
+				<h1>{title}</h1>
+				{excerpt && (
+					<div class="s-hero__body">
+						<p class="text-body">{excerpt}</p>
+					</div>
+				)}
+				<a href="/en/contact" class="btn btn-dark">{ctaLabel}</a>
+			</div>
+			<svg class="s-hero__cube" viewBox="0 0 100 110" aria-hidden="true">
+				<path class="s-hero__cube-face" d="M50 5 95 30v50L50 105 5 80V30Z" />
+				<g fill="none" stroke="currentColor" stroke-width="4">
+					<path d="M50 5 95 30v50L50 105 5 80V30Z" />
+					<path d="M5 30l45 25 45-25M50 55v50" />
+				</g>
+			</svg>
 		</div>
 	</section>
 
+	<!-- ══════ CONTENT — discipline instrument (or legacy fallback) ══════ -->
 	{content && (
-		<section class="s-content" aria-label={t("content")}>
-			<div class="container s-content__inner">
-				<PortableText value={content} />
-			</div>
-		</section>
+		<ServiceInstrument
+			slug={slug!}
+			content={content as any[]}
+			ctaLabel={ctaLabel}
+			contactPath="/en/contact"
+			labels={labels}
+		/>
 	)}
 
 	<CtaGlobal />

@@ -1,0 +1,103 @@
+---
+/**
+ * ServiceInstrument — renders a service's Portable Text inside the instrument
+ * of its discipline (design approved 2026-08-06, issue #156):
+ *   cart (e-commerce) · terminal (integration) · bigquery · dashboard · javadoc
+ *
+ * Content stays CMS-pure: this component reshapes the existing blocks
+ * (see src/utils/panels.ts); instrument chrome strings come from the
+ * panel_labels UI widget. Instruments not yet implemented fall back to the
+ * legacy dark section.
+ */
+import { PortableText } from "emdash/ui";
+import { parsePanelSections, mdNormalize, INSTRUMENT_BY_SLUG } from "../../utils/panels";
+
+interface Props {
+	slug: string;
+	content: any[];
+	ctaLabel: string;
+	contactPath: string;
+	labels: { get: (widget: string, key: string, fallback: string) => string };
+}
+const { slug, content, ctaLabel, contactPath, labels } = Astro.props;
+
+const kind = INSTRUMENT_BY_SLUG[slug] ?? "legacy";
+const s = parsePanelSections(content);
+const L = (k: string, fb: string) => labels.get("panel_labels", k, fb);
+
+const leadLines = s.lead ? s.lead.split(/(?<=[.!?])\s+/).filter(Boolean) : [];
+---
+
+{(kind === "cart" || kind === "terminal") ? (
+	<section class="s-inst" aria-label={s.heading}>
+		<div class="container s-inst__inner">
+			{s.intro.length > 0 && <div class="s-inst__intro"><PortableText value={s.intro} /></div>}
+			<h2 class="s-inst__heading">{s.heading}</h2>
+
+			{kind === "cart" && (
+				<div class="inst inst--light" role="group" aria-label={s.heading}>
+					<div class="inst__bar">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2l2.5 11.5h10L20 8H6"/></svg>
+						<b>{L("cart_title", "Tu cesta")}</b>
+						<span class="inst__muted">({s.items.length})</span>
+						<span class="cart__banner">{L("cart_shipping_banner", "Envío gratis: cero handoffs")}</span>
+					</div>
+					<div class="cart__grid">
+						<ul class="cart__items">
+							{s.items.map((it) => (
+								<li class="cart__item">
+									<span class="cart__thumb" aria-hidden="true">
+										<svg width="30" height="33" viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="6"><path d="M50 5 95 30v50L50 105 5 80V30Z"/><path d="M5 30l45 25 45-25M50 55v50"/></svg>
+									</span>
+									<span>
+										<b class="cart__name">{it.label}</b>
+										{it.desc && <span class="cart__desc">{it.desc}</span>}
+									</span>
+									<span class="cart__qty" aria-hidden="true">1 ⌄</span>
+								</li>
+							))}
+						</ul>
+						<div class="cart__summary">
+							<b>{L("cart_summary", "Resumen del pedido")}</b>
+							<div class="cart__row"><span>{L("cart_subtotal", "Subtotal")}</span><b>{L("cart_subtotal_value", "5 años con Auchan")}</b></div>
+							<div class="cart__row"><span>{L("cart_shipping", "Envío")}</span><span class="cart__free">{L("cart_shipping_value", "gratis")}</span></div>
+							<div class="cart__row cart__row--total"><span>{L("cart_total", "Total")}</span><b>{L("cart_total_value", "un equipo")}</b></div>
+							<a href={contactPath} class="btn cart__cta">{ctaLabel}</a>
+							<span class="cart__returns">{L("cart_returns", "Devoluciones: no las vas a necesitar")}</span>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{kind === "terminal" && (
+				<div class="inst inst--dark" role="group" aria-label={s.heading}>
+					<div class="inst__bar inst__bar--dots" aria-hidden="true"><i></i><i></i><i></i></div>
+					<div class="term">
+						<p class="term__cmd"><span class="term__prompt">➜ {L("term_host", "serverstartup.io")}</span>{" "}{L("term_cmd_main", "integrar --erp --tienda --almacen")}</p>
+						{s.items.map((it) => (
+							<p class="term__line"><span class="term__ok" aria-hidden="true">✓</span>{" "}<span class="term__label">{it.label.toLowerCase()}</span>{it.desc && <span class="term__out">{" — "}{it.desc}</span>}</p>
+						))}
+						<p class="term__cmd"><span class="term__prompt">➜ {L("term_host", "serverstartup.io")}</span>{" "}{L("term_cmd_observe", "observar --extremo-a-extremo")}</p>
+						{leadLines.map((line) => (
+							<p class="term__pipe">│ {line}</p>
+						))}
+						<p class="term__log">╰─ {L("term_log", "INFO … Server startup in [2019] ms")}</p>
+					</div>
+				</div>
+			)}
+
+			{(s.closerHeading || s.closer.length > 0) && (
+				<div class="s-inst__closer">
+					{s.closerHeading && <h2>{s.closerHeading}</h2>}
+					<PortableText value={s.closer} />
+				</div>
+			)}
+		</div>
+	</section>
+) : (
+	<section class="s-content" aria-label={s.heading || "content"}>
+		<div class="container s-content__inner">
+			<PortableText value={mdNormalize(content)} />
+		</div>
+	</section>
+)}
