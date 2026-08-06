@@ -72,9 +72,9 @@ for (const block of content || []) {
 	<section class="s-team" aria-label={t("team_section")}>
 		<div class="container s-team__inner">
 			<h2>{teamHeading}</h2>
-			<div class="s-team__grid" role="list">
+			<ul class="s-team__grid" role="list">
 				{members.map((member) => (
-					<article class="team-card" role="listitem">
+					<li class="team-card">
 						<div class="team-card__photo">
 							{member.data.featured_image?.src
 								? <img src={member.data.featured_image.src} alt={member.data.title} loading="lazy" />
@@ -83,9 +83,9 @@ for (const block of content || []) {
 						</div>
 						<h3 class="team-card__name">{member.data.title}</h3>
 						{member.data.excerpt && <p class="team-card__role">{member.data.excerpt}</p>}
-					</article>
+					</li>
 				))}
-			</div>
+			</ul>
 		</div>
 	</section>
 

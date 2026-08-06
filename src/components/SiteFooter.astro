@@ -47,22 +47,18 @@ const {
 const t = Astro.locals.t;
 ---
 
-<footer class="site-footer" role="contentinfo">
+<footer class="site-footer">
 	<!-- Trust logos carousel -->
 	<section class="footer-trust" aria-label={t("trust_section")}>
 		<div class="container">
-			<h4 class="footer-trust__title">{trustTitle}</h4>
-			<div class="trust-logos" role="list" aria-label={t("trust_logos")}>
+			<h2 class="footer-trust__title">{trustTitle}</h2>
+			<ul class="trust-logos" role="list" aria-label={t("trust_logos")}>
 				{trustLogos.map((logo) => (
-					<img
-						src={logo.src}
-						alt={logo.alt}
-						class="trust-logo"
-						loading="lazy"
-						role="listitem"
-					/>
+					<li>
+						<img src={logo.src} alt={logo.alt} class="trust-logo" loading="lazy" />
+					</li>
 				))}
-			</div>
+			</ul>
 		</div>
 	</section>
 
@@ -84,7 +80,7 @@ const t = Astro.locals.t;
 
 			<!-- Col 2: Services -->
 			<div class="footer-col">
-				<h5>{servicesTitle}</h5>
+				<h3>{servicesTitle}</h3>
 				<ul class="footer-list">
 					{services.map((svc) => (
 						<li><a href={`${localePrefix}/${svc.id}`}>{svc.data.title}</a></li>
@@ -94,7 +90,7 @@ const t = Astro.locals.t;
 
 			<!-- Col 3: Partner -->
 			<div class="footer-col">
-				<h5>{partnersTitle}</h5>
+				<h3>{partnersTitle}</h3>
 				{trustLogos.length > 0 ? (
 					trustLogos.map((logo) => (
 						<img
@@ -116,7 +112,7 @@ const t = Astro.locals.t;
 
 			<!-- Col 4: Contact -->
 			<div class="footer-col">
-				<h5>{contactTitle}</h5>
+				<h3>{contactTitle}</h3>
 				<ul class="footer-list">
 					<li><a href={`${localePrefix}/${locale === "en" ? "about-us" : "quienes-somos"}`}>{aboutUsLabel}</a></li>
 					<li><a href={`mailto:${email}`}>{email}</a></li>
@@ -154,6 +150,10 @@ const t = Astro.locals.t;
 	.footer-trust__title {
 		margin-bottom: 24px;
 		font-style: italic;
+		/* h2 for document outline; visual size stays as the old h4 */
+		font-size: 22px;
+		line-height: 30px;
+		font-weight: 400;
 	}
 	.trust-logos {
 		display: flex;
@@ -185,8 +185,11 @@ const t = Astro.locals.t;
 		gap: 32px;
 		align-items: flex-start;
 	}
-	.footer-col h5 {
+	.footer-col h3 {
 		margin-bottom: 16px;
+		/* h3 for document outline; visual size stays as the old h5 */
+		font-size: 20px;
+		line-height: 26px;
 	}
 	.footer-logo-img {
 		width: 180px;

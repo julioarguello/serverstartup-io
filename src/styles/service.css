@@ -275,7 +275,7 @@
 
 .cart__returns {
 	font-size: 12px;
-	color: #9aa0a6;
+	color: #5f6368;
 	text-align: center;
 	margin-top: 6px;
 }
@@ -496,26 +496,31 @@
 
 .bq__grid { font-size: 14px; color: #3c4043; overflow-x: auto; }
 
-.bq__row {
-	display: grid;
-	grid-template-columns: 44px 1.4fr 1fr 1fr;
-	gap: 12px;
-	padding: 8px 10px;
-	border-bottom: 1px solid #f0f2f4;
+.bq__grid table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+	font-variant-numeric: tabular-nums;
 }
 
-.bq__row--head {
+.bq__grid th {
 	background: #f8f9fa;
 	color: #5f6368;
 	font-weight: 600;
-	border-bottom: none;
+	padding: 8px 10px;
 }
 
-.bq__row:last-child { border-bottom: none; }
+.bq__grid td {
+	padding: 8px 10px;
+	border-bottom: 1px solid #f0f2f4;
+	font-weight: 300;
+}
+
+.bq__grid tr:last-child td { border-bottom: none; }
 
 .bq__note {
 	font-size: 12.5px;
-	color: #9aa0a6;
+	color: #5f6368;
 	border-top: 1px solid #e8eaed;
 	margin: 10px 0 0;
 	padding-top: 10px;
@@ -526,7 +531,7 @@
 	margin-left: auto;
 	font-size: 11.5px;
 	font-weight: 700;
-	color: #188038;
+	color: #0d652d;
 	background: #e6f4ea;
 	padding: 4px 10px;
 	border-radius: 99px;
