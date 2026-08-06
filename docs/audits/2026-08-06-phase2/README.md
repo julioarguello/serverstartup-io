@@ -34,3 +34,25 @@ instrument-system visuals (post #182/#183), on the local dev server.
 - #158: final Nu run against the production build (dev-artifact noise excluded).
 - #159: Lighthouse performance against `astro build` + Workers preview, mobile
   throttling, plus font/caching budget review.
+
+## Production build results (same day, `astro build` + `wrangler dev` preview)
+
+| Page | Perf | A11y | BP | SEO | FCP | LCP | TBT | CLS |
+| ---- | ---- | ---- | -- | --- | --- | --- | --- | --- |
+| home | **100** | 100 | 100 | 100 | 0.9 s | 1.0 s | 0 ms | 0 |
+| cart (e-commerce) | **100** | 100 | 100 | 100 | 1.1 s | 1.1 s | 0 ms | 0 |
+| dashboard (edge) | **100** | 100 | 100 | 100 | 1.1 s | 1.1 s | 0 ms | 0 |
+| contact | **100** | 100 | 100 | 100 | 0.9 s | 1.3 s | 0 ms | 0.002 |
+
+Mobile emulation with Lighthouse default throttling. The #159 budget
+(LCP < 1.5 s · CLS < 0.05 · TBT/INP proxy < 200 ms) is met with margin.
+
+W3C Nu on production HTML: **0 errors** on every checked page after moving the
+contact decode `<script>` inside the layout slot (it was being emitted after
+`</html>`).
+
+**Open finding for launch (#162)**: the runtime logs
+`cache.set() was called but caching is not enabled` — project rule §4 calls
+`Astro.cache.set()` on every page but no `experimental.cache` provider is
+configured, so edge caching is currently a no-op. Configure the cache provider
+as part of production deployment and verify cache HITs from the edge.

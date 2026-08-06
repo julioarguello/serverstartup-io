@@ -78,16 +78,15 @@ const emailLabel = settings.contactEmailLabel || "Email";
 			</ul>
 		</div>
 	</section>
+	<script>
+		for (const el of document.querySelectorAll<HTMLElement>("[data-tel],[data-wa]")) {
+			el.addEventListener("click", () => {
+				if (el.dataset.tel) location.href = "tel:" + atob(el.dataset.tel);
+				else if (el.dataset.wa) window.open("https://wa.me/" + atob(el.dataset.wa), "_blank", "noopener");
+			});
+		}
+	</script>
 </Base>
-
-<script>
-	for (const el of document.querySelectorAll<HTMLElement>("[data-tel],[data-wa]")) {
-		el.addEventListener("click", () => {
-			if (el.dataset.tel) location.href = "tel:" + atob(el.dataset.tel);
-			else if (el.dataset.wa) window.open("https://wa.me/" + atob(el.dataset.wa), "_blank", "noopener");
-		});
-	}
-</script>
 
 <style>
 	@import "../styles/contact.css";
