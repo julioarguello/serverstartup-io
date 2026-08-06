@@ -2,12 +2,12 @@
 /**
  * ServiceInstrument — renders a service's Portable Text inside the instrument
  * of its discipline (design approved 2026-08-06, issue #156):
- *   cart (e-commerce) · terminal (integration) · bigquery · dashboard · javadoc
+ *   cart (e-commerce) · terminal (integration) · bigquery (data) ·
+ *   dashboard (edge security) · javadoc (greenfield)
  *
- * Content stays CMS-pure: this component reshapes the existing blocks
+ * Content stays CMS-pure: the copy comes from the existing blocks
  * (see src/utils/panels.ts); instrument chrome strings come from the
- * panel_labels UI widget. Instruments not yet implemented fall back to the
- * legacy dark section.
+ * panel_labels UI widget.
  */
 import { PortableText } from "emdash/ui";
 import { parsePanelSections, mdNormalize, INSTRUMENT_BY_SLUG } from "../../utils/panels";
@@ -26,9 +26,33 @@ const s = parsePanelSections(content);
 const L = (k: string, fb: string) => labels.get("panel_labels", k, fb);
 
 const leadLines = s.lead ? s.lead.split(/(?<=[.!?])\s+/).filter(Boolean) : [];
+
+// bigquery: results grid comes from panel_labels (semicolon rows, comma cells)
+const bqHead = L("bq_head", "Fila,metrica,linaje,ultima_ejecucion").split(",");
+const bqRows = L("bq_rows", "").split(";").filter(Boolean).map((r) => r.split(","));
+
+// dashboard: metric tiles from panel_labels; toggles from the content items
+const cfTiles = L("cf_tiles", "").split(";").filter(Boolean).map((t) => t.split(","));
+
+// javadoc: tag names zip with the content items
+const jdTags = L("jd_tags", "pila,contrato,gobernanza,seguridad").split(",");
+
+// Strings with characters that confuse Astro's JSX expression scanner
+// (backticks, braces) are hoisted here — the frontmatter is real TypeScript.
+const bqTab = L("bq_tab", "metricas_fiables.sql");
+const bqRun = L("bq_run", "Ejecutar");
+const bqMenu = L("bq_menu", "Guardar ▾   Programar   Compartir");
+const bqCTop = L("bq_c_top", "-- ¿de qué números te fías?");
+const bqL1 = L("bq_l1", "metrica, linaje, ultima_ejecucion");
+const bqTable = L("bq_l2", "`gold.metricas_de_negocio`");
+const bqL3 = L("bq_l3", "fiable = TRUE;");
+const bqCBottom = L("bq_c_bottom", "-- lo garantizan 1.646 tests sobre 111 modelos dbt");
+const bqStatus = L("bq_status", "Consulta completada (1,4 s) · el linaje de cada métrica, de la ingesta al análisis");
+const bqNote = L("bq_note", "El dato que no cuadra no llega a gold. Ahí está el gobierno.");
+const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato) { … }");
 ---
 
-{(kind === "cart" || kind === "terminal") ? (
+{kind !== "legacy" ? (
 	<section class="s-inst" aria-label={s.heading}>
 		<div class="container s-inst__inner">
 			{s.intro.length > 0 && <div class="s-inst__intro"><PortableText value={s.intro} /></div>}
@@ -82,6 +106,95 @@ const leadLines = s.lead ? s.lead.split(/(?<=[.!?])\s+/).filter(Boolean) : [];
 							<p class="term__pipe">│ {line}</p>
 						))}
 						<p class="term__log">╰─ {L("term_log", "INFO … Server startup in [2019] ms")}</p>
+					</div>
+				</div>
+			)}
+
+			{kind === "bigquery" && (
+				<>
+					<div class="inst inst--light" role="group" aria-label={s.heading}>
+						<div class="inst__bar bq__bar">
+							<span class="bq__tab">{bqTab} <span class="inst__muted">✕</span></span>
+							<span class="bq__run">▶ {bqRun}</span>
+							<span class="bq__menu">{bqMenu}</span>
+						</div>
+						<div class="bq__editor">
+							<div class="bq__gutter" aria-hidden="true">1<br />2<br />3<br />4<br />5</div>
+							<pre class="bq__sql"><span class="bq__comment">{bqCTop}</span>
+<span class="bq__kw">SELECT</span> {bqL1}
+<span class="bq__kw">FROM</span> <span class="bq__table">{bqTable}</span>
+<span class="bq__kw">WHERE</span> {bqL3}
+<span class="bq__comment">{bqCBottom}</span></pre>
+						</div>
+						<div class="bq__results">
+							<p class="bq__status">✓ {bqStatus}</p>
+							<div class="bq__grid" role="table">
+								<div class="bq__row bq__row--head" role="row">{bqHead.map((h) => <span role="columnheader">{h}</span>)}</div>
+								{bqRows.map((r, i) => (
+									<div class="bq__row" role="row"><span class="inst__muted">{i + 1}</span>{r.map((c) => <span role="cell">{c}</span>)}</div>
+								))}
+							</div>
+							<p class="bq__note">{bqNote}</p>
+						</div>
+					</div>
+					{s.items.length > 0 && (
+						<ul class="inst-list">
+							{s.items.map((it) => (
+								<li><b>{it.label}.</b>{" "}{it.desc}</li>
+							))}
+						</ul>
+					)}
+				</>
+			)}
+
+			{kind === "dashboard" && (
+				<div class="inst inst--light" role="group" aria-label={s.heading}>
+					<div class="inst__bar">
+						<svg width="26" height="17" viewBox="0 0 32 20" aria-hidden="true"><path d="M25 15a4.5 4.5 0 0 0 .3-9A7.5 7.5 0 0 0 11 4.6 6 6 0 0 0 6 15Z" fill="#F38020"/></svg>
+						<b>{L("cf_title", "Seguridad · serverstartup.io")}</b>
+						<span class="cf__status">{L("cf_status", "ACTIVO")}</span>
+					</div>
+					{cfTiles.length > 0 && (
+						<div class="cf__tiles">
+							{cfTiles.map(([label, value]) => (
+								<div class="cf__tile"><span class="cf__tile-label">{label}</span><span class="cf__tile-value">{value}</span></div>
+							))}
+						</div>
+					)}
+					<div class="cf__toggles">
+						{s.items.map((it) => (
+							<div class="cf__toggle">
+								<span class="cf__switch cf__switch--on" aria-hidden="true"><i></i></span>
+								<span><b>{it.label}</b>{it.desc && <span class="cf__desc">{it.desc}</span>}</span>
+							</div>
+						))}
+						<div class="cf__toggle">
+							<span class="cf__switch" aria-hidden="true"><i></i></span>
+							<span><b>{L("cf_joke_title", "Modo «lo montó alguien que ya no está»")}</b><span class="cf__desc">{L("cf_joke_desc", "Desactivado desde 2019. Las reglas las escribimos y las mantenemos nosotros.")}</span></span>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{kind === "javadoc" && (
+				<div class="inst inst--dark inst--javadoc" role="group" aria-label={s.heading}>
+					<div class="inst__bar inst__bar--file"><span class="inst__muted">{L("jd_file", "MotorDeNegocio.java — greenfield")}</span><span class="jd__ok">{L("jd_status", "Java 21 · 0 warnings")}</span></div>
+					<div class="jd">
+						<div class="jd__gutter" aria-hidden="true">{Array.from({ length: s.items.length + leadLines.length + 5 }, (_, i) => <span>{i + 1}</span>)}</div>
+						<div class="jd__code">
+							<p class="jd__doc">/**</p>
+							{leadLines.map((line) => (
+								<p class="jd__doc">&nbsp;* {line}</p>
+							))}
+							<p class="jd__doc">&nbsp;*</p>
+							{s.items.map((it, i) => (
+								<p class="jd__doc">&nbsp;* <span class="jd__tag">@param</span>{" "}<span class="jd__name">{jdTags[i] ?? `p${i + 1}`}</span>{" "}{it.label}. {it.desc}</p>
+							))}
+							<p class="jd__doc">&nbsp;* <span class="jd__tag">@author</span>{" "}{L("jd_author", "los mismos tres ingenieros, de principio a fin")}</p>
+							<p class="jd__doc">&nbsp;* <span class="jd__tag">@since</span>{" "}{L("jd_since", "2019")}</p>
+							<p class="jd__doc">&nbsp;*/</p>
+							<p class="jd__sig">{jdSig}</p>
+						</div>
 					</div>
 				</div>
 			)}
