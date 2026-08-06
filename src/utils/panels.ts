@@ -73,7 +73,9 @@ function splitItem(block: any): PanelItem {
 	}
 	const clean = plain(full);
 	const m = clean.match(/^(.+?[.!?])\s+(.*)$/s);
-	return m ? { label: m[1].replace(/[.]$/, ""), desc: m[2] } : { label: clean, desc: "" };
+	return m
+		? { label: m[1].replace(/[.]$/, ""), desc: m[2] }
+		: { label: clean.replace(/[.]$/, ""), desc: "" };
 }
 
 export function parsePanelSections(content: any[]): PanelSections {
