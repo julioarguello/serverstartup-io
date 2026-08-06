@@ -9,7 +9,8 @@ import { contactJsonLd } from "../../utils/jsonld";
 import type { SiteSettings } from "../../types";
 
 const locale = "en";
-const { entry, cacheHint } = await getEmDashEntry("pages", "contacto", { locale });
+let { entry, cacheHint } = await getEmDashEntry("pages", "contact", { locale });
+if (!entry) ({ entry, cacheHint } = await getEmDashEntry("pages", "contacto", { locale }));
 if (!entry) return Astro.redirect("/en/");
 Astro.cache.set(cacheHint);
 
