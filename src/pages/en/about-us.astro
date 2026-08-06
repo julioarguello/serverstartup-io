@@ -10,7 +10,8 @@ import { aboutJsonLd } from "../../utils/jsonld";
 const t = Astro.locals.t;
 
 const locale = "en";
-const { entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos", { locale });
+let { entry, cacheHint } = await getEmDashEntry("pages", "about-us", { locale });
+if (!entry) ({ entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos", { locale }));
 if (!entry) return Astro.redirect("/en/");
 Astro.cache.set(cacheHint);
 
