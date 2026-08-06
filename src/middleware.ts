@@ -11,9 +11,54 @@ import { loadAriaLabels, type TFunction } from "./i18n/ui";
  * This eliminates the module-level mutable state race condition
  * that existed when t() was a global function.
  */
-export const onRequest = defineMiddleware(async ({ locals, currentLocale }, next) => {
+/**
+ * Security headers (#164). Applied to every SSR response.
+ *
+ * CSP notes:
+ * - style-src needs 'unsafe-inline': Astro emits component styles as inline
+ *   <style> tags (framework behavior, documented trade-off — costs a notch on
+ *   Observatory, hashes are the future upgrade path).
+ * - script-src stays 'self': all scripts are bundled external modules; inline
+ *   JSON-LD <script type="application/ld+json"> is a non-executable data block
+ *   and is not subject to script-src.
+ * - Static assets in public/ are served by the asset layer (no middleware);
+ *   /demo/ keeps its own external fonts and stays outside this policy.
+ */
+const SECURITY_HEADERS: Record<string, string> = {
+	"Content-Security-Policy": [
+		"default-src 'self'",
+		"script-src 'self'",
+		"style-src 'self' 'unsafe-inline'",
+		"img-src 'self' data:",
+		"font-src 'self'",
+		"connect-src 'self'",
+		"object-src 'none'",
+		"base-uri 'self'",
+		"form-action 'self'",
+		"frame-ancestors 'none'",
+		// upgrade-insecure-requests deliberately omitted: Cloudflare's
+		// Always-Use-HTTPS enforces the scheme at the edge, and the directive
+		// breaks style/script loading on the http-only local wrangler preview.
+	].join("; "),
+	"Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+	"X-Content-Type-Options": "nosniff",
+	"Referrer-Policy": "strict-origin-when-cross-origin",
+	"Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
+	"X-Frame-Options": "DENY",
+	"Cross-Origin-Opener-Policy": "same-origin",
+};
+
+export const onRequest = defineMiddleware(async ({ locals, currentLocale, url }, next) => {
 	const locale = currentLocale || "es";
 	const t = await loadAriaLabels(locale);
 	locals.t = t;
-	return next();
+	const response = await next();
+
+	// Leave the CMS admin UI alone — it ships its own scripts/styles.
+	if (!url.pathname.startsWith("/_emdash")) {
+		for (const [k, v] of Object.entries(SECURITY_HEADERS)) {
+			response.headers.set(k, v);
+		}
+	}
+	return response;
 });
