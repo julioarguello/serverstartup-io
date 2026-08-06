@@ -56,3 +56,21 @@ contact decode `<script>` inside the layout slot (it was being emitted after
 `Astro.cache.set()` on every page but no `experimental.cache` provider is
 configured, so edge caching is currently a no-op. Configure the cache provider
 as part of production deployment and verify cache HITs from the edge.
+
+## Security headers (#164, same day)
+
+Implemented in `src/middleware.ts`, verified with `curl -I` on the Workers
+preview and a full-page render check under the final policy:
+
+- CSP: `default-src 'self'`; `script-src 'self'` (all scripts are bundled
+  modules; inline JSON-LD is non-executable); `style-src 'self' 'unsafe-inline'`
+  (Astro inlines component styles — documented trade-off, hash-based upgrade
+  path); `object-src 'none'`, `frame-ancestors 'none'`, `base-uri 'self'`,
+  `form-action 'self'`. `upgrade-insecure-requests` deliberately omitted
+  (Cloudflare Always-Use-HTTPS at the edge; the directive kills styles on the
+  http-only local preview — found the hard way, render-verified).
+- HSTS preload · nosniff · Referrer-Policy strict-origin-when-cross-origin ·
+  Permissions-Policy (camera/mic/geo/payment off) · X-Frame-Options DENY · COOP.
+- `/_emdash` admin excluded (ships its own assets). `/.well-known/security.txt`
+  published.
+- Pending live domain (#162): Mozilla Observatory scan on production.
