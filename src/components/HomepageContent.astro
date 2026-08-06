@@ -128,7 +128,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 		</div>
 
 		<!-- Right: stacking cards from services collection -->
-		<div class="s-areas__cards" role="list">
+		<ul class="s-areas__cards" role="list">
 			{services.map((svc, i) => {
 				const d = svc.data;
 				const cardColor = d.color || '#BFEDEE';
@@ -138,16 +138,16 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 				const yiq = (parseInt(hex.substring(0, 2), 16) * 299 + parseInt(hex.substring(2, 4), 16) * 587 + parseInt(hex.substring(4, 6), 16) * 114) / 1000;
 				const darkCard = yiq < 150;
 				return (
-					<article class={`area-card card${i + 1}${darkCard ? ' area-card--dark' : ''}`} style={`background-color: ${cardColor};`} role="listitem">
+					<li class={`area-card card${i + 1}${darkCard ? ' area-card--dark' : ''}`} style={`background-color: ${cardColor};`}>
 						<h3>{d.title}</h3>
 						<p class="text-body">{d.excerpt}</p>
 						<a href={`${localePrefix}/${svc.id}`} class="area-card__arrow" aria-label={t("view_service", { title: d.title })}>
 							<svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
 						</a>
-					</article>
+					</li>
 				);
 			})}
-		</div>
+		</ul>
 	</div>
 </section>
 

@@ -49,33 +49,33 @@ const emailLabel = settings.contactEmailLabel || "Email";
 				</div>
 			)}
 
-			<div class="s-contact__methods" role="list">
+			<ul class="s-contact__methods" role="list">
 				{whatsappEncoded && (
-					<button type="button" class="s-contact__method" role="listitem" data-wa={whatsappEncoded} aria-label={whatsappLabel}>
+					<li><button type="button" class="s-contact__method" data-wa={whatsappEncoded} aria-label={whatsappLabel}>
 						<span class="s-contact__method-label">{whatsappLabel}</span>
 						<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 							<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
-					</button>
+					</button></li>
 				)}
 
 				{phoneEncoded && (
-					<button type="button" class="s-contact__method" role="listitem" data-tel={phoneEncoded} aria-label={phoneLabel}>
+					<li><button type="button" class="s-contact__method" data-tel={phoneEncoded} aria-label={phoneLabel}>
 						<span class="s-contact__method-label">{phoneLabel}</span>
 						<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 							<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
-					</button>
+					</button></li>
 				)}
 
-				<a href={`mailto:${email}`} class="s-contact__method" role="listitem" aria-label={emailLabel}>
+				<li><a href={`mailto:${email}`} class="s-contact__method">
 					<span class="s-contact__method-label">{emailLabel}</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
 					<span class="s-contact__method-value">{email}</span>
-				</a>
-			</div>
+				</a></li>
+			</ul>
 		</div>
 	</section>
 </Base>

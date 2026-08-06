@@ -128,11 +128,15 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 						</div>
 						<div class="bq__results">
 							<p class="bq__status">✓ {bqStatus}</p>
-							<div class="bq__grid" role="table">
-								<div class="bq__row bq__row--head" role="row">{bqHead.map((h) => <span role="columnheader">{h}</span>)}</div>
-								{bqRows.map((r, i) => (
-									<div class="bq__row" role="row"><span class="inst__muted">{i + 1}</span>{r.map((c) => <span role="cell">{c}</span>)}</div>
-								))}
+							<div class="bq__grid">
+								<table>
+									<thead><tr>{bqHead.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+									<tbody>
+										{bqRows.map((r, i) => (
+											<tr><td class="inst__muted">{i + 1}</td>{r.map((c) => <td>{c}</td>)}</tr>
+										))}
+									</tbody>
+								</table>
 							</div>
 							<p class="bq__note">{bqNote}</p>
 						</div>

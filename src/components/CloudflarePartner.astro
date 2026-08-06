@@ -62,14 +62,14 @@ const features = h4Blocks.map((h4: any, i: number) => ({
 			{description && <p class="text-body s-cf__desc">{description}</p>}
 
 			{features.length > 0 && (
-				<div class="s-cf__features" role="list">
+				<ul class="s-cf__features" role="list">
 					{features.map((f: { title: string; desc: string }) => (
-						<div class="s-cf__feature" role="listitem">
+						<li class="s-cf__feature">
 							<h4>{f.title}</h4>
 							<p class="text-body">{f.desc}</p>
-						</div>
+						</li>
 					))}
-				</div>
+				</ul>
 			)}
 
 			{ctaLabel && (
