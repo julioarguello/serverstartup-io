@@ -1,0 +1,179 @@
+/* ═══ Deconstructing this website — assembly-manual page (#161) ═══ */
+
+.s-manual {
+	padding: calc(80px + 24px) 0 72px;
+}
+
+.s-manual__inner {
+	max-width: 900px;
+}
+
+.s-manual__intro {
+	max-width: 700px;
+	margin-top: 20px;
+}
+
+.s-manual__intro p,
+.s-manual__prose p {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 28px;
+	margin-block-end: 14px;
+}
+
+.s-manual__prose {
+	max-width: 700px;
+	margin-top: 48px;
+}
+
+.s-manual__prose h2 {
+	font-size: 32px;
+	line-height: 40px;
+	margin: 36px 0 14px;
+}
+
+/* ── The manual sheet ── */
+.manual {
+	border: 2px solid var(--color-primary);
+	padding: 26px 30px;
+	margin-top: 36px;
+	background: #fdfdfb;
+}
+
+.manual__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 12px;
+	flex-wrap: wrap;
+	border-bottom: 2px solid var(--color-primary);
+	padding-bottom: 12px;
+}
+
+.manual__brand {
+	font-weight: 700;
+	font-size: 22px;
+}
+
+.manual__brand em {
+	font-weight: 300;
+	font-style: normal;
+}
+
+.manual__meta {
+	font-family: var(--font-family-mono);
+	font-size: 11px;
+	color: var(--color-ink-soft);
+}
+
+.manual__section-title {
+	font-family: var(--font-family-mono);
+	font-size: 11px;
+	letter-spacing: 0.1em;
+	color: var(--color-ink-soft);
+	margin: 20px 0 10px;
+}
+
+.manual__parts {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 10px;
+}
+
+.manual__parts li {
+	border: 1px solid var(--color-primary);
+	padding: 10px 12px;
+	font-size: 13px;
+	line-height: 1.45;
+}
+
+.manual__qty {
+	font-family: var(--font-family-mono);
+	font-size: 12px;
+}
+
+.manual__note {
+	display: block;
+	color: var(--color-ink-soft);
+	font-weight: 300;
+	font-size: 12px;
+}
+
+.manual__steps {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+	text-align: center;
+}
+
+.manual__step {
+	border: 1px solid var(--color-primary);
+	padding: 12px 6px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+}
+
+.manual__step--human {
+	background: var(--color-primary);
+	color: var(--color-secondary);
+}
+
+.manual__step-num {
+	font-family: var(--font-family-mono);
+	font-size: 15px;
+}
+
+.manual__step-caption {
+	font-family: var(--font-family-mono);
+	font-size: 9.5px;
+	line-height: 1.4;
+}
+
+.manual__boxes {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 14px;
+	margin-top: 18px;
+}
+
+.manual__box {
+	border: 1.5px solid var(--color-primary);
+	padding: 12px 14px;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.manual__box b {
+	display: block;
+	margin-bottom: 4px;
+}
+
+.manual__box p {
+	margin: 0;
+	font-weight: 300;
+}
+
+.manual__repo {
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.manual__soon {
+	font-family: var(--font-family-mono);
+	font-size: 11.5px;
+	color: var(--color-ink-soft);
+}
+
+@media (min-width: 768px) {
+	.manual__parts { grid-template-columns: repeat(4, 1fr); }
+	.manual__steps { grid-template-columns: repeat(6, 1fr); }
+	.manual__boxes { grid-template-columns: 1fr 1fr; }
+}
