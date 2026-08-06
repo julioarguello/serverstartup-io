@@ -67,9 +67,20 @@ Canonical: **768px** (tablet, 17 uses) and **1025px** (desktop, 4 uses),
 `min-width`, mobile-first. Strays to normalize when touched: one `max-width:
 600px`, one `900px`, one `1100px` (post-detail/menu) — flagged, not urgent.
 
-## Open taste decisions (for Julio, feeding #156)
+## Resolved taste decisions (Julio, 2026-08-06)
 
-1. Brand vertical palette vs Figma pastels on service cards.
-2. JetBrains Mono reach: accents only, or headings too.
-3. Dark mode: the original design is light-only; offering `prefers-color-scheme`
-   would be new design work, not consolidation.
+1. **Service cards use the brand vertical palette** (#008FD3, #F38020, #EA4335,
+   #1D4E89, #3E7D50), stored in the CMS `color` field. Contrast mechanism:
+   cards compute YIQ luminance at render; dark backgrounds get `.area-card--dark`
+   (white text over a 25% ink overlay, lifting body copy to AA 4.5:1). The
+   orange card correctly keeps dark text (YIQ 151 > 150).
+2. **JetBrains Mono is accents-only**: inline `code` renders in mono site-wide;
+   headings stay in Alexandria. Pending accent: equation-headlines (needs a PT
+   h2 renderer hook — tracked in #156).
+3. **Placeholder blog posts deleted** from seeds; blog routes serve their
+   written empty states until real articles exist.
+4. **Phone/WhatsApp are click-to-decode**: base64 in settings
+   (`phoneEncoded`/`whatsappEncoded`), decoded on click; no plain number in
+   HTML, JSON-LD or the committed seed. Obfuscation, not secrecy — it defeats
+   scrapers, not a determined human.
+5. Dark mode: not adopted; the site is deliberately light (original design).
