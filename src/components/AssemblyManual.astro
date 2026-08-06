@@ -1,0 +1,70 @@
+---
+/**
+ * AssemblyManual — the "Deconstructing this website" flat-pack diagram
+ * (design approved 2026-08-06, issue #161). All text comes from the
+ * manual_labels UI widget; only layout, borders and pictograms live here.
+ */
+interface Props {
+	labels: { get: (widget: string, key: string, fallback: string) => string };
+	repoUrl: string;
+}
+const { labels, repoUrl } = Astro.props;
+const L = (k: string, fb: string) => labels.get("manual_labels", k, fb);
+
+const parts = L("mn_parts", "").split(";").filter(Boolean).map((p) => p.split(","));
+const steps = L("mn_steps", "").split(";").filter(Boolean).map((s) => s.split(","));
+
+/* Minimal line pictograms, one per assembly step (order matters). */
+const stepIcons = [
+	'<rect x="4" y="3" width="16" height="18" fill="none"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+	'<path d="M12 3v6M9 6h6M5 21c1-5 3-8 7-8s6 3 7 8Z"/>',
+	'<rect x="5" y="7" width="14" height="12" rx="2"/><circle cx="10" cy="12" r="1"/><circle cx="14" cy="12" r="1"/><path d="M12 3v4"/>',
+	'<path d="M7 11V7a5 5 0 0 1 10 0v4M5 11h14v9H5Z"/>',
+	'<circle cx="7" cy="7" r="2.5"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="12" r="2.5"/><path d="M9 8l6 3M9 16l6-3"/>',
+	'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+];
+---
+
+<div class="manual" role="group" aria-label={L("mn_header", "manual de montaje")}>
+	<div class="manual__head">
+		<span class="manual__brand">SERVERSTARTUP<em>.io</em></span>
+		<span class="manual__meta">{L("mn_header", "manual de montaje · ES/EN · hoja 1 de 1")}</span>
+	</div>
+
+	<p class="manual__section-title">{L("mn_parts_title", "PIEZAS INCLUIDAS")}</p>
+	<ul class="manual__parts" role="list">
+		{parts.map(([name, qty, note]) => (
+			<li>
+				<b>{name}</b> <span class="manual__qty">{qty}</span>
+				<span class="manual__note">{note}</span>
+			</li>
+		))}
+	</ul>
+
+	<p class="manual__section-title">{L("mn_steps_title", "MONTAJE")}</p>
+	<ul class="manual__steps" role="list">
+		{steps.map(([num, caption], i) => (
+			<li class={i === 3 ? "manual__step manual__step--human" : "manual__step"}>
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={stepIcons[i] ?? stepIcons[0]} />
+				<span class="manual__step-num">{num}</span>
+				<span class="manual__step-caption">{caption}</span>
+			</li>
+		))}
+	</ul>
+
+	<div class="manual__boxes">
+		<div class="manual__box">
+			<b>{L("mn_warn_title", "⚠ Advertencias")}</b>
+			<p>{L("mn_warn_1", "")}</p>
+			<p>{L("mn_warn_2", "")}</p>
+		</div>
+		<div class="manual__box">
+			<b>{L("mn_data_title", "ℹ Datos de montaje")}</b>
+			<p>{L("mn_data_1", "")}</p>
+			<p>{L("mn_data_2", "")}</p>
+			{repoUrl
+				? <p><a class="manual__repo" href={repoUrl} rel="noopener">{L("mn_repo_label", "Ver el repositorio")} →</a></p>
+				: <p class="manual__soon">{L("mn_repo_soon", "enlace al repositorio, en breve")}</p>}
+		</div>
+	</div>
+</div>

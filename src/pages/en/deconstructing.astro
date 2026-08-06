@@ -1,0 +1,42 @@
+---
+/**
+ * Deconstructing this website (EN) — mirrors deconstruyendo.astro.
+ */
+import { getEmDashEntry, getSiteSettings } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+import AssemblyManual from "../../components/AssemblyManual.astro";
+import { getUiLabels } from "../../utils/ui-labels";
+import type { SiteSettings } from "../../types";
+
+const locale = "en";
+let { entry, cacheHint } = await getEmDashEntry("pages", "deconstructing", { locale });
+if (!entry) ({ entry, cacheHint } = await getEmDashEntry("pages", "deconstruyendo", { locale }));
+if (!entry) return Astro.redirect("/en/");
+Astro.cache.set(cacheHint);
+
+const { title, content, excerpt } = entry.data;
+const settings = await getSiteSettings() as SiteSettings;
+const labels = await getUiLabels(locale);
+const repoUrl = settings.repoUrl || "";
+
+const blocks: any[] = (content as any[]) || [];
+const firstH2 = blocks.findIndex((b) => b._type === "block" && b.style === "h2");
+const intro = firstH2 === -1 ? blocks : blocks.slice(0, firstH2);
+const prose = firstH2 === -1 ? [] : blocks.slice(firstH2);
+---
+
+<Base title={title} description={excerpt || `${title} — Server Startup`}>
+	<section class="s-manual" aria-label={title}>
+		<div class="container s-manual__inner">
+			<h1>{title}</h1>
+			{intro.length > 0 && <div class="s-manual__intro"><PortableText value={intro} /></div>}
+			<AssemblyManual labels={labels} repoUrl={repoUrl} />
+			{prose.length > 0 && <div class="s-manual__prose"><PortableText value={prose} /></div>}
+		</div>
+	</section>
+</Base>
+
+<style is:global>
+	@import "../../styles/deconstruct.css";
+</style>
