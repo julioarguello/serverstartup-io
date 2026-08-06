@@ -87,6 +87,7 @@ const servicesTitle = labels.get("footer_headings", "services_title", "Áreas de
 const partnersTitle = labels.get("footer_headings", "partners_title", "Somos partners");
 const contactTitle = labels.get("footer_headings", "contact_title", "Contacto");
 const aboutUsLabel = labels.get("footer_headings", "about_us", "Quiénes somos");
+const manualLabel = labels.get("manual_labels", "manual_footer_link", locale === "en" ? "Deconstructing this website" : "Deconstruyendo esta web");
 const pageTitle = title
 	? `${title} — ${identity.siteTitle}`
 	: identity.siteTitle;
@@ -174,6 +175,7 @@ const resolvedOgType = ogType || "website";
 		partnersTitle={partnersTitle}
 		contactTitle={contactTitle}
 		aboutUsLabel={aboutUsLabel}
+		manualLabel={manualLabel}
 		defaultCtaLabel={defaultCtaLabel}
 		email={email}
 		phone={phone}

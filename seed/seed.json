@@ -12,6 +12,7 @@
 		"phone": "",
 		"phoneDisplay": "",
 		"email": "ventas@serverstartup.io",
+		"repoUrl": "",
 		"phoneEncoded": "KzM0NjY1ODU5NTEw",
 		"whatsappEncoded": "MzQ2NjU4NTk1MTA=",
 		"whatsapp": "",
@@ -535,6 +536,166 @@
 			"label": "UI Labels (Español)",
 			"description": "Translatable UI micro-copy: footer headings, error pages, search page, and button labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "manual_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_header",
+							"children": [
+								{
+									"_type": "span",
+									"text": "manual de montaje · ES/EN · hoja 1 de 1"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_parts_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "PIEZAS INCLUIDAS"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_parts",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Workers + WAF,×1,el escudo;D1 + R2,×1,datos y media;Astro SSR + EmDash,×1,render y CMS;semillas,×26,todos los textos;skill de copywriting,×1,la voz con lista negra;agente,×N,redacta nunca decide;repositorio,×1,mira dentro;ingenieros,×3,no incluidos: ya estaban"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_steps_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "MONTAJE"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_steps",
+							"children": [
+								{
+									"_type": "span",
+									"text": "01,escribe las semillas;02,la skill fija la voz;03,el agente redacta;04,revisión humana ✋;05,pull request y merge;06,deploy al edge"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_warn_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "⚠ Advertencias"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_warn_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "No montar sin el paso 04. El agente redacta, el humano firma."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_warn_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El paso 03 nunca hace merge. Nunca."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_data_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ℹ Datos de montaje"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_data_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tiempo estimado: una tarde y sus commits."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_data_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tornillería incluida: cero handoffs."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_repo_soon",
+							"children": [
+								{
+									"_type": "span",
+									"text": "enlace al repositorio, en breve"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_repo_label",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ver el repositorio"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "manual_footer_link",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Deconstruyendo esta web"
+								}
+							]
+						}
+					]
+				},
 				{
 					"type": "content",
 					"title": "panel_labels",
@@ -1458,6 +1619,166 @@
 			"label": "UI Labels (English)",
 			"description": "English UI micro-copy — footer headings, error page, search, aria-labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "manual_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_header",
+							"children": [
+								{
+									"_type": "span",
+									"text": "assembly manual · ES/EN · sheet 1 of 1"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_parts_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "PARTS INCLUDED"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_parts",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Workers + WAF,×1,the shield;D1 + R2,×1,data and media;Astro SSR + EmDash,×1,render and CMS;seeds,×26,every text;copywriting skill,×1,the voice with a blacklist;agent,×N,drafts never decides;repository,×1,look inside;engineers,×3,not included: already there"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_steps_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ASSEMBLY"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_steps",
+							"children": [
+								{
+									"_type": "span",
+									"text": "01,write the seeds;02,the skill sets the voice;03,the agent drafts;04,human review ✋;05,pull request and merge;06,deploy to the edge"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_warn_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "⚠ Warnings"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_warn_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Do not assemble without step 04. The agent drafts, the human signs."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_warn_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Step 03 never merges. Ever."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_data_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ℹ Assembly data"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_data_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Estimated time: one afternoon and its commits."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_data_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Hardware included: zero handoffs."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_repo_soon",
+							"children": [
+								{
+									"_type": "span",
+									"text": "repository link, coming shortly"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "mn_repo_label",
+							"children": [
+								{
+									"_type": "span",
+									"text": "View the repository"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "manual_footer_link",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Deconstructing this website"
+								}
+							]
+						}
+					]
+				},
 				{
 					"type": "content",
 					"title": "panel_labels",
@@ -6249,6 +6570,251 @@
 								{
 									"_type": "span",
 									"text": "This site uses no tracking or advertising cookies. Analytics (Cloudflare Web Analytics) works without cookies and without identifying you."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-deconstruyendo",
+				"slug": "deconstruyendo",
+				"status": "published",
+				"data": {
+					"title": "Deconstruyendo esta web",
+					"excerpt": "Cómo está montada esta web. Semillas versionadas, un agente que redacta y un humano que firma. Con los números a la vista.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Esta página explica cómo está construida la web que estás leyendo. No por vanidad. Es nuestra manera de trabajar, aplicada a nuestro propio escaparate. Si te cuentan cómo trabajan y no pueden enseñarte el taller, desconfía."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "La arquitectura"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Astro con renderizado en servidor sobre Cloudflare Workers. El contenido vive en EmDash, un CMS que corre en el mismo Worker, con la base de datos en D1 y las imágenes en R2. No hay servidores que cuidar. La página que ves se sirvió desde un punto de presencia a menos de 50 ms de ti."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Contenido como código"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cada texto de esta web vive en seed/, versionado en Git. Un rebuild desde cero reproduce el sitio entero, palabra a palabra. Si un texto cambia, hay un commit que lo cuenta."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Los agentes"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "La primera versión de cada texto la redacta un agente con una skill de copywriting. La voz de la casa, una lista negra de palabras prohibidas y un detector de tics de IA con puntuación. Después un humano lo lee, lo corrige y lo firma. El paso de revisión no es opcional. Es el producto."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Los números"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Lighthouse 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las cuatro plantillas, medido el 6 de agosto de 2026 sobre el build de producción. Validación W3C, cero errores. LCP por debajo de 1,3 segundos en móvil. Cuando cambien, cambiará esta línea."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El taller, a la vista"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Código, semillas, skills y prompts viven en el repositorio. Mira dentro y dinos si harías algo mejor. Probablemente sí. Así empiezan las buenas conversaciones."
+								}
+							]
+						}
+					]
+				},
+				"locale": "es"
+			},
+			{
+				"id": "page-deconstructing",
+				"slug": "deconstructing",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "page-deconstruyendo",
+				"data": {
+					"title": "Deconstructing this website",
+					"excerpt": "How this site is put together. Versioned seeds, an agent that drafts and a human who signs. Numbers in plain sight.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This page explains how the website you are reading is built. Not out of vanity. It is how we work, applied to our own shop window. If someone tells you how they work but can't show you the workshop, be suspicious."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The architecture"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Astro with server-side rendering on Cloudflare Workers. Content lives in EmDash, a CMS running in the same Worker, with the database on D1 and images on R2. No servers to babysit. The page you are reading was served from a point of presence less than 50 ms away from you."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Content as code"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Every text on this site lives in seed/, versioned in Git. A clean rebuild reproduces the whole site, word for word. When a text changes, there is a commit that tells the story."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The agents"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The first draft of every text is written by an agent with a copywriting skill. The house voice, a blacklist of forbidden words, and an AI-tell detector with a score. Then a human reads it, corrects it and signs it. The review step is not optional. It is the product."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The numbers"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Lighthouse 100 in performance, accessibility, best practices and SEO across all four templates, measured on the production build on August 6, 2026. W3C validation, zero errors. LCP under 1.3 seconds on mobile. When these change, this line changes."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The workshop, in plain sight"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Code, seeds, skills and prompts live in the repository. Look inside and tell us what you would do better. Probably something. That is how good conversations start."
 								}
 							]
 						}
