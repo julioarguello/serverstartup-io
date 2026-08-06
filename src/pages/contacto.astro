@@ -2,8 +2,10 @@
 /**
  * Contacto page — layout in template, content + contact data from CMS.
  * - Hero with h1 "Contacto"
- * - Content from CMS (intro text + bullet list)
- * - 3 contact methods (WhatsApp, Teléfono, Email) — data from site settings
+ * - Content from CMS (intro text)
+ * - Contact methods (WhatsApp, Teléfono, Email) — data from site settings.
+ *   Phone/WhatsApp live base64-encoded in settings and are decoded on click,
+ *   so the number never appears in static HTML, JSON-LD or crawlable text.
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
@@ -19,11 +21,9 @@ Astro.cache.set(cacheHint);
 const { title, content, excerpt } = entry.data;
 const settings = await getSiteSettings() as SiteSettings;
 
-// Contact info from site settings (fallback to hardcoded for safety)
-const phone = settings.phone || "+34666666666";
-const phoneDisplay = settings.phoneDisplay || "666 66 66 66";
-const email = settings.email || "info@serverstartup.io";
-const whatsapp = settings.whatsapp || `https://wa.me/${phone.replace('+', '')}`;
+const email = settings.email || "ventas@serverstartup.io";
+const phoneEncoded = settings.phoneEncoded || "";
+const whatsappEncoded = settings.whatsappEncoded || "";
 
 // Contact method labels from site settings
 const whatsappLabel = settings.contactWhatsappLabel || "WhatsApp";
@@ -38,7 +38,6 @@ const emailLabel = settings.contactEmailLabel || "Email";
 	<script type="application/ld+json" set:html={JSON.stringify(contactJsonLd({
 		siteUrl: Astro.site?.origin!,
 		description: excerpt || `${title} — Server Startup`,
-		phone,
 		email,
 	}))} />
 	<section class="s-contact" aria-label={title}>
@@ -51,23 +50,25 @@ const emailLabel = settings.contactEmailLabel || "Email";
 			)}
 
 			<div class="s-contact__methods" role="list">
-				<a href={whatsapp} target="_blank" rel="noopener" class="s-contact__method" role="listitem" aria-label={`${whatsappLabel}`}>
-					<span class="s-contact__method-label">{whatsappLabel}</span>
-					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-					<span class="s-contact__method-value">{phoneDisplay}</span>
-				</a>
+				{whatsappEncoded && (
+					<button type="button" class="s-contact__method" role="listitem" data-wa={whatsappEncoded} aria-label={whatsappLabel}>
+						<span class="s-contact__method-label">{whatsappLabel}</span>
+						<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+							<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+				)}
 
-				<a href={`tel:${phone}`} class="s-contact__method" role="listitem" aria-label={`${phoneLabel}`}>
-					<span class="s-contact__method-label">{phoneLabel}</span>
-					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-					<span class="s-contact__method-value">{phoneDisplay}</span>
-				</a>
+				{phoneEncoded && (
+					<button type="button" class="s-contact__method" role="listitem" data-tel={phoneEncoded} aria-label={phoneLabel}>
+						<span class="s-contact__method-label">{phoneLabel}</span>
+						<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+							<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+				)}
 
-				<a href={`mailto:${email}`} class="s-contact__method" role="listitem" aria-label={`${emailLabel}`}>
+				<a href={`mailto:${email}`} class="s-contact__method" role="listitem" aria-label={emailLabel}>
 					<span class="s-contact__method-label">{emailLabel}</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -78,6 +79,15 @@ const emailLabel = settings.contactEmailLabel || "Email";
 		</div>
 	</section>
 </Base>
+
+<script>
+	for (const el of document.querySelectorAll<HTMLElement>("[data-tel],[data-wa]")) {
+		el.addEventListener("click", () => {
+			if (el.dataset.tel) location.href = "tel:" + atob(el.dataset.tel);
+			else if (el.dataset.wa) window.open("https://wa.me/" + atob(el.dataset.wa), "_blank", "noopener");
+		});
+	}
+</script>
 
 <style>
 	@import "../styles/contact.css";

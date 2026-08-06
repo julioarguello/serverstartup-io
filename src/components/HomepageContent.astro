@@ -132,8 +132,13 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 			{services.map((svc, i) => {
 				const d = svc.data;
 				const cardColor = d.color || '#BFEDEE';
+				// YIQ luminance: dark brand backgrounds get white text (+ the CSS
+				// overlay in .area-card--dark that lifts contrast to AA for body copy)
+				const hex = cardColor.replace('#', '');
+				const yiq = (parseInt(hex.substring(0, 2), 16) * 299 + parseInt(hex.substring(2, 4), 16) * 587 + parseInt(hex.substring(4, 6), 16) * 114) / 1000;
+				const darkCard = yiq < 150;
 				return (
-					<article class={`area-card card${i + 1}`} style={`background-color: ${cardColor};`} role="listitem">
+					<article class={`area-card card${i + 1}${darkCard ? ' area-card--dark' : ''}`} style={`background-color: ${cardColor};`} role="listitem">
 						<h3>{d.title}</h3>
 						<p class="text-body">{d.excerpt}</p>
 						<a href={`${localePrefix}/${svc.id}`} class="area-card__arrow" aria-label={t("view_service", { title: d.title })}>

@@ -248,3 +248,14 @@
 @media (min-width: 1025px) {
 	.s-cta { padding: 80px 0; }
 }
+
+/* Brand-palette cards: dark backgrounds get white text. The 25% ink overlay
+   lifts body-copy contrast to AA (4.5:1) on mid-tone brand colors. */
+.area-card--dark {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
+}
+.area-card--dark h3,
+.area-card--dark .text-body,
+.area-card--dark .area-card__arrow {
+	color: #FFFFFF;
+}

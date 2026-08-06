@@ -12,6 +12,10 @@ export interface SiteSettings {
 	tagline?: string;
 	phone?: string;
 	phoneDisplay?: string;
+	/* Base64-encoded contact endpoints — decoded on click so the number never
+	   appears in static HTML, JSON-LD or the committed seed in plain text. */
+	phoneEncoded?: string;
+	whatsappEncoded?: string;
 	email?: string;
 	whatsapp?: string;
 	defaultCtaLabel?: string;
