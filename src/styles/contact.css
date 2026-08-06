@@ -82,3 +82,15 @@
 		gap: 48px;
 	}
 }
+
+/* Contact methods rendered as <button> (click-to-decode phone/WhatsApp)
+   must sit identically to their <a> siblings. */
+button.s-contact__method {
+	background: none;
+	border: 0;
+	font: inherit;
+	color: inherit;
+	text-align: inherit;
+	cursor: pointer;
+	width: 100%;
+}

@@ -120,7 +120,7 @@ const t = Astro.locals.t;
 				<ul class="footer-list">
 					<li><a href={`${localePrefix}/${locale === "en" ? "about-us" : "quienes-somos"}`}>{aboutUsLabel}</a></li>
 					<li><a href={`mailto:${email}`}>{email}</a></li>
-					<li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>
+					{phone && phoneDisplay && <li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>}
 				</ul>
 				<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
 			</div>
