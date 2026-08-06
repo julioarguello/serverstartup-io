@@ -94,3 +94,7 @@ button.s-contact__method {
 	cursor: pointer;
 	width: 100%;
 }
+
+/* Methods are a real <ul>; each li stretches its single child card. */
+.s-contact__methods > li { display: flex; }
+.s-contact__methods > li > .s-contact__method { width: 100%; }
