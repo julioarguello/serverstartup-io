@@ -1617,19 +1617,193 @@
 				"data": {
 					"title": "Comercio electrónico",
 					"excerpt": "Tu catálogo tiene 50.000 SKUs y tu partner no sabe cómo se indexan. Parametrizamos SAP Commerce Cloud con la profundidad que solo da trabajar en el mismo proyecto durante años.",
+					"cta_label": "Audita tu e-commerce",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k3",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "En SAP hay 4.000 partners. Lo que no hay son tres ingenieros que conozcan tu catálogo, tu pipeline de precios y tu WAF al mismo tiempo. Nosotros parametrizamos SAP Commerce Cloud para Auchan desde hace 5 años."
+									"_key": "k0",
+									"text": "Tu catálogo tiene 50.000 SKUs y tu partner no sabe cómo se indexan. En SAP hay 4.000 partners. Lo que no hay son tres ingenieros que conozcan tu catálogo, tu pipeline de precios y tu ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": " al mismo tiempo. Nosotros parametrizamos SAP Commerce Cloud para Auchan desde hace 5 años.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "Partner ≠ ingeniero",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "No vendemos licencias SAP. Parametrizamos tu plataforma con la profundidad que solo da trabajar años en el mismo proyecto.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "Parametrizamos ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": "SAP Commerce Cloud",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": " sobre tu lógica de negocio, no sobre la configuración de serie. Catálogos masivos, checkout, precios, promociones.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": "La arquitectura aguanta un *Black Friday* real. Caché en el edge con Cloudflare y pre-rendering selectivo.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "Precios y stock sincronizados entre SAP y BigQuery, y promociones que llegan a la vez a la web y a la tienda.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "El ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": " protege el checkout. Lo configura el mismo equipo que conoce tu catálogo.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kl",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "SAP + datos + seguridad",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ko",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "El equipo que parametriza tu catálogo construye también tu pipeline de datos y tu seguridad perimetral. Nadie te dirá \"lo miro con el otro equipo\". ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
 					],
-					"cta_label": "Audita tu e-commerce",
 					"color": "#B5E6F7"
 				},
 				"locale": "es"
@@ -1641,19 +1815,179 @@
 				"data": {
 					"title": "CDN, WAF y seguridad edge",
 					"excerpt": "Cloudflare está configurado. ¿Seguro de que está bien configurado? Diseñamos, desplegamos y mantenemos arquitecturas de seguridad perimetral en producción.",
+					"cta_label": "Audita tu edge",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k3",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cloudflare está configurado. ¿Seguro de que está bien configurado? Sabemos por qué están esas WAF rules. Sabemos qué Workers ejecutan lógica de negocio y cuáles sobran. Diseñamos, desplegamos y mantenemos arquitecturas de seguridad perimetral en producción."
+									"_key": "k0",
+									"text": "Cloudflare está configurado. ¿Seguro de que está bien configurado? En muchas casas el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": " lo montó alguien que ya no está, y nadie se atreve a tocar las reglas. Nosotros sabemos por qué está cada una, porque las escribimos y las mantenemos en producción.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "WAF ≠ seguridad",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "Un firewall no es una estrategia de seguridad. Configuramos Cloudflare como arquitectura.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "Reglas de ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": " ajustadas a tu superficie de ataque real. OWASP Top 10, DDoS, bots, y las plantillas genéricas fuera.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": "*Zero Trust* para las aplicaciones internas. Sin VPN, con políticas verificadas por identidad y dispositivo.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "Lógica de negocio en el edge con Workers, a menos de 50 ms del usuario y en más de 300 PoPs.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kh",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "Caché y CDN que descargan tu origen y hacen predecibles los tiempos de respuesta.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "Quien lo configura, lo mantiene",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "No montamos Cloudflare y desaparecemos. Vigilamos el tráfico, ajustamos las reglas cuando cambian los patrones de ataque y respondemos cuando algo se degrada. Tres ingenieros que conocen tu configuración, no un ticket a un partner genérico. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
 					],
-					"cta_label": "Audita tu edge",
 					"color": "#FDEBB6"
 				},
 				"locale": "es"
@@ -1665,19 +1999,179 @@
 				"data": {
 					"title": "Big Data & Cloud Analytics",
 					"excerpt": "Tu equipo de datos apaga fuegos, no innova. Construimos plataformas en Google Cloud que gobiernan el dato desde la ingesta hasta el análisis.",
+					"cta_label": "Hablemos de tus datos",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tu equipo de datos apaga fuegos, no innova. Los informes llegan tarde, los dashboards no cuadran con el ERP y nadie se fía del número. Construimos arquitecturas de datos que gobiernan el ciclo completo, conectadas con tus sistemas operacionales."
+									"_key": "k0",
+									"text": "Tu equipo de datos apaga fuegos, no innova. Los informes llegan tarde, el dato no cuadra con el ERP y nadie sabe dónde se pierde. Lo hemos visto. Construimos plataformas que gobiernan el dato desde la ingesta hasta el análisis, conectadas con tus sistemas operacionales.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "dbt ≠ pipeline",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "Tener dbt no significa tener datos gobernados. Diseñamos plataformas en Google Cloud donde cada transformación está versionada, testeada y documentada.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "El warehouse es ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "BigQuery",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": ". Sin servidores que cuidar, con costes predecibles y el dato viviendo donde se analiza.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "Las transformaciones son código ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "dbt",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": ", versionado en Git y con el linaje completo de cada métrica. En nuestra mayor plataforma corren 111 modelos y 1.646 tests.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "Ingesta en tiempo real con Dataflow y Pub/Sub para los flujos que no pueden esperar.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kh",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "Arquitectura medallón en tres capas, cada una con su propósito y su control de acceso.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "Datos conectados con el negocio",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "No construimos plataformas de datos aisladas. Conectamos BigQuery con SAP, con tu ERP y con el edge. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
 					],
-					"cta_label": "Hablemos de tus datos",
 					"color": "#BFEDEE"
 				},
 				"locale": "es"
@@ -1689,19 +2183,690 @@
 				"data": {
 					"title": "Integración de sistemas",
 					"excerpt": "No somos arquitectos de PowerPoint. Más de 150 flujos, 19 sistemas interconectados. Enterprise Integration Patterns reales sobre Karaf y Quarkus.",
+					"cta_label": "Hablemos de integración",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k7",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tu integración funciona... excepto cuando importa. El stock no cuadra, el pedido no llega al ERP y nadie sabe por qué. Lo hemos visto. No somos arquitectos de PowerPoint: construimos herramientas de diagnóstico como grafos de topología interactivos, trazamos cada flujo de datos extremo a extremo y desplegamos bundles OSGi en producción. Más de 150 flujos de integración orquestando 19 sistemas en un solo cliente."
+									"_key": "k0",
+									"text": "Mover datos de A a B es la parte fácil. El verdadero desafío de ingeniería es mantener la ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "continuidad operativa",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": " en ecosistemas donde conviven tu ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3",
+									"text": "ERP",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": ", plataformas ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": "SaaS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": " y sistemas *legacy* intocables. Abordamos la integración con una regla: observabilidad absoluta. Si un flujo falla, la traza revela exactamente *dónde*, *cuándo* y *por qué*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "Conector ≠ Sistema integrado",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "Un simple *script* punto-a-punto es frágil. Una integración profesional de verdad ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "desacopla sistemas",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": ": enruta inteligentemente, transforma al vuelo y aísla los fallos. Si el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "ERP",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": " se cae, los pedidos se encolan en *standby* y se procesan al volver. Cero pérdida de datos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kt",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "ki",
+									"_type": "link",
+									"href": "https://camel.apache.org/"
+								},
+								{
+									"_key": "kl",
+									"_type": "link",
+									"href": "https://karaf.apache.org/"
+								},
+								{
+									"_key": "kq",
+									"_type": "link",
+									"href": "https://camel.apache.org/camel-quarkus/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "Patrones `EIP` y Orquestación",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": ": Enrutamiento complejo con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "Apache Camel",
+									"marks": [
+										"ki"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": ", desplegado sobre ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "Karaf",
+									"marks": [
+										"kl"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": " (aislamiento ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ko",
+									"text": "OSGi",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": ") o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": "Quarkus",
+									"marks": [
+										"kq"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": " (arranque sub-milisegundo). Implementamos consumidores idempotentes sin «cajas negras».",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k18",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kw",
+									"_type": "link",
+									"href": "https://kafka.apache.org/"
+								},
+								{
+									"_key": "kz",
+									"_type": "link",
+									"href": "https://activemq.apache.org/components/artemis/"
+								},
+								{
+									"_key": "k12",
+									"_type": "link",
+									"href": "https://cloud.google.com/pubsub"
+								},
+								{
+									"_key": "k15",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/queues/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "Mensajería Asíncrona y Eventos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": ": *Backbones* tolerantes a fallos con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": "Kafka",
+									"marks": [
+										"kw"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ky",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": "ActiveMQ Artemis",
+									"marks": [
+										"kz"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k11",
+									"text": ", o servicios gestionados como ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "Google Cloud Pub/Sub",
+									"marks": [
+										"k12"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "Cloudflare Queues",
+									"marks": [
+										"k15"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1h",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1b",
+									"_type": "link",
+									"href": "https://cloud.google.com/run"
+								},
+								{
+									"_key": "k1e",
+									"_type": "link",
+									"href": "https://workers.cloudflare.com/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "Cómputo `Serverless`",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": ": Lógica de integración elástica usando ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "Google Cloud Run",
+									"marks": [
+										"k1b"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": " o directamente en el borde (*edge computing*) con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1f",
+									"text": "Cloudflare Workers",
+									"marks": [
+										"k1e"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1t",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1k",
+									"_type": "link",
+									"href": "https://hop.apache.org/"
+								},
+								{
+									"_key": "k1n",
+									"_type": "link",
+									"href": "https://www.talend.com/"
+								},
+								{
+									"_key": "k1q",
+									"_type": "link",
+									"href": "https://cloud.google.com/dataflow"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1i",
+									"text": "Data Engineering y `ETL`",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": ": Movimiento pesado de datos con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": "Apache Hop",
+									"marks": [
+										"k1k"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": " o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": "Talend",
+									"marks": [
+										"k1n"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": " para procesos *batch*, y canalizaciones unificadas con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": "Google Cloud Dataflow",
+									"marks": [
+										"k1q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k24",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1y",
+									"_type": "link",
+									"href": "https://www.gravitee.io/"
+								},
+								{
+									"_key": "k21",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/api-shield/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1u",
+									"text": "Gobierno de `APIs`",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": ": Exposición segura mediante soluciones de ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": "API Management",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1x",
+									"text": " (como ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": "Gravitee",
+									"marks": [
+										"k1y"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": ") o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "Cloudflare API Shield",
+									"marks": [
+										"k21"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k29",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k25",
+									"text": "Observabilidad 360º",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": ": Logs y métricas centralizadas en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": "`ELK`",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": " (Elasticsearch, Logstash, Kibana). Trazabilidad exacta de cada mensaje, *de extremo a extremo*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "Quién lo construye, responde",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2d",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2c",
+									"text": "«Tu integración funciona... excepto cuando importa».",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": "El *stock* no cuadra, los pedidos se duplican y nadie sabe muy bien por qué. Lo hemos visto demasiadas veces.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": "No somos ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": "\"arquitectos de PowerPoint\"",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2i",
+									"text": ". El equipo *senior* que diseña la topología en la pizarra es ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2j",
+									"text": "el mismo",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2k",
+									"text": " que luego escribe el código, afina los *brokers* y levanta el teléfono si algo falla un viernes a las seis (aunque ya no falle 😉). ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": "Si se rompe, no abrimos un *ticket*: ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2n",
+									"text": "lo arreglamos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2o",
+									"text": ".",
+									"marks": []
 								}
 							]
 						}
 					],
-					"cta_label": "Hablemos de integración",
 					"color": "#ECDCE3"
 				},
 				"locale": "es"
@@ -1713,19 +2878,179 @@
 				"data": {
 					"title": "Ingeniería Greenfield y sistemas críticos",
 					"excerpt": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Java 21+, Spring Boot, Quarkus.",
+					"cta_label": "Hablemos de tu proyecto",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Si tu cadena de valor necesita un motor específico que no existe, lo diseñamos."
+									"_key": "k0",
+									"text": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Si tu cadena de valor necesita un motor que no existe, lo diseñamos, lo escribimos y lo operamos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "El código no es el producto",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "El producto es el sistema que funciona en producción. Java 21+, Spring Boot o Quarkus. Elegimos la pila según el problema, no según la tendencia.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "Java moderno con virtual threads, records y pattern matching. Código mantenible que escala sin trucos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "APIs *Contract First*. Primero el contrato, luego el código, con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": "OAuth 2.0",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "mTLS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": " de serie.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "El CI/CD funciona como gobernanza. Tests, análisis estático y validación de seguridad antes de cada despliegue.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kh",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "La seguridad se compila. Spring Security en el código y el WAF de Cloudflare delante.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "Tu deuda técnica es nuestro problema",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "Tres ingenieros senior. Los mismos tres. Quien diseña el sistema lo despliega y responde por su estabilidad. No entregamos y desaparecemos. Acompañamos la transición y dejamos el conocimiento en tu casa. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
 					],
-					"cta_label": "Hablemos de tu proyecto",
 					"color": "#C5EFCD"
 				},
 				"locale": "es"
@@ -1743,11 +3068,179 @@
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k3",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "SAP has 4,000 partners. What it doesn't have is three engineers who know your catalog, your pricing pipeline and your WAF at the same time. We've parameterized SAP Commerce Cloud for Auchan for 5 years."
+									"_key": "k0",
+									"text": "Your catalog has 50,000 SKUs and your partner doesn't know how they're indexed. SAP has 4,000 partners. What it doesn't have is three engineers who know your catalog, your pricing pipeline and your ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": " at the same time. We've parameterized SAP Commerce Cloud for Auchan for 5 years.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "Partner ≠ engineer",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "We don't sell SAP licenses. We parameterize your platform with the depth that only years on the same project can give.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "SAP Commerce Cloud",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": " tuned to your business logic, not the factory defaults. Massive catalogs, checkout, pricing, promotions.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "Architecture that survives a real *Black Friday*. Edge caching on Cloudflare, selective pre-rendering.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ke",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "Prices and stock in sync between SAP and BigQuery, and promotions that hit the web and the store at the same time.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ki",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kf",
+									"text": "The ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": " guards the checkout, configured by the same people who know your catalog.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kk",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "SAP + data + security",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kn",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "The team parameterizing your catalog also builds your data pipeline and your edge security. Nobody will tell you \"let me check with the other team\". ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "One team. Four verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -1767,11 +3260,165 @@
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k3",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Your Cloudflare is configured. Are you sure it's configured right? We know why those WAF rules are there. We know which Workers run business logic and which ones are dead weight. We design, deploy and maintain edge security architectures in production."
+									"_key": "k0",
+									"text": "Your Cloudflare is configured. Are you sure it's configured right? In many companies the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": " was set up by someone who left, and nobody dares touch the rules. We know why each one is there, because we wrote them and we keep them running in production.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "WAF ≠ security",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "A firewall is not a security strategy. We configure Cloudflare as architecture.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": " rules tuned to your actual attack surface. OWASP Top 10, DDoS, bots, and no generic templates.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "*Zero Trust* for internal apps. No VPN, policies verified by identity and device.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ke",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "Business logic at the edge with Workers, under 50 ms from the user, on 300+ PoPs.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kg",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kf",
+									"text": "Caching and CDN that unload your origin and make response times predictable.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ki",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": "Whoever configures it, maintains it",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kl",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "We don't set up Cloudflare and disappear. We watch the traffic, adjust rules as attack patterns change, and respond when something degrades. Three engineers who know your configuration, not a ticket to a generic partner. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "One team. Four verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -1791,11 +3438,171 @@
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Your data team fights fires, not builds insights. Reports arrive late, dashboards don't match the ERP, and nobody trusts the numbers. We build data architectures that govern the full cycle, connected to your operational systems."
+									"_key": "k0",
+									"text": "Your data team fights fires all week. Reports arrive late, the numbers don't match the ERP, and nobody knows where the data goes wrong. We've seen it. We build platforms that govern data from ingestion to analysis, connected to your operational systems.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "dbt ≠ pipeline",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "Having dbt doesn't mean having governed data. We design platforms on Google Cloud where every transformation is versioned, tested and documented.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "The warehouse is ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "BigQuery",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": ". No servers to babysit, predictable costs, data living where it gets analyzed.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "Transformations are ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "dbt",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": " code, versioned in Git with full lineage for every metric. Our largest platform runs 111 models and 1,646 tests.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "Real-time ingestion with Dataflow and Pub/Sub for the flows that can't wait.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kh",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "A three-layer medallion architecture, each layer with its purpose and its access control.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "Data connected to the business",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "We don't build isolated data platforms. We connect BigQuery to SAP, to your ERP, and to the edge. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "One team. Four verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -1815,11 +3622,668 @@
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k7",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Your integration works — except when it matters. Orders don't reach the ERP, stock doesn't match, and nobody knows why. We've seen it. We're not PowerPoint architects: we build diagnostic tools like interactive topology graphs, trace every data flow end to end, and deploy OSGi bundles in production. Over 150 integration flows orchestrating 19 systems for a single client."
+									"_key": "k0",
+									"text": "Moving data from A to B is the easy part. The real engineering challenge is maintaining ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "operational continuity",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": " in ecosystems where your ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3",
+									"text": "ERP",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": "SaaS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": " platforms, and untouchable *legacy* systems coexist. We approach integration with one rule: absolute observability. If a flow fails, the trace reveals exactly *where* and *why* before it impacts the business.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "Connector ≠ Integrated system",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "A simple point-to-point *script* is fragile. True professional integration ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "decouples systems",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": ": it routes intelligently, transforms on the fly, and isolates failures. If the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "ERP",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": " goes down, orders queue up in *standby* and process when it returns. Zero data loss.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kt",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "ki",
+									"_type": "link",
+									"href": "https://camel.apache.org/"
+								},
+								{
+									"_key": "kl",
+									"_type": "link",
+									"href": "https://karaf.apache.org/"
+								},
+								{
+									"_key": "kq",
+									"_type": "link",
+									"href": "https://camel.apache.org/camel-quarkus/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "`EIP` Patterns & Orchestration",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": ": Complex routing with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "Apache Camel",
+									"marks": [
+										"ki"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": ", deployed on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "Karaf",
+									"marks": [
+										"kl"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": " (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ko",
+									"text": "OSGi",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": " isolation) or ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": "Quarkus",
+									"marks": [
+										"kq"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": " (sub-millisecond startup). We implement idempotent consumers with no \"black boxes.\"",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k18",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kw",
+									"_type": "link",
+									"href": "https://kafka.apache.org/"
+								},
+								{
+									"_key": "kz",
+									"_type": "link",
+									"href": "https://activemq.apache.org/components/artemis/"
+								},
+								{
+									"_key": "k12",
+									"_type": "link",
+									"href": "https://cloud.google.com/pubsub"
+								},
+								{
+									"_key": "k15",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/queues/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "Async Messaging & Events",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": ": Fault-tolerant *backbones* using ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": "Kafka",
+									"marks": [
+										"kw"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ky",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": "ActiveMQ Artemis",
+									"marks": [
+										"kz"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k11",
+									"text": ", or managed services like ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "Google Cloud Pub/Sub",
+									"marks": [
+										"k12"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "Cloudflare Queues",
+									"marks": [
+										"k15"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1h",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1b",
+									"_type": "link",
+									"href": "https://cloud.google.com/run"
+								},
+								{
+									"_key": "k1e",
+									"_type": "link",
+									"href": "https://workers.cloudflare.com/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "`Serverless` Compute",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": ": Elastic integration logic using ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "Google Cloud Run",
+									"marks": [
+										"k1b"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": " or directly at the edge with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1f",
+									"text": "Cloudflare Workers",
+									"marks": [
+										"k1e"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1t",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1k",
+									"_type": "link",
+									"href": "https://hop.apache.org/"
+								},
+								{
+									"_key": "k1n",
+									"_type": "link",
+									"href": "https://www.talend.com/"
+								},
+								{
+									"_key": "k1q",
+									"_type": "link",
+									"href": "https://cloud.google.com/dataflow"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1i",
+									"text": "Data Engineering & `ETL`",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": ": Heavy data movement with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": "Apache Hop",
+									"marks": [
+										"k1k"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": " or ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": "Talend",
+									"marks": [
+										"k1n"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": " for *batch* processing, and unified pipelines using ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": "Google Cloud Dataflow",
+									"marks": [
+										"k1q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k24",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1y",
+									"_type": "link",
+									"href": "https://www.gravitee.io/"
+								},
+								{
+									"_key": "k21",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/api-shield/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1u",
+									"text": "API Governance",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": ": Secure exposure via ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": "API Management",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1x",
+									"text": " solutions (like ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": "Gravitee",
+									"marks": [
+										"k1y"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": ") or ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "Cloudflare API Shield",
+									"marks": [
+										"k21"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k29",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k25",
+									"text": "360º Observability",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": ": Centralized logs and metrics via the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": "`ELK`",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": " stack (Elasticsearch, Logstash, Kibana). Exact traceability for every single message, *end-to-end*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "Who builds it, answers for it",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2d",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2c",
+									"text": "\"Your integration works... except when it matters.\"",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": "Stock doesn't match, orders duplicate, and nobody quite knows why. We've seen it one too many times.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": "We are not PowerPoint architects. The senior team that designs the topology on the whiteboard is ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": "the exact same one",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2i",
+									"text": " that writes the code, fine-tunes the *brokers*, and picks up the phone if something breaks on a Friday at six (though they break less and less 😉).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2k",
+									"text": "If it breaks, we don't open a *ticket*: ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2l",
+									"text": "we fix it",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": ".",
+									"marks": []
 								}
 							]
 						}
@@ -1839,11 +4303,171 @@
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "We're not a software factory. We build the critical components that commercial software can't cover. If your value chain needs a specific engine that doesn't exist, we design it."
+									"_key": "k0",
+									"text": "We're not a software factory. We build the critical components commercial software can't cover. If your value chain needs an engine that doesn't exist, we design it, write it and run it.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "Code is not the product",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "The product is the system running in production. Java 21+, Spring Boot or Quarkus. We pick the stack for the problem, not for the trend.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "Modern Java with virtual threads, records and pattern matching. Maintainable code that scales without tricks.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "*Contract First* APIs. Contract first, code second, with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": "OAuth 2.0",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "mTLS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": " as standard.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "CI/CD as governance. Tests, static analysis and security validation before every deploy.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kh",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "Security gets compiled in. Spring Security in the code, Cloudflare's WAF in front.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "Your technical debt is our problem",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "Three senior engineers. The same three. Whoever designs the system deploys it and answers for its stability. We don't hand over and vanish. We walk the transition with you and leave the knowledge in your house. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "One team. Four verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}

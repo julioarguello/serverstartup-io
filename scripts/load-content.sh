@@ -131,15 +131,23 @@ print(json.dumps(fields))
       continue
     fi
 
-    # Update via CLI (markdown → PT conversion happens server-side)
+    # Update via CLI (markdown → PT conversion happens server-side).
+    # Payload goes through a temp FILE: emoji/unicode payloads break as a giant
+    # --data argv in some shells, and --file is immune to quoting entirely.
+    PAYLOAD_FILE=$(mktemp)
+    printf '%s' "$PAYLOAD" > "$PAYLOAD_FILE"
+    ERR_FILE=$(mktemp)
     if npx emdash content update "$COLLECTION" "$FM_ID" \
         --rev "$REV" \
-        --data "$PAYLOAD" \
-        --json >/dev/null 2>&1; then
+        --file "$PAYLOAD_FILE" \
+        --json >/dev/null 2>"$ERR_FILE"; then
       echo -e "  ${GREEN}✓ OK${NC}   ${filename} → ${FM_ID}"
       SUCCESS=$((SUCCESS + 1))
+      rm -f "$PAYLOAD_FILE" "$ERR_FILE"
     else
-      echo -e "  ${RED}✗ FAIL${NC} ${filename} → ${FM_ID}"
+      rm -f "$PAYLOAD_FILE"
+      echo -e "  ${RED}✗ FAIL${NC} ${filename} → ${FM_ID} — $(head -c 200 "$ERR_FILE" | tr '\n' ' ')"
+      rm -f "$ERR_FILE"
       FAILED=$((FAILED + 1))
     fi
   done
