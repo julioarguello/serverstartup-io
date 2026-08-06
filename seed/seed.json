@@ -542,6 +542,259 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "bq_tab",
+							"children": [
+								{
+									"_type": "span",
+									"text": "metricas_fiables.sql"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_run",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ejecutar"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Guardar ▾   Programar   Compartir"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_c_top",
+							"children": [
+								{
+									"_type": "span",
+									"text": "-- ¿de qué números te fías?"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_l1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "metrica, linaje, ultima_ejecucion"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_l2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "`gold.metricas_de_negocio`"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_l3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "fiable = TRUE;"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_c_bottom",
+							"children": [
+								{
+									"_type": "span",
+									"text": "-- lo garantizan 1.646 tests sobre 111 modelos dbt"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Consulta completada (1,4 s) · el linaje de cada métrica, de la ingesta al análisis"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_head",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Fila,metrica,linaje,ultima_ejecucion"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_rows",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ventas_del_dia,completo,hace 4 min;stock_por_almacen,completo,hace 4 min;margen_por_promocion,completo,hace 4 min"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_note",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El dato que no cuadra no llega a gold. Ahí está el gobierno."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Seguridad · serverstartup.io"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ACTIVO"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_tiles",
+							"children": [
+								{
+									"_type": "span",
+									"text": "PoPs sirviendo tu web,300+;Workers · latencia al usuario,<50 ms;Plantillas genéricas,0"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_joke_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Modo «lo montó alguien que ya no está»"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_joke_desc",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Desactivado desde 2019. Las reglas las escribimos y las mantenemos nosotros."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_file",
+							"children": [
+								{
+									"_type": "span",
+									"text": "MotorDeNegocio.java — greenfield"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Java 21 · 0 warnings"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_tags",
+							"children": [
+								{
+									"_type": "span",
+									"text": "pila,contrato,gobernanza,seguridad"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_author",
+							"children": [
+								{
+									"_type": "span",
+									"text": "los mismos tres ingenieros, de principio a fin"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_since",
+							"children": [
+								{
+									"_type": "span",
+									"text": "2019"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_sig",
+							"children": [
+								{
+									"_type": "span",
+									"text": "public Sistema construir(Pila pila, Contrato contrato) { … }"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "cart_title",
 							"children": [
 								{
@@ -1209,6 +1462,259 @@
 					"type": "content",
 					"title": "panel_labels",
 					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_tab",
+							"children": [
+								{
+									"_type": "span",
+									"text": "reliable_metrics.sql"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_run",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Run"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_menu",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Save ▾   Schedule   Share"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_c_top",
+							"children": [
+								{
+									"_type": "span",
+									"text": "-- which numbers do you trust?"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_l1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "metric, lineage, last_run"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_l2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "`gold.business_metrics`"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_l3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "reliable = TRUE;"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_c_bottom",
+							"children": [
+								{
+									"_type": "span",
+									"text": "-- guaranteed by 1,646 tests across 111 dbt models"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Query complete (1.4 s) · every metric's lineage, from ingestion to analysis"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_head",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Row,metric,lineage,last_run"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_rows",
+							"children": [
+								{
+									"_type": "span",
+									"text": "daily_sales,complete,4 min ago;stock_by_warehouse,complete,4 min ago;margin_by_promo,complete,4 min ago"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bq_note",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Data that doesn't add up never reaches gold. That's the governance."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Security · serverstartup.io"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ACTIVE"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_tiles",
+							"children": [
+								{
+									"_type": "span",
+									"text": "PoPs serving your site,300+;Workers · latency to the user,<50 ms;Generic templates,0"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_joke_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "«Set up by someone who left» mode"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cf_joke_desc",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Off since 2019. We wrote the rules and we maintain them."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_file",
+							"children": [
+								{
+									"_type": "span",
+									"text": "BusinessEngine.java — greenfield"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Java 21 · 0 warnings"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_tags",
+							"children": [
+								{
+									"_type": "span",
+									"text": "stack,contract,governance,security"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_author",
+							"children": [
+								{
+									"_type": "span",
+									"text": "the same three engineers, start to finish"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_since",
+							"children": [
+								{
+									"_type": "span",
+									"text": "2019"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "jd_sig",
+							"children": [
+								{
+									"_type": "span",
+									"text": "public System build(Stack stack, Contract contract) { … }"
+								}
+							]
+						},
 						{
 							"_type": "block",
 							"style": "normal",
