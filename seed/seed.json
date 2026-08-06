@@ -8,12 +8,12 @@
 	},
 	"settings": {
 		"title": "Server Startup",
-		"tagline": "Ingeniería de Sistemas, Integración y Seguridad Edge",
+		"tagline": "Ingeniería de sistemas, integración y seguridad edge",
 		"phone": "+34666666666",
 		"phoneDisplay": "666 66 66 66",
-		"email": "info@serverstartup.com",
+		"email": "ventas@serverstartup.io",
 		"whatsapp": "https://wa.me/34666666666",
-		"defaultCtaLabel": "Contacta ahora",
+		"defaultCtaLabel": "Cuéntanos tu proyecto",
 		"contactWhatsappLabel": "WhatsApp",
 		"contactPhoneLabel": "Teléfono",
 		"contactEmailLabel": "Email"
@@ -388,7 +388,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "A blog about software, design, and the occasional stray thought."
+									"text": "Ingeniería de sistemas, integración y seguridad edge. Tres ingenieros senior en Getxo, desde 2019."
 								}
 							]
 						}
@@ -398,12 +398,12 @@
 		},
 		{
 			"name": "cta_global",
-			"label": "CTA Global",
-			"description": "Call-to-action block shared across homepage and service pages",
+			"label": "CTA Global (fallback)",
+			"description": "Fallback call-to-action block; locale variants live in cta_global_es / cta_global_en",
 			"widgets": [
 				{
 					"type": "content",
-					"title": "¿Listo para optimizar tu infraestructura digital?",
+					"title": "Hablemos de ingeniero a ingeniero.",
 					"content": [
 						{
 							"_type": "block",
@@ -411,17 +411,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Hablemos de ingeniero a ingeniero, con el negocio en el centro."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Cuéntanos tu reto y te daremos una visión honesta de cómo resolverlo."
+									"text": "Trae el problema como esté. Te responde quien va a escribir el código."
 								}
 							]
 						},
@@ -432,7 +422,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Contacta ahora",
+									"text": "Cuéntanos tu proyecto",
 									"marks": [
 										"cta-link"
 									]
@@ -443,6 +433,94 @@
 									"_type": "link",
 									"_key": "cta-link",
 									"href": "/contacto"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cta_global_es",
+			"label": "CTA Global (ES)",
+			"description": "Call-to-action block shared across homepage and service pages (Spanish)",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "Hablemos de ingeniero a ingeniero.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Trae el problema como esté. Te responde quien va a escribir el código."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cta-button",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cuéntanos tu proyecto",
+									"marks": [
+										"cta-link"
+									]
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "cta-link",
+									"href": "/contacto"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cta_global_en",
+			"label": "CTA Global (EN)",
+			"description": "Call-to-action block shared across homepage and service pages (English)",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "Let's talk, engineer to engineer.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Bring the problem as it is. You'll hear back from the person who'll write the code."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cta-button",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tell us about your project",
+									"marks": [
+										"cta-link"
+									]
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "cta-link",
+									"href": "/en/contact"
 								}
 							]
 						}
@@ -549,7 +627,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "La página que buscas no existe."
+									"text": "Esta página no existe. Puede que el enlace sea viejo o que hayamos movido algo de sitio."
 								}
 							]
 						},
@@ -1058,7 +1136,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "The page you are looking for does not exist."
+									"text": "This page doesn't exist. The link may be old, or we moved something around."
 								}
 							]
 						},
@@ -1561,7 +1639,7 @@
 				"slug": "cdn-waf-seguridad-edge-cloudflare",
 				"status": "published",
 				"data": {
-					"title": "CDN, WAF & Edge Security",
+					"title": "CDN, WAF y seguridad edge",
 					"excerpt": "Cloudflare está configurado. ¿Seguro de que está bien configurado? Diseñamos, desplegamos y mantenemos arquitecturas de seguridad perimetral en producción.",
 					"content": [
 						{
@@ -1586,7 +1664,7 @@
 				"status": "published",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Tu equipo de datos apaga fuegos, no innova. Construimos arquitecturas de datos en Google Cloud que gobiernan el ciclo completo: ingesta, transformación, análisis.",
+					"excerpt": "Tu equipo de datos apaga fuegos, no innova. Construimos plataformas en Google Cloud que gobiernan el dato desde la ingesta hasta el análisis.",
 					"content": [
 						{
 							"_type": "block",
@@ -1633,7 +1711,7 @@
 				"slug": "ingenieria-greenfield-y-sistemas-criticos",
 				"status": "published",
 				"data": {
-					"title": "Desarrollo backend a medida",
+					"title": "Ingeniería Greenfield y sistemas críticos",
 					"excerpt": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Java 21+, Spring Boot, Quarkus.",
 					"content": [
 						{
@@ -1659,7 +1737,7 @@
 				"locale": "en",
 				"translationOf": "svc-ecommerce",
 				"data": {
-					"title": "E-Commerce",
+					"title": "E-commerce",
 					"excerpt": "Your catalog has 50,000 SKUs and your partner doesn't know how they're indexed. We parameterize SAP Commerce Cloud with the depth that only comes from years on the same project.",
 					"cta_label": "Audit your e-commerce",
 					"content": [
@@ -1708,7 +1786,7 @@
 				"translationOf": "svc-bigdata",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Your data team fights fires, not builds insights. We build data architectures on Google Cloud that govern the full cycle: ingestion, transformation, analysis.",
+					"excerpt": "Your data team fights fires all week. We build platforms on Google Cloud that govern data from ingestion to analysis.",
 					"cta_label": "Let's talk data",
 					"content": [
 						{
@@ -1755,7 +1833,7 @@
 				"locale": "en",
 				"translationOf": "svc-greenfield",
 				"data": {
-					"title": "Custom Backend Development",
+					"title": "Greenfield engineering & critical systems",
 					"excerpt": "We're not a software factory. We build the critical components that commercial software can't cover. Java 21+, Spring Boot, Quarkus.",
 					"cta_label": "Let's talk about your project",
 					"content": [
@@ -1788,7 +1866,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Arquitecto de sistemas con más de 15 años de experiencia en infraestructura cloud, sistemas distribuidos y consultoría tecnológica."
+									"text": "Arquitecto de software. Integración con Apache Camel, middleware para Ocado, dbt y Cloudflare Workers. Quince años largos entre hybris y producción."
 								}
 							]
 						}
@@ -1797,12 +1875,12 @@
 				"locale": "es"
 			},
 			{
-				"id": "member-ariadna",
-				"slug": "ariadna",
+				"id": "member-ignacio",
+				"slug": "ignacio-ibaseta",
 				"status": "published",
 				"data": {
-					"title": "Ariadna",
-					"excerpt": "Backend Engineer",
+					"title": "Ignacio Ibaseta",
+					"excerpt": "Data Platform & Terraform Engineer",
 					"content": [
 						{
 							"_type": "block",
@@ -1810,29 +1888,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ingeniera backend especializada en microservicios, APIs y sistemas de mensajería."
-								}
-							]
-						}
-					]
-				},
-				"locale": "es"
-			},
-			{
-				"id": "member-raul",
-				"slug": "raul",
-				"status": "published",
-				"data": {
-					"title": "Raúl",
-					"excerpt": "Data Engineer",
-					"content": [
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Ingeniero de datos con experiencia en BigQuery, dbt, pipelines ETL y arquitecturas de datos en la nube."
+									"text": "Terraform, GCP y la infraestructura como código de la plataforma de datos. Los cimientos que hacen que el dato sea fiable."
 								}
 							]
 						}
@@ -1842,11 +1898,11 @@
 			},
 			{
 				"id": "member-daniel",
-				"slug": "daniel",
+				"slug": "daniel-sio",
 				"status": "published",
 				"data": {
-					"title": "Daniel",
-					"excerpt": "Cloud & DevOps Engineer",
+					"title": "Daniel Sío",
+					"excerpt": "E-commerce Operations Engineer",
 					"content": [
 						{
 							"_type": "block",
@@ -1854,7 +1910,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ingeniero cloud y DevOps especializado en GCP, Cloudflare, infraestructura como código y CI/CD."
+									"text": "Operativa de e-commerce sobre Ocado y evolutivos de plataforma. Automatización, CI y el dato del día a día en dbt."
 								}
 							]
 						}
@@ -1994,7 +2050,7 @@
 				"status": "published",
 				"data": {
 					"title": "Quiénes somos",
-					"excerpt": "El equipo de Server Startup. Ingenieros especializados en arquitectura backend, cloud y sistemas distribuidos.",
+					"excerpt": "Tres ingenieros senior, los mismos de principio a fin. Backend, integración, datos y edge desde Getxo, desde 2019.",
 					"content": [
 						{
 							"_type": "block",
@@ -2002,11 +2058,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "No somos una consultora generalista, trabajamos con un "
-								},
-								{
-									"_type": "span",
-									"text": "modelo boutique",
+									"text": "Tres ingenieros. Los mismos tres. De principio a fin.",
 									"marks": [
 										"strong"
 									]
@@ -2019,18 +2071,17 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Somos profesionales con más de 15 años de experiencia, nos centramos en aquello que dominamos: "
-								},
+									"text": "La sociedad existe desde 2019, y cada uno de nosotros lleva más de quince años en producción. Ser pocos es una elección. Pocos clientes, máxima implicación y ningún junior aprendiendo con tu presupuesto."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
 								{
 									"_type": "span",
-									"text": "arquitectura backend, rendimiento y seguridad en la nube",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": ". Este enfoque nos permite ofrecer soluciones más precisas, rápidas y adaptadas a cada entorno."
+									"text": "Trabajamos dentro de tu equipo, no desde fuera. El middleware que conecta tu ERP con la tienda, el WAF que para el tráfico malo, el modelo de dbt que cierra las ventas del día. Ese es nuestro sitio."
 								}
 							]
 						},
@@ -2050,7 +2101,30 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "En Server Startup creemos en apoyar a quienes comparten nuestra visión de esfuerzo, innovación y superación. Por eso colaboramos con equipos y proyectos que aplican la misma mentalidad que guía nuestro trabajo diario."
+									"text": "Pocas cosas, bien hechas. Preferimos decir que no a entregar tarde. Si un proyecto no encaja con lo que dominamos, te lo decimos en la primera reunión."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Sin inversores. Sin deuda. Sin prisa. La empresa se sostiene con su trabajo, y eso nos permite elegir proyectos complejos y relaciones largas."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -2064,7 +2138,7 @@
 				"status": "published",
 				"data": {
 					"title": "Contacto",
-					"excerpt": "Contacta con Server Startup. Consultoría tecnológica, arquitectura backend y seguridad edge.",
+					"excerpt": "Hablemos de tu proyecto. Te responde uno de los tres ingenieros, sin comerciales de por medio.",
 					"content": [
 						{
 							"_type": "block",
@@ -2072,7 +2146,18 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Si tienes un proyecto en marcha o quieres mejorar tu infraestructura actual, estamos aquí para ayudarte."
+									"text": "Escríbenos. Te responde uno de los tres ingenieros, "
+								},
+								{
+									"_type": "span",
+									"text": "porque no hay nadie más",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
 								}
 							]
 						},
@@ -2082,51 +2167,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cuéntanos qué necesitas:"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Auditorías y consultoría técnica."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Diseño o mejora de arquitectura backend."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Optimización de rendimiento y seguridad."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"listItem": "bullet",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Integración entre sistemas o migración a la nube."
+									"text": "Cuéntanos qué se te rompe, qué quieres montar o qué te preocupa del sistema que ya tienes. Una respuesta honesta no compromete a nada."
 								}
 							]
 						}
@@ -2140,7 +2181,7 @@
 				"status": "published",
 				"data": {
 					"title": "Política de privacidad",
-					"excerpt": "Política de privacidad de Server Startup.",
+					"excerpt": "Pocos datos y explicados claro. Responsable, finalidades y tus derechos, sin letra pequeña.",
 					"content": [
 						{
 							"_type": "block",
@@ -2148,7 +2189,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "De conformidad con el Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales."
+									"text": "Tratamos pocos datos y lo contamos en pocas líneas. Esta política cumple el RGPD y la Ley Orgánica 3/2018 (LOPDGDD)."
 								}
 							]
 						},
@@ -2168,7 +2209,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Server Startup — info@serverstartup.com"
+									"text": "Server Startup S.L., CIF B95944807. Para cualquier asunto de datos, escríbenos a ventas@serverstartup.io."
 								}
 							]
 						},
@@ -2178,7 +2219,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Finalidad"
+									"text": "Qué datos tratamos"
 								}
 							]
 						},
@@ -2188,7 +2229,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Los datos recabados a través del formulario de contacto serán tratados con la finalidad de gestionar su consulta."
+									"text": "Los que nos envías tú al escribirnos por correo o WhatsApp. Tu dirección, tu nombre si lo firmas y lo que nos cuentes. La web no tiene formularios ni cuentas de usuario."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Para qué"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Para responderte. No usamos tus datos para publicidad ni te incorporamos a listas de correo."
 								}
 							]
 						},
@@ -2208,7 +2269,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "La base legal para el tratamiento de sus datos es el consentimiento del interesado."
+									"text": "Tu consentimiento al escribirnos y, si acabamos trabajando juntos, la ejecución de ese contrato."
 								}
 							]
 						},
@@ -2228,7 +2289,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "No se cederán datos a terceros, salvo obligación legal."
+									"text": "No cedemos tus datos a terceros salvo obligación legal. El correo funciona sobre Google Workspace, que actúa como encargado del tratamiento."
 								}
 							]
 						},
@@ -2238,7 +2299,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Derechos"
+									"text": "Conservación"
 								}
 							]
 						},
@@ -2248,7 +2309,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Puede ejercer sus derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiendo a info@serverstartup.com."
+									"text": "Guardamos la correspondencia mientras haga falta para atenderla, y lo que exija la normativa fiscal cuando hay factura de por medio."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tus derechos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Acceso, rectificación, supresión, limitación, portabilidad y oposición. Escríbenos y lo resolvemos. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es)."
 								}
 							]
 						},
@@ -2268,7 +2349,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Este sitio web no utiliza cookies de seguimiento o publicidad."
+									"text": "Esta web no usa cookies de seguimiento ni de publicidad. La analítica (Cloudflare Web Analytics) funciona sin cookies y sin identificarte."
 								}
 							]
 						}
@@ -2409,7 +2490,7 @@
 				"translationOf": "page-quienes-somos",
 				"data": {
 					"title": "About us",
-					"excerpt": "The Server Startup team. Engineers specialised in backend architecture, cloud and distributed systems.",
+					"excerpt": "Three senior engineers, the same three start to finish. Backend, integration, data and edge, from Getxo, since 2019.",
 					"content": [
 						{
 							"_type": "block",
@@ -2417,11 +2498,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We are not a generalist consultancy; we work with a "
-								},
-								{
-									"_type": "span",
-									"text": "boutique model",
+									"text": "Three engineers. The same three. Start to finish.",
 									"marks": [
 										"strong"
 									]
@@ -2434,18 +2511,17 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We are professionals with over 15 years of experience, focused on what we master: "
-								},
+									"text": "The company dates from 2019, and each of us has fifteen-plus years in production. Staying small is a choice. Few clients, deep involvement, and no junior learning on your budget."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
 								{
 									"_type": "span",
-									"text": "backend architecture, performance and cloud security",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": ". This approach lets us deliver more precise, faster and tailored solutions for every environment."
+									"text": "We work inside your team, not around it. The middleware wiring your ERP to the storefront, the WAF stopping bad traffic, the dbt model that closes the day's sales. That's where you'll find us."
 								}
 							]
 						},
@@ -2465,7 +2541,30 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We believe in transparency, technical rigour and long-term partnerships. Every project we take on is an opportunity to build something that lasts."
+									"text": "Few things, done well. We'd rather say no than deliver late. If a project doesn't fit what we're good at, we tell you in the first meeting."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "No investors. No debt. No hurry. The company runs on its own work, which lets us pick complex projects and long relationships."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "One team. Four verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -2480,7 +2579,7 @@
 				"translationOf": "page-contacto",
 				"data": {
 					"title": "Contact",
-					"excerpt": "Get in touch with Server Startup.",
+					"excerpt": "Let's talk. One of the three engineers answers, with no salespeople in between.",
 					"content": [
 						{
 							"_type": "block",
@@ -2488,7 +2587,28 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Contact us and we'll get back to you as soon as possible."
+									"text": "Write to us. One of the three engineers answers, "
+								},
+								{
+									"_type": "span",
+									"text": "because there is no one else",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tell us what's breaking, what you want to build, or what worries you about the system you already run. An honest answer costs nothing."
 								}
 							]
 						}
@@ -2503,7 +2623,7 @@
 				"translationOf": "page-privacidad",
 				"data": {
 					"title": "Privacy policy",
-					"excerpt": "Server Startup privacy policy.",
+					"excerpt": "Very little data, plainly explained. Controller, purposes and your rights, no fine print.",
 					"content": [
 						{
 							"_type": "block",
@@ -2511,7 +2631,167 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "This page describes our privacy policy."
+									"text": "We process very little data, and we explain it in a few lines. This policy follows the GDPR and Spain's Organic Law 3/2018 (LOPDGDD)."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Data controller"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server Startup S.L., tax ID B95944807. For anything data-related, write to ventas@serverstartup.io."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "What we process"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Whatever you send us by email or WhatsApp. Your address, your name if you sign it, and what you tell us. The site has no forms and no user accounts."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Why"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "To answer you. We don't use your data for advertising and we don't add you to mailing lists."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Legal basis"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Your consent when you write to us and, if we end up working together, the performance of that contract."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Recipients"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We don't share your data with third parties unless the law requires it. Our email runs on Google Workspace, which acts as a data processor."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Retention"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We keep correspondence for as long as it takes to handle it, plus whatever tax law requires when an invoice is involved."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Your rights"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Access, rectification, erasure, restriction, portability and objection. Write to us and we'll sort it out. You can also complain to the Spanish supervisory authority (aepd.es)."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cookies"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This site uses no tracking or advertising cookies. Analytics (Cloudflare Web Analytics) works without cookies and without identifying you."
 								}
 							]
 						}

@@ -121,7 +121,7 @@
 	padding: 4px 12px;
 	font-size: 14px;
 	color: rgba(30, 30, 30, 0.7);
-	background: #f5f5f5;
+	background: var(--color-surface);
 	border-radius: 4px;
 	text-decoration: none;
 	transition: color 0.2s, background 0.2s;
@@ -129,7 +129,7 @@
 
 .post-tag:hover {
 	color: var(--color-text);
-	background: #e8e8e8;
+	background: var(--color-surface-hover);
 }
 
 @media (min-width: 768px) {
