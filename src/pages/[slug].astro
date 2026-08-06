@@ -10,10 +10,11 @@
  * Each service has a color-themed cube background SVG.
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
-import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
+import ServiceInstrument from "../components/service/ServiceInstrument.astro";
 import { serviceJsonLd } from "../utils/jsonld";
+import { getUiLabels } from "../utils/ui-labels";
 import type { SiteSettings } from "../types";
 const t = Astro.locals.t;
 
@@ -36,6 +37,7 @@ const ctaLabel = entry.data.cta_label || defaultCtaLabel;
 
 // Locale-aware URL prefix ("" for ES default, "/en" for English)
 const localePrefix = locale === "es" ? "" : `/${locale}`;
+const labels = await getUiLabels(locale);
 ---
 
 <Base
@@ -49,26 +51,37 @@ const localePrefix = locale === "es" ? "" : `/${locale}`;
 		slug: slug!,
 		locale,
 	}))} />
-	<!-- ══════ HERO — full height, themed cube bg ══════ -->
+	<!-- ══════ HERO — compact, solid cube glyph in the discipline color ══════ -->
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
-			<h1>{title}</h1>
-			{excerpt && (
-				<div class="s-hero__body">
-					<p class="text-body">{excerpt}</p>
-				</div>
-			)}
-			<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark">{ctaLabel}</a>
+			<div class="s-hero__copy">
+				<h1>{title}</h1>
+				{excerpt && (
+					<div class="s-hero__body">
+						<p class="text-body">{excerpt}</p>
+					</div>
+				)}
+				<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark">{ctaLabel}</a>
+			</div>
+			<svg class="s-hero__cube" viewBox="0 0 100 110" aria-hidden="true">
+				<path class="s-hero__cube-face" d="M50 5 95 30v50L50 105 5 80V30Z" />
+				<g fill="none" stroke="currentColor" stroke-width="4">
+					<path d="M50 5 95 30v50L50 105 5 80V30Z" />
+					<path d="M5 30l45 25 45-25M50 55v50" />
+				</g>
+			</svg>
 		</div>
 	</section>
 
-	<!-- ══════ CONTENT — dark bg section + portable text ══════ -->
+	<!-- ══════ CONTENT — discipline instrument (or legacy fallback) ══════ -->
 	{content && (
-		<section class="s-content" aria-label={t("content")}>
-			<div class="container s-content__inner">
-				<PortableText value={content} />
-			</div>
-		</section>
+		<ServiceInstrument
+			slug={slug!}
+			content={content as any[]}
+			ctaLabel={ctaLabel}
+			contactPath={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`}
+			labels={labels}
+		/>
 	)}
 
 	<!-- ══════ CTA (from cta_global widget) ══════ -->

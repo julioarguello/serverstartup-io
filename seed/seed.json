@@ -537,6 +537,166 @@
 			"widgets": [
 				{
 					"type": "content",
+					"title": "panel_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tu cesta"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_shipping_banner",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Envío gratis: cero handoffs"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_summary",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Resumen del pedido"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_subtotal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Subtotal"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_subtotal_value",
+							"children": [
+								{
+									"_type": "span",
+									"text": "5 años con Auchan"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_shipping",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Envío"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_shipping_value",
+							"children": [
+								{
+									"_type": "span",
+									"text": "gratis"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_total",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Total"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_total_value",
+							"children": [
+								{
+									"_type": "span",
+									"text": "un equipo"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_returns",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Devoluciones: no las vas a necesitar"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_host",
+							"children": [
+								{
+									"_type": "span",
+									"text": "serverstartup.io"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_cmd_main",
+							"children": [
+								{
+									"_type": "span",
+									"text": "integrar --erp --tienda --almacen"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_cmd_observe",
+							"children": [
+								{
+									"_type": "span",
+									"text": "observar --extremo-a-extremo"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_log",
+							"children": [
+								{
+									"_type": "span",
+									"text": "INFO … Server startup in [2019] ms"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "content",
 					"title": "footer_headings",
 					"content": [
 						{
@@ -1045,6 +1205,166 @@
 			"label": "UI Labels (English)",
 			"description": "English UI micro-copy — footer headings, error page, search, aria-labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "panel_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Your cart"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_shipping_banner",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Free shipping: zero handoffs"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_summary",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Order summary"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_subtotal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Subtotal"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_subtotal_value",
+							"children": [
+								{
+									"_type": "span",
+									"text": "5 years with Auchan"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_shipping",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Shipping"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_shipping_value",
+							"children": [
+								{
+									"_type": "span",
+									"text": "free"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_total",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Total"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_total_value",
+							"children": [
+								{
+									"_type": "span",
+									"text": "one team"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cart_returns",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Returns: you won't need them"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_host",
+							"children": [
+								{
+									"_type": "span",
+									"text": "serverstartup.io"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_cmd_main",
+							"children": [
+								{
+									"_type": "span",
+									"text": "integrate --erp --storefront --warehouse"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_cmd_observe",
+							"children": [
+								{
+									"_type": "span",
+									"text": "observe --end-to-end"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "term_log",
+							"children": [
+								{
+									"_type": "span",
+									"text": "INFO … Server startup in [2019] ms"
+								}
+							]
+						}
+					]
+				},
 				{
 					"title": "footer_headings",
 					"content": [
