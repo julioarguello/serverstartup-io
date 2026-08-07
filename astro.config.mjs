@@ -57,4 +57,13 @@ export default defineConfig({
 		},
 	],
 	devToolbar: { enabled: false },
+	vite: {
+		build: {
+			// 0 = never inline scripts into the HTML. The middleware CSP is
+			// script-src 'self' (no hashes, no unsafe-inline), so any script
+			// Vite inlines under the default 4 KB threshold is silently blocked
+			// by the browser — menu dialog and phone decode died this way.
+			assetsInlineLimit: 0,
+		},
+	},
 });

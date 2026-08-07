@@ -1,0 +1,106 @@
+name: quality-gates
+
+# The practices audited in phase 2 (issues #157/#158/#159/#164) plus the
+# citability policy, enforced on every PR and on main (issue #192).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read # gitleaks-action lists the PR's commits
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # gitleaks scans history of the push range
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Secret scan (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Citability guard
+        env:
+          FORBIDDEN_NAMES: ${{ secrets.FORBIDDEN_NAMES }}
+        run: |
+          if [ -z "$FORBIDDEN_NAMES" ]; then
+            echo "FORBIDDEN_NAMES secret not present — skipping (public mirror)"; exit 0
+          fi
+          # The tree must never name non-citable clients (policy lives outside the repo).
+          if grep -rIlE "$FORBIDDEN_NAMES" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.wrangler; then
+            echo "::error::Citability violation: forbidden name found in the tree"; exit 1
+          fi
+          echo "citability clean"
+
+      - name: Types (astro check)
+        run: |
+          npx astro check 2>&1 | tee /tmp/astro-check.log
+          grep -q "^- 0 errors" /tmp/astro-check.log
+          grep -q "^- 0 warnings" /tmp/astro-check.log
+
+      - name: Seed schema validation
+        run: npx emdash seed seed/seed.json --validate
+
+      - name: Build
+        run: npx astro build
+
+      - name: Boot seeded local stack
+        run: scripts/ci-local-stack.sh 8787
+
+      - name: HTML validation (rendered output, all templates)
+        run: |
+          mkdir -p /tmp/html
+          for r in /:home /en:home-en /quienes-somos:about /en/about-us:about-en \
+                   /contacto:contact /en/contact:contact-en \
+                   /comercio-electronico:cart /integracion-de-sistemas:term \
+                   /big-data-cloud-analytics:bq /cdn-waf-seguridad-edge-cloudflare:cf \
+                   /ingenieria-greenfield-y-sistemas-criticos:jd \
+                   /deconstruyendo:manual /en/deconstructing:manual-en \
+                   /politica-de-privacidad:legal /en/privacy-policy:legal-en; do
+            url="${r%%:*}"; name="${r##*:}"
+            curl -sf "http://localhost:8787$url" -o "/tmp/html/$name.html"
+          done
+          npx --yes html-validate --config .htmlvalidate.json /tmp/html/*.html
+          echo "html-validate: 0 problems across $(ls /tmp/html | wc -l) templates"
+
+      - name: Security headers
+        run: scripts/ci-check-headers.sh http://localhost:8787
+
+      - name: Lighthouse assertions (perf>=95, a11y/bp/seo=100)
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: lighthouserc.json
+          uploadArtifacts: true
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Quality gates"
+            echo "| Gate | Target |"
+            echo "|---|---|"
+            echo "| gitleaks | no leaks |"
+            echo "| citability | 0 forbidden names |"
+            echo "| astro check | 0 errors, 0 warnings |"
+            echo "| html-validate | 0 problems, 15 templates |"
+            echo "| security headers | full #164 suite |"
+            echo "| Lighthouse | perf >=95 · a11y 100 · bp 100 · seo 100 |"
+          } >> "$GITHUB_STEP_SUMMARY"
