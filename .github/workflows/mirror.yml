@@ -1,0 +1,55 @@
+name: mirror
+
+# Automated public-mirror sync (#195): every push to main (and every tag)
+# lands on github.com/julioarguello/serverstartup-io. Replaces the manual
+# scripts/sync-public.sh run, which stays as the fallback.
+#
+# This file travels WITH the mirror, so the job hard-gates on the source
+# repository — on the mirror it is inert by construction.
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    if: github.repository == 'julioarguello/www-serverstartup-io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Gate on MIRROR_SSH_KEY
+        id: gate
+        env:
+          MIRROR_SSH_KEY: ${{ secrets.MIRROR_SSH_KEY }}
+        run: |
+          if [ -z "$MIRROR_SSH_KEY" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::MIRROR_SSH_KEY secret not set — mirror sync skipped"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.ready == 'true'
+        with:
+          fetch-depth: 0 # the mirror needs the full history of main
+
+      - name: Push main + tags to the public mirror
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          MIRROR_SSH_KEY: ${{ secrets.MIRROR_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$MIRROR_SSH_KEY" > ~/.ssh/mirror_key
+          chmod 600 ~/.ssh/mirror_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/mirror_key -o IdentitiesOnly=yes"
+          git push git@github.com:julioarguello/serverstartup-io.git main --tags
+          echo "mirror synced: main + tags → julioarguello/serverstartup-io"
