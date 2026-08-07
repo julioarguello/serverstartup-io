@@ -1,0 +1,111 @@
+name: deploy-preview
+
+# Every merge to main lands on the live preview URL automatically (#193).
+# Runs only after the quality-gates workflow succeeds on main (workflow_run
+# fires from the default branch), or by hand via workflow_dispatch.
+#
+# Until the CLOUDFLARE_API_TOKEN repo secret exists, the deploy job skips
+# with a notice instead of failing — the workflow can land inert and
+# activates the moment the secret is added.
+on:
+  workflow_run:
+    workflows: [quality-gates]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: deploy-preview
+  cancel-in-progress: false # never kill a deploy mid-flight (mixed-state rule)
+
+env:
+  PREVIEW_URL: https://www-serverstartup-io-preview.serverstartup-s-partner-demo-account3612.workers.dev
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: preview
+      url: ${{ env.PREVIEW_URL }}
+    outputs:
+      deployed: ${{ steps.gate.outputs.deployed }}
+      preview_url: ${{ env.PREVIEW_URL }}
+    steps:
+      - name: Gate on CLOUDFLARE_API_TOKEN
+        id: gate
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "deployed=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::CLOUDFLARE_API_TOKEN secret not set — preview deploy skipped"
+          else
+            echo "deployed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.deployed == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.deployed == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        if: steps.gate.outputs.deployed == 'true'
+        run: npm ci
+
+      - name: Build (preview environment)
+        if: steps.gate.outputs.deployed == 'true'
+        # The Cloudflare adapter flattens the wrangler env at BUILD time —
+        # wrangler deploy --env is a no-op against the generated config.
+        run: CLOUDFLARE_ENV=preview npx astro build
+
+      - name: Refresh preview D1 from seed/seed.json
+        if: steps.gate.outputs.deployed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: d70cd71aecc76f94c73d7a6f3cc1265d
+        # ci-local-stack seeds a fresh local sqlite the canonical way (emdash
+        # applies its migrations); seed-remote-preview reproduces it remotely
+        # after rehearsing the generated SQL on a throwaway database.
+        run: |
+          scripts/ci-local-stack.sh 8787
+          lsof -ti :8787 | xargs kill -9 2>/dev/null || true
+          scripts/seed-remote-preview.sh www-serverstartup-io-preview
+
+      - name: Deploy preview worker
+        if: steps.gate.outputs.deployed == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: d70cd71aecc76f94c73d7a6f3cc1265d
+          command: deploy
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## deploy-preview"
+            if [ "${{ steps.gate.outputs.deployed }}" = "true" ]; then
+              echo "Deployed **main** to the preview environment:"
+              echo ""
+              echo "🔍 ${{ env.PREVIEW_URL }}"
+            else
+              echo "Skipped — CLOUDFLARE_API_TOKEN secret not set."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  verify:
+    needs: deploy
+    if: needs.deploy.outputs.deployed == 'true'
+    uses: ./.github/workflows/verify-deploy.yml
+    with:
+      base_url: ${{ needs.deploy.outputs.preview_url }}
