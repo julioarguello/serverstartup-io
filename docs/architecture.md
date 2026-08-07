@@ -249,6 +249,47 @@ D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqli
 npx emdash seed seed/seed.json -d "$D1_DB"
 ```
 
+### 10.2 Release ritual (CI/CD, issues #191–#196)
+
+```
+PR → quality-gates green → merge to main
+                              │
+                              ▼ (automatic, workflow_run)
+                    deploy-preview: build CLOUDFLARE_ENV=preview
+                    → refresh preview D1 from seed/seed.json
+                    → wrangler-action deploy → verify-deploy battery
+                              │
+                              ▼ (Julio verifies on the preview URL)
+                    deploy-production: workflow_dispatch ONLY
+                    → rebuild same commit CLOUDFLARE_ENV=production
+                    → wrangler-action deploy → verify-deploy battery
+```
+
+- **The manual dispatch IS the production approval gate.** GitHub environment
+  required-reviewers is a paid feature on private repos; there is no automatic
+  path to production.
+- **No same-artifact promotion**: the Cloudflare adapter flattens wrangler
+  environment bindings into the build at *build* time (`wrangler deploy --env`
+  is a no-op against the generated config). Promotion = rebuilding the same
+  commit with `CLOUDFLARE_ENV=production`.
+- **Remote D1 seeding** (`scripts/seed-remote-preview.sh`): per-table dumps
+  (a whole-db dump writes `sqlite_schema` for the FTS5 virtual tables, which
+  D1 rejects), explicit `CREATE VIRTUAL TABLE` + FTS rebuild statements,
+  rehearsed on a throwaway sqlite before touching remote. Automatic for
+  preview on every deploy; **opt-in and destructive** for production
+  (`seed_d1` input — overwrites CMS edits made live).
+- **Post-deploy verification** (`verify-deploy.yml`, reusable): 20 routes ×
+  (200 + served title), 404 behavior, security-header suite, robots/sitemap/
+  canonical/hreflang, W3C Nu spot-check (downtime warns, errors fail).
+- Quality gates on every PR (`ci.yml`): gitleaks, citability guard,
+  `astro check` 0/0 (TypeScript pinned to 5.x — `astro check` has no
+  programmatic API on TS 7 and TS 6 misreports inference errors), seed
+  validation, build, seeded boot, html-validate ×15 routes, header suite,
+  Lighthouse 3-run median (perf ≥ 95, a11y/bp/seo = 100).
+- **CSP constraint**: `script-src 'self'` with no hashes — Vite must never
+  inline scripts into HTML (`assetsInlineLimit: 0` in astro.config.mjs) or
+  the browser silently blocks them (menu + phone decode died this way).
+
 ## 11. Security
 
 - MCP tokens **must not** be passed via CLI arguments (visible in `ps aux`)
