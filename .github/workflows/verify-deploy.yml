@@ -1,0 +1,44 @@
+name: verify-deploy
+
+# Reusable post-deploy smoke battery (#196): the same checks after every
+# deploy, preview or production. Consumed via workflow_call by the deploy
+# workflows; workflow_dispatch allows running it by hand against any URL.
+on:
+  workflow_call:
+    inputs:
+      base_url:
+        description: "Base URL of the deployed site to verify"
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Base URL of the deployed site to verify"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Smoke battery (routes, headers, discovery, Nu)
+        run: scripts/verify-deploy.sh "${{ inputs.base_url }}"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## verify-deploy — ${{ inputs.base_url }}"
+            echo "| Check | Coverage |"
+            echo "|---|---|"
+            echo "| routes | 20 routes × (200 + title), 404 behavior |"
+            echo "| headers | #164 security suite + security.txt |"
+            echo "| discovery | robots.txt, sitemap, canonical, hreflang |"
+            echo "| W3C Nu | 2 pages, warn-only on validator downtime |"
+          } >> "$GITHUB_STEP_SUMMARY"
