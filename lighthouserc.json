@@ -1,0 +1,25 @@
+{
+	"ci": {
+		"collect": {
+			"url": [
+				"http://localhost:8787/",
+				"http://localhost:8787/comercio-electronico",
+				"http://localhost:8787/cdn-waf-seguridad-edge-cloudflare",
+				"http://localhost:8787/contacto"
+			],
+			"numberOfRuns": 3,
+			"settings": {
+				"chromeFlags": "--headless --no-sandbox --disable-gpu"
+			}
+		},
+		"assert": {
+			"aggregationMethod": "median-run",
+			"assertions": {
+				"categories:performance": ["error", { "minScore": 0.95 }],
+				"categories:accessibility": ["error", { "minScore": 1 }],
+				"categories:best-practices": ["error", { "minScore": 1 }],
+				"categories:seo": ["error", { "minScore": 1 }]
+			}
+		}
+	}
+}
