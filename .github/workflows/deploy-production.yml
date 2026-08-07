@@ -1,0 +1,106 @@
+name: deploy-production
+
+# "Otra forma para desplegar en prod" (#194): production only ever deploys
+# when Julio dispatches this workflow by hand. GitHub environment
+# required-reviewers is a paid feature on private repos (HTTP 422), so the
+# manual dispatch IS the approval gate — there is no automatic path here.
+#
+# Same-artifact promotion is impossible with the Cloudflare adapter: bindings
+# are flattened into the build at build time (preview and production carry
+# different D1/R2/KV ids), so promotion means rebuilding the SAME commit with
+# CLOUDFLARE_ENV=production — pin the ref you verified on preview.
+on:
+  workflow_dispatch:
+    inputs:
+      seed_d1:
+        description: "DESTRUCTIVE — overwrite the production D1 from seed/seed.json (pre-launch only; wipes CMS edits made in production)"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false # never kill a deploy mid-flight (mixed-state rule)
+
+env:
+  PRODUCTION_URL: https://www-serverstartup-io.serverstartup-s-partner-demo-account3612.workers.dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: ${{ env.PRODUCTION_URL }}
+    outputs:
+      deployed: ${{ steps.gate.outputs.deployed }}
+      production_url: ${{ env.PRODUCTION_URL }}
+    steps:
+      - name: Gate on CLOUDFLARE_API_TOKEN
+        id: gate
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "deployed=false" >> "$GITHUB_OUTPUT"
+            echo "::error::CLOUDFLARE_API_TOKEN secret not set — cannot deploy production"
+            exit 1
+          fi
+          echo "deployed=true" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build (production environment)
+        # The Cloudflare adapter flattens the wrangler env at BUILD time —
+        # this is where production bindings are chosen, not at deploy.
+        run: CLOUDFLARE_ENV=production npx astro build
+
+      - name: Seed production D1 from seed/seed.json (opt-in, destructive)
+        if: inputs.seed_d1
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: d70cd71aecc76f94c73d7a6f3cc1265d
+        run: |
+          scripts/ci-local-stack.sh 8787
+          lsof -ti :8787 | xargs kill -9 2>/dev/null || true
+          scripts/seed-remote-preview.sh www-serverstartup-io
+
+      - name: Deploy production worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: d70cd71aecc76f94c73d7a6f3cc1265d
+          command: deploy
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## deploy-production"
+            echo "Ref: \`${{ github.sha }}\`"
+            echo ""
+            echo "🏭 ${{ env.PRODUCTION_URL }}"
+            if [ "${{ inputs.seed_d1 }}" = "true" ]; then
+              echo ""
+              echo "⚠️ Production D1 was re-seeded from seed/seed.json."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  verify:
+    needs: deploy
+    if: needs.deploy.outputs.deployed == 'true'
+    uses: ./.github/workflows/verify-deploy.yml
+    with:
+      base_url: ${{ needs.deploy.outputs.production_url }}
