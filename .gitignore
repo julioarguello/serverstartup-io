@@ -9,4 +9,4 @@ data.db
 .venv
 .vscode
 .DS_Store
-docs/company/private/
+docs/company/
