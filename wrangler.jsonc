@@ -31,4 +31,65 @@
 			"binding": "LOADER",
 		},
 	],
+
+	// ── CI/CD environments (#191) ─────────────────────────────────────────
+	// Bindings are NOT inherited into named environments: each env declares
+	// its full set. `preview` owns separate D1/R2/KV so it can never touch
+	// production data; `production` pins the real resources explicitly.
+	"env": {
+		"preview": {
+			"name": "www-serverstartup-io-preview",
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "www-serverstartup-io-preview",
+					"database_id": "17f35592-7a2e-4270-bb5f-1d711198255a",
+				},
+			],
+			"r2_buckets": [
+				{
+					"binding": "MEDIA",
+					"bucket_name": "www-serverstartup-io-preview",
+				},
+			],
+			"kv_namespaces": [
+				{
+					"binding": "SESSION",
+					"id": "954d2ce62bad46f99508dae829ac4af2",
+				},
+			],
+			"worker_loaders": [
+				{
+					"binding": "LOADER",
+				},
+			],
+		},
+		"production": {
+			"name": "www-serverstartup-io",
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "www-serverstartup-io",
+					"database_id": "1b3b50f2-0269-4fe2-8f80-1b55b08bdfa1",
+				},
+			],
+			"r2_buckets": [
+				{
+					"binding": "MEDIA",
+					"bucket_name": "www-serverstartup-io",
+				},
+			],
+			"kv_namespaces": [
+				{
+					"binding": "SESSION",
+					"id": "3d255fdb73a9480b9010cdb5eb7ff4cb",
+				},
+			],
+			"worker_loaders": [
+				{
+					"binding": "LOADER",
+				},
+			],
+		},
+	},
 }
