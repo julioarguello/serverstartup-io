@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
-# seed-remote-preview.sh — reproduce seed/seed.json onto the REMOTE preview D1.
+# seed-remote-preview.sh — reproduce seed/seed.json onto a REMOTE D1, idempotently.
 #
-# Route (each step earned in rehearsal, 2026-08-07):
+# Route (each step earned in rehearsal, 2026-08-07/08):
 #   1. Seed a LOCAL sqlite the canonical way (emdash seed applies the 33
 #      migrations itself; server must be down — FTS corruption rule).
-#   2. Per-table dump of REAL tables only. A whole-db .dump restores FTS5
-#      virtual tables by writing sqlite_schema directly (writable_schema),
-#      which D1 rejects; FTS shadow tables travel the same forbidden path.
-#      (Local sqlite3 is 3.28: one LIKE pattern per .dump call, hence the loop.)
-#   3. Append explicit CREATE VIRTUAL TABLE statements + FTS 'rebuild' inserts.
-#   4. Rehearse the SQL on a throwaway sqlite BEFORE touching remote.
-#   5. Apply to the remote preview database and verify a count.
+#   2. DATA-ONLY refresh: per real table, DELETE FROM + INSERT rows. Replaying
+#      CREATEs breaks on a previously-seeded remote (UNIQUE on
+#      _emdash_migrations was the first casualty), and a whole-db .dump writes
+#      sqlite_schema for the FTS5 virtual tables, which D1 rejects. Schema is
+#      migrations' job, not ours — we only move content.
+#      (_emdash_migrations, _cf_METADATA, sqlite_% and FTS shadows excluded.)
+#   3. Append FTS 'rebuild' inserts (regenerated from sqlite_master, never
+#      speculative — a rebuild for a missing table rolls back the whole file).
+#   4. Rehearse the SQL on a COPY of the local sqlite BEFORE touching remote.
+#   5. Apply to the remote database and verify a count.
 #
 # Usage: scripts/seed-remote-preview.sh [d1-name]   (default www-serverstartup-io-preview)
 set -euo pipefail
@@ -24,20 +27,20 @@ D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqli
 
 SQL="$WORK/seed.sql"
 : > "$SQL"
-sqlite3 "$D1_DB" "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE '\_emdash\_fts\_%' ESCAPE '\' AND name NOT LIKE 'sqlite_%' AND name != '_cf_METADATA';" |
+sqlite3 "$D1_DB" "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE '\_emdash\_fts\_%' ESCAPE '\' AND name NOT LIKE 'sqlite_%' AND name NOT IN ('_cf_METADATA','_emdash_migrations');" |
 while read -r t; do
-	sqlite3 "$D1_DB" ".dump '$t'" | grep -vE "^PRAGMA|^BEGIN TRANSACTION;|^COMMIT;" >> "$SQL"
+	echo "DELETE FROM \"$t\";" >> "$SQL"
+	sqlite3 "$D1_DB" ".mode insert \"$t\"" "SELECT * FROM \"$t\";" >> "$SQL"
 done
-sqlite3 "$D1_DB" "SELECT sql || ';' FROM sqlite_master WHERE sql LIKE 'CREATE VIRTUAL TABLE%';" >> "$SQL"
 sqlite3 "$D1_DB" "SELECT 'INSERT INTO ' || name || '(' || name || ') VALUES(''rebuild'');' FROM sqlite_master WHERE sql LIKE 'CREATE VIRTUAL TABLE%';" >> "$SQL"
 
-# Rehearse before remote (a guard that only runs remotely is a dead guard).
-rm -f "$WORK/throwaway.sqlite"
-sqlite3 "$WORK/throwaway.sqlite" < "$SQL"
-PAGES_LOCAL=$(sqlite3 "$WORK/throwaway.sqlite" "SELECT count(*) FROM ec_pages;")
+# Rehearse on a copy of the local database (schema present, data replaced).
+cp "$D1_DB" "$WORK/rehearsal.sqlite"
+sqlite3 "$WORK/rehearsal.sqlite" < "$SQL"
+PAGES_LOCAL=$(sqlite3 "$WORK/rehearsal.sqlite" "SELECT count(*) FROM ec_pages;")
 [ "$PAGES_LOCAL" -gt 0 ] || { echo "ERROR: rehearsal produced 0 pages" >&2; exit 1; }
 
 npx wrangler d1 execute "$D1_NAME" --remote --file "$SQL" -y >/dev/null
 PAGES_REMOTE=$(npx wrangler d1 execute "$D1_NAME" --remote --command "SELECT count(*) AS c FROM ec_pages;" -y 2>/dev/null | grep -oE '"c": [0-9]+' | grep -oE '[0-9]+')
-echo "remote $D1_NAME seeded: $PAGES_REMOTE pages (rehearsal had $PAGES_LOCAL)"
+echo "remote $D1_NAME refreshed: $PAGES_REMOTE pages (rehearsal had $PAGES_LOCAL)"
 [ "$PAGES_REMOTE" = "$PAGES_LOCAL" ]

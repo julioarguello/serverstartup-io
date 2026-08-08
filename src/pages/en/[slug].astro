@@ -7,7 +7,7 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import Base from "../../layouts/Base.astro";
 import CtaGlobal from "../../components/CtaGlobal.astro";
 import ServiceInstrument from "../../components/service/ServiceInstrument.astro";
-import { serviceJsonLd } from "../../utils/jsonld";
+import { serviceJsonLd, breadcrumbJsonLd } from "../../utils/jsonld";
 import { getUiLabels } from "../../utils/ui-labels";
 import type { CacheHint } from "emdash";
 import type { SiteSettings } from "../../types";
@@ -53,6 +53,12 @@ const labels = await getUiLabels(locale);
 		description: excerpt || `${title} — Server Startup`,
 		slug: slug!,
 		locale,
+	}))} />
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd({
+		siteUrl: Astro.site?.origin!,
+		locale,
+		homeName: (settings as SiteSettings).title || "Server Startup",
+		trail: [{ name: title, path: `/en/${slug}` }],
 	}))} />
 	<!-- ══════ HERO — compact, solid cube glyph in the discipline color ══════ -->
 	<section class="s-hero" aria-label={title}>

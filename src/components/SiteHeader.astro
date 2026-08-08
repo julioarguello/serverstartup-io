@@ -1,50 +1,58 @@
 ---
 /**
- * SiteHeader — sticky white bar with logo, language switcher, hamburger.
- * Extracted from Base.astro for maintainability.
+ * SiteHeader — the wayfinding compass (#213, design #211 v7).
+ *
+ * Three pieces in one bar: the 2×2 logo cube (always ink — the mark never
+ * mutates) as the menu trigger, the wordmark extended into a terminal-prompt
+ * breadcrumb (~Server Startup/<path>▮ with the path in the section color),
+ * and a 3px bottom edge carrying the same color. The accent comes from the
+ * CMS service entry (via Base) — ink on site pages.
  */
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+interface Props {
+	promptPath: string; // current pathname ("" on home)
+	accent: string; // section color from CMS, ink for site pages
+}
+const { promptPath, accent } = Astro.props;
 
 const t = Astro.locals.t;
 ---
 
-<header class="site-header" id="site-header">
+<header class="site-header" id="site-header" style={`--accent:${accent}`}>
 	<div class="container header-inner">
-		<a href="/" class="header-logo" aria-label={t("go_home")}>
-			<img
-				src="/assets/logo.svg"
-				alt="Server Startup"
-				width="396"
-				height="68"
-				class="logo-img"
-			/>
-		</a>
+		<div class="header-brand">
+			<button
+				type="button"
+				class="menu-toggle"
+				id="menu-trigger"
+				aria-expanded="false"
+				aria-controls="menu-dialog"
+				aria-label={t("open_menu")}
+			>
+				<svg class="brand-cube" width="30" height="34" viewBox="0 0 200 228" aria-hidden="true">
+					<polygon points="100,14 186,64 100,114 14,64" fill="#CED4DA"></polygon>
+					<polygon points="14,64 100,114 100,214 14,164" fill="#CED4DA"></polygon>
+					<polygon points="100,114 186,64 186,164 100,214" fill="#E3E7EB"></polygon>
+					<path class="brand-cube-edge" d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
+					<path class="brand-cube-edge" d="M14,64 100,114 186,64 M100,114 100,214"></path>
+					<path class="brand-cube-edge" d="M57,39 143,89 M143,39 57,89"></path>
+					<path class="brand-cube-edge" d="M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"></path>
+				</svg>
+			</button>
+			<a href="/" class="brand-prompt">
+				<span class="brand-word">~Server Startup</span><span class="brand-path">{promptPath}</span><span class="brand-cursor" aria-hidden="true"></span>
+			</a>
+		</div>
 		<div class="header-actions">
 			<LanguageSwitcher />
-		<button
-			type="button"
-			class="menu-toggle"
-			id="menu-trigger"
-			aria-expanded="false"
-			aria-controls="menu-dialog"
-			aria-label={t("open_menu")}
-		>
-			<img
-				src="/assets/menu.svg"
-				alt=""
-				width="60"
-				height="60"
-				class="menu-icon"
-				aria-hidden="true"
-			/>
-		</button>
 		</div>
 	</div>
 </header>
 
 <style is:global>
 	/* ═══════════════════════════════════════════
-	   HEADER — mobile-first
+	   HEADER — the compass (mobile-first)
 	   ═══════════════════════════════════════════ */
 	.site-header {
 		position: fixed;
@@ -53,6 +61,7 @@ const t = Astro.locals.t;
 		right: 0;
 		z-index: 100;
 		background-color: var(--color-secondary);
+		border-bottom: 3px solid var(--accent, var(--color-primary));
 		transition: box-shadow 0.3s;
 	}
 
@@ -64,7 +73,86 @@ const t = Astro.locals.t;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-block: 16px;
+		padding-block: 14px;
+	}
+
+	.header-brand {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		min-width: 0;
+	}
+
+	.menu-toggle {
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 4px;
+		line-height: 0;
+		border-radius: 4px;
+	}
+
+	.menu-toggle:hover .brand-cube,
+	.menu-toggle:focus-visible .brand-cube {
+		transform: translateY(-1px);
+	}
+
+	.brand-cube {
+		display: block;
+		transition: transform 0.15s;
+	}
+
+	.brand-cube-edge {
+		fill: none;
+		stroke: var(--color-primary);
+		stroke-width: 13;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+	}
+
+	.brand-prompt {
+		display: flex;
+		align-items: baseline;
+		min-width: 0;
+		text-decoration: none;
+		color: var(--color-primary);
+		font-family: var(--font-mono), monospace;
+		font-size: 0.95rem;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+	}
+
+	.brand-path {
+		font-weight: 500;
+		/* Ink text over an accent-tinted "terminal selection" — the color
+		   signal stays while text contrast stays AA (colored glyphs on white
+		   failed color-contrast: #F38020 is 2.4:1). */
+		color: var(--color-primary);
+		background: color-mix(in srgb, var(--accent, transparent) 22%, transparent);
+		border-radius: 3px;
+		padding-inline: 2px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		max-width: 34vw;
+	}
+
+	.brand-cursor {
+		width: 0.5em;
+		height: 1.05em;
+		background: var(--color-primary);
+		margin-left: 2px;
+		align-self: center;
+		animation: brand-blink 1.2s steps(1) infinite;
+	}
+
+	@keyframes brand-blink {
+		50% { opacity: 0; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.brand-cursor { animation: none; }
+		.brand-cube { transition: none; }
 	}
 
 	.header-actions {
@@ -73,26 +161,9 @@ const t = Astro.locals.t;
 		gap: 8px;
 	}
 
-	.logo-img {
-		width: 250px;
-		height: auto;
-	}
-
-	.menu-toggle {
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-		line-height: 0;
-	}
-
-	.menu-icon {
-		width: 48px;
-		height: 48px;
-	}
-
 	@media (min-width: 768px) {
-		.logo-img { width: 350px; }
-		.menu-icon { width: 60px; height: 60px; }
+		.brand-cube { width: 34px; height: 39px; }
+		.brand-prompt { font-size: 1.05rem; }
+		.brand-path { max-width: 44vw; }
 	}
 </style>

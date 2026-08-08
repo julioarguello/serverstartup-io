@@ -201,3 +201,34 @@ export function blogPostJsonLd(opts: BlogPostJsonLdOptions) {
 		},
 	};
 }
+
+export interface BreadcrumbJsonLdOptions {
+	siteUrl: string;
+	locale: string;
+	/** Ordered trail AFTER home, e.g. [{ name: "Comercio electrónico", path: "/comercio-electronico" }] */
+	trail: Array<{ name: string; path: string }>;
+	homeName: string;
+}
+
+/** BreadcrumbList backing the header prompt breadcrumb (#211). */
+export function breadcrumbJsonLd(opts: BreadcrumbJsonLdOptions) {
+	const localePrefix = opts.locale === "es" ? "" : `/${opts.locale}`;
+	return {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: opts.homeName,
+				item: `${opts.siteUrl}${localePrefix}/`,
+			},
+			...opts.trail.map((t, i) => ({
+				"@type": "ListItem",
+				position: i + 2,
+				name: t.name,
+				item: `${opts.siteUrl}${t.path}`,
+			})),
+		],
+	};
+}
