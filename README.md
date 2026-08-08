@@ -10,10 +10,15 @@ built at [/deconstruyendo](https://serverstartup.io/deconstruyendo)
 verifiable here — the copy, the templates, the design tokens, the CI that
 keeps us honest.
 
+> **Status: pre-launch.** The domain still serves our previous site; what
+> this repository builds goes live with the DNS cutover. Until then, links
+> into `serverstartup.io` describe the incoming site, not what the domain
+> answers today.
+
 ## How it works
 
-- **Astro SSR on Cloudflare Workers** — no servers to babysit; pages render at
-  the edge, under 50 ms from the reader.
+- **Astro SSR on Cloudflare Workers** — no servers to babysit; every page
+  renders on Cloudflare's edge, in the datacenter closest to the reader.
 - **EmDash CMS on D1 + R2** — content management running inside the same
   Worker.
 - **Seeds carry the complete launch corpus** — every text of this first
@@ -25,11 +30,11 @@ keeps us honest.
   carrying a copywriting skill (house voice, a blacklist, an AI-tell detector
   with a score). A human reviews, corrects and signs every text. The review
   step is not optional.
-- **Standards as the hallmark** — Lighthouse audits at 100 across categories
-  on the audited templates, W3C validation at zero errors. Not a one-off
-  screenshot: CI re-asserts performance ≥ 95 and hard 100s on accessibility,
-  best practices and SEO on every pull request. The receipts live in
-  [`docs/audits/`](docs/audits/).
+- **Standards as the hallmark** — Lighthouse 100 on accessibility, best
+  practices and SEO in the audits, W3C validation at zero errors, and
+  performance measured where it counts: CI asserts ≥ 95 on the production
+  build (3-run median) plus those hard 100s, on every pull request. The
+  receipts live in [`docs/audits/`](docs/audits/).
 
 ## The map
 
@@ -40,7 +45,7 @@ keeps us honest.
 | [`src/components/`](src/components/) | Layout shell, service "instruments", assembly manual |
 | [`src/styles/`](src/styles/) | Shared CSS and design tokens (documented in [`docs/design-system.md`](docs/design-system.md)) |
 | [`src/middleware.ts`](src/middleware.ts) | Security headers on every response, CSP included |
-| [`scripts/`](scripts/) | CI helpers: local stack boot, header checks, deploy verification, remote seeding |
+| [`scripts/`](scripts/) | CI helpers (local stack, headers, deploy verification, remote seeding), environment wrappers, content loader, mirror sync |
 | [`.github/workflows/`](.github/workflows/) | Quality gates, preview and production deploys, mirror sync |
 | [`docs/`](docs/) | Architecture, design system, audit receipts |
 
@@ -73,8 +78,8 @@ pull request → quality gates → merge to main
 Every PR passes secret scanning, type checking at zero errors and warnings,
 schema validation, a full build booted from seeds alone, HTML validation on
 15 rendered routes, a security-header suite and Lighthouse assertions —
-before a human reads a single line. Merges deploy nothing by themselves;
-production only ever moves when a maintainer dispatches it. The whole ritual
+before a human reads a single line. Merges deploy nothing to production by
+themselves; production only ever moves when a maintainer dispatches it. The whole ritual
 is documented in [`docs/architecture.md`](docs/architecture.md) §10.2.
 
 ## Two homes

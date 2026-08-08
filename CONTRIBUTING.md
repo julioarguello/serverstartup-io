@@ -51,13 +51,14 @@ Two local gotchas worth knowing before they cost you an hour:
 
 - **Never commit to `main`.** Every change, however small, goes through a
   branch and a PR.
-- Branch names: `<type>/<issue>-<slug>` — `feat/155-design-system`,
-  `ci/192-quality-gates`, `content/152-seo-sweep`.
+- Branch names: `<type>/<issue>-<slug>` — real examples:
+  `feat/155-design-system`, `ci/192-quality-gates`, `docs/204-public-readme`.
 - Commits: conventional style with a scope when it helps —
   `feat(design): …`, `ci: …`, `content(seo): …`. The subject says what
   changed; the body says why and what was verified.
-- One issue = one branch = one PR. PRs are squash-merged; the squash subject
-  keeps the PR number.
+- One issue = one branch = one PR. PRs are squash-merged (the practice since
+  August 2026; older history carries true merges); the squash subject keeps
+  the PR number.
 - A PR is mergeable when the quality gates are green and the description
   states what was verified, not just what was edited.
 
@@ -101,16 +102,20 @@ the CMS carries every word.
 - **CSP constraint (the expensive one)**: the middleware sends
   `script-src 'self'` with no hashes and no `unsafe-inline`. Vite is
   configured to never inline scripts (`assetsInlineLimit: 0` in
-  `astro.config.mjs`); keep it that way, and never add `is:inline` scripts.
-  An inlined script is not an error you will see — the browser blocks it
-  silently and a feature just stops working.
+  `astro.config.mjs`); keep it that way, and never add inline *executable*
+  scripts (JSON-LD data blocks are fine — the browser does not execute
+  them, so the CSP does not apply). An inlined executable script is not an
+  error you will see — the browser blocks it silently and a feature just
+  stops working.
 - **Type-safety patterns that D1 and Astro impose**: SQLite stores booleans
   as `0`/`1` — use `Boolean(x)`, never `=== true`; PortableText blocks need
   an `any[]` cast when iterated; no `.toSorted()` (the base tsconfig lacks
   ES2023) — use `[...arr].sort()`.
 - **Caching**: every page that queries CMS content calls
-  `Astro.cache.set(cacheHint)`. Forgetting it means stale content after a
-  CMS publish.
+  `Astro.cache.set(cacheHint)`. The cache provider is configured at launch
+  (until then the call is a harmless no-op) — but the convention holds now,
+  because a page missing its hint will serve stale content after a CMS
+  publish the moment the provider exists.
 
 ## The quality bar
 
