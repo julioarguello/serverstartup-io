@@ -1,49 +1,138 @@
 ---
 /**
- * MenuDialog — fullscreen slide-in navigation from right.
- * Extracted from Base.astro for maintainability.
+ * MenuDialog — the cutting sheet (#214, design #211 v7).
+ *
+ * Two cubes unfolded on one lattice: the specialties cross (six flat color
+ * faces, icon-only) and the site cross at half scale in ink (five faces
+ * around an open dashed center — the face still to be assembled). Names
+ * live in ONE caption line under the sheet (aria-live) and in sr-only text
+ * inside every link; colors and labels come from the CMS.
+ *
+ * Dialog contract (ids, open/close classes) is unchanged — Base's script
+ * keeps driving it.
  */
+import { FACE_BY_SLUG, SITE_BY_PATH, ICON_BY_KEY } from "../utils/nav";
+
+interface ServiceEntry {
+	id: string;
+	data: { title?: string; color?: string };
+}
 interface MenuItem {
 	url?: string;
 	label?: string;
 }
-
 interface Props {
-	serviceItems: MenuItem[];
-	secondaryItems: MenuItem[];
+	services: ServiceEntry[];
+	siteItems: MenuItem[];
+	currentPath: string;
+	localePrefix: string;
 }
-
-const { serviceItems, secondaryItems } = Astro.props;
+const { services, siteItems, currentPath, localePrefix } = Astro.props;
 const t = Astro.locals.t;
+
+const activeFace = FACE_BY_SLUG[currentPath.replace(/^\/en/, "").replace(/^\//, "")] ?? null;
+const activeSite = SITE_BY_PATH[currentPath] ?? null;
+
+const faces = services
+	.map((s) => ({
+		key: FACE_BY_SLUG[s.id],
+		href: `${localePrefix}/${s.id}`,
+		title: s.data.title ?? s.id,
+		color: s.data.color ?? "#1E1E1E",
+	}))
+	.filter((f) => f.key);
+
+const siteFaces = siteItems
+	.map((it) => ({
+		key: SITE_BY_PATH[it.url ?? ""],
+		href: it.url ?? "#",
+		title: it.label ?? "",
+	}))
+	.filter((f) => f.key);
+
+const activeName =
+	faces.find((f) => f.key === activeFace)?.title ??
+	siteFaces.find((f) => f.key === activeSite)?.title ??
+	"~";
+const activeColor = faces.find((f) => f.key === activeFace)?.color ?? "#1E1E1E";
 ---
 
 <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
-<dialog
-	class="menu-dialog"
-	id="menu-dialog"
-	aria-label={t("main_menu")}
->
+<dialog class="menu-dialog" id="menu-dialog" aria-label={t("main_menu")}>
 	<button
 		type="button"
 		class="menu-close"
 		id="menu-close"
 		aria-label={t("close_menu")}
 	>✕</button>
-	<nav aria-label={t("main_nav")}>
-		<ul class="menu-list" role="list">
-			{serviceItems.map((item) => (
-				<li><a href={item.url} class="menu-link">{item.label}</a></li>
-			))}
-			{secondaryItems.map((item) => (
-				<li><a href={item.url} class="menu-link menu-link--secondary">{item.label}</a></li>
-			))}
-		</ul>
-	</nav>
+
+	<div class="sheet" id="menu-sheet">
+		<nav aria-label={t("nav_specialties")}>
+			<ul class="net" role="list">
+				{faces.map((f) => (
+					<li class={`face face--${f.key}`} style={`--fc:${f.color}`}>
+						<a
+							href={f.href}
+							class="face-link"
+							data-name={f.title}
+							data-color={f.color}
+							aria-current={f.key === activeFace ? "page" : undefined}
+						>
+							<svg viewBox="0 0 96 96" aria-hidden="true">
+								<rect class="face-fill" x="8" y="8" width="80" height="80" rx="5"></rect>
+								<path class="face-sub" d="M48 8V88 M8 48H88"></path>
+								<rect class="face-border" x="8" y="8" width="80" height="80" rx="5"></rect>
+								{f.key === "ia" ? (
+									<text class="face-ai" x="48" y="62" text-anchor="middle">AI</text>
+								) : (
+									<path class="face-icon" transform="translate(26,26) scale(1.85)" d={ICON_BY_KEY[f.key]}></path>
+								)}
+							</svg>
+							<span class="sr-only">{f.title}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+
+		<nav aria-label={t("nav_site")} class="minisite-nav">
+			<ul class="minisite" role="list">
+				{siteFaces.map((f) => (
+					<li class={`face face--m face--${f.key}`} style="--fc:#1E1E1E">
+						<a
+							href={f.href}
+							class="face-link"
+							data-name={f.title}
+							data-color="#1E1E1E"
+							aria-current={f.key === activeSite ? "page" : undefined}
+						>
+							<svg viewBox="0 0 96 96" aria-hidden="true">
+								<rect class="face-fill" x="8" y="8" width="80" height="80" rx="5"></rect>
+								<path class="face-sub" d="M48 8V88 M8 48H88"></path>
+								<rect class="face-border" x="8" y="8" width="80" height="80" rx="5" stroke-dasharray={f.key === "dec" ? "9 7" : undefined}></rect>
+								<path class="face-icon" transform="translate(27,27) scale(1.8)" d={ICON_BY_KEY[f.key]}></path>
+							</svg>
+							<span class="sr-only">{f.title}</span>
+						</a>
+					</li>
+				))}
+				<li class="face face--m face--open" aria-hidden="true">
+					<svg viewBox="0 0 96 96">
+						<rect x="8" y="8" width="80" height="80" rx="5" fill="none" stroke="#B9B6B0" stroke-width="3.5" stroke-dasharray="4 7" stroke-linecap="round"></rect>
+					</svg>
+				</li>
+			</ul>
+		</nav>
+
+		<p class="sheet-caption" id="menu-caption" aria-live="polite">
+			<b style={`--cap:${activeColor}`} data-default-name={activeName} data-default-color={activeColor}>{activeName}</b>
+		</p>
+	</div>
 </dialog>
 
 <style is:global>
 	/* ═══════════════════════════════════════════
-	   MENU DIALOG — fullscreen slide-in from right
+	   MENU DIALOG — the cutting sheet
 	   ═══════════════════════════════════════════ */
 	.menu-backdrop {
 		position: fixed;
@@ -54,10 +143,7 @@ const t = Astro.locals.t;
 		pointer-events: none;
 		transition: opacity 0.5s;
 	}
-	.menu-backdrop.is-open {
-		opacity: 1;
-		pointer-events: auto;
-	}
+	.menu-backdrop.is-open { opacity: 1; pointer-events: auto; }
 
 	.menu-dialog {
 		position: fixed;
@@ -75,13 +161,12 @@ const t = Astro.locals.t;
 		overflow-y: auto;
 		padding: 0;
 		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
-	.menu-dialog::backdrop {
-		background: transparent;
-	}
-	.menu-dialog.is-open {
-		transform: translateX(0);
-	}
+	.menu-dialog::backdrop { background: transparent; }
+	.menu-dialog.is-open { transform: translateX(0); }
 
 	.menu-close {
 		position: fixed;
@@ -98,35 +183,139 @@ const t = Astro.locals.t;
 		justify-content: center;
 	}
 
-	.menu-list {
-		padding: 80px 16px 40px;
-		display: flex;
-		flex-direction: column;
-		gap: 32px;
+	/* the shared lattice: mini face = (big − gap) / 2 — every intermediate
+	   vertex of both crosses lands on the same grid */
+	.sheet {
+		--bf: clamp(56px, 13vw, 88px);
+		--gap: 8px;
+		--mf: calc((var(--bf) - var(--gap)) / 2);
+		position: relative;
+		padding: 2rem 1.4rem 1rem;
+		border: 1.5px dashed #c9c6c0;
+		border-radius: 4px;
+		margin: 80px 16px 40px;
 	}
 
-	.menu-link {
-		font-family: var(--font-family);
-		font-size: 32px;
-		font-weight: 600;
-		line-height: 40px;
+	.sheet nav { display: contents; }
+
+	.net {
+		display: grid;
+		grid-template-columns: repeat(6, var(--bf));
+		grid-template-rows: repeat(3, var(--bf));
+		gap: var(--gap);
+		justify-content: center;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.face { position: relative; }
+	.face-link { display: block; border-radius: 4px; }
+	.face-link svg { display: block; width: 100%; height: auto; }
+	.face-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+
+	.face-fill { fill: var(--fc); fill-opacity: 0.08; transition: fill-opacity 0.22s; }
+	.face-link:hover .face-fill,
+	.face-link:focus-visible .face-fill { fill-opacity: 0.26; }
+	.face-link[aria-current="page"] .face-fill { fill-opacity: 1; }
+
+	.face-sub { fill: none; stroke: var(--fc); stroke-opacity: 0.15; stroke-width: 3; }
+	.face-link[aria-current="page"] .face-sub { stroke: #fff; stroke-opacity: 0.25; }
+
+	.face-border { fill: none; stroke: var(--fc); stroke-width: 4; stroke-linejoin: round; }
+
+	.face-icon {
+		fill: none;
+		stroke: var(--fc);
+		stroke-width: 2.1;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.face-ai {
+		font-family: var(--font-mono), monospace;
+		font-size: 34px;
+		font-weight: 700;
+		fill: var(--fc);
+	}
+	.face-link[aria-current="page"] .face-icon { stroke: #fff; }
+	.face-link[aria-current="page"] .face-ai { fill: #fff; }
+
+	/* cross positions — the net of the specialties cube */
+	.face--bd { grid-area: 1 / 2; }
+	.face--ec { grid-area: 2 / 1; }
+	.face--int { grid-area: 2 / 2; }
+	.face--cdn { grid-area: 2 / 3; }
+	.face--gf { grid-area: 2 / 4; }
+	.face--ia { grid-area: 3 / 2; }
+
+	/* the site cube: vertical cross at half scale, same lattice */
+	.minisite-nav { display: contents; }
+	.minisite {
+		grid-area: 1 / 5 / 3 / 7;
+		display: grid;
+		grid-template-columns: repeat(4, var(--mf));
+		grid-template-rows: repeat(4, var(--mf));
+		gap: var(--gap);
+		align-content: start;
+		justify-content: start;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.face--quienes { grid-area: 1 / 2; }
+	.face--ref { grid-area: 2 / 1; }
+	.face--open { grid-area: 2 / 2; }
+	.face--dec { grid-area: 2 / 3; }
+	.face--contacto { grid-area: 3 / 2; }
+	.face--partners { grid-area: 4 / 2; }
+
+	.sheet-caption {
+		min-height: 2.2rem;
+		text-align: center;
+		font-family: var(--font-mono), monospace;
+		font-size: 0.85rem;
 		color: var(--color-primary);
-		text-decoration: none;
-		display: block;
-		transition: color 0.3s;
+		padding: 0.9rem 0 0.2rem;
+		margin: 0;
 	}
-	.menu-link:hover {
-		color: rgba(30, 30, 30, 0.75);
-	}
-	.menu-list .menu-link--secondary {
-		font-size: 22px;
-		line-height: 30px;
+	.sheet-caption b {
+		font-weight: 600;
+		border-bottom: 2px solid var(--cap, var(--color-primary));
+		padding-bottom: 1px;
 	}
 
-	@media (min-width: 768px) {
-		.menu-list { padding: 80px 20px 40px; max-width: var(--container-max); margin: 0 auto; }
-		.menu-link { font-size: 48px; line-height: 54px; }
-		.menu-list .menu-link--secondary { font-size: 32px; line-height: 40px; }
-		.menu-close { right: 56px; }
+	@media (max-width: 640px) {
+		.net {
+			grid-template-columns: repeat(4, var(--bf));
+			grid-template-rows: repeat(3, var(--bf)) auto;
+		}
+		.minisite {
+			grid-area: 4 / 1 / 5 / 5;
+			justify-content: center;
+			padding-top: 0.6rem;
+		}
 	}
 </style>
+
+<script>
+	// Caption follows hover/focus across both crosses; falls back to the
+	// current section. Pure enhancement — links work without it.
+	const sheet = document.getElementById("menu-sheet");
+	const caption = document.getElementById("menu-caption")?.querySelector("b");
+	if (sheet && caption) {
+		const show = (name: string | null, color: string | null) => {
+			caption.textContent = name || caption.dataset.defaultName || "~";
+			caption.style.setProperty("--cap", color || caption.dataset.defaultColor || "#1E1E1E");
+		};
+		sheet.addEventListener("mouseover", (e) => {
+			const link = (e.target as Element).closest("[data-name]") as HTMLElement | null;
+			if (link) show(link.dataset.name ?? null, link.dataset.color ?? null);
+		});
+		sheet.addEventListener("mouseout", () => show(null, null));
+		sheet.addEventListener("focusin", (e) => {
+			const link = (e.target as Element).closest("[data-name]") as HTMLElement | null;
+			if (link) show(link.dataset.name ?? null, link.dataset.color ?? null);
+		});
+		sheet.addEventListener("focusout", () => show(null, null));
+	}
+</script>
