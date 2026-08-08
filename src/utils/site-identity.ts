@@ -13,7 +13,8 @@ export interface BlogSiteIdentitySettings {
 }
 
 const DEFAULT_SITE_TITLE = "Server Startup";
-const DEFAULT_SITE_TAGLINE = "Consultoría tecnológica y arquitectura backend";
+// Last resort only — the live value comes from site settings (seed/seed.json).
+const DEFAULT_SITE_TAGLINE = "Ingeniería de sistemas, integración y seguridad edge";
 
 export function resolveBlogSiteIdentity(settings?: BlogSiteIdentitySettings) {
 	return {
