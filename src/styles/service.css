@@ -7,6 +7,14 @@
  */
 
 /* ═══ HERO — compact, cube glyph in discipline color ═══ */
+.s-hero__emblem {
+	flex: none;
+	height: auto;
+}
+@media (max-width: 640px) {
+	.s-hero__emblem { width: 96px; }
+}
+
 .s-hero {
 	padding: calc(80px + 24px) 0 48px;
 }
@@ -18,16 +26,7 @@
 	align-items: center;
 }
 
-.s-hero__cube {
-	width: 120px;
-	color: var(--accentColor);
-	justify-self: start;
-}
 
-.s-hero__cube-face {
-	fill: var(--accentColor);
-	opacity: 0.14;
-}
 
 .s-hero__body {
 	margin-top: 20px;
@@ -46,10 +45,7 @@
 		grid-template-columns: 1fr 200px;
 		gap: 40px;
 	}
-	.s-hero__cube {
-		width: 180px;
-		justify-self: end;
-	}
+	
 }
 
 /* ═══ INSTRUMENT SECTION ═══ */

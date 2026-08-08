@@ -1,0 +1,80 @@
+---
+/**
+ * CubeEmblem — the section die (#215, design #211 v7).
+ *
+ * The 1×1 section cube: colored stroke, translucent faces, the logo's 2×2
+ * grid hinted at 18% opacity, and the section pictogram projected in
+ * perspective onto the LEFT face (a die with the craft on its side). The AI
+ * section carries a lettered mono glyph instead of a path; deconstruyendo
+ * wears its dashed cut-line border.
+ *
+ * Pure SVG, decorative (aria-hidden) — the accompanying heading names the
+ * section. Geometry lives here; color comes from the CMS entry.
+ */
+import { ICON_BY_KEY } from "../utils/nav";
+
+interface Props {
+	color: string;
+	faceKey?: string;
+	size?: number;
+	class?: string;
+}
+const { color, faceKey, size = 104, class: className } = Astro.props;
+
+// Left-face projection: icon-space (u,v) ∈ [0,24]² mapped onto the rhombus
+// L(14,64) → C(100,114) → (100,214) → (14,164).
+const LEFT = "matrix(3.583,2.083,0,4.167,14,64)";
+const dash = faceKey === "dec" ? "14 12" : undefined;
+const icon = faceKey ? ICON_BY_KEY[faceKey] : undefined;
+---
+
+<svg
+	class:list={["cube-emblem", className]}
+	width={size}
+	viewBox="0 0 200 228"
+	aria-hidden="true"
+>
+	<polygon fill={color} fill-opacity="0.07" points="100,14 186,64 100,114 14,64"></polygon>
+	<polygon fill={color} fill-opacity="0.13" points="14,64 100,114 100,214 14,164"></polygon>
+	<polygon fill={color} fill-opacity="0.10" points="100,114 186,64 186,164 100,214"></polygon>
+	<path
+		fill="none"
+		stroke={color}
+		stroke-opacity="0.18"
+		stroke-width="5"
+		d="M57,39 143,89 M143,39 57,89 M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"
+	></path>
+	<path
+		fill="none"
+		stroke={color}
+		stroke-width="11"
+		stroke-linejoin="round"
+		stroke-linecap="round"
+		stroke-dasharray={dash}
+		d="M100,14 186,64 186,164 100,214 14,164 14,64 Z M14,64 100,114 186,64 M100,114 100,214"
+	></path>
+	{faceKey === "ia" ? (
+		<g transform={`${LEFT} translate(3.1,3.1) scale(0.74)`}>
+			<text
+				x="12"
+				y="16.8"
+				text-anchor="middle"
+				font-family="var(--font-mono), monospace"
+				font-size="12.5"
+				font-weight="700"
+				fill={color}
+			>AI</text>
+		</g>
+	) : icon ? (
+		<g
+			transform={`${LEFT} translate(3.1,3.1) scale(0.74)`}
+			fill="none"
+			stroke={color}
+			stroke-width="2.4"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			<path vector-effect="non-scaling-stroke" d={icon}></path>
+		</g>
+	) : null}
+</svg>
