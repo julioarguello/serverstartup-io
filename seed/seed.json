@@ -5663,6 +5663,175 @@
 						}
 					]
 				}
+			},
+			{
+				"id": "svc-ia",
+				"slug": "inteligencia-artificial",
+				"status": "published",
+				"locale": "es",
+				"data": {
+					"title": "Inteligencia artificial",
+					"excerpt": "Agentes que trabajan dentro de tus sistemas, con el ERP, el dato y el perímetro que ya conocemos. Nada de demos de laboratorio.",
+					"cta_label": "Cuéntanos tu caso",
+					"color": "#6B4FBB",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "b1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n1",
+									"text": "La mayoría de los proyectos de IA muere en la demo. Un chatbot que no puede tocar el pedido, un copiloto que no ve el stock. Nosotros llegamos por el otro lado: primero los sistemas, luego el agente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b2",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n2",
+									"text": "IA con las manos en tu sistema",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b3",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n3",
+									"text": "Llevamos más de quince años integrando ERPs, catálogos y plataformas de datos, y eso nos deja algo mejor que un modelo. Nos deja el mapa. Un agente útil necesita leer el pedido en SAP, comprobar el stock en BigQuery y escribir el resultado donde tu equipo trabaja de verdad. Eso es integración, y es nuestra casa.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b4",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n4",
+									"text": "Estamos construyendo esta vertical con la misma regla que el resto. Profundidad antes que amplitud, y nada en producción que no podamos explicar línea a línea.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n5",
+									"text": "Esta página crecerá cuando haya casos que contar. Así trabajamos.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "svc-ia-en",
+				"slug": "artificial-intelligence",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "svc-ia",
+				"data": {
+					"title": "Artificial Intelligence",
+					"excerpt": "Agents that work inside your systems, wired to the ERP, the data and the edge we already run. No lab demos.",
+					"cta_label": "Tell us your case",
+					"color": "#6B4FBB",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "b6",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n6",
+									"text": "Most AI projects die at the demo — a chatbot that can't touch the order, a copilot that can't see the stock. We come at it from the other side: systems first, agent second.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b7",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n7",
+									"text": "AI with its hands in your system",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n8",
+									"text": "Fifteen-plus years integrating ERPs, catalogues and data platforms left us with something better than a model: the map. A useful agent needs to read the order in SAP, check stock in BigQuery and write the result where your team actually works. That is integration — and integration is home ground for us.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b9",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n9",
+									"text": "We are building this practice under the same rule as the rest: depth before breadth, and nothing in production we cannot explain line by line.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b10",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n10",
+									"text": "This page will grow as there are cases worth telling. That is how we work.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
 			}
 		],
 		"members": [
@@ -6851,6 +7020,280 @@
 								{
 									"_type": "span",
 									"text": "Code, seeds, skills and prompts live in the repository. Look inside and tell us what you would do better. Probably something. That is how good conversations start."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-referencias",
+				"slug": "referencias",
+				"status": "published",
+				"locale": "es",
+				"data": {
+					"title": "Referencias",
+					"excerpt": "Los nombres que podemos escribir y el trabajo que hay detrás.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "b11",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n11",
+									"text": "No todos nuestros clientes pueden aparecer aquí. Buena parte de nuestro trabajo llega a través de terceros, y lo que firmamos se respeta. Estos son los nombres que sí podemos escribir.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b12",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n12",
+									"text": "Clientes",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b13",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n13",
+									"text": "Alcampo. Auchan. Forum Sport. Punt Roma. Y Job&Talent, con quien trabajamos en su día.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b14",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n14",
+									"text": "Colaboraciones",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b15",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n15",
+									"text": "Con Inetum y con Grupo Seidor participamos como especialistas dentro de proyectos suyos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b16",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n16",
+									"text": "Del resto solo contamos agregados. Más de cuarenta dominios protegidos tras Cloudflare, una cadena de juguetería, retail alimentario a escala europea. Si necesitas una referencia concreta de tu sector, pídela en una llamada.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-references",
+				"slug": "references",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "page-referencias",
+				"data": {
+					"title": "References",
+					"excerpt": "The names we can write, and the work behind them.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "b17",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n17",
+									"text": "Not every client of ours can appear here. A good part of our work arrives through third parties, and what we sign stays signed. These are the names we can write.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b18",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n18",
+									"text": "Clients",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b19",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n19",
+									"text": "Alcampo. Auchan. Forum Sport. Punt Roma. And Job&Talent, whom we worked with back in the day.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b20",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n20",
+									"text": "Collaborations",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b21",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n21",
+									"text": "With Inetum and Grupo Seidor we take part as specialists inside their projects.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b22",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n22",
+									"text": "For the rest, aggregates only: forty-plus domains protected behind Cloudflare, a toy-store chain, food retail at European scale. If you need a reference from your sector, ask for it on a call.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-partners",
+				"slug": "partners",
+				"status": "published",
+				"locale": "es",
+				"data": {
+					"title": "Partners",
+					"excerpt": "Pocas alianzas, largas y con nombre.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "b23",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n23",
+									"text": "Somos partner de Cloudflare. La relación viene de años protegiendo dominios de retail sobre su plataforma y sigue viva en cada proyecto de edge que firmamos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b24",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n24",
+									"text": "Cuando un proyecto pide más manos que las nuestras, colaboramos con firmas que respetan nuestra forma de trabajar. Pocas alianzas, largas y con nombre.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-partners-en",
+				"slug": "partners",
+				"status": "published",
+				"locale": "en",
+				"translationOf": "page-partners",
+				"data": {
+					"title": "Partners",
+					"excerpt": "Few alliances, long ones, with names attached.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "b25",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n25",
+									"text": "We are a Cloudflare partner. The relationship comes from years of protecting retail domains on their platform, and it lives on in every edge project we sign.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b26",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "n26",
+									"text": "When a project needs more hands than ours, we collaborate with firms that respect how we work. Few alliances, long ones, with names attached.",
+									"marks": []
 								}
 							]
 						}
