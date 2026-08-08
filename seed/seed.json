@@ -1178,6 +1178,12 @@
 									"text": "Quiénes somos"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"_key": "team_title",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "~ El equipo" }]
 						}
 					]
 				},
@@ -1608,6 +1614,18 @@
 							"style": "normal",
 							"_key": "all_posts_in",
 							"children": [{ "_type": "span", "text": "Todos los posts en" }]
+						},
+						{
+							"_type": "block",
+							"_key": "switch_language",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Cambiar a la versión en inglés" }]
+						},
+						{
+							"_type": "block",
+							"_key": "kit_digital",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Programa Kit Digital — Financiado por los fondos Next Generation de la Unión Europea" }]
 						}
 					],
 					"type": "content"
@@ -2260,6 +2278,12 @@
 									"text": "About us"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"_key": "team_title",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "~ The team" }]
 						}
 					],
 					"type": "content"
@@ -2691,6 +2715,18 @@
 							"style": "normal",
 							"_key": "all_posts_in",
 							"children": [{ "_type": "span", "text": "All posts in" }]
+						},
+						{
+							"_type": "block",
+							"_key": "switch_language",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Switch to the Spanish version" }]
+						},
+						{
+							"_type": "block",
+							"_key": "kit_digital",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Kit Digital Programme — Funded by the European Union's Next Generation funds" }]
 						}
 					],
 					"type": "content"

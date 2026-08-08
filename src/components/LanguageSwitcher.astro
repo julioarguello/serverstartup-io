@@ -39,12 +39,14 @@ if (currentLocale === "es") {
 }
 
 // All routes now have EN equivalents — no ES-only fallback needed
+
+const t = Astro.locals.t;
 ---
 
 <a
 	href={altPath}
 	class="lang-switch"
-	aria-label={`Switch to ${altLocale === "en" ? "English" : "Español"}`}
+	aria-label={t("switch_language")}
 	hreflang={altLocale}
 >
 	{altLabel}
