@@ -57,7 +57,7 @@ const filteredPosts = await Promise.all(
 							title={post.data.title}
 							excerpt={post.data.excerpt}
 							featuredImage={post.data.featured_image}
-							href={`/en/posts/${post.id}`}
+							href={`/en/posts/${(post as any).slug ?? post.id}`}
 							date={post.data.publishedAt ?? undefined}
 							readingTime={getReadingTime(post.data.content)}
 							tags={tags.map((t) => ({ slug: t.slug, label: t.label }))}

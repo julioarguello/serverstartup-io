@@ -78,7 +78,7 @@ const identity = resolveBlogSiteIdentity(settings);
 // section accent comes from the CMS service entry — ink everywhere else.
 const promptPath = Astro.url.pathname.replace(/\/$/, "");
 const currentSlug = promptPath.replace(/^\/en/, "").replace(/^\//, "");
-const activeService = services.find((s: any) => s.id === currentSlug);
+const activeService = services.find((s: any) => (s.slug ?? s.id) === currentSlug);
 const headerAccent = activeService?.data?.color || "#1E1E1E";
 
 // Contact info from site settings

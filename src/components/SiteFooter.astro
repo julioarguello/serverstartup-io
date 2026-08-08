@@ -9,6 +9,7 @@ interface TrustLogo {
 }
 
 interface ServiceEntry {
+	slug?: string;
 	id: string;
 	data: { title: string };
 }
@@ -85,7 +86,7 @@ const t = Astro.locals.t;
 				<h3>{servicesTitle}</h3>
 				<ul class="footer-list">
 					{services.map((svc) => (
-						<li><a href={`${localePrefix}/${svc.id}`}>{svc.data.title}</a></li>
+						<li><a href={`${localePrefix}/${svc.slug ?? svc.id}`}>{svc.data.title}</a></li>
 					))}
 				</ul>
 			</div>
