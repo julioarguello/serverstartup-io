@@ -333,6 +333,28 @@
 					"url": "/contacto"
 				}
 			]
+		},
+		{
+			"name": "site_es",
+			"label": "Sitio",
+			"items": [
+				{ "type": "custom", "label": "Quiénes somos", "url": "/quienes-somos" },
+				{ "type": "custom", "label": "Referencias", "url": "/referencias" },
+				{ "type": "custom", "label": "Deconstruyendo", "url": "/deconstruyendo" },
+				{ "type": "custom", "label": "Contacto", "url": "/contacto" },
+				{ "type": "custom", "label": "Partners", "url": "/partners" }
+			]
+		},
+		{
+			"name": "site_en",
+			"label": "Site",
+			"items": [
+				{ "type": "custom", "label": "About us", "url": "/en/about-us" },
+				{ "type": "custom", "label": "References", "url": "/en/references" },
+				{ "type": "custom", "label": "Deconstructing", "url": "/en/deconstructing" },
+				{ "type": "custom", "label": "Contact", "url": "/en/contact" },
+				{ "type": "custom", "label": "Partners", "url": "/en/partners" }
+			]
 		}
 	],
 	"widgetAreas": [
@@ -1626,6 +1648,18 @@
 							"_key": "kit_digital",
 							"style": "normal",
 							"children": [{ "_type": "span", "text": "Programa Kit Digital — Financiado por los fondos Next Generation de la Unión Europea" }]
+						},
+						{
+							"_type": "block",
+							"_key": "nav_specialties",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Especialidades" }]
+						},
+						{
+							"_type": "block",
+							"_key": "nav_site",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Sitio" }]
 						}
 					],
 					"type": "content"
@@ -2727,6 +2761,18 @@
 							"_key": "kit_digital",
 							"style": "normal",
 							"children": [{ "_type": "span", "text": "Kit Digital Programme — Funded by the European Union's Next Generation funds" }]
+						},
+						{
+							"_type": "block",
+							"_key": "nav_specialties",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Specialties" }]
+						},
+						{
+							"_type": "block",
+							"_key": "nav_site",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Site" }]
 						}
 					],
 					"type": "content"

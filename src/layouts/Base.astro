@@ -51,9 +51,9 @@ const t = Astro.locals.t;
 // support passing data through <slot/> to child components. EmDash caches
 // query results at the request level, so the database is hit only once per
 // collection per request. The overhead is negligible.
-const [settings, menu, servicesResult, partnersResult, labels] = await Promise.all([
+const [settings, siteMenu, servicesResult, partnersResult, labels] = await Promise.all([
 	getSiteSettings(),
-	getMenu("primary"),
+	getMenu(`site_${Astro.currentLocale || "es"}`),
 	getEmDashCollection("services", {
 		orderBy: { created_at: "asc" },
 		locale,
@@ -101,13 +101,7 @@ const pageTitle = title
 const pageDescription = description || identity.siteTagline;
 
 // Menu items — classify by matching against services collection slugs
-const menuItems = menu?.items ?? [];
-const serviceSlugs = new Set(services.map((s) => s.id));
-const serviceItems = menuItems.filter((item) => {
-	const slug = item.url?.replace(/^\//, "").replace(/\/$/, "");
-	return slug && serviceSlugs.has(slug);
-});
-const secondaryItems = menuItems.filter((item) => !serviceItems.includes(item));
+const siteMenuItems = siteMenu?.items ?? [];
 
 // Locale-aware URL prefix ("" for ES default, "/en" for English)
 const localePrefix = locale === "es" ? "" : `/${locale}`;
@@ -169,7 +163,7 @@ const resolvedOgType = ogType || "website";
 
 	<SiteHeader promptPath={promptPath} accent={headerAccent} />
 
-	<MenuDialog serviceItems={serviceItems} secondaryItems={secondaryItems} />
+	<MenuDialog services={services} siteItems={siteMenuItems} currentPath={promptPath} localePrefix={localePrefix} />
 
 	<!-- ═══ MAIN CONTENT ═══ -->
 	<main id="content">

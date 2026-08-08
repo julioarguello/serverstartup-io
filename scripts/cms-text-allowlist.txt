@@ -3,6 +3,9 @@
 # mark, NOT copy: if a string reads as a sentence to a site visitor, it does
 # not belong in this file — it belongs in seed/seed.json.
 #
+# The AI section's lettered glyph (menu face / emblem) — a typographic
+# pictogram in the house mono, neutral across locales; not copy
+AI
 # Instrument syntax (BigQuery console SQL, Javadoc tags)
 SELECT
 FROM
