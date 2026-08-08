@@ -74,6 +74,13 @@ const services = serviceEntries ?? [];
 
 const identity = resolveBlogSiteIdentity(settings);
 
+// Wayfinding (#211): the header prompt shows the real pathname, and the
+// section accent comes from the CMS service entry — ink everywhere else.
+const promptPath = Astro.url.pathname.replace(/\/$/, "");
+const currentSlug = promptPath.replace(/^\/en/, "").replace(/^\//, "");
+const activeService = services.find((s: any) => s.id === currentSlug);
+const headerAccent = activeService?.data?.color || "#1E1E1E";
+
 // Contact info from site settings
 const s = settings as SiteSettings;
 const phone = s.phone || "";
@@ -160,7 +167,7 @@ const resolvedOgType = ogType || "website";
 </head>
 <body>
 
-	<SiteHeader />
+	<SiteHeader promptPath={promptPath} accent={headerAccent} />
 
 	<MenuDialog serviceItems={serviceItems} secondaryItems={secondaryItems} />
 

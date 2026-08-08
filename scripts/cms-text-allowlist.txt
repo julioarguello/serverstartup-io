@@ -10,10 +10,11 @@ WHERE
 @param
 @author
 @since
-# Brand wordmark (AssemblyManual header) and brand-name image alts
+# Brand wordmark (AssemblyManual header, SiteHeader prompt) and brand-name image alts
 SERVERSTARTUP
 .io
 Server Startup
+~Server Startup
 # Meta values (Base.astro head, not user-visible copy)
 width=device-width, initial-scale=1
 summary_large_image
