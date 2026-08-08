@@ -161,34 +161,69 @@
 }
 
 .s-areas__cards {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Flat face-cards (#215): white face, ink border, mini 2×2 in the strong
+   vertical color — one color code across menu, heroes and index. */
+.face-card__link {
 	display: flex;
-	flex-direction: column;
-	gap: 120px;
-}
-
-/* Individual cards */
-.area-card {
-	border-radius: var(--card-radius);
-	box-shadow: var(--card-shadow);
-	padding: 24px;
-	display: flex;
-	flex-direction: column;
-}
-
-.area-card h3 {
-	margin-bottom: 0;
-}
-
-.area-card .text-body {
-	margin-top: 0;
-}
-
-.area-card__arrow {
-	display: flex;
-	justify-content: flex-end;
-	color: var(--color-primary);
-	margin-top: 16px;
+	gap: 16px;
+	align-items: flex-start;
+	background: var(--color-secondary);
+	border: 1.5px solid var(--color-primary);
+	border-radius: 6px;
+	padding: 18px;
 	text-decoration: none;
+	color: var(--color-primary);
+	transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.face-card__link:hover,
+.face-card__link:focus-visible {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 0 var(--cc);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.face-card__link { transition: none; }
+	.face-card__link:hover { transform: none; }
+}
+
+.face-card__mini {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 2px;
+	width: 34px;
+	height: 34px;
+	border: 2px solid var(--color-primary);
+	border-radius: 3px;
+	background: var(--color-primary);
+	flex: none;
+	overflow: hidden;
+	margin-top: 4px;
+}
+
+.face-card__mini i {
+	background: var(--cc);
+}
+
+.face-card h3 {
+	margin: 0 0 4px;
+	font-size: 20px;
+	line-height: 1.3;
+}
+
+.face-card .text-body {
+	margin: 0;
+	font-size: 15px;
+	line-height: 1.5;
 }
 
 @media (min-width: 768px) {
@@ -206,15 +241,9 @@
 
 	.s-areas__cards {
 		flex: 1;
-		gap: 300px;
+		gap: 18px;
 	}
 
-	/* Sticky positions (from custom.css — exact values) */
-	.card1 { position: sticky; top: calc(50% - 150px); z-index: 1; }
-	.card2 { position: sticky; top: calc(50% - 130px); z-index: 2; }
-	.card3 { position: sticky; top: calc(50% - 110px); z-index: 3; }
-	.card4 { position: sticky; top: calc(50% - 90px);  z-index: 4; }
-	.card5 { position: sticky; top: calc(50% - 70px);  z-index: 5; }
 }
 
 /* ═══ CTA — dark bg ═══ */
@@ -249,13 +278,3 @@
 	.s-cta { padding: 80px 0; }
 }
 
-/* Brand-palette cards: dark backgrounds get white text. The 25% ink overlay
-   lifts body-copy contrast to AA (4.5:1) on mid-tone brand colors. */
-.area-card--dark {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
-}
-.area-card--dark h3,
-.area-card--dark .text-body,
-.area-card--dark .area-card__arrow {
-	color: #FFFFFF;
-}

@@ -13,6 +13,8 @@ import { getEmDashEntry, getSiteSettings } from "emdash";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
 import ServiceInstrument from "../components/service/ServiceInstrument.astro";
+import CubeEmblem from "../components/CubeEmblem.astro";
+import { FACE_BY_SLUG, SITE_BY_PATH } from "../utils/nav";
 import { serviceJsonLd, breadcrumbJsonLd } from "../utils/jsonld";
 import { getUiLabels } from "../utils/ui-labels";
 import type { SiteSettings } from "../types";
@@ -46,7 +48,8 @@ const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contacta 
 const { title, content, excerpt } = entry.data;
 
 // Theme color from CMS entry (fallback to teal)
-const accentColor = entry.data.color || "#BFEDEE";
+const accentColor = entry.data.color || "#1E1E1E";
+const emblemKey = FACE_BY_SLUG[slug!] ?? SITE_BY_PATH[Astro.url.pathname.replace(/\/$/, "")];
 
 // CTA label from CMS (fallback to site settings default)
 const ctaLabel = entry.data.cta_label || defaultCtaLabel;
@@ -85,13 +88,7 @@ const labels = await getUiLabels(locale);
 				)}
 				<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark">{ctaLabel}</a>
 			</div>
-			<svg class="s-hero__cube" viewBox="0 0 100 110" aria-hidden="true">
-				<path class="s-hero__cube-face" d="M50 5 95 30v50L50 105 5 80V30Z" />
-				<g fill="none" stroke="currentColor" stroke-width="4">
-					<path d="M50 5 95 30v50L50 105 5 80V30Z" />
-					<path d="M5 30l45 25 45-25M50 55v50" />
-				</g>
-			</svg>
+			<CubeEmblem class="s-hero__emblem" color={accentColor} faceKey={emblemKey} size={150} />
 		</div>
 	</section>
 
