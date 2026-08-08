@@ -239,7 +239,7 @@ Basic PWA support via Web App Manifest — enables mobile home screen installati
 - **Dev**: `npx emdash dev` (runs migrations, seeds, generates types)
 - **Admin**: `http://localhost:4321/_emdash/admin`
 
-### 9.1 D1 Seeding (CRITICAL)
+### 10.1 D1 Seeding (CRITICAL)
 
 `npx emdash seed` writes to `./data.db` by default. With `d1()` adapter, the dev server uses Wrangler's D1 emulator at `.wrangler/state/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite`.
 
