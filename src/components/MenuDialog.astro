@@ -34,12 +34,15 @@ const activeFace = FACE_BY_SLUG[currentPath.replace(/^\/en/, "").replace(/^\//, 
 const activeSite = SITE_BY_PATH[currentPath] ?? null;
 
 const faces = services
-	.map((s) => ({
-		key: FACE_BY_SLUG[s.id],
-		href: `${localePrefix}/${s.id}`,
-		title: s.data.title ?? s.id,
+	.map((s) => {
+		const slug = (s as any).slug ?? s.id;
+		return {
+		key: FACE_BY_SLUG[slug],
+		href: `${localePrefix}/${slug}`,
+		title: s.data.title ?? slug,
 		color: s.data.color ?? "#1E1E1E",
-	}))
+		};
+	})
 	.filter((f) => f.key);
 
 const siteFaces = siteItems

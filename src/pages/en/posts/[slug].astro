@@ -280,7 +280,7 @@ const publishDateIso = post.data.publishedAt?.toISOString() ?? null;
 									title={p.data.title}
 									excerpt={p.data.excerpt}
 									featuredImage={p.data.featured_image}
-									href={`/en/posts/${p.id}`}
+									href={`/en/posts/${(p as any).slug ?? p.id}`}
 									date={p.data.publishedAt ?? undefined}
 									readingTime={getReadingTime(p.data.content)}
 									tags={postTags.map((t) => ({ slug: t.slug, label: t.label }))}

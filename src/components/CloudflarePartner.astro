@@ -27,7 +27,7 @@ const logo = d.featured_image;
 const ctaLabel = d.cta_label;
 const locale = Astro.currentLocale || "es";
 const localePrefix = locale === "es" ? "" : `/${locale}`;
-const ctaHref = `${localePrefix}/${featuredPartner.id}`;
+const ctaHref = `${localePrefix}/${(featuredPartner as any).slug ?? featuredPartner.id}`;
 
 // Parse PT blocks into heading, description, and features
 const blocks = d.content || [];
