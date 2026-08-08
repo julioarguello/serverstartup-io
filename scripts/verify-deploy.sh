@@ -15,7 +15,7 @@ FAIL=0
 TMP="${RUNNER_TEMP:-/tmp}/verify-deploy"
 mkdir -p "$TMP"
 
-# ── 1. Routes battery: 20 routes, both locales, status + title ──────────────
+# ── 1. Routes battery: 26 routes, both locales, status + title ──────────────
 ROUTES=(
 	"/|Ingeniería de sistemas, integración y seguridad edge"
 	"/quienes-somos|Quiénes somos"
@@ -27,6 +27,9 @@ ROUTES=(
 	"/ingenieria-greenfield-y-sistemas-criticos|Ingeniería Greenfield y sistemas críticos"
 	"/deconstruyendo|Deconstruyendo esta web"
 	"/politica-de-privacidad|Política de privacidad"
+	"/inteligencia-artificial|Inteligencia artificial"
+	"/referencias|Referencias"
+	"/partners|Partners"
 	"/en|Systems engineering, integration and edge security"
 	"/en/about-us|About us"
 	"/en/contact|Contact"
@@ -37,6 +40,9 @@ ROUTES=(
 	"/en/greenfield-engineering-critical-systems|Greenfield engineering &amp; critical systems"
 	"/en/deconstructing|Deconstructing this website"
 	"/en/privacy-policy|Privacy policy"
+	"/en/artificial-intelligence|Artificial Intelligence"
+	"/en/references|References"
+	"/en/partners|Partners"
 )
 
 echo "── routes battery ($BASE)"

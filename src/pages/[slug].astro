@@ -20,9 +20,25 @@ const t = Astro.locals.t;
 
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "es";
-const { entry, cacheHint } = await getEmDashEntry("services", slug!, { locale });
+
+// Try services first, then pages (mirrors en/[slug].astro)
+let entry: any = null;
+let cacheHint: any = null;
+
+const svcResult = await getEmDashEntry("services", slug!, { locale });
+if (svcResult.entry) {
+	entry = svcResult.entry;
+	cacheHint = svcResult.cacheHint;
+} else {
+	const pageResult = await getEmDashEntry("pages", slug!, { locale });
+	if (pageResult.entry) {
+		entry = pageResult.entry;
+		cacheHint = pageResult.cacheHint;
+	}
+}
+
 if (!entry) return Astro.redirect("/404");
-Astro.cache.set(cacheHint);
+if (cacheHint) Astro.cache.set(cacheHint);
 
 const settings = await getSiteSettings();
 const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contacta ahora";
