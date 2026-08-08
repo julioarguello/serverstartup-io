@@ -1,0 +1,19 @@
+# cms-text-allowlist.txt — exact strings the CMS-text gate (#209) accepts as
+# template literals. Everything here is the graphic's own syntax or a brand
+# mark, NOT copy: if a string reads as a sentence to a site visitor, it does
+# not belong in this file — it belongs in seed/seed.json.
+#
+# Instrument syntax (BigQuery console SQL, Javadoc tags)
+SELECT
+FROM
+WHERE
+@param
+@author
+@since
+# Brand wordmark (AssemblyManual header) and brand-name image alts
+SERVERSTARTUP
+.io
+Server Startup
+# Meta values (Base.astro head, not user-visible copy)
+width=device-width, initial-scale=1
+summary_large_image

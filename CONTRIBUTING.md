@@ -126,6 +126,7 @@ reproducible with the scripts in [`scripts/`](scripts/):
 | :--- | :--- | :--- |
 | Types | `npm run typecheck` | 0 errors, 0 warnings |
 | Seed schema | `npx emdash seed seed/seed.json --validate` | valid |
+| CMS text | `python3 scripts/ci-check-cms-text.py` | labels resolve in both locales; 0 hardcoded copy |
 | Build | `npm run build` | completes |
 | Seeded boot | `scripts/ci-local-stack.sh 8787` | homepage 200 from seeds alone |
 | HTML | `html-validate` over the 15 rendered routes | 0 problems |

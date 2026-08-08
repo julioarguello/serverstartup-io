@@ -59,6 +59,9 @@ jobs:
       - name: Seed schema validation
         run: npx emdash seed seed/seed.json --validate
 
+      - name: CMS text integrity (labels resolve, no hardcoded copy)
+        run: python3 scripts/ci-check-cms-text.py
+
       - name: Build
         run: npx astro build
 
@@ -99,6 +102,7 @@ jobs:
             echo "|---|---|"
             echo "| gitleaks | no leaks |"
             echo "| citability | 0 forbidden names |"
+            echo "| cms-text | labels resolve ES+EN, 0 hardcoded copy |"
             echo "| astro check | 0 errors, 0 warnings |"
             echo "| html-validate | 0 problems, 15 templates |"
             echo "| security headers | full #164 suite |"
