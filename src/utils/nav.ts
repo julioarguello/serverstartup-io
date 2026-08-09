@@ -57,3 +57,39 @@ export const ICON_BY_KEY: Record<string, string> = {
 	contacto: "M3.5 6h17v12h-17z M4 7l8 6 8-6",
 	partners: "M13.5 10.5l-3 3 M8.5 11.5L6 14a3.2 3.2 0 0 0 4.5 4.5l2.5-2.5 M15.5 12.5L18 10a3.2 3.2 0 0 0-4.5-4.5L11 8",
 };
+
+/* ── The living-logo die (#211 v29 / #231) ───────────────────────────────
+ * Which 3D face of the die each specialty owns (mirrors the old unfolded
+ * cross, folded), and how each site link plays in the grey world: a face
+ * to spin to plus its coin — quiénes somos pastes the three initials on
+ * the faces visible after its quarter turn; deconstruyendo also opens
+ * the plates and lifts the die. */
+
+export type DieSlot = "front" | "right" | "back" | "left" | "top" | "bottom";
+
+export const DIE_FACE: Record<FaceKey, DieSlot> = {
+	int: "front",
+	ec: "left",
+	cdn: "right",
+	gf: "back",
+	bd: "top",
+	ia: "bottom",
+};
+
+export interface SiteDieFx {
+	face: FaceKey;
+	/** faceKey → initial letter pasted on it (quiénes somos: D·I·J) */
+	triple?: Record<string, string>;
+	/** ICON_BY_KEY key for the single grey coin */
+	icon?: SiteKey;
+	/** deconstruyendo: plates open, die lifts */
+	dec?: boolean;
+}
+
+export const SITE_DIE: Record<SiteKey, SiteDieFx> = {
+	quienes: { face: "int", triple: { int: "D", bd: "I", cdn: "J" } },
+	ref: { face: "gf", icon: "ref" },
+	contacto: { face: "cdn", icon: "contacto" },
+	partners: { face: "ia", icon: "partners" },
+	dec: { face: "bd", icon: "dec", dec: true },
+};

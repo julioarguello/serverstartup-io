@@ -1,20 +1,21 @@
 ---
 /**
- * MenuDialog — the cutting sheet (#214, design #211 v7).
+ * MenuDialog — list + living logo (#211 v29, #231; supersedes the sheet).
  *
- * Two cubes unfolded on one lattice: the specialties cross (six flat color
- * faces, icon-only) and the site cross at half scale in ink (five faces
- * around an open dashed center — the face still to be assembled). Names
- * live in ONE caption line under the sheet (aria-live) and in sr-only text
- * inside every link; colors and labels come from the CMS.
+ * A traditional menu that drives the die: specialties in large type with
+ * colored 2×2 mini-face bullets, one quiet line of site links below, and
+ * the logo-as-die on the right reacting to every hover/focus. Labels and
+ * colors come from the CMS; the die is decorative (aria-hidden).
  *
  * Dialog contract (ids, open/close classes) is unchanged — Base's script
  * keeps driving it.
  */
-import { FACE_BY_SLUG, SITE_BY_PATH, ICON_BY_KEY } from "../utils/nav";
+import LogoDie from "./LogoDie.astro";
+import { FACE_BY_SLUG, SITE_BY_PATH } from "../utils/nav";
 
 interface ServiceEntry {
 	id: string;
+	slug?: string;
 	data: { title?: string; color?: string };
 }
 interface MenuItem {
@@ -33,31 +34,27 @@ const t = Astro.locals.t;
 const activeFace = FACE_BY_SLUG[currentPath.replace(/^\/en/, "").replace(/^\//, "")] ?? null;
 const activeSite = SITE_BY_PATH[currentPath] ?? null;
 
-const faces = services
+const FACE_ORDER = ["ec", "int", "bd", "cdn", "gf", "ia"];
+const specLinks = services
 	.map((s) => {
-		const slug = (s as any).slug ?? s.id;
+		const slug = s.slug ?? s.id;
 		return {
-		key: FACE_BY_SLUG[slug],
-		href: `${localePrefix}/${slug}`,
-		title: s.data.title ?? slug,
-		color: s.data.color ?? "#1E1E1E",
+			key: FACE_BY_SLUG[slug],
+			href: `${localePrefix}/${slug}`,
+			title: s.data.title ?? slug,
+			color: s.data.color ?? "#1E1E1E",
 		};
 	})
-	.filter((f) => f.key);
+	.filter((l) => l.key)
+	.sort((a, b) => FACE_ORDER.indexOf(a.key) - FACE_ORDER.indexOf(b.key));
 
-const siteFaces = siteItems
+const siteLinks = siteItems
 	.map((it) => ({
 		key: SITE_BY_PATH[it.url ?? ""],
 		href: it.url ?? "#",
 		title: it.label ?? "",
 	}))
-	.filter((f) => f.key);
-
-const activeName =
-	faces.find((f) => f.key === activeFace)?.title ??
-	siteFaces.find((f) => f.key === activeSite)?.title ??
-	"~";
-const activeColor = faces.find((f) => f.key === activeFace)?.color ?? "#1E1E1E";
+	.filter((l) => l.key);
 ---
 
 <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
@@ -69,73 +66,50 @@ const activeColor = faces.find((f) => f.key === activeFace)?.color ?? "#1E1E1E";
 		aria-label={t("close_menu")}
 	>✕</button>
 
-	<div class="sheet" id="menu-sheet">
-		<nav aria-label={t("nav_specialties")}>
-			<ul class="net" role="list">
-				{faces.map((f) => (
-					<li class={`face face--${f.key}`} style={`--fc:${f.color}`}>
-						<a
-							href={f.href}
-							class="face-link"
-							data-name={f.title}
-							data-color={f.color}
-							aria-current={f.key === activeFace ? "page" : undefined}
-						>
-							<svg viewBox="0 0 96 96" aria-hidden="true">
-								<rect class="face-fill" x="8" y="8" width="80" height="80" rx="5"></rect>
-								<path class="face-sub" d="M48 8V88 M8 48H88"></path>
-								<rect class="face-border" x="8" y="8" width="80" height="80" rx="5"></rect>
-								{f.key === "ia" ? (
-									<text class="face-ai" x="48" y="62" text-anchor="middle">AI</text>
-								) : (
-									<path class="face-icon" transform="translate(26,26) scale(1.85)" d={ICON_BY_KEY[f.key]}></path>
-								)}
-							</svg>
-							<span class="sr-only">{f.title}</span>
-						</a>
-					</li>
-				))}
-			</ul>
-		</nav>
-
-		<nav aria-label={t("nav_site")} class="minisite-nav">
-			<ul class="minisite" role="list">
-				{siteFaces.map((f) => (
-					<li class={`face face--m face--${f.key}`} style="--fc:#1E1E1E">
-						<a
-							href={f.href}
-							class="face-link"
-							data-name={f.title}
-							data-color="#1E1E1E"
-							aria-current={f.key === activeSite ? "page" : undefined}
-						>
-							<svg viewBox="0 0 96 96" aria-hidden="true">
-								<rect class="face-fill" x="8" y="8" width="80" height="80" rx="5"></rect>
-								<path class="face-sub" d="M48 8V88 M8 48H88"></path>
-								<rect class="face-border" x="8" y="8" width="80" height="80" rx="5" stroke-dasharray={f.key === "dec" ? "9 7" : undefined}></rect>
-								<path class="face-icon" transform="translate(27,27) scale(1.8)" d={ICON_BY_KEY[f.key]}></path>
-							</svg>
-							<span class="sr-only">{f.title}</span>
-						</a>
-					</li>
-				))}
-				<li class="face face--m face--open" aria-hidden="true">
-					<svg viewBox="0 0 96 96">
-						<rect x="8" y="8" width="80" height="80" rx="5" fill="none" stroke="#B9B6B0" stroke-width="3.5" stroke-dasharray="4 7" stroke-linecap="round"></rect>
-					</svg>
-				</li>
-			</ul>
-		</nav>
-
-		<p class="sheet-caption" id="menu-caption" aria-live="polite">
-			<b style={`--cap:${activeColor}`} data-default-name={activeName} data-default-color={activeColor}>{activeName}</b>
-		</p>
+	<div class="menu-inner">
+		<div class="menu-lists">
+			<nav aria-label={t("nav_specialties")}>
+				<ul class="menu-spec" role="list">
+					{specLinks.map((l) => (
+						<li>
+							<a
+								href={l.href}
+								class="spec-link"
+								style={`--fc:${l.color}`}
+								data-die-spec={l.key}
+								aria-current={l.key === activeFace ? "page" : undefined}
+							>
+								<span class="spec-mini" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+								<span class="spec-title">{l.title}</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+			<nav aria-label={t("nav_site")}>
+				<ul class="menu-site" role="list">
+					{siteLinks.map((l) => (
+						<li>
+							<a
+								href={l.href}
+								class="site-link"
+								data-die-site={l.key}
+								aria-current={l.key === activeSite ? "page" : undefined}
+							>{l.title}</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		</div>
+		<div class="menu-die">
+			<LogoDie services={services} currentPath={currentPath} />
+		</div>
 	</div>
 </dialog>
 
 <style is:global>
 	/* ═══════════════════════════════════════════
-	   MENU DIALOG — the cutting sheet
+	   MENU DIALOG — list + living logo
 	   ═══════════════════════════════════════════ */
 	.menu-backdrop {
 		position: fixed;
@@ -164,9 +138,6 @@ const activeColor = faces.find((f) => f.key === activeFace)?.color ?? "#1E1E1E";
 		overflow-y: auto;
 		padding: 0;
 		margin: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 	.menu-dialog::backdrop { background: transparent; }
 	.menu-dialog.is-open { transform: translateX(0); }
@@ -186,139 +157,100 @@ const activeColor = faces.find((f) => f.key === activeFace)?.color ?? "#1E1E1E";
 		justify-content: center;
 	}
 
-	/* the shared lattice: mini face = (big − gap) / 2 — every intermediate
-	   vertex of both crosses lands on the same grid */
-	.sheet {
-		--bf: clamp(56px, 13vw, 88px);
-		--gap: 8px;
-		--mf: calc((var(--bf) - var(--gap)) / 2);
-		position: relative;
-		padding: 2rem 1.4rem 1rem;
-		border: 1.5px dashed #c9c6c0;
-		border-radius: 4px;
-		margin: 80px 16px 40px;
+	.menu-inner {
+		max-width: var(--container-max);
+		margin: 0 auto;
+		padding: 96px 24px 48px;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 48px;
+		align-items: center;
+		min-height: 100vh;
 	}
 
-	.sheet nav { display: contents; }
-
-	.net {
-		display: grid;
-		grid-template-columns: repeat(6, var(--bf));
-		grid-template-rows: repeat(3, var(--bf));
-		gap: var(--gap);
-		justify-content: center;
+	.menu-spec {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
-
-	.face { position: relative; }
-	.face-link { display: block; border-radius: 4px; }
-	.face-link svg { display: block; width: 100%; height: auto; }
-	.face-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
-
-	.face-fill { fill: var(--fc); fill-opacity: 0.08; transition: fill-opacity 0.22s; }
-	.face-link:hover .face-fill,
-	.face-link:focus-visible .face-fill { fill-opacity: 0.26; }
-	.face-link[aria-current="page"] .face-fill { fill-opacity: 1; }
-
-	.face-sub { fill: none; stroke: var(--fc); stroke-opacity: 0.15; stroke-width: 3; }
-	.face-link[aria-current="page"] .face-sub { stroke: #fff; stroke-opacity: 0.25; }
-
-	.face-border { fill: none; stroke: var(--fc); stroke-width: 4; stroke-linejoin: round; }
-
-	.face-icon {
-		fill: none;
-		stroke: var(--fc);
-		stroke-width: 2.1;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-	}
-	.face-ai {
-		font-family: var(--font-mono), monospace;
-		font-size: 34px;
-		font-weight: 700;
-		fill: var(--fc);
-	}
-	.face-link[aria-current="page"] .face-icon { stroke: #fff; }
-	.face-link[aria-current="page"] .face-ai { fill: #fff; }
-
-	/* cross positions — the net of the specialties cube */
-	.face--bd { grid-area: 1 / 2; }
-	.face--ec { grid-area: 2 / 1; }
-	.face--int { grid-area: 2 / 2; }
-	.face--cdn { grid-area: 2 / 3; }
-	.face--gf { grid-area: 2 / 4; }
-	.face--ia { grid-area: 3 / 2; }
-
-	/* the site cube: vertical cross at half scale, same lattice */
-	.minisite-nav { display: contents; }
-	.minisite {
-		grid-area: 1 / 5 / 3 / 7;
-		display: grid;
-		grid-template-columns: repeat(4, var(--mf));
-		grid-template-rows: repeat(4, var(--mf));
-		gap: var(--gap);
-		align-content: start;
-		justify-content: start;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-	.face--quienes { grid-area: 1 / 2; }
-	.face--ref { grid-area: 2 / 1; }
-	.face--open { grid-area: 2 / 2; }
-	.face--dec { grid-area: 2 / 3; }
-	.face--contacto { grid-area: 3 / 2; }
-	.face--partners { grid-area: 4 / 2; }
-
-	.sheet-caption {
-		min-height: 2.2rem;
-		text-align: center;
-		font-family: var(--font-mono), monospace;
-		font-size: 0.85rem;
+	.spec-link {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		font-size: 32px;
+		font-weight: 650;
+		line-height: 1.25;
 		color: var(--color-primary);
-		padding: 0.9rem 0 0.2rem;
-		margin: 0;
+		text-decoration: none;
+		padding: 8px 10px;
+		transition: background 0.15s;
 	}
-	.sheet-caption b {
-		font-weight: 600;
-		border-bottom: 2px solid var(--cap, var(--color-primary));
-		padding-bottom: 1px;
+	.spec-link:hover,
+	.spec-link:focus-visible {
+		background: color-mix(in srgb, var(--fc) 10%, white);
+	}
+	.spec-link[aria-current="page"] {
+		background: color-mix(in srgb, var(--fc) 14%, white);
+	}
+	.spec-mini {
+		display: inline-grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+		gap: 2px;
+		width: 26px;
+		height: 26px;
+		border: 2px solid var(--fc);
+		padding: 2px;
+		flex: none;
+	}
+	.spec-mini i {
+		background: var(--fc);
+		opacity: 0.16;
+	}
+	.spec-link[aria-current="page"] .spec-mini i { opacity: 1; }
+
+	.menu-site {
+		margin: 22px 0 0;
+		padding: 16px 10px 0;
+		border-top: 1px dashed #e4e2de;
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 20px;
+		list-style: none;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+	.site-link {
+		font-size: 16px;
+		font-weight: 500;
+		color: rgba(30, 30, 30, 0.65);
+		text-decoration: none;
+		flex: none;
+	}
+	.site-link:hover,
+	.site-link:focus-visible,
+	.site-link[aria-current="page"] {
+		color: var(--color-primary);
 	}
 
-	@media (max-width: 640px) {
-		.net {
-			grid-template-columns: repeat(4, var(--bf));
-			grid-template-rows: repeat(3, var(--bf)) auto;
+	.menu-die {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (max-width: 700px) {
+		.menu-inner {
+			grid-template-columns: 1fr;
+			gap: 24px;
+			padding: 88px 16px 40px;
+			align-content: start;
 		}
-		.minisite {
-			grid-area: 4 / 1 / 5 / 5;
-			justify-content: center;
-			padding-top: 0.6rem;
-		}
+		.menu-die { order: -1; }
+		.logo-stage { transform: scale(0.8); margin: -20px 0; }
+		.spec-link { font-size: 26px; }
 	}
 </style>
-
-<script>
-	// Caption follows hover/focus across both crosses; falls back to the
-	// current section. Pure enhancement — links work without it.
-	const sheet = document.getElementById("menu-sheet");
-	const caption = document.getElementById("menu-caption")?.querySelector("b");
-	if (sheet && caption) {
-		const show = (name: string | null, color: string | null) => {
-			caption.textContent = name || caption.dataset.defaultName || "~";
-			caption.style.setProperty("--cap", color || caption.dataset.defaultColor || "#1E1E1E");
-		};
-		sheet.addEventListener("mouseover", (e) => {
-			const link = (e.target as Element).closest("[data-name]") as HTMLElement | null;
-			if (link) show(link.dataset.name ?? null, link.dataset.color ?? null);
-		});
-		sheet.addEventListener("mouseout", () => show(null, null));
-		sheet.addEventListener("focusin", (e) => {
-			const link = (e.target as Element).closest("[data-name]") as HTMLElement | null;
-			if (link) show(link.dataset.name ?? null, link.dataset.color ?? null);
-		});
-		sheet.addEventListener("focusout", () => show(null, null));
-	}
-</script>

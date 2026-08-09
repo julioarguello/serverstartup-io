@@ -340,9 +340,9 @@
 			"items": [
 				{ "type": "custom", "label": "Quiénes somos", "url": "/quienes-somos" },
 				{ "type": "custom", "label": "Referencias", "url": "/referencias" },
-				{ "type": "custom", "label": "Deconstruyendo", "url": "/deconstruyendo" },
 				{ "type": "custom", "label": "Contacto", "url": "/contacto" },
-				{ "type": "custom", "label": "Partners", "url": "/partners" }
+				{ "type": "custom", "label": "Partners", "url": "/partners" },
+				{ "type": "custom", "label": "Deconstruyendo", "url": "/deconstruyendo" }
 			]
 		},
 		{
@@ -351,9 +351,9 @@
 			"items": [
 				{ "type": "custom", "label": "About us", "url": "/en/about-us" },
 				{ "type": "custom", "label": "References", "url": "/en/references" },
-				{ "type": "custom", "label": "Deconstructing", "url": "/en/deconstructing" },
 				{ "type": "custom", "label": "Contact", "url": "/en/contact" },
-				{ "type": "custom", "label": "Partners", "url": "/en/partners" }
+				{ "type": "custom", "label": "Partners", "url": "/en/partners" },
+				{ "type": "custom", "label": "Deconstructing", "url": "/en/deconstructing" }
 			]
 		}
 	],
