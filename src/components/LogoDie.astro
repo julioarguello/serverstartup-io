@@ -82,7 +82,7 @@ const CORNERS = [-62, 62];
 					CORNERS.map((z) => (
 						<div class="knob" style={`transform:translate3d(${x}px,${y}px,${z}px)`}>
 							{KNOB_FACES.map((r) => (
-								<i style={`transform:${r} translateZ(2.5px)`}></i>
+								<i style={`transform:${r} translateZ(3.5px)`}></i>
 							))}
 						</div>
 					))
@@ -211,10 +211,10 @@ const CORNERS = [-62, 62];
 	}
 	.logo-stage .knob i {
 		position: absolute;
-		left: -2.5px;
-		top: -2.5px;
-		width: 5px;
-		height: 5px;
+		left: -3.5px;
+		top: -3.5px;
+		width: 7px;
+		height: 7px;
 		background: var(--color-primary);
 	}
 	.logo-stage .df-front { transform: rotateY(0deg) translateZ(62px); }
