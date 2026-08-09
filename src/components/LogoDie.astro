@@ -1,0 +1,310 @@
+---
+/**
+ * LogoDie — the logo as a living die (#211 v29, #231).
+ *
+ * At rest it IS the logo: both rounded plates (dark one at +10°), the 2×2
+ * cube carved in plate grey, uniform thick ink lines, corner studs. Menu
+ * links wake it: specialties spin it to their face and flood its cells in
+ * the section color with a frosted white-icon coin; site links spin it in
+ * the grey world — colors untouched, only their ink-icon coin (quiénes
+ * somos pastes D·I·J on the three visible faces; deconstruyendo opens the
+ * plates and lifts the die).
+ *
+ * Faces are ink slabs extending half a line beyond the face, corners
+ * chamfered (lines are gaps, not strokes — no joins to overshoot); tiny
+ * axis-aligned studs close every vertex. Everything belongs to the die,
+ * so every pose and the spin itself need no static overlays.
+ *
+ * Purely decorative (aria-hidden): the list is the menu. Links opt in via
+ * data-die-spec="<faceKey>" / data-die-site="<siteKey>" anywhere in the
+ * document; the script listens globally.
+ */
+import { DIE_FACE, ICON_BY_KEY, FACE_BY_SLUG } from "../utils/nav";
+
+interface ServiceEntry {
+	id: string;
+	slug?: string;
+	data: { color?: string };
+}
+interface Props {
+	services: ServiceEntry[];
+	/** current pathname — a specialty page opens with its face awake */
+	currentPath: string;
+}
+const { services, currentPath } = Astro.props;
+
+const currentFace = FACE_BY_SLUG[currentPath.replace(/^\/en/, "").replace(/^\//, "")] ?? "";
+
+const faces = services
+	.map((s) => ({
+		key: FACE_BY_SLUG[s.slug ?? s.id],
+		color: s.data.color ?? "#1E1E1E",
+	}))
+	.filter((f) => f.key);
+
+const KNOB_FACES = [
+	"rotateY(0deg)",
+	"rotateY(90deg)",
+	"rotateY(180deg)",
+	"rotateY(-90deg)",
+	"rotateX(90deg)",
+	"rotateX(-90deg)",
+];
+const CORNERS = [-62, 62];
+---
+
+<div class="logo-stage" id="logo-die" data-current-face={currentFace} aria-hidden="true">
+	<div class="plate plate--dark"></div>
+	<div class="plate plate--light"></div>
+	<div class="scene">
+		<div class="cube3d" id="die-cube">
+			{faces.map((f) => (
+				<div class={`cface df-${DIE_FACE[f.key]}`} data-face={f.key} style={`--fc:${f.color}`}>
+					<svg class="facesvg" viewBox="0 0 133 133">
+						<polygon class="slab" points="4.5,0 128.5,0 133,4.5 133,128.5 128.5,133 4.5,133 0,128.5 0,4.5"></polygon>
+						<rect class="cell" x="9" y="9" width="53" height="53"></rect>
+						<rect class="cell" x="71" y="9" width="53" height="53"></rect>
+						<rect class="cell" x="9" y="71" width="53" height="53"></rect>
+						<rect class="cell" x="71" y="71" width="53" height="53"></rect>
+					</svg>
+					<span class="sticker">
+						{f.key === "ia" ? (
+							<svg viewBox="0 0 24 24"><text x="12" y="16.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">AI</text></svg>
+						) : (
+							<svg viewBox="0 0 24 24"><path d={ICON_BY_KEY[f.key]}></path></svg>
+						)}
+					</span>
+					<span class="gsticker"></span>
+				</div>
+			))}
+			{CORNERS.map((x) =>
+				CORNERS.map((y) =>
+					CORNERS.map((z) => (
+						<div class="knob" style={`transform:translate3d(${x}px,${y}px,${z}px)`}>
+							{KNOB_FACES.map((r) => (
+								<i style={`transform:${r} translateZ(2.5px)`}></i>
+							))}
+						</div>
+					))
+				)
+			)}
+		</div>
+	</div>
+</div>
+
+<style is:global>
+	/* ═══ LogoDie — the living logo ═══ */
+	.logo-stage {
+		position: relative;
+		width: 230px;
+		height: 230px;
+	}
+	.logo-stage .plate {
+		position: absolute;
+		inset: 0;
+		border-radius: 26px;
+		transition: transform 0.45s cubic-bezier(0.22, 0.75, 0.3, 1);
+	}
+	.logo-stage .plate--dark {
+		background: var(--color-primary);
+		transform: rotate(10deg);
+	}
+	.logo-stage .plate--light {
+		background: #ced4da;
+	}
+	.logo-stage .scene {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.logo-stage .cube3d {
+		width: 124px;
+		height: 124px;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 0.65s cubic-bezier(0.22, 0.75, 0.3, 1);
+		transform: var(--rot, rotateX(-35.264deg) rotateY(45deg));
+	}
+	.logo-stage .cface {
+		position: absolute;
+		inset: 0;
+		backface-visibility: hidden;
+	}
+	.logo-stage .facesvg {
+		position: absolute;
+		left: -4.5px;
+		top: -4.5px;
+		width: 133px;
+		height: 133px;
+	}
+	.logo-stage .slab {
+		fill: var(--color-primary);
+	}
+	.logo-stage .cell {
+		fill: #ced4da;
+		transition: fill 0.25s;
+	}
+	.logo-stage .cface.alive .cell {
+		fill: var(--fc);
+	}
+	.logo-stage .sticker,
+	.logo-stage .gsticker {
+		position: absolute;
+		inset: 0;
+		margin: auto;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.75);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transform: scale(0.7);
+		transition: opacity 0.25s, transform 0.25s;
+	}
+	.logo-stage .sticker {
+		width: 62%;
+		height: 62%;
+	}
+	.logo-stage .gsticker {
+		width: 56%;
+		height: 56%;
+		font-family: var(--font-mono), monospace;
+		font-weight: 700;
+		font-size: 34px;
+		color: var(--color-primary);
+	}
+	.logo-stage .cface.alive .sticker,
+	.logo-stage .cface.gs .gsticker {
+		opacity: 1;
+		transform: scale(1);
+	}
+	.logo-stage .sticker svg {
+		width: 62%;
+		height: 62%;
+		stroke: #fff;
+		fill: none;
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.logo-stage .sticker text {
+		stroke: none;
+	}
+	.logo-stage .gsticker svg {
+		width: 56%;
+		height: 56%;
+		stroke: var(--color-primary);
+		fill: none;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.logo-stage .knob {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 0;
+		height: 0;
+		transform-style: preserve-3d;
+	}
+	.logo-stage .knob i {
+		position: absolute;
+		left: -2.5px;
+		top: -2.5px;
+		width: 5px;
+		height: 5px;
+		background: var(--color-primary);
+	}
+	.logo-stage .df-front { transform: rotateY(0deg) translateZ(62px); }
+	.logo-stage .df-right { transform: rotateY(90deg) translateZ(62px); }
+	.logo-stage .df-back { transform: rotateY(180deg) translateZ(62px); }
+	.logo-stage .df-left { transform: rotateY(-90deg) translateZ(62px); }
+	.logo-stage .df-top { transform: rotateX(90deg) translateZ(62px); }
+	.logo-stage .df-bottom { transform: rotateX(-90deg) translateZ(62px); }
+	/* deconstruyendo: the logo's layers come apart */
+	.logo-stage.dec .plate--dark { transform: rotate(20deg) translate(14px, -10px); }
+	.logo-stage.dec .plate--light { transform: rotate(-6deg) translate(-12px, 8px); }
+	.logo-stage.dec .cube3d { transform: var(--rot) translateY(-10px) translateX(8px); }
+	@media (prefers-reduced-motion: reduce) {
+		.logo-stage .cube3d,
+		.logo-stage .plate {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	import { DIE_FACE, SITE_DIE, ICON_BY_KEY } from "../utils/nav";
+
+	const stage = document.getElementById("logo-die");
+	const cube = document.getElementById("die-cube");
+	if (stage && cube) {
+		const TILT = "rotateX(-35.264deg) rotateY(45deg)";
+		const ROT: Record<string, string> = {
+			front: TILT + " rotateY(-90deg)",
+			left: TILT,
+			right: TILT + " rotateY(-180deg)",
+			back: TILT + " rotateY(90deg)",
+			top: TILT + " rotateY(-90deg) rotateX(-90deg)",
+			bottom: TILT + " rotateY(-90deg) rotateX(90deg)",
+		};
+		const faceEl: Record<string, HTMLElement> = {};
+		cube.querySelectorAll<HTMLElement>(".cface").forEach((f) => {
+			if (f.dataset.face) faceEl[f.dataset.face] = f;
+		});
+		const clear = () => {
+			stage.classList.remove("dec");
+			Object.values(faceEl).forEach((f) => f.classList.remove("alive", "gs"));
+		};
+		const rotate = (faceKey: string | null) => {
+			cube.style.setProperty("--rot", faceKey ? ROT[DIE_FACE[faceKey as keyof typeof DIE_FACE]] : TILT);
+		};
+		const wakeSpec = (key: string) => {
+			clear();
+			rotate(key);
+			faceEl[key]?.classList.add("alive");
+		};
+		const setCoin = (faceKey: string, val: string) => {
+			const f = faceEl[faceKey];
+			if (!f) return;
+			const g = f.querySelector(".gsticker");
+			if (!g) return;
+			if (val.length <= 2) {
+				g.textContent = val;
+			} else {
+				const dash = val === "dec" ? ' stroke-dasharray="3 2.6"' : "";
+				g.innerHTML = `<svg viewBox="0 0 24 24"><path${dash} d="${ICON_BY_KEY[val]}"/></svg>`;
+			}
+			f.classList.add("gs");
+		};
+		const wakeSite = (key: string) => {
+			clear();
+			const fx = SITE_DIE[key as keyof typeof SITE_DIE];
+			if (!fx) return;
+			if (fx.dec) stage.classList.add("dec");
+			rotate(fx.face);
+			if (fx.triple) for (const [fk, v] of Object.entries(fx.triple)) setCoin(fk, v);
+			else if (fx.icon) setCoin(fx.face, fx.icon);
+		};
+		const rest = () => {
+			clear();
+			const cur = stage.dataset.currentFace || null;
+			rotate(cur);
+			if (cur) faceEl[cur]?.classList.add("alive");
+		};
+		const bind = (attr: string, fn: (v: string) => void) => {
+			document.querySelectorAll<HTMLElement>(`[${attr}]`).forEach((el) => {
+				const v = el.getAttribute(attr)!;
+				el.addEventListener("pointerenter", () => fn(v));
+				el.addEventListener("focus", () => fn(v));
+				el.addEventListener("pointerleave", rest);
+				el.addEventListener("blur", rest);
+			});
+		};
+		bind("data-die-spec", wakeSpec);
+		bind("data-die-site", wakeSite);
+		rest();
+	}
+</script>
