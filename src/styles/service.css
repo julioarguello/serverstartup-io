@@ -673,3 +673,9 @@
 	.bq__grid { font-size: 11px; }
 	.bq__grid th, .bq__grid td { padding: 5px 5px; }
 }
+
+/* ≤380: snake_case tokens (ultima_ejecucion) exceed the column budget of
+   the narrowest phones — let them break rather than scroll */
+@media (max-width: 380px) {
+	.bq__grid th, .bq__grid td { overflow-wrap: anywhere; }
+}
