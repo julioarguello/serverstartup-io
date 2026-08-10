@@ -10,10 +10,11 @@
  * somos pastes D·I·J on the three visible faces; deconstruyendo opens the
  * plates and lifts the die).
  *
- * Faces are ink slabs extending half a line beyond the face, corners
- * chamfered (lines are gaps, not strokes — no joins to overshoot); tiny
- * axis-aligned studs close every vertex. Everything belongs to the die,
- * so every pose and the spin itself need no static overlays.
+ * Faces are ink slabs extending half a line beyond the face (lines are
+ * gaps, not strokes — no joins to overshoot); each corner is a pointed
+ * chamfer (vertex at 2px) so every projected silhouette vertex closes in
+ * a clean point on GPU compositors. Everything belongs to the die, so
+ * every pose and the spin itself need no static overlays.
  *
  * Purely decorative (aria-hidden): the list is the menu. Links opt in via
  * data-die-spec="<faceKey>" / data-die-site="<siteKey>" anywhere in the
@@ -42,15 +43,6 @@ const faces = services
 	}))
 	.filter((f) => f.key);
 
-const KNOB_FACES = [
-	"rotateY(0deg)",
-	"rotateY(90deg)",
-	"rotateY(180deg)",
-	"rotateY(-90deg)",
-	"rotateX(90deg)",
-	"rotateX(-90deg)",
-];
-const CORNERS = [-62, 62];
 ---
 
 <div class="logo-stage" id="logo-die" data-current-face={currentFace} aria-hidden="true">
@@ -61,7 +53,7 @@ const CORNERS = [-62, 62];
 			{faces.map((f) => (
 				<div class={`cface df-${DIE_FACE[f.key]}`} data-face={f.key} style={`--fc:${f.color}`}>
 					<svg class="facesvg" viewBox="0 0 133 133">
-						<polygon class="slab" points="4.5,0 128.5,0 133,4.5 133,128.5 128.5,133 4.5,133 0,128.5 0,4.5"></polygon>
+						<polygon class="slab" points="4.5,0 128.5,0 131,2 133,4.5 133,128.5 131,131 128.5,133 4.5,133 2,131 0,128.5 0,4.5 2,2"></polygon>
 						<rect class="cell" x="9" y="9" width="53" height="53"></rect>
 						<rect class="cell" x="71" y="9" width="53" height="53"></rect>
 						<rect class="cell" x="9" y="71" width="53" height="53"></rect>
@@ -77,17 +69,6 @@ const CORNERS = [-62, 62];
 					<span class="gsticker"></span>
 				</div>
 			))}
-			{CORNERS.map((x) =>
-				CORNERS.map((y) =>
-					CORNERS.map((z) => (
-						<div class="knob" style={`transform:translate3d(${x}px,${y}px,${z}px)`}>
-							{KNOB_FACES.map((r) => (
-								<i style={`transform:${r} translateZ(3.5px)`}></i>
-							))}
-						</div>
-					))
-				)
-			)}
 		</div>
 	</div>
 </div>
@@ -200,22 +181,6 @@ const CORNERS = [-62, 62];
 		stroke-width: 2;
 		stroke-linecap: round;
 		stroke-linejoin: round;
-	}
-	.logo-stage .knob {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		width: 0;
-		height: 0;
-		transform-style: preserve-3d;
-	}
-	.logo-stage .knob i {
-		position: absolute;
-		left: -3.5px;
-		top: -3.5px;
-		width: 7px;
-		height: 7px;
-		background: var(--color-primary);
 	}
 	.logo-stage .df-front { transform: rotateY(0deg) translateZ(62px); }
 	.logo-stage .df-right { transform: rotateY(90deg) translateZ(62px); }
