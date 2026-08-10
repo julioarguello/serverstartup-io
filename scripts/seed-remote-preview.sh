@@ -35,8 +35,12 @@ done
 sqlite3 "$D1_DB" "SELECT 'INSERT INTO ' || name || '(' || name || ') VALUES(''rebuild'');' FROM sqlite_master WHERE sql LIKE 'CREATE VIRTUAL TABLE%';" >> "$SQL"
 
 # Rehearse on a copy of the local database (schema present, data replaced).
+# trusted_schema=ON: the pages FTS triggers write into the virtual table on
+# every ec_pages insert, which modern sqlite3 CLIs reject as "unsafe" under
+# their default untrusted-schema policy — it is our own schema, and remote
+# D1 executes the same statements through its own engine without complaint.
 cp "$D1_DB" "$WORK/rehearsal.sqlite"
-sqlite3 "$WORK/rehearsal.sqlite" < "$SQL"
+sqlite3 -cmd "PRAGMA trusted_schema=ON;" "$WORK/rehearsal.sqlite" < "$SQL"
 PAGES_LOCAL=$(sqlite3 "$WORK/rehearsal.sqlite" "SELECT count(*) FROM ec_pages;")
 [ "$PAGES_LOCAL" -gt 0 ] || { echo "ERROR: rehearsal produced 0 pages" >&2; exit 1; }
 

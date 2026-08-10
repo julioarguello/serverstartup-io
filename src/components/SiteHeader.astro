@@ -55,6 +55,10 @@ const t = Astro.locals.t;
 	   HEADER — the compass (mobile-first)
 	   ═══════════════════════════════════════════ */
 	.site-header {
+		/* clip, not hidden: transient pre-font overflow must neither widen
+		   the document (sticky mobile viewport expansion) nor create a
+		   scroll container */
+		overflow-x: clip;
 		position: fixed;
 		top: 0;
 		left: 0;
