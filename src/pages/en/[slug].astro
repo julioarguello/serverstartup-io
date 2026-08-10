@@ -64,6 +64,12 @@ const labels = await getUiLabels(locale);
 		trail: [{ name: title, path: `/en/${slug}` }],
 	}))} />
 	<!-- ══════ HERO — compact, solid cube glyph in the discipline color ══════ -->
+	<!-- Mobile: the section emblem lives as a fixed full-viewport watermark
+	     instead of an in-flow icon (always in view, adds no scroll — #216) -->
+	<div class="s-emblem-bg" aria-hidden="true">
+		<CubeEmblem color={accentColor} faceKey={emblemKey} size={340} />
+	</div>
+
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
 			<div class="s-hero__copy">

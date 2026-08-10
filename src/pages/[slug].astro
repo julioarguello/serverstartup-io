@@ -76,6 +76,12 @@ const labels = await getUiLabels(locale);
 		homeName: (settings as SiteSettings).title || "Server Startup",
 		trail: [{ name: title, path: `/${slug}` }],
 	}))} />
+	<!-- Mobile: the section emblem lives as a fixed full-viewport watermark
+	     instead of an in-flow icon (always in view, adds no scroll — #216) -->
+	<div class="s-emblem-bg" aria-hidden="true">
+		<CubeEmblem color={accentColor} faceKey={emblemKey} size={340} />
+	</div>
+
 	<!-- ══════ HERO — compact, solid cube glyph in the discipline color ══════ -->
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
