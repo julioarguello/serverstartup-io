@@ -103,6 +103,7 @@ const siteLinks = siteItems
 		</div>
 		<div class="menu-die">
 			<LogoDie services={services} currentPath={currentPath} />
+			<p class="die-hint" aria-hidden="true">{t("die_hint")}</p>
 		</div>
 	</div>
 </dialog>
@@ -236,21 +237,58 @@ const siteLinks = siteItems
 		color: var(--color-primary);
 	}
 
+	/* The grid item must be allowed to shrink below its content's automatic
+	   minimum — the nowrap site row otherwise inflates the 1fr track past
+	   the viewport and the whole menu clips (#236). */
+	.menu-lists {
+		min-width: 0;
+	}
+
 	.menu-die {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
 
+	.die-hint {
+		display: none;
+		font-family: var(--font-mono), monospace;
+		font-size: 11px;
+		letter-spacing: 0.06em;
+		text-transform: lowercase;
+		color: rgba(30, 30, 30, 0.55);
+		margin: 0;
+		text-align: center;
+	}
+
+	/* The die highlights the specialty it lands on when rolled by tap */
+	.spec-link.rolled {
+		background: color-mix(in srgb, var(--fc) 10%, white);
+	}
+
+	/* tablet: the approved composition, compressed — die at ×0.85 with air */
+	@media (min-width: 701px) and (max-width: 1100px) {
+		.menu-inner {
+			gap: 28px;
+			padding-inline: 40px;
+		}
+		.logo-stage { transform: scale(0.85); margin: -14px 0; }
+		.menu-die { padding-right: 6px; }
+		.die-hint { display: block; }
+	}
+
+	/* mobile: the die opens the menu — compass position, tap to roll */
 	@media (max-width: 700px) {
 		.menu-inner {
 			grid-template-columns: 1fr;
-			gap: 24px;
-			padding: 88px 16px 40px;
+			gap: 20px;
+			padding: 76px 16px 40px;
 			align-content: start;
 		}
 		.menu-die { order: -1; }
-		.logo-stage { transform: scale(0.8); margin: -20px 0; }
+		.logo-stage { transform: scale(0.62); margin: -38px 0; }
+		.die-hint { display: block; }
 		.spec-link { font-size: 26px; }
 	}
 </style>

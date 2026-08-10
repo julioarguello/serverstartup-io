@@ -1359,6 +1359,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "die_hint",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Toca el dado"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "close_menu",
 							"children": [
 								{
@@ -2466,6 +2477,17 @@
 								{
 									"_type": "span",
 									"text": "Open navigation menu"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "die_hint",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tap the die"
 								}
 							]
 						},

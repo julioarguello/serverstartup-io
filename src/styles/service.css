@@ -346,7 +346,12 @@
 }
 
 @media (max-width: 767px) {
-	.term { font-size: 12.5px; }
+	.term {
+		font-size: 12.5px;
+		line-height: 1.75;
+		padding: 16px 14px 14px;
+	}
+	.term__line { margin-block: 6px; }
 }
 
 /* ═══ LEGACY dark content (instruments pending migration) ═══ */
