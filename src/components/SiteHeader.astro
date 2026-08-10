@@ -145,9 +145,20 @@ const t = Astro.locals.t;
 		white-space: nowrap;
 	}
 
+	/* ≤480: everything cedes to the breadcrumb — flush cube, tight gaps,
+	   smaller type; the path takes ALL remaining width and only then
+	   ellipsizes (the two extreme slugs are the only ones that still do). */
 	@media (max-width: 480px) {
-		.brand-prompt { font-size: 0.85rem; }
-		.brand-path { max-width: 26vw; }
+		.site-header .header-inner { padding-inline: 12px; }
+		.header-brand { flex: 1; gap: 8px; }
+		.brand-cube { width: 26px; height: 30px; }
+		.brand-prompt { font-size: 0.8rem; flex: 1; }
+		.brand-path {
+			max-width: none;
+			flex: 0 1 auto;
+			min-width: 0;
+			font-size: 0.75rem;
+		}
 	}
 
 	.brand-cursor {
