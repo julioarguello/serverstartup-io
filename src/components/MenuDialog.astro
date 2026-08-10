@@ -217,12 +217,16 @@ const siteLinks = siteItems
 		padding: 16px 10px 0;
 		border-top: 1px dashed #e4e2de;
 		display: flex;
-		flex-wrap: nowrap;
-		gap: 20px;
+		flex-wrap: wrap;
+		gap: 12px 20px;
 		list-style: none;
-		overflow-x: auto;
-		white-space: nowrap;
 	}
+	.spec-title,
+	.site-link,
+	.die-hint {
+		text-transform: lowercase;
+	}
+
 	.site-link {
 		font-size: 16px;
 		font-weight: 500;
