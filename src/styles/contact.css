@@ -36,13 +36,23 @@
 	gap: 8px;
 }
 
+/* mobile: structured tappable rows — label · value (ellipsized) · arrow
+   right. The old stacked column left orphaned arrows on their own line
+   (#240). Desktop restores the airy column composition below. */
 .s-contact__method {
 	display: flex;
-	flex-direction: column;
-	padding: 0;
+	align-items: center;
+	gap: 10px;
+	min-height: 52px;
+	padding: 12px 2px;
+	border-top: 1px solid #ececec;
 	text-decoration: none;
 	color: var(--color-primary);
 	transition: color 0.2s;
+}
+
+.s-contact__methods > li:last-child .s-contact__method {
+	border-bottom: 1px solid #ececec;
 }
 
 .s-contact__method:hover {
@@ -50,23 +60,33 @@
 }
 
 .s-contact__method-label {
+	order: 1;
+	flex: none;
 	font-family: var(--font-family);
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 24px;
 }
 
-.s-contact__arrow {
-	width: 24px;
-	height: 24px;
-	margin: 4px 0;
+.s-contact__method-value {
+	order: 2;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 300;
+	/* 0.7, not lighter: 16px text on white needs >=4.5:1 (0.6 = 4.04:1, failed the gate) */
+	color: rgba(30, 30, 30, 0.7);
 }
 
-.s-contact__method-value {
-	font-family: var(--font-family);
-	font-size: 20px;
-	font-weight: 300;
-	line-height: 26px;
+.s-contact__arrow {
+	order: 3;
+	flex: none;
+	width: 22px;
+	height: 22px;
+	margin-left: auto;
 }
 
 @media (min-width: 768px) {
@@ -80,6 +100,40 @@
 	.s-contact__methods {
 		flex-direction: row;
 		gap: 48px;
+	}
+
+	.s-contact__method {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0;
+		min-height: 0;
+		padding: 0;
+		border-top: 0;
+	}
+
+	.s-contact__methods > li:last-child .s-contact__method {
+		border-bottom: 0;
+	}
+
+	.s-contact__method-label {
+		order: 0;
+	}
+
+	.s-contact__arrow {
+		order: 0;
+		width: 24px;
+		height: 24px;
+		margin: 4px 0;
+		margin-left: 0;
+	}
+
+	.s-contact__method-value {
+		order: 0;
+		white-space: normal;
+		overflow: visible;
+		font-size: 20px;
+		line-height: 26px;
+		color: inherit;
 	}
 }
 
