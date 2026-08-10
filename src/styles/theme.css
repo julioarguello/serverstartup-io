@@ -70,6 +70,10 @@ h1 { font-family: var(--font-family); font-size: 48px; font-weight: 700; line-he
 	/* "Deconstruyendo" at 48px measures 379px — wider than a 393px phone's content box */
 	h1 { font-size: 42px; line-height: 50px; }
 }
+@media (max-width: 380px) {
+	/* and at 42px it is 332px — 4px over a 360px phone's content box */
+	h1 { font-size: 40px; line-height: 48px; }
+}
 h2 { font-family: var(--font-family); font-size: 40px; font-weight: 700; line-height: 48px; color: var(--color-primary); }
 h3 { font-family: var(--font-family); font-size: 24px; font-weight: 700; line-height: 30px; color: var(--color-primary); }
 h4 { font-family: var(--font-family); font-size: 22px; font-weight: 400; line-height: 30px; color: var(--color-primary); }
