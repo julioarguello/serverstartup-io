@@ -29,22 +29,27 @@
 	margin-bottom: 40px;
 }
 
+/* mobile: compact rows — square photo left, name/role right. Three tidy
+   rows instead of a 2+1 grid with an orphaned card (#239). */
 .s-team__grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 32px;
+	grid-template-columns: 1fr;
+	gap: 20px;
 }
 
 .team-card {
 	text-align: left;
+	display: grid;
+	grid-template-columns: 96px 1fr;
+	gap: 14px;
+	align-items: center;
 }
 
 .team-card__photo {
 	width: 100%;
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 1 / 1;
 	overflow: hidden;
 	background: var(--color-ink-soft);
-	margin-bottom: 16px;
 }
 
 .team-card__photo img {
@@ -59,7 +64,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 48px;
+	font-size: 32px;
 	font-weight: 600;
 	color: rgba(255, 255, 255, 0.3);
 	background: var(--color-ink-soft);
@@ -86,6 +91,12 @@
 		grid-template-columns: repeat(4, 1fr);
 		gap: 40px;
 	}
+	.team-card { display: block; }
+	.team-card__photo {
+		aspect-ratio: 4 / 3;
+		margin-bottom: 16px;
+	}
+	.team-card__placeholder { font-size: 48px; }
 }
 
 /* ═══ VALUES — dark bg ═══ */
