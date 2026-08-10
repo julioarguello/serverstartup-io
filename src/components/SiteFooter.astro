@@ -187,7 +187,10 @@ const t = Astro.locals.t;
 		display: flex;
 		flex-direction: column;
 		gap: 32px;
-		align-items: flex-start;
+		/* stacked mobile footer reads centered — logo, columns and partner
+		   marks alike (the desktop row overrides below) */
+		align-items: center;
+		text-align: center;
 	}
 	.footer-col h3 {
 		margin-bottom: 16px;
@@ -215,6 +218,7 @@ const t = Astro.locals.t;
 	.footer-partner-logo {
 		max-width: 200px;
 		margin-top: 8px;
+		margin-inline: auto;
 	}
 	.footer-cta {
 		margin-top: 32px;
@@ -224,7 +228,10 @@ const t = Astro.locals.t;
 		.footer-grid {
 			flex-direction: row;
 			gap: 40px;
+			align-items: flex-start;
+			text-align: left;
 		}
+		.footer-partner-logo { margin-inline: 0; }
 		.footer-col {
 			flex: 1;
 		}

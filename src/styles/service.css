@@ -648,3 +648,22 @@
 @media (max-width: 767px) {
 	.bq__sql, .jd__code, .bq__grid { font-size: 11.5px; }
 }
+
+/* ≤600: the console must FIT — internal horizontal scroll is not
+   admissible on the signature graphics. Decorative chrome yields first. */
+@media (max-width: 600px) {
+	.bq__menu { display: none; }
+	.bq__bar { flex-wrap: wrap; row-gap: 6px; }
+	.bq__editor {
+		grid-template-columns: 1fr;
+		padding: 12px 14px;
+	}
+	.bq__gutter { display: none; }
+	.bq__sql {
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+		line-height: 1.9;
+	}
+	.bq__results { padding: 10px 14px 14px; }
+	.bq__grid th, .bq__grid td { padding: 6px 7px; }
+}
