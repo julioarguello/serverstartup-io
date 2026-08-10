@@ -208,7 +208,7 @@ const faces = services
 </style>
 
 <script>
-	import { DIE_FACE, SITE_DIE, ICON_BY_KEY } from "../utils/nav";
+	import { DIE_FACE, FACE_ORDER, SITE_DIE, ICON_BY_KEY } from "../utils/nav";
 
 	const stage = document.getElementById("logo-die");
 	const cube = document.getElementById("die-cube");
@@ -263,9 +263,7 @@ const faces = services
 		// the roll: undefined = not rolling (rest shows the current section);
 		// a key = landed on that face; null = rolled past the last, pure logo
 		let rolled: string | null | undefined = undefined;
-		const ORDER = [...cube.querySelectorAll<HTMLElement>(".cface")]
-			.map((f) => f.dataset.face!)
-			.filter(Boolean);
+		const ORDER = FACE_ORDER.filter((k) => k in faceEl);
 		const markRolled = (key: string | null) => {
 			document.querySelectorAll<HTMLElement>("[data-die-spec]").forEach((el) => {
 				el.classList.toggle("rolled", el.getAttribute("data-die-spec") === key);
@@ -279,7 +277,7 @@ const faces = services
 		};
 		stage.addEventListener("click", () => {
 			const from = rolled !== undefined ? rolled : stage.dataset.currentFace || null;
-			const i = from ? ORDER.indexOf(from) : -1;
+			const i = from ? ORDER.indexOf(from as (typeof ORDER)[number]) : -1;
 			rolled = i + 1 < ORDER.length ? ORDER[i + 1] : null;
 			markRolled(rolled);
 			rest();

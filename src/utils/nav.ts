@@ -67,6 +67,9 @@ export const ICON_BY_KEY: Record<string, string> = {
 
 export type DieSlot = "front" | "right" | "back" | "left" | "top" | "bottom";
 
+/** Menu order of the specialties — the list renders it and the roll walks it. */
+export const FACE_ORDER: FaceKey[] = ["ec", "int", "bd", "cdn", "gf", "ia"];
+
 export const DIE_FACE: Record<FaceKey, DieSlot> = {
 	int: "front",
 	ec: "left",

@@ -11,7 +11,7 @@
  * keeps driving it.
  */
 import LogoDie from "./LogoDie.astro";
-import { FACE_BY_SLUG, SITE_BY_PATH } from "../utils/nav";
+import { FACE_BY_SLUG, FACE_ORDER, SITE_BY_PATH } from "../utils/nav";
 
 interface ServiceEntry {
 	id: string;
@@ -34,7 +34,6 @@ const t = Astro.locals.t;
 const activeFace = FACE_BY_SLUG[currentPath.replace(/^\/en/, "").replace(/^\//, "")] ?? null;
 const activeSite = SITE_BY_PATH[currentPath] ?? null;
 
-const FACE_ORDER = ["ec", "int", "bd", "cdn", "gf", "ia"];
 const specLinks = services
 	.map((s) => {
 		const slug = s.slug ?? s.id;
