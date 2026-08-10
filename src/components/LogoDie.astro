@@ -19,6 +19,11 @@
  * Purely decorative (aria-hidden): the list is the menu. Links opt in via
  * data-die-spec="<faceKey>" / data-die-site="<siteKey>" anywhere in the
  * document; the script listens globally.
+ *
+ * Touch has no hover, so the die earns its place with the gesture a die is
+ * for: tapping it rolls it through the specialties — each tap wakes the
+ * next face and highlights its link (.rolled); after the last it returns
+ * to the resting logo. The die never navigates; it points.
  */
 import { DIE_FACE, ICON_BY_KEY, FACE_BY_SLUG } from "../utils/nav";
 
@@ -79,6 +84,8 @@ const faces = services
 		position: relative;
 		width: 230px;
 		height: 230px;
+		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
 	}
 	.logo-stage .plate {
 		position: absolute;
@@ -253,12 +260,30 @@ const faces = services
 			if (fx.triple) for (const [fk, v] of Object.entries(fx.triple)) setCoin(fk, v);
 			else if (fx.icon) setCoin(fx.face, fx.icon);
 		};
+		// the roll: undefined = not rolling (rest shows the current section);
+		// a key = landed on that face; null = rolled past the last, pure logo
+		let rolled: string | null | undefined = undefined;
+		const ORDER = [...cube.querySelectorAll<HTMLElement>(".cface")]
+			.map((f) => f.dataset.face!)
+			.filter(Boolean);
+		const markRolled = (key: string | null) => {
+			document.querySelectorAll<HTMLElement>("[data-die-spec]").forEach((el) => {
+				el.classList.toggle("rolled", el.getAttribute("data-die-spec") === key);
+			});
+		};
 		const rest = () => {
 			clear();
-			const cur = stage.dataset.currentFace || null;
+			const cur = rolled !== undefined ? rolled : stage.dataset.currentFace || null;
 			rotate(cur);
 			if (cur) faceEl[cur]?.classList.add("alive");
 		};
+		stage.addEventListener("click", () => {
+			const from = rolled !== undefined ? rolled : stage.dataset.currentFace || null;
+			const i = from ? ORDER.indexOf(from) : -1;
+			rolled = i + 1 < ORDER.length ? ORDER[i + 1] : null;
+			markRolled(rolled);
+			rest();
+		});
 		const bind = (attr: string, fn: (v: string) => void) => {
 			document.querySelectorAll<HTMLElement>(`[${attr}]`).forEach((el) => {
 				const v = el.getAttribute(attr)!;

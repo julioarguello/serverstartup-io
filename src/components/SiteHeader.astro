@@ -137,6 +137,15 @@ const t = Astro.locals.t;
 		max-width: 34vw;
 	}
 
+	.brand-word {
+		white-space: nowrap;
+	}
+
+	@media (max-width: 480px) {
+		.brand-prompt { font-size: 0.85rem; }
+		.brand-path { max-width: 26vw; }
+	}
+
 	.brand-cursor {
 		width: 0.5em;
 		height: 1.05em;
