@@ -281,7 +281,9 @@ const siteLinks = siteItems
 		.die-hint { display: block; }
 	}
 
-	/* mobile: the die opens the menu — compass position, tap to roll */
+	/* mobile: the die opens the menu — compass position, tap to roll.
+	   Site links stack vertically (wrapped rows read as clutter and the
+	   last row died half-cut at the viewport edge). */
 	@media (max-width: 700px) {
 		.menu-inner {
 			grid-template-columns: 1fr;
@@ -293,5 +295,13 @@ const siteLinks = siteItems
 		.logo-stage { transform: scale(0.62); margin: -38px 0; }
 		.die-hint { display: block; }
 		.spec-link { font-size: 26px; }
+		.menu-site {
+			flex-direction: column;
+			gap: 2px;
+		}
+		.site-link {
+			padding: 9px 0;
+			font-size: 17px;
+		}
 	}
 </style>
