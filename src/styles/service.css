@@ -667,3 +667,9 @@
 	.bq__results { padding: 10px 14px 14px; }
 	.bq__grid th, .bq__grid td { padding: 6px 7px; }
 }
+
+/* ≤480: the results table needs the last 9px (measured 340 in a 331 box) */
+@media (max-width: 480px) {
+	.bq__grid { font-size: 11px; }
+	.bq__grid th, .bq__grid td { padding: 5px 5px; }
+}
