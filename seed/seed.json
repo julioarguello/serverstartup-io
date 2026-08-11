@@ -1245,6 +1245,17 @@
 									"text": "Volver al inicio"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_pieces",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Al cubo se le han caído estas piezas — te sacan de aquí"
+								}
+							]
 						}
 					]
 				},
@@ -2366,6 +2377,17 @@
 								{
 									"_type": "span",
 									"text": "Back to home"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_pieces",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The cube dropped these pieces — they lead out of here"
 								}
 							]
 						}

@@ -1,27 +1,72 @@
 ---
+/**
+ * 404 — the cracked logo and the pieces that lead out (#216, study v6/V2).
+ *
+ * The mark appears broken (BrokenLogo) and, below the home CTA, the six
+ * colored cells the cube "dropped" are the menu's mini-dice linking to
+ * each specialty — the error page doubles as the site's smallest map.
+ */
 import Base from "../layouts/Base.astro";
+import BrokenLogo from "../components/BrokenLogo.astro";
 import { getUiLabels } from "../utils/ui-labels";
+import { getEmDashCollection } from "emdash";
+import { FACE_BY_SLUG, FACE_ORDER } from "../utils/nav";
 
-const labels = await getUiLabels(Astro.currentLocale || "es");
+const locale = Astro.currentLocale || "es";
+const labels = await getUiLabels(locale);
 const errorTitle = labels.get("error_page", "error_title", "Página no encontrada");
 const errorBody = labels.get("error_page", "error_body", "La página que buscas no existe.");
 const errorCta = labels.get("error_page", "error_cta", "Volver al inicio");
-const locale = Astro.currentLocale || "es";
+const errorPieces = labels.get("error_page", "error_pieces", "");
 const homeHref = locale === "es" ? "/" : `/${locale}/`;
+const localePrefix = locale === "es" ? "" : `/${locale}`;
+
+const servicesResult = await getEmDashCollection("services", {
+	orderBy: { created_at: "asc" },
+	locale,
+});
+if (servicesResult.cacheHint) Astro.cache.set(servicesResult.cacheHint);
+const pieces = (servicesResult.entries ?? [])
+	.map((s: any) => {
+		const slug = s.slug ?? s.id;
+		return {
+			key: FACE_BY_SLUG[slug],
+			href: `${localePrefix}/${slug}`,
+			title: s.data?.title ?? slug,
+			color: s.data?.color ?? "#1E1E1E",
+		};
+	})
+	.filter((p: any) => p.key)
+	.sort((a: any, b: any) => FACE_ORDER.indexOf(a.key) - FACE_ORDER.indexOf(b.key));
 ---
 
 <Base title={errorTitle} robots="noindex, nofollow">
 	<div class="not-found">
+		<BrokenLogo class="not-found__logo" />
 		<h1>404</h1>
 		<p class="text-body">{errorBody}</p>
 		<a href={homeHref} class="btn btn-dark">{errorCta}</a>
+		{pieces.length > 0 && errorPieces && (
+			<nav class="nf-pieces" aria-label={errorPieces}>
+				<p aria-hidden="true">{errorPieces}</p>
+				<ul role="list">
+					{pieces.map((p: any) => (
+						<li>
+							<a href={p.href} class="nf-mini" style={`--c:${p.color}`} aria-label={p.title} title={p.title}>
+								<i></i><i></i><i></i><i></i>
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		)}
 	</div>
 </Base>
 
 <style>
 	.not-found {
 		text-align: center;
-		padding: calc(80px + 60px) 16px 80px;
+		padding: calc(80px + 40px) 16px 80px;
 		min-height: 60vh;
 		display: flex;
 		flex-direction: column;
@@ -29,19 +74,91 @@ const homeHref = locale === "es" ? "/" : `/${locale}/`;
 		justify-content: center;
 	}
 
+	.not-found__logo {
+		width: 190px;
+		height: auto;
+		margin-bottom: 8px;
+	}
+
 	.not-found h1 {
-		font-size: 120px;
+		font-family: var(--font-family-mono);
+		font-size: 72px;
 		font-weight: 700;
-		color: #eee;
 		line-height: 1;
-		margin-bottom: 16px;
+		margin-bottom: 12px;
 	}
 
 	.not-found p {
 		margin-bottom: 32px;
+		max-width: 340px;
+	}
+
+	.nf-pieces {
+		margin-top: 36px;
+	}
+
+	.nf-pieces p {
+		font-family: var(--font-family-mono);
+		font-size: 11px;
+		letter-spacing: 0.06em;
+		text-transform: lowercase;
+		color: rgba(30, 30, 30, 0.55);
+		margin-bottom: 14px;
+	}
+
+	.nf-pieces ul {
+		list-style: none;
+		display: flex;
+		justify-content: center;
+		gap: 14px;
+		flex-wrap: wrap;
+		padding: 0;
+		margin: 0;
+	}
+
+	/* the dropped cells: the menu's mini-dice, slightly tumbled */
+	.nf-mini {
+		display: inline-grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+		gap: 2px;
+		width: 30px;
+		height: 30px;
+		border: 2px solid var(--c);
+		padding: 2px;
+		transform: rotate(var(--r, 0deg));
+		transition: transform 0.2s, opacity 0.2s;
+	}
+
+	.nf-mini i {
+		background: var(--c);
+		opacity: 0.3;
+		transition: opacity 0.2s;
+	}
+
+	.nf-mini:hover,
+	.nf-mini:focus-visible {
+		transform: rotate(0deg) scale(1.15);
+	}
+
+	.nf-mini:hover i,
+	.nf-mini:focus-visible i {
+		opacity: 1;
+	}
+
+	.nf-pieces li:nth-child(1) .nf-mini { --r: -8deg; }
+	.nf-pieces li:nth-child(2) .nf-mini { --r: 5deg; }
+	.nf-pieces li:nth-child(3) .nf-mini { --r: -4deg; }
+	.nf-pieces li:nth-child(4) .nf-mini { --r: 7deg; }
+	.nf-pieces li:nth-child(5) .nf-mini { --r: -6deg; }
+	.nf-pieces li:nth-child(6) .nf-mini { --r: 3deg; }
+
+	@media (prefers-reduced-motion: reduce) {
+		.nf-mini { transition: none; }
 	}
 
 	@media (min-width: 768px) {
-		.not-found { padding: 160px 20px 80px; }
+		.not-found { padding: 150px 20px 80px; }
+		.not-found__logo { width: 210px; }
 	}
 </style>
