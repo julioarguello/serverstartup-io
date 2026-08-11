@@ -4,6 +4,7 @@
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
+import CubeEmblem from "../../components/CubeEmblem.astro";
 import Base from "../../layouts/Base.astro";
 import { getUiLabels } from "../../utils/ui-labels";
 import { aboutJsonLd } from "../../utils/jsonld";
@@ -57,8 +58,13 @@ for (const block of content || []) {
 		})),
 	}))} />
 	<!-- ══════ HERO ══════ -->
+	<div class="s-emblem-bg" aria-hidden="true">
+		<CubeEmblem color="var(--color-primary)" faceKey="quienes" size={340} />
+	</div>
+
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
+			<CubeEmblem class="s-emblem-mini" color="var(--color-primary)" faceKey="quienes" size={104} />
 			<h1>{title}</h1>
 			{heroBlocks.length > 0 && (
 				<div class="s-hero__body">

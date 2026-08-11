@@ -9,6 +9,7 @@
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
+import CubeEmblem from "../components/CubeEmblem.astro";
 import Base from "../layouts/Base.astro";
 import { contactJsonLd } from "../utils/jsonld";
 import type { SiteSettings } from "../types";
@@ -40,8 +41,13 @@ const emailLabel = settings.contactEmailLabel || "Email";
 		description: excerpt || `${title} — Server Startup`,
 		email,
 	}))} />
+	<div class="s-emblem-bg" aria-hidden="true">
+		<CubeEmblem color="var(--color-primary)" faceKey="contacto" size={340} />
+	</div>
+
 	<section class="s-contact" aria-label={title}>
 		<div class="container s-contact__inner">
+			<CubeEmblem class="s-emblem-mini" color="var(--color-primary)" faceKey="contacto" size={104} />
 			<h1>{title}</h1>
 			{content && (
 				<div class="s-contact__content">

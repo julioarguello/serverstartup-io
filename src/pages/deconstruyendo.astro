@@ -6,6 +6,7 @@
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
+import CubeEmblem from "../components/CubeEmblem.astro";
 import Base from "../layouts/Base.astro";
 import AssemblyManual from "../components/AssemblyManual.astro";
 import { getUiLabels } from "../utils/ui-labels";
@@ -29,8 +30,13 @@ const prose = firstH2 === -1 ? [] : blocks.slice(firstH2);
 ---
 
 <Base title={title} description={excerpt || `${title} — Server Startup`}>
+	<div class="s-emblem-bg" aria-hidden="true">
+		<CubeEmblem color="var(--color-primary)" faceKey="dec" size={340} />
+	</div>
+
 	<section class="s-manual" aria-label={title}>
 		<div class="container s-manual__inner">
+			<CubeEmblem class="s-emblem-mini" color="var(--color-primary)" faceKey="dec" size={104} />
 			<h1>{title}</h1>
 			{intro.length > 0 && <div class="s-manual__intro"><PortableText value={intro} /></div>}
 			<AssemblyManual labels={labels} repoUrl={repoUrl} />
