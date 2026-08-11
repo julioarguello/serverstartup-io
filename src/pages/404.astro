@@ -12,7 +12,11 @@ import { getUiLabels } from "../utils/ui-labels";
 import { getEmDashCollection } from "emdash";
 import { FACE_BY_SLUG, FACE_ORDER } from "../utils/nav";
 
-const locale = Astro.currentLocale || "es";
+// The 404 route serves every missed path, but Astro.currentLocale reports
+// the route's own locale (default) — derive it from the REQUESTED url so
+// /en/* misses render the English page (pre-existing bug, surfaced by the
+// #216 verification).
+const locale = /^\/en(\/|$)/.test(Astro.url.pathname) ? "en" : Astro.currentLocale || "es";
 const labels = await getUiLabels(locale);
 const errorTitle = labels.get("error_page", "error_title", "Página no encontrada");
 const errorBody = labels.get("error_page", "error_body", "La página que buscas no existe.");
