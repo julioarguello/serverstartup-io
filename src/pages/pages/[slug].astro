@@ -6,14 +6,14 @@ import Base from "../../layouts/Base.astro";
 const slug = decodeSlug(Astro.params.slug);
 
 if (!slug) {
-	return Astro.redirect("/404");
+	return Astro.rewrite("/404");
 }
 
 const locale = Astro.currentLocale || "es";
 const { entry: page, cacheHint } = await getEmDashEntry("pages", slug, { locale });
 
 if (!page) {
-	return Astro.redirect("/404");
+	return Astro.rewrite("/404");
 }
 
 Astro.cache.set(cacheHint);

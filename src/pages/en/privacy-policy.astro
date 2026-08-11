@@ -13,7 +13,7 @@ const { entry, cacheHint } = await getEmDashEntry("pages", "privacy-policy", { l
 const fallback = entry ? null : await getEmDashEntry("pages", "politica-de-privacidad", { locale: "en" });
 const page = entry || fallback?.entry;
 
-if (!page) return Astro.redirect("/404");
+if (!page) return Astro.rewrite("/404");
 if (cacheHint) Astro.cache.set(cacheHint);
 if (fallback?.cacheHint) Astro.cache.set(fallback.cacheHint);
 

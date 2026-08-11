@@ -27,7 +27,7 @@ const locale = Astro.currentLocale || "es";
 const localePrefix = locale === "es" ? "" : `/${locale}`;
 
 const { entry, cacheHint } = await getEmDashEntry("pages", "home", { locale });
-if (!entry) return Astro.redirect("/404");
+if (!entry) return Astro.rewrite("/404");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
