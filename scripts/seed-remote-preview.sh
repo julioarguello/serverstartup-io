@@ -39,7 +39,11 @@ sqlite3 "$D1_DB" "SELECT 'INSERT INTO ' || name || '(' || name || ') VALUES(''re
 # every ec_pages insert, which modern sqlite3 CLIs reject as "unsafe" under
 # their default untrusted-schema policy — it is our own schema, and remote
 # D1 executes the same statements through its own engine without complaint.
-cp "$D1_DB" "$WORK/rehearsal.sqlite"
+# .backup, not cp: the freshly-seeded database's newest schema (the FTS
+# virtual tables) may still live in the -wal file — a bare file copy loses
+# it and the rehearsal dies with "no such table: _emdash_fts_*" (bit CI,
+# where the server is killed and copied within the same second).
+sqlite3 "$D1_DB" ".backup '$WORK/rehearsal.sqlite'"
 sqlite3 -cmd "PRAGMA trusted_schema=ON;" "$WORK/rehearsal.sqlite" < "$SQL"
 PAGES_LOCAL=$(sqlite3 "$WORK/rehearsal.sqlite" "SELECT count(*) FROM ec_pages;")
 [ "$PAGES_LOCAL" -gt 0 ] || { echo "ERROR: rehearsal produced 0 pages" >&2; exit 1; }
