@@ -6,34 +6,7 @@
  * instruments not yet implemented.
  */
 
-/* ═══ HERO — compact, cube glyph in discipline color ═══ */
-/* Mobile watermark layer: fixed, behind content (negative z-index paints
-   over the body background but under all in-flow content), clipped so the
-   fixed chrome can never widen the document. Hidden on ≥701px, where the
-   in-flow emblem returns. */
-.s-emblem-bg {
-	display: flex;
-	position: fixed;
-	inset: 0;
-	z-index: -1;
-	align-items: center;
-	justify-content: center;
-	overflow: clip;
-	opacity: 0.07;
-	pointer-events: none;
-}
-
-.s-hero__emblem {
-	flex: none;
-	height: auto;
-}
-
-@media (min-width: 701px) {
-	.s-emblem-bg { display: none; }
-}
-@media (max-width: 700px) {
-	.s-hero__emblem { display: none; }
-}
+/* ═══ HERO — pattern B: floated emblem + watermark (shared classes in theme.css) ═══ */
 
 .s-hero {
 	padding: calc(80px + 24px) 0 48px;
@@ -61,11 +34,6 @@
 	.s-hero {
 		padding: calc(100px + 40px) 0 64px;
 	}
-	.s-hero__inner {
-		grid-template-columns: 1fr 200px;
-		gap: 40px;
-	}
-	
 }
 
 /* ═══ INSTRUMENT SECTION ═══ */

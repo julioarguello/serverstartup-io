@@ -179,6 +179,40 @@ ul, ol { list-style: none; }
 	.container { padding-inline: 20px; }
 }
 
+/* ─────────────────────────────────────────
+   Section emblem — pattern B (#216)
+   A crisp floated mark the heading wraps around (zero added scroll),
+   plus the section-color watermark fixed behind the content on every
+   device. Site pages use ink via var(--color-primary).
+   ───────────────────────────────────────── */
+.s-emblem-bg {
+	display: flex;
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	align-items: center;
+	justify-content: center;
+	overflow: clip;
+	opacity: 0.07;
+	pointer-events: none;
+}
+.s-emblem-bg svg {
+	width: min(60vmin, 480px);
+	height: auto;
+}
+.s-emblem-mini {
+	float: right;
+	width: 68px;
+	height: auto;
+	margin: 6px 0 10px 14px;
+}
+@media (min-width: 701px) {
+	.s-emblem-mini {
+		width: 104px;
+		margin: 8px 0 14px 20px;
+	}
+}
+
 /* Screen reader only — accessible hidden */
 .sr-only {
 	position: absolute;

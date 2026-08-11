@@ -86,6 +86,7 @@ const labels = await getUiLabels(locale);
 	<section class="s-hero" aria-label={title}>
 		<div class="container s-hero__inner">
 			<div class="s-hero__copy">
+				<CubeEmblem class="s-emblem-mini" color={accentColor} faceKey={emblemKey} size={104} />
 				<h1>{title}</h1>
 				{excerpt && (
 					<div class="s-hero__body">
@@ -94,7 +95,6 @@ const labels = await getUiLabels(locale);
 				)}
 				<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark">{ctaLabel}</a>
 			</div>
-			<CubeEmblem class="s-hero__emblem" color={accentColor} faceKey={emblemKey} size={150} />
 		</div>
 	</section>
 
