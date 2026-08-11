@@ -33,7 +33,7 @@ if (svcResult.entry) {
 	}
 }
 
-if (!entry) return Astro.redirect("/404");
+if (!entry) return Astro.rewrite("/404");
 if (cacheHint) Astro.cache.set(cacheHint);
 
 const settings = await getSiteSettings();

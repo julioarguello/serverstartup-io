@@ -8,7 +8,7 @@ import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 
 const { entry, cacheHint } = await getEmDashEntry("pages", "politica-de-privacidad");
-if (!entry) return Astro.redirect("/404");
+if (!entry) return Astro.rewrite("/404");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
