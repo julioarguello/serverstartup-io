@@ -17,6 +17,14 @@ interface Props {
 const { promptPath, accent } = Astro.props;
 
 const t = Astro.locals.t;
+
+// V2 (#216): the mark never changes shape and the strokes stay ink — but on
+// section pages the 2×2 cells take the section color (the same language as
+// the menu's mini-dice). Ink pages keep the plate greys. Base sends the
+// literal ink fallback for non-section pages.
+const isSection = accent !== "#1E1E1E";
+const cellA = isSection ? `color-mix(in srgb, ${accent} 30%, white)` : "#CED4DA";
+const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB";
 ---
 
 <header class="site-header" id="site-header" style={`--accent:${accent}`}>
@@ -31,9 +39,9 @@ const t = Astro.locals.t;
 				aria-label={t("open_menu")}
 			>
 				<svg class="brand-cube" width="30" height="34" viewBox="0 0 200 228" aria-hidden="true">
-					<polygon points="100,14 186,64 100,114 14,64" fill="#CED4DA"></polygon>
-					<polygon points="14,64 100,114 100,214 14,164" fill="#CED4DA"></polygon>
-					<polygon points="100,114 186,64 186,164 100,214" fill="#E3E7EB"></polygon>
+					<polygon points="100,14 186,64 100,114 14,64" fill={cellA}></polygon>
+					<polygon points="14,64 100,114 100,214 14,164" fill={cellA}></polygon>
+					<polygon points="100,114 186,64 186,164 100,214" fill={cellB}></polygon>
 					<path class="brand-cube-edge" d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
 					<path class="brand-cube-edge" d="M14,64 100,114 186,64 M100,114 100,214"></path>
 					<path class="brand-cube-edge" d="M57,39 143,89 M143,39 57,89"></path>
