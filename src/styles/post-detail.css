@@ -501,53 +501,6 @@
 		border-radius: 4px;
 	}
 
-	/* Comments section */
-	.article-comments {
-		margin-top: 64px;
-		padding-top: 40px;
-		border-top: 1px solid rgba(30,30,30,0.15);
-	}
-
-	.article-comments :global(.ec-comments) {
-		--ec-comment-border: 1px solid rgba(30,30,30,0.15);
-	}
-
-	.article-comments :global(.ec-comments-heading) {
-		font-size: 28px;
-		font-weight: 600;
-		margin-bottom: 32px;
-	}
-
-	.article-comments :global(.ec-comment-author) {
-		color: var(--color-text);
-	}
-
-	.article-comments :global(.ec-comment-date) {
-		font-family: monospace;
-		color: rgba(30,30,30,0.5);
-	}
-
-	.article-comments :global(.ec-comment-body) {
-		color: var(--color-text);
-	}
-
-	.article-comments :global(.ec-comment-form-field input),
-	.article-comments :global(.ec-comment-form-field textarea) {
-		background: var(--color-surface) !important;
-		border-color: rgba(30,30,30,0.15) !important;
-		color: var(--color-text) !important;
-	}
-
-	.article-comments :global(.ec-comment-user-info) {
-		background: var(--color-surface) !important;
-		border-color: rgba(30,30,30,0.15) !important;
-	}
-
-	.article-comments :global(.ec-comment-form-submit) {
-		background: var(--color-accent) !important;
-		color: var(--color-secondary) !important;
-	}
-
 	/* More posts section */
 	.more-posts {
 		background: var(--color-surface-soft);

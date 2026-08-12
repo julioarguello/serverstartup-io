@@ -14,8 +14,6 @@ import {
 import {
 	Image,
 	PortableText,
-	Comments,
-	CommentForm,
 	WidgetArea,
 } from "emdash/ui";
 import Base from "../../../layouts/Base.astro";
@@ -245,10 +243,6 @@ const publishDateIso = post.data.publishedAt?.toISOString() ?? null;
 					<PortableText value={post.data.content} />
 				</div>
 
-				<div class="article-comments">
-					<Comments collection="posts" contentId={post.data.id} threaded />
-					<CommentForm collection="posts" contentId={post.data.id} />
-				</div>
 			</div>
 
 			{/* Right gutter: TOC + Sidebar widgets */}
