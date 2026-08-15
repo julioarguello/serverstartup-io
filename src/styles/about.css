@@ -11,21 +11,43 @@
 .s-hero__body p {
 	font-size: 20px;
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 30px;
+}
+
+.s-hero__body p + p {
+	margin-top: 16px;
+}
+
+/* content links: thin dashed underline, solid on hover (founder 2026-08-15) */
+.s-hero__body a,
+.s-history__inner a,
+.s-values__inner a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+	text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+.s-hero__body a:hover,
+.s-history__inner a:hover,
+.s-values__inner a:hover {
+	text-decoration-style: solid;
+	text-decoration-color: currentColor;
 }
 
 @media (min-width: 768px) {
 	.s-hero { padding: 160px 0 80px; }
 }
 
-/* ═══ TEAM — dark bg ═══ */
+/* ═══ TEAM — light band: the page alternates light (narrative: historia,
+   equipo) and dark (statements: hoy, valores) ═══ */
 .s-team {
-	background-color: var(--color-primary);
 	padding: 40px 0;
 }
 
 .s-team__inner h2 {
-	color: var(--color-secondary);
 	margin-bottom: 40px;
 }
 
@@ -79,7 +101,6 @@
 }
 
 .team-card__name {
-	color: var(--color-secondary);
 	font-size: 20px;
 	font-weight: 700;
 	margin-bottom: 2px;
@@ -93,10 +114,27 @@
 	margin-bottom: 8px;
 }
 
+/* informal one-paragraph bio; on phones it spans under the photo+name row */
+.team-card__bio {
+	grid-column: 1 / -1;
+	margin-top: 6px;
+}
+
+.team-card__bio p {
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 23px;
+	margin: 0;
+}
+
+.team-card__bio code {
+	font-size: 13px;
+}
+
 @media (min-width: 768px) {
 	.s-team { padding: 80px 0; }
 	.s-team__grid {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: 40px;
 	}
 	.team-card { display: block; }
@@ -108,10 +146,175 @@
 	.team-card__placeholder { font-size: 48px; }
 }
 
+/* ═══ HISTORY — light bg, anchor target ═══ */
+.s-history {
+	padding: 60px 0 80px;
+	/* anchor lands below the fixed header */
+	scroll-margin-top: 96px;
+}
+
+.s-history__inner h2 {
+	margin-bottom: 24px;
+}
+
+.s-history__inner p {
+	max-width: 700px;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 30px;
+}
+
+.s-history__inner p + p {
+	margin-top: 28px;
+}
+
+/* chapter eyebrows: mono labels, numbered by CSS (content stays clean) */
+.s-history__inner {
+	counter-reset: hist-chapter;
+}
+
+.s-history__inner h3 {
+	counter-increment: hist-chapter;
+	font-family: var(--font-family-mono);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: #70757a;
+	margin: 48px 0 14px;
+}
+
+.s-history__inner h3::before {
+	content: counter(hist-chapter, decimal-leading-zero) " · ";
+}
+
+/* the closing thought (the cube) — highlighted conclusion.
+   NOTE: the PT renderer puts text directly inside <blockquote> (no inner <p>),
+   so typography lives on the blockquote element itself. */
+.s-history__inner blockquote {
+	margin: 48px 0 0;
+	padding: 24px 28px;
+	border-left: 3px solid var(--color-primary);
+	background: color-mix(in srgb, var(--color-primary) 4%, transparent);
+	max-width: 700px;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 30px;
+}
+
+/* the Catalina log line: one long monospace token must wrap at 360px */
+.s-hero__body code,
+.s-history__inner code {
+	overflow-wrap: anywhere;
+}
+
+/* ═══ BOOT TERMINAL — the Catalina line inside a console window; echoes the
+   integration instrument (.inst--dark/.term in service.css) ═══ */
+.s-boot {
+	background: #14161a;
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 24px 0 20px;
+}
+
+.s-boot__bar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 18px;
+	background: #1d2026;
+}
+
+.s-boot__bar i {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.s-boot__bar i:nth-child(1) { background: #ea4335; }
+.s-boot__bar i:nth-child(2) { background: #f38020; }
+.s-boot__bar i:nth-child(3) { background: #3e7d50; }
+
+.s-boot__term {
+	padding: 16px 20px 18px;
+}
+
+.s-boot__term p {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.7;
+}
+
+.s-boot code {
+	font-family: var(--font-family-mono);
+	font-size: inherit;
+	color: #b6bcc6;
+	background: none;
+	padding: 0;
+}
+
+/* blinking block cursor after the log line (the wordmark's ▮) */
+.s-boot code::after {
+	content: "▮";
+	color: #5bb974;
+	margin-left: 8px;
+	animation: s-boot-blink 1.1s steps(1) infinite;
+}
+
+@keyframes s-boot-blink {
+	50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.s-boot code::after { animation: none; }
+}
+
+/* from tablet up the log line holds ONE line (founder): ~0.6em/char × 70
+   chars + caret, inside a hero column narrowed by the emblem (~604px at
+   768). Phones wrap naturally inside the console. */
+@media (min-width: 768px) {
+	.s-boot code { white-space: nowrap; }
+	.s-boot__term p { font-size: 12.5px; }
+}
+
+@media (min-width: 1100px) {
+	.s-boot__term p { font-size: 17px; }
+}
+
 /* ═══ VALUES — dark bg ═══ */
 .s-values {
 	background-color: var(--color-primary);
 	padding: 60px 0 80px;
+}
+
+.s-values__inner h2 {
+	color: var(--color-secondary);
+	margin-bottom: 24px;
+}
+
+/* value titles read as their own line, not inline bold (founder) */
+.s-values__inner p strong {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 4px;
+}
+
+/* the closing motto — standout quote on the dark band (text sits directly
+   inside the blockquote, see note above) */
+.s-values__inner blockquote {
+	margin: 48px 0 0;
+	padding: 4px 0 4px 24px;
+	border-left: 3px solid var(--color-secondary);
+	color: var(--color-secondary);
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 34px;
+}
+
+.s-values__inner blockquote strong {
+	display: inline;
+	margin: 0;
 }
 
 .s-values__inner p {
@@ -119,5 +322,19 @@
 	max-width: 700px;
 	font-size: 20px;
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 30px;
+}
+
+.s-values__inner p + p {
+	margin-top: 22px;
+}
+
+/* desktop: 700px reads as half-screen on wide monitors — let the text breathe */
+@media (min-width: 1100px) {
+	.s-hero__body,
+	.s-history__inner p,
+	.s-history__inner blockquote,
+	.s-values__inner p {
+		max-width: 880px;
+	}
 }

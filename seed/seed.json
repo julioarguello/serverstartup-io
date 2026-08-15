@@ -5931,7 +5931,6 @@
 				"status": "published",
 				"data": {
 					"title": "Julio Argüello",
-					"excerpt": "Fundador & Lead Architect",
 					"content": [
 						{
 							"_type": "block",
@@ -5939,11 +5938,16 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Arquitecto de software. Integración con Apache Camel, middleware para Ocado, dbt y Cloudflare Workers. Quince años largos entre hybris y producción."
+									"text": "El capitán. Dile que algo no se puede hacer y tienes su atención. Encuentra la manera, con más tiempo o menos presupuesto; a medias es lo único que no le sale. Rema todo el día y no se pierde un atardecer con su otra tripulación, la de casa."
 								}
 							]
 						}
-					]
+					],
+					"featured_image": {
+						"src": "/assets/team/julio.jpg",
+						"width": 1200,
+						"height": 900
+					}
 				},
 				"locale": "es"
 			},
@@ -5953,7 +5957,6 @@
 				"status": "published",
 				"data": {
 					"title": "Ignacio Ibaseta",
-					"excerpt": "Data Platform & Terraform Engineer",
 					"content": [
 						{
 							"_type": "block",
@@ -5961,11 +5964,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Terraform, GCP y la infraestructura como código de la plataforma de datos. Los cimientos que hacen que el dato sea fiable."
+									"text": "El Pepito Grillo del equipo. Te avisa de cada curva antes de tomarla y por eso llega siempre el primero. Trabajador incansable, puntual como un "
+								},
+								{
+									"_type": "span",
+									"text": "cron",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Mecánica fina, cero averías y muchos kilómetros juntos."
 								}
 							]
 						}
-					]
+					],
+					"featured_image": {
+						"src": "/assets/team/nacho.jpg",
+						"width": 1200,
+						"height": 900
+					}
 				},
 				"locale": "es"
 			},
@@ -5975,7 +5994,6 @@
 				"status": "published",
 				"data": {
 					"title": "Daniel Sío",
-					"excerpt": "E-commerce Operations Engineer",
 					"content": [
 						{
 							"_type": "block",
@@ -5983,13 +6001,110 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Operativa de e-commerce sobre Ocado y evolutivos de plataforma. Automatización, CI y el dato del día a día en dbt."
+									"text": "El alma del equipo. Maestro de ceremonias, sobre todo si acaban en karaoke. Lo mismo te sube un monte que el ánimo, y mantiene el e-commerce en producción. Buen amigo antes que buen ingeniero. Y muy buen ingeniero."
 								}
 							]
 						}
-					]
+					],
+					"featured_image": {
+						"src": "/assets/team/dani.jpg",
+						"width": 1200,
+						"height": 900
+					}
 				},
 				"locale": "es"
+			},
+			{
+				"id": "member-julio-en",
+				"slug": "julio-arguello",
+				"status": "published",
+				"translationOf": "member-julio",
+				"data": {
+					"title": "Julio Argüello",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The captain. Say something cannot be done and he is all ears. He finds the way, with more time or less budget; half-done he cannot do. Rows all day and never misses a sunset with his other crew, the one at home."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"src": "/assets/team/julio.jpg",
+						"width": 1200,
+						"height": 900
+					}
+				},
+				"locale": "en"
+			},
+			{
+				"id": "member-ignacio-en",
+				"slug": "ignacio-ibaseta",
+				"status": "published",
+				"translationOf": "member-ignacio",
+				"data": {
+					"title": "Ignacio Ibaseta",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The team's Jiminy Cricket. Calls out every bend before you take it, which is why he always arrives first. Tireless, punctual as a "
+								},
+								{
+									"_type": "span",
+									"text": "cron",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Fine mechanics, zero breakdowns and plenty of miles together."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"src": "/assets/team/nacho.jpg",
+						"width": 1200,
+						"height": 900
+					}
+				},
+				"locale": "en"
+			},
+			{
+				"id": "member-daniel-en",
+				"slug": "daniel-sio",
+				"status": "published",
+				"translationOf": "member-daniel",
+				"data": {
+					"title": "Daniel Sío",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The soul of the team. Master of ceremonies, above all when they end in karaoke. He will get you up a mountain or lift your mood, and keeps the e-commerce running. A good friend before a good engineer. And a very good one."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"src": "/assets/team/dani.jpg",
+						"width": 1200,
+						"height": 900
+					}
+				},
+				"locale": "en"
 			}
 		],
 		"pages": [
@@ -6131,6 +6246,438 @@
 							"children": [
 								{
 									"_type": "span",
+									"text": "org.apache.catalina.startup.Catalina.start Server startup in [2019] ms",
+									"marks": [
+										"code"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Una señal de identidad. Una línea de "
+								},
+								{
+									"_type": "span",
+									"text": "log",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", para algunos familiar, que dice mucho más de nosotros que cualquier presentación corporativa."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Historia"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El nombre"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Fundada en 2019, "
+								},
+								{
+									"_type": "span",
+									"text": "Server Startup",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " debe efectivamente su nombre a la trinchera de "
+								},
+								{
+									"_type": "span",
+									"text": "hybris",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " (ahora "
+								},
+								{
+									"_type": "span",
+									"text": "SAP Commerce",
+									"marks": [
+										"code",
+										"sap"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "). Muchas horas picando código en casa, aviones, hoteles o tirando de 3G en el metro. A veces, incluso en la oficina... En ese contexto, ver aparecer ese mensaje de "
+								},
+								{
+									"_type": "span",
+									"text": "Tomcat",
+									"marks": [
+										"code",
+										"tomcat"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " era puro "
+								},
+								{
+									"_type": "span",
+									"text": "rock'n'roll",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Un chute de adrenalina al ver que el sistema levanta."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "sap",
+									"href": "https://www.sap.com/products/crm/commerce-cloud.html",
+									"blank": true
+								},
+								{
+									"_type": "link",
+									"_key": "tomcat",
+									"href": "https://tomcat.apache.org/",
+									"blank": true
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Somos "
+								},
+								{
+									"_type": "span",
+									"text": "Server",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " por especialización en "
+								},
+								{
+									"_type": "span",
+									"text": "backend",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Nos gustan las tripas, la lógica compleja y afrontar retos. El rigor y la optimización."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Y "
+								},
+								{
+									"_type": "span",
+									"text": "Startup",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " por filosofía. Porque en este sector el mundo no para y hay que adaptarse y evolucionar continuamente. Claro que ya no somos una "
+								},
+								{
+									"_type": "span",
+									"text": "startup",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " (tampoco el Pont "
+								},
+								{
+									"_type": "span",
+									"text": "Neuf",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " de París, la ciudad de "
+								},
+								{
+									"_type": "span",
+									"text": "Nueva",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " York o el Camp "
+								},
+								{
+									"_type": "span",
+									"text": "Nou",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " se construyeron precisamente ayer...) pero conservamos la entereza e ilusión del primer día."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El camino"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El proyecto arrancó por cuenta propia en 2017. En enero de 2019 se convirtió en sociedad, desde Getxo. Hoy somos tres ingenieros con más de veinte años de producción cada uno."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Aquel mismo 2019 nos hicimos "
+								},
+								{
+									"_type": "span",
+									"text": "partner",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " oficial de "
+								},
+								{
+									"_type": "span",
+									"text": "Cloudflare",
+									"marks": [
+										"cf"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Para 2022 el lema de la casa era "
+								},
+								{
+									"_type": "span",
+									"text": "“+ Calidad − Cantidad”",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ": más criterio, menos volumen. Las dos cosas siguen en vigor."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "cf",
+									"href": "/cdn-waf-seguridad-edge-cloudflare"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El cubo"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Si el mensaje de "
+								},
+								{
+									"_type": "span",
+									"text": "Server Startup",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " es la chispa vital, el "
+								},
+								{
+									"_type": "span",
+									"text": "rock'n'roll",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " de nuestros inicios, el "
+								},
+								{
+									"_type": "span",
+									"text": "cubo",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " canaliza hoy esa energía. Simboliza el salto de madurez que dimos al pasar de implantar "
+								},
+								{
+									"_type": "span",
+									"text": "e-commerce complejos",
+									"marks": [
+										"svc-ecom"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " a integrar plataformas de exigencia extrema como "
+								},
+								{
+									"_type": "span",
+									"text": "Ocado",
+									"marks": [
+										"ocado"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Sus famosas colmenas ("
+								},
+								{
+									"_type": "span",
+									"text": "hives",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "), donde miles de robots optimizan el "
+								},
+								{
+									"_type": "span",
+									"text": "picking",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " al milímetro, son un referente de modernidad y eficiencia logística."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "svc-ecom",
+									"href": "/comercio-electronico"
+								},
+								{
+									"_type": "link",
+									"_key": "ocado",
+									"href": "https://www.ocadogroup.com/solutions/ocado-smart-platform",
+									"blank": true
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "blockquote",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Nuestro logo nace de esa retícula. Símbolo de la precisión, el rigor, la escalabilidad y la búsqueda de sinergias que rigen nuestro día a día. Un espejo en el que mirarnos. Es el mismo cubo que te acompaña por todo este sitio."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Hoy"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
 									"text": "Tres ingenieros. Los mismos tres. De principio a fin.",
 									"marks": [
 										"strong"
@@ -6144,7 +6691,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "La sociedad existe desde 2019, y cada uno de nosotros lleva más de quince años en producción. Ser pocos es una elección. Pocos clientes, máxima implicación y ningún junior aprendiendo con tu presupuesto."
+									"text": "Ser pocos es una elección. Pocos clientes, máxima implicación y ningún junior aprendiendo con tu presupuesto."
 								}
 							]
 						},
@@ -6154,7 +6701,67 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Trabajamos dentro de tu equipo, no desde fuera. El middleware que conecta tu ERP con la tienda, el WAF que para el tráfico malo, el modelo de dbt que cierra las ventas del día. Ese es nuestro sitio."
+									"text": "Trabajamos dentro de tu equipo, no desde fuera. El "
+								},
+								{
+									"_type": "span",
+									"text": "middleware que conecta tu ERP con la tienda",
+									"marks": [
+										"svc-int"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", el "
+								},
+								{
+									"_type": "span",
+									"text": "WAF que para el tráfico malo",
+									"marks": [
+										"svc-waf"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", el "
+								},
+								{
+									"_type": "span",
+									"text": "modelo de dbt que cierra las ventas del día",
+									"marks": [
+										"svc-dbt"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Ese es nuestro sitio."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "svc-int",
+									"href": "/integracion-de-sistemas"
+								},
+								{
+									"_type": "link",
+									"_key": "svc-waf",
+									"href": "/cdn-waf-seguridad-edge-cloudflare"
+								},
+								{
+									"_type": "link",
+									"_key": "svc-dbt",
+									"href": "/big-data-cloud-analytics"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Fuera de producción, patrocinamos deporte base. Equipos de cantera y un campeonato provincial en la temporada 2026/27."
 								}
 							]
 						},
@@ -6174,7 +6781,14 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Pocas cosas, bien hechas. Preferimos decir que no a entregar tarde. Si un proyecto no encaja con lo que dominamos, te lo decimos en la primera reunión."
+									"text": "Pocas cosas, bien hechas.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " Preferimos decir que no a entregar tarde. Si un proyecto no encaja con lo que dominamos, te lo decimos en la primera reunión."
 								}
 							]
 						},
@@ -6184,7 +6798,14 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Sin inversores. Sin deuda. Sin prisa. La empresa se sostiene con su trabajo, y eso nos permite elegir proyectos complejos y relaciones largas."
+									"text": "Sin inversores. Sin deuda. Sin prisa.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " La empresa se sostiene con su trabajo, y eso nos permite elegir proyectos complejos y relaciones largas."
 								}
 							]
 						},
@@ -6194,7 +6815,58 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"text": "Certeza antes que velocidad.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " Preferimos una arquitectura resiliente hoy que deuda técnica mañana."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "La responsabilidad no se delega.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " Quien diseña el sistema lo entrega y responde por él."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Independencia técnica.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " Prescribimos cada tecnología por idoneidad, no por acuerdos comerciales con fabricantes."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "blockquote",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Un equipo. Seis verticales. Cero traspasos.",
 									"marks": [
 										"strong"
 									]
@@ -6571,6 +7243,335 @@
 							"children": [
 								{
 									"_type": "span",
+									"text": "org.apache.catalina.startup.Catalina.start Server startup in [2019] ms",
+									"marks": [
+										"code"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "A sign of identity. A "
+								},
+								{
+									"_type": "span",
+									"text": "log",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " line, familiar to some, that says more about us than any corporate deck."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ History"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The name"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Founded in 2019, "
+								},
+								{
+									"_type": "span",
+									"text": "Server Startup",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " owes its name to the "
+								},
+								{
+									"_type": "span",
+									"text": "hybris",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " (now "
+								},
+								{
+									"_type": "span",
+									"text": "SAP Commerce",
+									"marks": [
+										"code",
+										"sap"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ") trenches. Long hours writing code at home, on planes, in hotels, on metro 3G. Sometimes even at the office... Watching that "
+								},
+								{
+									"_type": "span",
+									"text": "Tomcat",
+									"marks": [
+										"code",
+										"tomcat"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " message appear was pure "
+								},
+								{
+									"_type": "span",
+									"text": "rock'n'roll",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". The jolt of seeing the system come up."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "sap",
+									"href": "https://www.sap.com/products/crm/commerce-cloud.html",
+									"blank": true
+								},
+								{
+									"_type": "link",
+									"_key": "tomcat",
+									"href": "https://tomcat.apache.org/",
+									"blank": true
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " for backend specialization. We like the guts, the complex logic, the hard problems. Rigor and optimization."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "And "
+								},
+								{
+									"_type": "span",
+									"text": "Startup",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " as philosophy. This sector never stops, and neither do we. We are no longer a startup, of course (then again, the Pont Neuf, New York City and the Camp Nou were not exactly built yesterday...) but we keep the nerve and excitement of day one."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The road"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The project started as freelance work in 2017. In January 2019 it became a company, from Getxo. Today we are three engineers, each with twenty-plus years in production."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "That same 2019 we became an official "
+								},
+								{
+									"_type": "span",
+									"text": "Cloudflare",
+									"marks": [
+										"cf"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " partner. By 2022 the house motto was "
+								},
+								{
+									"_type": "span",
+									"text": "“+ Calidad − Cantidad”",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ": more judgment, less volume. Both still stand."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "cf",
+									"href": "/en/cdn-waf-edge-security-cloudflare"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The cube"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "If that log line is the spark, the "
+								},
+								{
+									"_type": "span",
+									"text": "rock'n'roll",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " of our beginnings, the "
+								},
+								{
+									"_type": "span",
+									"text": "cube",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " channels that energy today. It marks the maturity leap from building "
+								},
+								{
+									"_type": "span",
+									"text": "complex e-commerce",
+									"marks": [
+										"svc-ecom"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " to integrating platforms as demanding as "
+								},
+								{
+									"_type": "span",
+									"text": "Ocado",
+									"marks": [
+										"ocado"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". Its famous hives, where thousands of robots optimize picking to the millimeter, set the bar for logistics engineering."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "svc-ecom",
+									"href": "/en/e-commerce"
+								},
+								{
+									"_type": "link",
+									"_key": "ocado",
+									"href": "https://www.ocadogroup.com/solutions/ocado-smart-platform",
+									"blank": true
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "blockquote",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Our logo is born from that grid. A symbol of the precision, rigor and scale that govern our daily work. A mirror to look at ourselves in. It is the same cube that guides you around this site."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Today"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
 									"text": "Three engineers. The same three. Start to finish.",
 									"marks": [
 										"strong"
@@ -6584,7 +7585,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "The company dates from 2019, and each of us has fifteen-plus years in production. Staying small is a choice. Few clients, deep involvement, and no junior learning on your budget."
+									"text": "Staying small is a choice. Few clients, deep involvement, and no junior learning on your budget."
 								}
 							]
 						},
@@ -6594,7 +7595,67 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We work inside your team, not around it. The middleware wiring your ERP to the storefront, the WAF stopping bad traffic, the dbt model that closes the day's sales. That's where you'll find us."
+									"text": "We work inside your team, not around it. The "
+								},
+								{
+									"_type": "span",
+									"text": "middleware wiring your ERP to the storefront",
+									"marks": [
+										"svc-int"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", the "
+								},
+								{
+									"_type": "span",
+									"text": "WAF stopping bad traffic",
+									"marks": [
+										"svc-waf"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", the "
+								},
+								{
+									"_type": "span",
+									"text": "dbt model that closes the day's sales",
+									"marks": [
+										"svc-dbt"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". That's where you'll find us."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "svc-int",
+									"href": "/en/systems-integration"
+								},
+								{
+									"_type": "link",
+									"_key": "svc-waf",
+									"href": "/en/cdn-waf-edge-security-cloudflare"
+								},
+								{
+									"_type": "link",
+									"_key": "svc-dbt",
+									"href": "/en/big-data-cloud-analytics"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Off the clock, we sponsor grassroots sport. Youth teams, and the 2026/27 provincial championship."
 								}
 							]
 						},
@@ -6614,7 +7675,14 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Few things, done well. We'd rather say no than deliver late. If a project doesn't fit what we're good at, we tell you in the first meeting."
+									"text": "Few things, done well.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " We'd rather say no than deliver late. If a project doesn't fit what we're good at, we tell you in the first meeting."
 								}
 							]
 						},
@@ -6624,7 +7692,14 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "No investors. No debt. No hurry. The company runs on its own work, which lets us pick complex projects and long relationships."
+									"text": "No investors. No debt. No hurry.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " The company runs on its own work, which lets us pick complex projects and long relationships."
 								}
 							]
 						},
@@ -6634,7 +7709,58 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "One team. Four verticals. Zero handoffs.",
+									"text": "Certainty over speed.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " We'd rather have a resilient architecture today than technical debt tomorrow."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Responsibility isn't delegated.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " Whoever designs the system delivers it and answers for it."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Technical independence.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " We prescribe technology on merit, not on vendor agreements."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "blockquote",
+							"children": [
+								{
+									"_type": "span",
+									"text": "One team. Six verticals. Zero handoffs.",
 									"marks": [
 										"strong"
 									]
