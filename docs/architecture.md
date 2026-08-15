@@ -116,6 +116,7 @@ All routes exist in both ES and EN:
 | `PostCard.astro` | Blog post card with image, tags, bylines |
 | `TagList.astro` | Tag pill list |
 | `LanguageSwitcher.astro` | ES ↔ EN toggle |
+| `PtLink.astro` | Whitespace-safe Portable Text link mark (single-line `<a>`; EmDash's default emits spaces inside anchors, breaking lines before punctuation). Supports `blank: true` markDefs (`target="_blank" rel="noopener noreferrer"`). Pass via `components={{ mark: { link: PtLink } }}` — adopted on the About pages, candidate for site-wide use. |
 
 ### 4.3 Shared CSS
 

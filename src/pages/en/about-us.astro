@@ -4,6 +4,10 @@
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { PortableText } from "emdash/ui";
+import PtLink from "../../components/PtLink.astro";
+
+// Whitespace-safe link mark (EmDash's default breaks lines before punctuation)
+const ptComponents = { mark: { link: PtLink } };
 import CubeEmblem from "../../components/CubeEmblem.astro";
 import Base from "../../layouts/Base.astro";
 import { getUiLabels } from "../../utils/ui-labels";
@@ -21,26 +25,33 @@ const { title, content, excerpt } = entry.data;
 const { entries: members } = await getEmDashCollection("members", {
 	limit: 50,
 	orderBy: { title: "asc" },
+	locale,
 });
 
 const labels = await getUiLabels(locale);
 const teamHeading = labels.get("footer_headings", "team_title", "~ The team");
 
-// Split content: first blocks are hero, blocks after h2 are the values section
+// Split content on h2 boundaries: hero (before 1st h2), history (1st h2 + its
+// blocks), today (2nd h2), values (3rd h2 onward). Each section keeps its h2 so
+// PortableText renders the heading. The team grid renders between today and
+// values (founder order: History → Today → Team → Values).
 const heroBlocks: any[] = [];
+const historyBlocks: any[] = [];
+const hoyBlocks: any[] = [];
 const valuesBlocks: any[] = [];
-let inValues = false;
+let h2Count = 0;
 for (const block of content || []) {
-	if (block._type === 'block' && block.style === 'h2') {
-		inValues = true;
-		continue;
-	}
-	if (inValues) {
-		valuesBlocks.push(block);
-	} else {
-		heroBlocks.push(block);
-	}
+	if (block._type === 'block' && block.style === 'h2') h2Count++;
+	if (h2Count === 0) heroBlocks.push(block);
+	else if (h2Count === 1) historyBlocks.push(block);
+	else if (h2Count === 2) hoyBlocks.push(block);
+	else valuesBlocks.push(block);
 }
+
+// The boot line (code-marked first block) renders inside a terminal window
+// that echoes the integration instrument; the rest of the hero is plain intro.
+const bootBlocks = heroBlocks[0]?.children?.[0]?.marks?.includes("code") ? [heroBlocks[0]] : [];
+const introBlocks = bootBlocks.length ? heroBlocks.slice(1) : heroBlocks;
 ---
 
 <Base
@@ -68,13 +79,39 @@ for (const block of content || []) {
 			<h1>{title}</h1>
 			{heroBlocks.length > 0 && (
 				<div class="s-hero__body">
-					<PortableText value={heroBlocks} />
+					{bootBlocks.length > 0 && (
+						<div class="s-boot">
+							<div class="s-boot__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+							<div class="s-boot__term">
+								<PortableText value={bootBlocks} components={ptComponents} />
+							</div>
+						</div>
+					)}
+					<PortableText value={introBlocks} components={ptComponents} />
 				</div>
 			)}
 		</div>
 	</section>
 
-	<!-- ══════ TEAM — dark bg, 4-col grid ══════ -->
+	<!-- ══════ HISTORY — light bg, anchor target for "2019" ══════ -->
+	{historyBlocks.length > 0 && (
+		<section id="history" class="s-history">
+			<div class="container s-history__inner">
+				<PortableText value={historyBlocks} components={ptComponents} />
+			</div>
+		</section>
+	)}
+
+	<!-- ══════ TODAY — dark bg ══════ -->
+	{hoyBlocks.length > 0 && (
+		<section class="s-values">
+			<div class="container s-values__inner">
+				<PortableText value={hoyBlocks} components={ptComponents} />
+			</div>
+		</section>
+	)}
+
+	<!-- ══════ TEAM — dark bg, 3-col grid ══════ -->
 	<section class="s-team" aria-label={t("team_section")}>
 		<div class="container s-team__inner">
 			<h2>{teamHeading}</h2>
@@ -89,6 +126,11 @@ for (const block of content || []) {
 						</div>
 						<h3 class="team-card__name">{member.data.title}</h3>
 						{member.data.excerpt && <p class="team-card__role">{member.data.excerpt}</p>}
+						{member.data.content && (
+							<div class="team-card__bio">
+								<PortableText value={member.data.content as any} components={ptComponents} />
+							</div>
+						)}
 					</li>
 				))}
 			</ul>
@@ -99,12 +141,12 @@ for (const block of content || []) {
 	{valuesBlocks.length > 0 && (
 		<section class="s-values" aria-label={t("values_section")}>
 			<div class="container s-values__inner">
-				<PortableText value={valuesBlocks} />
+				<PortableText value={valuesBlocks} components={ptComponents} />
 			</div>
 		</section>
 	)}
 </Base>
 
-<style>
+<style is:global>
 	@import "../../styles/about.css";
 </style>
