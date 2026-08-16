@@ -3,17 +3,31 @@ id: "01KZB2G0MYR4QS70ETN5SN5W10"
 cta_label: "Audit your e-commerce"
 ---
 
-Your catalog has 50,000 SKUs and your partner doesn't know how they're indexed. SAP has 4,000 partners. What it doesn't have is three engineers who know your catalog, your pricing pipeline and your `WAF` at the same time. We've parameterized SAP Commerce Cloud for Auchan for 5 years.
+Extending a commerce platform looks quick… a custom development here, a patch there, and a few years in, the version upgrade the vendor calls routine costs you a quarter. We've seen it. We know how to avoid it.
 
-## Partner ≠ engineer
+Not every platform is worked the same way. `SAP Commerce Cloud` is parameterized and extended. Extending is the easy part. Doing it with restraint, keeping each improvement decoupled from the core so it survives the next upgrade, is what almost nobody does. That's our advantage. With `Ocado Smart Platform` the craft is in the conversation: everything custom lives outside, in an [integration](/en/systems-integration) middleware that talks to the platform.
 
-We don't sell SAP licenses. We parameterize your platform with the depth that only years on the same project can give.
+We've spent fifteen years inside `hybris` and `SAP Commerce Cloud`. We don't sell licenses.
 
-- **SAP Commerce Cloud** tuned to your business logic, not the factory defaults. Massive catalogs, checkout, pricing, promotions.
-- Architecture that survives a real *Black Friday*. Edge caching on Cloudflare, selective pre-rendering.
-- Prices and stock in sync between SAP and BigQuery, and promotions that hit the web and the store at the same time.
-- The `WAF` guards the checkout, configured by the same people who know your catalog.
+## Custom ≠ coupled
 
-## SAP + data + security
+- **SAP Commerce Cloud.** Parameterized and extended. Catalogs, pricing, promotions, Solr. We know where not to touch.
+- **Ocado Smart Platform.** A third-party system. Presentation rules, substitutes and encrypted feeds, all from the middleware.
+- **Decoupled extensions.** Your custom logic, outside the core. The platform upgrades and your improvements keep working.
+- **Black Friday.** Edge caching and selective pre-rendering. The architecture holds the real peak.
+- **A guarded checkout.** The `WAF` is configured by the same people who know your catalog.
+- **Prices and stock that match.** Synced with `BigQuery`. Promotions hit the web and the till at the same time.
 
-The team parameterizing your catalog also builds your data pipeline and your edge security. Nobody will tell you "let me check with the other team". **One team. Four verticals. Zero handoffs.**
+## Cases we're fond of
+
+The ones that come to mind when someone asks what we do.
+
+- **Multi-country promotions.** One model with kits and assortments changing per market and channel, without duplicating the catalog.
+- **Per-customer pricing.** Millions of price rows computed, indexed and served without the search engine feeling it.
+- **Search engine.** What gets indexed, how often and at what cost. `Solr` sizing decides whether the campaign holds.
+- **`S/4HANA` and POS interfaces.** Orders, prices and returns squaring between the web, the store and the ERP.
+- **Cross-docking and fulfillment.** From the web order to picking and the delivery promise, with substitutes when a product runs out.
+
+The team working on your platform also builds your data `pipeline` and writes your `WAF` rules. Nobody will tell you "let me check with the other team".
+
+> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

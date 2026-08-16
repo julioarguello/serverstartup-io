@@ -148,8 +148,10 @@
 
 /* the closing motto — standout final blockquote, same pattern as the About
    motto (about.css), in the discipline color (cross-vertical convention,
-   founder 2026-08-16, #265) */
-.s-inst__closer blockquote:last-child {
+   founder 2026-08-16, #265). :last-of-type, not :last-child — Astro injects
+   the RefsNoIndex module script after the closer content on pages without a
+   refs list, and the motto must still match (#268). */
+.s-inst__closer blockquote:last-of-type {
 	font-style: normal;
 	font-size: 24px;
 	font-weight: 700;

@@ -994,7 +994,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Envío gratis: cero handoffs"
+									"text": "Envío gratis: cero traspasos"
 								}
 							]
 						},
@@ -1027,7 +1027,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "5 años con Auchan"
+									"text": "quince años"
 								}
 							]
 						},
@@ -2173,7 +2173,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "5 years with Auchan"
+									"text": "fifteen years"
 								}
 							]
 						},
