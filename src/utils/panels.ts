@@ -16,8 +16,10 @@ export interface PanelItem {
 export interface PanelSections {
 	intro: any[]; // PT blocks before the first h2 (rendered as-is)
 	heading: string; // first h2 text (the equation-headline)
-	lead: string; // first paragraph after the h2
+	lead: string; // first paragraph after the h2, flattened to plain text
+	leadBlocks: any[]; // same paragraphs as PT blocks (marks preserved)
 	items: PanelItem[];
+	itemBlocks: any[]; // the raw list blocks (marks preserved)
 	closerHeading: string; // second h2 text ("" if absent)
 	closer: any[]; // PT blocks after the second h2 (rendered as-is)
 }
@@ -85,7 +87,7 @@ export function parsePanelSections(content: any[]): PanelSections {
 		.filter((i) => i >= 0);
 
 	if (h2Idx.length === 0) {
-		return { intro: blocks, heading: "", lead: "", items: [], closerHeading: "", closer: [] };
+		return { intro: blocks, heading: "", lead: "", leadBlocks: [], items: [], itemBlocks: [], closerHeading: "", closer: [] };
 	}
 
 	const [first, second] = [h2Idx[0], h2Idx[1] ?? blocks.length];
@@ -94,14 +96,12 @@ export function parsePanelSections(content: any[]): PanelSections {
 	const closerHeading = h2Idx[1] != null ? blockText(blocks[h2Idx[1]]) : "";
 	const closer = h2Idx[1] != null ? blocks.slice(h2Idx[1] + 1) : [];
 
-	const items = body.filter((b) => b.listItem).map(splitItem);
-	const lead = body
-		.filter((b) => !b.listItem && b._type === "block")
-		.map(blockText)
-		.join(" ")
-		.trim();
+	const itemBlocks = body.filter((b) => b.listItem);
+	const items = itemBlocks.map(splitItem);
+	const leadBlocks = body.filter((b) => !b.listItem && b._type === "block");
+	const lead = leadBlocks.map(blockText).join(" ").trim();
 
-	return { intro, heading: blockText(blocks[first]), lead, items, closerHeading, closer };
+	return { intro, heading: blockText(blocks[first]), lead, leadBlocks, items, itemBlocks, closerHeading, closer };
 }
 
 /** Which instrument renders each service, by slug (both locales). */

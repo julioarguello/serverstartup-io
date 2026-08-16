@@ -11,6 +11,7 @@ import CubeEmblem from "../../components/CubeEmblem.astro";
 import { FACE_BY_SLUG, SITE_BY_PATH } from "../../utils/nav";
 import { serviceJsonLd, breadcrumbJsonLd } from "../../utils/jsonld";
 import { getUiLabels } from "../../utils/ui-labels";
+import { excerptHtml, excerptPlain } from "../../utils/excerpt";
 import type { CacheHint } from "emdash";
 import type { SiteSettings } from "../../types";
 
@@ -48,12 +49,12 @@ const labels = await getUiLabels(locale);
 
 <Base
 	title={title}
-	description={excerpt || `${title} — Server Startup`}
+	description={excerpt ? excerptPlain(excerpt) : `${title} — Server Startup`}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd({
 		siteUrl: Astro.site?.origin!,
 		name: title,
-		description: excerpt || `${title} — Server Startup`,
+		description: excerpt ? excerptPlain(excerpt) : `${title} — Server Startup`,
 		slug: slug!,
 		locale,
 	}))} />
@@ -77,7 +78,7 @@ const labels = await getUiLabels(locale);
 				<h1>{title}</h1>
 				{excerpt && (
 					<div class="s-hero__body">
-						<p class="text-body">{excerpt}</p>
+						<p class="text-body" set:html={excerptHtml(excerpt)} />
 					</div>
 				)}
 				<a href="/en/contact" class="btn btn-dark">{ctaLabel}</a>

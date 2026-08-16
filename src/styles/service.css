@@ -83,6 +83,18 @@
 	margin: 0 0 14px;
 }
 
+/* the closing motto — standout final blockquote, same pattern as the About
+   motto (about.css), in the discipline color (cross-vertical convention,
+   founder 2026-08-16, #265) */
+.s-inst__closer blockquote:last-child {
+	font-style: normal;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 34px;
+	margin: 32px 0 0;
+	padding: 4px 0 4px 24px;
+}
+
 @media (min-width: 768px) {
 	.s-inst__heading {
 		font-size: 32px;
@@ -404,6 +416,34 @@
 	padding: 0;
 	margin: 28px 0 0;
 	max-width: 700px;
+}
+
+/* When the list arrives as rendered Portable Text (bigquery), the ul lives
+   one level down — same reset, same rhythm. */
+.inst-list ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* content links: thin dashed underline, solid on hover (founder 2026-08-15,
+   same convention as about.css) */
+.s-inst__intro a,
+.inst-list a,
+.s-inst__closer a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+	text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+.s-inst__intro a:hover,
+.inst-list a:hover,
+.s-inst__closer a:hover {
+	text-decoration-style: solid;
+	text-decoration-color: currentColor;
 }
 
 .inst-list li {

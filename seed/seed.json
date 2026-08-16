@@ -3273,7 +3273,7 @@
 				"status": "published",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Tu equipo de datos apaga fuegos, no innova. Construimos plataformas en Google Cloud que gobiernan el dato desde la ingesta hasta el análisis.",
+					"excerpt": "Construimos plataformas, en *cloud* y *on-premise*, que gobiernan el dato desde la ingesta hasta el análisis.",
 					"cta_label": "Hablemos de tus datos",
 					"content": [
 						{
@@ -3285,65 +3285,55 @@
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "Tu equipo de datos apaga fuegos, no innova. Los informes llegan tarde, el dato no cuadra con el ERP y nadie sabe dónde se pierde. Lo hemos visto. Construimos plataformas que gobiernan el dato desde la ingesta hasta el análisis, conectadas con tus sistemas operacionales.",
+									"text": "Cualquiera monta un *pipeline* en una tarde. Una plataforma que aguante años de negocio, cambios de esquema y picos de campaña es otra historia.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k3",
-							"style": "h2",
-							"markDefs": [],
+							"_key": "k8",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "/ingenieria-greenfield-y-sistemas-criticos"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
 									"_key": "k2",
-									"text": "dbt ≠ pipeline",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k5",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k4",
-									"text": "Tener dbt no significa tener datos gobernados. Diseñamos plataformas en Google Cloud donde cada transformación está versionada, testeada y documentada.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k9",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k6",
-									"text": "El warehouse es ",
+									"text": "Nosotros la construimos como se construye el ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k7",
-									"text": "BigQuery",
+									"_key": "k4",
+									"text": "software serio",
 									"marks": [
-										"strong"
+										"k3"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k8",
-									"text": ". Sin servidores que cuidar, con costes predecibles y el dato viviendo donde se analiza.",
+									"_key": "k5",
+									"text": ". Cada transformación versionada en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "git",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": ", cada dato con su test, cada flujo con su alerta.",
 									"marks": []
 								}
 							]
@@ -3352,28 +3342,32 @@
 							"_type": "block",
 							"_key": "kd",
 							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "ka",
+									"_type": "link",
+									"href": "https://www.getdbt.com/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ka",
-									"text": "Las transformaciones son código ",
+									"_key": "k9",
+									"text": "La esencia es analítica, y las sinergias con lo operacional la multiplican. Usamos ",
 									"marks": []
 								},
 								{
 									"_type": "span",
 									"_key": "kb",
-									"text": "dbt",
+									"text": "`dbt`",
 									"marks": [
-										"strong"
+										"ka"
 									]
 								},
 								{
 									"_type": "span",
 									"_key": "kc",
-									"text": ", versionado en Git y con el linaje completo de cada métrica. En nuestra mayor plataforma corren 111 modelos y 1.646 tests.",
+									"text": " a los dos lados del *warehouse*.",
 									"marks": []
 								}
 							]
@@ -3381,65 +3375,626 @@
 						{
 							"_type": "block",
 							"_key": "kf",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "ke",
-									"text": "Ingesta en tiempo real con Dataflow y Pub/Sub para los flujos que no pueden esperar.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kh",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "kg",
-									"text": "Arquitectura medallón en tres capas, cada una con su propósito y su control de acceso.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kj",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ki",
-									"text": "Datos conectados con el negocio",
+									"_key": "ke",
+									"text": "dbt ≠ pipeline",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "km",
+							"_key": "ko",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "ki",
+									"_type": "link",
+									"href": "https://www.getdbt.com/blog/extract-load-transform"
+								},
+								{
+									"_key": "kl",
+									"_type": "link",
+									"href": "https://www.getdbt.com/what-is-analytics-engineering"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "dbt",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": " es la T del ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "`ELT`",
+									"marks": [
+										"ki"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": " y lo tratamos como se trata el buen software, el patrón que el sector llama ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "*analytics engineering*",
+									"marks": [
+										"kl"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": ". Pero la herramienta es solo una pieza: la ingesta, la orquestación y la vigilancia van aparte, y nuestro valor está en montar y operar el conjunto completo.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kw",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kr",
+									"_type": "link",
+									"href": "https://cloud.google.com/bigquery"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": "Donde más hemos profundizado",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": ". En el *cloud* de Google, ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": "`BigQuery`",
+									"marks": [
+										"kr"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": " como *warehouse* y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "dbt",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": " en las transformaciones.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k15",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kz",
+									"_type": "link",
+									"href": "https://scrumguides.org/scrum-guide.html#commitment-definition-of-done"
+								},
+								{
+									"_key": "k12",
+									"_type": "link",
+									"href": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": "De la pizarra a la publicación",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ky",
+									"text": ". Nuestra ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": "*definition of done*",
+									"marks": [
+										"kz"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k11",
+									"text": " nace en el *blueprint*, mucho antes del código. Diseño de la base de datos con el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "modelado clásico del sector",
+									"marks": [
+										"k12"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": ", nomenclatura estándar, homogeneización y normalización del dato. Es más análisis que desarrollo, y es donde se gana la fiabilidad.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k18",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "El testeo es la parte que casi todo el mundo se salta",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": ". En nuestras plataformas los tests se cuentan por miles. *Unit tests* que corren antes de publicar y *data tests* que se ejecutan cada día, con cada carga. El dato que no los pasa no llega a *gold*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1e",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1b",
+									"_type": "link",
+									"href": "https://dataengineering.wiki/Concepts/Medallion+Architecture"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "Arquitectura por capas",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": ". El patrón ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "*medallion*",
+									"marks": [
+										"k1b"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": " separa el dato crudo del verificado, cada capa con su propósito y su control de acceso.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1k",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1h",
+									"_type": "link",
+									"href": "https://www.terraform.io/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1f",
+									"text": "La infraestructura también es código",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": ". ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1i",
+									"text": "`Terraform`",
+									"marks": [
+										"k1h"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": " levanta los mismos *datasets*, permisos y entornos en desarrollo y en producción.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1t",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1n",
+									"_type": "link",
+									"href": "https://cloud.google.com/pubsub"
+								},
+								{
+									"_key": "k1q",
+									"_type": "link",
+									"href": "https://cloud.google.com/dataflow"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": "Tiempo real cuando el negocio lo pide",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": ". Ingesta con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": "`Pub/Sub`",
+									"marks": [
+										"k1n"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": "`Dataflow`",
+									"marks": [
+										"k1q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": " para los flujos que no pueden esperar al *batch* nocturno.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1v",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1u",
+									"text": "Sinergias entre lo analítico y lo operacional",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1x",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": "«Un solo modo de trabajar para dos mundos divergentes.»",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2c",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k1z",
+									"_type": "link",
+									"href": "https://docs.getdbt.com/docs/platform/about-platform/dbt-platform-features"
+								},
+								{
+									"_key": "k26",
+									"_type": "link",
+									"href": "https://github.com/dbt-labs/dbt-core"
+								},
+								{
+									"_key": "k29",
+									"_type": "link",
+									"href": "https://github.com/oracle/dbt-oracle"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "En lo analítico trabajamos con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "`dbt Cloud`",
+									"marks": [
+										"k1z"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": " sobre ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "BigQuery",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": ". Y cuando la transformación nace en la capa operacional, sobre una base relacional como ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "Oracle",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k25",
+									"text": ", la gestionamos con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": "`dbt Core`",
+									"marks": [
+										"k26"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": " y el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "adapter que mantiene Oracle",
+									"marks": [
+										"k29"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2b",
+									"text": " (con nuestras mejoras, tan obvias como necesarias...).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2e",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kk",
-									"text": "No construimos plataformas de datos aisladas. Conectamos BigQuery con SAP, con tu ERP y con el edge. ",
+									"_key": "k2d",
+									"text": "Los mismos tests y el mismo versionado a los dos lados, sin peajes entre equipos. Al cuadro de mando, el dato llega ya probado.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2r",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2i",
+									"_type": "link",
+									"href": "/comercio-electronico"
+								},
+								{
+									"_key": "k2l",
+									"_type": "link",
+									"href": "/integracion-de-sistemas"
+								},
+								{
+									"_key": "k2o",
+									"_type": "link",
+									"href": "/cdn-waf-seguridad-edge-cloudflare"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2f",
+									"text": "Conectamos ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kl",
-									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"_key": "k2g",
+									"text": "BigQuery",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": " con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2j",
+									"text": "tu e-commerce",
+									"marks": [
+										"k2i"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2k",
+									"text": ", con tu ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": "ERP",
+									"marks": [
+										"k2l"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2n",
+									"text": " y con el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2p",
+									"text": "*edge*",
+									"marks": [
+										"k2o"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2q",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2v",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2s",
+									"_type": "link",
+									"href": "/quienes-somos"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2t",
+									"text": "**Un equipo**",
+									"marks": [
+										"k2s"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2u",
+									"text": ". Seis verticales. Cero traspasos.",
 									"marks": [
 										"strong"
 									]
@@ -4710,9 +5265,8 @@
 				"translationOf": "svc-bigdata",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Your data team fights fires all week. We build platforms on Google Cloud that govern data from ingestion to analysis.",
+					"excerpt": "We build platforms, in the *cloud* and *on-premise*, that govern data from ingestion to analysis.",
 					"cta_label": "Let's talk data",
-					"color": "#EA4335",
 					"content": [
 						{
 							"_type": "block",
@@ -4723,65 +5277,55 @@
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "Your data team fights fires all week. Reports arrive late, the numbers don't match the ERP, and nobody knows where the data goes wrong. We've seen it. We build platforms that govern data from ingestion to analysis, connected to your operational systems.",
+									"text": "Anyone can stand up a pipeline in an afternoon. A platform that survives years of business, schema changes and campaign peaks is another story.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k3",
-							"style": "h2",
-							"markDefs": [],
+							"_key": "k8",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "/en/greenfield-engineering-critical-systems"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
 									"_key": "k2",
-									"text": "dbt ≠ pipeline",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k5",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k4",
-									"text": "Having dbt doesn't mean having governed data. We design platforms on Google Cloud where every transformation is versioned, tested and documented.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k9",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k6",
-									"text": "The warehouse is ",
+									"text": "We build them the way ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k7",
-									"text": "BigQuery",
+									"_key": "k4",
+									"text": "serious software",
 									"marks": [
-										"strong"
+										"k3"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k8",
-									"text": ". No servers to babysit, predictable costs, data living where it gets analyzed.",
+									"_key": "k5",
+									"text": " gets built. Every transformation versioned in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "git",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": ", every dataset tested, every flow wired to an alert.",
 									"marks": []
 								}
 							]
@@ -4790,28 +5334,32 @@
 							"_type": "block",
 							"_key": "kd",
 							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "ka",
+									"_type": "link",
+									"href": "https://www.getdbt.com/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ka",
-									"text": "Transformations are ",
+									"_key": "k9",
+									"text": "The essence is analytical, and the synergies with the operational side multiply it. We run ",
 									"marks": []
 								},
 								{
 									"_type": "span",
 									"_key": "kb",
-									"text": "dbt",
+									"text": "`dbt`",
 									"marks": [
-										"strong"
+										"ka"
 									]
 								},
 								{
 									"_type": "span",
 									"_key": "kc",
-									"text": " code, versioned in Git with full lineage for every metric. Our largest platform runs 111 models and 1,646 tests.",
+									"text": " on both sides of the *warehouse*.",
 									"marks": []
 								}
 							]
@@ -4819,72 +5367,634 @@
 						{
 							"_type": "block",
 							"_key": "kf",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "ke",
-									"text": "Real-time ingestion with Dataflow and Pub/Sub for the flows that can't wait.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kh",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "kg",
-									"text": "A three-layer medallion architecture, each layer with its purpose and its access control.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kj",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ki",
-									"text": "Data connected to the business",
+									"_key": "ke",
+									"text": "dbt ≠ pipeline",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "km",
+							"_key": "ko",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "ki",
+									"_type": "link",
+									"href": "https://www.getdbt.com/blog/extract-load-transform"
+								},
+								{
+									"_key": "kl",
+									"_type": "link",
+									"href": "https://www.getdbt.com/what-is-analytics-engineering"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "dbt",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": " is the T in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "`ELT`",
+									"marks": [
+										"ki"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": ", and we treat it the way good software gets treated, the pattern the industry calls ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "*analytics engineering*",
+									"marks": [
+										"kl"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": ". But the tool is only one piece: ingestion, orchestration and monitoring live elsewhere, and our value is building and running the whole set.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kw",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kr",
+									"_type": "link",
+									"href": "https://cloud.google.com/bigquery"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": "Google Cloud is where we've gone deepest",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": ". ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": "`BigQuery`",
+									"marks": [
+										"kr"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": " as the *warehouse*, ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "dbt",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": " for the transformations.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k15",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kz",
+									"_type": "link",
+									"href": "https://scrumguides.org/scrum-guide.html#commitment-definition-of-done"
+								},
+								{
+									"_key": "k12",
+									"_type": "link",
+									"href": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": "From blueprint to publication",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ky",
+									"text": ". Our ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": "*definition of done*",
+									"marks": [
+										"kz"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k11",
+									"text": " starts long before the code. Database design following the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "sector's classic modeling",
+									"marks": [
+										"k12"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": ", standard naming, homogenization and normalization of the data. It is more analysis than development, and it is where reliability is won.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k18",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "Testing is the part most teams skip",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": ". On our platforms tests number in the thousands. *Unit tests* run before anything ships, and *data tests* run every day, with every load. Data that fails never reaches *gold*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1e",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1b",
+									"_type": "link",
+									"href": "https://dataengineering.wiki/Concepts/Medallion+Architecture"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "Layered architecture",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": ". The ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "*medallion*",
+									"marks": [
+										"k1b"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": " pattern keeps raw and verified data apart, each layer with its purpose and its access control.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1k",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1h",
+									"_type": "link",
+									"href": "https://www.terraform.io/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1f",
+									"text": "Infrastructure is code too",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": ". ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1i",
+									"text": "`Terraform`",
+									"marks": [
+										"k1h"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": " builds the same datasets, permissions and environments in development and in production.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1t",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1n",
+									"_type": "link",
+									"href": "https://cloud.google.com/pubsub"
+								},
+								{
+									"_key": "k1q",
+									"_type": "link",
+									"href": "https://cloud.google.com/dataflow"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": "Real time when the business needs it",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": ". Ingestion on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": "`Pub/Sub`",
+									"marks": [
+										"k1n"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": "`Dataflow`",
+									"marks": [
+										"k1q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": " for the flows that can't wait for the nightly *batch*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1v",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1u",
+									"text": "Synergies between analytical and operational",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1x",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": "\"One way of working for two divergent worlds.\"",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2c",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k1z",
+									"_type": "link",
+									"href": "https://docs.getdbt.com/docs/platform/about-platform/dbt-platform-features"
+								},
+								{
+									"_key": "k26",
+									"_type": "link",
+									"href": "https://github.com/dbt-labs/dbt-core"
+								},
+								{
+									"_key": "k29",
+									"_type": "link",
+									"href": "https://github.com/oracle/dbt-oracle"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "On the analytical side we work with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "`dbt Cloud`",
+									"marks": [
+										"k1z"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": " on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "BigQuery",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": ". And when a transformation belongs in the operational layer, on a relational database like ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "Oracle",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k25",
+									"text": ", we manage it with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": "`dbt Core`",
+									"marks": [
+										"k26"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": " and the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "adapter Oracle maintains",
+									"marks": [
+										"k29"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2b",
+									"text": " (plus our own improvements, as obvious as they were necessary...).",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2e",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kk",
-									"text": "We don't build isolated data platforms. We connect BigQuery to SAP, to your ERP, and to the edge. ",
+									"_key": "k2d",
+									"text": "The same tests and the same versioning on both sides, with no toll booths between teams. Data reaches the dashboard already proven.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2r",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2i",
+									"_type": "link",
+									"href": "/en/e-commerce"
+								},
+								{
+									"_key": "k2l",
+									"_type": "link",
+									"href": "/en/systems-integration"
+								},
+								{
+									"_key": "k2o",
+									"_type": "link",
+									"href": "/en/cdn-waf-edge-security-cloudflare"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2f",
+									"text": "We connect ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kl",
-									"text": "One team. Four verticals. Zero handoffs.",
+									"_key": "k2g",
+									"text": "BigQuery",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": " to ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2j",
+									"text": "your e-commerce",
+									"marks": [
+										"k2i"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2k",
+									"text": ", to your ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": "ERP",
+									"marks": [
+										"k2l"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2n",
+									"text": ", and to the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2p",
+									"text": "*edge*",
+									"marks": [
+										"k2o"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2q",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2v",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2s",
+									"_type": "link",
+									"href": "/en/about-us"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2t",
+									"text": "**One team**",
+									"marks": [
+										"k2s"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2u",
+									"text": ". Six verticals. Zero handoffs.",
 									"marks": [
 										"strong"
 									]
 								}
 							]
 						}
-					]
+					],
+					"color": "#EA4335"
 				}
 			},
 			{
