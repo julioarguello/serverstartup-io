@@ -3089,107 +3089,77 @@
 				"status": "published",
 				"data": {
 					"title": "CDN, WAF y seguridad edge",
-					"excerpt": "Cloudflare está configurado. ¿Seguro de que está bien configurado? Diseñamos, desplegamos y mantenemos arquitecturas de seguridad perimetral en producción.",
+					"excerpt": "Socios oficiales de Cloudflare desde 2019. Auditoría, migración y operación de CDN, WAF y seguridad perimetral, sobre todo en comercio electrónico.",
 					"cta_label": "Audita tu edge",
 					"content": [
 						{
 							"_type": "block",
-							"_key": "k3",
+							"_key": "ka",
 							"style": "normal",
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "k1",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/es-es/"
+								},
+								{
+									"_key": "k4",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/es-es/plans/enterprise/"
+								},
+								{
+									"_key": "k7",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/es-es/plans/business/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "Cloudflare está configurado. ¿Seguro de que está bien configurado? En muchas casas el ",
+									"text": "Trabajamos con la plataforma de ",
 									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k1",
-									"text": "WAF",
-									"marks": [
-										"code"
-									]
 								},
 								{
 									"_type": "span",
 									"_key": "k2",
-									"text": " lo montó alguien que ya no está, y nadie se atreve a tocar las reglas. Nosotros sabemos por qué está cada una, porque las escribimos y las mantenemos en producción.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k5",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k4",
-									"text": "WAF ≠ seguridad",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k7",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k6",
-									"text": "Un firewall no es una estrategia de seguridad. Configuramos Cloudflare como arquitectura.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kb",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k8",
-									"text": "Reglas de ",
-									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k9",
-									"text": "WAF",
+									"text": "`Cloudflare`",
 									"marks": [
-										"code"
+										"k1"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "ka",
-									"text": " ajustadas a tu superficie de ataque real. OWASP Top 10, DDoS, bots, y las plantillas genéricas fuera.",
+									"_key": "k3",
+									"text": " desde 2017, dos años antes de hacernos socios oficiales. Auditamos, migramos y optimizamos cuentas ",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kd",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
+								},
 								{
 									"_type": "span",
-									"_key": "kc",
-									"text": "*Zero Trust* para las aplicaciones internas. Sin VPN, con políticas verificadas por identidad y dispositivo.",
+									"_key": "k5",
+									"text": "Enterprise",
+									"marks": [
+										"k4"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "Business",
+									"marks": [
+										"k7"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": ", sobre todo para *retail* y comercio electrónico.",
 									"marks": []
 								}
 							]
@@ -3198,44 +3168,68 @@
 							"_type": "block",
 							"_key": "kf",
 							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
+									"_key": "kb",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": " está configurado. ¿Seguro de que está bien configurado? En muchas organizaciones nadie se atreve a tocar las reglas del ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
 									"_key": "ke",
-									"text": "Lógica de negocio en el edge con Workers, a menos de 50 ms del usuario y en más de 300 PoPs.",
+									"text": ". Bloquean algo, seguro. Nadie recuerda qué.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kh",
+							"_key": "kk",
 							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "kh",
+									"_type": "link",
+									"href": "https://developer.hashicorp.com/terraform"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
 									"_key": "kg",
-									"text": "Caché y CDN que descargan tu origen y hacen predecibles los tiempos de respuesta.",
+									"text": "Nosotros sabemos por qué está cada una, porque las escribimos, las versionamos con ",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kj",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
+								},
 								{
 									"_type": "span",
 									"_key": "ki",
-									"text": "Quien lo configura, lo mantiene",
+									"text": "`Terraform`",
+									"marks": [
+										"kh"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": " y las mantenemos en producción.",
 									"marks": []
 								}
 							]
@@ -3243,19 +3237,513 @@
 						{
 							"_type": "block",
 							"_key": "km",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "WAF ≠ seguridad",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kq",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kk",
-									"text": "No montamos Cloudflare y desaparecemos. Vigilamos el tráfico, ajustamos las reglas cuando cambian los patrones de ataque y respondemos cuando algo se degrada. Tres ingenieros que conocen tu configuración, no un ticket a un partner genérico. ",
+									"_key": "kn",
+									"text": "Un *firewall* no es una estrategia de seguridad, sino una parte de ella. Configuramos ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kl",
-									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"_key": "ko",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": " como arquitectura, y cada interruptor de este panel tiene un porqué.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kt",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": "Reglas `WAF` a tu medida.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": " Ajustadas a tu superficie de ataque real. OWASP Top 10, DDoS, bots. Las plantillas genéricas, fuera.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kw",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "Caché y `CDN`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": " Tu origen respira y los tiempos de respuesta se vuelven predecibles. También en la campaña de noviembre.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k11",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": "Migraciones sin corte.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ky",
+									"text": " Desde Akamai o la ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kz",
+									"text": "CDN",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": " que toque, sin parar la tienda.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k14",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "Todo en `Terraform`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": " La configuración entera como código, versionada y revisada. Nada depende de la memoria de nadie.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k19",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": "Lógica junto al usuario.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": " ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": "Workers",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k18",
+									"text": " en más de 300 ciudades, a menos de 50 ms. Los primeros los pusimos en producción en 2018.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1c",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": "Guardia diaria.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1b",
+									"text": " Alertas y comprobaciones que un ingeniero revisa cada mañana. El mismo que escribió tus reglas.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1e",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": "Quien lo configura, lo mantiene",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1f",
+									"text": "No montamos ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": " y desaparecemos. Vigilamos el tráfico, ajustamos las reglas cuando cambian los patrones de ataque y damos la cara cuando algo se degrada.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1m",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "Hemos montado ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1k",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": " para:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1o",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": "b64:QURJIEliZXJpYSwgQWxjYW1wbywgRG9vZXJzIFNuZWFrZXJzLCBGb3J1bSBTcG9ydCwgSm9iJlRhbGVudCwgTWFyYXRob24sIFB1bnQgUm9tYSwgVG95cyJSIlVzIEliZXJpYSw=",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k22",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": "La plataforma no se acaba en el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": "CDN",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": " y el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": ". ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1u",
+									"text": "Zero Trust",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": "Access",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1x",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "Stream",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "R2",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": ". Te ayudamos a decidir qué piezas encajan y cuáles no.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2f",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2c",
+									"_type": "link",
+									"href": "/deconstruyendo"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": "Esta misma web corre sobre ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "Workers",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k25",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "D1",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "R2",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k29",
+									"text": ", detrás del mismo ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2b",
+									"text": " que operamos para clientes. La desmontamos pieza a pieza en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "Deconstruyendo esta web",
+									"marks": [
+										"k2c"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2j",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2g",
+									"_type": "link",
+									"href": "/quienes-somos"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": "**Un equipo**",
+									"marks": [
+										"k2g"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2i",
+									"text": ". Seis verticales. Cero traspasos.",
 									"marks": [
 										"strong"
 									]
@@ -5365,117 +5853,77 @@
 				"translationOf": "svc-cdn",
 				"data": {
 					"title": "CDN, WAF & Edge Security",
-					"excerpt": "Your Cloudflare is configured. Are you sure it's configured right? We design, deploy and maintain edge security architectures in production.",
+					"excerpt": "Official Cloudflare partner since 2019. We audit, migrate and run CDN, WAF and edge security, mostly for e-commerce.",
 					"cta_label": "Audit your edge",
 					"content": [
 						{
 							"_type": "block",
-							"_key": "k3",
+							"_key": "ka",
 							"style": "normal",
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "k1",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/"
+								},
+								{
+									"_key": "k4",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/plans/enterprise/"
+								},
+								{
+									"_key": "k7",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/plans/business/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "Your Cloudflare is configured. Are you sure it's configured right? In many companies the ",
+									"text": "We've worked with the ",
 									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k1",
-									"text": "WAF",
-									"marks": [
-										"code"
-									]
 								},
 								{
 									"_type": "span",
 									"_key": "k2",
-									"text": " was set up by someone who left, and nobody dares touch the rules. We know why each one is there, because we wrote them and we keep them running in production.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k5",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
+									"text": "`Cloudflare`",
+									"marks": [
+										"k1"
+									]
+								},
 								{
 									"_type": "span",
-									"_key": "k4",
-									"text": "WAF ≠ security",
+									"_key": "k3",
+									"text": " platform since 2017, two years before becoming an official partner. We audit, migrate and tune ",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k7",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": "Enterprise",
+									"marks": [
+										"k4"
+									]
+								},
 								{
 									"_type": "span",
 									"_key": "k6",
-									"text": "A firewall is not a security strategy. We configure Cloudflare as architecture.",
+									"text": " and ",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "ka",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
+								},
 								{
 									"_type": "span",
 									"_key": "k8",
-									"text": "WAF",
+									"text": "Business",
 									"marks": [
-										"code"
+										"k7"
 									]
 								},
 								{
 									"_type": "span",
 									"_key": "k9",
-									"text": " rules tuned to your actual attack surface. OWASP Top 10, DDoS, bots, and no generic templates.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "kc",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "kb",
-									"text": "*Zero Trust* for internal apps. No VPN, policies verified by identity and device.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "ke",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "kd",
-									"text": "Business logic at the edge with Workers, under 50 ms from the user, on 300+ PoPs.",
+									"text": " accounts, mostly for retail and e-commerce.",
 									"marks": []
 								}
 							]
@@ -5484,28 +5932,40 @@
 							"_type": "block",
 							"_key": "kg",
 							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
 							"markDefs": [],
 							"children": [
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "Your ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kc",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": " is configured. Are you sure it's configured right? In many organizations nobody dares touch the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
 								{
 									"_type": "span",
 									"_key": "kf",
-									"text": "Caching and CDN that unload your origin and make response times predictable.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "ki",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "kh",
-									"text": "Whoever configures it, maintains it",
+									"text": " rules. They block something. Nobody remembers what.",
 									"marks": []
 								}
 							]
@@ -5514,18 +5974,532 @@
 							"_type": "block",
 							"_key": "kl",
 							"style": "normal",
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "ki",
+									"_type": "link",
+									"href": "https://developer.hashicorp.com/terraform"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kj",
-									"text": "We don't set up Cloudflare and disappear. We watch the traffic, adjust rules as attack patterns change, and respond when something degrades. Three engineers who know your configuration, not a ticket to a generic partner. ",
+									"_key": "kh",
+									"text": "We know why each rule is there, because we wrote them, we version them with ",
 									"marks": []
 								},
 								{
 									"_type": "span",
+									"_key": "kj",
+									"text": "`Terraform`",
+									"marks": [
+										"ki"
+									]
+								},
+								{
+									"_type": "span",
 									"_key": "kk",
-									"text": "One team. Four verticals. Zero handoffs.",
+									"text": ", and we keep them running in production.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kn",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "WAF ≠ security",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kr",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ko",
+									"text": "A firewall is not a security strategy, it's one part of it. We configure ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": " as architecture, and every switch on this panel is there for a reason.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ku",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": "`WAF` rules, tuned to you.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": " Matched to your actual attack surface. OWASP Top 10, DDoS, bots. No generic templates.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kx",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": "Cache and `CDN`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": " Your origin breathes and response times become predictable. Black Friday included.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k10",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ky",
+									"text": "Zero-downtime migrations.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kz",
+									"text": " From Akamai or whatever you run today, without stopping the store.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k13",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k11",
+									"text": "Everything in `Terraform`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": " The whole configuration as code, versioned and reviewed. Nothing depends on anyone's memory.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k18",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": "Logic next to the user.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": " ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "Workers",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": " in 300+ cities, under 50 ms away. We shipped our first ones in 2018.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1b",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "Daily watch.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": " Alerts and checks an engineer reviews every morning. The same engineer who wrote your rules.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "Whoever configures it, maintains it",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1e",
+									"text": "We don't set up ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1f",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": " and disappear. We watch the traffic, adjust rules as attack patterns change, and answer personally when something degrades.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1i",
+									"text": "We've deployed ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "Cloudflare",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1k",
+									"text": " for:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1n",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": "b64:QURJIEliZXJpYSwgQWxjYW1wbywgRG9vZXJzIFNuZWFrZXJzLCBGb3J1bSBTcG9ydCwgSm9iJlRhbGVudCwgTWFyYXRob24sIFB1bnQgUm9tYSwgVG95cyJSIlVzIEliZXJpYSw=",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k21",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": "The platform doesn't end at ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": "CDN",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": ". ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": "Zero Trust",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1u",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": "Access",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1x",
+									"text": "Stream",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": "R2",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": ". We help you decide which pieces fit, and which don't.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2e",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2b",
+									"_type": "link",
+									"href": "/en/deconstructing"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "This very site runs on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": "Workers",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k25",
+									"text": "D1",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": "R2",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": ", behind the same ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k29",
+									"text": "WAF",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": " we run for clients. We take it apart, piece by piece, in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2c",
+									"text": "Deconstructing this website",
+									"marks": [
+										"k2b"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2i",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2f",
+									"_type": "link",
+									"href": "/en/about-us"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": "**One team**",
+									"marks": [
+										"k2f"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": ". Six verticals. Zero handoffs.",
 									"marks": [
 										"strong"
 									]

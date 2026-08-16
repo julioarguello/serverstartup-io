@@ -30,6 +30,36 @@
 	margin-top: 28px;
 }
 
+/* Cloudflare Partner Network block (dashboard service only): the About
+   logo-card pattern — left bar + tinted bg, logo left, partner ¶ right.
+   Clear space around the logo ≥ the cloudmark height (partner guidelines). */
+.s-partner {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 26px;
+	align-items: center;
+	margin: 0 0 24px;
+	padding: 24px 28px;
+	border-left: 3px solid var(--color-primary);
+	background: color-mix(in srgb, var(--color-primary) 4%, transparent);
+}
+
+.s-partner__logo {
+	display: block;
+	width: 180px;
+}
+
+.s-partner__logo img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+@media (max-width: 480px) {
+	.s-partner { gap: 18px; }
+	.s-partner__logo { width: 120px; }
+}
+
 @media (min-width: 768px) {
 	.s-hero {
 		padding: calc(100px + 40px) 0 64px;
@@ -56,6 +86,39 @@
 	font-size: 26px;
 	line-height: 34px;
 	margin: 40px 0 20px;
+}
+
+.s-inst__lead {
+	max-width: 700px;
+	margin: 0 0 20px;
+}
+
+.s-inst__lead p {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 28px;
+}
+
+/* content links: thin dashed underline, solid on hover (founder 2026-08-15,
+   same convention as about.css) */
+.s-inst__intro a,
+.s-inst__lead a,
+.inst-list a,
+.s-inst__closer a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+	text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+.s-inst__intro a:hover,
+.s-inst__lead a:hover,
+.inst-list a:hover,
+.s-inst__closer a:hover {
+	text-decoration-style: solid;
+	text-decoration-color: currentColor;
 }
 
 .s-inst__closer {
@@ -93,6 +156,19 @@
 	line-height: 34px;
 	margin: 32px 0 0;
 	padding: 4px 0 4px 24px;
+}
+
+/* Reference list (closer blockquote ending in a comma): drawn on a canvas —
+   discreet muted line, text never in the DOM (founder decision, #266). */
+.svc-refs {
+	display: block;
+	margin: 0 0 14px;
+	min-height: 24px;
+}
+
+.svc-refs canvas {
+	display: block;
+	max-width: 100%;
 }
 
 @media (min-width: 768px) {

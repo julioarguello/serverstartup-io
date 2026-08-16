@@ -1,0 +1,109 @@
+---
+/**
+ * Closer blockquotes carry two conventions, discriminated by content:
+ *
+ * - Ends with a trailing comma → the service's REFERENCE LIST, rendered as an
+ *   in-browser image: the names are drawn onto a <canvas>, so they exist
+ *   neither in the HTML source nor in the DOM text — invisible to crawlers
+ *   (including JS-rendering ones), readable by people. Deliberately discreet
+ *   (small muted mono line). The names travel only as a base64 payload and
+ *   the attribute is dropped after drawing.
+ *
+ * - Anything else (e.g. the final cross-line motto) → a normal blockquote,
+ *   styled by service.css (`.s-inst__closer blockquote:last-child` standout).
+ */
+const { node } = Astro.props;
+const raw = ((node?.children ?? []) as any[]).map((c) => c?.text ?? "").join("").trim();
+// Sensitive lists are base64-encoded AT REST too (`b64:` prefix), so the
+// names never sit in the repo tree / CMS as plain text (citability guard).
+let text = raw;
+if (/^b64:/.test(raw)) {
+	try {
+		const b = atob(raw.slice(4));
+		text = new TextDecoder().decode(Uint8Array.from(b, (c) => c.charCodeAt(0)));
+	} catch {
+		text = "";
+	}
+}
+const isRefs = /^b64:/.test(raw) || /,\s*$/.test(text);
+const names = isRefs
+	? text
+			.split(",")
+			.map((s: string) => s.trim())
+			.filter(Boolean)
+	: [];
+const bytes = new TextEncoder().encode(JSON.stringify(names));
+let bin = "";
+for (const b of bytes) bin += String.fromCharCode(b);
+const payload = btoa(bin);
+---
+
+{
+	isRefs ? (
+		<span class="svc-refs" data-nosnippet aria-hidden="true" data-refs={payload} />
+	) : (
+		<blockquote>
+			<slot />
+		</blockquote>
+	)
+}
+
+<script>
+	for (const el of document.querySelectorAll<HTMLElement>(".svc-refs[data-refs]")) {
+		let names: string[] = [];
+		try {
+			const bin = atob(el.getAttribute("data-refs") || "");
+			const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+			names = JSON.parse(new TextDecoder().decode(bytes));
+		} catch {
+			/* malformed payload: leave the container empty */
+		}
+		el.removeAttribute("data-refs");
+		if (!names.length) continue;
+
+		const canvas = document.createElement("canvas");
+		el.appendChild(canvas);
+		const ctx = canvas.getContext("2d");
+		if (!ctx) continue;
+
+		const FONT = '500 14px ui-monospace, SFMono-Regular, Menlo, "Courier New", monospace';
+		const LINE_H = 24;
+		const words = names.concat(["…"]);
+
+		const draw = () => {
+			const width = el.clientWidth || 640;
+			const dpr = window.devicePixelRatio || 1;
+			// wrap: measure with the target font (canvas resize resets state)
+			ctx.font = FONT;
+			const lines: string[] = [];
+			let cur = "";
+			for (const w of words) {
+				const candidate = cur ? cur + "  ·  " + w : w;
+				if (cur && ctx.measureText(candidate).width > width) {
+					lines.push(cur);
+					cur = w;
+				} else {
+					cur = candidate;
+				}
+			}
+			if (cur) lines.push(cur);
+
+			canvas.width = Math.round(width * dpr);
+			canvas.height = Math.round(lines.length * LINE_H * dpr);
+			canvas.style.width = width + "px";
+			canvas.style.height = lines.length * LINE_H + "px";
+			ctx.scale(dpr, dpr);
+			ctx.font = FONT;
+			ctx.fillStyle = "#6f6f6f";
+			ctx.textBaseline = "middle";
+			lines.forEach((l, i) => ctx.fillText(l, 0, i * LINE_H + LINE_H / 2));
+		};
+
+		draw();
+		let t: ReturnType<typeof setTimeout>;
+		window.addEventListener("resize", () => {
+			clearTimeout(t);
+			t = setTimeout(draw, 150);
+		});
+	}
+</script>
