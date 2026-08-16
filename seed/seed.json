@@ -5877,20 +5877,82 @@
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Si tu cadena de valor necesita un motor que no existe, lo diseñamos, lo escribimos y lo operamos.",
+									"text": "Hay necesidades que ningún producto comercial cubre. Un motor de precios que solo existe en tu negocio, una web que no cabe en ninguna plantilla (esta misma, sin ir más lejos). Para eso siempre ha existido el desarrollo *greenfield*.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k3",
+							"_key": "k6",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "/inteligencia-artificial"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "Y hoy pesa otro motivo. Con las capacidades que trae la ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "IA",
+									"marks": [
+										"k3"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": ", construir a medida sale a cuenta en casos donde antes se compraba por defecto.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "La advertencia, por delante. Si un ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "SaaS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": " te lo resuelve, te lo decimos y no lo construimos. Preferimos perder un proyecto antes que mantener uno que sobra.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2",
+									"_key": "kb",
 									"text": "El código no es el producto",
 									"marks": []
 								}
@@ -5898,51 +5960,162 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k5",
+							"_key": "ke",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k4",
-									"text": "El producto es el sistema que funciona en producción. Java 21+, Spring Boot o Quarkus. Elegimos la pila según el problema, no según la tendencia.",
+									"_key": "kd",
+									"text": "El producto es el sistema que sigue en producción años después de la demo. La disciplina que lo consigue es siempre la misma, esté la IA por medio o no.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k7",
+							"_key": "kg",
 							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k6",
-									"text": "Java moderno con virtual threads, records y pattern matching. Código mantenible que escala sin trucos.",
+									"_key": "kf",
+									"text": "Cuatro reglas y ninguna es opcional.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kd",
+							"_key": "kr",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "kj",
+									"_type": "link",
+									"href": "https://spring.io/projects/spring-boot"
+								},
+								{
+									"_key": "km",
+									"_type": "link",
+									"href": "https://quarkus.io/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k8",
-									"text": "APIs *Contract First*. Primero el contrato, luego el código, con ",
+									"_key": "kh",
+									"text": "`Java` sin nostalgia.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": " ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k9",
+									"_key": "kk",
+									"text": "Spring Boot",
+									"marks": [
+										"kj"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": " o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": "Quarkus",
+									"marks": [
+										"km"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ko",
+									"text": " sobre ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": "Java",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": " 21. *Virtual threads*, *records* y *pattern matching*. Código que escala sin trucos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k12",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": "El contrato antes que el código.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": " La ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "API",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": " se pacta por escrito (*Contract First*, ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "OpenAPI",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": ") y las credenciales (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ky",
 									"text": "OAuth 2.0",
 									"marks": [
 										"code"
@@ -5950,13 +6123,13 @@
 								},
 								{
 									"_type": "span",
-									"_key": "ka",
-									"text": " y ",
+									"_key": "kz",
+									"text": ", ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kb",
+									"_key": "k10",
 									"text": "mTLS",
 									"marks": [
 										"code"
@@ -5964,15 +6137,15 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kc",
-									"text": " de serie.",
+									"_key": "k11",
+									"text": ") entran en el diseño, no en el parche.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kf",
+							"_key": "k15",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
@@ -5980,37 +6153,375 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ke",
-									"text": "El CI/CD funciona como gobernanza. Tests, análisis estático y validación de seguridad antes de cada despliegue.",
+									"_key": "k13",
+									"text": "El `CI/CD` es la gobernanza.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": " Tests, análisis estático y validación de seguridad delante de cada despliegue. Siempre sabes qué corre en tus servidores y por qué.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kh",
+							"_key": "k1e",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "k18",
+									"_type": "link",
+									"href": "/cdn-waf-seguridad-edge-cloudflare"
+								},
+								{
+									"_key": "k1b",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/es-es/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kg",
-									"text": "La seguridad se compila. Spring Security en el código y el WAF de Cloudflare delante.",
+									"_key": "k16",
+									"text": "La seguridad se compila.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": " Control de acceso granular en el código y el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "`WAF`",
+									"marks": [
+										"k18"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": " de ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "Cloudflare",
+									"marks": [
+										"k1b"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": " delante.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kj",
+							"_key": "k1g",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ki",
+									"_key": "k1f",
+									"text": "Greenfield ≠ página en blanco",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": "Nunca partimos de cero, y no dejamos que una IA lo haga. Para cada marco tecnológico mantenemos un *framework* de trabajo propio: esqueleto del proyecto, convenciones, entornos, calidad y despliegue resueltos antes de la primera línea de negocio.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1r",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1l",
+									"_type": "link",
+									"href": "https://cloud.google.com/run"
+								},
+								{
+									"_key": "k1o",
+									"_type": "link",
+									"href": "https://cloud.google.com/functions"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "`Python` en Google Cloud.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1k",
+									"text": " Servicios y funciones sobre ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": "Cloud Run",
+									"marks": [
+										"k1l"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": "Cloud Functions",
+									"marks": [
+										"k1o"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": ", con el mismo andamiaje de entornos, credenciales y pruebas en cada proyecto.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1x",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1u",
+									"_type": "link",
+									"href": "/integracion-de-sistemas"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "`Quarkus` y `Camel` sobre `Docker`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": " Arranque en milisegundos e ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": "integración",
+									"marks": [
+										"k1u"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": " de serie, listos para cualquier orquestador.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k22",
+									"_type": "link",
+									"href": "https://karaf.apache.org/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "Publicación en `Karaf`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": " Para las plataformas que viven en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "OSGi",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": " y despliegan por *bundles* sobre ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": "Karaf",
+									"marks": [
+										"k22"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": ", sin parar el resto del sistema.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "La ventaja se nota en el segundo servicio. Se lee como el primero, se despliega igual y lo opera cualquiera del equipo. Aburrido a propósito.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k29",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "La IA multiplica. El *framework* conduce.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "Puede que el *greenfield* sea donde más rinde la IA. Seguro que es donde antes descarrila. Sobre una página en blanco, un agente entrega en horas lo que costaba semanas. Sin marco, cada una de esas horas es deuda nueva.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2i",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2f",
+									"_type": "link",
+									"href": "/inteligencia-artificial"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2c",
+									"text": "Nuestros *frameworks* son el perímetro. El agente escribe dentro de esos raíles y un ingeniero firma cada línea que llega a ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "main",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": ". El detalle, en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": "el vertical de IA",
+									"marks": [
+										"k2f"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2k",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2j",
 									"text": "Tu deuda técnica es nuestro problema",
 									"marks": []
 								}
@@ -6018,20 +6529,42 @@
 						},
 						{
 							"_type": "block",
-							"_key": "km",
+							"_key": "k2m",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kk",
-									"text": "Tres ingenieros senior. Los mismos tres. Quien diseña el sistema lo despliega y responde por su estabilidad. No entregamos y desaparecemos. Acompañamos la transición y dejamos el conocimiento en tu casa. ",
+									"_key": "k2l",
+									"text": "Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos tres ingenieros *senior*, del primer *commit* a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.",
 									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2q",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2n",
+									"_type": "link",
+									"href": "/quienes-somos"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2o",
+									"text": "**Un equipo**",
+									"marks": [
+										"k2n"
+									]
 								},
 								{
 									"_type": "span",
-									"_key": "kl",
-									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"_key": "k2p",
+									"text": ". Seis verticales. Cero traspasos.",
 									"marks": [
 										"strong"
 									]
@@ -8996,20 +9529,82 @@
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "We're not a software factory. We build the critical components commercial software can't cover. If your value chain needs an engine that doesn't exist, we design it, write it and run it.",
+									"text": "Some needs no commercial product covers. A pricing engine that only exists in your business, a website no template fits (this one, for instance). That's what *greenfield* development has always been for.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k3",
+							"_key": "k6",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "/en/artificial-intelligence"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "And there's a newer reason. With the capabilities ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "AI",
+									"marks": [
+										"k3"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": " brings, building custom now pays off in cases where buying used to be the default.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "Fair warning first, though. If a ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "SaaS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": " solves it, we'll say so and we won't build it. We'd rather lose a project than maintain one that shouldn't exist.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2",
+									"_key": "kb",
 									"text": "Code is not the product",
 									"marks": []
 								}
@@ -9017,51 +9612,162 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k5",
+							"_key": "ke",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k4",
-									"text": "The product is the system running in production. Java 21+, Spring Boot or Quarkus. We pick the stack for the problem, not for the trend.",
+									"_key": "kd",
+									"text": "The product is the system still running years after the demo. The discipline behind that never changes, AI in the loop or not.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k7",
+							"_key": "kg",
 							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k6",
-									"text": "Modern Java with virtual threads, records and pattern matching. Maintainable code that scales without tricks.",
+									"_key": "kf",
+									"text": "Four rules, none of them optional.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kd",
+							"_key": "kr",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "kj",
+									"_type": "link",
+									"href": "https://spring.io/projects/spring-boot"
+								},
+								{
+									"_key": "km",
+									"_type": "link",
+									"href": "https://quarkus.io/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k8",
-									"text": "*Contract First* APIs. Contract first, code second, with ",
+									"_key": "kh",
+									"text": "`Java` without nostalgia.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": " ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k9",
+									"_key": "kk",
+									"text": "Spring Boot",
+									"marks": [
+										"kj"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": " or ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": "Quarkus",
+									"marks": [
+										"km"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ko",
+									"text": " on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": "Java",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": " 21. *Virtual threads*, *records* and *pattern matching*. Code that scales without tricks.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k12",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": "The contract comes before the code.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": " The ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "API",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": " is agreed in writing (*Contract First*, ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "OpenAPI",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": "), with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ky",
 									"text": "OAuth 2.0",
 									"marks": [
 										"code"
@@ -9069,13 +9775,13 @@
 								},
 								{
 									"_type": "span",
-									"_key": "ka",
+									"_key": "kz",
 									"text": " and ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kb",
+									"_key": "k10",
 									"text": "mTLS",
 									"marks": [
 										"code"
@@ -9083,15 +9789,15 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kc",
-									"text": " as standard.",
+									"_key": "k11",
+									"text": " in the design, not in a patch.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kf",
+							"_key": "k15",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
@@ -9099,37 +9805,375 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ke",
-									"text": "CI/CD as governance. Tests, static analysis and security validation before every deploy.",
+									"_key": "k13",
+									"text": "`CI/CD` is governance.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": " Tests, static analysis and security checks gate every deploy. You always know what runs on your servers, and why.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kh",
+							"_key": "k1e",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "k18",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/"
+								},
+								{
+									"_key": "k1b",
+									"_type": "link",
+									"href": "/en/cdn-waf-edge-security-cloudflare"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kg",
-									"text": "Security gets compiled in. Spring Security in the code, Cloudflare's WAF in front.",
+									"_key": "k16",
+									"text": "Security gets compiled in.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": " Fine-grained access control in the code, and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "Cloudflare",
+									"marks": [
+										"k18"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": "'s ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "`WAF`",
+									"marks": [
+										"k1b"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": " in front.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "kj",
+							"_key": "k1g",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ki",
+									"_key": "k1f",
+									"text": "Greenfield ≠ blank page",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": "We never start from zero, and we don't let an AI do it either. For every technology frame we maintain our own working *framework*: project skeleton, conventions, environments, quality and deployment solved before the first line of business logic.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1r",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1l",
+									"_type": "link",
+									"href": "https://cloud.google.com/run"
+								},
+								{
+									"_key": "k1o",
+									"_type": "link",
+									"href": "https://cloud.google.com/functions"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "`Python` on Google Cloud.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1k",
+									"text": " Services and functions on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": "Cloud Run",
+									"marks": [
+										"k1l"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": "Cloud Functions",
+									"marks": [
+										"k1o"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": ", with the same scaffolding for environments, credentials and tests in every project.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1x",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1u",
+									"_type": "link",
+									"href": "/en/systems-integration"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "`Quarkus` and `Camel` on `Docker`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": " Millisecond startup, ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": "integration",
+									"marks": [
+										"k1u"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": " built in, ready for any orchestrator.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k22",
+									"_type": "link",
+									"href": "https://karaf.apache.org/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "Publishing to `Karaf`.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": " For platforms that live on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "OSGi",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": " and deploy by *bundles* on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": "Karaf",
+									"marks": [
+										"k22"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": ", without stopping the rest of the system.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "You feel the difference on the second service. It reads like the first, deploys the same way, and anyone on the team can run it. Boring on purpose.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k29",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "AI multiplies. The framework steers.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "Maybe *greenfield* is where AI pays off most. It is certainly where it derails first. On a blank page, an agent delivers in hours what used to take weeks. Without a frame, every one of those hours is fresh debt.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2i",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2f",
+									"_type": "link",
+									"href": "/en/artificial-intelligence"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2c",
+									"text": "Our *frameworks* are that perimeter. The agent writes inside the rails, and an engineer signs every line that reaches ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "main",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": ". The full story is in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": "our AI vertical",
+									"marks": [
+										"k2f"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2h",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2k",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2j",
 									"text": "Your technical debt is our problem",
 									"marks": []
 								}
@@ -9137,20 +10181,42 @@
 						},
 						{
 							"_type": "block",
-							"_key": "km",
+							"_key": "k2m",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kk",
-									"text": "Three senior engineers. The same three. Whoever designs the system deploys it and answers for its stability. We don't hand over and vanish. We walk the transition with you and leave the knowledge in your house. ",
+									"_key": "k2l",
+									"text": "Whoever designs the system deploys it and answers for its stability. The same three senior engineers, from first *commit* to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.",
 									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2q",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2n",
+									"_type": "link",
+									"href": "/en/about-us"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2o",
+									"text": "**One team**",
+									"marks": [
+										"k2n"
+									]
 								},
 								{
 									"_type": "span",
-									"_key": "kl",
-									"text": "One team. Four verticals. Zero handoffs.",
+									"_key": "k2p",
+									"text": ". Six verticals. Zero handoffs.",
 									"marks": [
 										"strong"
 									]
@@ -9173,13 +10239,13 @@
 					"content": [
 						{
 							"_type": "block",
-							"_key": "b1",
+							"_key": "k1",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n1",
+									"_key": "k0",
 									"text": "La mayoría de los proyectos de IA muere en la demo. Un chatbot que no puede tocar el pedido, un copiloto que no ve el stock. Nosotros llegamos por el otro lado: primero los sistemas, luego el agente.",
 									"marks": []
 								}
@@ -9187,13 +10253,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b2",
+							"_key": "k3",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n2",
+									"_key": "k2",
 									"text": "IA con las manos en tu sistema",
 									"marks": []
 								}
@@ -9201,13 +10267,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b3",
+							"_key": "k5",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n3",
+									"_key": "k4",
 									"text": "Llevamos más de quince años integrando ERPs, catálogos y plataformas de datos, y eso nos deja algo mejor que un modelo. Nos deja el mapa. Un agente útil necesita leer el pedido en SAP, comprobar el stock en BigQuery y escribir el resultado donde tu equipo trabaja de verdad. Eso es integración, y es nuestra casa.",
 									"marks": []
 								}
@@ -9215,13 +10281,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b4",
+							"_key": "k7",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n4",
+									"_key": "k6",
 									"text": "Estamos construyendo esta vertical con la misma regla que el resto. Profundidad antes que amplitud, y nada en producción que no podamos explicar línea a línea.",
 									"marks": []
 								}
@@ -9229,13 +10295,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b5",
+							"_key": "k9",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n5",
+									"_key": "k8",
 									"text": "Esta página crecerá cuando haya casos que contar. Así trabajamos.",
 									"marks": []
 								}
@@ -9258,13 +10324,13 @@
 					"content": [
 						{
 							"_type": "block",
-							"_key": "b6",
+							"_key": "k1",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n6",
+									"_key": "k0",
 									"text": "Most AI projects die at the demo — a chatbot that can't touch the order, a copilot that can't see the stock. We come at it from the other side: systems first, agent second.",
 									"marks": []
 								}
@@ -9272,13 +10338,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b7",
+							"_key": "k3",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n7",
+									"_key": "k2",
 									"text": "AI with its hands in your system",
 									"marks": []
 								}
@@ -9286,13 +10352,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b8",
+							"_key": "k5",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n8",
+									"_key": "k4",
 									"text": "Fifteen-plus years integrating ERPs, catalogues and data platforms left us with something better than a model: the map. A useful agent needs to read the order in SAP, check stock in BigQuery and write the result where your team actually works. That is integration — and integration is home ground for us.",
 									"marks": []
 								}
@@ -9300,13 +10366,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b9",
+							"_key": "k7",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n9",
+									"_key": "k6",
 									"text": "We are building this practice under the same rule as the rest: depth before breadth, and nothing in production we cannot explain line by line.",
 									"marks": []
 								}
@@ -9314,13 +10380,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "b10",
+							"_key": "k9",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "n10",
+									"_key": "k8",
 									"text": "This page will grow as there are cases worth telling. That is how we work.",
 									"marks": []
 								}
