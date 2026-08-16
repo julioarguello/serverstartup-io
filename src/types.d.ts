@@ -18,6 +18,8 @@ export interface SiteSettings {
 	repoUrl?: string;
 	whatsappEncoded?: string;
 	email?: string;
+	/* EN-locale address (hello@); ES pages and the shared footer use `email`. */
+	emailEn?: string;
 	whatsapp?: string;
 	defaultCtaLabel?: string;
 	contactWhatsappLabel?: string;

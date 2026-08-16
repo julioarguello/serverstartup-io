@@ -4,14 +4,16 @@
  * - Hero with h1 "Contacto"
  * - Content from CMS (intro text)
  * - Contact methods (WhatsApp, Teléfono, Email) — data from site settings.
- *   Phone/WhatsApp live base64-encoded in settings and are decoded on click,
- *   so the number never appears in static HTML, JSON-LD or crawlable text.
+ *   Phone/WhatsApp live base64-encoded in settings; the email is encoded here
+ *   at render time. All three decode on click, so neither number nor address
+ *   appears in static HTML, JSON-LD or crawlable text.
  */
-import { getEmDashEntry, getSiteSettings } from "emdash";
+import { getEmDashCollection, getEmDashEntry, getSiteSettings } from "emdash";
 import { PortableText } from "emdash/ui";
 import CubeEmblem from "../components/CubeEmblem.astro";
 import Base from "../layouts/Base.astro";
 import { contactJsonLd } from "../utils/jsonld";
+import { getUiLabels } from "../utils/ui-labels";
 import type { SiteSettings } from "../types";
 
 const locale = Astro.currentLocale || "es";
@@ -22,9 +24,29 @@ Astro.cache.set(cacheHint);
 const { title, content, excerpt } = entry.data;
 const settings = await getSiteSettings() as SiteSettings;
 
-const email = settings.email || "ventas@serverstartup.io";
+// Team faces come from the members collection (owned by the About page work,
+// #263) — photo when uploaded, initial-letter placeholder meanwhile.
+const { entries: members } = await getEmDashCollection("members", {
+	limit: 50,
+	orderBy: { title: "asc" },
+	locale,
+});
+
+// Content convention: the LAST block is the identity colophon rendered under
+// the contact methods ("Server Startup S.L. · …"); everything before it is
+// the intro above them.
+const blocks: any[] = content || [];
+const introBlocks = blocks.slice(0, -1);
+const colophonBlocks = blocks.slice(-1);
+
+const email = settings.email || "hola@serverstartup.io";
+const emailEncoded = btoa(email);
 const phoneEncoded = settings.phoneEncoded || "";
 const whatsappEncoded = settings.whatsappEncoded || "";
+
+// No roles by design — every member carries the same caption (founder, #272)
+const labels = await getUiLabels(locale);
+const engineerCaption = labels.get("footer_headings", "engineer_caption", "Ingeniero");
 
 // Contact method labels from site settings
 const whatsappLabel = settings.contactWhatsappLabel || "WhatsApp";
@@ -39,7 +61,6 @@ const emailLabel = settings.contactEmailLabel || "Email";
 	<script type="application/ld+json" set:html={JSON.stringify(contactJsonLd({
 		siteUrl: Astro.site?.origin!,
 		description: excerpt || `${title} — Server Startup`,
-		email,
 	}))} />
 	<div class="s-emblem-bg" aria-hidden="true">
 		<CubeEmblem color="var(--color-primary)" faceKey="contacto" size={340} />
@@ -49,15 +70,35 @@ const emailLabel = settings.contactEmailLabel || "Email";
 		<div class="container s-contact__inner">
 			<CubeEmblem class="s-emblem-mini" color="var(--color-primary)" faceKey="contacto" size={104} />
 			<h1>{title}</h1>
-			{content && (
+			{introBlocks.length > 0 && (
 				<div class="s-contact__content">
-					<PortableText value={content} />
+					<PortableText value={introBlocks} />
 				</div>
+			)}
+
+			{members.length > 0 && (
+				<ul class="s-contact__team" role="list">
+					{members.map((m) => (
+						<li class="s-contact__person">
+							<div class="s-contact__avatar">
+								{m.data.featured_image?.src
+									? <img src={m.data.featured_image.src} alt={m.data.title} loading="lazy" />
+									: <span aria-hidden="true">{m.data.title?.charAt(0) || "?"}</span>
+								}
+							</div>
+							<span class="s-contact__person-name">{m.data.title}</span>
+							<span class="s-contact__person-caption">{engineerCaption}</span>
+						</li>
+					))}
+				</ul>
 			)}
 
 			<ul class="s-contact__methods" role="list">
 				{whatsappEncoded && (
 					<li><button type="button" class="s-contact__method" data-wa={whatsappEncoded} aria-label={whatsappLabel}>
+						<svg class="s-contact__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+						</svg>
 						<span class="s-contact__method-label">{whatsappLabel}</span>
 						<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 							<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -67,6 +108,9 @@ const emailLabel = settings.contactEmailLabel || "Email";
 
 				{phoneEncoded && (
 					<li><button type="button" class="s-contact__method" data-tel={phoneEncoded} aria-label={phoneLabel}>
+						<svg class="s-contact__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+						</svg>
 						<span class="s-contact__method-label">{phoneLabel}</span>
 						<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 							<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -74,21 +118,31 @@ const emailLabel = settings.contactEmailLabel || "Email";
 					</button></li>
 				)}
 
-				<li><a href={`mailto:${email}`} class="s-contact__method">
+				<li><button type="button" class="s-contact__method" data-mail={emailEncoded} aria-label={emailLabel}>
+					<svg class="s-contact__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<rect width="20" height="16" x="2" y="4" rx="2"/>
+						<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+					</svg>
 					<span class="s-contact__method-label">{emailLabel}</span>
 					<svg class="s-contact__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
-					<span class="s-contact__method-value">{email}</span>
-				</a></li>
+				</button></li>
 			</ul>
+
+			{colophonBlocks.length > 0 && (
+				<div class="s-contact__colophon">
+					<PortableText value={colophonBlocks} />
+				</div>
+			)}
 		</div>
 	</section>
 	<script>
-		for (const el of document.querySelectorAll<HTMLElement>("[data-tel],[data-wa]")) {
+		for (const el of document.querySelectorAll<HTMLElement>("[data-tel],[data-wa],[data-mail]")) {
 			el.addEventListener("click", () => {
 				if (el.dataset.tel) location.href = "tel:" + atob(el.dataset.tel);
 				else if (el.dataset.wa) window.open("https://wa.me/" + atob(el.dataset.wa), "_blank", "noopener");
+				else if (el.dataset.mail) location.href = "mailto:" + atob(el.dataset.mail);
 			});
 		}
 	</script>

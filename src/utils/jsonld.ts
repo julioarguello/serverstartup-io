@@ -131,10 +131,10 @@ export function aboutJsonLd(opts: AboutJsonLdOptions) {
 export interface ContactJsonLdOptions {
 	siteUrl: string;
 	description: string;
-	/* Deliberately optional and normally omitted: a phone in JSON-LD is
-	   indexed by search engines, defeating the click-to-decode obfuscation. */
+	/* Deliberately optional and normally omitted: a phone or email in JSON-LD
+	   is indexed by search engines, defeating the click-to-decode obfuscation. */
 	phone?: string;
-	email: string;
+	email?: string;
 }
 
 export function contactJsonLd(opts: ContactJsonLdOptions) {
@@ -145,7 +145,7 @@ export function contactJsonLd(opts: ContactJsonLdOptions) {
 		description: opts.description,
 		url: opts.siteUrl,
 		...(opts.phone && { telephone: opts.phone }),
-		email: opts.email,
+		...(opts.email && { email: opts.email }),
 		contactPoint: [{
 			"@type": "ContactPoint",
 			...(opts.phone && { telephone: opts.phone }),

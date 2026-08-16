@@ -11,7 +11,8 @@
 		"tagline": "Ingeniería de sistemas, integración y seguridad edge",
 		"phone": "",
 		"phoneDisplay": "",
-		"email": "ventas@serverstartup.io",
+		"email": "hola@serverstartup.io",
+		"emailEn": "hello@serverstartup.io",
 		"repoUrl": "https://github.com/julioarguello/serverstartup-io",
 		"phoneEncoded": "KzM0NjY1ODU5NTEw",
 		"whatsappEncoded": "MzQ2NjU4NTk1MTA=",
@@ -1149,6 +1150,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "engineer_caption",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ingeniero"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "services_title",
 							"children": [
 								{
@@ -2277,6 +2289,17 @@
 								{
 									"_type": "span",
 									"text": "Trusted by"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "engineer_caption",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Engineer"
 								}
 							]
 						},
@@ -9581,8 +9604,8 @@
 				"slug": "contacto",
 				"status": "published",
 				"data": {
-					"title": "Contacto",
-					"excerpt": "Hablemos de tu proyecto. Te responde uno de los tres ingenieros, sin comerciales de por medio.",
+					"title": "Hablemos",
+					"excerpt": "Escríbenos por WhatsApp, teléfono o email. Te responde Daniel, Ignacio o Julio, sin comerciales de por medio.",
 					"content": [
 						{
 							"_type": "block",
@@ -9590,18 +9613,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Escríbenos. Te responde uno de los tres ingenieros, "
-								},
-								{
-									"_type": "span",
-									"text": "porque no hay nadie más",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": "."
+									"text": "Escríbenos. Te responde Daniel, Ignacio o Julio."
 								}
 							]
 						},
@@ -9611,7 +9623,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cuéntanos qué se te rompe, qué quieres montar o qué te preocupa del sistema que ya tienes. Una respuesta honesta no compromete a nada."
+									"text": "Si corre prisa, WhatsApp. Si puede esperar, email."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Un equipo. Seis verticales. Cero traspasos."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server Startup S.L. · Bizkaia · desde 2019."
 								}
 							]
 						}
@@ -10519,8 +10551,8 @@
 				"locale": "en",
 				"translationOf": "page-contacto",
 				"data": {
-					"title": "Contact",
-					"excerpt": "Let's talk. One of the three engineers answers, with no salespeople in between.",
+					"title": "Let's talk",
+					"excerpt": "Reach us on WhatsApp, by phone or by email. Daniel, Ignacio or Julio answers, with no salespeople in between.",
 					"content": [
 						{
 							"_type": "block",
@@ -10528,18 +10560,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Write to us. One of the three engineers answers, "
-								},
-								{
-									"_type": "span",
-									"text": "because there is no one else",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"text": "."
+									"text": "Write to us. Daniel, Ignacio or Julio answers."
 								}
 							]
 						},
@@ -10549,7 +10570,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tell us what's breaking, what you want to build, or what worries you about the system you already run. An honest answer costs nothing."
+									"text": "If it's urgent, WhatsApp. If it can wait, email."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "One team. Six verticals. Zero handoffs."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Server Startup S.L. · Bizkaia, Spain · since 2019."
 								}
 							]
 						}

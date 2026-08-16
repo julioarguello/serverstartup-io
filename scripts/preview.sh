@@ -63,7 +63,7 @@ case "$CMD" in
 		start_server
 		D1_DB=""
 		for _ in $(seq 1 120); do
-			D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqlite" 2>/dev/null | head -1)
+			D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqlite" 2>/dev/null | head -1 || true)
 			[ -n "$D1_DB" ] && [ "$(probe)" != "000" ] && break
 			sleep 1
 		done
