@@ -10,7 +10,6 @@ import PtLink from "../../components/PtLink.astro";
 const ptComponents = { mark: { link: PtLink } };
 import CubeEmblem from "../../components/CubeEmblem.astro";
 import Base from "../../layouts/Base.astro";
-import { getUiLabels } from "../../utils/ui-labels";
 import { aboutJsonLd } from "../../utils/jsonld";
 const t = Astro.locals.t;
 
@@ -28,8 +27,6 @@ const { entries: members } = await getEmDashCollection("members", {
 	locale,
 });
 
-const labels = await getUiLabels(locale);
-const teamHeading = labels.get("footer_headings", "team_title", "~ The team");
 
 // Split content on h2 boundaries: hero (before 1st h2), history (1st h2 + its
 // blocks), today (2nd h2), values (3rd h2 onward). Each section keeps its h2 so
@@ -39,14 +36,31 @@ const heroBlocks: any[] = [];
 const historyBlocks: any[] = [];
 const hoyBlocks: any[] = [];
 const valuesBlocks: any[] = [];
+const sponsorBlocks: any[] = [];
 let h2Count = 0;
 for (const block of content || []) {
 	if (block._type === 'block' && block.style === 'h2') h2Count++;
 	if (h2Count === 0) heroBlocks.push(block);
 	else if (h2Count === 1) historyBlocks.push(block);
 	else if (h2Count === 2) hoyBlocks.push(block);
-	else valuesBlocks.push(block);
+	else if (h2Count === 3) valuesBlocks.push(block);
+	else sponsorBlocks.push(block);
 }
+
+// The history's closing blockquote renders as a custom figure (logo + text);
+// the sponsor group's LAST block is the photo's figcaption — keep it last in
+// the CMS content.
+const historyConclusion =
+	historyBlocks.at(-1)?.style === "blockquote"
+		? { ...historyBlocks.at(-1), style: "normal" }
+		: null;
+const historyMain = historyConclusion ? historyBlocks.slice(0, -1) : historyBlocks;
+
+// Accessible name for the photo link, sourced from the CMS caption itself
+// (an anchor whose only child is an alt="" image has no name — WCAG H30).
+const sponsorCaption = (sponsorBlocks.at(-1)?.children ?? [])
+	.map((s: any) => s.text ?? "")
+	.join("");
 
 // The boot line (code-marked first block) renders inside a terminal window
 // that echoes the integration instrument; the rest of the hero is plain intro.
@@ -97,24 +111,31 @@ const introBlocks = bootBlocks.length ? heroBlocks.slice(1) : heroBlocks;
 	{historyBlocks.length > 0 && (
 		<section id="history" class="s-history">
 			<div class="container s-history__inner">
-				<PortableText value={historyBlocks} components={ptComponents} />
+				<PortableText value={historyMain} components={ptComponents} />
+				{historyConclusion && (
+					<blockquote class="s-history__conclusion">
+						<svg class="s-history__logo" viewBox="0 0 68 68" aria-hidden="true">
+					<path d="M17.7764 3.94218C33.9811 6.8248 50.1858 9.70743 59.1352 11.2994C62.8739 11.9645 64.4148 14.1728 63.758 17.9244C62.0299 27.7959 60.3028 37.6615 56.4924 59.4268C55.8357 63.1785 53.638 64.7217 49.8993 64.0567C35.821 61.5523 21.7484 59.049 8.5405 56.6994C4.80185 56.0344 3.26091 53.826 3.91769 50.0744C5.57605 40.6015 7.23544 31.1228 11.1833 8.57203C11.8401 4.8204 14.0378 3.27712 17.7764 3.94218Z" fill="#1E1E1E"></path>
+					<path d="M12.8495 7.19339C28.6413 7.19339 44.4332 7.19339 54.8188 7.19339C58.6127 7.19339 60.5096 9.09949 60.5096 12.9117C60.5096 21.8048 60.5096 30.6979 60.5096 55.0841C60.5096 58.8963 58.6127 60.8024 54.8188 60.8024C45.1445 60.8024 35.4702 60.8024 12.8495 60.8024C9.05561 60.8024 7.15869 58.8963 7.15869 55.0841C7.15869 42.7659 7.15869 30.4478 7.15869 12.9117C7.15869 9.09949 9.05561 7.19339 12.8495 7.19339Z" fill="#CED4DA"></path>
+					<path d="M56.2081 19.6566C56.1606 19.6209 56.1073 19.5971 56.048 19.5732L34.1445 10.7635C33.9489 10.6861 33.7236 10.6861 33.528 10.7635L11.6186 19.5851C11.5652 19.609 11.5119 19.6328 11.4645 19.6685C11.2392 19.8234 11.0969 20.0795 11.0969 20.3595V46.89C11.0969 47.2295 11.3044 47.5392 11.6186 47.6643L33.528 56.4681C33.6288 56.5098 33.7296 56.5277 33.8363 56.5277C33.9845 56.5277 34.1327 56.486 34.2571 56.4086L56.048 47.6524C56.3622 47.5273 56.5697 47.2176 56.5697 46.8781V20.3476C56.5697 20.0736 56.4333 19.8115 56.2081 19.6566ZM43.9314 37.8062L34.6662 41.2134V29.7172L43.9077 26.0003L43.9314 37.8062ZM44.7673 23.8619L36.3023 19.8115L43.884 16.4758L53.5109 20.3476L44.7673 23.8619ZM54.9099 21.5806V33.7737L45.5912 37.1987L45.5675 25.3392L54.9099 21.5806ZM33.8363 12.4373L41.7203 15.6062L34.3164 18.8644L26.7999 15.2666L33.8363 12.4373ZM22.0576 50.0589L12.7627 46.3241V35.5606L22.0813 38.9856L22.0576 50.0589ZM22.0813 37.2106L12.7627 33.7856V21.5925L22.105 25.3511L22.0813 37.2106ZM14.1616 20.3595L24.7014 16.1125L32.3009 19.746L22.9171 23.8739L14.1616 20.3595ZM33.0064 54.4608L23.7114 50.726L23.7352 39.5932L33.0064 43.0004V54.4608ZM33.0064 41.2253L23.7411 37.8182L23.7648 26.0123L33.0064 29.7292V41.2253ZM25.0808 24.7495L34.2868 20.699L42.6688 24.7078L33.8244 28.2638L25.0808 24.7495ZM34.6662 42.9884L43.9374 39.5813L43.9611 50.7141L34.6662 54.4488V42.9884ZM45.615 50.047L45.5912 38.9737L54.9099 35.5487V46.3122L45.615 50.047Z" fill="#1E1E1E"></path>
+				</svg>
+						<div>
+							<PortableText value={[historyConclusion]} components={ptComponents} />
+						</div>
+					</blockquote>
+				)}
 			</div>
 		</section>
 	)}
 
-	<!-- ══════ TODAY — dark bg ══════ -->
-	{hoyBlocks.length > 0 && (
-		<section class="s-values">
-			<div class="container s-values__inner">
-				<PortableText value={hoyBlocks} components={ptComponents} />
-			</div>
-		</section>
-	)}
-
-	<!-- ══════ TEAM — dark bg, 3-col grid ══════ -->
+	<!-- ══════ TEAM — light band: CMS intro (h2) + photo grid ══════ -->
 	<section class="s-team" aria-label={t("team_section")}>
 		<div class="container s-team__inner">
-			<h2>{teamHeading}</h2>
+			{hoyBlocks.length > 0 && (
+				<div class="s-team__intro">
+					<PortableText value={hoyBlocks} components={ptComponents} />
+				</div>
+			)}
 			<ul class="s-team__grid" role="list">
 				{members.map((member) => (
 					<li class="team-card">
@@ -142,6 +163,25 @@ const introBlocks = bootBlocks.length ? heroBlocks.slice(1) : heroBlocks;
 		<section class="s-values" aria-label={t("values_section")}>
 			<div class="container s-values__inner">
 				<PortableText value={valuesBlocks} components={ptComponents} />
+			</div>
+		</section>
+	)}
+
+	<!-- ══════ SPONSOR — light band: grassroots sport (last block = figcaption) ══════ -->
+	{sponsorBlocks.length > 1 && (
+		<section class="s-sponsor">
+			<div class="container s-sponsor__inner">
+				<PortableText value={sponsorBlocks.slice(0, -1)} components={ptComponents} />
+				<div class="s-sponsor__media">
+					<figure class="s-sponsor__figure">
+						<a href="https://www.instagram.com/p/DSflABTjB0P/" target="_blank" rel="noopener noreferrer" aria-label={sponsorCaption}>
+							<img src="/assets/urdaneta-infantil.webp" alt="" width="1200" height="900" loading="lazy" />
+						</a>
+						<figcaption>
+							<PortableText value={sponsorBlocks.slice(-1)} components={ptComponents} />
+						</figcaption>
+					</figure>
+				</div>
 			</div>
 		</section>
 	)}

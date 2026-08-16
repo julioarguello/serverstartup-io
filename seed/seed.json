@@ -6668,7 +6668,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Hoy"
+									"text": "~ El equipo"
 								}
 							]
 						},
@@ -6752,16 +6752,6 @@
 									"_type": "link",
 									"_key": "svc-dbt",
 									"href": "/big-data-cloud-analytics"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Fuera de producción, patrocinamos deporte base. Equipos de cantera y un campeonato provincial en la temporada 2026/27."
 								}
 							]
 						},
@@ -6870,6 +6860,59 @@
 									"marks": [
 										"strong"
 									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Con el deporte base"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Patrocinamos deporte base. Equipos de cantera y un campeonato provincial en la temporada 2026/27."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Infantil masculino del Urdaneta. Campeón provincial de Bizkaia 2024/25 y subcampeón 2025/26."
+								},
+								{
+									"_type": "span",
+									"text": " Foto: "
+								},
+								{
+									"_type": "span",
+									"marks": [
+										"ig"
+									],
+									"text": "el club en Instagram"
+								},
+								{
+									"_type": "span",
+									"text": "."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "ig",
+									"href": "https://www.instagram.com/p/DSflABTjB0P/",
+									"blank": true
 								}
 							]
 						}
@@ -7562,7 +7605,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Today"
+									"text": "~ The team"
 								}
 							]
 						},
@@ -7646,16 +7689,6 @@
 									"_type": "link",
 									"_key": "svc-dbt",
 									"href": "/en/big-data-cloud-analytics"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Off the clock, we sponsor grassroots sport. Youth teams, and the 2026/27 provincial championship."
 								}
 							]
 						},
@@ -7764,6 +7797,59 @@
 									"marks": [
 										"strong"
 									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Backing grassroots sport"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We sponsor grassroots sport. Youth teams and the 2026/27 provincial championship."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Urdaneta under-14 boys. Bizkaia provincial champions 2024/25 and runners-up 2025/26."
+								},
+								{
+									"_type": "span",
+									"text": " Photo: "
+								},
+								{
+									"_type": "span",
+									"marks": [
+										"ig"
+									],
+									"text": "the club on Instagram"
+								},
+								{
+									"_type": "span",
+									"text": "."
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "ig",
+									"href": "https://www.instagram.com/p/DSflABTjB0P/",
+									"blank": true
 								}
 							]
 						}
