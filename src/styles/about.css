@@ -21,6 +21,7 @@
 /* content links: thin dashed underline, solid on hover (founder 2026-08-15) */
 .s-hero__body a,
 .s-history__inner a,
+.s-team__intro a,
 .s-values__inner a {
 	color: inherit;
 	text-decoration: underline;
@@ -32,6 +33,7 @@
 
 .s-hero__body a:hover,
 .s-history__inner a:hover,
+.s-team__intro a:hover,
 .s-values__inner a:hover {
 	text-decoration-style: solid;
 	text-decoration-color: currentColor;
@@ -49,6 +51,28 @@
 
 .s-team__inner h2 {
 	margin-bottom: 40px;
+}
+
+/* CMS intro of the team section (renamed from Hoy): dark-on-light body text */
+.s-team__intro p {
+	max-width: 700px;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 30px;
+}
+
+.s-team__intro p + p {
+	margin-top: 22px;
+}
+
+.s-team__intro p strong {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 4px;
+}
+
+.s-team__intro + .s-team__grid {
+	margin-top: 44px;
 }
 
 /* mobile: compact rows — square photo left, name/role right. Three tidy
@@ -189,8 +213,29 @@
 }
 
 /* the closing thought (the cube) — highlighted conclusion.
-   NOTE: the PT renderer puts text directly inside <blockquote> (no inner <p>),
-   so typography lives on the blockquote element itself. */
+   Rendered by the template as a custom blockquote: logo cube left, text right
+   (founder: the original logo, sized to match the text block). */
+.s-history__conclusion {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 26px;
+	align-items: center;
+}
+
+.s-history__logo {
+	width: 92px;
+	height: 92px;
+}
+
+.s-history__conclusion p {
+	margin: 0;
+}
+
+@media (max-width: 480px) {
+	.s-history__logo { width: 60px; height: 60px; }
+	.s-history__conclusion { gap: 18px; }
+}
+
 .s-history__inner blockquote {
 	margin: 48px 0 0;
 	padding: 24px 28px;
@@ -317,6 +362,51 @@
 	margin: 0;
 }
 
+/* ═══ SPONSOR — light band: grassroots sport ═══ */
+.s-sponsor {
+	padding: 60px 0 80px;
+}
+
+/* deliberately quieter than the page's other section headings (founder) */
+.s-sponsor__inner h2 {
+	font-size: 24px;
+	line-height: 1.2;
+	margin-bottom: 20px;
+}
+
+.s-sponsor__inner p {
+	max-width: 700px;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 30px;
+}
+
+.s-sponsor__media {
+	margin-top: 36px;
+	max-width: 680px;
+}
+
+.s-sponsor__figure {
+	margin: 0;
+}
+
+.s-sponsor__figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.s-sponsor__figure figcaption p {
+	margin-top: 10px;
+	font-family: var(--font-family-mono);
+	font-size: 13px;
+	line-height: 1.6;
+	font-weight: 400;
+	color: #70757a;
+	max-width: none;
+}
+
+
 .s-values__inner p {
 	color: var(--color-secondary);
 	max-width: 700px;
@@ -334,6 +424,7 @@
 	.s-hero__body,
 	.s-history__inner p,
 	.s-history__inner blockquote,
+	.s-team__intro p,
 	.s-values__inner p {
 		max-width: 880px;
 	}
