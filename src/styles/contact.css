@@ -29,38 +29,124 @@
 	line-height: 28px;
 }
 
-/* ── Contact methods ── */
-.s-contact__methods {
+/* ── Team row — the three engineers who answer: photo (or initial-letter
+   placeholder until photos are uploaded) + name + role. ── */
+.s-contact__team {
 	display: flex;
-	flex-direction: column;
-	gap: 8px;
+	flex-wrap: wrap;
+	gap: 20px 32px;
+	margin-bottom: 40px;
 }
 
-/* mobile: structured tappable rows — label · value (ellipsized) · arrow
-   right. The old stacked column left orphaned arrows on their own line
-   (#240). Desktop restores the airy column composition below. */
-.s-contact__method {
+.s-contact__person {
+	display: grid;
+	grid-template-columns: 56px auto;
+	grid-template-rows: auto auto;
+	column-gap: 12px;
+	align-items: center;
+}
+
+/* avatar spans both rows so name and caption stack in the text column */
+.s-contact__avatar {
+	grid-row: 1 / 3;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	overflow: hidden;
 	display: flex;
 	align-items: center;
-	gap: 10px;
-	min-height: 52px;
-	padding: 12px 2px;
-	border-top: 1px solid #ececec;
-	text-decoration: none;
+	justify-content: center;
+	background: var(--color-surface);
+	border: 1.5px solid var(--color-primary);
+	font-family: var(--font-family);
+	font-size: 22px;
+	font-weight: 700;
 	color: var(--color-primary);
-	transition: color 0.2s;
 }
 
-.s-contact__methods > li:last-child .s-contact__method {
-	border-bottom: 1px solid #ececec;
+.s-contact__avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
-.s-contact__method:hover {
+.s-contact__person-name {
+	align-self: end;
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+}
+
+.s-contact__person-caption {
+	align-self: start;
+	font-family: var(--font-family);
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 18px;
+	/* 0.7 on white ≈ #626262 — clears 4.5:1 */
 	color: rgba(30, 30, 30, 0.7);
 }
 
+/* ── Identity colophon under the methods — quiet, factual ── */
+.s-contact__colophon {
+	margin-top: 32px;
+}
+
+.s-contact__colophon p {
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 22px;
+	color: rgba(30, 30, 30, 0.7);
+}
+
+/* ── Contact methods — one card per channel: icon · label · arrow.
+   The card border anchors the right-aligned arrow; without it the arrow
+   floats orphaned in whitespace (founder, #272). ── */
+.s-contact__methods {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	/* Hug the content: icon + short label + arrow. Wider cards leave a
+	   dead span between label and arrow (founder, #272). */
+	max-width: 340px;
+}
+
+/* Same chrome as the homepage face-cards: white face, ink border, flat
+   lift on hover. */
+.s-contact__method {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	min-height: 60px;
+	padding: 16px 20px;
+	background: var(--color-secondary);
+	border: 1.5px solid var(--color-primary);
+	border-radius: 6px;
+	text-decoration: none;
+	color: var(--color-primary);
+	transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.s-contact__method:hover,
+.s-contact__method:focus-visible {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 0 var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.s-contact__method { transition: none; }
+	.s-contact__method:hover { transform: none; }
+}
+
+.s-contact__icon {
+	flex: none;
+	width: 24px;
+	height: 24px;
+}
+
 .s-contact__method-label {
-	order: 1;
 	flex: none;
 	font-family: var(--font-family);
 	font-size: 18px;
@@ -68,80 +154,55 @@
 	line-height: 24px;
 }
 
-.s-contact__method-value {
-	order: 2;
-	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font-family: var(--font-family);
-	font-size: 16px;
-	font-weight: 300;
-	/* 0.7, not lighter: 16px text on white needs >=4.5:1 (0.6 = 4.04:1, failed the gate) */
-	color: rgba(30, 30, 30, 0.7);
-}
-
 .s-contact__arrow {
-	order: 3;
 	flex: none;
 	width: 22px;
 	height: 22px;
 	margin-left: auto;
+	transition: transform 0.2s;
+}
+
+.s-contact__method:hover .s-contact__arrow {
+	transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.s-contact__arrow { transition: none; }
+	.s-contact__method:hover .s-contact__arrow { transform: none; }
 }
 
 @media (min-width: 768px) {
 	.s-contact {
-		padding: 0;
+		/* Keep the vertical centering, but reserve the fixed-header band:
+		   with the team row + colophon the page is tall enough to slide
+		   under it otherwise. */
+		padding: calc(80px + 24px) 0 40px;
 		min-height: calc(100vh - 200px);
 		display: flex;
 		align-items: center;
 	}
 
-	.s-contact__methods {
-		flex-direction: row;
-		gap: 48px;
-	}
-
 	.s-contact__method {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 0;
-		min-height: 0;
-		padding: 0;
-		border-top: 0;
-	}
-
-	.s-contact__methods > li:last-child .s-contact__method {
-		border-bottom: 0;
+		min-height: 64px;
+		padding: 18px 22px;
 	}
 
 	.s-contact__method-label {
-		order: 0;
+		font-size: 20px;
 	}
 
 	.s-contact__arrow {
-		order: 0;
 		width: 24px;
 		height: 24px;
-		margin: 4px 0;
-		margin-left: 0;
-	}
-
-	.s-contact__method-value {
-		order: 0;
-		white-space: normal;
-		overflow: visible;
-		font-size: 20px;
-		line-height: 26px;
-		color: inherit;
 	}
 }
 
-/* Contact methods rendered as <button> (click-to-decode phone/WhatsApp)
-   must sit identically to their <a> siblings. */
+/* Methods render as <button> (click-to-decode). Neutralize only the UA
+   button styles; background and border come from .s-contact__method — a
+   `background: none; border: 0` here outspecifies the card rule and
+   silently strips its chrome. */
 button.s-contact__method {
-	background: none;
-	border: 0;
+	appearance: none;
 	font: inherit;
 	color: inherit;
 	text-align: inherit;
