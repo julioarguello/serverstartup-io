@@ -4017,9 +4017,15 @@
 					"content": [
 						{
 							"_type": "block",
-							"_key": "k7",
+							"_key": "kc",
 							"style": "normal",
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "k7",
+									"_type": "link",
+									"href": "https://www.enterpriseintegrationpatterns.com/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
@@ -4066,20 +4072,82 @@
 								{
 									"_type": "span",
 									"_key": "k6",
-									"text": " y sistemas *legacy* intocables. Abordamos la integración con una regla: observabilidad absoluta. Si un flujo falla, la traza revela exactamente *dónde*, *cuándo* y *por qué*.",
+									"text": " y sistemas *legacy* intocables. Abordamos cada flujo con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "patrones de integración empresarial",
+									"marks": [
+										"k7"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": " (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "EIP",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": ") y con una regla: observabilidad absoluta. Si un flujo falla, la traza revela exactamente *dónde*, *cuándo* y *por qué*.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k9",
+							"_key": "kh",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "ke",
+									"_type": "link",
+									"href": "/big-data-cloud-analytics"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "Conectamos, además, los sistemas operacionales con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kf",
+									"text": "los analíticos",
+									"marks": [
+										"ke"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": ", cerrando el ciclo del dato.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k8",
+									"_key": "ki",
 									"text": "Conector ≠ Sistema integrado",
 									"marks": []
 								}
@@ -4087,19 +4155,19 @@
 						},
 						{
 							"_type": "block",
-							"_key": "kf",
+							"_key": "kp",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ka",
+									"_key": "kk",
 									"text": "Un simple *script* punto-a-punto es frágil. Una integración profesional de verdad ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kb",
+									"_key": "kl",
 									"text": "desacopla sistemas",
 									"marks": [
 										"strong"
@@ -4107,13 +4175,13 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kc",
+									"_key": "km",
 									"text": ": enruta inteligentemente, transforma al vuelo y aísla los fallos. Si el ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kd",
+									"_key": "kn",
 									"text": "ERP",
 									"marks": [
 										"code"
@@ -4121,7 +4189,7 @@
 								},
 								{
 									"_type": "span",
-									"_key": "ke",
+									"_key": "ko",
 									"text": " se cae, los pedidos se encolan en *standby* y se procesan al volver. Cero pérdida de datos.",
 									"marks": []
 								}
@@ -4129,31 +4197,36 @@
 						},
 						{
 							"_type": "block",
-							"_key": "kt",
+							"_key": "k16",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "ki",
+									"_key": "ks",
 									"_type": "link",
 									"href": "https://camel.apache.org/"
 								},
 								{
-									"_key": "kl",
+									"_key": "kv",
 									"_type": "link",
 									"href": "https://karaf.apache.org/"
 								},
 								{
-									"_key": "kq",
+									"_key": "k10",
 									"_type": "link",
 									"href": "https://camel.apache.org/camel-quarkus/"
+								},
+								{
+									"_key": "k13",
+									"_type": "link",
+									"href": "https://pebbletemplates.io/"
 								}
 							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kg",
+									"_key": "kq",
 									"text": "Patrones `EIP` y Orquestación",
 									"marks": [
 										"strong"
@@ -4161,41 +4234,41 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kh",
+									"_key": "kr",
 									"text": ": Enrutamiento complejo con ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kj",
+									"_key": "kt",
 									"text": "Apache Camel",
 									"marks": [
-										"ki"
+										"ks"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "kk",
+									"_key": "ku",
 									"text": ", desplegado sobre ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "km",
+									"_key": "kw",
 									"text": "Karaf",
 									"marks": [
-										"kl"
+										"kv"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "kn",
+									"_key": "kx",
 									"text": " (aislamiento ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "ko",
+									"_key": "ky",
 									"text": "OSGi",
 									"marks": [
 										"code"
@@ -4203,50 +4276,59 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kp",
+									"_key": "kz",
 									"text": ") o ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kr",
+									"_key": "k11",
 									"text": "Quarkus",
 									"marks": [
-										"kq"
+										"k10"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "ks",
-									"text": " (arranque sub-milisegundo). Implementamos consumidores idempotentes sin «cajas negras».",
+									"_key": "k12",
+									"text": ". Implementamos consumidores idempotentes sin «cajas negras». Y cuando el conector no existe, lo escribimos. Mantenemos un componente propio de Camel para el motor de plantillas ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": "Pebble",
+									"marks": [
+										"k13"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": ".",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k18",
+							"_key": "k1i",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "kw",
-									"_type": "link",
-									"href": "https://kafka.apache.org/"
-								},
-								{
-									"_key": "kz",
+									"_key": "k19",
 									"_type": "link",
 									"href": "https://activemq.apache.org/components/artemis/"
 								},
 								{
-									"_key": "k12",
+									"_key": "k1c",
 									"_type": "link",
 									"href": "https://cloud.google.com/pubsub"
 								},
 								{
-									"_key": "k15",
+									"_key": "k1f",
 									"_type": "link",
 									"href": "https://developers.cloudflare.com/queues/"
 								}
@@ -4254,7 +4336,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ku",
+									"_key": "k17",
 									"text": "Mensajería Asíncrona y Eventos",
 									"marks": [
 										"strong"
@@ -4262,63 +4344,49 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kv",
+									"_key": "k18",
 									"text": ": *Backbones* tolerantes a fallos con ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kx",
-									"text": "Kafka",
-									"marks": [
-										"kw"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "ky",
-									"text": " y ",
-									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k10",
+									"_key": "k1a",
 									"text": "ActiveMQ Artemis",
 									"marks": [
-										"kz"
+										"k19"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k11",
+									"_key": "k1b",
 									"text": ", o servicios gestionados como ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k13",
+									"_key": "k1d",
 									"text": "Google Cloud Pub/Sub",
 									"marks": [
-										"k12"
+										"k1c"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k14",
+									"_key": "k1e",
 									"text": " y ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k16",
+									"_key": "k1g",
 									"text": "Cloudflare Queues",
 									"marks": [
-										"k15"
+										"k1f"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k17",
+									"_key": "k1h",
 									"text": ".",
 									"marks": []
 								}
@@ -4326,18 +4394,18 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k1h",
+							"_key": "k1r",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "k1b",
+									"_key": "k1l",
 									"_type": "link",
 									"href": "https://cloud.google.com/run"
 								},
 								{
-									"_key": "k1e",
+									"_key": "k1o",
 									"_type": "link",
 									"href": "https://workers.cloudflare.com/"
 								}
@@ -4345,7 +4413,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k19",
+									"_key": "k1j",
 									"text": "Cómputo `Serverless`",
 									"marks": [
 										"strong"
@@ -4353,35 +4421,35 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k1a",
+									"_key": "k1k",
 									"text": ": Lógica de integración elástica usando ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1c",
+									"_key": "k1m",
 									"text": "Google Cloud Run",
 									"marks": [
-										"k1b"
+										"k1l"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1d",
+									"_key": "k1n",
 									"text": " o directamente en el borde (*edge computing*) con ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1f",
+									"_key": "k1p",
 									"text": "Cloudflare Workers",
 									"marks": [
-										"k1e"
+										"k1o"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1g",
+									"_key": "k1q",
 									"text": ".",
 									"marks": []
 								}
@@ -4389,23 +4457,23 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k1t",
+							"_key": "k23",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "k1k",
+									"_key": "k1u",
 									"_type": "link",
 									"href": "https://hop.apache.org/"
 								},
 								{
-									"_key": "k1n",
+									"_key": "k1x",
 									"_type": "link",
 									"href": "https://www.talend.com/"
 								},
 								{
-									"_key": "k1q",
+									"_key": "k20",
 									"_type": "link",
 									"href": "https://cloud.google.com/dataflow"
 								}
@@ -4413,7 +4481,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k1i",
+									"_key": "k1s",
 									"text": "Data Engineering y `ETL`",
 									"marks": [
 										"strong"
@@ -4421,49 +4489,49 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k1j",
+									"_key": "k1t",
 									"text": ": Movimiento pesado de datos con ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1l",
+									"_key": "k1v",
 									"text": "Apache Hop",
 									"marks": [
-										"k1k"
+										"k1u"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1m",
+									"_key": "k1w",
 									"text": " o ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1o",
+									"_key": "k1y",
 									"text": "Talend",
 									"marks": [
-										"k1n"
+										"k1x"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1p",
+									"_key": "k1z",
 									"text": " para procesos *batch*, y canalizaciones unificadas con ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1r",
+									"_key": "k21",
 									"text": "Google Cloud Dataflow",
 									"marks": [
-										"k1q"
+										"k20"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1s",
+									"_key": "k22",
 									"text": ".",
 									"marks": []
 								}
@@ -4471,18 +4539,84 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k24",
+							"_key": "k2c",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "Diseño por contrato",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k25",
+									"text": ": El contrato antes que el código (*Contract First*, ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "OpenAPI",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k27",
+									"text": "), con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "OAuth 2.0",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k29",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "mTLS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2b",
+									"text": " desde el diseño, no como parche posterior.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2n",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "k1y",
+									"_key": "k2h",
 									"_type": "link",
 									"href": "https://www.gravitee.io/"
 								},
 								{
-									"_key": "k21",
+									"_key": "k2k",
 									"_type": "link",
 									"href": "https://developers.cloudflare.com/api-shield/"
 								}
@@ -4490,7 +4624,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k1u",
+									"_key": "k2d",
 									"text": "Gobierno de `APIs`",
 									"marks": [
 										"strong"
@@ -4498,13 +4632,13 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k1v",
+									"_key": "k2e",
 									"text": ": Exposición segura mediante soluciones de ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1w",
+									"_key": "k2f",
 									"text": "API Management",
 									"marks": [
 										"code"
@@ -4512,35 +4646,35 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k1x",
+									"_key": "k2g",
 									"text": " (como ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1z",
+									"_key": "k2i",
 									"text": "Gravitee",
 									"marks": [
-										"k1y"
+										"k2h"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k20",
+									"_key": "k2j",
 									"text": ") o ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k22",
+									"_key": "k2l",
 									"text": "Cloudflare API Shield",
 									"marks": [
-										"k21"
+										"k2k"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k23",
+									"_key": "k2m",
 									"text": ".",
 									"marks": []
 								}
@@ -4548,7 +4682,7 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k29",
+							"_key": "k2s",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
@@ -4556,21 +4690,21 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k25",
-									"text": "Observabilidad 360º",
+									"_key": "k2o",
+									"text": "Observabilidad",
 									"marks": [
 										"strong"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k26",
+									"_key": "k2p",
 									"text": ": Logs y métricas centralizadas en ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k27",
+									"_key": "k2q",
 									"text": "`ELK`",
 									"marks": [
 										"strong"
@@ -4578,7 +4712,7 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k28",
+									"_key": "k2r",
 									"text": " (Elasticsearch, Logstash, Kibana). Trazabilidad exacta de cada mensaje, *de extremo a extremo*.",
 									"marks": []
 								}
@@ -4586,13 +4720,142 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k2b",
+							"_key": "k2u",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2a",
+									"_key": "k2t",
+									"text": "Ni PowerPoint ni copiar y pegar",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2w",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2v",
+									"text": "Diseñamos lo que se puede construir, y lo construimos nosotros. Sin florituras. Estudiamos cada caso y adoptamos la solución que mejor le encaja. Los patrones son el vocabulario común; la topología se dibuja sobre tus sistemas y tus ventanas de carga.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2y",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2x",
+									"text": "La IA acelera. El patrón manda.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k33",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k30",
+									"_type": "link",
+									"href": "/inteligencia-artificial"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2z",
+									"text": "Cada vez construimos más integración con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k31",
+									"text": "IA",
+									"marks": [
+										"k30"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k32",
+									"text": ". La diferencia entre acelerar y acumular deuda es el marco. Un agente sin restricciones resuelve el mismo problema de una forma distinta cada vez, y esa factura llega con el primer incidente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3b",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k35",
+									"_type": "link",
+									"href": "https://github.com/github/spec-kit"
+								},
+								{
+									"_key": "k38",
+									"_type": "link",
+									"href": "/inteligencia-artificial"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k34",
+									"text": "Nosotros practicamos ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k36",
+									"text": "*spec-driven development*",
+									"marks": [
+										"k35"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k37",
+									"text": ". Primero la especificación (el contrato de datos, el patrón, la política de errores). Después el código, generado dentro de ese perímetro y firmado por el ingeniero que lo revisa. Cero libre albedrío. Cada flujo se lee como el anterior. Por eso nuestro ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k39",
+									"text": "vertical de IA",
+									"marks": [
+										"k38"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3a",
+									"text": " empieza por los sistemas, no por el agente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3c",
 									"text": "Quién lo construye, responde",
 									"marks": []
 								}
@@ -4600,13 +4863,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k2d",
+							"_key": "k3f",
 							"style": "blockquote",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2c",
+									"_key": "k3e",
 									"text": "«Tu integración funciona... excepto cuando importa».",
 									"marks": []
 								}
@@ -4614,13 +4877,13 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k2f",
+							"_key": "k3h",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2e",
+									"_key": "k3g",
 									"text": "El *stock* no cuadra, los pedidos se duplican y nadie sabe muy bien por qué. Lo hemos visto demasiadas veces.",
 									"marks": []
 								}
@@ -4628,33 +4891,19 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k2l",
+							"_key": "k3l",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2g",
-									"text": "No somos ",
+									"_key": "k3i",
+									"text": "El equipo *senior* que diseña la topología en la pizarra es ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k2h",
-									"text": "\"arquitectos de PowerPoint\"",
-									"marks": [
-										"em"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2i",
-									"text": ". El equipo *senior* que diseña la topología en la pizarra es ",
-									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k2j",
+									"_key": "k3j",
 									"text": "el mismo",
 									"marks": [
 										"strong"
@@ -4662,27 +4911,27 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k2k",
-									"text": " que luego escribe el código, afina los *brokers* y levanta el teléfono si algo falla un viernes a las seis (aunque ya no falle 😉). ",
+									"_key": "k3k",
+									"text": " que escribe el código, afina los *brokers* y levanta el teléfono si algo falla un viernes a las seis (aunque ya no falle 😉). Conocemos el negocio tan bien como la implementación. Sabemos lo que cuesta un pedido duplicado en plena campaña.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k2p",
+							"_key": "k3p",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2m",
+									"_key": "k3m",
 									"text": "Si se rompe, no abrimos un *ticket*: ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k2n",
+									"_key": "k3n",
 									"text": "lo arreglamos",
 									"marks": [
 										"strong"
@@ -4690,9 +4939,39 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k2o",
+									"_key": "k3o",
 									"text": ".",
 									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3t",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k3q",
+									"_type": "link",
+									"href": "/quienes-somos"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3r",
+									"text": "**Un equipo**",
+									"marks": [
+										"k3q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3s",
+									"text": ". Seis verticales. Cero traspasos.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -4895,7 +5174,6 @@
 					"title": "E-commerce",
 					"excerpt": "Your catalog has 50,000 SKUs and your partner doesn't know how they're indexed. We parameterize SAP Commerce Cloud with the depth that only comes from years on the same project.",
 					"cta_label": "Audit your e-commerce",
-					"color": "#008FD3",
 					"content": [
 						{
 							"_type": "block",
@@ -5075,7 +5353,8 @@
 								}
 							]
 						}
-					]
+					],
+					"color": "#008FD3"
 				}
 			},
 			{
@@ -5088,7 +5367,6 @@
 					"title": "CDN, WAF & Edge Security",
 					"excerpt": "Your Cloudflare is configured. Are you sure it's configured right? We design, deploy and maintain edge security architectures in production.",
 					"cta_label": "Audit your edge",
-					"color": "#F38020",
 					"content": [
 						{
 							"_type": "block",
@@ -5254,7 +5532,8 @@
 								}
 							]
 						}
-					]
+					],
+					"color": "#F38020"
 				}
 			},
 			{
@@ -6007,13 +6286,18 @@
 					"title": "Systems Integration",
 					"excerpt": "We're not PowerPoint architects. Over 150 integration flows, 19 interconnected systems. Real Enterprise Integration Patterns on Karaf and Quarkus.",
 					"cta_label": "Let's talk integration",
-					"color": "#1D4E89",
 					"content": [
 						{
 							"_type": "block",
-							"_key": "k7",
+							"_key": "kc",
 							"style": "normal",
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "k7",
+									"_type": "link",
+									"href": "https://www.enterpriseintegrationpatterns.com/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
@@ -6060,20 +6344,82 @@
 								{
 									"_type": "span",
 									"_key": "k6",
-									"text": " platforms, and untouchable *legacy* systems coexist. We approach integration with one rule: absolute observability. If a flow fails, the trace reveals exactly *where* and *why* before it impacts the business.",
+									"text": " platforms, and untouchable *legacy* systems coexist. We approach every flow with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": "enterprise integration patterns",
+									"marks": [
+										"k7"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": " (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "EIP",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": ") and one rule: absolute observability. If a flow fails, the trace reveals exactly *where* and *why* before it impacts the business.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k9",
+							"_key": "kh",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "ke",
+									"_type": "link",
+									"href": "/en/big-data-cloud-analytics"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "We also connect the operational systems with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kf",
+									"text": "the analytical ones",
+									"marks": [
+										"ke"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": ", closing the data loop.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kj",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k8",
+									"_key": "ki",
 									"text": "Connector ≠ Integrated system",
 									"marks": []
 								}
@@ -6081,19 +6427,19 @@
 						},
 						{
 							"_type": "block",
-							"_key": "kf",
+							"_key": "kp",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ka",
+									"_key": "kk",
 									"text": "A simple point-to-point *script* is fragile. True professional integration ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kb",
+									"_key": "kl",
 									"text": "decouples systems",
 									"marks": [
 										"strong"
@@ -6101,13 +6447,13 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kc",
+									"_key": "km",
 									"text": ": it routes intelligently, transforms on the fly, and isolates failures. If the ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kd",
+									"_key": "kn",
 									"text": "ERP",
 									"marks": [
 										"code"
@@ -6115,7 +6461,7 @@
 								},
 								{
 									"_type": "span",
-									"_key": "ke",
+									"_key": "ko",
 									"text": " goes down, orders queue up in *standby* and process when it returns. Zero data loss.",
 									"marks": []
 								}
@@ -6123,31 +6469,36 @@
 						},
 						{
 							"_type": "block",
-							"_key": "kt",
+							"_key": "k16",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "ki",
+									"_key": "ks",
 									"_type": "link",
 									"href": "https://camel.apache.org/"
 								},
 								{
-									"_key": "kl",
+									"_key": "kv",
 									"_type": "link",
 									"href": "https://karaf.apache.org/"
 								},
 								{
-									"_key": "kq",
+									"_key": "k10",
 									"_type": "link",
 									"href": "https://camel.apache.org/camel-quarkus/"
+								},
+								{
+									"_key": "k13",
+									"_type": "link",
+									"href": "https://pebbletemplates.io/"
 								}
 							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "kg",
+									"_key": "kq",
 									"text": "`EIP` Patterns & Orchestration",
 									"marks": [
 										"strong"
@@ -6155,41 +6506,41 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kh",
+									"_key": "kr",
 									"text": ": Complex routing with ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kj",
+									"_key": "kt",
 									"text": "Apache Camel",
 									"marks": [
-										"ki"
+										"ks"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "kk",
+									"_key": "ku",
 									"text": ", deployed on ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "km",
+									"_key": "kw",
 									"text": "Karaf",
 									"marks": [
-										"kl"
+										"kv"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "kn",
+									"_key": "kx",
 									"text": " (",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "ko",
+									"_key": "ky",
 									"text": "OSGi",
 									"marks": [
 										"code"
@@ -6197,50 +6548,59 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kp",
+									"_key": "kz",
 									"text": " isolation) or ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kr",
+									"_key": "k11",
 									"text": "Quarkus",
 									"marks": [
-										"kq"
+										"k10"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "ks",
-									"text": " (sub-millisecond startup). We implement idempotent consumers with no \"black boxes.\"",
+									"_key": "k12",
+									"text": ". We implement idempotent consumers with no \"black boxes.\" When a connector doesn't exist, we write it. We maintain our own Camel component for the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": "Pebble",
+									"marks": [
+										"k13"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": " template engine.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k18",
+							"_key": "k1i",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "kw",
-									"_type": "link",
-									"href": "https://kafka.apache.org/"
-								},
-								{
-									"_key": "kz",
+									"_key": "k19",
 									"_type": "link",
 									"href": "https://activemq.apache.org/components/artemis/"
 								},
 								{
-									"_key": "k12",
+									"_key": "k1c",
 									"_type": "link",
 									"href": "https://cloud.google.com/pubsub"
 								},
 								{
-									"_key": "k15",
+									"_key": "k1f",
 									"_type": "link",
 									"href": "https://developers.cloudflare.com/queues/"
 								}
@@ -6248,7 +6608,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "ku",
+									"_key": "k17",
 									"text": "Async Messaging & Events",
 									"marks": [
 										"strong"
@@ -6256,63 +6616,49 @@
 								},
 								{
 									"_type": "span",
-									"_key": "kv",
+									"_key": "k18",
 									"text": ": Fault-tolerant *backbones* using ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "kx",
-									"text": "Kafka",
-									"marks": [
-										"kw"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "ky",
-									"text": " and ",
-									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k10",
+									"_key": "k1a",
 									"text": "ActiveMQ Artemis",
 									"marks": [
-										"kz"
+										"k19"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k11",
+									"_key": "k1b",
 									"text": ", or managed services like ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k13",
+									"_key": "k1d",
 									"text": "Google Cloud Pub/Sub",
 									"marks": [
-										"k12"
+										"k1c"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k14",
+									"_key": "k1e",
 									"text": " and ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k16",
+									"_key": "k1g",
 									"text": "Cloudflare Queues",
 									"marks": [
-										"k15"
+										"k1f"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k17",
+									"_key": "k1h",
 									"text": ".",
 									"marks": []
 								}
@@ -6320,18 +6666,18 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k1h",
+							"_key": "k1r",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "k1b",
+									"_key": "k1l",
 									"_type": "link",
 									"href": "https://cloud.google.com/run"
 								},
 								{
-									"_key": "k1e",
+									"_key": "k1o",
 									"_type": "link",
 									"href": "https://workers.cloudflare.com/"
 								}
@@ -6339,7 +6685,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k19",
+									"_key": "k1j",
 									"text": "`Serverless` Compute",
 									"marks": [
 										"strong"
@@ -6347,35 +6693,35 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k1a",
+									"_key": "k1k",
 									"text": ": Elastic integration logic using ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1c",
+									"_key": "k1m",
 									"text": "Google Cloud Run",
 									"marks": [
-										"k1b"
+										"k1l"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1d",
+									"_key": "k1n",
 									"text": " or directly at the edge with ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1f",
+									"_key": "k1p",
 									"text": "Cloudflare Workers",
 									"marks": [
-										"k1e"
+										"k1o"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1g",
+									"_key": "k1q",
 									"text": ".",
 									"marks": []
 								}
@@ -6383,23 +6729,23 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k1t",
+							"_key": "k23",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
 							"markDefs": [
 								{
-									"_key": "k1k",
+									"_key": "k1u",
 									"_type": "link",
 									"href": "https://hop.apache.org/"
 								},
 								{
-									"_key": "k1n",
+									"_key": "k1x",
 									"_type": "link",
 									"href": "https://www.talend.com/"
 								},
 								{
-									"_key": "k1q",
+									"_key": "k20",
 									"_type": "link",
 									"href": "https://cloud.google.com/dataflow"
 								}
@@ -6407,7 +6753,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k1i",
+									"_key": "k1s",
 									"text": "Data Engineering & `ETL`",
 									"marks": [
 										"strong"
@@ -6415,49 +6761,49 @@
 								},
 								{
 									"_type": "span",
-									"_key": "k1j",
+									"_key": "k1t",
 									"text": ": Heavy data movement with ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1l",
+									"_key": "k1v",
 									"text": "Apache Hop",
 									"marks": [
-										"k1k"
+										"k1u"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1m",
+									"_key": "k1w",
 									"text": " or ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1o",
+									"_key": "k1y",
 									"text": "Talend",
 									"marks": [
-										"k1n"
+										"k1x"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1p",
+									"_key": "k1z",
 									"text": " for *batch* processing, and unified pipelines using ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1r",
+									"_key": "k21",
 									"text": "Google Cloud Dataflow",
 									"marks": [
-										"k1q"
+										"k20"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1s",
+									"_key": "k22",
 									"text": ".",
 									"marks": []
 								}
@@ -6465,185 +6811,66 @@
 						},
 						{
 							"_type": "block",
-							"_key": "k24",
+							"_key": "k2c",
 							"style": "normal",
 							"listItem": "bullet",
 							"level": 1,
-							"markDefs": [
-								{
-									"_key": "k1y",
-									"_type": "link",
-									"href": "https://www.gravitee.io/"
-								},
-								{
-									"_key": "k21",
-									"_type": "link",
-									"href": "https://developers.cloudflare.com/api-shield/"
-								}
-							],
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k1u",
-									"text": "API Governance",
+									"_key": "k24",
+									"text": "Contract-first design",
 									"marks": [
 										"strong"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1v",
-									"text": ": Secure exposure via ",
+									"_key": "k25",
+									"text": ": The contract comes before the code (*Contract First*, ",
 									"marks": []
 								},
 								{
 									"_type": "span",
-									"_key": "k1w",
-									"text": "API Management",
+									"_key": "k26",
+									"text": "OpenAPI",
 									"marks": [
 										"code"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k1x",
-									"text": " solutions (like ",
-									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k1z",
-									"text": "Gravitee",
-									"marks": [
-										"k1y"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k20",
-									"text": ") or ",
-									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k22",
-									"text": "Cloudflare API Shield",
-									"marks": [
-										"k21"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k23",
-									"text": ".",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k29",
-							"style": "normal",
-							"listItem": "bullet",
-							"level": 1,
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k25",
-									"text": "360º Observability",
-									"marks": [
-										"strong"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k26",
-									"text": ": Centralized logs and metrics via the ",
-									"marks": []
-								},
-								{
-									"_type": "span",
 									"_key": "k27",
-									"text": "`ELK`",
-									"marks": [
-										"strong"
-									]
+									"text": "), with ",
+									"marks": []
 								},
 								{
 									"_type": "span",
 									"_key": "k28",
-									"text": " stack (Elasticsearch, Logstash, Kibana). Exact traceability for every single message, *end-to-end*.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2b",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2a",
-									"text": "Who builds it, answers for it",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2d",
-							"style": "blockquote",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2c",
-									"text": "\"Your integration works... except when it matters.\"",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2f",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2e",
-									"text": "Stock doesn't match, orders duplicate, and nobody quite knows why. We've seen it one too many times.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2j",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2g",
-									"text": "We are not PowerPoint architects. The senior team that designs the topology on the whiteboard is ",
-									"marks": []
-								},
-								{
-									"_type": "span",
-									"_key": "k2h",
-									"text": "the exact same one",
+									"text": "OAuth 2.0",
 									"marks": [
-										"strong"
+										"code"
 									]
 								},
 								{
 									"_type": "span",
-									"_key": "k2i",
-									"text": " that writes the code, fine-tunes the *brokers*, and picks up the phone if something breaks on a Friday at six (though they break less and less 😉).",
+									"_key": "k29",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "mTLS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2b",
+									"text": " designed in, not patched on later.",
 									"marks": []
 								}
 							]
@@ -6652,20 +6879,69 @@
 							"_type": "block",
 							"_key": "k2n",
 							"style": "normal",
-							"markDefs": [],
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k2h",
+									"_type": "link",
+									"href": "https://www.gravitee.io/"
+								},
+								{
+									"_key": "k2k",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/api-shield/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2k",
-									"text": "If it breaks, we don't open a *ticket*: ",
+									"_key": "k2d",
+									"text": "API Governance",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": ": Secure exposure via ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2f",
+									"text": "API Management",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": " solutions (like ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2i",
+									"text": "Gravitee",
+									"marks": [
+										"k2h"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2j",
+									"text": ") or ",
 									"marks": []
 								},
 								{
 									"_type": "span",
 									"_key": "k2l",
-									"text": "we fix it",
+									"text": "Cloudflare API Shield",
 									"marks": [
-										"strong"
+										"k2k"
 									]
 								},
 								{
@@ -6675,8 +6951,304 @@
 									"marks": []
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2s",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2o",
+									"text": "Observability",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2p",
+									"text": ": Centralized logs and metrics via the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2q",
+									"text": "`ELK`",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2r",
+									"text": " stack (Elasticsearch, Logstash, Kibana). Exact traceability for every single message, *end-to-end*.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2u",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2t",
+									"text": "Not PowerPoint. Not copy-paste.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2w",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2v",
+									"text": "We design what can be built, and we build it ourselves. No frills. We study each case and adopt the solution that fits it best. Patterns are the shared vocabulary; the topology is drawn on your systems and your load windows.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2y",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2x",
+									"text": "AI speeds things up. Patterns call the shots.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k33",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k30",
+									"_type": "link",
+									"href": "/en/artificial-intelligence"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2z",
+									"text": "More and more of our integration work is built with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k31",
+									"text": "AI",
+									"marks": [
+										"k30"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k32",
+									"text": ". The difference between speed and debt is the frame. An unconstrained agent solves the same problem a different way each time, and that bill arrives with the first incident.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3b",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k35",
+									"_type": "link",
+									"href": "https://github.com/github/spec-kit"
+								},
+								{
+									"_key": "k38",
+									"_type": "link",
+									"href": "/en/artificial-intelligence"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k34",
+									"text": "We practice ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k36",
+									"text": "*spec-driven development*",
+									"marks": [
+										"k35"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k37",
+									"text": ". The specification comes first (data contract, pattern, error policy). Then the code, generated inside that perimeter and signed by the engineer who reviews it. Zero free rein. Each flow reads like the one before it. It's why our ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k39",
+									"text": "AI vertical",
+									"marks": [
+										"k38"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3a",
+									"text": " starts with the systems, not the agent.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3c",
+									"text": "Who builds it, answers for it",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3f",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3e",
+									"text": "\"Your integration works... except when it matters.\"",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3g",
+									"text": "Stock doesn't match, orders duplicate, and nobody quite knows why. We've seen it one too many times.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3i",
+									"text": "The senior team that designs the topology on the whiteboard is ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3j",
+									"text": "the exact same one",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3k",
+									"text": " that writes the code, fine-tunes the *brokers*, and picks up the phone if something breaks on a Friday at six (though they break less and less 😉). We know the business as well as we know the implementation. We know what a duplicated order costs mid-campaign.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3m",
+									"text": "If it breaks, we don't open a *ticket*: ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3n",
+									"text": "we fix it",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3o",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3t",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k3q",
+									"_type": "link",
+									"href": "/en/about-us"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3r",
+									"text": "**One team**",
+									"marks": [
+										"k3q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3s",
+									"text": ". Six verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
+								}
+							]
 						}
-					]
+					],
+					"color": "#1D4E89"
 				}
 			},
 			{
@@ -6689,7 +7261,6 @@
 					"title": "Greenfield engineering & critical systems",
 					"excerpt": "We're not a software factory. We build the critical components that commercial software can't cover. Java 21+, Spring Boot, Quarkus.",
 					"cta_label": "Let's talk about your project",
-					"color": "#3E7D50",
 					"content": [
 						{
 							"_type": "block",
@@ -6861,7 +7432,8 @@
 								}
 							]
 						}
-					]
+					],
+					"color": "#3E7D50"
 				}
 			},
 			{
@@ -6873,7 +7445,6 @@
 					"title": "Inteligencia artificial",
 					"excerpt": "Agentes que trabajan dentro de tus sistemas, con el ERP, el dato y el perímetro que ya conocemos. Nada de demos de laboratorio.",
 					"cta_label": "Cuéntanos tu caso",
-					"color": "#6B4FBB",
 					"content": [
 						{
 							"_type": "block",
@@ -6945,7 +7516,8 @@
 								}
 							]
 						}
-					]
+					],
+					"color": "#6B4FBB"
 				}
 			},
 			{
@@ -6958,7 +7530,6 @@
 					"title": "Artificial Intelligence",
 					"excerpt": "Agents that work inside your systems, wired to the ERP, the data and the edge we already run. No lab demos.",
 					"cta_label": "Tell us your case",
-					"color": "#6B4FBB",
 					"content": [
 						{
 							"_type": "block",
@@ -7030,7 +7601,8 @@
 								}
 							]
 						}
-					]
+					],
+					"color": "#6B4FBB"
 				}
 			}
 		],
