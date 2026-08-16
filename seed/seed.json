@@ -5496,7 +5496,7 @@
 				"slug": "ingenieria-greenfield-y-sistemas-criticos",
 				"status": "published",
 				"data": {
-					"title": "Ingeniería Greenfield y sistemas críticos",
+					"title": "Desarrollo greenfield",
 					"excerpt": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Java 21+, Spring Boot, Quarkus.",
 					"cta_label": "Hablemos de tu proyecto",
 					"content": [
@@ -8255,7 +8255,7 @@
 				"locale": "en",
 				"translationOf": "svc-greenfield",
 				"data": {
-					"title": "Greenfield engineering & critical systems",
+					"title": "Greenfield development",
 					"excerpt": "We're not a software factory. We build the critical components that commercial software can't cover. Java 21+, Spring Boot, Quarkus.",
 					"cta_label": "Let's talk about your project",
 					"content": [
