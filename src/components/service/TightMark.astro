@@ -1,0 +1,24 @@
+---
+/**
+ * Whitespace-tight mark renderer for Portable Text.
+ *
+ * The default astro-portabletext Mark template wraps each branch in
+ * parenthesized multi-line JSX; with nested marks (link > code) those
+ * newlines land INSIDE the anchor and the dashed underline paints over
+ * a phantom space (founder round 7, #265). A single dynamic-tag element
+ * emits no text nodes at all.
+ *
+ * Links: same tab for internal, new tab for external — mirrors PtLink.astro
+ * (#263): honor the CMS `blank` flag when present, else derive from the href.
+ */
+const { node } = Astro.props;
+const type: string = node?.markType;
+const TAGS: Record<string, string> = { link: "a", code: "code", em: "em", strong: "strong" };
+const Tag = (TAGS[type] ?? "span") as any;
+const href = type === "link" ? node?.markDef?.href : undefined;
+const blank = type === "link" ? (node?.markDef?.blank ?? /^https?:\/\//.test(href ?? "")) : false;
+const attrs = type === "link"
+	? { href, target: blank ? "_blank" : undefined, rel: blank ? "noopener noreferrer" : undefined }
+	: {};
+---
+<Tag {...attrs}><slot /></Tag>

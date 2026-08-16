@@ -1,19 +1,34 @@
 ---
-id: "01KZB2G0MZ03AW0F2ZTS7Q9T4F"
+id: "01M02XSPBAZDE0QWGW5ASJHMVH"
 cta_label: "Let's talk data"
+excerpt: "We build platforms, in the *cloud* and *on-premise*, that govern data from ingestion to analysis."
 ---
 
-Your data team fights fires all week. Reports arrive late, the numbers don't match the ERP, and nobody knows where the data goes wrong. We've seen it. We build platforms that govern data from ingestion to analysis, connected to your operational systems.
+Anyone can stand up a pipeline in an afternoon. A platform that survives years of business, schema changes and campaign peaks is another story.
+
+We build them the way [serious software](/en/greenfield-engineering-critical-systems) gets built. Every transformation versioned in `git`, every dataset tested, every flow wired to an alert.
+
+The essence is analytical, and the synergies with the operational side multiply it. We run [`dbt`](https://www.getdbt.com/) on both sides of the *warehouse*.
 
 ## dbt ≠ pipeline
 
-Having dbt doesn't mean having governed data. We design platforms on Google Cloud where every transformation is versioned, tested and documented.
+`dbt` is the T in [`ELT`](https://www.getdbt.com/blog/extract-load-transform), and we treat it the way good software gets treated, the pattern the industry calls [*analytics engineering*](https://www.getdbt.com/what-is-analytics-engineering). But the tool is only one piece: ingestion, orchestration and monitoring live elsewhere, and our value is building and running the whole set.
 
-- The warehouse is **BigQuery**. No servers to babysit, predictable costs, data living where it gets analyzed.
-- Transformations are **dbt** code, versioned in Git with full lineage for every metric. Our largest platform runs 111 models and 1,646 tests.
-- Real-time ingestion with Dataflow and Pub/Sub for the flows that can't wait.
-- A three-layer medallion architecture, each layer with its purpose and its access control.
+- **Google Cloud is where we've gone deepest**. [`BigQuery`](https://cloud.google.com/bigquery) as the *warehouse*, `dbt` for the transformations.
+- **From blueprint to publication**. Our [*definition of done*](https://scrumguides.org/scrum-guide.html#commitment-definition-of-done) starts long before the code. Database design following the [sector's classic modeling](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/), standard naming, homogenization and normalization of the data. It is more analysis than development, and it is where reliability is won.
+- **Testing is the part most teams skip**. On our platforms tests number in the thousands. *Unit tests* run before anything ships, and *data tests* run every day, with every load. Data that fails never reaches *gold*.
+- **Layered architecture**. The [*medallion*](https://dataengineering.wiki/Concepts/Medallion+Architecture) pattern keeps raw and verified data apart, each layer with its purpose and its access control.
+- **Infrastructure is code too**. [`Terraform`](https://www.terraform.io/) builds the same datasets, permissions and environments in development and in production.
+- **Real time when the business needs it**. Ingestion on [`Pub/Sub`](https://cloud.google.com/pubsub) and [`Dataflow`](https://cloud.google.com/dataflow) for the flows that can't wait for the nightly *batch*.
 
-## Data connected to the business
+## Synergies between analytical and operational
 
-We don't build isolated data platforms. We connect BigQuery to SAP, to your ERP, and to the edge. **One team. Four verticals. Zero handoffs.**
+> "One way of working for two divergent worlds."
+
+On the analytical side we work with [`dbt Cloud`](https://docs.getdbt.com/docs/platform/about-platform/dbt-platform-features) on `BigQuery`. And when a transformation belongs in the operational layer, on a relational database like `Oracle`, we manage it with [`dbt Core`](https://github.com/dbt-labs/dbt-core) and the [adapter Oracle maintains](https://github.com/oracle/dbt-oracle) (plus our own improvements, as obvious as they were necessary...).
+
+The same tests and the same versioning on both sides, with no toll booths between teams. Data reaches the dashboard already proven.
+
+We connect `BigQuery` to [your e-commerce](/en/e-commerce), to your [ERP](/en/systems-integration), and to the [*edge*](/en/cdn-waf-edge-security-cloudflare).
+
+> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

@@ -10,6 +10,7 @@
  * panel_labels UI widget.
  */
 import { PortableText } from "emdash/ui";
+import TightMark from "./TightMark.astro";
 import { parsePanelSections, mdNormalize, INSTRUMENT_BY_SLUG } from "../../utils/panels";
 
 interface Props {
@@ -55,7 +56,7 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 {kind !== "legacy" ? (
 	<section class="s-inst" aria-label={s.heading}>
 		<div class="container s-inst__inner">
-			{s.intro.length > 0 && <div class="s-inst__intro"><PortableText value={s.intro} /></div>}
+			{s.intro.length > 0 && <div class="s-inst__intro"><PortableText value={s.intro} components={{ mark: TightMark }} /></div>}
 			<h2 class="s-inst__heading">{s.heading}</h2>
 
 			{kind === "cart" && (
@@ -112,6 +113,9 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 
 			{kind === "bigquery" && (
 				<>
+					{s.leadBlocks.length > 0 && (
+						<div class="s-inst__intro s-inst__lead"><PortableText value={s.leadBlocks} components={{ mark: TightMark }} /></div>
+					)}
 					<div class="inst inst--light" role="group" aria-label={s.heading}>
 						<div class="inst__bar bq__bar">
 							<span class="bq__tab">{bqTab} <span class="inst__muted">✕</span></span>
@@ -141,12 +145,8 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 							<p class="bq__note">{bqNote}</p>
 						</div>
 					</div>
-					{s.items.length > 0 && (
-						<ul class="inst-list">
-							{s.items.map((it) => (
-								<li><b>{it.label}.</b>{" "}{it.desc}</li>
-							))}
-						</ul>
+					{s.itemBlocks.length > 0 && (
+						<div class="inst-list"><PortableText value={s.itemBlocks} components={{ mark: TightMark }} /></div>
 					)}
 				</>
 			)}
@@ -206,7 +206,7 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 			{(s.closerHeading || s.closer.length > 0) && (
 				<div class="s-inst__closer">
 					{s.closerHeading && <h2>{s.closerHeading}</h2>}
-					<PortableText value={s.closer} />
+					<PortableText value={s.closer} components={{ mark: TightMark }} />
 				</div>
 			)}
 		</div>
@@ -214,7 +214,7 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 ) : (
 	<section class="s-content" aria-label={s.heading || "content"}>
 		<div class="container s-content__inner">
-			<PortableText value={mdNormalize(content)} />
+			<PortableText value={mdNormalize(content)} components={{ mark: TightMark }} />
 		</div>
 	</section>
 )}
