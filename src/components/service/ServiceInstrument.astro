@@ -12,6 +12,11 @@
 import { PortableText } from "emdash/ui";
 import TightMark from "./TightMark.astro";
 import { parsePanelSections, mdNormalize, INSTRUMENT_BY_SLUG } from "../../utils/panels";
+import RefsNoIndex from "./RefsNoIndex.astro";
+
+// Closer blockquotes carry either the reference list (trailing comma) or the
+// final motto — see RefsNoIndex.astro. Marks render tight everywhere.
+const closerComponents = { mark: TightMark, block: { blockquote: RefsNoIndex } } as any;
 
 interface Props {
 	slug: string;
@@ -56,8 +61,34 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 {kind !== "legacy" ? (
 	<section class="s-inst" aria-label={s.heading}>
 		<div class="container s-inst__inner">
-			{s.intro.length > 0 && <div class="s-inst__intro"><PortableText value={s.intro} components={{ mark: TightMark }} /></div>}
+			{kind === "dashboard" && s.intro.length > 0 ? (
+				<div class="s-inst__intro">
+					<div class="s-partner">
+						<a
+							class="s-partner__logo"
+							href="https://www.cloudflare.com/partners/"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img
+								src="/assets/cf-partner-network-stacked.png"
+								alt="Cloudflare Partner Network"
+								width="516"
+								height="234"
+								loading="lazy"
+							/>
+						</a>
+						<div class="s-partner__copy"><PortableText value={[s.intro[0]]} components={{ mark: TightMark }} /></div>
+					</div>
+					{s.intro.length > 1 && <PortableText value={s.intro.slice(1)} components={{ mark: TightMark }} />}
+				</div>
+			) : (
+				s.intro.length > 0 && <div class="s-inst__intro"><PortableText value={s.intro} components={{ mark: TightMark }} /></div>
+			)}
 			<h2 class="s-inst__heading">{s.heading}</h2>
+			{kind === "dashboard" && s.leadBlocks.length > 0 && (
+				<div class="s-inst__lead"><PortableText value={s.leadBlocks} components={{ mark: TightMark }} /></div>
+			)}
 
 			{kind === "cart" && (
 				<div class="inst inst--light" role="group" aria-label={s.heading}>
@@ -206,7 +237,7 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 			{(s.closerHeading || s.closer.length > 0) && (
 				<div class="s-inst__closer">
 					{s.closerHeading && <h2>{s.closerHeading}</h2>}
-					<PortableText value={s.closer} components={{ mark: TightMark }} />
+					<PortableText value={s.closer} components={closerComponents} />
 				</div>
 			)}
 		</div>

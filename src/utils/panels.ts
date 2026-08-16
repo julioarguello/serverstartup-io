@@ -38,7 +38,19 @@ const plain = (s: string): string =>
  * real marks instead of Markdown residue. Idempotent on clean content.
  */
 export function mdNormalize(blocks: any[]): any[] {
-	return (blocks || []).map((b) => {
+	return (blocks || []).map((raw) => {
+		// The md→PT converter emits link markDefs without `blank`; the site
+		// convention is that absolute (external) links open in a new tab, so
+		// stamp it at render time — the Link mark component honors it.
+		const b =
+			Array.isArray(raw?.markDefs) && raw.markDefs.some((d: any) => d._type === "link")
+				? {
+						...raw,
+						markDefs: raw.markDefs.map((d: any) =>
+							d._type === "link" && /^https?:\/\//.test(d.href ?? "") ? { ...d, blank: true } : d,
+						),
+					}
+				: raw;
 		if (b?._type !== "block" || !Array.isArray(b.children)) return b;
 		const children = b.children.flatMap((span: any) => {
 			if (span._type !== "span" || typeof span.text !== "string") return [span];
