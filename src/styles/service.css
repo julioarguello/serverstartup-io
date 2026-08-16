@@ -81,6 +81,26 @@
 	line-height: 28px;
 }
 
+/* ═══ Vertical rhythm (founder 2026-08-16, #269) ═══
+   The global reset (theme.css `* { margin: 0 }`) zeroes every gap, and each
+   one was being restored ad hoc per page. These rules close the audit for ALL
+   service pages at once: ¶↔¶, prose→panel, and section h2s inside the closer. */
+
+/* consecutive intro/lead paragraphs — between ¶s only, the intro→heading gap
+   stays untouched */
+.s-inst__intro p + p {
+	margin-block-start: 14px;
+}
+
+/* prose lead → instrument panel: covered by .s-inst__lead's own margin
+   (defined with the lead typography below, from #266) */
+
+/* section h2s inside the closer (any element before them): section-level air,
+   matching .s-inst__heading's top margin */
+.s-inst__closer * + h2 {
+	margin-top: 40px;
+}
+
 .s-inst__heading {
 	font-family: var(--font-family-mono);
 	font-size: 26px;
@@ -171,6 +191,28 @@
 .svc-refs canvas {
 	display: block;
 	max-width: 100%;
+}
+
+/* closer enumerations: dash-marked items — the marker is presentation, so it
+   lives here and never as literal text in the CMS content (founder 2026-08-16,
+   #269; greenfield is the only service with closer lists today) */
+.s-inst__closer ul {
+	list-style: none;
+	padding-left: 0;
+	margin: 0 0 14px;
+}
+
+.s-inst__closer li {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 28px;
+	padding-left: 22px;
+	text-indent: -22px;
+	margin-block: 10px;
+}
+
+.s-inst__closer li::before {
+	content: "–\00a0";
 }
 
 @media (min-width: 768px) {

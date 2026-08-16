@@ -33,6 +33,19 @@ const L = (k: string, fb: string) => labels.get("panel_labels", k, fb);
 
 const leadLines = s.lead ? s.lead.split(/(?<=[.!?])\s+/).filter(Boolean) : [];
 
+// javadoc: the first paragraph after the heading is prose and renders before
+// the panel (same slot as bigquery's lead); only the remaining paragraphs
+// become the /** … */ comment lines (founder request, #269).
+const jdIntroBlocks = kind === "javadoc" ? s.leadBlocks.slice(0, 1) : [];
+const jdLines =
+	kind === "javadoc"
+		? s.leadBlocks
+				.slice(1)
+				.map((b: any) => (b.children ?? []).map((c: any) => c.text ?? "").join(""))
+				.flatMap((t: string) => t.split(/(?<=[.!?])\s+/))
+				.filter(Boolean)
+		: [];
+
 // bigquery: results grid comes from panel_labels (semicolon rows, comma cells)
 const bqHead = L("bq_head", "Fila,metrica,linaje,ultima_ejecucion").split(",");
 const bqRows = L("bq_rows", "").split(";").filter(Boolean).map((r) => r.split(","));
@@ -212,13 +225,17 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 			)}
 
 			{kind === "javadoc" && (
-				<div class="inst inst--dark inst--javadoc" role="group" aria-label={s.heading}>
+				<>
+					{jdIntroBlocks.length > 0 && (
+						<div class="s-inst__intro s-inst__lead"><PortableText value={jdIntroBlocks} components={{ mark: TightMark }} /></div>
+					)}
+					<div class="inst inst--dark inst--javadoc" role="group" aria-label={s.heading}>
 					<div class="inst__bar inst__bar--file"><span class="inst__muted">{L("jd_file", "MotorDeNegocio.java — greenfield")}</span><span class="jd__ok">{L("jd_status", "Java 21 · 0 warnings")}</span></div>
 					<div class="jd">
-						<div class="jd__gutter" aria-hidden="true">{Array.from({ length: s.items.length + leadLines.length + 5 }, (_, i) => <span>{i + 1}</span>)}</div>
+						<div class="jd__gutter" aria-hidden="true">{Array.from({ length: s.items.length + jdLines.length + 5 }, (_, i) => <span>{i + 1}</span>)}</div>
 						<div class="jd__code">
 							<p class="jd__doc">/**</p>
-							{leadLines.map((line) => (
+							{jdLines.map((line) => (
 								<p class="jd__doc">&nbsp;* {line}</p>
 							))}
 							<p class="jd__doc">&nbsp;*</p>
@@ -231,7 +248,8 @@ const jdSig = L("jd_sig", "public Sistema construir(Pila pila, Contrato contrato
 							<p class="jd__sig">{jdSig}</p>
 						</div>
 					</div>
-				</div>
+					</div>
+				</>
 			)}
 
 			{(s.closerHeading || s.closer.length > 0) && (
