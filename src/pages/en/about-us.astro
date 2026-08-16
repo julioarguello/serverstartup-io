@@ -61,6 +61,10 @@ const historyMain = historyConclusion ? historyBlocks.slice(0, -1) : historyBloc
 const sponsorCaption = (sponsorBlocks.at(-1)?.children ?? [])
 	.map((s: any) => s.text ?? "")
 	.join("");
+// The photo links wherever the caption's CMS markDef points — single source,
+// no URL duplicated in the template.
+const sponsorHref = (sponsorBlocks.at(-1)?.markDefs ?? [])
+	.find((m: any) => m._type === "link")?.href;
 
 // The boot line (code-marked first block) renders inside a terminal window
 // that echoes the integration instrument; the rest of the hero is plain intro.
@@ -174,9 +178,13 @@ const introBlocks = bootBlocks.length ? heroBlocks.slice(1) : heroBlocks;
 				<PortableText value={sponsorBlocks.slice(0, -1)} components={ptComponents} />
 				<div class="s-sponsor__media">
 					<figure class="s-sponsor__figure">
-						<a href="https://www.instagram.com/p/DSflABTjB0P/" target="_blank" rel="noopener noreferrer" aria-label={sponsorCaption}>
+						{sponsorHref ? (
+							<a href={sponsorHref} target="_blank" rel="noopener noreferrer" aria-label={sponsorCaption}>
+								<img src="/assets/urdaneta-infantil.webp" alt="" width="1200" height="900" loading="lazy" />
+							</a>
+						) : (
 							<img src="/assets/urdaneta-infantil.webp" alt="" width="1200" height="900" loading="lazy" />
-						</a>
+						)}
 						<figcaption>
 							<PortableText value={sponsorBlocks.slice(-1)} components={ptComponents} />
 						</figcaption>
