@@ -84,7 +84,7 @@ npx emdash dev
 
 # 4. Verificar que las páginas funcionan
 curl -s -o /dev/null -w "%{http_code}" http://localhost:4321/
-curl -s -o /dev/null -w "%{http_code}" http://localhost:4321/ingenieria-greenfield-y-sistemas-criticos
+curl -s -o /dev/null -w "%{http_code}" http://localhost:4321/desarrollo-greenfield
 curl -s -o /dev/null -w "%{http_code}" http://localhost:4321/quienes-somos
 ```
 
@@ -93,7 +93,7 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:4321/quienes-somos
 | Ruta | Template | Contenido |
 |------|----------|-----------|
 | `/` | `src/pages/index.astro` | Homepage (hardcoded) |
-| `/ingenieria-greenfield-y-sistemas-criticos` | `src/pages/[slug].astro` | CMS (services) |
+| `/desarrollo-greenfield` | `src/pages/[slug].astro` | CMS (services) |
 | `/integracion-de-sistemas` | `src/pages/[slug].astro` | CMS (services) |
 | `/comercio-electronico` | `src/pages/[slug].astro` | CMS (services) |
 | `/big-data-cloud-analytics` | `src/pages/[slug].astro` | CMS (services) |

@@ -21,6 +21,7 @@ import { PortableText } from "emdash/ui";
 import CtaGlobal from "./CtaGlobal.astro";
 import { FACE_BY_SLUG } from "../utils/nav";
 import { getUiLabels } from "../utils/ui-labels";
+import { excerptPlain } from "../utils/excerpt";
 const t = Astro.locals.t;
 
 const locale = Astro.currentLocale || "es";
@@ -147,7 +148,7 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 								<span class="face-card__mini" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
 								<div class="face-card__text">
 									<h3>{d.title}</h3>
-									<p class="text-body">{d.excerpt}</p>
+									<p class="text-body">{excerptPlain(d.excerpt || "")}</p>
 								</div>
 							</a>
 						</li>

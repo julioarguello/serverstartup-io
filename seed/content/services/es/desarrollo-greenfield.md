@@ -1,6 +1,7 @@
 ---
 id: "01KZB2G0MY3WA1HR2CK79SBNKZ"
 cta_label: "Hablemos de tu proyecto"
+excerpt: "El código no es el producto: el producto es la obra — el sistema y las personas que lo sostienen — y sigue en producción años después de la demo. `SDLC` completo, de la especificación a la observabilidad. Trabajamos *contract first*, con foco en estabilidad, seguridad y gobernanza."
 ---
 
 Hay necesidades que ningún producto comercial cubre. Un motor de precios que solo existe en tu negocio, una web que no cabe en ninguna plantilla (esta misma, sin ir más lejos). Para eso siempre ha existido el desarrollo *greenfield*.

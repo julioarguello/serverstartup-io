@@ -20,8 +20,8 @@ export const FACE_BY_SLUG: Record<string, FaceKey> = {
 	"big-data-cloud-analytics": "bd",
 	"cdn-waf-seguridad-edge-cloudflare": "cdn",
 	"cdn-waf-edge-security-cloudflare": "cdn",
-	"ingenieria-greenfield-y-sistemas-criticos": "gf",
-	"greenfield-engineering-critical-systems": "gf",
+	"desarrollo-greenfield": "gf",
+	"greenfield-development": "gf",
 	"inteligencia-artificial": "ia",
 	"artificial-intelligence": "ia",
 };

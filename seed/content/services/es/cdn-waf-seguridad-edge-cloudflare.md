@@ -1,7 +1,7 @@
 ---
 id: "01KZB2G0MXNZQR7Q35JNHYVZNM"
 cta_label: "Audita tu edge"
-excerpt: "Socios oficiales de Cloudflare desde 2019. Auditoría, migración y operación de CDN, WAF y seguridad perimetral, sobre todo en comercio electrónico."
+excerpt: "*Partners* oficiales de [`Cloudflare`](https://www.cloudflare.com/es-es/) desde 2019. Auditoría, migración y operación de `CDN`, `WAF` y seguridad perimetral, sobre todo en [comercio electrónico](/comercio-electronico)."
 ---
 
 Trabajamos con la plataforma de [`Cloudflare`](https://www.cloudflare.com/es-es/) desde 2017, dos años antes de hacernos socios oficiales. Auditamos, migramos y optimizamos cuentas [Enterprise](https://www.cloudflare.com/es-es/plans/enterprise/) y [Business](https://www.cloudflare.com/es-es/plans/business/), sobre todo para *retail* y comercio electrónico.

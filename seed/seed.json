@@ -301,7 +301,7 @@
 				{
 					"type": "custom",
 					"label": "Ingeniería Greenfield",
-					"url": "/ingenieria-greenfield-y-sistemas-criticos"
+					"url": "/desarrollo-greenfield"
 				},
 				{
 					"type": "custom",
@@ -3112,7 +3112,7 @@
 				"status": "published",
 				"data": {
 					"title": "Comercio electrónico",
-					"excerpt": "Tu catálogo tiene 50.000 SKUs y tu partner no sabe cómo se indexan. Parametrizamos SAP Commerce Cloud con la profundidad que solo da trabajar en el mismo proyecto durante años.",
+					"excerpt": "Quince años dentro de [`SAP Commerce Cloud`](https://www.sap.com/spain/products/crm/commerce-cloud.html). Extender la plataforma es lo fácil: hacerlo con cada mejora desacoplada del *core*, ajustada al estándar, para que sobreviva versión tras versión, es lo que casi nadie hace. Y el rendimiento, nuestra especialidad.",
 					"cta_label": "Audita tu e-commerce",
 					"content": [
 						{
@@ -3228,7 +3228,7 @@
 								{
 									"_type": "span",
 									"_key": "kf",
-									"text": ". No vendemos licencias.",
+									"text": ". No vendemos licencias. El rendimiento es nuestra especialidad: catálogo, buscador y paso por caja se dimensionan para el pico real, no para la media.",
 									"marks": []
 								}
 							]
@@ -3678,7 +3678,7 @@
 				"status": "published",
 				"data": {
 					"title": "CDN, WAF y seguridad edge",
-					"excerpt": "Socios oficiales de Cloudflare desde 2019. Auditoría, migración y operación de CDN, WAF y seguridad perimetral, sobre todo en comercio electrónico.",
+					"excerpt": "*Partners* oficiales de [`Cloudflare`](https://www.cloudflare.com/es-es/) desde 2019. Auditoría, migración y operación de `CDN`, `WAF` y seguridad perimetral, sobre todo en [comercio electrónico](/comercio-electronico).",
 					"cta_label": "Audita tu edge",
 					"content": [
 						{
@@ -4350,7 +4350,7 @@
 				"status": "published",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "Construimos plataformas, en *cloud* y *on-premise*, que gobiernan el dato desde la ingesta hasta el análisis.",
+					"excerpt": "Un flujo de datos se monta rápido. Una plataforma que aguante años de negocio, cambios de esquema, picos de campaña y fuentes de datos variables es otra historia. Arquitectura [*medallion*](https://dataengineering.wiki/Concepts/Medallion+Architecture) y tests que se cuentan por miles.",
 					"cta_label": "Hablemos de tus datos",
 					"content": [
 						{
@@ -4375,7 +4375,7 @@
 								{
 									"_key": "k3",
 									"_type": "link",
-									"href": "/ingenieria-greenfield-y-sistemas-criticos"
+									"href": "/desarrollo-greenfield"
 								}
 							],
 							"children": [
@@ -5089,7 +5089,7 @@
 				"status": "published",
 				"data": {
 					"title": "Integración de sistemas",
-					"excerpt": "No somos arquitectos de PowerPoint. Más de 150 flujos, 19 sistemas interconectados. Enterprise Integration Patterns reales sobre Karaf y Quarkus.",
+					"excerpt": "No somos «arquitectos de PowerPoint»: lo que planificamos, lo ejecutamos. Sin exageraciones — lo objetivamente necesario y viable. Un guante, no un martillo, con homogeneidad, metodología, testabilidad y observabilidad absoluta.",
 					"cta_label": "Hablemos de integración",
 					"content": [
 						{
@@ -6059,11 +6059,11 @@
 			},
 			{
 				"id": "svc-greenfield",
-				"slug": "ingenieria-greenfield-y-sistemas-criticos",
+				"slug": "desarrollo-greenfield",
 				"status": "published",
 				"data": {
 					"title": "Desarrollo greenfield",
-					"excerpt": "No somos una factoría de software. Construimos los componentes críticos que el software comercial no cubre. Java 21+, Spring Boot, Quarkus.",
+					"excerpt": "El código no es el producto: el producto es la obra — el sistema y las personas que lo sostienen — y sigue en producción años después de la demo. `SDLC` completo, de la especificación a la observabilidad. Trabajamos *contract first*, con foco en estabilidad, seguridad y gobernanza.",
 					"cta_label": "Hablemos de tu proyecto",
 					"content": [
 						{
@@ -6782,7 +6782,7 @@
 				"translationOf": "svc-ecommerce",
 				"data": {
 					"title": "E-commerce",
-					"excerpt": "Your catalog has 50,000 SKUs and your partner doesn't know how they're indexed. We parameterize SAP Commerce Cloud with the depth that only comes from years on the same project.",
+					"excerpt": "Fifteen years inside [`SAP Commerce Cloud`](https://www.sap.com/products/crm/commerce-cloud.html). Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty.",
 					"cta_label": "Audit your e-commerce",
 					"content": [
 						{
@@ -6898,7 +6898,7 @@
 								{
 									"_type": "span",
 									"_key": "kf",
-									"text": ". We don't sell licenses.",
+									"text": ". We don't sell licenses. Performance is our specialty: catalog, search and checkout are sized for the real peak, not the average.",
 									"marks": []
 								}
 							]
@@ -7335,7 +7335,7 @@
 				"translationOf": "svc-cdn",
 				"data": {
 					"title": "CDN, WAF & Edge Security",
-					"excerpt": "Official Cloudflare partner since 2019. We audit, migrate and run CDN, WAF and edge security, mostly for e-commerce.",
+					"excerpt": "Official [`Cloudflare`](https://www.cloudflare.com/) partners since 2019. We audit, migrate and run `CDN`, `WAF` and edge security, mostly for [e-commerce](/en/e-commerce).",
 					"cta_label": "Audit your edge",
 					"content": [
 						{
@@ -8000,7 +8000,7 @@
 				"translationOf": "svc-bigdata",
 				"data": {
 					"title": "Big Data & Cloud Analytics",
-					"excerpt": "We build platforms, in the *cloud* and *on-premise*, that govern data from ingestion to analysis.",
+					"excerpt": "A data pipeline comes together quickly. A platform that survives years of business, schema changes, campaign peaks and shifting data sources is another story. [Medallion](https://dataengineering.wiki/Concepts/Medallion+Architecture) architecture, and tests that number in the thousands.",
 					"cta_label": "Let's talk data",
 					"content": [
 						{
@@ -8025,7 +8025,7 @@
 								{
 									"_key": "k3",
 									"_type": "link",
-									"href": "/en/greenfield-engineering-critical-systems"
+									"href": "/en/greenfield-development"
 								}
 							],
 							"children": [
@@ -8740,7 +8740,7 @@
 				"translationOf": "svc-integracion",
 				"data": {
 					"title": "Systems Integration",
-					"excerpt": "We're not PowerPoint architects. Over 150 integration flows, 19 interconnected systems. Real Enterprise Integration Patterns on Karaf and Quarkus.",
+					"excerpt": "We're not “PowerPoint architects”: what we plan is what we ship. No overpromising — the objectively necessary and viable. A glove, not a hammer, with homogeneity, methodology, testability and absolute observability.",
 					"cta_label": "Let's talk integration",
 					"content": [
 						{
@@ -9709,13 +9709,13 @@
 			},
 			{
 				"id": "svc-greenfield-en",
-				"slug": "greenfield-engineering-critical-systems",
+				"slug": "greenfield-development",
 				"status": "published",
 				"locale": "en",
 				"translationOf": "svc-greenfield",
 				"data": {
 					"title": "Greenfield development",
-					"excerpt": "We're not a software factory. We build the critical components that commercial software can't cover. Java 21+, Spring Boot, Quarkus.",
+					"excerpt": "The code isn't the product: the product is the system and the people who keep it alive, years after the demo. Full `SDLC`, from specification to observability. We work contract first, focused on stability, security and governance.",
 					"cta_label": "Let's talk about your project",
 					"content": [
 						{
@@ -10432,7 +10432,7 @@
 				"locale": "es",
 				"data": {
 					"title": "Inteligencia artificial",
-					"excerpt": "Agentes que trabajan dentro de tus sistemas, con el ERP, el dato y el perímetro que ya conocemos. Nada de demos de laboratorio.",
+					"excerpt": "La IA es un medio, no un fin. La máquina hace el código repetitivo; nosotros ponemos la arquitectura y el criterio, del desarrollo a la operación — enfoque integral, perfil *DevOps*. El agente propone, el ingeniero dispone.",
 					"cta_label": "Cuéntanos tu caso",
 					"content": [
 						{
@@ -11060,7 +11060,7 @@
 				"translationOf": "svc-ia",
 				"data": {
 					"title": "Artificial Intelligence",
-					"excerpt": "Agents that work inside your systems, wired to the ERP, the data and the edge we already run. No lab demos.",
+					"excerpt": "AI is a means, not an end. The machine writes the repetitive code; we bring the architecture and the judgment, from development to operations — one integral approach, a DevOps profile. The agent proposes; the engineer disposes.",
 					"cta_label": "Tell us your case",
 					"content": [
 						{

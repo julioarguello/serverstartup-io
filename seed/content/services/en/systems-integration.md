@@ -1,6 +1,7 @@
 ---
 id: "01KZB2G0N109BBQE64HQA0T3SF"
 cta_label: "Let's talk integration"
+excerpt: "We're not “PowerPoint architects”: what we plan is what we ship. No overpromising — the objectively necessary and viable. A glove, not a hammer, with homogeneity, methodology, testability and absolute observability."
 ---
 
 Moving data from A to B is the easy part. The real engineering challenge is maintaining **operational continuity** in ecosystems where your `ERP`, `SaaS` platforms, and untouchable *legacy* systems coexist. We approach every flow with [enterprise integration patterns](https://www.enterpriseintegrationpatterns.com/) (`EIP`) and one rule: absolute observability. If a flow fails, the trace reveals exactly *where* and *why* before it impacts the business.

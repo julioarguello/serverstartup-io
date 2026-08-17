@@ -1,6 +1,7 @@
 ---
 id: "01KZB2G0N1704D37VQJPQFZE96"
 cta_label: "Let's talk about your project"
+excerpt: "The code isn't the product: the product is the system and the people who keep it alive, years after the demo. Full `SDLC`, from specification to observability. We work contract first, focused on stability, security and governance."
 ---
 
 Some needs no commercial product covers. A pricing engine that only exists in your business, a website no template fits (this one, for instance). That's what *greenfield* development has always been for.
