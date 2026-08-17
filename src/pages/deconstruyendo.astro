@@ -5,6 +5,7 @@
  * Content from CMS page `deconstruyendo`; manual text from manual_labels.
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
+import { entryAlternatePath } from "../utils/alternate";
 import { PortableText } from "emdash/ui";
 import CubeEmblem from "../components/CubeEmblem.astro";
 import Base from "../layouts/Base.astro";
@@ -27,9 +28,12 @@ const blocks: any[] = (content as any[]) || [];
 const firstH2 = blocks.findIndex((b) => b._type === "block" && b.style === "h2");
 const intro = firstH2 === -1 ? blocks : blocks.slice(0, firstH2);
 const prose = firstH2 === -1 ? [] : blocks.slice(firstH2);
+// Slugs are translated across locales — resolve the counterpart via the CMS (#291)
+const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") : null;
+
 ---
 
-<Base title={title} description={excerpt || `${title} — Server Startup`}>
+<Base title={title} description={excerpt || `${title} — Server Startup`} altPath={altPath}>
 	<div class="s-emblem-bg" aria-hidden="true">
 		<CubeEmblem color="var(--color-primary)" faceKey="dec" size={340} />
 	</div>

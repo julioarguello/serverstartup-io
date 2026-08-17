@@ -2,49 +2,27 @@
 /**
  * LanguageSwitcher — toggle between ES / EN.
  *
- * Shows the *other* locale as a link. Clicking switches to that locale's
- * equivalent URL (prefixed for non-default, root for default).
- *
- * Strategy:
- *   1. Try simple prefix swap (works for most pages with same slug)
- *   2. If the slug could differ between locales (e.g., quienes-somos vs about-us),
- *      the prefix swap is the best-effort fallback. True CMS-level slug
- *      resolution would require an async lookup here. For now, we provide
- *      a safe fallback to the alternate locale's homepage if the swap is
- *      likely to 404 (heuristic: non-matching patterns).
- *
- * Astro i18n routing:
- *   - ES (default): /quienes-somos
- *   - EN: /en/about-us
+ * Shows the *other* locale as a link. The target URL is NOT computed here:
+ * slugs are translated (/quienes-somos ↔ /en/about-us), so the switcher
+ * renders the same `altPath` Base resolved for the hreflang tags (#291) —
+ * one value, one source (utils/alternate). When no published counterpart
+ * exists (altPath = null), fall back to the alternate locale's homepage.
  */
-const currentLocale = Astro.currentLocale || "es";
-const currentPath = Astro.url.pathname;
-
-// Build the alternate URL
-let altLocale: string;
-let altPath: string;
-let altLabel: string;
-
-if (currentLocale === "es") {
-	altLocale = "en";
-	altLabel = "EN";
-	// For ES → EN: prefix with /en/
-	const cleanPath = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
-	altPath = `/en${cleanPath}`;
-} else {
-	altLocale = "es";
-	altLabel = "ES";
-	// For EN → ES: remove /en prefix
-	altPath = currentPath.replace(/^\/en/, "") || "/";
+interface Props {
+	altPath: string | null;
 }
+const { altPath } = Astro.props;
 
-// All routes now have EN equivalents — no ES-only fallback needed
+const currentLocale = Astro.currentLocale || "es";
+const altLocale = currentLocale === "es" ? "en" : "es";
+const altLabel = altLocale.toUpperCase();
+const href = altPath ?? (altLocale === "en" ? "/en/" : "/");
 
 const t = Astro.locals.t;
 ---
 
 <a
-	href={altPath}
+	href={href}
 	class="lang-switch"
 	aria-label={t("switch_language")}
 	hreflang={altLocale}

@@ -13,8 +13,9 @@ import LanguageSwitcher from "./LanguageSwitcher.astro";
 interface Props {
 	promptPath: string; // current pathname ("" on home)
 	accent: string; // section color from CMS, ink for site pages
+	altPath: string | null; // alternate-locale path resolved by Base (#291)
 }
-const { promptPath, accent } = Astro.props;
+const { promptPath, accent, altPath } = Astro.props;
 
 const t = Astro.locals.t;
 
@@ -53,7 +54,7 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 			</a>
 		</div>
 		<div class="header-actions">
-			<LanguageSwitcher />
+			<LanguageSwitcher altPath={altPath} />
 		</div>
 	</div>
 </header>

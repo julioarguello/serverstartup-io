@@ -138,7 +138,7 @@ All routes exist in both ES and EN:
 
 - **Canonical URLs** on all pages via `Base.astro`
 - **Open Graph + Twitter Card** meta tags (title, description, image, URL, type)
-- **hreflang** tags with absolute URLs and `x-default`
+- **hreflang** tags with absolute URLs and `x-default` — alternate URLs resolved from the CMS `translationOf` group via `src/utils/alternate.ts` (#291: slugs are translated, so the `/en` prefix swap is only valid for locale-invariant routes). The same resolved value feeds the `LanguageSwitcher`; contract verified by `scripts/hreflang-sweep.py`
 - **RSS autodiscovery** `<link>` in `<head>`
 - **`@astrojs/sitemap`** with i18n-aware sitemap
 - **`robots.txt`** with sitemap reference

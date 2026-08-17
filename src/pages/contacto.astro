@@ -9,6 +9,7 @@
  *   appears in static HTML, JSON-LD or crawlable text.
  */
 import { getEmDashCollection, getEmDashEntry, getSiteSettings } from "emdash";
+import { entryAlternatePath } from "../utils/alternate";
 import { PortableText } from "emdash/ui";
 import CubeEmblem from "../components/CubeEmblem.astro";
 import Base from "../layouts/Base.astro";
@@ -52,11 +53,15 @@ const engineerCaption = labels.get("footer_headings", "engineer_caption", "Ingen
 const whatsappLabel = settings.contactWhatsappLabel || "WhatsApp";
 const phoneLabel = settings.contactPhoneLabel || "Teléfono";
 const emailLabel = settings.contactEmailLabel || "Email";
+// Slugs are translated across locales — resolve the counterpart via the CMS (#291)
+const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") : null;
+
 ---
 
 <Base
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
+	altPath={altPath}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(contactJsonLd({
 		siteUrl: Astro.site?.origin!,
