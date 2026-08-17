@@ -117,7 +117,7 @@ export function parsePanelSections(content: any[]): PanelSections {
 }
 
 /** Which instrument renders each service, by slug (both locales). */
-export const INSTRUMENT_BY_SLUG: Record<string, "cart" | "terminal" | "bigquery" | "dashboard" | "javadoc"> = {
+export const INSTRUMENT_BY_SLUG: Record<string, "cart" | "terminal" | "bigquery" | "dashboard" | "javadoc" | "review"> = {
 	"comercio-electronico": "cart",
 	"e-commerce": "cart",
 	"integracion-de-sistemas": "terminal",
@@ -127,4 +127,6 @@ export const INSTRUMENT_BY_SLUG: Record<string, "cart" | "terminal" | "bigquery"
 	"cdn-waf-edge-security-cloudflare": "dashboard",
 	"ingenieria-greenfield-y-sistemas-criticos": "javadoc",
 	"greenfield-engineering-critical-systems": "javadoc",
+	"inteligencia-artificial": "review",
+	"artificial-intelligence": "review",
 };
