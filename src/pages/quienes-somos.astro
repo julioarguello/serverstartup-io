@@ -6,6 +6,7 @@
  * 3. Values — text from CMS content (h2 + paragraph at end of page content)
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
+import { entryAlternatePath } from "../utils/alternate";
 import { PortableText } from "emdash/ui";
 import PtLink from "../components/PtLink.astro";
 
@@ -72,11 +73,15 @@ const sponsorHref = (sponsorBlocks.at(-1)?.markDefs ?? [])
 // that echoes the integration instrument; the rest of the hero is plain intro.
 const bootBlocks = heroBlocks[0]?.children?.[0]?.marks?.includes("code") ? [heroBlocks[0]] : [];
 const introBlocks = bootBlocks.length ? heroBlocks.slice(1) : heroBlocks;
+// Slugs are translated across locales — resolve the counterpart via the CMS (#291)
+const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") : null;
+
 ---
 
 <Base
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
+	altPath={altPath}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(aboutJsonLd({
 		siteUrl: Astro.site?.origin!,

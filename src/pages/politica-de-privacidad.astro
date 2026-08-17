@@ -4,6 +4,7 @@
  * noindex, nofollow.
  */
 import { getEmDashEntry } from "emdash";
+import { entryAlternatePath } from "../utils/alternate";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
 
@@ -12,12 +13,16 @@ if (!entry) return Astro.rewrite("/404");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
+// Slugs are translated across locales — resolve the counterpart via the CMS (#291)
+const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") : null;
+
 ---
 
 <Base
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
 	robots="noindex, nofollow"
+	altPath={altPath}
 >
 	<section class="legal" aria-label={title}>
 		<div class="container legal-inner">

@@ -10,6 +10,7 @@ import ServiceInstrument from "../../components/service/ServiceInstrument.astro"
 import CubeEmblem from "../../components/CubeEmblem.astro";
 import { FACE_BY_SLUG, SITE_BY_PATH } from "../../utils/nav";
 import { serviceJsonLd, breadcrumbJsonLd } from "../../utils/jsonld";
+import { entryAlternatePath } from "../../utils/alternate";
 import { getUiLabels } from "../../utils/ui-labels";
 import { excerptHtml, excerptPlain } from "../../utils/excerpt";
 import type { CacheHint } from "emdash";
@@ -21,6 +22,7 @@ const locale = "en";
 // Try services first, then pages
 let entry: any = null;
 let cacheHint: CacheHint | null = null;
+let entryCollection: "services" | "pages" = "services";
 
 const svcResult = await getEmDashEntry("services", slug!, { locale });
 if (svcResult.entry) {
@@ -31,11 +33,15 @@ if (svcResult.entry) {
 	if (pageResult.entry) {
 		entry = pageResult.entry;
 		cacheHint = pageResult.cacheHint;
+		entryCollection = "pages";
 	}
 }
 
 if (!entry) return Astro.rewrite("/404");
 if (cacheHint) Astro.cache.set(cacheHint);
+
+// Slugs are translated across locales — resolve the counterpart via the CMS (#291)
+const altPath = await entryAlternatePath(entryCollection, entry.data.id, locale);
 
 const settings = await getSiteSettings();
 const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Tell us about your project";
@@ -50,6 +56,7 @@ const labels = await getUiLabels(locale);
 <Base
 	title={title}
 	description={excerpt ? excerptPlain(excerpt) : `${title} — Server Startup`}
+	altPath={altPath}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd({
 		siteUrl: Astro.site?.origin!,

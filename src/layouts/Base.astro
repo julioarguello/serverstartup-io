@@ -11,6 +11,7 @@
 import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
+import { routeAlternatePath } from "../utils/alternate";
 import type { SiteSettings } from "../types";
 
 import SiteHeader from "../components/SiteHeader.astro";
@@ -29,6 +30,15 @@ interface Props {
 	publishedTime?: string | null;
 	modifiedTime?: string | null;
 	content?: { collection: string; id: string; slug: string };
+	/**
+	 * Alternate-locale path for hreflang + LanguageSwitcher (#291).
+	 * Pages rendering a CMS entry MUST pass utils/alternate's
+	 * entryAlternatePath() result — slugs are translated, so the prefix-swap
+	 * default is only correct for locale-invariant routes. `null` = no
+	 * published counterpart: no hreflang set, switcher falls back to the
+	 * alternate homepage.
+	 */
+	altPath?: string | null;
 }
 
 const {
@@ -42,6 +52,7 @@ const {
 	publishedTime,
 	modifiedTime,
 	content: editableContent,
+	altPath: altPathProp,
 } = Astro.props;
 const locale = Astro.currentLocale || "es";
 const t = Astro.locals.t;
@@ -114,15 +125,16 @@ const trustLogos = (partnerEntries ?? [])
 		alt: p.data.featured_image?.alt || p.data.title || "Partner",
 	}));
 
-// Alternate locale URL for hreflang (absolute URLs per Google spec)
+// Alternate locale URL for hreflang (absolute URLs per Google spec).
+// The prop wins; the prefix-swap default is only correct for routes whose
+// path is identical in both locales (#291).
 const currentPath = Astro.url.pathname;
 const altLocale = locale === "es" ? "en" : "es";
-const altPath = locale === "es"
-	? `/en${currentPath === "/" ? "/" : currentPath}`
-	: currentPath.replace(/^\/en/, "") || "/";
+const altPath =
+	altPathProp !== undefined ? altPathProp : routeAlternatePath(currentPath, locale);
 const siteOrigin = Astro.site?.origin || "https://www.serverstartup.io";
 const canonicalUrl = canonical || `${siteOrigin}${currentPath}`;
-const altUrl = `${siteOrigin}${altPath}`;
+const altUrl = altPath ? `${siteOrigin}${altPath}` : null;
 const defaultUrl = locale === "es" ? canonicalUrl : altUrl;
 const ogImage = image || `${siteOrigin}/assets/logo-vertical.png`;
 const resolvedOgTitle = ogTitleOverride || pageTitle;
@@ -137,9 +149,13 @@ const resolvedOgType = ogType || "website";
 	<meta name="description" content={pageDescription} />
 	{robots && <meta name="robots" content={robots} />}
 	<link rel="canonical" href={canonicalUrl} />
-	<link rel="alternate" hreflang={locale} href={canonicalUrl} />
-	<link rel="alternate" hreflang={altLocale} href={altUrl} />
-	<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+	{altUrl && (
+		<>
+			<link rel="alternate" hreflang={locale} href={canonicalUrl} />
+			<link rel="alternate" hreflang={altLocale} href={altUrl} />
+			<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+		</>
+	)}
 	<meta property="og:title" content={resolvedOgTitle} />
 	<meta property="og:description" content={pageDescription} />
 	<meta property="og:url" content={canonicalUrl} />
@@ -161,7 +177,7 @@ const resolvedOgType = ogType || "website";
 </head>
 <body>
 
-	<SiteHeader promptPath={promptPath} accent={headerAccent} />
+	<SiteHeader promptPath={promptPath} accent={headerAccent} altPath={altPath} />
 
 	<MenuDialog services={services} siteItems={siteMenuItems} currentPath={promptPath} localePrefix={localePrefix} />
 
