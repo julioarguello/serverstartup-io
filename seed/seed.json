@@ -1129,6 +1129,105 @@
 									"text": "INFO … Server startup in [2019] ms"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "agent/propuesta → main"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_chip",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Open"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_del",
+							"children": [
+								{
+									"_type": "span",
+									"text": "git push --force origin main"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_check_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ci/security"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_check_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ci/business-logic"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_check_3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ci/performance"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_approved",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Approved"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_signoff",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Signed-off-by: Server Startup"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_merge",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Merge pull request"
+								}
+							]
 						}
 					]
 				},
@@ -2273,6 +2372,105 @@
 								{
 									"_type": "span",
 									"text": "INFO … Server startup in [2019] ms"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "agent/propuesta → main"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_chip",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Open"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_del",
+							"children": [
+								{
+									"_type": "span",
+									"text": "git push --force origin main"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_check_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ci/security"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_check_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ci/business-logic"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_check_3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "ci/performance"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_approved",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Approved"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_signoff",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Signed-off-by: Server Startup"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "pr_merge",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Merge pull request"
 								}
 							]
 						}
@@ -10246,64 +10444,607 @@
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "La mayoría de los proyectos de IA muere en la demo. Un chatbot que no puede tocar el pedido, un copiloto que no ve el stock. Nosotros llegamos por el otro lado: primero los sistemas, luego el agente.",
+									"text": "Usamos la IA de dos maneras. Como herramienta, para construir con más calidad y menos horas lo que ya sabíamos construir. Y como pieza del sistema, para resolver lo que hace poco no era posible. En los dos casos es un medio, no un fin.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k3",
+							"_key": "kc",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "https://news.northeastern.edu/2025/02/07/jevons-paradox-ai-future/"
+								},
+								{
+									"_key": "k6",
+									"_type": "link",
+									"href": "/integracion-de-sistemas"
+								},
+								{
+									"_key": "k9",
+									"_type": "link",
+									"href": "/cdn-waf-seguridad-edge-cloudflare"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "Cuando generar código sale casi gratis, se genera muchísimo más software (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "paradoja de Jevons",
+									"marks": [
+										"k3"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": "). Y todo ese software nuevo hay que ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "integrarlo",
+									"marks": [
+										"k6"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "asegurarlo",
+									"marks": [
+										"k9"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": " dentro de sistemas que ya existían. Es la parte de más valor del trabajo, y la que hacemos desde 2019.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ke",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "El código repetitivo lo hace la máquina. Nuestro tiempo va al criterio y la responsabilidad, y un equipo pequeño entrega hoy lo que antes pedía uno grande.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kg",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2",
-									"text": "IA con las manos en tu sistema",
+									"_key": "kf",
+									"text": "Generado ≠ entregado",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k5",
+							"_key": "ko",
 							"style": "normal",
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "ki",
+									"_type": "link",
+									"href": "/comercio-electronico"
+								},
+								{
+									"_key": "kl",
+									"_type": "link",
+									"href": "/big-data-cloud-analytics"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k4",
-									"text": "Llevamos más de quince años integrando ERPs, catálogos y plataformas de datos, y eso nos deja algo mejor que un modelo. Nos deja el mapa. Un agente útil necesita leer el pedido en SAP, comprobar el stock en BigQuery y escribir el resultado donde tu equipo trabaja de verdad. Eso es integración, y es nuestra casa.",
+									"_key": "kh",
+									"text": "Un agente es IA que hace cosas, no solo responde. Y para ser útil necesita leer el pedido en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "`SAP`",
+									"marks": [
+										"ki"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": ", comprobar el *stock* en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "`BigQuery`",
+									"marks": [
+										"kl"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": " y escribir el resultado donde tu equipo trabaja de verdad. Ese cableado es lo nuestro.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k7",
+							"_key": "ks",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k6",
-									"text": "Estamos construyendo esta vertical con la misma regla que el resto. Profundidad antes que amplitud, y nada en producción que no podamos explicar línea a línea.",
+									"_key": "kp",
+									"text": "Nuestro flujo es el de este *pull request*. El agente propone; el ingeniero revisa, aprueba y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": "firma",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": ". Siempre con permisos mínimos y cada acción registrada.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k9",
+							"_key": "ky",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kv",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/agents/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": "Agentes con permisos acotados.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": " Construidos sobre el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "`Agents SDK`",
+									"marks": [
+										"kv"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": ", tocan solo lo que deben y siempre hay una persona que puede pararlos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k19",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k11",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/workers-ai/"
+								},
+								{
+									"_key": "k14",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/es-es/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kz",
+									"text": "Inferencia en el borde.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": " Clasificación y extracción de documentos con ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "`Workers AI`",
+									"marks": [
+										"k11"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": ", en la red de ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": "`Cloudflare`",
+									"marks": [
+										"k14"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": ". El dato se procesa en tu propia cuenta, no en el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": "SaaS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k18",
+									"text": " de IA de un tercero.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1f",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1c",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/ai-gateway/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": "Tráfico de IA gobernado.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1b",
+									"text": " Cada llamada a un modelo queda registrada y con techo de gasto en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": "`AI Gateway`",
+									"marks": [
+										"k1c"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1e",
+									"text": ". Sabrás qué modelo respondió y cuánto costó.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": "Auditoría antes de producción.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": " Seguridad, lógica de negocio y rendimiento. Ninguna línea generada se despliega sin pasarla.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1k",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "Firmamos el código",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1u",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k1m",
+									"_type": "link",
+									"href": "https://claude.com/claude-code"
+								},
+								{
+									"_key": "k1p",
+									"_type": "link",
+									"href": "https://cursor.com"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": "Usamos IA a diario. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": "`Claude Code`",
+									"marks": [
+										"k1m"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": "`Cursor`",
+									"marks": [
+										"k1p"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": ", modelos abiertos en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "Workers AI",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": ". Y por usarla sabemos dónde falla.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1w",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k8",
-									"text": "Esta página crecerá cuando haya casos que contar. Así trabajamos.",
+									"_key": "k1v",
+									"text": "La queja más repetida del sector es el código «casi correcto, pero no del todo». Ese «casi», en el cálculo de una promoción o en el *stock* que ve la tienda, es un incidente.",
 									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k20",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1x",
+									"text": "Por eso trabajamos con la seguridad por delante. Los agentes usan credenciales de mínimo privilegio, trabajan en entornos separados de producción y nada llega a ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "main",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": " sin revisión humana.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k22",
+									"_type": "link",
+									"href": "https://artificialintelligenceact.eu/es/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": "El que firma, da la cara. Desde agosto de 2026, además, la ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": "ley europea de IA",
+									"marks": [
+										"k22"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": " exige supervisión humana con competencia y autoridad para corregir o parar un sistema de alto riesgo. Nosotros ya trabajamos así.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "Aquí no vas a encontrar un producto de IA. No lo tenemos y no lo fingimos. Tenemos un método hecho de reglas y protocolos versionados que dirigen a los agentes, distribuible y auditable.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k28",
+									"_type": "link",
+									"href": "/deconstruyendo"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k29",
+									"text": "Esta misma web",
+									"marks": [
+										"k28"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": " se construye así, con agentes supervisados, *pull request* a *pull request*. Y si un *chatbot* no te resuelve nada, te diremos que no lo pongas.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2f",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2c",
+									"_type": "link",
+									"href": "/quienes-somos"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "**Un equipo**",
+									"marks": [
+										"k2c"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": ". Seis verticales. Cero traspasos.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
@@ -10331,64 +11072,607 @@
 								{
 									"_type": "span",
 									"_key": "k0",
-									"text": "Most AI projects die at the demo — a chatbot that can't touch the order, a copilot that can't see the stock. We come at it from the other side: systems first, agent second.",
+									"text": "We use AI in two ways. As a tool, to build with more quality and fewer hours what we already knew how to build. And as a system component, to solve what was not possible until recently. Either way it is a means, not an end.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k3",
+							"_key": "kc",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "https://news.northeastern.edu/2025/02/07/jevons-paradox-ai-future/"
+								},
+								{
+									"_key": "k6",
+									"_type": "link",
+									"href": "/en/systems-integration"
+								},
+								{
+									"_key": "k9",
+									"_type": "link",
+									"href": "/en/cdn-waf-edge-security-cloudflare"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "When code gets cheap to generate, far more software gets generated (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "Jevons paradox",
+									"marks": [
+										"k3"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": "). And all that new software must be ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "integrated",
+									"marks": [
+										"k6"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "secured",
+									"marks": [
+										"k9"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": " inside systems that already exist. That is the most valuable part of the work, and the part we have done since 2019.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ke",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "The repetitive code goes to the machine. Our time goes to judgment and accountability, and a small team now ships what used to take a large one.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kg",
 							"style": "h2",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k2",
-									"text": "AI with its hands in your system",
+									"_key": "kf",
+									"text": "Generated ≠ shipped",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k5",
+							"_key": "ko",
 							"style": "normal",
-							"markDefs": [],
+							"markDefs": [
+								{
+									"_key": "ki",
+									"_type": "link",
+									"href": "/en/e-commerce"
+								},
+								{
+									"_key": "kl",
+									"_type": "link",
+									"href": "/en/big-data-cloud-analytics"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k4",
-									"text": "Fifteen-plus years integrating ERPs, catalogues and data platforms left us with something better than a model: the map. A useful agent needs to read the order in SAP, check stock in BigQuery and write the result where your team actually works. That is integration — and integration is home ground for us.",
+									"_key": "kh",
+									"text": "An agent is AI that does things, not just answers. To be useful it needs to read the order in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "`SAP`",
+									"marks": [
+										"ki"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": ", check stock in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "km",
+									"text": "`BigQuery`",
+									"marks": [
+										"kl"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": " and write the result where your team actually works. That wiring is our home ground.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k7",
+							"_key": "ks",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k6",
-									"text": "We are building this practice under the same rule as the rest: depth before breadth, and nothing in production we cannot explain line by line.",
+									"_key": "kp",
+									"text": "Our workflow is this very pull request. The agent proposes; the engineer reviews, approves and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kq",
+									"text": "signs",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": ". Always with minimal permissions, every action logged.",
 									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
-							"_key": "k9",
+							"_key": "ky",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kv",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/agents/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": "Agents with bounded permissions.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": " Built on the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "`Agents SDK`",
+									"marks": [
+										"kv"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": ", they touch only what they must, and a person can always stop them.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k19",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k11",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/workers-ai/"
+								},
+								{
+									"_key": "k14",
+									"_type": "link",
+									"href": "https://www.cloudflare.com/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kz",
+									"text": "Inference at the edge.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": " Document classification and extraction with ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "`Workers AI`",
+									"marks": [
+										"k11"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": ", on the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": "`Cloudflare`",
+									"marks": [
+										"k14"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": " network. The data is processed in your own account, not in a third-party AI ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": "SaaS",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k18",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1f",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1c",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/ai-gateway/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": "Governed AI traffic.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1b",
+									"text": " Every model call logged and cost-capped in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": "`AI Gateway`",
+									"marks": [
+										"k1c"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1e",
+									"text": ". You will know which model answered and what it cost.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": "Audit before production.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": " Security, business logic and performance. No generated line ships without passing it.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1k",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "We sign the code",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1u",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k1m",
+									"_type": "link",
+									"href": "https://claude.com/claude-code"
+								},
+								{
+									"_key": "k1p",
+									"_type": "link",
+									"href": "https://cursor.com"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": "We use AI every day. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": "`Claude Code`",
+									"marks": [
+										"k1m"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": "`Cursor`",
+									"marks": [
+										"k1p"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": ", open models on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "Workers AI",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": ". Using it is how we know where it fails.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1w",
 							"style": "normal",
 							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"_key": "k8",
-									"text": "This page will grow as there are cases worth telling. That is how we work.",
+									"_key": "k1v",
+									"text": "The industry's most repeated complaint is code that is almost right, but not quite. On a promotion calculation or a stock feed, \"almost\" is an incident.",
 									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k20",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1x",
+									"text": "So we lead with security. Agents run on least-privilege credentials, work in environments separated from production, and nothing reaches ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "main",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": " without human review.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k22",
+									"_type": "link",
+									"href": "https://artificialintelligenceact.eu/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": "Whoever signs, answers. From August 2026, the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k23",
+									"text": "EU AI Act",
+									"marks": [
+										"k22"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": " also demands human oversight with the competence and authority to override or halt a high-risk system. That is already how we work.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "You won't find an AI product here. We don't have one, and we don't pretend to. What we have is a method made of versioned rules and protocols that steer the agents, distributable and auditable.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k28",
+									"_type": "link",
+									"href": "/en/deconstructing"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k29",
+									"text": "This very website",
+									"marks": [
+										"k28"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": " is built that way, by supervised agents, pull request by pull request. And if a chatbot won't solve anything for you, we'll tell you not to build one.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2f",
+							"style": "blockquote",
+							"markDefs": [
+								{
+									"_key": "k2c",
+									"_type": "link",
+									"href": "/en/about-us"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "**One team**",
+									"marks": [
+										"k2c"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": ". Six verticals. Zero handoffs.",
+									"marks": [
+										"strong"
+									]
 								}
 							]
 						}
