@@ -75,7 +75,7 @@ jobs:
                    /contacto:contact /en/contact:contact-en \
                    /comercio-electronico:cart /integracion-de-sistemas:term \
                    /big-data-cloud-analytics:bq /cdn-waf-seguridad-edge-cloudflare:cf \
-                   /ingenieria-greenfield-y-sistemas-criticos:jd \
+                   /desarrollo-greenfield:jd \
                    /deconstruyendo:manual /en/deconstructing:manual-en \
                    /politica-de-privacidad:legal /en/privacy-policy:legal-en; do
             url="${r%%:*}"; name="${r##*:}"

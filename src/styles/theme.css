@@ -135,34 +135,37 @@ ul, ol { list-style: none; }
 .btn {
 	display: inline-block;
 	font-family: var(--font-family);
-	font-size: 20px;
+	font-size: 17px;
 	font-weight: 600;
-	line-height: 24px;
-	padding: 16px;
-	border: none;
+	line-height: 22px;
+	padding: 10px 18px;
 	border-radius: 0;
 	cursor: pointer;
 	text-decoration: none;
 	transition: background-color 0.3s, color 0.3s;
 }
 
+/* Ghost buttons (#264): CTAs step back — outline over fill, ink does not
+   shout. Fill returns on hover so the action is still unmistakable. */
 .btn-dark {
-	background-color: var(--color-primary);
-	color: var(--color-secondary);
+	background-color: transparent;
+	color: var(--color-primary);
+	border: 1px solid var(--color-primary);
 }
 .btn-dark:hover,
 .btn-dark:focus-visible {
-	background-color: var(--color-btn-cta-hover);
-	color: var(--color-primary);
+	background-color: var(--color-primary);
+	color: var(--color-secondary);
 }
 
 .btn-light {
-	background-color: var(--color-secondary);
-	color: var(--color-primary);
+	background-color: transparent;
+	color: var(--color-secondary);
+	border: 1px solid var(--color-secondary);
 }
 .btn-light:hover,
 .btn-light:focus-visible {
-	background-color: var(--color-btn-cta-hover);
+	background-color: var(--color-secondary);
 	color: var(--color-primary);
 }
 

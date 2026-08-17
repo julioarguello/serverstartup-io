@@ -10,6 +10,11 @@ import emdash from "emdash/astro";
 export default defineConfig({
 	site: "https://www.serverstartup.io",
 	output: "server",
+	// #264: greenfield slug aligned with its title (old URLs are live in prod)
+	redirects: {
+		"/ingenieria-greenfield-y-sistemas-criticos": { status: 301, destination: "/desarrollo-greenfield" },
+		"/en/greenfield-engineering-critical-systems": { status: 301, destination: "/en/greenfield-development" },
+	},
 	i18n: {
 		defaultLocale: "es",
 		locales: ["es", "en"],

@@ -1,12 +1,12 @@
 ---
 id: "01M02XSPBAZDE0QWGW5ASJHMVH"
 cta_label: "Let's talk data"
-excerpt: "We build platforms, in the *cloud* and *on-premise*, that govern data from ingestion to analysis."
+excerpt: "A data pipeline comes together quickly. A platform that survives years of business, schema changes, campaign peaks and shifting data sources is another story. [Medallion](https://dataengineering.wiki/Concepts/Medallion+Architecture) architecture, and tests that number in the thousands."
 ---
 
 Anyone can stand up a pipeline in an afternoon. A platform that survives years of business, schema changes and campaign peaks is another story.
 
-We build them the way [serious software](/en/greenfield-engineering-critical-systems) gets built. Every transformation versioned in `git`, every dataset tested, every flow wired to an alert.
+We build them the way [serious software](/en/greenfield-development) gets built. Every transformation versioned in `git`, every dataset tested, every flow wired to an alert.
 
 The essence is analytical, and the synergies with the operational side multiply it. We run [`dbt`](https://www.getdbt.com/) on both sides of the *warehouse*.
 

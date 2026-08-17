@@ -125,8 +125,8 @@ export const INSTRUMENT_BY_SLUG: Record<string, "cart" | "terminal" | "bigquery"
 	"big-data-cloud-analytics": "bigquery",
 	"cdn-waf-seguridad-edge-cloudflare": "dashboard",
 	"cdn-waf-edge-security-cloudflare": "dashboard",
-	"ingenieria-greenfield-y-sistemas-criticos": "javadoc",
-	"greenfield-engineering-critical-systems": "javadoc",
+	"desarrollo-greenfield": "javadoc",
+	"greenfield-development": "javadoc",
 	"inteligencia-artificial": "review",
 	"artificial-intelligence": "review",
 };

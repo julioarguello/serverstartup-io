@@ -1,12 +1,12 @@
 ---
 id: "01M02XSPB4687H2JC48XSJKP5H"
 cta_label: "Hablemos de tus datos"
-excerpt: "Construimos plataformas, en *cloud* y *on-premise*, que gobiernan el dato desde la ingesta hasta el análisis."
+excerpt: "Un flujo de datos se monta rápido. Una plataforma que aguante años de negocio, cambios de esquema, picos de campaña y fuentes de datos variables es otra historia. Arquitectura [*medallion*](https://dataengineering.wiki/Concepts/Medallion+Architecture) y tests que se cuentan por miles."
 ---
 
 Cualquiera monta un *pipeline* en una tarde. Una plataforma que aguante años de negocio, cambios de esquema y picos de campaña es otra historia.
 
-Nosotros la construimos como se construye el [software serio](/ingenieria-greenfield-y-sistemas-criticos). Cada transformación versionada en `git`, cada dato con su test, cada flujo con su alerta.
+Nosotros la construimos como se construye el [software serio](/desarrollo-greenfield). Cada transformación versionada en `git`, cada dato con su test, cada flujo con su alerta.
 
 La esencia es analítica, y las sinergias con lo operacional la multiplican. Usamos [`dbt`](https://www.getdbt.com/) a los dos lados del *warehouse*.
 

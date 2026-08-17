@@ -121,7 +121,9 @@
 }
 
 /* content links: thin dashed underline, solid on hover (founder 2026-08-15,
-   same convention as about.css) */
+   same convention as about.css). The hero excerpt joined in #264 — excerpt
+   links wear the same house format as body links. */
+.s-hero__body a,
 .s-inst__intro a,
 .s-inst__lead a,
 .inst-list a,
@@ -134,6 +136,7 @@
 	text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
 }
 
+.s-hero__body a:hover,
 .s-inst__intro a:hover,
 .s-inst__lead a:hover,
 .inst-list a:hover,
