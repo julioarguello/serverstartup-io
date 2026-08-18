@@ -118,12 +118,22 @@ const siteMenuItems = siteMenu?.items ?? [];
 const localePrefix = locale === "es" ? "" : `/${locale}`;
 
 // Trust logos from partners collection (featured = true)
-const trustLogos = (partnerEntries ?? [])
-	.filter((p) => Boolean(p.data.featured))
-	.map((p) => ({
-		src: p.data.featured_image?.src || "",
-		alt: p.data.featured_image?.alt || p.data.title || "Partner",
-	}));
+// Partner logos for the footer column. Deduplicated by image: the CMS
+// carried five identical Cloudflare rows and every one of them rendered
+// (#296). References live in their own collection and their own banner.
+const partnerLogos = [
+	...new Map(
+		(partnerEntries ?? [])
+			.filter((p) => Boolean(p.data.featured))
+			.map((p) => [
+				p.data.featured_image?.src || "",
+				{
+					src: p.data.featured_image?.src || "",
+					alt: p.data.featured_image?.alt || p.data.title || "Partner",
+				},
+			]),
+	).values(),
+].filter((l) => l.src);
 
 // Alternate locale URL for hreflang (absolute URLs per Google spec).
 // The prop wins; the prefix-swap default is only correct for routes whose
@@ -197,7 +207,7 @@ const resolvedOgType = ogType || "website";
 		email={email}
 		phone={phone}
 		phoneDisplay={phoneDisplay}
-		trustLogos={trustLogos}
+		partnerLogos={partnerLogos}
 		services={services}
 		localePrefix={localePrefix}
 		locale={locale}

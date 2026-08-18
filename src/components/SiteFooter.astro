@@ -1,13 +1,9 @@
 ---
+import ReferenceBanner from "./ReferenceBanner.astro";
 /**
  * SiteFooter — trust logos, 4-column grid, Kit Digital banner.
  * Extracted from Base.astro for maintainability.
  */
-interface TrustLogo {
-	src: string;
-	alt: string;
-}
-
 interface ServiceEntry {
 	slug?: string;
 	id: string;
@@ -25,7 +21,7 @@ interface Props {
 	email: string;
 	phone: string;
 	phoneDisplay: string;
-	trustLogos: TrustLogo[];
+	partnerLogos: { src: string; alt: string }[];
 	services: ServiceEntry[];
 	localePrefix: string;
 	locale: string;
@@ -42,7 +38,7 @@ const {
 	email,
 	phone,
 	phoneDisplay,
-	trustLogos,
+	partnerLogos,
 	services,
 	localePrefix,
 	locale,
@@ -51,19 +47,14 @@ const t = Astro.locals.t;
 ---
 
 <footer class="site-footer">
-	<!-- Trust logos carousel -->
-	<section class="footer-trust" aria-label={t("trust_section")}>
-		<div class="container">
-			<h2 class="footer-trust__title">{trustTitle}</h2>
-			<ul class="trust-logos" role="list" aria-label={t("trust_logos")}>
-				{trustLogos.map((logo) => (
-					<li>
-						<img src={logo.src} alt={logo.alt} class="trust-logo" loading="lazy" />
-					</li>
-				))}
-			</ul>
-		</div>
-	</section>
+	<!-- Citable references (#296): one static band, every content page.
+	     Replaces the old strip, which read `partners` where five duplicate
+	     Cloudflare placeholders lived — the same logo, five times, sitewide. -->
+	<ReferenceBanner
+		title={trustTitle}
+		href={`${localePrefix}/${locale === "en" ? "references" : "referencias"}`}
+		ariaLabel={t("trust_section")}
+	/>
 
 	<!-- 4-column footer grid -->
 	<div class="footer-main">
@@ -94,8 +85,8 @@ const t = Astro.locals.t;
 			<!-- Col 3: Partner -->
 			<div class="footer-col">
 				<h3>{partnersTitle}</h3>
-				{trustLogos.length > 0 ? (
-					trustLogos.map((logo) => (
+				{partnerLogos.length > 0 ? (
+					partnerLogos.map((logo) => (
 						<img
 							src={logo.src}
 							alt={logo.alt}
@@ -147,25 +138,6 @@ const t = Astro.locals.t;
 	}
 
 	/* Trust logos */
-	.footer-trust {
-		text-align: center;
-		padding: 48px 0 0;
-	}
-	.footer-trust__title {
-		margin-bottom: 24px;
-		font-style: italic;
-		/* h2 for document outline; visual size stays as the old h4 */
-		font-size: 22px;
-		line-height: 30px;
-		font-weight: 400;
-	}
-	.trust-logos {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 16px;
-		flex-wrap: wrap;
-	}
 	.trust-logo {
 		height: 60px;
 		width: auto;
