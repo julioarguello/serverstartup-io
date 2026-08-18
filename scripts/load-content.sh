@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 # AUTO-GENERATED — DO NOT EDIT MANUALLY
+# AUTO-GENERATED — DO NOT EDIT MANUALLY
 # EmDash Content Loader — syncs markdown files into EmDash CMS via CLI.
 #
 # Usage:
-#   ./scripts/load-content.sh <collection> [--dry-run]
+#   ./scripts/load-content.sh <collection> [--dry-run] [--port N | --url URL]
 #
 # Examples:
-#   ./scripts/load-content.sh services           # Load all services (ES + EN)
-#   ./scripts/load-content.sh services --dry-run  # Preview only
+#   ./scripts/load-content.sh services              # Load all services (ES + EN)
+#   ./scripts/load-content.sh services --dry-run    # Preview only
+#   ./scripts/load-content.sh services --port 8263  # A parallel session's stack
+#
+# The CMS URL defaults to http://localhost:4321 (the EmDash CLI default).
+# Parallel sessions run their stack on 8000 + issue number, and pointing the
+# loader at the wrong port used to surface as "entry not found in CMS" — a
+# connection problem wearing a content problem's message.
 #
 # Prerequisites:
 #   - EmDash dev server running (npx emdash dev)
@@ -20,13 +27,37 @@
 set -euo pipefail
 
 # ── Args ──────────────────────────────────────────────────────────────
-COLLECTION="${1:?Usage: load-content.sh <collection> [--dry-run]}"
-DRY_RUN="${2:-}"
+COLLECTION="${1:?Usage: load-content.sh <collection> [--dry-run] [--port N|--url URL]}"
+shift
+DRY_RUN=""
+BASE_URL="${EMDASH_URL:-http://localhost:4321}"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --dry-run) DRY_RUN="--dry-run"; shift ;;
+    --port) BASE_URL="http://localhost:${2:?--port needs a number}"; shift 2 ;;
+    --url) BASE_URL="${2:?--url needs a URL}"; shift 2 ;;
+    *) echo "unknown argument: $1 (expected --dry-run, --port N or --url URL)" >&2; exit 2 ;;
+  esac
+done
 CONTENT_DIR="seed/content/${COLLECTION}"
 
 if [[ ! -d "$CONTENT_DIR" ]]; then
   echo "❌ Content directory not found: $CONTENT_DIR" >&2
   exit 1
+fi
+
+# Fail fast on the connection, with the observed fact and where to look: a
+# dead or wrong-port CMS otherwise reports as every entry being "not found".
+if [[ -z "$DRY_RUN" ]]; then
+  if ! curl -sf -o /dev/null -m 5 "$BASE_URL/"; then
+    {
+      echo "❌ No CMS answering at $BASE_URL"
+      echo "   Start it, or point this loader at the right stack:"
+      echo "     scripts/load-content.sh $COLLECTION --port <PORT>"
+      echo "   (parallel sessions use 8000 + issue number)"
+    } >&2
+    exit 1
+  fi
 fi
 
 # ── Colors ────────────────────────────────────────────────────────────
@@ -122,11 +153,15 @@ print(json.dumps(fields))
     fi
 
     # Get current _rev for optimistic concurrency
-    REV=$(npx emdash content get "$COLLECTION" "$FM_ID" --json 2>/dev/null \
+    GET_ERR=$(mktemp)
+    REV=$(npx emdash content get "$COLLECTION" "$FM_ID" -u "$BASE_URL" --json 2>"$GET_ERR" \
       | python3 -c "import json,sys; print(json.load(sys.stdin).get('_rev',''))" 2>/dev/null) || true
 
     if [[ -z "$REV" ]]; then
-      echo -e "  ${RED}✗ FAIL${NC} ${filename} — entry ${FM_ID} not found in CMS"
+      # the CLI's own words, not our guess about what went wrong
+      REASON=$(head -c 160 "$GET_ERR" | tr '\n' ' ')
+      rm -f "$GET_ERR"
+      echo -e "  ${RED}✗ FAIL${NC} ${filename} — no _rev for ${FM_ID} at ${BASE_URL}${REASON:+ — }${REASON}"
       FAILED=$((FAILED + 1))
       continue
     fi
@@ -137,7 +172,9 @@ print(json.dumps(fields))
     PAYLOAD_FILE=$(mktemp)
     printf '%s' "$PAYLOAD" > "$PAYLOAD_FILE"
     ERR_FILE=$(mktemp)
+    rm -f "$GET_ERR"
     if npx emdash content update "$COLLECTION" "$FM_ID" \
+        -u "$BASE_URL" \
         --rev "$REV" \
         --file "$PAYLOAD_FILE" \
         --json >/dev/null 2>"$ERR_FILE"; then
