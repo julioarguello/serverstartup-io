@@ -32,5 +32,3 @@ Hemos montado `Cloudflare` para:
 La plataforma no se acaba en el `CDN` y el `WAF`. `Zero Trust`, `Access`, `Stream`, `R2`. Te ayudamos a decidir qué piezas encajan y cuáles no.
 
 Esta misma web corre sobre `Workers`, `D1` y `R2`, detrás del mismo `WAF` que operamos para clientes. La desmontamos pieza a pieza en [Deconstruyendo esta web](/deconstruyendo).
-
-> [**Un equipo**](/quienes-somos)**. Seis verticales. Cero traspasos.**

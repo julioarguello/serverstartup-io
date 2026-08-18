@@ -39,5 +39,3 @@ El *stock* no cuadra, los pedidos se duplican y nadie sabe muy bien por qué. Lo
 El equipo *senior* que diseña la topología en la pizarra es **el mismo** que escribe el código, afina los *brokers* y levanta el teléfono si algo falla un viernes a las seis (aunque ya no falle 😉). Conocemos el negocio tan bien como la implementación. Sabemos lo que cuesta un pedido duplicado en plena campaña.
 
 Si se rompe, no abrimos un *ticket*: **lo arreglamos**.
-
-> [**Un equipo**](/quienes-somos)**. Seis verticales. Cero traspasos.**

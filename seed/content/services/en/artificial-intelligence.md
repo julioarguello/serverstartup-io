@@ -35,5 +35,3 @@ Whoever signs, answers. From August 2026, the [EU AI Act](https://artificialinte
 You won't find an AI product here. We don't have one, and we don't pretend to. What we have is a method made of versioned rules and protocols that steer the agents, distributable and auditable.
 
 [This very website](/en/deconstructing) is built that way, by supervised agents, pull request by pull request. And if a chatbot won't solve anything for you, we'll tell you not to build one.
-
-> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

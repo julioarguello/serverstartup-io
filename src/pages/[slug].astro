@@ -12,6 +12,7 @@
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import Base from "../layouts/Base.astro";
 import CtaGlobal from "../components/CtaGlobal.astro";
+import MantraCloser from "../components/MantraCloser.astro";
 import ServiceInstrument from "../components/service/ServiceInstrument.astro";
 import CubeEmblem from "../components/CubeEmblem.astro";
 import { FACE_BY_SLUG, SITE_BY_PATH } from "../utils/nav";
@@ -116,6 +117,10 @@ const labels = await getUiLabels(locale);
 			labels={labels}
 		/>
 	)}
+
+	<div class="container mantra-wrap">
+		<MantraCloser />
+	</div>
 
 	<!-- ══════ CTA (from cta_global widget) ══════ -->
 	<CtaGlobal />

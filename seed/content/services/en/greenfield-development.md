@@ -40,5 +40,3 @@ Our *frameworks* are that perimeter. The agent writes inside the rails, and an e
 ## Your technical debt is our problem
 
 Whoever designs the system deploys it and answers for its stability. The same three senior engineers, from first *commit* to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.
-
-> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

@@ -40,5 +40,3 @@ Nuestros *frameworks* son el perímetro. El agente escribe dentro de esos raíle
 ## Tu deuda técnica es nuestro problema
 
 Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos tres ingenieros *senior*, del primer *commit* a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.
-
-> [**Un equipo**](/quienes-somos)**. Seis verticales. Cero traspasos.**

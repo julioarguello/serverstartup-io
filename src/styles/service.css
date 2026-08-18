@@ -170,19 +170,12 @@
 	margin: 0 0 14px;
 }
 
-/* the closing motto — standout final blockquote, same pattern as the About
-   motto (about.css), in the discipline color (cross-vertical convention,
-   founder 2026-08-16, #265). :last-of-type, not :last-child — Astro injects
-   the RefsNoIndex module script after the closer content on pages without a
-   refs list, and the motto must still match (#268). */
-.s-inst__closer blockquote:last-of-type {
-	font-style: normal;
-	font-size: 24px;
-	font-weight: 700;
-	line-height: 34px;
-	margin: 32px 0 0;
-	padding: 4px 0 4px 24px;
-}
+/* The closing motto is no longer part of the body: it is the shared
+   MantraCloser component (#295). This rule used to promote the body's LAST
+   blockquote — with the motto gone it promoted whatever pull-quote came
+   last (Big Data's «Un solo modo de trabajar…», Integración's «Tu
+   integración funciona…»), which is not a closer. Removed on purpose.
+   Body quotes keep the .s-inst__closer blockquote style above. */
 
 /* Reference list (closer blockquote ending in a comma): drawn on a canvas —
    discreet muted line, text never in the DOM (founder decision, #266). */

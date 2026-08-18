@@ -20,6 +20,7 @@ import CloudflarePartner from "./CloudflarePartner.astro";
 import { PortableText } from "emdash/ui";
 import PtLink from "./PtLink.astro";
 import CtaGlobal from "./CtaGlobal.astro";
+import MantraCloser from "./MantraCloser.astro";
 import { FACE_BY_SLUG } from "../utils/nav";
 import CubeEmblem from "./CubeEmblem.astro";
 import { getUiLabels } from "../utils/ui-labels";
@@ -169,4 +170,8 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 </section>
 
 <!-- ══════ SECTION 5: CTA (from cta_global widget) ══════ -->
+<div class="container mantra-wrap">
+	<MantraCloser />
+</div>
+
 <CtaGlobal />
