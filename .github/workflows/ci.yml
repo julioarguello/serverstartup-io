@@ -77,7 +77,8 @@ jobs:
                    /big-data-cloud-analytics:bq /cdn-waf-seguridad-edge-cloudflare:cf \
                    /desarrollo-greenfield:jd \
                    /deconstruyendo:manual /en/deconstructing:manual-en \
-                   /politica-de-privacidad:legal /en/privacy-policy:legal-en; do
+                   /politica-de-privacidad:legal /en/privacy-policy:legal-en \
+                   /referencias:refs /en/references:refs-en; do
             url="${r%%:*}"; name="${r##*:}"
             curl -sf "http://localhost:8787$url" -o "/tmp/html/$name.html"
           done

@@ -22,3 +22,13 @@ Cloudflare Partner Network
 # Meta values (Base.astro head, not user-visible copy)
 width=device-width, initial-scale=1
 summary_large_image
+# Terminal listing syntax (#271 referencias — `ls -alh` console): invariant
+# across locales like code; groups come from the CMS, these are the shell's
+# own output grammar
+ls -alh referencias/
+ls -alh references/
+total 9
+drwxr-xr-x
+serverstartup
+24 ene 2019
+Jan 24 2019

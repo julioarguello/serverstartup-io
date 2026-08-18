@@ -74,6 +74,20 @@ export interface Post {
   bylines?: ContentBylineCredit[];
 }
 
+export interface Referencia {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
+  excerpt?: string;
+  featured?: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
 export interface Servicio {
   id: string;
   slug: string | null;
@@ -97,6 +111,7 @@ declare module "emdash" {
     pages: Page;
     partners: Partner;
     posts: Post;
+    references: Referencia;
     services: Servicio;
   }
 }

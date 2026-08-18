@@ -190,6 +190,34 @@
 			]
 		},
 		{
+			"slug": "references",
+			"label": "Referencias",
+			"labelSingular": "Referencia",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Logo",
+					"type": "image"
+				},
+				{
+					"slug": "excerpt",
+					"label": "Note",
+					"type": "text"
+				},
+				{
+					"slug": "featured",
+					"label": "Die face (citable client)",
+					"type": "boolean"
+				}
+			]
+		},
+		{
 			"slug": "partners",
 			"label": "Partners",
 			"labelSingular": "Partner",
@@ -559,6 +587,67 @@
 			"label": "UI Labels (Español)",
 			"description": "Translatable UI micro-copy: footer headings, error pages, search page, and button labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "refs_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "group_clientes",
+							"children": [
+								{
+									"_type": "span",
+									"text": "clientes"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "group_colaboraciones",
+							"children": [
+								{
+									"_type": "span",
+									"text": "colaboraciones"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "aggregate_face",
+							"children": [
+								{
+									"_type": "span",
+									"text": "+40 dominios"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "lattice_aria",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Referencias"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "disclaimer",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Los logotipos pertenecen a sus titulares; se muestran únicamente como referencia de proyectos realizados."
+								}
+							]
+						}
+					]
+				},
 				{
 					"type": "content",
 					"title": "manual_labels",
@@ -1804,6 +1893,67 @@
 			"label": "UI Labels (English)",
 			"description": "English UI micro-copy — footer headings, error page, search, aria-labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "refs_labels",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "group_clientes",
+							"children": [
+								{
+									"_type": "span",
+									"text": "clients"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "group_colaboraciones",
+							"children": [
+								{
+									"_type": "span",
+									"text": "collaborations"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "aggregate_face",
+							"children": [
+								{
+									"_type": "span",
+									"text": "+40 domains"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "lattice_aria",
+							"children": [
+								{
+									"_type": "span",
+									"text": "References"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "disclaimer",
+							"children": [
+								{
+									"_type": "span",
+									"text": "All logos belong to their respective owners; shown solely as a factual reference of delivered work."
+								}
+							]
+						}
+					]
+				},
 				{
 					"type": "content",
 					"title": "manual_labels",
@@ -14111,92 +14261,7 @@
 				"data": {
 					"title": "Referencias",
 					"excerpt": "Los nombres que podemos escribir y el trabajo que hay detrás.",
-					"content": [
-						{
-							"_type": "block",
-							"_key": "b11",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n11",
-									"text": "No todos nuestros clientes pueden aparecer aquí. Buena parte de nuestro trabajo llega a través de terceros, y lo que firmamos se respeta. Estos son los nombres que sí podemos escribir.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b12",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n12",
-									"text": "Clientes",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b13",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n13",
-									"text": "Alcampo. Auchan. Forum Sport. Punt Roma. Y Job&Talent, con quien trabajamos en su día.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b14",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n14",
-									"text": "Colaboraciones",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b15",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n15",
-									"text": "Con Inetum y con Grupo Seidor participamos como especialistas dentro de proyectos suyos.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b16",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n16",
-									"text": "Del resto solo contamos agregados. Más de cuarenta dominios protegidos tras Cloudflare, una cadena de juguetería, retail alimentario a escala europea. Si necesitas una referencia concreta de tu sector, pídela en una llamada.",
-									"marks": []
-								}
-							]
-						}
-					]
+					"content": []
 				}
 			},
 			{
@@ -14208,92 +14273,7 @@
 				"data": {
 					"title": "References",
 					"excerpt": "The names we can write, and the work behind them.",
-					"content": [
-						{
-							"_type": "block",
-							"_key": "b17",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n17",
-									"text": "Not every client of ours can appear here. A good part of our work arrives through third parties, and what we sign stays signed. These are the names we can write.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b18",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n18",
-									"text": "Clients",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b19",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n19",
-									"text": "Alcampo. Auchan. Forum Sport. Punt Roma. And Job&Talent, whom we worked with back in the day.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b20",
-							"style": "h2",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n20",
-									"text": "Collaborations",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b21",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n21",
-									"text": "With Inetum and Grupo Seidor we take part as specialists inside their projects.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b22",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n22",
-									"text": "For the rest, aggregates only: forty-plus domains protected behind Cloudflare, a toy-store chain, food retail at European scale. If you need a reference from your sector, ask for it on a call.",
-									"marks": []
-								}
-							]
-						}
-					]
+					"content": []
 				}
 			},
 			{
@@ -14379,6 +14359,143 @@
 			}
 		],
 		"posts": [],
+		"references": [
+			{
+				"id": "ref-alcampo",
+				"locale": "es",
+				"slug": "alcampo",
+				"status": "published",
+				"data": {
+					"title": "Alcampo",
+					"excerpt": "clientes · 5.5K",
+					"featured_image": {
+						"src": "/assets/ref-alcampo.png",
+						"alt": "Alcampo"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "ref-auchan",
+				"locale": "es",
+				"slug": "auchan",
+				"status": "published",
+				"data": {
+					"title": "Auchan",
+					"excerpt": "clientes · 5.4K",
+					"featured_image": {
+						"src": "/assets/ref-auchan.png",
+						"alt": "Auchan"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "ref-forum-sport",
+				"locale": "es",
+				"slug": "forum-sport",
+				"status": "published",
+				"data": {
+					"title": "Forum Sport",
+					"excerpt": "clientes · 8.7K",
+					"featured_image": {
+						"src": "/assets/ref-forum-sport.png",
+						"alt": "Forum Sport"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "ref-punt-roma",
+				"locale": "es",
+				"slug": "punt-roma",
+				"status": "published",
+				"data": {
+					"title": "Punt Roma",
+					"excerpt": "clientes · 6.8K",
+					"featured_image": {
+						"src": "/assets/ref-punt-roma.png",
+						"alt": "Punt Roma"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "ref-jobandtalent",
+				"locale": "es",
+				"slug": "jobandtalent",
+				"status": "published",
+				"data": {
+					"title": "Job&Talent",
+					"excerpt": "clientes · 6.6K",
+					"featured_image": {
+						"src": "/assets/ref-jobandtalent.png",
+						"alt": "Job&Talent"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "ref-c1",
+				"locale": "es",
+				"slug": "c1",
+				"status": "published",
+				"data": {
+					"title": "c1",
+					"excerpt": "clientes · 42K",
+					"featured_image": {
+						"src": "/assets/ref-c1.png",
+						"alt": ""
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "ref-t1",
+				"locale": "es",
+				"slug": "t1",
+				"status": "published",
+				"data": {
+					"title": "t1",
+					"excerpt": "clientes · 27K",
+					"featured_image": {
+						"src": "/assets/ref-t1.png",
+						"alt": ""
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "colab-inetum",
+				"locale": "es",
+				"slug": "inetum",
+				"status": "published",
+				"data": {
+					"title": "Inetum",
+					"excerpt": "colaboraciones · 5.2K",
+					"featured_image": {
+						"src": "/assets/colab-inetum.png",
+						"alt": "Inetum"
+					},
+					"featured": true
+				}
+			},
+			{
+				"id": "colab-seidor",
+				"locale": "es",
+				"slug": "grupo-seidor",
+				"status": "published",
+				"data": {
+					"title": "Grupo Seidor",
+					"excerpt": "colaboraciones · 14K",
+					"featured_image": {
+						"src": "/assets/colab-seidor.png",
+						"alt": "Grupo Seidor"
+					},
+					"featured": true
+				}
+			}
+		],
 		"partners": [
 			{
 				"id": "partner-cloudflare",
