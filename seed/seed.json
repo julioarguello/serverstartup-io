@@ -779,7 +779,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tornillería incluida: cero handoffs."
+									"text": "Tornillería incluida: cero traspasos."
 								}
 							]
 						},
@@ -1415,7 +1415,7 @@
 							"_type": "block",
 							"_key": "team_title",
 							"style": "normal",
-							"children": [{ "_type": "span", "text": "~ El equipo" }]
+							"children": [{ "_type": "span", "text": "El equipo" }]
 						}
 					]
 				},
@@ -2720,7 +2720,7 @@
 							"_type": "block",
 							"_key": "team_title",
 							"style": "normal",
-							"children": [{ "_type": "span", "text": "~ The team" }]
+							"children": [{ "_type": "span", "text": "The team" }]
 						}
 					],
 					"type": "content"
@@ -12157,7 +12157,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Cómo trabajamos"
+									"text": "Cómo trabajamos"
 								}
 							]
 						},
@@ -12218,7 +12218,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Áreas de especialización"
+									"text": "Áreas de especialización"
 								}
 							]
 						},
@@ -12303,7 +12303,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Historia"
+									"text": "Historia"
 								}
 							]
 						},
@@ -12691,7 +12691,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ El equipo"
+									"text": "El equipo"
 								}
 							]
 						},
@@ -12784,7 +12784,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Nuestros valores"
+									"text": "Nuestros valores"
 								}
 							]
 						},
@@ -12892,7 +12892,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Con el deporte base"
+									"text": "Con el deporte base"
 								}
 							]
 						},
@@ -13300,7 +13300,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ How we work"
+									"text": "How we work"
 								}
 							]
 						},
@@ -13361,7 +13361,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Areas of expertise"
+									"text": "Areas of expertise"
 								}
 							]
 						},
@@ -13447,7 +13447,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ History"
+									"text": "History"
 								}
 							]
 						},
@@ -13732,7 +13732,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ The team"
+									"text": "The team"
 								}
 							]
 						},
@@ -13825,7 +13825,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Our values"
+									"text": "Our values"
 								}
 							]
 						},
@@ -13933,7 +13933,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Backing grassroots sport"
+									"text": "Backing grassroots sport"
 								}
 							]
 						},

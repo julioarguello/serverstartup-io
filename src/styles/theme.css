@@ -170,6 +170,19 @@ ul, ol { list-style: none; }
 }
 
 /* ─────────────────────────────────────────
+   Section headings — the house mark (#298)
+   Every section heading inside <main> opens with the terminal tilde. It
+   lives HERE, not in the CMS: it is a design signal, and while it lived
+   in the copy only two pages out of twelve carried it. The CTA block is
+   a different register (a closing invitation, not a section) and opts out.
+   ───────────────────────────────────────── */
+main h2:not(.s-cta__heading):not(.ref-banner__title)::before,
+.ref-banner__title::before {
+	content: "~ ";
+	font-weight: inherit;
+}
+
+/* ─────────────────────────────────────────
    Layout Containers
    ───────────────────────────────────────── */
 .container {
