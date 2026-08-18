@@ -35,5 +35,3 @@ El que firma, da la cara. Desde agosto de 2026, además, la [ley europea de IA](
 Aquí no vas a encontrar un producto de IA. No lo tenemos y no lo fingimos. Tenemos un método hecho de reglas y protocolos versionados que dirigen a los agentes, distribuible y auditable.
 
 [Esta misma web](/deconstruyendo) se construye así, con agentes supervisados, *pull request* a *pull request*. Y si un *chatbot* no te resuelve nada, te diremos que no lo pongas.
-
-> [**Un equipo**](/quienes-somos)**. Seis verticales. Cero traspasos.**

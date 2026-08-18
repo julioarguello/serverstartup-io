@@ -599,6 +599,45 @@
 			"widgets": [
 				{
 					"type": "content",
+					"title": "mantra",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "beat_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Un equipo"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "beat_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Seis verticales"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "beat_3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cero traspasos"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "content",
 					"title": "refs_labels",
 					"content": [
 						{
@@ -1903,6 +1942,45 @@
 			"label": "UI Labels (English)",
 			"description": "English UI micro-copy — footer headings, error page, search, aria-labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "mantra",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "beat_1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "One team"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "beat_2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Six verticals"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "beat_3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Zero handoffs"
+								}
+							]
+						}
+					]
+				},
 				{
 					"type": "content",
 					"title": "refs_labels",
@@ -3796,36 +3874,6 @@
 									"marks": []
 								}
 							]
-						},
-						{
-							"_type": "block",
-							"_key": "k21",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k1y",
-									"_type": "link",
-									"href": "/quienes-somos"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k1z",
-									"text": "**Un equipo**",
-									"marks": [
-										"k1y"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k20",
-									"text": ". Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
 						}
 					],
 					"color": "#008FD3"
@@ -4466,36 +4514,6 @@
 									"_key": "k2e",
 									"text": ".",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2j",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2g",
-									"_type": "link",
-									"href": "/quienes-somos"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2h",
-									"text": "**Un equipo**",
-									"marks": [
-										"k2g"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2i",
-									"text": ". Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
 								}
 							]
 						}
@@ -5205,36 +5223,6 @@
 									"_key": "k2q",
 									"text": ".",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2v",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2s",
-									"_type": "link",
-									"href": "/quienes-somos"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2t",
-									"text": "**Un equipo**",
-									"marks": [
-										"k2s"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2u",
-									"text": ". Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
 								}
 							]
 						}
@@ -6181,36 +6169,6 @@
 									"marks": []
 								}
 							]
-						},
-						{
-							"_type": "block",
-							"_key": "k3t",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k3q",
-									"_type": "link",
-									"href": "/quienes-somos"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k3r",
-									"text": "**Un equipo**",
-									"marks": [
-										"k3q"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k3s",
-									"text": ". Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
 						}
 					],
 					"color": "#1D4E89"
@@ -6898,36 +6856,6 @@
 									"marks": []
 								}
 							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2q",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2n",
-									"_type": "link",
-									"href": "/quienes-somos"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2o",
-									"text": "**Un equipo**",
-									"marks": [
-										"k2n"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2p",
-									"text": ". Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
 						}
 					],
 					"color": "#3E7D50"
@@ -7450,36 +7378,6 @@
 									"_key": "k1u",
 									"text": " rules. Nobody will tell you \"let me check with the other team\".",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k1z",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k1w",
-									"_type": "link",
-									"href": "/en/about-us"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k1x",
-									"text": "**One team**",
-									"marks": [
-										"k1w"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k1y",
-									"text": ". Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
 								}
 							]
 						}
@@ -8115,36 +8013,6 @@
 									"_key": "k2d",
 									"text": ".",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2i",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2f",
-									"_type": "link",
-									"href": "/en/about-us"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2g",
-									"text": "**One team**",
-									"marks": [
-										"k2f"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2h",
-									"text": ". Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
 								}
 							]
 						}
@@ -8855,36 +8723,6 @@
 									"_key": "k2q",
 									"text": ".",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2v",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2s",
-									"_type": "link",
-									"href": "/en/about-us"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2t",
-									"text": "**One team**",
-									"marks": [
-										"k2s"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2u",
-									"text": ". Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
 								}
 							]
 						}
@@ -9832,36 +9670,6 @@
 									"marks": []
 								}
 							]
-						},
-						{
-							"_type": "block",
-							"_key": "k3t",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k3q",
-									"_type": "link",
-									"href": "/en/about-us"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k3r",
-									"text": "**One team**",
-									"marks": [
-										"k3q"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k3s",
-									"text": ". Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
 						}
 					],
 					"color": "#1D4E89"
@@ -10550,36 +10358,6 @@
 									"marks": []
 								}
 							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2q",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2n",
-									"_type": "link",
-									"href": "/en/about-us"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2o",
-									"text": "**One team**",
-									"marks": [
-										"k2n"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2p",
-									"text": ". Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
 						}
 					],
 					"color": "#3E7D50"
@@ -11175,36 +10953,6 @@
 									"_key": "k2a",
 									"text": " se construye así, con agentes supervisados, *pull request* a *pull request*. Y si un *chatbot* no te resuelve nada, te diremos que no lo pongas.",
 									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2f",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2c",
-									"_type": "link",
-									"href": "/quienes-somos"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2d",
-									"text": "**Un equipo**",
-									"marks": [
-										"k2c"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2e",
-									"text": ". Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
 								}
 							]
 						}
@@ -11805,36 +11553,6 @@
 									"marks": []
 								}
 							]
-						},
-						{
-							"_type": "block",
-							"_key": "k2f",
-							"style": "blockquote",
-							"markDefs": [
-								{
-									"_key": "k2c",
-									"_type": "link",
-									"href": "/en/about-us"
-								}
-							],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "k2d",
-									"text": "**One team**",
-									"marks": [
-										"k2c"
-									]
-								},
-								{
-									"_type": "span",
-									"_key": "k2e",
-									"text": ". Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
 						}
 					],
 					"color": "#6B4FBB"
@@ -12200,14 +11918,7 @@
 								},
 								{
 									"_type": "span",
-									"text": " recorren todas las capas: el que diseña, escribe; el que escribe, opera. "
-								},
-								{
-									"_type": "span",
-									"text": "Un equipo. Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
+									"text": " recorren todas las capas: el que diseña, escribe; el que escribe, opera."
 								}
 							]
 						},
@@ -12875,19 +12586,6 @@
 						},
 						{
 							"_type": "block",
-							"style": "blockquote",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Un equipo. Seis verticales. Cero traspasos.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
-						},
-						{
-							"_type": "block",
 							"style": "h2",
 							"children": [
 								{
@@ -12968,16 +12666,6 @@
 								{
 									"_type": "span",
 									"text": "Si corre prisa, WhatsApp. Si puede esperar, email."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Un equipo. Seis verticales. Cero traspasos."
 								}
 							]
 						},
@@ -13343,14 +13031,7 @@
 								},
 								{
 									"_type": "span",
-									"text": " cover every layer: whoever designs, writes; whoever writes, operates. "
-								},
-								{
-									"_type": "span",
-									"text": "One team. Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
+									"text": " cover every layer: whoever designs, writes; whoever writes, operates."
 								}
 							]
 						},
@@ -13916,19 +13597,6 @@
 						},
 						{
 							"_type": "block",
-							"style": "blockquote",
-							"children": [
-								{
-									"_type": "span",
-									"text": "One team. Six verticals. Zero handoffs.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
-						},
-						{
-							"_type": "block",
 							"style": "h2",
 							"children": [
 								{
@@ -14010,16 +13678,6 @@
 								{
 									"_type": "span",
 									"text": "If it's urgent, WhatsApp. If it can wait, email."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "One team. Six verticals. Zero handoffs."
 								}
 							]
 						},

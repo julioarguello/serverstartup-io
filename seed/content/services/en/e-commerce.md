@@ -30,5 +30,3 @@ The ones that come to mind when someone asks what we do.
 - **Cross-docking and fulfillment.** From the web order to picking and the delivery promise, with substitutes when a product runs out.
 
 The team working on your platform also builds your data `pipeline` and writes your `WAF` rules. Nobody will tell you "let me check with the other team".
-
-> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

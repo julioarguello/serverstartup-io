@@ -32,5 +32,3 @@ We've deployed `Cloudflare` for:
 The platform doesn't end at `CDN` and `WAF`. `Zero Trust`, `Access`, `Stream`, `R2`. We help you decide which pieces fit, and which don't.
 
 This very site runs on `Workers`, `D1` and `R2`, behind the same `WAF` we run for clients. We take it apart, piece by piece, in [Deconstructing this website](/en/deconstructing).
-
-> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

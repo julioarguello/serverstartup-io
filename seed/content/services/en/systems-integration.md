@@ -39,5 +39,3 @@ Stock doesn't match, orders duplicate, and nobody quite knows why. We've seen it
 The senior team that designs the topology on the whiteboard is **the exact same one** that writes the code, fine-tunes the *brokers*, and picks up the phone if something breaks on a Friday at six (though they break less and less 😉). We know the business as well as we know the implementation. We know what a duplicated order costs mid-campaign.
 
 If it breaks, we don't open a *ticket*: **we fix it**.
-
-> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

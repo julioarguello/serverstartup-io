@@ -30,5 +30,3 @@ En lo analítico trabajamos con [`dbt Cloud`](https://docs.getdbt.com/docs/platf
 Los mismos tests y el mismo versionado a los dos lados, sin peajes entre equipos. Al cuadro de mando, el dato llega ya probado.
 
 Conectamos `BigQuery` con [tu e-commerce](/comercio-electronico), con tu [ERP](/integracion-de-sistemas) y con el [*edge*](/cdn-waf-seguridad-edge-cloudflare).
-
-> [**Un equipo**](/quienes-somos)**. Seis verticales. Cero traspasos.**

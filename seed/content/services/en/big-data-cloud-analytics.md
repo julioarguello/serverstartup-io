@@ -30,5 +30,3 @@ On the analytical side we work with [`dbt Cloud`](https://docs.getdbt.com/docs/p
 The same tests and the same versioning on both sides, with no toll booths between teams. Data reaches the dashboard already proven.
 
 We connect `BigQuery` to [your e-commerce](/en/e-commerce), to your [ERP](/en/systems-integration), and to the [*edge*](/en/cdn-waf-edge-security-cloudflare).
-
-> [**One team**](/en/about-us)**. Six verticals. Zero handoffs.**

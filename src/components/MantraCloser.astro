@@ -1,0 +1,211 @@
+---
+/**
+ * MantraCloser — the house signature, one implementation (#295).
+ *
+ * The line used to be written 14 times across the content, each page
+ * giving it its own shape. Now the three beats live once per locale in the
+ * CMS (ui_labels → mantra) and this component gives them their form, so a
+ * new page cannot drift. Same move as the heading mark in #298.
+ *
+ * The form is an equation set in Computer Modern (Knuth's TeX face,
+ * self-hosted, subset to these glyphs — 13 KB for three cuts), and every
+ * figure carries its own glyph BENEATH it, all three numerals staying on
+ * one baseline (founder design, 2026-08-18):
+ *
+ *     1 equipo   =   6 verticales   =   0 traspasos
+ *     ▣              ▪▪▪▪▪▪
+ *   the logo      the six faces        nothing — and that IS the claim
+ *
+ * The glyphs are absolutely positioned so they never disturb the line;
+ * the box reserves the room for them. Screen readers read the numerals
+ * and skip the glyphs.
+ *
+ * Chrome: the house box (left rule + 4% ink tint), the same pattern and
+ * margins as `.s-partner` — nothing invented here.
+ */
+import { getEmDashCollection } from "emdash";
+import { getUiLabels } from "../utils/ui-labels";
+import { FACE_BY_SLUG, FACE_ORDER } from "../utils/nav";
+
+interface Props {
+	/** true on Quiénes somos / About us: no self-link */
+	selfPage?: boolean;
+}
+const { selfPage = false } = Astro.props;
+
+const locale = Astro.currentLocale || "es";
+const labels = await getUiLabels(locale);
+const en = locale === "en";
+const beats = [
+	labels.get("mantra", "beat_1", en ? "One team" : "Un equipo"),
+	labels.get("mantra", "beat_2", en ? "Six verticals" : "Seis verticales"),
+	labels.get("mantra", "beat_3", en ? "Zero handoffs" : "Cero traspasos"),
+];
+const href = en ? "/en/about-us" : "/quienes-somos";
+
+// the six faces come from the CMS in canonical cube order, and each one
+// LINKS to its vertical — the glyph is navigation, not decoration
+const { entries: serviceEntries } = await getEmDashCollection("services", {
+	orderBy: { created_at: "asc" },
+	locale,
+});
+const faces = (serviceEntries ?? [])
+	.map((s: any) => {
+		const slug = s.slug ?? s.id;
+		return {
+			key: FACE_BY_SLUG[slug],
+			href: `${en ? "/en" : ""}/${slug}`,
+			title: s.data.title ?? slug,
+			color: s.data.color ?? "#1E1E1E",
+		};
+	})
+	.filter((f) => f.key)
+	.sort((a, b) => FACE_ORDER.indexOf(a.key) - FACE_ORDER.indexOf(b.key));
+// the figure carries the number, so the noun drops its quantifier
+const nouns = beats.map((b) => b.replace(/^(Un |One |Seis |Six |Cero |Zero )/, ""));
+---
+
+<aside class="mantra">
+	<p class="mantra__eq">
+		<span class="mantra__cube-wrap" aria-hidden="true">
+			<svg class="mantra__cube" width="21" height="24" viewBox="0 0 200 228" role="presentation">
+				<polygon points="100,14 186,64 100,114 14,64" fill="#CED4DA"></polygon>
+				<polygon points="14,64 100,114 100,214 14,164" fill="#CED4DA"></polygon>
+				<polygon points="100,114 186,64 186,164 100,214" fill="#E3E7EB"></polygon>
+				<path d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
+				<path d="M14,64 100,114 186,64 M100,114 100,214"></path>
+				<path d="M57,39 143,89 M143,39 57,89"></path>
+				<path d="M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"></path>
+			</svg>
+		</span>
+		<span class="mantra__n">1</span>{" "}
+		{selfPage ? nouns[0] : <a href={href}>{nouns[0]}</a>} <b>=</b>
+		<span class="mantra__cells" aria-hidden="true"
+			><span class="mantra__cells-grid">
+				{faces.map((f) => <i style={`background:${f.color}`} title={f.title}></i>)}
+			</span></span
+		>
+		<span class="mantra__n">6</span> {nouns[1]} <b>=</b>
+		<span class="mantra__n mantra__empty" aria-hidden="true">Ø</span>
+		<span class="u-sr">0</span> {nouns[2]}
+	</p>
+</aside>
+
+<style is:global>
+	/* the house box: left rule + 4% ink tint, same pattern and rhythm as
+	   .s-partner (service.css) — the signature sits inside it instead of
+	   floating naked against the next band (founder review) */
+	.mantra {
+		margin: 44px 0 8px;
+		padding: 26px 30px 34px;
+		border-left: 3px solid var(--color-primary, #1e1e1e);
+		background: color-mix(in srgb, var(--color-primary, #1e1e1e) 4%, transparent);
+	}
+
+	.mantra__eq {
+		margin: 0;
+		font-family: "CMU Serif", "Latin Modern Roman", "Times New Roman", serif;
+		font-size: 27px;
+		line-height: 40px;
+		font-weight: 400;
+		font-style: italic;
+		color: var(--color-primary, #1e1e1e);
+	}
+
+	.mantra__n {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 31px;
+	}
+
+	/* zero is the empty set: CMU Serif has no U+2205 (it lives in the math
+	   cuts), and its Ø is the identical drawing — screen readers get "0" */
+	.mantra__empty {
+		font-weight: 500;
+	}
+
+	/* the six faces ride IN FRONT of the figure, stacked (2x3) so the block
+	   matches the numeral's height instead of running along the line */
+	/* The block SITS on the text baseline. An inline-BLOCK whose content has
+	   no line box takes its bottom margin edge as baseline (CSS 2.1 §10.8);
+	   an inline-GRID instead synthesises one from its first row, which is why
+	   the earlier version floated (founder: "no quiero que bailen"). Hence
+	   the wrapper: inline-block outside, grid inside. */
+	.mantra__cells {
+		display: inline-block;
+		overflow: hidden;
+		vertical-align: baseline;
+		line-height: 0;
+		margin-right: 8px;
+	}
+	.mantra__cells-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2px;
+		width: 16px;
+	}
+	.mantra__cells i {
+		aspect-ratio: 1;
+		display: block;
+	}
+
+	/* ink edges over grey faces — the mark reads at 21px only if the strokes
+	   carry it (founder review: the first cut had no legible edges) */
+	.mantra__cube path {
+		fill: none;
+		stroke: var(--color-primary, #1e1e1e);
+		stroke-width: 13;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+	}
+	.mantra__cube-wrap {
+		display: inline-block;
+		margin-right: 8px;
+		vertical-align: baseline;
+		overflow: hidden;
+		line-height: 0;
+	}
+
+
+	.mantra__eq b {
+		font-style: normal;
+		font-weight: 400;
+		padding: 0 8px;
+		color: color-mix(in srgb, var(--color-primary, #1e1e1e) 45%, transparent);
+	}
+
+	.mantra a {
+		color: inherit;
+		text-decoration: underline;
+		text-decoration-style: dashed;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 5px;
+		text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+	}
+	.mantra a:hover,
+	.mantra a:focus-visible {
+		text-decoration-style: solid;
+		text-decoration-color: currentColor;
+	}
+
+	.u-sr {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	@media (max-width: 700px) {
+		.mantra { padding: 20px 22px 30px; margin: 34px 0 8px; }
+		.mantra__eq { font-size: 20px; line-height: 34px; }
+		.mantra__n { font-size: 23px; }
+		.mantra__cells { width: 36px; }
+		.mantra__cube { width: 17px; height: 19px; }
+		.mantra__cells { width: 13px; }
+	}
+</style>

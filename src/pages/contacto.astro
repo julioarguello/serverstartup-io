@@ -13,6 +13,7 @@ import { entryAlternatePath } from "../utils/alternate";
 import { PortableText } from "emdash/ui";
 import CubeEmblem from "../components/CubeEmblem.astro";
 import Base from "../layouts/Base.astro";
+import MantraCloser from "../components/MantraCloser.astro";
 import { contactJsonLd } from "../utils/jsonld";
 import { getUiLabels } from "../utils/ui-labels";
 import type { SiteSettings } from "../types";
@@ -151,6 +152,9 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") :
 			});
 		}
 	</script>
+	<section class="container mantra-section">
+		<MantraCloser />
+	</section>
 </Base>
 
 <style>

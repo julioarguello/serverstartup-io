@@ -30,5 +30,3 @@ Los que nos vienen a la cabeza cuando alguien pregunta a qué nos dedicamos.
 - ***Cross-docking* y *fulfillment*.** Del pedido web a la preparación y la promesa de entrega, con sustitutos cuando falta producto.
 
 El equipo que trabaja sobre tu plataforma construye también tu `pipeline` de datos y escribe las reglas de tu `WAF`. Nadie te dirá «lo miro con el otro equipo».
-
-> [**Un equipo**](/quienes-somos)**. Seis verticales. Cero traspasos.**

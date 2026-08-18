@@ -5,6 +5,7 @@
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import Base from "../../layouts/Base.astro";
+import MantraCloser from "../../components/MantraCloser.astro";
 import CtaGlobal from "../../components/CtaGlobal.astro";
 import ServiceInstrument from "../../components/service/ServiceInstrument.astro";
 import CubeEmblem from "../../components/CubeEmblem.astro";
@@ -103,6 +104,10 @@ const labels = await getUiLabels(locale);
 			labels={labels}
 		/>
 	)}
+
+	<div class="container mantra-wrap">
+		<MantraCloser />
+	</div>
 
 	<CtaGlobal />
 </Base>

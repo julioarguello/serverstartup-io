@@ -11,6 +11,7 @@ import PtLink from "../../components/PtLink.astro";
 const ptComponents = { mark: { link: PtLink } };
 import CubeEmblem from "../../components/CubeEmblem.astro";
 import Base from "../../layouts/Base.astro";
+import MantraCloser from "../../components/MantraCloser.astro";
 import { aboutJsonLd } from "../../utils/jsonld";
 const t = Astro.locals.t;
 
@@ -198,6 +199,9 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "en") :
 			</div>
 		</section>
 	)}
+	<section class="container mantra-section">
+		<MantraCloser selfPage />
+	</section>
 </Base>
 
 <style is:global>
