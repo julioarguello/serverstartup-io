@@ -1,0 +1,125 @@
+---
+/**
+ * ReferenceBanner — the citable references as a quiet band (#296).
+ *
+ * Static by decision: no rotation, no carousel — a reader should be able
+ * to look at the whole set at once. White ground, logos in a row in the
+ * same order as `/referencias` (by slug, which `ls` sorts alphabetically),
+ * carrying the same treatment as the wall there: optically pre-equalized
+ * at the asset, single-ink (dark here, inverted white there), and inert —
+ * no links on the logos, we have no permission to imply endorsement.
+ *
+ * It lives in the footer, so it repeats on every content page: the
+ * industry practice is not homepage-only — repetition is what builds the
+ * credibility (verified 2026-08-18, see the issue).
+ *
+ * The section title is the only link: it points at `/referencias`, where
+ * the ownership disclaimer and the full listing live.
+ */
+import { getEmDashCollection } from "emdash";
+
+interface Props {
+	title: string;
+	href: string;
+	ariaLabel: string;
+}
+const { title, href, ariaLabel } = Astro.props;
+
+const { entries, cacheHint } = await getEmDashCollection("references", {
+	orderBy: { created_at: "asc" },
+});
+if (cacheHint) Astro.cache.set(cacheHint);
+
+const logos = (entries ?? [])
+	.filter((r: any) => Boolean(r.data.featured) && r.data.featured_image?.src)
+	.sort((a: any, b: any) =>
+		String((a as any).slug ?? a.id).localeCompare(String((b as any).slug ?? b.id)))
+	.map((r: any) => ({
+		src: r.data.featured_image.src,
+		alt: r.data.featured_image.alt ?? "",
+	}));
+---
+
+{logos.length > 0 && (
+	<section class="ref-banner" aria-label={ariaLabel}>
+		<div class="container ref-banner__inner">
+			<h2 class="ref-banner__title"><a href={href}>{title}</a></h2>
+			<ul class="ref-banner__row" role="list">
+				{logos.map((l) => (
+					<li>
+						<img src={l.src} alt={l.alt} loading="lazy" decoding="async" />
+					</li>
+				))}
+			</ul>
+		</div>
+	</section>
+)}
+
+<style is:global>
+	.ref-banner {
+		background: var(--color-secondary, #fff);
+		padding: 34px 0 30px;
+		border-top: 1px solid var(--color-border, #e3e7eb);
+	}
+
+	.ref-banner__inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 18px;
+	}
+
+	.ref-banner__title {
+		margin: 0;
+		font-weight: 400;
+		line-height: 1.2;
+		font-family: var(--font-family-mono, monospace);
+		font-size: 13px;
+		letter-spacing: 0.06em;
+		text-transform: lowercase;
+		/* 78%: AA contrast on white at 13px — 55% failed Lighthouse a11y */
+		color: color-mix(in srgb, var(--color-primary, #1e1e1e) 78%, transparent);
+		text-decoration: underline;
+		text-decoration-style: dashed;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 4px;
+		text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+	}
+	.ref-banner__title a {
+		color: inherit;
+		text-decoration: inherit;
+		text-decoration-color: inherit;
+	}
+	.ref-banner__title:hover,
+	.ref-banner__title:focus-visible {
+		color: var(--color-primary, #1e1e1e);
+		text-decoration-style: solid;
+	}
+
+	/* one row, wrapping on narrow screens — never a scroller */
+	.ref-banner__row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		gap: 10px 34px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	/* single ink on a light ground: the mirror of the dark wall at
+	   /referencias. Inert — no hover restore, referential use only. */
+	.ref-banner__row img {
+		display: block;
+		height: 26px;
+		width: auto;
+		filter: grayscale(1) opacity(0.62);
+	}
+
+	@media (max-width: 700px) {
+		.ref-banner { padding: 26px 0 22px; }
+		.ref-banner__row { gap: 8px 22px; }
+		.ref-banner__row img { height: 21px; }
+	}
+</style>

@@ -74,7 +74,8 @@
 }
 
 .ls-row--dim {
-	color: rgba(255, 255, 255, 0.32);
+	/* 0.32 failed AA on the terminal ground — dim, but readable */
+	color: rgba(255, 255, 255, 0.55);
 	min-height: 26px;
 }
 .ls-row--dim .ls-name {
@@ -106,7 +107,7 @@
 .refs-disclaimer {
 	font-size: 13px;
 	line-height: 1.5;
-	color: color-mix(in srgb, var(--color-primary, #1e1e1e) 55%, transparent);
+	color: color-mix(in srgb, var(--color-primary, #1e1e1e) 72%, transparent);
 	margin: 6px 0 0;
 }
 
