@@ -367,6 +367,11 @@
 			"name": "site_es",
 			"label": "Sitio",
 			"items": [
+				{
+					"type": "custom",
+					"label": "Inicio",
+					"url": "/"
+				},
 				{ "type": "custom", "label": "Quiénes somos", "url": "/quienes-somos" },
 				{ "type": "custom", "label": "Referencias", "url": "/referencias" },
 				{ "type": "custom", "label": "Contacto", "url": "/contacto" },
@@ -378,6 +383,11 @@
 			"name": "site_en",
 			"label": "Site",
 			"items": [
+				{
+					"type": "custom",
+					"label": "Home",
+					"url": "/en/"
+				},
 				{ "type": "custom", "label": "About us", "url": "/en/about-us" },
 				{ "type": "custom", "label": "References", "url": "/en/references" },
 				{ "type": "custom", "label": "Contact", "url": "/en/contact" },
@@ -1116,7 +1126,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "quince años"
+									"text": "más de veinte años"
 								}
 							]
 						},
@@ -2422,7 +2432,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "fifteen years"
+									"text": "over twenty years"
 								}
 							]
 						},
@@ -3262,7 +3272,7 @@
 				"status": "published",
 				"data": {
 					"title": "Comercio electrónico",
-					"excerpt": "Quince años dentro de [`SAP Commerce Cloud`](https://www.sap.com/spain/products/crm/commerce-cloud.html). Extender la plataforma es lo fácil: hacerlo con cada mejora desacoplada del *core*, ajustada al estándar, para que sobreviva versión tras versión, es lo que casi nadie hace. Y el rendimiento, nuestra especialidad.",
+					"excerpt": "Más de veinte años dentro de [`SAP Commerce Cloud`](https://www.sap.com/spain/products/crm/commerce-cloud.html). Extender la plataforma es lo fácil: hacerlo con cada mejora desacoplada del *core*, ajustada al estándar, para que sobreviva versión tras versión, es lo que casi nadie hace. Y el rendimiento, nuestra especialidad.",
 					"cta_label": "Audita tu e-commerce",
 					"content": [
 						{
@@ -3350,7 +3360,7 @@
 								{
 									"_type": "span",
 									"_key": "kb",
-									"text": "Llevamos quince años dentro de ",
+									"text": "Llevamos más de veinte años dentro de ",
 									"marks": []
 								},
 								{
@@ -6932,7 +6942,7 @@
 				"translationOf": "svc-ecommerce",
 				"data": {
 					"title": "E-commerce",
-					"excerpt": "Fifteen years inside [`SAP Commerce Cloud`](https://www.sap.com/products/crm/commerce-cloud.html). Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty.",
+					"excerpt": "Over twenty years inside [`SAP Commerce Cloud`](https://www.sap.com/products/crm/commerce-cloud.html). Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty.",
 					"cta_label": "Audit your e-commerce",
 					"content": [
 						{
@@ -7020,7 +7030,7 @@
 								{
 									"_type": "span",
 									"_key": "kb",
-									"text": "We've spent fifteen years inside ",
+									"text": "We've spent over twenty years inside ",
 									"marks": []
 								},
 								{
@@ -12020,22 +12030,78 @@
 				"slug": "home",
 				"status": "published",
 				"data": {
-					"title": "Ingeniería de sistemas, integración y seguridad edge",
-					"excerpt": "Tres ingenieros senior para el backend, la integración, los datos y el edge. Un equipo. Cuatro verticales. Cero handoffs.",
+					"title": "Ingeniería de software: arquitectura, integración y operación",
+					"excerpt": "Partners oficiales de Cloudflare desde 2019. Tres ingenieros senior: quien diseña tu arquitectura escribe el código. Un equipo. Seis verticales. Cero traspasos.",
 					"content": [
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "h_cred",
+							"markDefs": [
+								{
+									"_key": "hk1",
+									"_type": "link",
+									"href": "/cdn-waf-seguridad-edge-cloudflare"
+								},
+								{
+									"_key": "hk2",
+									"_type": "link",
+									"href": "/comercio-electronico"
+								},
+								{
+									"_key": "hk3",
+									"_type": "link",
+									"href": "/integracion-de-sistemas"
+								},
+								{
+									"_key": "hk4",
+									"_type": "link",
+									"href": "/big-data-cloud-analytics"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cada sistema funciona. Lo difícil es que funcionen "
+									"text": "Partners oficiales de "
 								},
 								{
 									"_type": "span",
-									"text": "juntos",
+									"text": "Cloudflare",
 									"marks": [
-										"strong"
+										"hk1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " desde 2019, y más de veinte años de oficio en "
+								},
+								{
+									"_type": "span",
+									"text": "comercio electrónico",
+									"marks": [
+										"hk2"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", "
+								},
+								{
+									"_type": "span",
+									"text": "integración de sistemas",
+									"marks": [
+										"hk3"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " y el "
+								},
+								{
+									"_type": "span",
+									"text": "dato",
+									"marks": [
+										"hk4"
 									]
 								},
 								{
@@ -12047,10 +12113,29 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "h_who",
+							"markDefs": [
+								{
+									"_key": "hk5",
+									"_type": "link",
+									"href": "/quienes-somos"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Somos tres ingenieros "
+									"text": "Somos "
+								},
+								{
+									"_type": "span",
+									"text": "tres ingenieros",
+									"marks": [
+										"hk5"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " "
 								},
 								{
 									"_type": "span",
@@ -12061,11 +12146,65 @@
 								},
 								{
 									"_type": "span",
-									"text": ". Los mismos que escriben tu backend conectan el ERP con la tienda online, montan el dato en BigQuery y afinan el WAF de Cloudflare. "
+									"text": ". Quien diseña tu arquitectura escribe el código. Y da la cara si algo se rompe."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"_key": "w_h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "~ Cómo trabajamos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "w_lead",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Sin intermediarios y sin traspasos.",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "w_body",
+							"markDefs": [
+								{
+									"_key": "wk1",
+									"_type": "link",
+									"href": "/quienes-somos"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"text": "Los mismos "
 								},
 								{
 									"_type": "span",
-									"text": "Un equipo. Cuatro verticales. Cero handoffs.",
+									"text": "tres ingenieros",
+									"marks": [
+										"wk1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " recorren todas las capas: el que diseña, escribe; el que escribe, opera. "
+								},
+								{
+									"_type": "span",
+									"text": "Un equipo. Seis verticales. Cero traspasos.",
 									"marks": [
 										"strong"
 									]
@@ -12074,50 +12213,8 @@
 						},
 						{
 							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Trabajamos así desde 2019. Quien diseña tu arquitectura escribe el código. Y da la cara si algo se rompe."
-								}
-							]
-						},
-						{
-							"_type": "block",
 							"style": "h2",
-							"children": [
-								{
-									"_type": "span",
-									"text": "~ Tecnología sin ceremonia"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "No escalamos. Profundizamos.",
-									"marks": [
-										"strong"
-									]
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Metodologías, las justas. Entendemos el contexto de cada proyecto y aplicamos criterio. Pocos clientes, máxima implicación. Si algo no es buena idea, te lo decimos antes de facturarlo."
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "h2",
+							"_key": "a_h2",
 							"children": [
 								{
 									"_type": "span",
@@ -12128,10 +12225,29 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "a_body",
+							"markDefs": [
+								{
+									"_key": "ak1",
+									"_type": "link",
+									"href": "/referencias"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Backend, integración, e-commerce, datos y edge. Todas las capas, las mismas tres personas."
+									"text": "Seis verticales, las mismas tres personas. Y las "
+								},
+								{
+									"_type": "span",
+									"text": "referencias",
+									"marks": [
+										"ak1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " que podemos nombrar."
 								}
 							]
 						}
@@ -13068,22 +13184,78 @@
 				"locale": "en",
 				"translationOf": "page-home",
 				"data": {
-					"title": "Systems engineering, integration and edge security",
-					"excerpt": "Three senior engineers across backend, integration, data and edge. One team. Four verticals. Zero handoffs.",
+					"title": "Software engineering: architecture, integration and operations",
+					"excerpt": "Official Cloudflare partners since 2019. Three senior engineers: whoever designs your architecture writes the code. One team. Six verticals. Zero handoffs.",
 					"content": [
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "h_cred",
+							"markDefs": [
+								{
+									"_key": "hk1",
+									"_type": "link",
+									"href": "/en/cdn-waf-edge-security-cloudflare"
+								},
+								{
+									"_key": "hk2",
+									"_type": "link",
+									"href": "/en/e-commerce"
+								},
+								{
+									"_key": "hk3",
+									"_type": "link",
+									"href": "/en/systems-integration"
+								},
+								{
+									"_key": "hk4",
+									"_type": "link",
+									"href": "/en/big-data-cloud-analytics"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Every system works. The hard part is making them work "
+									"text": "Official "
 								},
 								{
 									"_type": "span",
-									"text": "together",
+									"text": "Cloudflare",
 									"marks": [
-										"strong"
+										"hk1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " partners since 2019, and over twenty years of craft in "
+								},
+								{
+									"_type": "span",
+									"text": "e-commerce",
+									"marks": [
+										"hk2"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", "
+								},
+								{
+									"_type": "span",
+									"text": "systems integration",
+									"marks": [
+										"hk3"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " and "
+								},
+								{
+									"_type": "span",
+									"text": "data",
+									"marks": [
+										"hk4"
 									]
 								},
 								{
@@ -13095,25 +13267,51 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "h_who",
+							"markDefs": [
+								{
+									"_key": "hk5",
+									"_type": "link",
+									"href": "/en/about-us"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "We're three "
+									"text": "We are "
 								},
 								{
 									"_type": "span",
-									"text": "senior",
+									"text": "three senior engineers",
 									"marks": [
-										"em"
+										"hk5"
 									]
 								},
 								{
 									"_type": "span",
-									"text": " engineers. The same three who write your backend wire the ERP to the storefront, model the data in BigQuery and tune the Cloudflare WAF. "
-								},
+									"text": ". Whoever designs your architecture writes the code. And answers for it when something breaks."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"_key": "w_h2",
+							"children": [
 								{
 									"_type": "span",
-									"text": "One team. Four verticals. Zero handoffs.",
+									"text": "~ How we work"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "w_lead",
+							"children": [
+								{
+									"_type": "span",
+									"text": "No middlemen, no handovers.",
 									"marks": [
 										"strong"
 									]
@@ -13123,30 +13321,33 @@
 						{
 							"_type": "block",
 							"style": "normal",
-							"children": [
+							"_key": "w_body",
+							"markDefs": [
 								{
-									"_type": "span",
-									"text": "We've worked this way since 2019. Whoever designs your architecture writes the code. And owns it when something breaks."
+									"_key": "wk1",
+									"_type": "link",
+									"href": "/en/about-us"
 								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "h2",
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "~ Technology, minus the ceremony"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"children": [
+									"text": "The same "
+								},
 								{
 									"_type": "span",
-									"text": "We don't scale. We go deeper.",
+									"text": "three engineers",
+									"marks": [
+										"wk1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " cover every layer: whoever designs, writes; whoever writes, operates. "
+								},
+								{
+									"_type": "span",
+									"text": "One team. Six verticals. Zero handoffs.",
 									"marks": [
 										"strong"
 									]
@@ -13155,17 +13356,8 @@
 						},
 						{
 							"_type": "block",
-							"style": "normal",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Just enough process. We learn each project's context and use judgement. Few clients, full involvement. If something is a bad idea, we say so before we bill for it."
-								}
-							]
-						},
-						{
-							"_type": "block",
 							"style": "h2",
+							"_key": "a_h2",
 							"children": [
 								{
 									"_type": "span",
@@ -13176,10 +13368,29 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "a_body",
+							"markDefs": [
+								{
+									"_key": "ak1",
+									"_type": "link",
+									"href": "/en/references"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Backend, integration, e-commerce, data and edge. Every layer, the same three people."
+									"text": "Six verticals, the same three people. And the "
+								},
+								{
+									"_type": "span",
+									"text": "references",
+									"marks": [
+										"ak1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " we are free to name."
 								}
 							]
 						}
@@ -14504,8 +14715,8 @@
 				"data": {
 					"title": "Cloudflare",
 					"featured_image": {
-						"src": "/assets/logo-cloudflare.svg",
-						"alt": "Cloudflare"
+						"src": "/assets/logo-cloudflare-partner.png",
+						"alt": "Cloudflare Partner Network"
 					},
 					"excerpt": "Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare",
 					"content": [
@@ -14602,8 +14813,8 @@
 				"data": {
 					"title": "Cloudflare",
 					"featured_image": {
-						"src": "/assets/logo-cloudflare.svg",
-						"alt": "Cloudflare"
+						"src": "/assets/logo-cloudflare-partner.png",
+						"alt": "Cloudflare Partner Network"
 					},
 					"featured": true
 				},
@@ -14616,8 +14827,8 @@
 				"data": {
 					"title": "Cloudflare",
 					"featured_image": {
-						"src": "/assets/logo-cloudflare.svg",
-						"alt": "Cloudflare"
+						"src": "/assets/logo-cloudflare-partner.png",
+						"alt": "Cloudflare Partner Network"
 					},
 					"featured": true
 				},
@@ -14630,8 +14841,8 @@
 				"data": {
 					"title": "Cloudflare",
 					"featured_image": {
-						"src": "/assets/logo-cloudflare.svg",
-						"alt": "Cloudflare"
+						"src": "/assets/logo-cloudflare-partner.png",
+						"alt": "Cloudflare Partner Network"
 					},
 					"featured": true
 				},
@@ -14644,8 +14855,8 @@
 				"data": {
 					"title": "Cloudflare",
 					"featured_image": {
-						"src": "/assets/logo-cloudflare.svg",
-						"alt": "Cloudflare"
+						"src": "/assets/logo-cloudflare-partner.png",
+						"alt": "Cloudflare Partner Network"
 					},
 					"featured": true
 				},

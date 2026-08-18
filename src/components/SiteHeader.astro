@@ -17,6 +17,10 @@ interface Props {
 }
 const { promptPath, accent, altPath } = Astro.props;
 
+// The brand prompt is the way back home — locale-aware, or EN visitors
+// land on the Spanish home (#273)
+const homeHref = (Astro.currentLocale || "es") === "en" ? "/en/" : "/";
+
 const t = Astro.locals.t;
 
 // V2 (#216): the mark never changes shape and the strokes stay ink — but on
@@ -49,7 +53,7 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 					<path class="brand-cube-edge" d="M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"></path>
 				</svg>
 			</button>
-			<a href="/" class="brand-prompt">
+			<a href={homeHref} class="brand-prompt">
 				<span class="brand-word">~Server Startup</span><span class="brand-path">{promptPath}</span><span class="brand-cursor" aria-hidden="true"></span>
 			</a>
 		</div>

@@ -18,10 +18,16 @@
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import CloudflarePartner from "./CloudflarePartner.astro";
 import { PortableText } from "emdash/ui";
+import PtLink from "./PtLink.astro";
 import CtaGlobal from "./CtaGlobal.astro";
 import { FACE_BY_SLUG } from "../utils/nav";
+import CubeEmblem from "./CubeEmblem.astro";
 import { getUiLabels } from "../utils/ui-labels";
 import { excerptPlain } from "../utils/excerpt";
+
+// Whitespace-safe link mark: EmDash's default renderer inserts a space
+// before punctuation that follows a link (#273 — the hero is link-heavy)
+const ptComponents = { mark: { link: PtLink } };
 const t = Astro.locals.t;
 
 const locale = Astro.currentLocale || "es";
@@ -63,12 +69,15 @@ if (currentSection.heading || currentSection.blocks.length > 0) {
 	sections.push(currentSection);
 }
 
-// Named section extraction
+// Named section extraction — BY POSITION, never by heading words: the
+// copy is the founder's to change (#273 renamed the second band and the
+// old text match silently dropped the whole section from the page).
+// CMS order for pages/home: [hero ¶s] · h2 how-we-work · h2 areas.
 const heroSection = sections[0]; // blocks before first h2
-const techSection = sections.find((s) => s.heading.includes("Tecnología") || s.heading.includes("Technology"));
-const areasSection = sections.find((s) => s.heading.includes("Áreas") || s.heading.includes("Areas"));
+const techSection = sections[1];
+const areasSection = sections[2];
 
-// Extract tech subtitle (first block with marks) and body (second block)
+// Second band: lead line (first block) + body (second block)
 const techSubtitleBlock = techSection?.blocks[0];
 const techBodyBlock = techSection?.blocks[1];
 
@@ -82,12 +91,12 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 		<h1>{title}</h1>
 		{heroSection?.blocks.length > 0 && (
 			<div class="s-hero__kicker">
-				<PortableText value={[heroSection.blocks[0]]} />
+				<PortableText value={[heroSection.blocks[0]]} components={ptComponents} />
 			</div>
 		)}
 		{heroSection?.blocks.length > 1 && (
 			<div class="s-hero__body">
-				<PortableText value={heroSection.blocks.slice(1)} />
+				<PortableText value={heroSection.blocks.slice(1)} components={ptComponents} />
 			</div>
 		)}
 		<a href="#areas-especializacion" class="btn btn-dark">{heroServicesBtn}</a>
@@ -104,12 +113,12 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 			<div class="s-tech__col-right">
 				{techSubtitleBlock && (
 					<div class="s-tech__subtitle-wrap">
-						<PortableText value={[techSubtitleBlock]} />
+						<PortableText value={[techSubtitleBlock]} components={ptComponents} />
 					</div>
 				)}
 				{techBodyBlock && (
 					<div class="s-tech__body-wrap">
-						<PortableText value={[techBodyBlock]} />
+						<PortableText value={[techBodyBlock]} components={ptComponents} />
 					</div>
 				)}
 			</div>
@@ -123,14 +132,15 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 <!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN (CMS-driven) ══════ -->
 <section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || labels.get("footer_headings", "services_title", "Áreas de especialización")}>
 	<div class="container s-areas__inner">
-		<!-- Left: sticky header -->
 		<div class="s-areas__header">
 			<h2>{areasSection?.heading || `~ ${labels.get("footer_headings", "services_title", "Áreas de especialización")}`}</h2>
 			<p class="text-sub">{areasSubtitle}</p>
 		</div>
 
-		<!-- Right: flat face-cards, canonical cube order, colors from the CMS -->
-		<ul class="s-areas__cards" role="list">
+		<!-- Full-width rows (#273): every vertical gets a color bar and room
+		     for its whole thesis. The two-column layout collided once the
+		     #264 excerpts grew — a stacked row cannot overlap by construction. -->
+		<ul class="s-areas__rows" role="list">
 			{[...services]
 				.sort((a, b) => {
 					const order = ["ec", "int", "bd", "cdn", "gf", "ia"];
@@ -143,10 +153,10 @@ const areasSubtitle = areasSection?.blocks[0]?.children?.map((c: any) => c.text)
 					const cardColor = d.color || "#1E1E1E";
 					const slug = (svc as any).slug ?? svc.id;
 					return (
-						<li class="face-card" style={`--cc:${cardColor}`}>
-							<a href={`${localePrefix}/${slug}`} class="face-card__link">
-								<span class="face-card__mini" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-								<div class="face-card__text">
+						<li class="area-row" style={`--cc:${cardColor}`}>
+							<a href={`${localePrefix}/${slug}`} class="area-row__link">
+								<CubeEmblem class="area-row__die" color={cardColor} faceKey={FACE_BY_SLUG[slug] ?? undefined} size={54} />
+								<div class="area-row__text">
 									<h3>{d.title}</h3>
 									<p class="text-body">{excerptPlain(d.excerpt || "")}</p>
 								</div>

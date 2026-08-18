@@ -1,14 +1,14 @@
 ---
 id: "01KZB2G0MW9QKQRHBMYVTRFEEF"
 cta_label: "Audita tu e-commerce"
-excerpt: "Quince años dentro de [`SAP Commerce Cloud`](https://www.sap.com/spain/products/crm/commerce-cloud.html). Extender la plataforma es lo fácil: hacerlo con cada mejora desacoplada del *core*, ajustada al estándar, para que sobreviva versión tras versión, es lo que casi nadie hace. Y el rendimiento, nuestra especialidad."
+excerpt: "Más de veinte años dentro de [`SAP Commerce Cloud`](https://www.sap.com/spain/products/crm/commerce-cloud.html). Extender la plataforma es lo fácil: hacerlo con cada mejora desacoplada del *core*, ajustada al estándar, para que sobreviva versión tras versión, es lo que casi nadie hace. Y el rendimiento, nuestra especialidad."
 ---
 
 Extender una plataforma de comercio parece rápido… un desarrollo a medida aquí, un parche allá, y en unos años la subida de versión que el fabricante anuncia como rutina cuesta un trimestre. Lo hemos visto. Y sabemos evitarlo.
 
 No todas las plataformas se trabajan igual. `SAP Commerce Cloud` se parametriza y se extiende. Extender es lo fácil. Hacerlo con mesura, dejando cada mejora desacoplada del núcleo para que sobreviva a la siguiente subida de versión, es lo que casi nadie hace. Esa es nuestra ventaja. Con `Ocado Smart Platform` el oficio está en el diálogo: todo lo a medida vive fuera, en un *middleware* de [integración](/integracion-de-sistemas) que habla con la plataforma.
 
-Llevamos quince años dentro de `hybris` y `SAP Commerce Cloud`. No vendemos licencias. El rendimiento es nuestra especialidad: catálogo, buscador y paso por caja se dimensionan para el pico real, no para la media.
+Llevamos más de veinte años dentro de `hybris` y `SAP Commerce Cloud`. No vendemos licencias. El rendimiento es nuestra especialidad: catálogo, buscador y paso por caja se dimensionan para el pico real, no para la media.
 
 ## A medida ≠ acoplado
 
