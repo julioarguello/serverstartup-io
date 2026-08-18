@@ -1,14 +1,14 @@
 ---
 id: "01KZB2G0MYR4QS70ETN5SN5W10"
 cta_label: "Audit your e-commerce"
-excerpt: "Fifteen years inside [`SAP Commerce Cloud`](https://www.sap.com/products/crm/commerce-cloud.html). Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty."
+excerpt: "Over twenty years inside [`SAP Commerce Cloud`](https://www.sap.com/products/crm/commerce-cloud.html). Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty."
 ---
 
 Extending a commerce platform looks quick… a custom development here, a patch there, and a few years in, the version upgrade the vendor calls routine costs you a quarter. We've seen it. We know how to avoid it.
 
 Not every platform is worked the same way. `SAP Commerce Cloud` is parameterized and extended. Extending is the easy part. Doing it with restraint, keeping each improvement decoupled from the core so it survives the next upgrade, is what almost nobody does. That's our advantage. With `Ocado Smart Platform` the craft is in the conversation: everything custom lives outside, in an [integration](/en/systems-integration) middleware that talks to the platform.
 
-We've spent fifteen years inside `hybris` and `SAP Commerce Cloud`. We don't sell licenses. Performance is our specialty: catalog, search and checkout are sized for the real peak, not the average.
+We've spent over twenty years inside `hybris` and `SAP Commerce Cloud`. We don't sell licenses. Performance is our specialty: catalog, search and checkout are sized for the real peak, not the average.
 
 ## Custom ≠ coupled
 
