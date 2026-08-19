@@ -96,9 +96,13 @@ const nouns = beats.map((b) => b.replace(/^(Un |One |Seis |Six |Cero |Zero )/, "
 	   .s-partner (service.css) — the signature sits inside it instead of
 	   floating naked against the next band (founder review) */
 	.mantra {
-		margin: 44px 0 8px;
-		padding: 26px 30px 34px;
-		border-left: 3px solid var(--color-primary, #1e1e1e);
+		/* one width for every statement block: the text measure (#304) */
+		max-width: var(--measure-statement);
+		/* no top margin: the gap above is the previous section's bottom
+		   padding, like every other section boundary (§14 rhythm) */
+		margin: 0;
+		padding: var(--space-4) var(--space-5) var(--space-5);
+		border-left: var(--statement-rule) solid var(--color-primary, #1e1e1e);
 		background: color-mix(in srgb, var(--color-primary, #1e1e1e) 4%, transparent);
 	}
 
@@ -201,11 +205,14 @@ const nouns = beats.map((b) => b.replace(/^(Un |One |Seis |Six |Cero |Zero )/, "
 	}
 
 	@media (max-width: 700px) {
-		.mantra { padding: 20px 22px 30px; margin: 34px 0 8px; }
+		.mantra { padding: var(--space-3) var(--space-4) var(--space-4); }
 		.mantra__eq { font-size: 20px; line-height: 34px; }
 		.mantra__n { font-size: 23px; }
-		.mantra__cells { width: 36px; }
 		.mantra__cube { width: 17px; height: 19px; }
-		.mantra__cells { width: 13px; }
+		/* the glyph scales by its GRID. Two conflicting widths used to sit on
+		   the wrapper here (36px then 13px); the wrapper is `overflow: hidden`,
+		   so the losing value clipped the right column of faces on every
+		   phone. The wrapper shrink-wraps — it never carries a width. */
+		.mantra__cells-grid { width: 13px; gap: 1px; }
 	}
 </style>

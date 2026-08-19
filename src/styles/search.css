@@ -32,12 +32,12 @@
 .search-summary {
 	font-size: 18px;
 	font-weight: 300;
-	color: rgba(30, 30, 30, 0.6);
+	color: var(--color-text-muted);
 	margin-bottom: 24px;
 }
 
 .search-hint {
-	color: rgba(30, 30, 30, 0.6);
+	color: var(--color-text-muted);
 }
 
 .search-results {

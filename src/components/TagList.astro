@@ -32,15 +32,15 @@ const { tags, class: className, locale = "es" } = Astro.props;
     display: inline-block;
     padding: 4px 12px;
     font-size: 14px;
-    color: rgba(30, 30, 30, 0.7);
-    background: #f5f5f5;
-    border-radius: 4px;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border-radius: var(--radius);
     text-decoration: none;
     transition: color 0.2s, background 0.2s;
   }
 
   .tag:hover {
     color: var(--color-text);
-    background: #e8e8e8;
+    background: var(--color-surface-hover);
   }
 </style>

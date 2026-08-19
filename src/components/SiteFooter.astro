@@ -150,10 +150,9 @@ const t = Astro.locals.t;
 
 	/* Footer grid */
 	.footer-main {
-		border-top: 1px solid rgba(30, 30, 30, 0.48);
-		border-bottom: 1px solid rgba(30, 30, 30, 0.48);
-		margin-top: 48px;
-		padding: 40px 0;
+		/* #304: no rules between sections — space separates */
+		margin-top: var(--space-6);
+		padding: var(--space-6) 0 var(--space-7);
 	}
 	.footer-grid {
 		display: flex;
@@ -188,7 +187,10 @@ const t = Astro.locals.t;
 		color: var(--color-primary);
 	}
 	.footer-partner-logo {
+		/* token-guard: off — a logo is drawn at its own size; the partner
+		   lockup has a minimum legible width and clear space of its own. */
 		max-width: 200px;
+		/* token-guard: on */
 		margin-top: 8px;
 		margin-inline: auto;
 	}

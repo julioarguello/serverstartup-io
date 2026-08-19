@@ -9,7 +9,7 @@
 /* ═══ HERO — pattern B: floated emblem + watermark (shared classes in theme.css) ═══ */
 
 .s-hero {
-	padding: calc(80px + 24px) 0 48px;
+	padding: calc(80px + var(--space-4)) 0 var(--rhythm-section);
 }
 
 .s-hero__inner {
@@ -23,7 +23,6 @@
 
 .s-hero__body {
 	margin-top: 20px;
-	max-width: 700px;
 }
 
 .s-hero .btn {
@@ -34,14 +33,15 @@
    logo-card pattern — left bar + tinted bg, logo left, partner ¶ right.
    Clear space around the logo ≥ the cloudmark height (partner guidelines). */
 .s-partner {
+	max-width: var(--measure-statement);
 	display: grid;
 	grid-template-columns: auto 1fr;
 	gap: 26px;
 	align-items: center;
-	margin: 0 0 24px;
-	padding: 24px 28px;
-	border-left: 3px solid var(--color-primary);
-	background: color-mix(in srgb, var(--color-primary) 4%, transparent);
+	margin: 0 0 var(--space-4);
+	padding: var(--space-4) var(--space-5);
+	border-left: var(--statement-rule) solid var(--color-primary);
+	background: var(--color-tint);
 }
 
 .s-partner__logo {
@@ -62,23 +62,22 @@
 
 @media (min-width: 768px) {
 	.s-hero {
-		padding: calc(100px + 40px) 0 64px;
+		padding: calc(100px + var(--space-6)) 0 var(--rhythm-section);
 	}
 }
 
 /* ═══ INSTRUMENT SECTION ═══ */
 .s-inst {
-	padding: 24px 0 56px;
+	padding: var(--rhythm-section) 0;
 }
 
 .s-inst__intro {
-	max-width: 700px;
 }
 
 .s-inst__intro p {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 28px;
+	line-height: 1.45;
 }
 
 /* ═══ Vertical rhythm (founder 2026-08-16, #269) ═══
@@ -110,14 +109,13 @@
 }
 
 .s-inst__lead {
-	max-width: 700px;
 	margin: 0 0 20px;
 }
 
 .s-inst__lead p {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 28px;
+	line-height: 1.45;
 }
 
 /* content links: thin dashed underline, solid on hover (founder 2026-08-15,
@@ -146,8 +144,7 @@
 }
 
 .s-inst__closer {
-	max-width: 700px;
-	margin-top: 44px;
+	margin-top: var(--space-6);
 }
 
 .s-inst__closer h2 {
@@ -157,9 +154,9 @@
 }
 
 .s-inst__closer p {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 28px;
+	line-height: 1.45;
 	margin-block-end: 14px;
 }
 
@@ -200,9 +197,9 @@
 }
 
 .s-inst__closer li {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 28px;
+	line-height: 1.45;
 	padding-left: 22px;
 	text-indent: -22px;
 	margin-block: 10px;
@@ -222,20 +219,20 @@
 /* ═══ Panel frame (shared) ═══ */
 .inst {
 	border-top: 4px solid var(--accentColor);
-	border-radius: 10px;
+	border-radius: var(--radius);
 	overflow: hidden;
 }
 
 .inst--light {
-	background: #ffffff;
-	border: 1px solid #e4e6e8;
+	background: var(--color-secondary);
+	border: 1px solid var(--color-border);
 	border-top: 4px solid var(--accentColor);
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+	box-shadow: var(--shadow-card);
 }
 
 .inst--dark {
-	background: #14161a;
-	color: #d8dce2;
+	background: var(--color-console);
+	color: var(--color-console-ink);
 }
 
 .inst__bar {
@@ -243,7 +240,7 @@
 	align-items: center;
 	gap: 8px;
 	padding: 14px 20px;
-	border-bottom: 1px solid #edeef0;
+	border-bottom: 1px solid var(--color-border-soft);
 	font-size: 15px;
 }
 
@@ -252,12 +249,12 @@
 }
 
 .inst__muted {
-	color: #70757a;
+	color: var(--color-text-muted);
 	font-size: 14px;
 }
 
 .inst__bar--dots {
-	background: #1d2026;
+	background: var(--color-console-bar);
 	border-bottom: none;
 	padding: 12px 18px;
 }
@@ -269,10 +266,15 @@
 	display: inline-block;
 }
 
+/* token-guard: off — the window dots are the console's own signal:
+   everyone reads them as a terminal, and a palette change must not
+   repaint them */
 .inst__bar--dots i:nth-child(1) { background: #ea4335; }
 .inst__bar--dots i:nth-child(2) { background: #f38020; }
 .inst__bar--dots i:nth-child(3) { background: #3e7d50; }
+/* token-guard: on */
 
+/* token-guard: off — a storefront cart: its greens, greys and rules belong to the shop being shown */
 /* ═══ CART (e-commerce) ═══ */
 .cart__banner {
 	margin-left: auto;
@@ -298,7 +300,7 @@
 	gap: 16px;
 	align-items: center;
 	padding: 16px 0;
-	border-bottom: 1px solid #f0f2f4;
+	border-bottom: 1px solid var(--color-border-soft);
 	font-size: 16px;
 	line-height: 22px;
 }
@@ -310,7 +312,7 @@
 .cart__thumb {
 	width: 56px;
 	height: 56px;
-	border-radius: 8px;
+	border-radius: var(--radius);
 	display: grid;
 	place-items: center;
 	color: var(--accentColor);
@@ -335,7 +337,7 @@
 
 .cart__qty {
 	border: 1px solid #dadce0;
-	border-radius: 6px;
+	border-radius: var(--radius);
 	padding: 6px 10px;
 	font-size: 13px;
 	color: #3c4043;
@@ -344,7 +346,6 @@
 
 .cart__summary {
 	padding: 18px 20px;
-	border-top: 1px solid #edeef0;
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
@@ -382,7 +383,7 @@
 	background: var(--accentColor);
 	color: #ffffff;
 	text-align: center;
-	border-radius: 6px;
+	border-radius: var(--radius);
 	margin-top: 12px;
 }
 
@@ -405,6 +406,9 @@
 	}
 }
 
+
+/* token-guard: on */
+/* token-guard: off — a terminal session: the palette is the shell's */
 /* ═══ TERMINAL (integration) ═══ */
 .term {
 	font-family: var(--font-family-mono);
@@ -471,46 +475,41 @@
 	.term__line { margin-block: 6px; }
 }
 
-/* ═══ LEGACY dark content (instruments pending migration) ═══ */
+
+/* token-guard: on */
+/* ═══ Prose fallback — entries with no instrument (partners, plain pages) ═══
+   #304: it used to be a dark band. Black is the machine voice (consoles) and
+   the closing CTA; a page whose whole body was black also collided with the
+   CTA that follows it into one long dark block. */
 .s-content {
-	background-color: var(--color-primary);
-	padding: 40px 0;
+	padding: var(--rhythm-section) 0;
 }
 
-.s-content__inner { color: var(--color-secondary); }
-.s-content__inner h2 { color: var(--color-secondary); margin-bottom: 24px; }
-.s-content__inner h3 { color: var(--color-secondary); margin-bottom: 16px; }
+.s-content__inner h2 { margin-bottom: var(--space-4); }
+.s-content__inner h3 { margin-bottom: var(--space-3); }
 
 .s-content__inner p {
-	color: var(--color-secondary);
-	max-width: 700px;
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 1.45;
 	margin-block-end: 12px;
 }
 
 .s-content__inner ul {
-	color: var(--color-secondary);
 	list-style: disc;
-	padding-left: 24px;
+	padding-left: var(--space-4);
 }
 
 .s-content__inner li {
-	color: var(--color-secondary);
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 28px;
-}
-
-@media (min-width: 768px) {
-	.s-content { padding: 80px 0; }
+	line-height: 1.45;
 }
 
 /* ═══ CTA ═══ */
 .s-cta {
 	background-color: var(--color-primary);
-	padding: 60px 0;
+	padding: var(--rhythm-band) 0;
 }
 
 .s-cta__heading {
@@ -522,17 +521,13 @@
 
 .s-cta .btn { margin-top: 32px; }
 
-@media (min-width: 768px) {
-	.s-cta { padding: 80px 0; }
-	.s-cta__heading { width: 70%; }
-}
+
 
 /* ═══ Generic item list (below panels that don't embed the bullets) ═══ */
 .inst-list {
 	list-style: none;
 	padding: 0;
 	margin: 28px 0 0;
-	max-width: 700px;
 }
 
 /* When the list arrives as rendered Portable Text (bigquery), the ul lives
@@ -568,13 +563,14 @@
 	font-weight: 300;
 	line-height: 26px;
 	padding: 12px 0;
-	border-top: 1px solid #ececec;
+	border-top: 1px solid var(--color-border-soft);
 }
 
 .inst-list li:last-child {
-	border-bottom: 1px solid #ececec;
+	border-bottom: 1px solid var(--color-border-soft);
 }
 
+/* token-guard: off — the BigQuery console being quoted — Google's chrome, not a house surface */
 /* ═══ BIGQUERY (data) ═══ */
 .bq__bar {
 	gap: 16px;
@@ -594,7 +590,7 @@
 	font-weight: 600;
 	font-size: 12px;
 	padding: 7px 16px;
-	border-radius: 4px;
+	border-radius: var(--radius);
 }
 
 .bq__menu {
@@ -658,7 +654,7 @@
 
 .bq__grid td {
 	padding: 8px 10px;
-	border-bottom: 1px solid #f0f2f4;
+	border-bottom: 1px solid var(--color-border-soft);
 	font-weight: 300;
 }
 
@@ -672,6 +668,9 @@
 	padding-top: 10px;
 }
 
+
+/* token-guard: on */
+/* token-guard: off — the Cloudflare dashboard being quoted */
 /* ═══ CLOUDFLARE DASHBOARD (edge) ═══ */
 .cf__status {
 	margin-left: auto;
@@ -680,7 +679,7 @@
 	color: #0d652d;
 	background: #e6f4ea;
 	padding: 4px 10px;
-	border-radius: 99px;
+	border-radius: var(--radius-pill);
 }
 
 .cf__tiles {
@@ -719,7 +718,7 @@
 .cf__switch {
 	width: 40px;
 	height: 22px;
-	border-radius: 99px;
+	border-radius: var(--radius-pill);
 	background: #dadce0;
 	position: relative;
 	margin-top: 2px;
@@ -751,6 +750,9 @@
 	.cf__tiles { grid-template-columns: 1fr; }
 }
 
+
+/* token-guard: on */
+/* token-guard: off — a javadoc page as the toolchain renders it */
 /* ═══ JAVADOC (greenfield) ═══ */
 .inst--javadoc { background: #1b1e1c; color: #c9d1c9; }
 
@@ -825,6 +827,9 @@
 	.bq__grid th, .bq__grid td { overflow-wrap: anywhere; }
 }
 
+
+/* token-guard: on */
+/* token-guard: off — a pull-request view: GitHub's chrome */
 /* ═══ review (IA): pull-request instrument ═══ */
 .pr__title {
 	font-family: var(--font-family-mono);
@@ -900,7 +905,6 @@
 	flex-wrap: wrap;
 	gap: 8px 22px;
 	padding: 12px 20px;
-	border-top: 1px solid #edeef0;
 	font-family: var(--font-family-mono);
 	font-size: 13px;
 	color: #1a7f37;
@@ -912,7 +916,6 @@
 	align-items: center;
 	gap: 10px 16px;
 	padding: 14px 20px;
-	border-top: 1px solid #edeef0;
 	font-size: 14px;
 	color: #24292f;
 }
@@ -934,7 +937,7 @@
 	background: #1f883d;
 	color: #ffffff;
 	padding: 7px 14px;
-	border-radius: 6px;
+	border-radius: var(--radius);
 	font-size: 14px;
 	font-weight: 600;
 }
@@ -945,3 +948,4 @@
 	.pr__merge { margin-left: 0; }
 	.pr__title { overflow-wrap: anywhere; }
 }
+/* token-guard: on */

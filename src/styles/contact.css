@@ -1,5 +1,5 @@
 .s-contact {
-	padding: calc(80px + 24px) 0 60px;
+	padding: calc(80px + var(--space-4)) 0 var(--rhythm-section);
 }
 
 .s-contact__inner h1 {
@@ -11,9 +11,9 @@
 }
 
 .s-contact__content p {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 28px;
+	line-height: 1.45;
 }
 
 .s-contact__content ul {
@@ -24,9 +24,9 @@
 
 .s-contact__content li {
 	font-family: var(--font-family);
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 400;
-	line-height: 28px;
+	line-height: 1.45;
 }
 
 /* ── Team row — the three engineers who answer: photo (or initial-letter
@@ -85,7 +85,7 @@
 	font-weight: 300;
 	line-height: 18px;
 	/* 0.7 on white ≈ #626262 — clears 4.5:1 */
-	color: rgba(30, 30, 30, 0.7);
+	color: var(--color-text-muted);
 }
 
 /* ── Identity colophon under the methods — quiet, factual ── */
@@ -98,7 +98,7 @@
 	font-size: 16px;
 	font-weight: 300;
 	line-height: 22px;
-	color: rgba(30, 30, 30, 0.7);
+	color: var(--color-text-muted);
 }
 
 /* ── Contact methods — one card per channel: icon · label · arrow.
@@ -108,9 +108,11 @@
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
-	/* Hug the content: icon + short label + arrow. Wider cards leave a
-	   dead span between label and arrow (founder, #272). */
+	/* token-guard: off — a control, not a block. Icon + short label + arrow:
+	   a full-width button leaves a dead span between label and arrow
+	   (founder decision, #272). Controls are sized by their content. */
 	max-width: 340px;
+	/* token-guard: on */
 }
 
 /* Same chrome as the homepage face-cards: white face, ink border, flat
@@ -123,7 +125,7 @@
 	padding: 16px 20px;
 	background: var(--color-secondary);
 	border: 1.5px solid var(--color-primary);
-	border-radius: 6px;
+	border-radius: var(--radius);
 	text-decoration: none;
 	color: var(--color-primary);
 	transition: transform 0.15s, box-shadow 0.15s;
@@ -132,7 +134,7 @@
 .s-contact__method:hover,
 .s-contact__method:focus-visible {
 	transform: translateY(-2px);
-	box-shadow: 0 4px 0 var(--color-primary);
+	box-shadow: var(--shadow-card);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -176,7 +178,7 @@
 		/* Keep the vertical centering, but reserve the fixed-header band:
 		   with the team row + colophon the page is tall enough to slide
 		   under it otherwise. */
-		padding: calc(80px + 24px) 0 40px;
+		padding: calc(80px + var(--space-4)) 0 var(--rhythm-section);
 		min-height: calc(100vh - 200px);
 		display: flex;
 		align-items: center;

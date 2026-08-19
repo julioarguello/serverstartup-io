@@ -122,7 +122,7 @@ All routes exist in both ES and EN:
 
 | File | Used by |
 |:-----|:--------|
-| `styles/theme.css` | Global design tokens, typography, colors |
+| `styles/theme.css` | **The only** declaration of colour, radius, shadow and spacing (design tokens), plus typography. Every other sheet consumes tokens — enforced by the `ci-check-design-tokens.py` gate. |
 | `styles/homepage.css` | Homepage layout |
 | `styles/service.css` | Service detail pages |
 | `styles/archive.css` | Category and tag archives |
@@ -285,8 +285,20 @@ PR → quality-gates green → merge to main
 - Quality gates on every PR (`ci.yml`): gitleaks, citability guard,
   `astro check` 0/0 (TypeScript pinned to 5.x — `astro check` has no
   programmatic API on TS 7 and TS 6 misreports inference errors), seed
-  validation, build, seeded boot, html-validate ×15 routes, header suite,
-  Lighthouse 3-run median (perf ≥ 95, a11y/bp/seo = 100).
+  validation, CMS text integrity, design tokens, build, seeded boot,
+  html-validate ×15 routes, header suite, Lighthouse 3-run median
+  (perf ≥ 95, a11y/bp/seo = 100).
+- **Design-token gate** (`scripts/ci-check-design-tokens.py`): a colour
+  literal, a non-token `border-radius`, a non-token `box-shadow` or a bespoke
+  `max-width` outside `theme.css` fails the build. The width rule is the
+  layout criterion made executable: a page has ONE column
+  (`--container-max`) and everything ends at its right edge, so `max-width`
+  may only be the column token, `100%` or `none`. A `var(--token, fallback)` is a token use, not
+  a declaration; a region may exempt itself with
+  `/* token-guard: off — reason */ … /* token-guard: on */`, which the service
+  instruments use because they quote another product's chrome (a cart, a
+  BigQuery console, a GitHub pull request). Each run prints how many
+  declarations the fences covered, so silencing cannot masquerade as passing.
 - **CSP constraint**: `script-src 'self'` with no hashes — Vite must never
   inline scripts into HTML (`assetsInlineLimit: 0` in astro.config.mjs) or
   the browser silently blocks them (menu + phone decode died this way).

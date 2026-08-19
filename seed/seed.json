@@ -11757,11 +11757,6 @@
 							"_key": "h_cred",
 							"markDefs": [
 								{
-									"_key": "hk1",
-									"_type": "link",
-									"href": "/cdn-waf-seguridad-edge-cloudflare"
-								},
-								{
 									"_key": "hk2",
 									"_type": "link",
 									"href": "/comercio-electronico"
@@ -11775,23 +11770,17 @@
 									"_key": "hk4",
 									"_type": "link",
 									"href": "/big-data-cloud-analytics"
+								},
+								{
+									"_key": "hk1",
+									"_type": "link",
+									"href": "/cdn-waf-seguridad-edge-cloudflare"
 								}
 							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Partners oficiales de "
-								},
-								{
-									"_type": "span",
-									"text": "Cloudflare",
-									"marks": [
-										"hk1"
-									]
-								},
-								{
-									"_type": "span",
-									"text": " desde 2019, y más de veinte años de oficio en "
+									"text": "Más de veinte años de oficio en "
 								},
 								{
 									"_type": "span",
@@ -11824,7 +11813,18 @@
 								},
 								{
 									"_type": "span",
-									"text": "."
+									"text": ". Partners oficiales de "
+								},
+								{
+									"_type": "span",
+									"text": "Cloudflare",
+									"marks": [
+										"hk1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " desde 2019."
 								}
 							]
 						},
@@ -11836,7 +11836,7 @@
 								{
 									"_key": "hk5",
 									"_type": "link",
-									"href": "/quienes-somos"
+									"href": "/quienes-somos#equipo"
 								}
 							],
 							"children": [
@@ -11871,11 +11871,11 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"_key": "w_h2",
+							"_key": "t_h2",
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cómo trabajamos"
+									"text": "El equipo"
 								}
 							]
 						},
@@ -11886,10 +11886,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Sin intermediarios y sin traspasos.",
-									"marks": [
-										"strong"
-									]
+									"text": "Sin intermediarios y sin traspasos."
 								}
 							]
 						},
@@ -11901,7 +11898,7 @@
 								{
 									"_key": "wk1",
 									"_type": "link",
-									"href": "/quienes-somos"
+									"href": "/quienes-somos#equipo"
 								}
 							],
 							"children": [
@@ -11935,30 +11932,86 @@
 						},
 						{
 							"_type": "block",
+							"style": "h2",
+							"_key": "p_h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Calidad y rendimiento"
+								}
+							]
+						},
+						{
+							"_type": "block",
 							"style": "normal",
-							"_key": "a_body",
+							"_key": "p_body",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Nuestro oficio es la calidad y el rendimiento donde salen caros: procesos críticos y volúmenes grandes. El pico de campaña, el catálogo que hay que reindexar, la integración que tiene que cerrar el día."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "p_body2",
 							"markDefs": [
 								{
-									"_key": "ak1",
+									"_key": "pk1",
 									"_type": "link",
-									"href": "/referencias"
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/lighthouserc.json",
+									"blank": true
+								},
+								{
+									"_key": "pk3",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/actions/workflows/ci.yml?query=branch%3Amain",
+									"blank": true
+								},
+								{
+									"_key": "pk2",
+									"_type": "link",
+									"href": "/deconstruyendo"
 								}
 							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Seis verticales, las mismas tres personas. Y las "
+									"text": "Esta web es una muestra pequeña de la misma disciplina, aplicada a nuestro propio escaparate. Ninguna versión se publica si el rendimiento baja de 95, o si accesibilidad, buenas prácticas y SEO no dan 100: el control corre en cada cambio y bloquea el despliegue. El "
 								},
 								{
 									"_type": "span",
-									"text": "referencias",
+									"text": "umbral",
 									"marks": [
-										"ak1"
+										"pk1"
 									]
 								},
 								{
 									"_type": "span",
-									"text": " que podemos nombrar."
+									"text": " está escrito en el repositorio público, y "
+								},
+								{
+									"_type": "span",
+									"text": "cada ejecución del control",
+									"marks": [
+										"pk3"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " también. "
+								},
+								{
+									"_type": "span",
+									"text": "Mira cómo está hecha",
+									"marks": [
+										"pk2"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
 								}
 							]
 						}
@@ -12881,11 +12934,6 @@
 							"_key": "h_cred",
 							"markDefs": [
 								{
-									"_key": "hk1",
-									"_type": "link",
-									"href": "/en/cdn-waf-edge-security-cloudflare"
-								},
-								{
 									"_key": "hk2",
 									"_type": "link",
 									"href": "/en/e-commerce"
@@ -12899,23 +12947,17 @@
 									"_key": "hk4",
 									"_type": "link",
 									"href": "/en/big-data-cloud-analytics"
+								},
+								{
+									"_key": "hk1",
+									"_type": "link",
+									"href": "/en/cdn-waf-edge-security-cloudflare"
 								}
 							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Official "
-								},
-								{
-									"_type": "span",
-									"text": "Cloudflare",
-									"marks": [
-										"hk1"
-									]
-								},
-								{
-									"_type": "span",
-									"text": " partners since 2019, and over twenty years of craft in "
+									"text": "Over twenty years of craft in "
 								},
 								{
 									"_type": "span",
@@ -12948,7 +12990,18 @@
 								},
 								{
 									"_type": "span",
-									"text": "."
+									"text": ". Official "
+								},
+								{
+									"_type": "span",
+									"text": "Cloudflare",
+									"marks": [
+										"hk1"
+									]
+								},
+								{
+									"_type": "span",
+									"text": " partners since 2019."
 								}
 							]
 						},
@@ -12960,7 +13013,7 @@
 								{
 									"_key": "hk5",
 									"_type": "link",
-									"href": "/en/about-us"
+									"href": "/en/about-us#team"
 								}
 							],
 							"children": [
@@ -12984,11 +13037,11 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"_key": "w_h2",
+							"_key": "t_h2",
 							"children": [
 								{
 									"_type": "span",
-									"text": "How we work"
+									"text": "The team"
 								}
 							]
 						},
@@ -12999,10 +13052,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "No middlemen, no handovers.",
-									"marks": [
-										"strong"
-									]
+									"text": "No middlemen, no handovers."
 								}
 							]
 						},
@@ -13014,7 +13064,7 @@
 								{
 									"_key": "wk1",
 									"_type": "link",
-									"href": "/en/about-us"
+									"href": "/en/about-us#team"
 								}
 							],
 							"children": [
@@ -13048,30 +13098,86 @@
 						},
 						{
 							"_type": "block",
+							"style": "h2",
+							"_key": "p_h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Quality and performance"
+								}
+							]
+						},
+						{
+							"_type": "block",
 							"style": "normal",
-							"_key": "a_body",
+							"_key": "p_body",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Our craft is quality and performance where they get expensive: critical processes and large volumes. The campaign peak, the catalogue that has to be reindexed, the integration that has to close the day."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "p_body2",
 							"markDefs": [
 								{
-									"_key": "ak1",
+									"_key": "pk1",
 									"_type": "link",
-									"href": "/en/references"
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/lighthouserc.json",
+									"blank": true
+								},
+								{
+									"_key": "pk3",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/actions/workflows/ci.yml?query=branch%3Amain",
+									"blank": true
+								},
+								{
+									"_key": "pk2",
+									"_type": "link",
+									"href": "/en/deconstructing"
 								}
 							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Six verticals, the same three people. And the "
+									"text": "This site is a small sample of the same discipline, applied to our own shop window. No version ships if performance drops below 95, or if accessibility, best practices and SEO are not 100: the check runs on every change and blocks the deploy. The "
 								},
 								{
 									"_type": "span",
-									"text": "references",
+									"text": "threshold",
 									"marks": [
-										"ak1"
+										"pk1"
 									]
 								},
 								{
 									"_type": "span",
-									"text": " we are free to name."
+									"text": " is written in the public repository, and so is "
+								},
+								{
+									"_type": "span",
+									"text": "every run of the check",
+									"marks": [
+										"pk3"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ". "
+								},
+								{
+									"_type": "span",
+									"text": "See how it is built",
+									"marks": [
+										"pk2"
+									]
+								},
+								{
+									"_type": "span",
+									"text": "."
 								}
 							]
 						}
@@ -14391,10 +14497,25 @@
 							{
 								"_type": "block",
 								"style": "normal",
+								"markDefs": [
+									{
+										"_key": "cfk1",
+										"_type": "link",
+										"href": "https://www.cloudflare.com/es-es/",
+										"blank": true
+									}
+								],
 								"children": [
 									{
 										"_type": "span",
-										"text": "Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare"
+										"text": "Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de "
+									},
+									{
+										"_type": "span",
+										"text": "Cloudflare",
+										"marks": [
+											"cfk1"
+										]
 									}
 								]
 							},

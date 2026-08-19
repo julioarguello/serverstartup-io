@@ -70,15 +70,15 @@ Astro.cache.set(cacheHint);
 	.page-content :global(blockquote) {
 		margin: 1.5em 0;
 		padding-left: 24px;
-		border-left: 3px solid rgba(30,30,30,0.15);
-		color: rgba(30,30,30,0.5);
+		border-left: 3px solid var(--color-border);
+		color: var(--color-text-muted);
 	}
 
 	.page-content :global(pre) {
 		margin: 1.5em 0;
 		padding: 16px;
-		background: #f5f5f5;
-		border-radius: 4px;
+		background: var(--color-surface);
+		border-radius: var(--radius);
 		overflow-x: auto;
 		font-family: monospace;
 		font-size: 14px;
@@ -87,9 +87,9 @@ Astro.cache.set(cacheHint);
 	.page-content :global(code) {
 		font-family: monospace;
 		font-size: 0.9em;
-		background: #f5f5f5;
+		background: var(--color-surface);
 		padding: 0.15em 0.3em;
-		border-radius: 4px;
+		border-radius: var(--radius);
 	}
 
 	.page-content :global(pre code) {

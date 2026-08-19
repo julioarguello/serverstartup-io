@@ -141,7 +141,7 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") :
 	)}
 
 	<!-- ══════ TEAM — light band: CMS intro (h2) + photo grid ══════ -->
-	<section class="s-team" aria-label={t("team_section")}>
+	<section id="equipo" class="s-team" aria-label={t("team_section")}>
 		<div class="container s-team__inner">
 			{hoyBlocks.length > 0 && (
 				<div class="s-team__intro">
@@ -173,9 +173,10 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") :
 	<!-- ══════ VALUES — dark bg ══════ -->
 	{valuesBlocks.length > 0 && (
 		<section class="s-values" aria-label={t("values_section")}>
-			<div class="container s-values__inner">
+			<div class="container"><div class="s-values__inner">
 				<PortableText value={valuesBlocks} components={ptComponents} />
 			</div>
+		</div>
 		</section>
 	)}
 
