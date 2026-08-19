@@ -1,0 +1,61 @@
+---
+/**
+ * ContactAction — a contact detail that is not in the page source (#311).
+ *
+ * The address, the phone number and the WhatsApp number travel base64-encoded
+ * in a `data-` attribute and are decoded on click. Nothing readable reaches
+ * the HTML, so a harvester reading the source finds nothing to take.
+ *
+ * Why bother, when base64 is not encryption: because it measurably works. In
+ * a honeypot study that gave each technique its own unique address and counted
+ * the spam that arrived, an unprotected address blocked 0% of harvesters and
+ * collected tens of thousands of messages, while every technique requiring
+ * script execution or a user gesture blocked 100%. Harvesters read source;
+ * they do not run pages.
+ *   https://spencermortensen.com/articles/email-obfuscation/
+ *
+ * Why a component rather than the inline script this page used to carry: the
+ * contact page protected its three details while the footer published the
+ * address in plain on all nine routes, which bought nothing. One
+ * implementation, used everywhere, is the fix (#311).
+ *
+ * Accessibility: it renders a real button with an accessible name, reachable
+ * and operable by keyboard. It does need JavaScript — that is the cost of the
+ * technique, and the reason the visible label says what the action does
+ * rather than showing an address that would not be clickable anyway.
+ */
+interface Props {
+	/** which channel: decides the URL scheme on click */
+	kind: "mail" | "tel" | "wa";
+	/** base64 of the raw value (address, or number without +) */
+	encoded: string;
+	/** visible text */
+	label: string;
+	/** accessible name — defaults to the visible label */
+	ariaLabel?: string;
+	class?: string;
+}
+const { kind, encoded, label, ariaLabel, class: className } = Astro.props;
+const attr = { mail: "data-mail", tel: "data-tel", wa: "data-wa" }[kind];
+---
+
+<button type="button" class:list={[className]} aria-label={ariaLabel ?? label} {...{ [attr]: encoded }}>
+	<slot name="icon" />
+	<slot>{label}</slot>
+	<slot name="after" />
+</button>
+
+<script>
+	// One listener for every ContactAction on the page. Astro hoists and
+	// deduplicates this, so the footer and the contact page share it.
+	document.addEventListener("click", (event) => {
+		const el = (event.target as HTMLElement | null)?.closest<HTMLElement>(
+			"[data-mail],[data-tel],[data-wa]"
+		);
+		if (!el) return;
+		const { mail, tel, wa } = el.dataset;
+		if (mail) location.href = "mailto:" + atob(mail);
+		else if (tel) location.href = "tel:" + atob(tel);
+		else if (wa) window.open("https://wa.me/" + atob(wa), "_blank", "noopener");
+	});
+</script>

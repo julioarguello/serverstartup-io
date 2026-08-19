@@ -1,5 +1,6 @@
 ---
 import ReferenceBanner from "./ReferenceBanner.astro";
+import ContactAction from "./ContactAction.astro";
 /**
  * SiteFooter — trust logos, 4-column grid, Kit Digital banner.
  * Extracted from Base.astro for maintainability.
@@ -19,6 +20,9 @@ interface Props {
 	manualLabel: string;
 	defaultCtaLabel: string;
 	email: string;
+	emailEncoded?: string;
+	phoneEncoded?: string;
+	emailLabel: string;
 	phone: string;
 	phoneDisplay: string;
 	partnerLogos: { src: string; alt: string }[];
@@ -36,6 +40,9 @@ const {
 	manualLabel,
 	defaultCtaLabel,
 	email,
+	emailEncoded,
+	phoneEncoded,
+	emailLabel,
 	phone,
 	phoneDisplay,
 	partnerLogos,
@@ -110,8 +117,15 @@ const t = Astro.locals.t;
 				<ul class="footer-list">
 					<li><a href={`${localePrefix}/${locale === "en" ? "about-us" : "quienes-somos"}`}>{aboutUsLabel}</a></li>
 					<li><a href={`${localePrefix}/${locale === "en" ? "deconstructing" : "deconstruyendo"}`}>{manualLabel}</a></li>
-					<li><a href={`mailto:${email}`}>{email}</a></li>
-					{phone && phoneDisplay && <li><a href={`tel:${phone}`}>{phoneDisplay}</a></li>}
+					{/* #311: encoded, like the contact page. This link was the only
+					    plain address on the site and it shipped on every route, which
+					    made the contact page's own protection pointless. */}
+					{emailEncoded && (
+						<li><ContactAction kind="mail" encoded={emailEncoded} label={emailLabel} class="footer-contact" /></li>
+					)}
+					{phoneEncoded && phoneDisplay && (
+						<li><ContactAction kind="tel" encoded={phoneEncoded} label={phoneDisplay} class="footer-contact" /></li>
+					)}
 				</ul>
 				<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark footer-cta">{defaultCtaLabel}</a>
 			</div>
@@ -179,12 +193,27 @@ const t = Astro.locals.t;
 		gap: 8px;
 	}
 	.footer-list,
-	.footer-list a {
+	.footer-list a,
+	.footer-contact {
 		font-family: var(--font-family);
 		font-size: 18px;
 		font-weight: 300;
 		line-height: 26px;
 		color: var(--color-primary);
+	}
+	/* #311: the contact detail is a <button> so it can decode on click, but it
+	   belongs to this list and must read as one of its links — a browser
+	   default button box in a column of links reads as a mistake. */
+	.footer-contact {
+		background: none;
+		border: 0;
+		padding: 0;
+		text-align: left;
+		cursor: pointer;
+		font: inherit;
+	}
+	.footer-contact:hover {
+		text-decoration: underline;
 	}
 	.footer-partner-logo {
 		/* token-guard: off — a logo is drawn at its own size; the partner

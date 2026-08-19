@@ -1387,6 +1387,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "email_label",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Escríbenos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "default_cta",
 							"children": [
 								{
@@ -2736,6 +2747,17 @@
 								{
 									"_type": "span",
 									"text": "References"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "email_label",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Email us"
 								}
 							]
 						},
