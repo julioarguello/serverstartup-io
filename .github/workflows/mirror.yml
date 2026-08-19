@@ -60,9 +60,18 @@ jobs:
           # remote-tracking ref instead works for BOTH event types, so the
           # command stays single and neither branch of the trigger is special.
           git fetch --quiet origin "+refs/heads/main:refs/remotes/origin/main"
+          #
+          # Tags are FORCED (`+`). Measured on the real repos: the mirror held
+          # v0.9.41 as a lightweight tag pointing at the commit while the source
+          # held it as an annotated tag object. Divergent refs like that make
+          # every later non-forced push fail with "(already exists)" — for good,
+          # since nothing ever repairs them. Forcing is right here by definition:
+          # this job's whole purpose is to make the mirror match the source.
+          # `main` stays UNFORCED, so a genuine divergence there fails loudly
+          # instead of being silently overwritten.
           git push "$MIRROR_URL" \
             "refs/remotes/origin/main:refs/heads/main" \
-            "refs/tags/*:refs/tags/*"
+            "+refs/tags/*:refs/tags/*"
 
           # report what was pushed, not that something was
           echo "mirror synced → julioarguello/serverstartup-io"
