@@ -87,6 +87,9 @@ const faces = services
 		cursor: pointer;
 		-webkit-tap-highlight-color: transparent;
 	}
+	/* token-guard: off — the mark's own drawing. The plate corner and the
+	   cell/sticker colours belong to the logo, not to the theme: a token
+	   here would let a palette change repaint the brand. */
 	.logo-stage .plate {
 		position: absolute;
 		inset: 0;
@@ -100,6 +103,7 @@ const faces = services
 	.logo-stage .plate--light {
 		background: #ced4da;
 	}
+	/* token-guard: on */
 	.logo-stage .scene {
 		position: absolute;
 		inset: 0;
@@ -130,10 +134,14 @@ const faces = services
 	.logo-stage .slab {
 		fill: var(--color-primary);
 	}
+	/* token-guard: off — the mark's own drawing. The plate corner and the
+	   cell/sticker colours belong to the logo, not to the theme: a token
+	   here would let a palette change repaint the brand. */
 	.logo-stage .cell {
 		fill: #ced4da;
 		transition: fill 0.25s;
 	}
+	/* token-guard: on */
 	.logo-stage .cface.alive .cell {
 		fill: var(--fc);
 	}
@@ -143,7 +151,9 @@ const faces = services
 		inset: 0;
 		margin: auto;
 		border-radius: 50%;
+		/* token-guard: off — the sticker is part of the mark */
 		background: rgba(255, 255, 255, 0.75);
+		/* token-guard: on */
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -171,7 +181,9 @@ const faces = services
 	.logo-stage .sticker svg {
 		width: 62%;
 		height: 62%;
+		/* token-guard: off — the mark's glyph stroke */
 		stroke: #fff;
+		/* token-guard: on */
 		fill: none;
 		stroke-width: 2.2;
 		stroke-linecap: round;

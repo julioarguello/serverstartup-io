@@ -114,7 +114,7 @@ const siteLinks = siteItems
 	.menu-backdrop {
 		position: fixed;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.3);
+		background: var(--color-scrim);
 		z-index: 199;
 		opacity: 0;
 		pointer-events: none;
@@ -215,7 +215,7 @@ const siteLinks = siteItems
 	.menu-site {
 		margin: 22px 0 0;
 		padding: 16px 10px 0;
-		border-top: 1px dashed #e4e2de;
+		border-top: 1px dashed var(--color-border);
 		display: flex;
 		flex-wrap: wrap;
 		gap: 12px 20px;
@@ -230,7 +230,7 @@ const siteLinks = siteItems
 	.site-link {
 		font-size: 16px;
 		font-weight: 500;
-		color: rgba(30, 30, 30, 0.65);
+		color: var(--color-text-muted);
 		text-decoration: none;
 		flex: none;
 	}
@@ -260,7 +260,7 @@ const siteLinks = siteItems
 		font-size: 11px;
 		letter-spacing: 0.06em;
 		text-transform: lowercase;
-		color: rgba(30, 30, 30, 0.55);
+		color: var(--color-text-muted);
 		margin: 0;
 		text-align: center;
 	}

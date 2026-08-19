@@ -2,16 +2,18 @@
 .s-hero {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
 	min-height: auto;
-	padding: 16px 0 40px;
-	/* Offset for fixed header */
-	padding-top: calc(80px + 16px);
+	padding: calc(80px + var(--space-6)) 0 var(--rhythm-section);
 	background-image: url("/assets/cubo-home.svg");
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: auto;
+	/* The mark is 671×704: at its natural size it is taller than a
+	   content-height hero and the box clips its vertices (founder: "el logo
+	   del background está cortado"). `contain` keeps the whole cube whatever
+	   the hero measures. */
+	background-size: contain;
 }
 
 .s-hero__kicker {
@@ -28,9 +30,9 @@
 	margin-top: 24px;
 }
 .s-hero__body p {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 1.45;
 	margin-block-end: 12px;
 }
 
@@ -40,16 +42,17 @@
 
 @media (min-width: 768px) {
 	.s-hero {
-		padding: 0;
-		padding-top: 0;
-		min-height: calc(100vh - 150px);
+		padding: calc(80px + var(--space-8)) 0 var(--rhythm-section);
+		min-height: auto;
 	}
 }
 
 /* ═══ TECH SECTION — dark bg, 2-col ═══ */
 .s-tech {
-	background-color: var(--color-primary);
-	padding: 32px 0;
+	/* #304: black is the machine voice (consoles) and the closing CTA — a
+	   content section in black steals the consoles' meaning. Emphasis now
+	   comes from the statement block (left rule + tint), family 2. */
+	padding: var(--rhythm-section) 0;
 }
 
 .s-tech__inner {
@@ -59,54 +62,61 @@
 }
 
 .s-tech__col-left h2 {
-	color: var(--color-secondary);
+	color: var(--color-primary);
 }
 
 .s-tech__subtitle-wrap p {
-	color: var(--color-secondary);
+	color: var(--color-primary);
 	font-size: var(--text-sub-size, 26px);
 	font-weight: var(--text-sub-weight, 500);
 	line-height: var(--text-sub-lh, 30px);
 }
 
 .s-tech__body-wrap p {
-	color: var(--color-secondary);
+	color: var(--color-primary);
 	margin-top: 16px;
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 1.45;
 }
 
 @media (min-width: 768px) {
-	.s-tech { padding: 40px 0; }
 	.s-tech__inner { flex-direction: row; align-items: center; gap: 40px; }
 	.s-tech__col-left,
 	.s-tech__col-right { flex: 1; }
 }
 
-@media (min-width: 1025px) {
-	.s-tech { padding: 80px 0; }
-}
-
-/* ═══ CLOUDFLARE SECTION — centered bordered card ═══ */
+/* ═══ CLOUDFLARE SECTION ═══ */
 .s-cf {
-	padding: 40px 0;
+	padding: var(--rhythm-section) 0;
 }
 
 .s-cf__wrapper {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 }
 
 .s-cf__card {
 	width: 100%;
-	/* no frame: the partner lockup carries its own clear space per the
-	   Cloudflare brand guidelines — the old ink border was ours (#273) */
-	padding: 32px;
-	text-align: center;
+	/* The one block tinted with a discipline colour instead of ink: the edge
+	   orange (founder, 2026-08-19 — "así separa sin líneas y destaca"). It is
+	   the statement-block pattern, not a new one: left rule + tint, radius 0.
+	   The lockup keeps its clear space per Cloudflare's brand guidelines, so
+	   the padding is generous rather than the usual box inset. */
+	/* same inset as every other statement block, so their contents line up */
+	padding: var(--space-5);
+	border-left: var(--statement-rule) solid var(--color-edge);
+	background: var(--color-tint-edge);
+	/* `align-items: stretch` (the default) matters here: with flex-start the
+	   description shrank to its own text and stopped 164px short of the
+	   column, which is a width nobody declared. Only the button opts out. */
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: stretch;
+}
+
+.s-cf__card > .btn {
+	align-self: flex-start;
 }
 
 .s-cf__logo {
@@ -126,24 +136,18 @@
 }
 
 .s-cf__feature {
-	text-align: center;
 }
 
 .s-cf__feature p {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 1.45;
 }
 
 @media (min-width: 768px) {
-	.s-cf { padding: 80px 0; }
-	.s-cf__card { width: 90%; max-width: 1000px; }
+	.s-cf__card { width: 100%; max-width: var(--measure-statement); }
 	.s-cf__features { flex-direction: row; gap: 6px; }
 	.s-cf__feature { flex: 1; }
-}
-
-@media (min-width: 1025px) {
-	.s-cf__card { width: 80%; }
 }
 
 /* ═══ ÁREAS — 2-col with sticky cards ═══ */
@@ -178,12 +182,15 @@
 }
 
 /* the dark band inherits ink tokens — its text and links flip to paper */
-.s-tech :is(p, a) {
-	color: var(--color-secondary);
+.s-tech__inner {
+	border-left: var(--statement-rule) solid var(--color-primary);
+	background: var(--color-tint);
+	padding: var(--space-4) var(--space-5);
+	max-width: var(--measure-statement);
 }
 
 .s-areas {
-	padding: 40px 0;
+	padding: var(--rhythm-section) 0;
 }
 
 .s-areas__inner {
@@ -213,9 +220,9 @@
 	gap: 16px;
 	align-items: flex-start;
 	background: var(--color-secondary);
-	border: 1px solid var(--color-border, #e3e7eb);
+	border: 1px solid var(--color-border);
 	border-left: 4px solid var(--cc);
-	border-radius: 4px;
+	border-radius: var(--radius);
 	padding: 20px 22px;
 	text-decoration: none;
 	color: var(--color-primary);
@@ -255,7 +262,6 @@
 }
 
 @media (min-width: 768px) {
-	.s-areas { padding: 80px 0; }
 	.s-areas__inner { gap: 34px; }
 
 	.s-areas__header {
@@ -263,10 +269,9 @@
 	}
 
 	/* the section title reads as one line — it wrapped inside the old
-	   two-column header and the break looked like a layout fault (#273) */
+	   two-column header and the break looked like a layout fault (#273).
+	   Its size is now the portal-wide section-heading size (theme.css). */
 	.s-areas__header h2 {
-		font-size: clamp(28px, 3.2vw, 40px);
-		line-height: 1.15;
 		white-space: nowrap;
 	}
 
@@ -279,7 +284,7 @@
 /* ═══ CTA — dark bg ═══ */
 .s-cta {
 	background-color: var(--color-primary);
-	padding: 80px 0;
+	padding: var(--rhythm-band) 0;
 }
 
 .s-cta__heading {
@@ -300,11 +305,116 @@
 	margin-top: 32px;
 }
 
+/* #304: the closing heading shares the column like everything else —
+   70% was the page's fifth width */
+
+/* ═══ EL EQUIPO — the faces behind "the same three engineers" (#304) ═══
+   The home asserted it twice and never showed anyone. Data card family:
+   the photo IS the card, the name and role sit under it. */
+.s-team-strip {
+	padding: var(--rhythm-section) 0;
+}
+
+/* the statement that used to head its own band: same weight, now inside the
+   section it was always talking about */
+.s-team-strip__statement {
+	margin-top: var(--space-3);
+}
+
+.s-team-strip__statement p {
+	font-size: var(--text-sub-size, 26px);
+	font-weight: var(--text-sub-weight, 500);
+	line-height: var(--text-sub-lh, 30px);
+}
+
+.s-team-strip__lead {
+	margin-top: var(--space-3);
+}
+
+.s-team-strip__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-4);
+	list-style: none;
+	margin: var(--space-5) 0 0;
+	padding: 0;
+}
+
+.s-team-strip__card img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	margin-bottom: var(--space-3);
+}
+
+.s-team-strip__card h3 {
+	font-size: 20px;
+	line-height: 1.2;
+}
+
+.s-team-strip__card p {
+	color: var(--color-text-muted);
+	font-size: 16px;
+	line-height: 1.4;
+	margin-top: 2px;
+}
+
 @media (min-width: 768px) {
-	.s-cta__heading { width: 70%; }
+	.s-team-strip__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-@media (min-width: 1025px) {
-	.s-cta { padding: 80px 0; }
+/* ═══ LA PRUEBA — the site as its own evidence (#304) ═══
+   Statement block: the claim is checkable, so it gets the weight. */
+.s-proof {
+	padding: var(--rhythm-section) 0;
 }
 
+/* deliberately NOT a statement box: it would sit directly on top of the
+   mantra, and two tinted boxes stacked read as a pile rather than as two
+   ideas. The claim carries its own weight — it is checkable. */
+.s-proof__inner {
+	padding: 0;
+}
+
+.s-proof__inner h2 {
+	margin-bottom: var(--space-3);
+}
+
+.s-proof__inner p + p {
+	margin-top: var(--space-3);
+}
+
+/* the deconstruction die, floated so the heading wraps around it */
+.s-proof__die {
+	float: right;
+	width: 72px;
+	height: auto;
+	margin: 0 0 var(--space-3) var(--space-4);
+}
+
+/* the house dashed link convention reaches the new blocks */
+.s-team-strip__lead a,
+.s-team-strip__statement a,
+.s-cf__desc a,
+.s-proof__inner a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+	text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+.s-team-strip__lead a:hover,
+.s-team-strip__statement a:hover,
+.s-cf__desc a:hover,
+.s-proof__inner a:hover,
+.s-team-strip__lead a:focus-visible,
+.s-team-strip__statement a:focus-visible,
+.s-cf__desc a:focus-visible,
+.s-proof__inner a:focus-visible {
+	text-decoration-style: solid;
+	text-decoration-color: currentColor;
+}

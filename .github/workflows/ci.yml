@@ -62,6 +62,9 @@ jobs:
       - name: CMS text integrity (labels resolve, no hardcoded copy)
         run: python3 scripts/ci-check-cms-text.py
 
+      - name: Design tokens (colour, radius and shadow live in theme.css)
+        run: python3 scripts/ci-check-design-tokens.py
+
       - name: Build
         run: npx astro build
 

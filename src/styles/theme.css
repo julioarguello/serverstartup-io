@@ -52,7 +52,7 @@
 	--color-marked: rgba(206, 212, 218, 0.50);
 
 	/* Neutral surfaces (consolidated from per-page styles) */
-	--color-surface: #f5f5f5;
+	--color-surface: #f5f5f5;        /* quiet fill: chips, thumbs, code */
 	--color-surface-soft: #fafafa;
 	--color-surface-hover: #e8e8e8;
 	--color-ink-soft: #3a3a3a;
@@ -62,11 +62,97 @@
 	--font-family-mono: "JetBrains Mono", monospace;
 
 	/* Layout */
-	--container-max: 1440px;
+	/* THE column, and the only width on a page. Everything ends at its right
+	   edge: headings, paragraphs, boxes, instrument panels, rows, band
+	   content, the header, the footer. Sized by the TEXT, not by the screen
+	   — 840px of content puts body copy at ~80 characters per line, the
+	   classic reading measure. A second, narrower measure for prose was
+	   tried and rejected: two measures alternate long and short lines down
+	   the page, which is exactly what reads as "no criterion" (#304). */
+	/* Fluid between 1440 and 2400: the column and the body type grow TOGETHER
+	   (see the body rule below), so the line keeps measuring ~80 characters
+	   at every size. Growing the column alone would just lengthen the line;
+	   growing neither leaves 20px text stranded in the middle of a 27-inch
+	   monitor. Below 1440 both are frozen — a laptop is already right. */
+	--container-max: clamp(880px, calc(880px + (100vw - 1440px) * 0.1667), 1040px);
+	--text-body: clamp(20px, calc(20px + (100vw - 1440px) * 0.004167), 24px);
 	--section-padding: 80px;
 	--card-radius: 24px;
 	--card-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 	--widget-spacing: 20px;
+
+	/* ═══════════════════════════════════════════════════════════════
+	   DESIGN TOKENS (#304) — the ONLY place these values are declared.
+	   Every other stylesheet consumes them; a literal colour, radius or
+	   shadow outside this block is a defect the CI guard rejects.
+	   The portal audit found five radii, three shadow policies and an
+	   ad-hoc spacing ladder living across nine stylesheets.
+	   ═══════════════════════════════════════════════════════════════ */
+
+	/* Surfaces & lines */
+	--color-border: #E3E7EB;          /* hairline on light ground */
+	--color-border-soft: #EDEEF0;     /* data separation INSIDE instruments */
+	--color-tint: color-mix(in srgb, var(--color-primary) 4%, transparent);
+	/* the edge discipline's own colour — the partner block is tinted with
+	   it so it separates by ground instead of by a rule (founder #304) */
+	--color-edge: #F38020;
+	--color-tint-edge: color-mix(in srgb, var(--color-edge) 8%, transparent);
+	--color-surface-sheet: #FDFDFB;   /* paper of the assembly manual sheet */
+	--color-scrim: rgba(0, 0, 0, 0.3); /* behind a modal */
+
+	/* Ink at reduced weight. ONE step, not the four alphas the audit found
+	   (0.5/0.55/0.65/0.7): the 0.5 ones composited to #8F8F8F, which is
+	   3.0:1 on white — below AA for the small metadata they dressed. */
+	--color-text-muted: #6B6B6B;      /* 5.4:1 on paper */
+
+	/* The console is a surface of its own — the machine voice (#304) */
+	--color-console: #101214;         /* terminal window ground */
+	--color-console-glass: rgba(14, 16, 18, 0.82); /* … when the cube shows through */
+	--color-console-bar: #1D2026;     /* its title bar */
+	--color-console-ink: rgba(255, 255, 255, 0.72);
+	--color-console-dim: rgba(255, 255, 255, 0.55);
+	--color-console-faint: rgba(255, 255, 255, 0.3);
+	--color-console-line: rgba(255, 255, 255, 0.16);
+	--color-console-ok: #5BB974;      /* the live cursor / OK state */
+
+	/* One radius for the whole portal */
+	--radius: 4px;
+
+	/* One shadow policy: data cards only */
+	--shadow-card: 0 2px 10px rgba(0, 0, 0, 0.06);
+
+	/* 8-point spacing scale */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 16px;
+	--space-4: 24px;
+	--space-5: 32px;
+	--space-6: 40px;
+	--space-7: 64px;
+	--space-8: 80px;
+	--space-9: 120px;
+
+	/* Named rhythms — sections and blocks draw from these, never raw px.
+	   `--rhythm-section` is the padding EACH side of a section declares, so
+	   two adjacent sections leave twice that between them (48px). Sections
+	   never add a one-off bottom: the neighbour's top is the other half. */
+	--rhythm-section: var(--space-4);   /* per side; 48px between sections */
+	--rhythm-band: var(--space-6);      /* inside a band (CTA, footer) */
+	--rhythm-block: var(--space-6);     /* between blocks in a section */
+	--rhythm-inline: var(--space-3);    /* between related lines */
+
+	/* There is no second measure. A page has ONE width and everything inside
+	   it — headings, paragraphs, boxes, panels, rows — ends at the same
+	   edge. Any two-measure system alternates short and long lines down the
+	   page, which is exactly what reads as "no criterion" (founder, #304).
+	   The column is therefore sized by the TEXT, not by the screen. */
+	--measure-statement: var(--container-max);
+
+	--radius-pill: 99px;              /* pills and toggles only */
+	--focus-ring: 0 0 0 3px rgba(30, 30, 30, 0.2);
+
+	/* Statement block (family 2): left rule + tint, no radius */
+	--statement-rule: 3px;
 }
 
 /* ─────────────────────────────────────────
@@ -112,7 +198,7 @@ ul, ol { list-style: none; }
 
 /* Tablet typography */
 @media (min-width: 768px) {
-	body { font-size: 20px; line-height: 28px; }
+	body { font-size: var(--text-body); line-height: 1.4; }
 	h1 { font-size: 64px; line-height: 72px; }
 	h2 { font-size: 48px; line-height: 56px; }
 	h3 { font-size: 32px; line-height: 40px; }
@@ -143,9 +229,9 @@ ul, ol { list-style: none; }
 /* Body text style (typography-efb39b7) */
 .text-body {
 	font-family: var(--font-family);
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 1.4;
 }
 
 /* Highlighted text (from custom CSS) */
@@ -177,10 +263,15 @@ ul, ol { list-style: none; }
 	color: var(--color-primary);
 	border: 1px solid var(--color-primary);
 }
+/* The filled state carries the SECTION's colour, ink where there is no
+   section (founder, 2026-08-19). The pair is computed per colour in
+   utils/accent.ts because CSS cannot branch on luminance and the palette
+   cannot carry one label colour: white on the CDN orange is 2.65:1. */
 .btn-dark:hover,
 .btn-dark:focus-visible {
-	background-color: var(--color-primary);
-	color: var(--color-secondary);
+	background-color: var(--accentFill, var(--color-primary));
+	border-color: var(--accentFill, var(--color-primary));
+	color: var(--accentLabel, var(--color-secondary));
 }
 
 .btn-light {
@@ -188,10 +279,12 @@ ul, ol { list-style: none; }
 	color: var(--color-secondary);
 	border: 1px solid var(--color-secondary);
 }
+/* on a dark band the outline is paper; it fills with the section colour too */
 .btn-light:hover,
 .btn-light:focus-visible {
-	background-color: var(--color-secondary);
-	color: var(--color-primary);
+	background-color: var(--accentFill, var(--color-secondary));
+	border-color: var(--accentFill, var(--color-secondary));
+	color: var(--accentLabel, var(--color-primary));
 }
 
 /* ─────────────────────────────────────────
@@ -205,6 +298,15 @@ main h2:not(.s-cta__heading):not(.ref-banner__title)::before,
 .ref-banner__title::before {
 	content: "~ ";
 	font-weight: inherit;
+}
+
+/* One size for every section heading (#304). The scale gave h2 48/64px —
+   the level below the page title — and each page then overrode it where the
+   result looked oversized, which is how three heading sizes ended up on the
+   same structural level. The page title (h1) keeps the big register. */
+main h2 {
+	font-size: clamp(28px, 3.2vw, 40px);
+	line-height: 1.15;
 }
 
 /* ─────────────────────────────────────────
@@ -280,7 +382,7 @@ code {
 	font-size: 0.92em;
 }
 
-/* the signature's own breathing room, both when it closes a page and
-   when a dark band follows it */
-.mantra-section { padding: 4px 0 64px; }
-.mantra-wrap { padding-bottom: 56px; }
+/* the signature closes the page like any other section: the same rhythm
+   above and below, and none of its own inside the box (§14) */
+.mantra-section,
+.mantra-wrap { padding-block: var(--rhythm-section); }

@@ -3,7 +3,6 @@
 }
 
 .legal-inner {
-	max-width: 700px;
 }
 
 .legal h1 {
@@ -17,9 +16,9 @@
 }
 
 .legal :global(p) {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 26px;
+	line-height: 1.45;
 }
 
 @media (min-width: 768px) {

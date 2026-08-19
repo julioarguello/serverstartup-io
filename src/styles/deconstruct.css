@@ -1,29 +1,30 @@
 /* ═══ Deconstructing this website — assembly-manual page (#161) ═══ */
 
 .s-manual {
-	padding: calc(80px + 24px) 0 72px;
+	padding: calc(80px + var(--space-4)) 0 var(--rhythm-section);
 }
 
 .s-manual__inner {
-	max-width: 900px;
+	/* #304: it is also the .container, which is margin:0 auto — capping it
+	   here centred the whole page and moved the portal's left edge. The
+	   column is the container's own width now; prose caps at --measure-prose. */
+	margin-inline: 0;
 }
 
 .s-manual__intro {
-	max-width: 700px;
 	margin-top: 20px;
 }
 
 .s-manual__intro p,
 .s-manual__prose p {
-	font-size: 20px;
+	font-size: var(--text-body);
 	font-weight: 300;
-	line-height: 28px;
+	line-height: 1.45;
 	margin-block-end: 14px;
 }
 
 .s-manual__prose {
-	max-width: 700px;
-	margin-top: 48px;
+	margin-top: var(--space-6);
 }
 
 .s-manual__prose h2 {
@@ -37,7 +38,7 @@
 	border: 2px solid var(--color-primary);
 	padding: 26px 30px;
 	margin-top: 36px;
-	background: #fdfdfb;
+	background: var(--color-surface-sheet);
 }
 
 .manual__head {
@@ -109,7 +110,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 8px;
-	text-align: center;
+	
 }
 
 .manual__step {
