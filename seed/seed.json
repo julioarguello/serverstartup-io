@@ -452,7 +452,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ingeniería de sistemas, integración y seguridad edge. Tres ingenieros senior en Getxo, desde 2019."
+									"text": "Ingeniería de sistemas, integración y seguridad edge. Con tres ingenieros senior en el núcleo, desde Getxo y desde 2019."
 								}
 							]
 						}
@@ -11771,7 +11771,7 @@
 				"status": "published",
 				"data": {
 					"title": "Ingeniería de software: arquitectura, integración y operación",
-					"excerpt": "Partners oficiales de Cloudflare desde 2019. Tres ingenieros senior: quien diseña tu arquitectura escribe el código. Un equipo. Seis verticales. Cero traspasos.",
+					"excerpt": "Partners oficiales de Cloudflare desde 2019. Siempre los mismos tres ingenieros senior: quien diseña tu arquitectura escribe el código. Un equipo. Seis verticales. Cero traspasos.",
 					"content": [
 						{
 							"_type": "block",
@@ -11864,7 +11864,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Somos "
+									"text": "En tu proyecto, siempre los mismos "
 								},
 								{
 									"_type": "span",
@@ -12047,7 +12047,7 @@
 				"status": "published",
 				"data": {
 					"title": "Quiénes somos",
-					"excerpt": "Tres ingenieros senior, los mismos de principio a fin. Backend, integración, datos y edge desde Getxo, desde 2019.",
+					"excerpt": "Tres ingenieros senior sostienen la casa, los mismos de principio a fin. Backend, integración, datos y edge desde Getxo, desde 2019.",
 					"content": [
 						{
 							"_type": "block",
@@ -12297,7 +12297,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "El proyecto arrancó por cuenta propia en 2017. En enero de 2019 se convirtió en sociedad, desde Getxo. Hoy somos tres ingenieros con más de veinte años de producción cada uno."
+									"text": "El proyecto arrancó por cuenta propia en 2017. En enero de 2019 se convirtió en sociedad, desde Getxo. Hoy el pilar son tres ingenieros senior, con más de veinte años de producción cada uno."
 								}
 							]
 						},
@@ -12487,7 +12487,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tres ingenieros. Los mismos tres. De principio a fin.",
+									"text": "El pilar son tres ingenieros. Los mismos, de principio a fin.",
 									"marks": [
 										"strong"
 									]
@@ -12500,7 +12500,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ser pocos es una elección. Pocos clientes, máxima implicación y ningún junior aprendiendo con tu presupuesto."
+									"text": "Pocos clientes a la vez, por elección. Máxima implicación, y ningún junior aprendiendo con tu presupuesto."
 								}
 							]
 						},
@@ -12948,7 +12948,7 @@
 				"translationOf": "page-home",
 				"data": {
 					"title": "Software engineering: architecture, integration and operations",
-					"excerpt": "Official Cloudflare partners since 2019. Three senior engineers: whoever designs your architecture writes the code. One team. Six verticals. Zero handoffs.",
+					"excerpt": "Official Cloudflare partners since 2019. Always the same three senior engineers: whoever designs your architecture writes the code. One team. Six verticals. Zero handoffs.",
 					"content": [
 						{
 							"_type": "block",
@@ -13041,7 +13041,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We are "
+									"text": "On your project, always the same "
 								},
 								{
 									"_type": "span",
@@ -13214,7 +13214,7 @@
 				"translationOf": "page-quienes-somos",
 				"data": {
 					"title": "About us",
-					"excerpt": "Three senior engineers, the same three start to finish. Backend, integration, data and edge, from Getxo, since 2019.",
+					"excerpt": "Three senior engineers hold it up, the same ones start to finish. Backend, integration, data and edge, from Getxo, since 2019.",
 					"content": [
 						{
 							"_type": "block",
@@ -13405,7 +13405,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "The project started as freelance work in 2017. In January 2019 it became a company, from Getxo. Today we are three engineers, each with twenty-plus years in production."
+									"text": "The project started as freelance work in 2017. In January 2019 it became a company, from Getxo. Today the pillar is three senior engineers, each with twenty-plus years in production."
 								}
 							]
 						},
@@ -13551,7 +13551,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Three engineers. The same three. Start to finish.",
+									"text": "Three engineers hold this up. The same ones, start to finish.",
 									"marks": [
 										"strong"
 									]
@@ -13564,7 +13564,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Staying small is a choice. Few clients, deep involvement, and no junior learning on your budget."
+									"text": "Few clients at a time, by choice. Deep involvement, and no junior learning on your budget."
 								}
 							]
 						},
