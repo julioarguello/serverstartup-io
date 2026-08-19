@@ -10,6 +10,7 @@
  * Falls back to "cta_global" (Spanish default) if locale variant not found.
  */
 import { getWidgetArea, getSiteSettings } from "emdash";
+import { getUiLabels } from "../utils/ui-labels";
 import type { SiteSettings } from "../types";
 const t = Astro.locals.t;
 const locale = Astro.currentLocale || "es";
@@ -22,7 +23,10 @@ if (!ctaArea?.widgets?.length && locale !== "es") {
 }
 const ctaWidget = ctaArea?.widgets[0];
 const settings = await getSiteSettings();
-const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Cuéntanos tu proyecto";
+const labels = await getUiLabels(locale);
+// #306: same reason as Base.astro — a label, not a setting
+const defaultCtaLabel = labels.get("footer_headings", "default_cta",
+	(settings as SiteSettings).defaultCtaLabel || (locale === "en" ? "Tell us about your project" : "Cuéntanos tu proyecto"));
 
 // Heading from widget title
 const heading = ctaWidget?.title || (locale === "en" ? "Let's talk, engineer to engineer." : "Hablemos de ingeniero a ingeniero.");

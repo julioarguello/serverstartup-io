@@ -97,7 +97,12 @@ const s = settings as SiteSettings;
 const phone = s.phone || "";
 const phoneDisplay = s.phoneDisplay || "";
 const email = s.email || "info@serverstartup.io";
-const defaultCtaLabel = s.defaultCtaLabel || "Contacta ahora";
+// #306: this used to read site settings, which are locale-NEUTRAL by design
+// (phone, email, company name). A CTA label is translatable copy, so every
+// English page shipped the Spanish button while the band above it was in
+// English. It lives with the other UI strings now.
+const defaultCtaLabel = labels.get("footer_headings", "default_cta",
+	s.defaultCtaLabel || (locale === "en" ? "Tell us about your project" : "Cuéntanos tu proyecto"));
 
 // Footer headings from CMS (ui_labels widget area)
 const trustTitle = labels.get("footer_headings", "trust_title", "Confían en nosotros");

@@ -14,8 +14,16 @@ import PtLink from "./PtLink.astro";
 const t = Astro.locals.t;
 const ptComponents = { mark: { link: PtLink } };
 
+const locale = Astro.currentLocale || "es";
+
+// Scoped to the locale (#306). Without this the query returned whatever came
+// first — the ES entry — and the English homepage rendered the whole partner
+// block in Spanish. If a locale has no entry the section renders NOTHING:
+// falling back to another language is the behaviour this issue was filed for,
+// and a missing block is honest where a foreign-language block is not.
 const { entries: allPartners } = await getEmDashCollection("partners", {
 	orderBy: { created_at: "asc" },
+	locale,
 });
 
 // The "featured" partner with full content = Cloudflare card
@@ -28,7 +36,6 @@ if (!featuredPartner) return;
 const d = featuredPartner.data;
 const logo = d.featured_image;
 const ctaLabel = d.cta_label;
-const locale = Astro.currentLocale || "es";
 const localePrefix = locale === "es" ? "" : `/${locale}`;
 // The block introduces the partnership; the button sends you where that
 // partnership is actually work — the edge vertical — not to the partner's own
