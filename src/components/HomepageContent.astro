@@ -135,7 +135,7 @@ const members = memberEntries ?? [];
 				{members.map((m: any) => (
 					<li class="s-team-strip__card">
 						{m.data.featured_image?.src && (
-							<img src={m.data.featured_image.src} alt={m.data.title} loading="lazy" decoding="async" />
+							<img src={m.data.featured_image.src} alt={m.data.title} width="1200" height="900" loading="lazy" decoding="async" />
 						)}
 						<h3>{m.data.title}</h3>
 						{/* the role is a UI label, like on Contacto — the members

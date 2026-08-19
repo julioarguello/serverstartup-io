@@ -161,6 +161,11 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
+/* #315: smooth scrolling is for anchor jumps; someone who asked the system
+   for less motion should not be taken on a ride by one. */
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+}
 
 body {
 	font-family: var(--font-family);
@@ -193,6 +198,9 @@ h6 { font-family: var(--font-family); font-size: 18px; font-weight: 700; line-he
 
 p { margin-block-end: 0; font-weight: 300; }
 a { color: var(--color-text); text-decoration: none; }
+/* #315: images declare their intrinsic width/height so the browser can
+   reserve the box before the bytes arrive — `height: auto` keeps the CSS
+   in charge of the rendered size, the attributes only supply the ratio. */
 img { max-width: 100%; height: auto; display: block; }
 ul, ol { list-style: none; }
 

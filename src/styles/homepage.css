@@ -120,6 +120,10 @@
 }
 
 .s-cf__logo {
+	/* #315: the rendered size moved here when the <img> took its intrinsic
+	   width/height as attributes — those give the browser the ratio so it can
+	   reserve the box, and CSS stays in charge of how big it draws. */
+	width: 268px;
 	margin-bottom: 24px;
 }
 
