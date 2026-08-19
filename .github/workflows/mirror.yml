@@ -60,6 +60,13 @@ jobs:
           # remote-tracking ref instead works for BOTH event types, so the
           # command stays single and neither branch of the trigger is special.
           git fetch --quiet origin "+refs/heads/main:refs/remotes/origin/main"
+          # …and the tags as the SOURCE holds them. On a tag event the runner
+          # receives the event's own tag PEELED — refs/tags/vX points at the
+          # commit, not at the annotated tag object — so pushing it wrote a
+          # lightweight tag onto the mirror and created the divergence that
+          # then blocked every later push (#313). Re-fetching with force
+          # replaces the peeled ref with the real object before it travels.
+          git fetch --quiet --force origin "+refs/tags/*:refs/tags/*"
           #
           # Tags are FORCED (`+`). Measured on the real repos: the mirror held
           # v0.9.41 as a lightweight tag pointing at the commit while the source
