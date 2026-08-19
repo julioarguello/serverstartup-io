@@ -1387,6 +1387,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "default_cta",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cuéntanos tu proyecto"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "engineer_caption",
 							"children": [
 								{
@@ -2725,6 +2736,17 @@
 								{
 									"_type": "span",
 									"text": "References"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "default_cta",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Tell us about your project"
 								}
 							]
 						},
@@ -14584,6 +14606,123 @@
 						"featured": true
 					},
 					"locale": "es"
+				},
+				{
+					"id": "partner-cloudflare-en",
+					"slug": "cloudflare",
+					"status": "published",
+					"data": {
+						"title": "Cloudflare",
+						"featured_image": {
+							"src": "/assets/logo-cloudflare-partner.png",
+							"alt": "Cloudflare Partner Network"
+						},
+						"excerpt": "We speed up and protect your infrastructure with Cloudflare's most advanced services",
+						"content": [
+							{
+								"_type": "block",
+								"style": "h3",
+								"children": [
+									{
+										"_type": "span",
+										"text": "Official Cloudflare partner"
+									}
+								]
+							},
+							{
+								"_type": "block",
+								"style": "normal",
+								"markDefs": [
+									{
+										"_key": "cfk1",
+										"_type": "link",
+										"href": "https://www.cloudflare.com/",
+										"blank": true
+									}
+								],
+								"children": [
+									{
+										"_type": "span",
+										"text": "We speed up and protect your infrastructure with the most advanced services "
+									},
+									{
+										"_type": "span",
+										"text": "Cloudflare",
+										"marks": [
+											"cfk1"
+										]
+									},
+									{
+										"_type": "span",
+										"text": " has to offer."
+									}
+								]
+							},
+							{
+								"_type": "block",
+								"style": "h4",
+								"children": [
+									{
+										"_type": "span",
+										"text": "Global CDN"
+									}
+								]
+							},
+							{
+								"_type": "block",
+								"style": "normal",
+								"children": [
+									{
+										"_type": "span",
+										"text": "to improve load times"
+									}
+								]
+							},
+							{
+								"_type": "block",
+								"style": "h4",
+								"children": [
+									{
+										"_type": "span",
+										"text": "WAF and Zero Trust"
+									}
+								]
+							},
+							{
+								"_type": "block",
+								"style": "normal",
+								"children": [
+									{
+										"_type": "span",
+										"text": "to harden security"
+									}
+								]
+							},
+							{
+								"_type": "block",
+								"style": "h4",
+								"children": [
+									{
+										"_type": "span",
+										"text": "Workers and edge computing"
+									}
+								]
+							},
+							{
+								"_type": "block",
+								"style": "normal",
+								"children": [
+									{
+										"_type": "span",
+										"text": "for modern, flexible architectures"
+									}
+								]
+							}
+						],
+						"cta_label": "More about Cloudflare",
+						"featured": true
+					},
+					"locale": "en"
 				}
 			]
 	}

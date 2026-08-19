@@ -52,7 +52,7 @@ if (cacheHint) Astro.cache.set(cacheHint);
 const altPath = await entryAlternatePath(entryCollection, entry.data.id, locale);
 
 const settings = await getSiteSettings();
-const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contacta ahora";
+const defaultCtaLabel = (settings as SiteSettings).defaultCtaLabel || "Contacta ahora"; // fallback only; the label itself comes from ui_labels via Base/CtaGlobal (#306)
 
 const { title, content, excerpt } = entry.data;
 
