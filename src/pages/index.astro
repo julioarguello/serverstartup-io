@@ -24,7 +24,9 @@ const schemas = homepageJsonLd({
 	description,
 	locale,
 	phone: settings.phone,
-	email: settings.email,
+	// #311: deliberately omitted — jsonld.ts already says why: an address in
+	// JSON-LD is indexed, which defeats the click-to-decode obfuscation the
+	// rest of the site relies on. contactJsonLd honoured that; this did not.
 });
 ---
 

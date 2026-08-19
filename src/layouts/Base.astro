@@ -96,7 +96,17 @@ const headerAccent = activeService?.data?.color || "#1E1E1E";
 const s = settings as SiteSettings;
 const phone = s.phone || "";
 const phoneDisplay = s.phoneDisplay || "";
-const email = s.email || "info@serverstartup.io";
+// The address is locale-specific: `hello@` answers in English, `hola@` in
+// Spanish. The footer picked the Spanish one on every locale, so an English
+// visitor got one address in the footer and another on the contact page (#311).
+const email = (locale === "en" ? s.emailEn : s.email) || s.email || "info@serverstartup.io";
+// #311: templates render the ENCODED value; the plain one never reaches HTML.
+// btoa, not Buffer: this renders on Workers. Computed rather than stored, so
+// editing the address in the CMS cannot leave a stale encoded copy behind.
+const emailEncoded = btoa(email);
+const phoneEncoded = s.phoneEncoded || "";
+const emailLabel = labels.get("footer_headings", "email_label",
+	locale === "en" ? "Email us" : "Escríbenos");
 // #306: this used to read site settings, which are locale-NEUTRAL by design
 // (phone, email, company name). A CTA label is translatable copy, so every
 // English page shipped the Spanish button while the band above it was in
@@ -209,6 +219,9 @@ const resolvedOgType = ogType || "website";
 		aboutUsLabel={aboutUsLabel}
 		manualLabel={manualLabel}
 		defaultCtaLabel={defaultCtaLabel}
+		emailEncoded={emailEncoded}
+		phoneEncoded={phoneEncoded}
+		emailLabel={emailLabel}
 		email={email}
 		phone={phone}
 		phoneDisplay={phoneDisplay}
