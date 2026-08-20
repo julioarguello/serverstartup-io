@@ -1532,6 +1532,188 @@
 				},
 				{
 					"type": "content",
+					"title": "search",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "home",
+							"children": [
+								{
+									"_type": "span",
+									"text": "getxo"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cdn",
+							"children": [
+								{
+									"_type": "span",
+									"text": "LaLiga"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ec",
+							"children": [
+								{
+									"_type": "span",
+									"text": "carrito-abandonado"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "int",
+							"children": [
+								{
+									"_type": "span",
+									"text": "trazabilidad"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bd",
+							"children": [
+								{
+									"_type": "span",
+									"text": "select-*"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "gf",
+							"children": [
+								{
+									"_type": "span",
+									"text": "quarkus"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ia",
+							"children": [
+								{
+									"_type": "span",
+									"text": "alucinación"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "quienes",
+							"children": [
+								{
+									"_type": "span",
+									"text": "amigos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "contacto",
+							"children": [
+								{
+									"_type": "span",
+									"text": "formulario"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ref",
+							"children": [
+								{
+									"_type": "span",
+									"text": "nda"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "dec",
+							"children": [
+								{
+									"_type": "span",
+									"text": "node_modules"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "privacy",
+							"children": [
+								{
+									"_type": "span",
+									"text": "cookies"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cmd_open",
+							"children": [
+								{
+									"_type": "span",
+									"text": "find . -name \""
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cmd_close",
+							"children": [
+								{
+									"_type": "span",
+									"text": "\""
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hint_enter",
+							"children": [
+								{
+									"_type": "span",
+									"text": "buscar"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hint_esc",
+							"children": [
+								{
+									"_type": "span",
+									"text": "cerrar"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "content",
 					"title": "search_page",
 					"content": [
 						{
@@ -1953,6 +2135,39 @@
 							"_key": "nav_site",
 							"style": "normal",
 							"children": [{ "_type": "span", "text": "Sitio" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_open",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Buscar en el sitio"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_close",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cerrar la búsqueda"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_field",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Buscar en el sitio"
+								}
+							]
 						}
 					],
 					"type": "content"
@@ -2898,6 +3113,188 @@
 					"type": "content"
 				},
 				{
+					"type": "content",
+					"title": "search",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "home",
+							"children": [
+								{
+									"_type": "span",
+									"text": "getxo"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cdn",
+							"children": [
+								{
+									"_type": "span",
+									"text": "edge"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ec",
+							"children": [
+								{
+									"_type": "span",
+									"text": "abandoned-cart"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "int",
+							"children": [
+								{
+									"_type": "span",
+									"text": "traceability"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bd",
+							"children": [
+								{
+									"_type": "span",
+									"text": "select-*"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "gf",
+							"children": [
+								{
+									"_type": "span",
+									"text": "quarkus"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ia",
+							"children": [
+								{
+									"_type": "span",
+									"text": "hallucination"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "quienes",
+							"children": [
+								{
+									"_type": "span",
+									"text": "friends"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "contacto",
+							"children": [
+								{
+									"_type": "span",
+									"text": "contact-form"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ref",
+							"children": [
+								{
+									"_type": "span",
+									"text": "nda"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "dec",
+							"children": [
+								{
+									"_type": "span",
+									"text": "node_modules"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "privacy",
+							"children": [
+								{
+									"_type": "span",
+									"text": "cookies"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cmd_open",
+							"children": [
+								{
+									"_type": "span",
+									"text": "find . -name \""
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cmd_close",
+							"children": [
+								{
+									"_type": "span",
+									"text": "\""
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hint_enter",
+							"children": [
+								{
+									"_type": "span",
+									"text": "search"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hint_esc",
+							"children": [
+								{
+									"_type": "span",
+									"text": "close"
+								}
+							]
+						}
+					]
+				},
+				{
 					"title": "search_page",
 					"content": [
 						{
@@ -3320,6 +3717,39 @@
 							"_key": "nav_site",
 							"style": "normal",
 							"children": [{ "_type": "span", "text": "Site" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_open",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Search the site"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_close",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Close search"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "search_field",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Search the site"
+								}
+							]
 						}
 					],
 					"type": "content"

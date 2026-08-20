@@ -22,8 +22,18 @@ const searchResults = labels.get("search_page", "search_results", "result(s) for
 const searchDescription = labels.get("search_page", "search_description", "Search Server Startup blog");
 
 // Use EmDash's FTS5-backed search instead of loading all posts into memory.
+// #338: results now span services, pages and posts. Each carries its own
+// `collection`, and the route differs per collection — assuming /posts/ for
+// everything sent every service and page result to a 404.
+const resultHref = (r: { collection?: string; slug?: string; id: string }) => {
+	const slug = r.slug || r.id;
+	if (r.collection === "posts") return `/en/posts/${slug}`;
+	if (r.collection === "pages" && slug === "home") return "/en";
+	return `/en/${slug}`;
+};
+
 const results = query
-	? (await search(query, { collections: ["posts"], locale: "en", limit: 20 })).items
+	? (await search(query, { collections: ["services", "pages", "posts"], locale: "en", limit: 20 })).items.filter((r) => r.slug !== "home")
 	: [];
 ---
 
@@ -62,7 +72,8 @@ const results = query
 					{results.map((result) => (
 						<PostCard
 							title={result.title || ""}
-							href={`/en/posts/${result.slug || result.id}`}
+							href={resultHref(result)}
+							placeholder={false}
 						/>
 					))}
 				</div>

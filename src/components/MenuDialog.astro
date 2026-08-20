@@ -11,6 +11,7 @@
  * keeps driving it.
  */
 import LogoDie from "./LogoDie.astro";
+import SearchPrompt from "./SearchPrompt.astro";
 import { FACE_BY_SLUG, FACE_ORDER, SITE_BY_PATH } from "../utils/nav";
 
 interface ServiceEntry {
@@ -66,6 +67,9 @@ const siteLinks = siteItems
 	>✕</button>
 
 	<div class="menu-inner">
+		{/* #338: on phones the header has no room for the command line, so the
+		    menu carries it — full-screen, and the cube is still the only door. */}
+		<SearchPrompt pathname={currentPath} accent="#1E1E1E" place="menu" />
 		<div class="menu-lists">
 			<nav aria-label={t("nav_specialties")}>
 				<ul class="menu-spec" role="list">
