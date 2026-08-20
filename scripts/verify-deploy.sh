@@ -6,6 +6,11 @@
 # route that answers 200 with the wrong content still fails. Titles were taken
 # from the live rendered pages, entity encoding included (&amp;).
 #
+# Renamed slugs keep a 301 in astro.config.mjs so inbound links survive. Those
+# redirects are asserted here too (#328): the promise they make is exactly the
+# one nothing else checks, and a redirect that quietly disappears looks like a
+# working site until someone follows an old link.
+#
 # Usage: scripts/verify-deploy.sh <base-url>
 set -euo pipefail
 
@@ -17,27 +22,27 @@ mkdir -p "$TMP"
 
 # ── 1. Routes battery: 26 routes, both locales, status + title ──────────────
 ROUTES=(
-	"/|Ingeniería de sistemas, integración y seguridad edge"
+	"/|Ingeniería de software"
 	"/quienes-somos|Quiénes somos"
 	"/contacto|Contacto"
 	"/comercio-electronico|Comercio electrónico"
 	"/integracion-de-sistemas|Integración de sistemas"
 	"/big-data-cloud-analytics|Big Data &amp; Cloud Analytics"
 	"/cdn-waf-seguridad-edge-cloudflare|CDN, WAF y seguridad edge"
-	"/ingenieria-greenfield-y-sistemas-criticos|Desarrollo greenfield"
+	"/desarrollo-greenfield|Desarrollo greenfield"
 	"/deconstruyendo|Deconstruyendo esta web"
 	"/politica-de-privacidad|Política de privacidad"
 	"/inteligencia-artificial|Inteligencia artificial"
 	"/referencias|Referencias"
 	"/partners|Partners"
-	"/en|Systems engineering, integration and edge security"
+	"/en|Software engineering"
 	"/en/about-us|About us"
 	"/en/contact|Contact"
 	"/en/e-commerce|E-commerce"
 	"/en/systems-integration|Systems Integration"
 	"/en/big-data-cloud-analytics|Big Data &amp; Cloud Analytics"
 	"/en/cdn-waf-edge-security-cloudflare|CDN, WAF &amp; Edge Security"
-	"/en/greenfield-engineering-critical-systems|Greenfield development"
+	"/en/greenfield-development|Greenfield development"
 	"/en/deconstructing|Deconstructing this website"
 	"/en/privacy-policy|Privacy policy"
 	"/en/artificial-intelligence|Artificial Intelligence"
@@ -65,6 +70,29 @@ if [ "$code" = "404" ] && grep -qF "Página no encontrada" "$TMP/page.html"; the
 else
 	echo "  FAIL unknown route — final HTTP $code (expected 404 with the 404 page)" >&2; FAIL=1
 fi
+
+# Legacy slugs kept alive by astro.config.mjs. Asserting the status AND the
+# destination: a 301 to the wrong page is worse than no redirect at all.
+echo "── legacy redirects"
+REDIRECTS=(
+	"/ingenieria-greenfield-y-sistemas-criticos|/desarrollo-greenfield"
+	"/en/greenfield-engineering-critical-systems|/en/greenfield-development"
+)
+for entry in "${REDIRECTS[@]}"; do
+	from="${entry%%|*}"; to="${entry##*|}"
+	read -r code location < <(curl -sI "$BASE$from" \
+		-w '%{http_code} %{redirect_url}\n' -o /dev/null)
+	if [ "$code" != "301" ]; then
+		echo "  FAIL $from — HTTP $code (expected 301)" >&2; FAIL=1; continue
+	fi
+	# Same-host destinations print as a path, off-host ones keep their full URL
+	# (the prefix does not strip) — which is the difference worth seeing.
+	landed="${location#"$BASE"}"
+	if [ "$landed" != "$to" ]; then
+		echo "  FAIL $from — 301 to ${landed:-<empty>} (expected $to)" >&2; FAIL=1; continue
+	fi
+	echo "  ok   $from → $to (301)"
+done
 
 # ── 2. Security headers + security.txt (the #164 suite) ─────────────────────
 echo "── security headers"
