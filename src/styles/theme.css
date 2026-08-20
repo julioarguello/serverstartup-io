@@ -394,3 +394,43 @@ code {
    above and below, and none of its own inside the box (§14) */
 .mantra-section,
 .mantra-wrap { padding-block: var(--rhythm-section); }
+
+/* ═══ FOCUS — one visible ring, everywhere (#343) ═══
+   WCAG 2.4.7. Written with :where() so its specificity is 0: every component
+   that already styles its own focus keeps winning, and anything new inherits
+   this instead of falling through to whatever the browser happens to draw —
+   or to nothing, the day someone writes `outline: none`. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+	border-radius: var(--radius);
+}
+
+/* Anchor targets must clear the fixed header when jumped to (2.4.11) */
+:target,
+main :is(h1, h2, h3)[id],
+#content {
+	scroll-margin-top: var(--space-6);
+}
+
+/* The skip link: off-screen until focused, then below the fixed header */
+.skip-link {
+	position: fixed;
+	top: var(--space-2);
+	left: var(--space-2);
+	z-index: 200;
+	padding: 10px 16px;
+	background: var(--color-primary);
+	color: var(--color-secondary);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-card);
+	font-weight: 600;
+	text-decoration: none;
+	transform: translateY(-200%);
+}
+.skip-link:focus {
+	transform: translateY(0);
+}
+@media (prefers-reduced-motion: no-preference) {
+	.skip-link { transition: transform 0.15s; }
+}

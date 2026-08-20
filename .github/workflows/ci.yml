@@ -91,6 +91,9 @@ jobs:
       - name: Security headers
         run: scripts/ci-check-headers.sh http://localhost:8787
 
+      - name: Accessibility (axe + keyboard + shortcuts + reflow)
+        run: node scripts/ci-check-a11y.mjs http://localhost:8787
+
       - name: Lighthouse assertions (perf>=95, a11y/bp/seo=100)
         uses: treosh/lighthouse-ci-action@v12
         with:
@@ -110,5 +113,6 @@ jobs:
             echo "| astro check | 0 errors, 0 warnings |"
             echo "| html-validate | 0 problems, 15 templates |"
             echo "| security headers | full #164 suite |"
+            echo "| a11y | axe 8 routes · keyboard traversal · WCAG 2.1.4 · reflow 320px |"
             echo "| Lighthouse | perf >=95 · a11y 100 · bp 100 · seo 100 |"
           } >> "$GITHUB_STEP_SUMMARY"
