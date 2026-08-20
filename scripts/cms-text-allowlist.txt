@@ -32,3 +32,8 @@ drwxr-xr-x
 serverstartup
 24 ene 2019
 Jan 24 2019
+# Key names printed as affordances in the search line (#338) — the labels
+# beside them ("buscar" / "search") DO come from the CMS; these are the keys
+# themselves, identical on every keyboard in every language
+enter
+esc

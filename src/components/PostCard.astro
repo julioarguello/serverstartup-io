@@ -12,6 +12,9 @@ interface Props {
 	tags?: Array<{ slug: string; label: string }>;
 	bylines?: ContentBylineCredit[];
 	locale?: string;
+	/** #338: search results carry no image, and a wall of empty 16:10 boxes
+	    reads as a page that never finished loading. */
+	placeholder?: boolean;
 }
 
 const {
@@ -24,6 +27,7 @@ const {
 	tags,
 	bylines,
 	locale = "es",
+	placeholder = true,
 } = Astro.props;
 
 const dateLocale = locale === "en" ? "en-US" : "es-ES";
@@ -44,9 +48,9 @@ const dateIso = date?.toISOString() ?? null;
 				<div class="card-image">
 					<Image image={featuredImage} />
 				</div>
-			) : (
+			) : placeholder ? (
 				<div class="card-placeholder" />
-			)
+			) : null
 		}
 		<div class="card-body">
 			<div class="card-meta">

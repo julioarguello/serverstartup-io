@@ -9,6 +9,7 @@
  * CMS service entry (via Base) — ink on site pages.
  */
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import SearchPrompt from "./SearchPrompt.astro";
 
 interface Props {
 	promptPath: string; // current pathname ("" on home)
@@ -58,9 +59,19 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 			</a>
 		</div>
 		<div class="header-actions">
+			{/* the toggle lives with the other controls so it never moves */}
+			<input type="checkbox" id="search-toggle" class="search-toggle" tabindex="-1" aria-hidden="true" />
+			<label for="search-toggle" class="search-btn" title={t("search_open")}>
+				<span class="sr-only">{t("search_open")}</span>
+				<svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<circle cx="8.5" cy="8.5" r="5.5"></circle>
+					<path d="M13 13l4.5 4.5"></path>
+				</svg>
+			</label>
 			<LanguageSwitcher altPath={altPath} />
 		</div>
 	</div>
+	<SearchPrompt pathname={Astro.url.pathname} accent={accent} />
 </header>
 
 <style is:global>
@@ -159,6 +170,151 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 
 	.brand-word {
 		white-space: nowrap;
+	}
+
+	/* ═══════════════════════════════════════════
+	   SEARCH — the prompt, made real (#338)
+	   The checkbox drives it in pure CSS so the field survives with no
+	   JavaScript; :has() is used instead of a sibling combinator because the
+	   breadcrumb it hides sits BEFORE the toggle in the DOM.
+	   ═══════════════════════════════════════════ */
+	.search-toggle {
+		/* focusable but invisible — Tab reaches it, Space opens the bar */
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	/* A second line, the way a terminal actually behaves: the line you were
+	   looking at stays untouched and a new prompt opens underneath. Nothing
+	   competes for the breadcrumb's width, and the magnifier never moves —
+	   it sits with the other controls. */
+	/* A LIGHT console — the inverse of `.s-boot`. Plenty of terminals ship a
+	   light theme; a dark strip under a white bar was a hole in the page.
+	   What makes it read as a console is not the ground but the details:
+	   the prompt glyph, the fixed syntax in one weight and the argument in
+	   another, the selection tint, and the key hint at the end of the line. */
+	.search-form {
+		display: none;
+		background: var(--color-surface);
+		border-top: 1px solid var(--color-border);
+		font-family: var(--font-family-mono);
+		font-size: 13px;
+	}
+	.search-line {
+		display: flex;
+		align-items: baseline;
+		gap: 0;
+		padding-block: 11px;
+		min-width: 0;
+	}
+	/* the prompt glyph carries the section colour at full strength — on a
+	   light ground the raw accent needs no lightening, and on ink pages it
+	   lands as the neutral grey-black the rest of the bar already uses */
+	.search-ps {
+		color: var(--accent);
+		font-weight: 700;
+		margin-right: 9px;
+	}
+
+	.site-header:has(.search-toggle:checked) .search-form { display: block; }
+
+	/* the fixed half of the command reads as syntax, not as content */
+	.search-chrome {
+		color: var(--color-text-muted);
+		white-space: nowrap;
+	}
+
+	/* THE SLOT — the same "terminal selection" the breadcrumb path already
+	   wears (`.brand-path`), so the two lines speak one language: tinted
+	   ground for what is selected, ink for the glyphs so contrast holds. */
+	.search-slot {
+		min-width: 0;
+		background: color-mix(in srgb, var(--accent) 22%, transparent);
+		border-radius: var(--radius);
+		padding-inline: 3px;
+		/* the rule is always 2px so focus recolours it without moving the
+		   baseline — a border, not a shadow: this underlines a blank to fill,
+		   and the token file owns shadows for depth, which this is not */
+		border-bottom: 2px solid color-mix(in srgb, var(--accent) 40%, transparent);
+	}
+	.search-slot:focus-within { border-bottom-color: var(--accent); }
+
+	/* the key hint sits where a shell would print its own status */
+	.search-hint {
+		margin-left: auto;
+		padding-left: 16px;
+		color: var(--color-text-muted);
+		white-space: nowrap;
+	}
+	.search-hint kbd {
+		font: inherit;
+		border: 1px solid var(--color-border);
+		border-bottom-width: 2px;
+		border-radius: var(--radius);
+		padding: 0 4px;
+		background: var(--color-secondary);
+	}
+
+	.search-input {
+		max-width: 100%;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		font: inherit;
+		color: var(--color-text);
+		/* grows with what you type; `size` on the element is the fallback */
+		field-sizing: content;
+	}
+	.search-input:focus { outline: none; }
+	.search-input::placeholder { color: var(--color-text-muted); opacity: 1; }
+	/* Safari paints its own clear button in the middle of the command */
+	.search-input::-webkit-search-decoration,
+	.search-input::-webkit-search-cancel-button { appearance: none; }
+
+	.search-btn {
+		display: grid;
+		place-items: center;
+		width: 26px;
+		height: 26px;
+		border-radius: var(--radius);
+		color: var(--color-text-muted);
+		cursor: pointer;
+		flex: none;
+	}
+	.search-btn:hover { color: var(--color-text); background: var(--color-surface); }
+	.site-header:has(.search-toggle:checked) .search-btn {
+		color: var(--color-text);
+		background: var(--color-surface);
+	}
+	.site-header:has(.search-toggle:focus-visible) .search-btn {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	/* ≤767: the bar already splits cube, wordmark, path and locale. §14 forbids
+	   internal horizontal scroll outright, so the control does not compete for
+	   that width — on phones it belongs in the menu, which is full-screen. */
+	@media (max-width: 767px) {
+		/* scoped to the header: the menu's copy must survive this rule */
+		.site-header .search-form,
+		.search-btn { display: none; }
+		.site-header:has(.search-toggle:checked) .search-form { display: none; }
+	}
+
+	/* The menu copy IS the phone's search: always open inside the dialog, and
+	   absent from tablet up, where the header line already exists. */
+	.search-form--menu {
+		display: block;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		margin-bottom: var(--space-3);
+	}
+	.search-form--menu .search-line { padding: 12px 14px; }
+	@media (min-width: 768px) {
+		.search-form--menu { display: none; }
 	}
 
 	/* ≤480: everything cedes to the breadcrumb — flush cube, tight gaps,

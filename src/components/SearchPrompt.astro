@@ -1,0 +1,129 @@
+---
+/**
+ * SearchPrompt — the header prompt, made real (#338).
+ *
+ * The bar was already a terminal line: the cube opens the menu, the wordmark
+ * extends into a breadcrumb path, and it ends in a blinking cursor that did
+ * nothing. This turns that cursor into a command.
+ *
+ * What you type IS the argument, so the line stays a valid `find` while you
+ * type it — the joke does not evaporate on the first keystroke the way a
+ * decorative placeholder does. The chrome (`find . -name "` and the closing
+ * quote) is muted like a shell would colour syntax; the argument is ink.
+ *
+ * The word between the quotes changes per page and lives in the CMS
+ * (`ui_labels_{locale}` → widget `search`, keyed by the route's last segment),
+ * so it is editable without a deploy and never hardcoded here (§1).
+ *
+ * Works with NO JavaScript: a checkbox toggles the bar in pure CSS and the
+ * field is a plain GET form pointed at /search. Script only adds the niceties
+ * — the `/` shortcut, focus on open, and Escape.
+ */
+import { getUiLabels } from "../utils/ui-labels";
+import { FACE_BY_SLUG, SITE_BY_PATH } from "../utils/nav";
+
+interface Props {
+	/** current pathname, as Base computes it */
+	pathname: string;
+	/** section colour from CMS, ink on site pages */
+	accent: string;
+	/**
+	 * Where this instance lives. "header" is the second line under the bar,
+	 * toggled by the magnifier — desktop only, because §14 forbids internal
+	 * horizontal scroll and the bar already splits cube, wordmark, path and
+	 * locale. "menu" is the phone's answer: the dialog is full-screen and has
+	 * the room, and the cube stays the only door.
+	 */
+	place?: "header" | "menu";
+}
+const { pathname, accent, place = "header" } = Astro.props;
+
+const locale = Astro.currentLocale || "es";
+const labels = await getUiLabels(locale);
+const t = Astro.locals.t;
+
+// The word is keyed by the LOCALE-INVARIANT id the site already uses for
+// these pages (nav.ts), never by the slug — slugs are translated, so keying
+// by them makes the ES and EN label sets impossible to keep in parity. The
+// cms-text gate catches exactly that, and did.
+const path = pathname.replace(/\/$/, "") || "/";
+const slug = path.replace(/^\/en/, "").replace(/^\//, "") || "home";
+const key =
+	FACE_BY_SLUG[slug] ??
+	SITE_BY_PATH[path] ??
+	(slug === "politica-de-privacidad" || slug === "privacy-policy" ? "privacy" : "home");
+// An unmapped route inherits the home word rather than showing an empty slot.
+const word =
+	labels.get("search", key, "") || labels.get("search", "home", "getxo");
+const cmdOpen = labels.get("search", "cmd_open", 'find . -name "');
+const cmdClose = labels.get("search", "cmd_close", '"');
+
+const action = locale === "en" ? "/en/search" : "/search";
+const inMenu = place === "menu";
+const hintEnter = labels.get("search", "hint_enter", "buscar");
+const hintEsc = labels.get("search", "hint_esc", "cerrar");
+---
+
+<!-- A terminal does not overwrite the line you are looking at: you press
+     Enter and a NEW prompt appears underneath. So the breadcrumb line is left
+     exactly as it is, and the command opens as a second line below it. -->
+<form
+	class:list={["search-form", inMenu && "search-form--menu"]}
+	method="get"
+	action={action}
+	role="search"
+	style={`--accent:${accent}`}
+>
+	<div class:list={[!inMenu && "container", "search-line"]}>
+		<span class="search-ps" aria-hidden="true">$</span>
+		<span class="search-chrome" aria-hidden="true">{cmdOpen}</span>
+		<span class="search-slot">
+			<input
+				type="search"
+				name="q"
+				class="search-input"
+				placeholder={word}
+				aria-label={t("search_field")}
+				autocomplete="off"
+				spellcheck="false"
+				size={word.length || 12}
+				required
+			/>
+		</span>
+		<span class="search-chrome" aria-hidden="true">{cmdClose}</span>
+		{/* WCAG H32: Enter in the field is not a submit control. Visually
+		    hidden, focusable, and it is what a screen reader announces. */}
+		<button type="submit" class="sr-only">{hintEnter}</button>
+		<span class="search-hint" aria-hidden="true">
+			<kbd>enter</kbd> {hintEnter}{!inMenu && (<><i>·</i><kbd>esc</kbd> {hintEsc}</>)}
+		</span>
+	</div>
+</form>
+
+{!inMenu && (
+<script>
+	const toggle = document.getElementById("search-toggle") as HTMLInputElement | null;
+	const input = document.querySelector<HTMLInputElement>(".search-input");
+	if (toggle && input) {
+		const open = (on: boolean) => {
+			toggle.checked = on;
+			if (on) input.focus();
+			else input.blur();
+		};
+		toggle.addEventListener("change", () => open(toggle.checked));
+		document.addEventListener("keydown", (e) => {
+			const el = document.activeElement;
+			const typing =
+				el instanceof HTMLInputElement ||
+				el instanceof HTMLTextAreaElement ||
+				(el as HTMLElement | null)?.isContentEditable;
+			if (e.key === "/" && !typing) {
+				e.preventDefault();
+				open(true);
+			} else if (e.key === "Escape" && toggle.checked) {
+				open(false);
+			}
+		});
+	}
+</script>
+)}
