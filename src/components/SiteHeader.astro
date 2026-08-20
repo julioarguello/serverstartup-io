@@ -59,10 +59,19 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 			</a>
 		</div>
 		<div class="header-actions">
-			{/* the toggle lives with the other controls so it never moves */}
-			<input type="checkbox" id="search-toggle" class="search-toggle" tabindex="-1" aria-hidden="true" />
-			<label for="search-toggle" class="search-btn" title={t("search_open")}>
-				<span class="sr-only">{t("search_open")}</span>
+			{/* The toggle lives with the other controls so it never moves — and
+			    it is a REAL control: focusable and announced. It shipped with
+			    `tabindex="-1" aria-hidden="true"` in #338, which made the
+			    search reachable by mouse or by the `/` shortcut and by nothing
+			    else. Tabbing the deployed page found three stops in the header
+			    and none of them was this one (WCAG 2.1.1). */}
+			<input
+				type="checkbox"
+				id="search-toggle"
+				class="search-toggle"
+				aria-label={t("search_open")}
+			/>
+			<label for="search-toggle" class="search-btn" aria-hidden="true">
 				<svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
 					<circle cx="8.5" cy="8.5" r="5.5"></circle>
 					<path d="M13 13l4.5 4.5"></path>
@@ -179,7 +188,10 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 	   breadcrumb it hides sits BEFORE the toggle in the DOM.
 	   ═══════════════════════════════════════════ */
 	.search-toggle {
-		/* focusable but invisible — Tab reaches it, Space opens the bar */
+		/* Invisible but REAL: Tab reaches it, Space toggles it, and a screen
+		   reader announces it from its aria-label. Sized 1px rather than
+		   display:none, which would remove it from the tab order — the bug
+		   this replaces. It sits under the icon, which is its label. */
 		position: absolute;
 		width: 1px;
 		height: 1px;

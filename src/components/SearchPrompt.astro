@@ -111,18 +111,27 @@ const hintEsc = labels.get("search", "hint_esc", "cerrar");
 			else input.blur();
 		};
 		toggle.addEventListener("change", () => open(toggle.checked));
+		// WCAG 2.1.4 (Character Key Shortcuts, level A): a shortcut bound to a
+		// single printable character must be switchable off, remappable, or
+		// active only while its component has focus. A document-wide `/` is none
+		// of those — skipping text fields limits the damage but is not one of
+		// the three permitted mitigations. So `/` is scoped: it opens the search
+		// only while focus is already inside the header, which IS the
+		// "active only on focus" case, and it costs nothing — the magnifier is
+		// the third Tab stop, so a keyboard user is one key away from it.
+		const header = toggle.closest(".site-header");
 		document.addEventListener("keydown", (e) => {
-			const el = document.activeElement;
-			const typing =
-				el instanceof HTMLInputElement ||
-				el instanceof HTMLTextAreaElement ||
-				(el as HTMLElement | null)?.isContentEditable;
-			if (e.key === "/" && !typing) {
-				e.preventDefault();
-				open(true);
-			} else if (e.key === "Escape" && toggle.checked) {
+			if (e.key === "Escape" && toggle.checked) {
 				open(false);
+				toggle.focus();
+				return;
 			}
+			if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+			const el = document.activeElement;
+			if (!header?.contains(el)) return;          // only on focus, per 2.1.4
+			if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) return;
+			e.preventDefault();
+			open(true);
 		});
 	}
 </script>

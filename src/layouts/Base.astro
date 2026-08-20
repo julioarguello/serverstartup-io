@@ -202,6 +202,11 @@ const resolvedOgType = ogType || "website";
 </head>
 <body>
 
+	<!-- WCAG 2.4.1: the first Tab stop skips the header instead of walking it
+	     on every page. Off-screen until focused, and it must clear the fixed
+	     header when it appears — hence the offset, not just `top: 0`. -->
+	<a href="#content" class="skip-link">{Astro.locals.t("skip_to_content")}</a>
+
 	<SiteHeader promptPath={promptPath} accent={headerAccent} altPath={altPath} />
 
 	<MenuDialog services={services} siteItems={siteMenuItems} currentPath={promptPath} localePrefix={localePrefix} />

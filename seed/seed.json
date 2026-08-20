@@ -2168,6 +2168,17 @@
 									"text": "Buscar en el sitio"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "skip_to_content",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Saltar al contenido"
+								}
+							]
 						}
 					],
 					"type": "content"
@@ -3748,6 +3759,17 @@
 								{
 									"_type": "span",
 									"text": "Search the site"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "skip_to_content",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Skip to content"
 								}
 							]
 						}
