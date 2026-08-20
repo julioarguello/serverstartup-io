@@ -18,7 +18,7 @@ const t = Astro.locals.t;
 const locale = "en";
 let { entry, cacheHint } = await getEmDashEntry("pages", "about-us", { locale });
 if (!entry) ({ entry, cacheHint } = await getEmDashEntry("pages", "quienes-somos", { locale }));
-if (!entry) return Astro.redirect("/en/");
+if (!entry) return Astro.redirect("/en");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;

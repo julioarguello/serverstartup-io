@@ -386,7 +386,7 @@
 				{
 					"type": "custom",
 					"label": "Home",
-					"url": "/en/"
+					"url": "/en"
 				},
 				{ "type": "custom", "label": "About us", "url": "/en/about-us" },
 				{ "type": "custom", "label": "References", "url": "/en/references" },
