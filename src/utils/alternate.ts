@@ -47,7 +47,7 @@ export async function entryAlternatePath(
 	if (!alt) return null;
 	// The pages entry `home` is served by /, not /home
 	if (collection === "pages" && alt.slug === "home") {
-		return target === "en" ? "/en/" : "/";
+		return target === "en" ? "/en" : "/";
 	}
 	return target === "en" ? `/en/${alt.slug}` : `/${alt.slug}`;
 }

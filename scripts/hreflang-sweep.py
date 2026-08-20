@@ -49,14 +49,19 @@ def fetch(path: str) -> tuple[int, str]:
 
 
 def norm(path: str) -> str:
-    """Trailing-slash-insensitive path comparison, root forms preserved."""
-    return path if path in ("/", "/en/") else path.rstrip("/")
+    """Path comparison under `trailingSlash: "never"` (#334).
+
+    Only the ES root keeps its slash — every other form, `/en/` included,
+    now 301s onto the bare path, so comparing against the slashed variant
+    would test a URL the site no longer serves.
+    """
+    return path if path == "/" else path.rstrip("/")
 
 
 def routes_from_seed() -> list[tuple[str, str]]:
     seed = json.loads((ROOT / "seed" / "seed.json").read_text())
     routes: list[tuple[str, str]] = [
-        ("/", "es"), ("/en/", "en"),
+        ("/", "es"), ("/en", "en"),
         ("/search", "es"), ("/en/search", "en"),
         ("/posts", "es"), ("/en/posts", "en"),
     ]
@@ -64,7 +69,7 @@ def routes_from_seed() -> list[tuple[str, str]]:
         for e in seed["content"][coll]:
             loc, slug = e.get("locale", "es"), e["slug"]
             if slug == "home":
-                continue  # served by / and /en/
+                continue  # served by / and /en
             routes.append((f"/en/{slug}" if loc == "en" else f"/{slug}", loc))
     return routes
 

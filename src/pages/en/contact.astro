@@ -20,7 +20,7 @@ import type { SiteSettings } from "../../types";
 const locale = "en";
 let { entry, cacheHint } = await getEmDashEntry("pages", "contact", { locale });
 if (!entry) ({ entry, cacheHint } = await getEmDashEntry("pages", "contacto", { locale }));
-if (!entry) return Astro.redirect("/en/");
+if (!entry) return Astro.redirect("/en");
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;

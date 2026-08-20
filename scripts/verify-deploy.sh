@@ -71,16 +71,26 @@ else
 	echo "  FAIL unknown route — final HTTP $code (expected 404 with the 404 page)" >&2; FAIL=1
 fi
 
-# Legacy slugs kept alive by astro.config.mjs. Asserting the status AND the
-# destination: a 301 to the wrong page is worse than no redirect at all.
-echo "── legacy redirects"
+# Two families, one assertion: renamed slugs kept alive by astro.config.mjs,
+# and the trailing-slash form of every page, which `trailingSlash: "never"`
+# folds onto the canonical one (#334). Both status AND destination — a 301 to
+# the wrong page is worse than no redirect at all.
+#
+# GET, not HEAD, and that is not a detail: Astro answers a trailing-slash
+# redirect with 301 to GET and 308 to every other method. Googlebot sends GET,
+# so HEAD here would assert a status no crawler ever sees.
+echo "── redirects"
 REDIRECTS=(
 	"/ingenieria-greenfield-y-sistemas-criticos|/desarrollo-greenfield"
 	"/en/greenfield-engineering-critical-systems|/en/greenfield-development"
+	"/en/|/en"
+	"/contacto/|/contacto"
+	"/en/about-us/|/en/about-us"
+	"/desarrollo-greenfield/|/desarrollo-greenfield"
 )
 for entry in "${REDIRECTS[@]}"; do
 	from="${entry%%|*}"; to="${entry##*|}"
-	read -r code location < <(curl -sI "$BASE$from" \
+	read -r code location < <(curl -s "$BASE$from" \
 		-w '%{http_code} %{redirect_url}\n' -o /dev/null)
 	if [ "$code" != "301" ]; then
 		echo "  FAIL $from — HTTP $code (expected 301)" >&2; FAIL=1; continue

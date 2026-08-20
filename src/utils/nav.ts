@@ -31,7 +31,7 @@ export const SITE_BY_PATH: Record<string, SiteKey> = {
 	// the menu filters site items by this map — an unmapped path is dropped
 	// silently, which is how the site shipped with no way back home (#273)
 	"/": "home",
-	"/en/": "home",
+	"/en": "home",
 	"/quienes-somos": "quienes",
 	"/en/about-us": "quienes",
 	"/referencias": "ref",

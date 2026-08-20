@@ -19,7 +19,7 @@ const { promptPath, accent, altPath } = Astro.props;
 
 // The brand prompt is the way back home — locale-aware, or EN visitors
 // land on the Spanish home (#273)
-const homeHref = (Astro.currentLocale || "es") === "en" ? "/en/" : "/";
+const homeHref = (Astro.currentLocale || "es") === "en" ? "/en" : "/";
 
 const t = Astro.locals.t;
 

@@ -16,7 +16,7 @@ const { altPath } = Astro.props;
 const currentLocale = Astro.currentLocale || "es";
 const altLocale = currentLocale === "es" ? "en" : "es";
 const altLabel = altLocale.toUpperCase();
-const href = altPath ?? (altLocale === "en" ? "/en/" : "/");
+const href = altPath ?? (altLocale === "en" ? "/en" : "/");
 
 const t = Astro.locals.t;
 ---

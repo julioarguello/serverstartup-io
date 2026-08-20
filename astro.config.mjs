@@ -10,6 +10,11 @@ import emdash from "emdash/astro";
 export default defineConfig({
 	site: "https://www.serverstartup.io",
 	output: "server",
+	// #334: one URL per page. Under the default "ignore" both /contacto and
+	// /contacto/ answered 200 and each self-canonicalised, so the canonical
+	// tag consolidated nothing — and the hreflang pair did not reciprocate
+	// across the two forms, which is the variant the sitemap declared.
+	trailingSlash: "never",
 	// #264: greenfield slug aligned with its title (old URLs are live in prod)
 	redirects: {
 		"/ingenieria-greenfield-y-sistemas-criticos": { status: 301, destination: "/desarrollo-greenfield" },
