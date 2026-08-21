@@ -13414,7 +13414,28 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiéndonos a la dirección indicada. Si consideras que no hemos atendido tu solicitud correctamente, puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es)."
+									"text": "Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiéndonos a la dirección indicada. Si consideras que no hemos atendido tu solicitud correctamente, puedes reclamar ante la Agencia Española de Protección de Datos (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"text": "aepd.es",
+									"marks": [
+										"lnk_aepd"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ").",
+									"marks": []
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "lnk_aepd",
+									"href": "https://www.aepd.es",
+									"blank": true
 								}
 							]
 						},
@@ -14530,7 +14551,28 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "You may exercise your rights of access, rectification, erasure, restriction of processing, portability and objection by writing to the address above. If you believe your request has not been handled properly, you may lodge a complaint with the Spanish Data Protection Agency (aepd.es)."
+									"text": "You may exercise your rights of access, rectification, erasure, restriction of processing, portability and objection by writing to the address above. If you believe your request has not been handled properly, you may lodge a complaint with the Spanish Data Protection Agency (",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"text": "aepd.es",
+									"marks": [
+										"lnk_aepd"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ").",
+									"marks": []
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "lnk_aepd",
+									"href": "https://www.aepd.es",
+									"blank": true
 								}
 							]
 						},
@@ -14966,7 +15008,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "El tratamiento de datos personales se explica en la política de privacidad, accesible desde el pie de cualquier página."
+									"text": "El tratamiento de datos personales se explica en la ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"text": "política de privacidad",
+									"marks": [
+										"lnk_priv"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", accesible desde el pie de cualquier página.",
+									"marks": []
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "lnk_priv",
+									"href": "/politica-de-privacidad"
 								}
 							]
 						},
@@ -15139,7 +15201,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Personal data processing is explained in the privacy policy, reachable from the footer of every page."
+									"text": "Personal data processing is explained in the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"text": "privacy policy",
+									"marks": [
+										"lnk_priv"
+									]
+								},
+								{
+									"_type": "span",
+									"text": ", reachable from the footer of every page.",
+									"marks": []
+								}
+							],
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "lnk_priv",
+									"href": "/en/privacy-policy"
 								}
 							]
 						},
