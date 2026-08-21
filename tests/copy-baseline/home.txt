@@ -1,0 +1,78 @@
+Ingeniería de software — Server Startup
+Saltar al contenido
+~Server Startup
+EN
+$ find . -name " " buscar enter buscar·esc cerrar
+✕
+$ find . -name " " buscar enter buscar
+Comercio electrónico
+Integración de sistemas
+Big Data & Cloud Analytics
+CDN, WAF y seguridad edge
+Desarrollo greenfield
+Inteligencia artificial
+Inicio
+Quiénes somos
+Referencias
+Contacto
+Deconstruyendo
+AI
+Toca el dado
+Ingeniería de software: arquitectura, integración y operación
+Más de veinte años de oficio en comercio electrónico, integración de sistemas y el dato. Partners oficiales de Cloudflare desde 2019.
+En tu proyecto, siempre los mismos tres ingenieros senior. Quien diseña tu arquitectura escribe el código. Y da la cara si algo se rompe.
+Nuestros servicios
+El equipo
+Sin intermediarios y sin traspasos.
+Los mismos tres ingenieros recorren todas las capas: el que diseña, escribe; el que escribe, opera.
+Daniel Sío
+Ingeniero
+Ignacio Ibaseta
+Ingeniero
+Julio Argüello
+Ingeniero
+Cloudflare Partner oficial
+Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare
+CDN global
+para mejorar la velocidad de carga
+WAF y Zero Trust
+para reforzar la seguridad
+Workers y Edge Computing
+para arquitecturas modernas y flexibles
+Descubre más sobre Cloudflare
+Áreas de especialización
+Comercio electrónico
+Más de veinte años dentro de SAP Commerce Cloud. Extender la plataforma es lo fácil: hacerlo con cada mejora desacoplada del core, ajustada al estándar, para que sobreviva versión tras versión, es lo que casi nadie hace. Y el rendimiento, nuestra especialidad.
+Integración de sistemas
+No somos «arquitectos de PowerPoint»: lo que planificamos, lo ejecutamos. Sin exageraciones — lo objetivamente necesario y viable. Un guante, no un martillo, con homogeneidad, metodología, testabilidad y observabilidad absoluta.
+Big Data & Cloud Analytics
+Un flujo de datos se monta rápido. Una plataforma que aguante años de negocio, cambios de esquema, picos de campaña y fuentes de datos variables es otra historia. Arquitectura medallion y tests que se cuentan por miles.
+CDN, WAF y seguridad edge
+Partners oficiales de Cloudflare desde 2019. Auditoría, migración y operación de CDN, WAF y seguridad perimetral, sobre todo en comercio electrónico.
+Desarrollo greenfield
+El código no es el producto: el producto es la obra — el sistema y las personas que lo sostienen — y sigue en producción años después de la demo. SDLC completo, de la especificación a la observabilidad. Trabajamos contract first, con foco en estabilidad, seguridad y gobernanza.
+AI
+Inteligencia artificial
+La IA es un medio, no un fin. La máquina hace el código repetitivo; nosotros ponemos la arquitectura y el criterio, del desarrollo a la operación — enfoque integral, perfil DevOps. El agente propone, el ingeniero dispone.
+Calidad y rendimiento
+Nuestro oficio es la calidad y el rendimiento donde salen caros: procesos críticos y volúmenes grandes. El pico de campaña, el catálogo que hay que reindexar, la integración que tiene que cerrar el día.
+Esta web es una muestra pequeña de la misma disciplina, aplicada a nuestro propio escaparate. Ninguna versión se publica si el rendimiento baja de 95, o si accesibilidad, buenas prácticas y SEO no dan 100: el control corre en cada cambio y bloquea el despliegue. El umbral está escrito en el repositorio público, y cada ejecución del control también. Mira cómo está hecha.
+1 equipo = 6 verticales = Ø 0 traspasos
+Hablemos de ingeniero a ingeniero.
+Trae el problema como esté. Te responde quien va a escribir el código.
+Cuéntanos tu proyecto
+Referencias
+Áreas de especialización
+Comercio electrónico
+Big Data & Cloud Analytics
+CDN, WAF y seguridad edge
+Integración de sistemas
+Desarrollo greenfield
+Inteligencia artificial
+Somos partners
+Contacto
+Quiénes somos
+Deconstruyendo esta web
+Escríbenos
+Cuéntanos tu proyecto
+© 2026 Server Startup, S.L. Aviso legal Política de privacidad

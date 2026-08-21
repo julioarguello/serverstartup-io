@@ -1,0 +1,56 @@
+Aviso legal — Server Startup
+Saltar al contenido
+~Server Startup/aviso-legal
+EN
+$ find . -name " " buscar enter buscar·esc cerrar
+✕
+$ find . -name " " buscar enter buscar
+Comercio electrónico
+Integración de sistemas
+Big Data & Cloud Analytics
+CDN, WAF y seguridad edge
+Desarrollo greenfield
+Inteligencia artificial
+Inicio
+Quiénes somos
+Referencias
+Contacto
+Deconstruyendo
+AI
+Toca el dado
+Aviso legal
+Datos identificativos de Server Startup S.L., condiciones de uso del sitio y legislación aplicable.
+Este aviso legal recoge la información que la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), exige publicar de forma permanente, fácil, directa y gratuita.
+Datos identificativos
+Titular: SERVER STARTUP, S.L. NIF: B95944807. Domicilio social: C/ Los Fueros 11 — 48992 Getxo (Bizkaia). Inscrita en el Registro Mercantil de Bizkaia, tomo 5831, libro 0, folio 75, hoja BI-72906, inscripción 1.ª, con fecha 24 de enero de 2019. Correo de contacto: legal@serverstartup.io.
+Objeto y condiciones de uso
+Este sitio es informativo: describe los servicios de la empresa y permite ponerse en contacto con ella. No vende productos ni servicios en línea, no requiere registro y no dispone de área privada. El acceso es libre y gratuito.
+Quien accede se compromete a hacer un uso conforme a la ley y a no emplear el sitio con fines ilícitos o que puedan dañar sus sistemas o los de terceros.
+Propiedad intelectual e industrial
+Los contenidos del sitio —textos, imágenes, marcas, logotipos y código— pertenecen a su titular o a terceros que han autorizado su uso. Puede citarse el contenido indicando la fuente; su explotación comercial requiere autorización previa por escrito.
+Responsabilidad
+El titular procura que la información esté actualizada y sea correcta, pero no garantiza que esté libre de errores ni que el servicio sea ininterrumpido. No se responsabiliza de los daños derivados del uso del sitio ni de la información de terceros a la que se enlace.
+Enlaces a otros sitios
+El sitio puede enlazar a páginas ajenas. Esos enlaces se ofrecen como referencia y su titular no controla ni responde de sus contenidos ni de sus políticas.
+Protección de datos
+El tratamiento de datos personales se explica en la política de privacidad, accesible desde el pie de cualquier página.
+Legislación aplicable
+Este aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio del titular, salvo que la normativa aplicable disponga otro fuero.
+Hablemos de ingeniero a ingeniero.
+Trae el problema como esté. Te responde quien va a escribir el código.
+Cuéntanos tu proyecto
+Referencias
+Áreas de especialización
+Comercio electrónico
+Big Data & Cloud Analytics
+CDN, WAF y seguridad edge
+Integración de sistemas
+Desarrollo greenfield
+Inteligencia artificial
+Somos partners
+Contacto
+Quiénes somos
+Deconstruyendo esta web
+Escríbenos
+Cuéntanos tu proyecto
+© 2026 Server Startup, S.L. Aviso legal Política de privacidad

@@ -1,0 +1,71 @@
+Greenfield development — Server Startup
+Skip to content
+~Server Startup/en/greenfield-development
+ES
+$ find . -name " " search enter search·esc close
+✕
+$ find . -name " " search enter search
+E-commerce
+Systems Integration
+Big Data & Cloud Analytics
+CDN, WAF & Edge Security
+Greenfield development
+Artificial Intelligence
+Home
+About us
+References
+Contact
+Deconstructing
+AI
+Tap the die
+Greenfield development
+The code isn't the product: the product is the system and the people who keep it alive, years after the demo. Full SDLC, from specification to observability. We work contract first, focused on stability, security and governance.
+Let's talk about your project
+Some needs no commercial product covers. A pricing engine that only exists in your business, a website no template fits (this one, for instance). That's what greenfield development has always been for.
+And there's a newer reason. With the capabilities AI brings, building custom now pays off in cases where buying used to be the default.
+Fair warning first, though. If a SaaS solves it, we'll say so and we won't build it. We'd rather lose a project than maintain one that shouldn't exist.
+Code is not the product
+The product is the system still running years after the demo. The discipline behind that never changes, AI in the loop or not.
+BusinessEngine.java — greenfieldJava 21 · 0 warnings
+12345678910
+/**
+* Four rules, none of them optional.
+*
+* @param stack Java without nostalgia. Spring Boot or Quarkus on Java 21. Virtual threads, records and pattern matching. Code that scales without tricks.
+* @param contract The contract comes before the code. The API is agreed in writing (Contract First, OpenAPI), with OAuth 2.0 and mTLS in the design, not in a patch.
+* @param governance CI/CD is governance. Tests, static analysis and security checks gate every deploy. You always know what runs on your servers, and why.
+* @param security Security gets compiled in. Fine-grained access control in the code, and Cloudflare's WAF in front.
+* @author the same three engineers, start to finish
+* @since 2019
+*/
+public System build(Stack stack, Contract contract) { … }
+Greenfield ≠ blank page
+We never start from zero, and we don't let an AI do it either. For every technology frame we maintain our own working framework: project skeleton, conventions, environments, quality and deployment solved before the first line of business logic.
+Python on Google Cloud. Services and functions on Cloud Run and Cloud Functions, with the same scaffolding for environments, credentials and tests in every project.
+Quarkus and Camel on Docker. Millisecond startup, integration built in, ready for any orchestrator.
+Publishing to Karaf. For platforms that live on OSGi and deploy by bundles on Karaf, without stopping the rest of the system.
+You feel the difference on the second service. It reads like the first, deploys the same way, and anyone on the team can run it. Boring on purpose.
+AI multiplies. The framework steers.
+Maybe greenfield is where AI pays off most. It is certainly where it derails first. On a blank page, an agent delivers in hours what used to take weeks. Without a frame, every one of those hours is fresh debt.
+Our frameworks are that perimeter. The agent writes inside the rails, and an engineer signs every line that reaches main. The full story is in our AI vertical.
+Your technical debt is our problem
+Whoever designs the system deploys it and answers for its stability. The same three senior engineers, from first commit to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.
+1 team = 6 verticals = Ø 0 handoffs
+Let's talk, engineer to engineer.
+Bring the problem as it is. You'll hear back from the person who'll write the code.
+Tell us about your project
+References
+Areas of expertise
+E-commerce
+CDN, WAF & Edge Security
+Big Data & Cloud Analytics
+Systems Integration
+Greenfield development
+Artificial Intelligence
+We are partners
+Contact
+About us
+Deconstructing this website
+Email us
+Tell us about your project
+© 2026 Server Startup, S.L. Legal notice Privacy policy
