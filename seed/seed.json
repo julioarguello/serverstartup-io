@@ -13244,7 +13244,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tratamos pocos datos y lo contamos en pocas líneas. Esta política cumple el RGPD y la Ley Orgánica 3/2018 (LOPDGDD)."
+									"text": "Tratamos pocos datos y lo contamos en pocas líneas. Esta política se rige por el Reglamento (UE) 2016/679 (RGPD) y por la Ley Orgánica 3/2018 (LOPDGDD)."
 								}
 							]
 						},
@@ -13264,7 +13264,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Server Startup S.L., CIF B95944807. Para cualquier asunto de datos, escríbenos a ventas@serverstartup.io."
+									"text": "SERVER STARTUP, S.L. NIF B95944807. Domicilio: C/ Los Fueros 11 — 48992 Getxo (Bizkaia). Para cualquier asunto relacionado con tus datos, escríbenos a hola@serverstartup.io."
 								}
 							]
 						},
@@ -13284,7 +13284,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Los que nos envías tú al escribirnos por correo o WhatsApp. Tu dirección, tu nombre si lo firmas y lo que nos cuentes. La web no tiene formularios ni cuentas de usuario."
+									"text": "Los que nos envías tú al escribirnos por correo electrónico o WhatsApp: tu dirección, tu nombre si lo firmas y lo que nos cuentes. Esta web no tiene formularios, ni registro, ni cuentas de usuario."
 								}
 							]
 						},
@@ -13294,7 +13294,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Para qué"
+									"text": "Con qué finalidad"
 								}
 							]
 						},
@@ -13304,7 +13304,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Para responderte. No usamos tus datos para publicidad ni te incorporamos a listas de correo."
+									"text": "Para atender tu consulta y, si acabamos trabajando juntos, para gestionar la relación contractual. No usamos tus datos con fines publicitarios ni te incorporamos a listas de correo."
 								}
 							]
 						},
@@ -13324,7 +13324,17 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tu consentimiento al escribirnos y, si acabamos trabajando juntos, la ejecución de ese contrato."
+									"text": "Tu consentimiento al dirigirte a nosotros y, cuando exista relación profesional, la ejecución de un contrato y el cumplimiento de las obligaciones legales asociadas."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Puedes retirar tu consentimiento en cualquier momento escribiéndonos, sin que ello afecte a la licitud del tratamiento previo a su retirada."
 								}
 							]
 						},
@@ -13344,7 +13354,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "No cedemos tus datos a terceros salvo obligación legal. El correo funciona sobre Google Workspace, que actúa como encargado del tratamiento."
+									"text": "No cedemos tus datos a terceros salvo obligación legal. Sí recurrimos a proveedores de servicios tecnológicos —correo electrónico, alojamiento y protección del sitio— que actúan como encargados del tratamiento y sólo tratan los datos siguiendo nuestras instrucciones, con contrato de encargo firmado."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Transferencias internacionales"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Algunos de esos proveedores están establecidos fuera del Espacio Económico Europeo. Cuando eso implica una transferencia internacional, se ampara en una decisión de adecuación de la Comisión Europea o en cláusulas contractuales tipo, con las garantías adicionales que procedan."
 								}
 							]
 						},
@@ -13364,7 +13394,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Guardamos la correspondencia mientras haga falta para atenderla, y lo que exija la normativa fiscal cuando hay factura de por medio."
+									"text": "Conservamos la correspondencia mientras sea necesaria para atenderla y, cuando media facturación, durante los plazos que exige la normativa mercantil y fiscal. Después la suprimimos."
 								}
 							]
 						},
@@ -13384,7 +13414,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Acceso, rectificación, supresión, limitación, portabilidad y oposición. Escríbenos y lo resolvemos. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es)."
+									"text": "Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiéndonos a la dirección indicada. Si consideras que no hemos atendido tu solicitud correctamente, puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es)."
 								}
 							]
 						},
@@ -13404,7 +13434,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Esta web no usa cookies de seguimiento ni de publicidad. La analítica (Cloudflare Web Analytics) funciona sin cookies y sin identificarte."
+									"text": "Esta web no utiliza cookies de seguimiento ni de publicidad, y no instala cookies que requieran tu consentimiento. La analítica que empleamos funciona sin cookies y sin identificarte."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Cambios en esta política"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Si cambia la forma en que tratamos los datos, actualizaremos esta página. La versión publicada es siempre la vigente."
 								}
 							]
 						}
@@ -14310,7 +14360,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We process very little data, and we explain it in a few lines. This policy follows the GDPR and Spain's Organic Law 3/2018 (LOPDGDD)."
+									"text": "We process very little data, and we explain it in a few lines. This policy is governed by Regulation (EU) 2016/679 (GDPR) and by Spain's Organic Law 3/2018 (LOPDGDD)."
 								}
 							]
 						},
@@ -14330,7 +14380,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Server Startup S.L., tax ID B95944807. For anything data-related, write to ventas@serverstartup.io."
+									"text": "SERVER STARTUP, S.L. Tax ID B95944807. Address: C/ Los Fueros 11 — 48992 Getxo (Bizkaia). For anything concerning your data, write to hello@serverstartup.io."
 								}
 							]
 						},
@@ -14350,7 +14400,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Whatever you send us by email or WhatsApp. Your address, your name if you sign it, and what you tell us. The site has no forms and no user accounts."
+									"text": "Whatever you send us by email or WhatsApp: your address, your name if you sign it, and what you tell us. This site has no forms, no registration and no user accounts."
 								}
 							]
 						},
@@ -14360,7 +14410,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Why"
+									"text": "Why we process it"
 								}
 							]
 						},
@@ -14370,7 +14420,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "To answer you. We don't use your data for advertising and we don't add you to mailing lists."
+									"text": "To answer your enquiry and, if we end up working together, to manage the contractual relationship. We do not use your data for advertising and we do not add you to mailing lists."
 								}
 							]
 						},
@@ -14390,7 +14440,17 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Your consent when you write to us and, if we end up working together, the performance of that contract."
+									"text": "Your consent when you contact us and, where a professional relationship exists, performance of a contract and compliance with the associated legal obligations."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "You may withdraw your consent at any time by writing to us, without affecting the lawfulness of processing carried out before the withdrawal."
 								}
 							]
 						},
@@ -14410,7 +14470,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We don't share your data with third parties unless the law requires it. Our email runs on Google Workspace, which acts as a data processor."
+									"text": "We do not share your data with third parties unless the law requires it. We do rely on technology providers — email, hosting and site protection — which act as data processors, handle the data only on our instructions, and are bound by a processing agreement."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "International transfers"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Some of those providers are established outside the European Economic Area. Where that entails an international transfer, it relies on a European Commission adequacy decision or on standard contractual clauses, with any additional safeguards required."
 								}
 							]
 						},
@@ -14430,7 +14510,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "We keep correspondence for as long as it takes to handle it, plus whatever tax law requires when an invoice is involved."
+									"text": "We keep correspondence for as long as it takes to deal with it and, where invoicing is involved, for the periods required by commercial and tax law. After that we delete it."
 								}
 							]
 						},
@@ -14450,7 +14530,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Access, rectification, erasure, restriction, portability and objection. Write to us and we'll sort it out. You can also complain to the Spanish supervisory authority (aepd.es)."
+									"text": "You may exercise your rights of access, rectification, erasure, restriction of processing, portability and objection by writing to the address above. If you believe your request has not been handled properly, you may lodge a complaint with the Spanish Data Protection Agency (aepd.es)."
 								}
 							]
 						},
@@ -14470,7 +14550,27 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "This site uses no tracking or advertising cookies. Analytics (Cloudflare Web Analytics) works without cookies and without identifying you."
+									"text": "This site uses no tracking or advertising cookies, and sets no cookie that would require your consent. The analytics we use work without cookies and without identifying you."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Changes to this policy"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "If the way we process data changes, we will update this page. The published version is always the one in force."
 								}
 							]
 						}
@@ -14721,6 +14821,351 @@
 						}
 					]
 				}
+			},
+			{
+				"id": "page-aviso-legal",
+				"slug": "aviso-legal",
+				"status": "published",
+				"data": {
+					"title": "Aviso legal",
+					"excerpt": "Datos identificativos de Server Startup S.L., condiciones de uso del sitio y legislación aplicable.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Este aviso legal recoge la información que la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), exige publicar de forma permanente, fácil, directa y gratuita."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Datos identificativos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Titular: SERVER STARTUP, S.L. NIF: B95944807. Domicilio social: C/ Los Fueros 11 — 48992 Getxo (Bizkaia). Inscrita en el Registro Mercantil de Bizkaia, tomo 5831, libro 0, folio 75, hoja BI-72906, inscripción 1.ª, con fecha 24 de enero de 2019. Correo de contacto: hola@serverstartup.io."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Objeto y condiciones de uso"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Este sitio es informativo: describe los servicios de la empresa y permite ponerse en contacto con ella. No vende productos ni servicios en línea, no requiere registro y no dispone de área privada. El acceso es libre y gratuito."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Quien accede se compromete a hacer un uso conforme a la ley y a no emplear el sitio con fines ilícitos o que puedan dañar sus sistemas o los de terceros."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Propiedad intelectual e industrial"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Los contenidos del sitio —textos, imágenes, marcas, logotipos y código— pertenecen a su titular o a terceros que han autorizado su uso. Puede citarse el contenido indicando la fuente; su explotación comercial requiere autorización previa por escrito."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Responsabilidad"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El titular procura que la información esté actualizada y sea correcta, pero no garantiza que esté libre de errores ni que el servicio sea ininterrumpido. No se responsabiliza de los daños derivados del uso del sitio ni de la información de terceros a la que se enlace."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Enlaces a otros sitios"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El sitio puede enlazar a páginas ajenas. Esos enlaces se ofrecen como referencia y su titular no controla ni responde de sus contenidos ni de sus políticas."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Protección de datos"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El tratamiento de datos personales se explica en la política de privacidad, accesible desde el pie de cualquier página."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Legislación aplicable"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Este aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio del titular, salvo que la normativa aplicable disponga otro fuero."
+								}
+							]
+						}
+					]
+				},
+				"locale": "es"
+			},
+			{
+				"id": "page-aviso-legal-en",
+				"slug": "legal-notice",
+				"status": "published",
+				"translationOf": "page-aviso-legal",
+				"data": {
+					"title": "Legal notice",
+					"excerpt": "Company details for Server Startup S.L., terms of use for this site and governing law.",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This legal notice contains the information that Spanish Law 34/2002 on information society services and electronic commerce (LSSI-CE) requires to be published permanently, easily, directly and free of charge."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Company details"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Owner: SERVER STARTUP, S.L. Tax ID: B95944807. Registered office: C/ Los Fueros 11 — 48992 Getxo (Bizkaia). Registered at the Commercial Registry of Bizkaia, volume 5831, book 0, sheet 75, page BI-72906, entry 1, on 24 January 2019. Contact: hello@serverstartup.io."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Purpose and terms of use"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This site is informational: it describes the company's services and lets you get in touch. It sells nothing online, requires no registration and has no private area. Access is free and open."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Visitors agree to use the site lawfully and not for unlawful purposes or in ways that could damage its systems or those of third parties."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Intellectual property"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The site's contents — text, images, trade marks, logos and code — belong to its owner or to third parties who have authorised their use. Content may be quoted with attribution; commercial exploitation requires prior written permission."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Liability"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The owner works to keep the information current and correct, but does not warrant that it is free of errors or that the service will be uninterrupted, and accepts no liability for damages arising from use of the site or from third-party information linked to it."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Links to other sites"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The site may link to external pages. Those links are offered as references; their contents and policies are outside the owner's control and responsibility."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Data protection"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Personal data processing is explained in the privacy policy, reachable from the footer of every page."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Governing law"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This legal notice is governed by Spanish law. For any dispute the parties submit to the courts of the owner's domicile, unless applicable law provides otherwise."
+								}
+							]
+						}
+					]
+				},
+				"locale": "en"
 			},
 			{
 				"id": "page-referencias",
