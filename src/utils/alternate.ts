@@ -31,7 +31,7 @@ export function routeAlternatePath(pathname: string, locale: string): string {
  * switcher falls back to the alternate homepage).
  *
  * `idOrSlug` should be the entry's id (`entry.data.id`) — unambiguous even
- * where both locales share a slug (e.g. `partners`).
+ * where both locales share a slug (e.g. `big-data-cloud-analytics`).
  */
 export async function entryAlternatePath(
 	collection: "services" | "pages",

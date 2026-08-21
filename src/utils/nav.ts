@@ -9,7 +9,7 @@
  */
 
 export type FaceKey = "ec" | "int" | "bd" | "cdn" | "gf" | "ia";
-export type SiteKey = "home" | "quienes" | "ref" | "dec" | "contacto" | "partners";
+export type SiteKey = "home" | "quienes" | "ref" | "dec" | "contacto";
 
 /** service slug (ES or EN) → face of the specialties cross */
 export const FACE_BY_SLUG: Record<string, FaceKey> = {
@@ -40,8 +40,6 @@ export const SITE_BY_PATH: Record<string, SiteKey> = {
 	"/en/deconstructing": "dec",
 	"/contacto": "contacto",
 	"/en/contact": "contacto",
-	"/partners": "partners",
-	"/en/partners": "partners",
 };
 
 /**
@@ -60,7 +58,6 @@ export const ICON_BY_KEY: Record<string, string> = {
 	ref: "M5 5h6v6H5z M13 5h6v6h-6z M5 13h6v6H5z M13 13h6v6h-6z",
 	dec: "M5 5h14v14H5z",
 	contacto: "M3.5 6h17v12h-17z M4 7l8 6 8-6",
-	partners: "M13.5 10.5l-3 3 M8.5 11.5L6 14a3.2 3.2 0 0 0 4.5 4.5l2.5-2.5 M15.5 12.5L18 10a3.2 3.2 0 0 0-4.5-4.5L11 8",
 };
 
 /* ── The living-logo die (#211 v29 / #231) ───────────────────────────────
@@ -100,6 +97,5 @@ export const SITE_DIE: Record<SiteKey, SiteDieFx> = {
 	quienes: { face: "int", triple: { int: "D", bd: "I", cdn: "J" } },
 	ref: { face: "gf", icon: "ref" },
 	contacto: { face: "cdn", icon: "contacto" },
-	partners: { face: "ia", icon: "partners" },
 	dec: { face: "bd", icon: "dec", dec: true },
 };
