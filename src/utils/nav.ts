@@ -9,7 +9,7 @@
  */
 
 export type FaceKey = "ec" | "int" | "bd" | "cdn" | "gf" | "ia";
-export type SiteKey = "home" | "quienes" | "ref" | "dec" | "contacto";
+export type SiteKey = "home" | "quienes" | "ref" | "dec" | "contacto" | "legal";
 
 /** service slug (ES or EN) → face of the specialties cross */
 export const FACE_BY_SLUG: Record<string, FaceKey> = {
@@ -40,6 +40,13 @@ export const SITE_BY_PATH: Record<string, SiteKey> = {
 	"/en/deconstructing": "dec",
 	"/contacto": "contacto",
 	"/en/contact": "contacto",
+	// The legal pages are not in the menu — no menu item points at these keys,
+	// so they never render as entries. They are here so the pages get their
+	// emblem detail like every other page (#350).
+	"/aviso-legal": "legal",
+	"/en/legal-notice": "legal",
+	"/politica-de-privacidad": "legal",
+	"/en/privacy-policy": "legal",
 };
 
 /**
@@ -56,6 +63,7 @@ export const ICON_BY_KEY: Record<string, string> = {
 	home: "M4 11.2L12 4.5l8 6.7 M6.6 9.8V19h10.8V9.8 M10.2 19v-5.2h3.6V19",
 	quienes: "M12 4.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8 M5 20c1.2-3.8 4-5.6 7-5.6s5.8 1.8 7 5.6",
 	ref: "M5 5h6v6H5z M13 5h6v6h-6z M5 13h6v6H5z M13 13h6v6h-6z",
+	legal: "M7 3.5h6.5L17 7v13.5H7z M13.5 3.5V7H17 M9.5 12h5 M9.5 15.5h5",
 	dec: "M5 5h14v14H5z",
 	contacto: "M3.5 6h17v12h-17z M4 7l8 6 8-6",
 };
@@ -98,4 +106,5 @@ export const SITE_DIE: Record<SiteKey, SiteDieFx> = {
 	ref: { face: "gf", icon: "ref" },
 	contacto: { face: "cdn", icon: "contacto" },
 	dec: { face: "bd", icon: "dec", dec: true },
+	legal: { face: "gf", icon: "legal" },
 };

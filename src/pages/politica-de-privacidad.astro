@@ -1,12 +1,13 @@
 ---
 /**
  * Política de privacidad — legal page, content from CMS.
- * noindex, nofollow.
+ * Indexable and reachable from the footer legal row (#335).
  */
 import { getEmDashEntry } from "emdash";
 import { entryAlternatePath } from "../utils/alternate";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
+import CubeEmblem from "../components/CubeEmblem.astro";
 
 const { entry, cacheHint } = await getEmDashEntry("pages", "politica-de-privacidad");
 if (!entry) return Astro.rewrite("/404");
@@ -24,8 +25,15 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") :
 	robots="noindex, nofollow"
 	altPath={altPath}
 >
+	{/* #350: every page carries the mark with its own detail — these were
+	    the only two without one. `legal` is a nav key with no menu entry. */}
+	<div class="s-emblem-bg" aria-hidden="true">
+		<CubeEmblem color="var(--color-primary)" faceKey="legal" size={340} />
+	</div>
+
 	<section class="legal" aria-label={title}>
 		<div class="container legal-inner">
+			<CubeEmblem class="s-emblem-mini" color="var(--color-primary)" faceKey="legal" size={104} />
 			<h1>{title}</h1>
 			{content && <PortableText value={content} />}
 		</div>
