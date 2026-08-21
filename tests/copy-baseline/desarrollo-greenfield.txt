@@ -1,0 +1,71 @@
+Desarrollo greenfield — Server Startup
+Saltar al contenido
+~Server Startup/desarrollo-greenfield
+EN
+$ find . -name " " buscar enter buscar·esc cerrar
+✕
+$ find . -name " " buscar enter buscar
+Comercio electrónico
+Integración de sistemas
+Big Data & Cloud Analytics
+CDN, WAF y seguridad edge
+Desarrollo greenfield
+Inteligencia artificial
+Inicio
+Quiénes somos
+Referencias
+Contacto
+Deconstruyendo
+AI
+Toca el dado
+Desarrollo greenfield
+El código no es el producto: el producto es la obra — el sistema y las personas que lo sostienen — y sigue en producción años después de la demo. SDLC completo, de la especificación a la observabilidad. Trabajamos contract first, con foco en estabilidad, seguridad y gobernanza.
+Hablemos de tu proyecto
+Hay necesidades que ningún producto comercial cubre. Un motor de precios que solo existe en tu negocio, una web que no cabe en ninguna plantilla (esta misma, sin ir más lejos). Para eso siempre ha existido el desarrollo greenfield.
+Y hoy pesa otro motivo. Con las capacidades que trae la IA, construir a medida sale a cuenta en casos donde antes se compraba por defecto.
+La advertencia, por delante. Si un SaaS te lo resuelve, te lo decimos y no lo construimos. Preferimos perder un proyecto antes que mantener uno que sobra.
+El código no es el producto
+El producto es el sistema que sigue en producción años después de la demo. La disciplina que lo consigue es siempre la misma, esté la IA por medio o no.
+MotorDeNegocio.java — greenfieldJava 21 · 0 warnings
+12345678910
+/**
+* Cuatro reglas y ninguna es opcional.
+*
+* @param pila Java sin nostalgia. Spring Boot o Quarkus sobre Java 21. Virtual threads, records y pattern matching. Código que escala sin trucos.
+* @param contrato El contrato antes que el código. La API se pacta por escrito (Contract First, OpenAPI) y las credenciales (OAuth 2.0, mTLS) entran en el diseño, no en el parche.
+* @param gobernanza El CI/CD es la gobernanza. Tests, análisis estático y validación de seguridad delante de cada despliegue. Siempre sabes qué corre en tus servidores y por qué.
+* @param seguridad La seguridad se compila. Control de acceso granular en el código y el WAF de Cloudflare delante.
+* @author los mismos tres ingenieros, de principio a fin
+* @since 2019
+*/
+public Sistema construir(Pila pila, Contrato contrato) { … }
+Greenfield ≠ página en blanco
+Nunca partimos de cero, y no dejamos que una IA lo haga. Para cada marco tecnológico mantenemos un framework de trabajo propio: esqueleto del proyecto, convenciones, entornos, calidad y despliegue resueltos antes de la primera línea de negocio.
+Python en Google Cloud. Servicios y funciones sobre Cloud Run y Cloud Functions, con el mismo andamiaje de entornos, credenciales y pruebas en cada proyecto.
+Quarkus y Camel sobre Docker. Arranque en milisegundos e integración de serie, listos para cualquier orquestador.
+Publicación en Karaf. Para las plataformas que viven en OSGi y despliegan por bundles sobre Karaf, sin parar el resto del sistema.
+La ventaja se nota en el segundo servicio. Se lee como el primero, se despliega igual y lo opera cualquiera del equipo. Aburrido a propósito.
+La IA multiplica. El framework conduce.
+Puede que el greenfield sea donde más rinde la IA. Seguro que es donde antes descarrila. Sobre una página en blanco, un agente entrega en horas lo que costaba semanas. Sin marco, cada una de esas horas es deuda nueva.
+Nuestros frameworks son el perímetro. El agente escribe dentro de esos raíles y un ingeniero firma cada línea que llega a main. El detalle, en el vertical de IA.
+Tu deuda técnica es nuestro problema
+Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos tres ingenieros senior, del primer commit a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.
+1 equipo = 6 verticales = Ø 0 traspasos
+Hablemos de ingeniero a ingeniero.
+Trae el problema como esté. Te responde quien va a escribir el código.
+Cuéntanos tu proyecto
+Referencias
+Áreas de especialización
+Comercio electrónico
+Big Data & Cloud Analytics
+CDN, WAF y seguridad edge
+Integración de sistemas
+Desarrollo greenfield
+Inteligencia artificial
+Somos partners
+Contacto
+Quiénes somos
+Deconstruyendo esta web
+Escríbenos
+Cuéntanos tu proyecto
+© 2026 Server Startup, S.L. Aviso legal Política de privacidad

@@ -10,3 +10,6 @@ data.db
 .vscode
 .DS_Store
 docs/company/
+
+# Python bytecode from local scripts
+__pycache__/

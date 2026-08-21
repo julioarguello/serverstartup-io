@@ -1,0 +1,66 @@
+E-commerce — Server Startup
+Skip to content
+~Server Startup/en/e-commerce
+ES
+$ find . -name " " search enter search·esc close
+✕
+$ find . -name " " search enter search
+E-commerce
+Systems Integration
+Big Data & Cloud Analytics
+CDN, WAF & Edge Security
+Greenfield development
+Artificial Intelligence
+Home
+About us
+References
+Contact
+Deconstructing
+AI
+Tap the die
+E-commerce
+Over twenty years inside SAP Commerce Cloud. Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty.
+Audit your e-commerce
+Extending a commerce platform looks quick… a custom development here, a patch there, and a few years in, the version upgrade the vendor calls routine costs you a quarter. We've seen it. We know how to avoid it.
+Not every platform is worked the same way. SAP Commerce Cloud is parameterized and extended. Extending is the easy part. Doing it with restraint, keeping each improvement decoupled from the core so it survives the next upgrade, is what almost nobody does. That's our advantage. With Ocado Smart Platform the craft is in the conversation: everything custom lives outside, in an integration middleware that talks to the platform.
+We've spent over twenty years inside hybris and SAP Commerce Cloud. We don't sell licenses. Performance is our specialty: catalog, search and checkout are sized for the real peak, not the average.
+Custom ≠ coupled
+Your cart(6)Free shipping: zero handoffs
+SAP Commerce CloudParameterized and extended. Catalogs, pricing, promotions, Solr. We know where not to touch.1 ⌄
+Ocado Smart PlatformA third-party system. Presentation rules, substitutes and encrypted feeds, all from the middleware.1 ⌄
+Decoupled extensionsYour custom logic, outside the core. The platform upgrades and your improvements keep working.1 ⌄
+Black FridayEdge caching and selective pre-rendering. The architecture holds the real peak.1 ⌄
+A guarded checkoutThe WAF is configured by the same people who know your catalog.1 ⌄
+Prices and stock that matchSynced with BigQuery. Promotions hit the web and the till at the same time.1 ⌄
+Order summary
+Subtotalover twenty years
+Shippingfree
+Totalone team
+Audit your e-commerceReturns: you won't need them
+Cases we're fond of
+The ones that come to mind when someone asks what we do.
+Multi-country promotions. One model with kits and assortments changing per market and channel, without duplicating the catalog.
+Per-customer pricing. Millions of price rows computed, indexed and served without the search engine feeling it.
+Search engine. What gets indexed, how often and at what cost. Solr sizing decides whether the campaign holds.
+S/4HANA and POS interfaces. Orders, prices and returns squaring between the web, the store and the ERP.
+Cross-docking and fulfillment. From the web order to picking and the delivery promise, with substitutes when a product runs out.
+The team working on your platform also builds your data pipeline and writes your WAF rules. Nobody will tell you "let me check with the other team".
+1 team = 6 verticals = Ø 0 handoffs
+Let's talk, engineer to engineer.
+Bring the problem as it is. You'll hear back from the person who'll write the code.
+Tell us about your project
+References
+Areas of expertise
+E-commerce
+CDN, WAF & Edge Security
+Big Data & Cloud Analytics
+Systems Integration
+Greenfield development
+Artificial Intelligence
+We are partners
+Contact
+About us
+Deconstructing this website
+Email us
+Tell us about your project
+© 2026 Server Startup, S.L. Legal notice Privacy policy

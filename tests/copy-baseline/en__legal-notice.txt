@@ -1,0 +1,56 @@
+Legal notice — Server Startup
+Skip to content
+~Server Startup/en/legal-notice
+ES
+$ find . -name " " search enter search·esc close
+✕
+$ find . -name " " search enter search
+E-commerce
+Systems Integration
+Big Data & Cloud Analytics
+CDN, WAF & Edge Security
+Greenfield development
+Artificial Intelligence
+Home
+About us
+References
+Contact
+Deconstructing
+AI
+Tap the die
+Legal notice
+Company details for Server Startup S.L., terms of use for this site and governing law.
+This legal notice contains the information that Spanish Law 34/2002 on information society services and electronic commerce (LSSI-CE) requires to be published permanently, easily, directly and free of charge.
+Company details
+Owner: SERVER STARTUP, S.L. Tax ID: B95944807. Registered office: C/ Los Fueros 11 — 48992 Getxo (Bizkaia). Registered at the Commercial Registry of Bizkaia, volume 5831, book 0, sheet 75, page BI-72906, entry 1, on 24 January 2019. Contact: legal@serverstartup.io.
+Purpose and terms of use
+This site is informational: it describes the company's services and lets you get in touch. It sells nothing online, requires no registration and has no private area. Access is free and open.
+Visitors agree to use the site lawfully and not for unlawful purposes or in ways that could damage its systems or those of third parties.
+Intellectual property
+The site's contents — text, images, trade marks, logos and code — belong to its owner or to third parties who have authorised their use. Content may be quoted with attribution; commercial exploitation requires prior written permission.
+Liability
+The owner works to keep the information current and correct, but does not warrant that it is free of errors or that the service will be uninterrupted, and accepts no liability for damages arising from use of the site or from third-party information linked to it.
+Links to other sites
+The site may link to external pages. Those links are offered as references; their contents and policies are outside the owner's control and responsibility.
+Data protection
+Personal data processing is explained in the privacy policy, reachable from the footer of every page.
+Governing law
+This legal notice is governed by Spanish law. For any dispute the parties submit to the courts of the owner's domicile, unless applicable law provides otherwise.
+Let's talk, engineer to engineer.
+Bring the problem as it is. You'll hear back from the person who'll write the code.
+Tell us about your project
+References
+Areas of expertise
+E-commerce
+CDN, WAF & Edge Security
+Big Data & Cloud Analytics
+Systems Integration
+Greenfield development
+Artificial Intelligence
+We are partners
+Contact
+About us
+Deconstructing this website
+Email us
+Tell us about your project
+© 2026 Server Startup, S.L. Legal notice Privacy policy
