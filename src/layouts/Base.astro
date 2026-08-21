@@ -99,7 +99,7 @@ const phoneDisplay = s.phoneDisplay || "";
 // The address is locale-specific: `hello@` answers in English, `hola@` in
 // Spanish. The footer picked the Spanish one on every locale, so an English
 // visitor got one address in the footer and another on the contact page (#311).
-const email = (locale === "en" ? s.emailEn : s.email) || s.email || "info@serverstartup.io";
+const email = (locale === "en" ? s.emailEn : s.email) || s.email || "hola@serverstartup.io";
 // #311: templates render the ENCODED value; the plain one never reaches HTML.
 // btoa, not Buffer: this renders on Workers. Computed rather than stored, so
 // editing the address in the CMS cannot leave a stale encoded copy behind.
