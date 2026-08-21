@@ -177,6 +177,40 @@ for (const route of ["/", "/cdn-waf-seguridad-edge-cloudflare", "/referencias", 
 	await page.close();
 }
 
+// ── 5. W3C Nu — the rules html-validate does not carry ─────────────────────
+// The local suite validates with html-validate; CI additionally runs Nu after
+// the deploy. They disagree, and the gap is not academic: `aria-hidden` on a
+// label bound to a control passed html-validate and was rejected by Nu, after
+// the merge. Running Nu here closes the loop before the push. An unreachable
+// validator warns rather than fails — an external outage must not block a
+// pull request — but a REACHED validator reporting errors is a hard failure.
+console.log("── W3C Nu (2 pages, one per locale)");
+for (const route of ["/", "/en/e-commerce"]) {
+	const page = await browser.newPage();
+	await page.goto(BASE + route, { waitUntil: "networkidle2", timeout: 60000 });
+	const html = await page.content();
+	await page.close();
+	let json;
+	try {
+		const r = await fetch("https://validator.w3.org/nu/?out=json", {
+			method: "POST",
+			headers: { "Content-Type": "text/html; charset=utf-8" },
+			body: html,
+			signal: AbortSignal.timeout(40000),
+		});
+		json = await r.json();
+	} catch {
+		console.log(`  warn ${route} — validator unreachable, skipped (not a failure)`);
+		continue;
+	}
+	const errors = (json.messages || []).filter((m) => m.type === "error");
+	if (errors.length) {
+		for (const e of errors) fail(route, `W3C Nu: ${e.message}`);
+	} else {
+		ok(`${route} — 0 Nu errors`);
+	}
+}
+
 await browser.close();
 
 if (failures.length) {

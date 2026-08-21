@@ -71,7 +71,12 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 				class="search-toggle"
 				aria-label={t("search_open")}
 			/>
-			<label for="search-toggle" class="search-btn" aria-hidden="true">
+			{/* No aria-hidden here: the W3C validator rejects it on a label bound
+				    to a labelable control, and rightly — hiding the label breaks the
+				    association it exists to make. Nothing is announced twice anyway:
+				    the label holds only an aria-hidden icon, and the input carries
+				    its own aria-label, which wins the name computation. */}
+			<label for="search-toggle" class="search-btn">
 				<svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
 					<circle cx="8.5" cy="8.5" r="5.5"></circle>
 					<path d="M13 13l4.5 4.5"></path>
