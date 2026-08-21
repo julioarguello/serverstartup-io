@@ -34,7 +34,6 @@ ROUTES=(
 	"/politica-de-privacidad|Política de privacidad"
 	"/inteligencia-artificial|Inteligencia artificial"
 	"/referencias|Referencias"
-	"/partners|Partners"
 	"/en|Software engineering"
 	"/en/about-us|About us"
 	"/en/contact|Contact"
@@ -47,7 +46,6 @@ ROUTES=(
 	"/en/privacy-policy|Privacy policy"
 	"/en/artificial-intelligence|Artificial Intelligence"
 	"/en/references|References"
-	"/en/partners|Partners"
 )
 
 echo "── routes battery ($BASE)"
@@ -79,6 +77,19 @@ fi
 # GET, not HEAD, and that is not a detail: Astro answers a trailing-slash
 # redirect with 301 to GET and 308 to every other method. Googlebot sends GET,
 # so HEAD here would assert a status no crawler ever sees.
+# Retired pages must be GONE, not merely unlinked (#337). A page pulled from
+# the menu that still answers 200 on some older deploy is indistinguishable
+# from one properly retired — until someone finds it.
+echo "── retired"
+for path in "/partners" "/en/partners"; do
+	code=$(curl -s -o /dev/null -w "%{http_code}" -L "$BASE$path")
+	if [ "$code" = "404" ]; then
+		echo "  ok   $path → 404"
+	else
+		echo "  FAIL $path — HTTP $code (expected 404: this page was retired)" >&2; FAIL=1
+	fi
+done
+
 echo "── redirects"
 REDIRECTS=(
 	"/ingenieria-greenfield-y-sistemas-criticos|/desarrollo-greenfield"

@@ -375,7 +375,6 @@
 				{ "type": "custom", "label": "Quiénes somos", "url": "/quienes-somos" },
 				{ "type": "custom", "label": "Referencias", "url": "/referencias" },
 				{ "type": "custom", "label": "Contacto", "url": "/contacto" },
-				{ "type": "custom", "label": "Partners", "url": "/partners" },
 				{ "type": "custom", "label": "Deconstruyendo", "url": "/deconstruyendo" }
 			]
 		},
@@ -391,7 +390,6 @@
 				{ "type": "custom", "label": "About us", "url": "/en/about-us" },
 				{ "type": "custom", "label": "References", "url": "/en/references" },
 				{ "type": "custom", "label": "Contact", "url": "/en/contact" },
-				{ "type": "custom", "label": "Partners", "url": "/en/partners" },
 				{ "type": "custom", "label": "Deconstructing", "url": "/en/deconstructing" }
 			]
 		}
@@ -14745,87 +14743,6 @@
 					"title": "References",
 					"excerpt": "The names we can write, and the work behind them.",
 					"content": []
-				}
-			},
-			{
-				"id": "page-partners",
-				"slug": "partners",
-				"status": "published",
-				"locale": "es",
-				"data": {
-					"title": "Partners",
-					"excerpt": "Pocas alianzas, largas y con nombre.",
-					"content": [
-						{
-							"_type": "block",
-							"_key": "b23",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n23",
-									"text": "Somos partner de Cloudflare. La relación viene de años protegiendo dominios de retail sobre su plataforma y sigue viva en cada proyecto de edge que firmamos.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b24",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n24",
-									"text": "Cuando un proyecto pide más manos que las nuestras, colaboramos con firmas que respetan nuestra forma de trabajar. Pocas alianzas, largas y con nombre.",
-									"marks": []
-								}
-							]
-						}
-					]
-				}
-			},
-			{
-				"id": "page-partners-en",
-				"slug": "partners",
-				"status": "published",
-				"locale": "en",
-				"translationOf": "page-partners",
-				"data": {
-					"title": "Partners",
-					"excerpt": "Few alliances, long ones, with names attached.",
-					"content": [
-						{
-							"_type": "block",
-							"_key": "b25",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n25",
-									"text": "We are a Cloudflare partner. The relationship comes from years of protecting retail domains on their platform, and it lives on in every edge project we sign.",
-									"marks": []
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"_key": "b26",
-							"style": "normal",
-							"markDefs": [],
-							"children": [
-								{
-									"_type": "span",
-									"_key": "n26",
-									"text": "When a project needs more hands than ours, we collaborate with firms that respect how we work. Few alliances, long ones, with names attached.",
-									"marks": []
-								}
-							]
-						}
-					]
 				}
 			}
 		],
