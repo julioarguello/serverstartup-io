@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# AUTO-GENERATED — DO NOT EDIT MANUALLY
 """Sync live CMS service entries back into seed/seed.json.
 
 Why: seed/seed.json must be the complete, canonical text corpus — a clean

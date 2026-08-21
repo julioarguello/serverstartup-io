@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# AUTO-GENERATED — DO NOT EDIT MANUALLY
-# AUTO-GENERATED — DO NOT EDIT MANUALLY
 # EmDash Content Loader — syncs markdown files into EmDash CMS via CLI.
 #
 # Usage:
