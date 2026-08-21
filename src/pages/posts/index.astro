@@ -32,7 +32,10 @@ const formatDate = (date: Date) =>
 	});
 ---
 
-<Base title={t("articles_title")} description={t("articles_description")}>
+{/* #335: an empty index is a soft-404 candidate; it comes back the day there is a
+	     first post (#340) */}
+<Base title={t("articles_title")} description={t("articles_description")}
+	robots="noindex">
 	<div class="posts-page">
 		<div class="container">
 			<header class="page-header">

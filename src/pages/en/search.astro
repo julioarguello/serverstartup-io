@@ -37,9 +37,12 @@ const results = query
 	: [];
 ---
 
+{/* #335: internal search results — Google's own guidance is to keep them out of the
+	     index while leaving them crawlable (#335) */}
 <Base
 	title={query ? `${searchTitle}: ${query}` : searchTitle}
 	description={searchDescription}
+	robots="noindex"
 >
 	<section class="search-page" aria-label={searchTitle}>
 		<div class="container search-inner">

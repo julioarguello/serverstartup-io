@@ -25,10 +25,15 @@ const altPath = page ? await entryAlternatePath("pages", page.data.id, "en") : n
 
 ---
 
+<!-- #335: indexable, like the legal notice beside it. It was `noindex,
+     nofollow`: the nofollow threw away link signal through the header, the
+     footer with all six verticals and the language switcher, and bought
+     nothing; the noindex left the page both unfindable AND declared in the
+     sitemap — which asks Google to index what it lists. Two legal documents
+     of the same class now behave the same way. -->
 <Base
 	title={title}
 	description={excerpt || `${title} — Server Startup`}
-	robots="noindex, nofollow"
 	altPath={altPath}
 >
 	{/* #350: every page carries the mark with its own detail — these were

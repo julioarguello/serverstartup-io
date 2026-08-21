@@ -15,6 +15,8 @@ interface Props {
 	trustTitle: string;
 	servicesTitle: string;
 	partnersTitle: string;
+	legalNoticeLabel: string;
+	privacyLabel: string;
 	contactTitle: string;
 	aboutUsLabel: string;
 	manualLabel: string;
@@ -35,6 +37,8 @@ const {
 	trustTitle,
 	servicesTitle,
 	partnersTitle,
+	legalNoticeLabel,
+	privacyLabel,
 	contactTitle,
 	aboutUsLabel,
 	manualLabel,
@@ -51,6 +55,8 @@ const {
 	locale,
 } = Astro.props;
 const t = Astro.locals.t;
+const legalSlug = (Astro.currentLocale || "es") === "en" ? "legal-notice" : "aviso-legal";
+const privacySlug = (Astro.currentLocale || "es") === "en" ? "privacy-policy" : "politica-de-privacidad";
 ---
 
 <footer class="site-footer">
@@ -146,6 +152,18 @@ const t = Astro.locals.t;
 			loading="lazy"
 		/>
 	</div>
+
+	<!-- Legal row (#335). RGPD art. 12.1 asks for information "de fácil acceso"
+	     and LSSI-CE art. 10.1 for it to be permanently, easily and directly
+	     available: a legal page nothing links to is neither. This is the only
+	     place they belong — the menu is five wayfinding entries, not paperwork. -->
+	<div class="footer-legal">
+		<nav class="container footer-legal__inner" aria-label={t("footer_legal")}>
+			<span class="footer-legal__copy">© {new Date().getFullYear()} Server Startup, S.L.</span>
+			<a href={`${localePrefix}/${legalSlug}`}>{legalNoticeLabel}</a>
+			<a href={`${localePrefix}/${privacySlug}`}>{privacyLabel}</a>
+		</nav>
+	</div>
 </footer>
 
 <style is:global>
@@ -220,6 +238,30 @@ const t = Astro.locals.t;
 	.footer-contact:hover {
 		text-decoration: underline;
 	}
+	/* Legal row: quiet, last, and always there (#335) */
+	.footer-legal {
+		border-top: 1px solid var(--color-border);
+		padding-block: var(--space-3);
+	}
+	.footer-legal__inner {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-4);
+		align-items: baseline;
+		justify-content: center;
+		font-size: 14px;
+	}
+	.footer-legal__copy { color: var(--color-text-muted); }
+	.footer-legal a {
+		color: var(--color-text-muted);
+		text-decoration-style: dashed;
+		text-underline-offset: 3px;
+	}
+	.footer-legal a:hover { color: var(--color-text); text-decoration-style: solid; }
+	@media (min-width: 768px) {
+		.footer-legal__inner { justify-content: flex-start; }
+	}
+
 	.footer-partner-logo {
 		/* token-guard: off — a logo is drawn at its own size; the partner
 		   lockup has a minimum legible width and clear space of its own. */
