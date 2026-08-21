@@ -1440,6 +1440,28 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "legal_notice",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Aviso legal"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "privacy_policy",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Política de privacidad"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "hero_services_btn",
 							"children": [
 								{
@@ -2164,6 +2186,17 @@
 								{
 									"_type": "span",
 									"text": "Buscar en el sitio"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "footer_legal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Información legal"
 								}
 							]
 						},
@@ -3032,6 +3065,28 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "legal_notice",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Legal notice"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "privacy_policy",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Privacy policy"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "hero_services_btn",
 							"children": [
 								{
@@ -3757,6 +3812,17 @@
 								{
 									"_type": "span",
 									"text": "Search the site"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "footer_legal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Legal information"
 								}
 							]
 						},

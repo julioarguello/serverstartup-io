@@ -47,7 +47,14 @@ export default defineConfig({
 				defaultLocale: "es",
 				locales: { es: "es-ES", en: "en-US" },
 			},
-			filter: (page) => !page.includes("/_emdash/"),
+			// #335: the admin, plus routes that must not be offered to the index —
+			// internal search results, and blog indexes with no posts (soft-404
+			// candidates until #340 gives them content). A sitemap declares the
+			// URLs you WANT indexed; these carry noindex, so listing them would
+			// be asking Google to crawl what we just told it to skip.
+			filter: (page) =>
+				!page.includes("/_emdash/") &&
+				!/\/(en\/)?(search|posts)\/?$/.test(new URL(page).pathname),
 		}),
 	],
 	fonts: [
