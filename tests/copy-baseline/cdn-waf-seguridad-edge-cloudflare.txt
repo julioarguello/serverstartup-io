@@ -1,23 +1,7 @@
-CDN, WAF y seguridad edge — Server Startup
 Saltar al contenido
-~Server Startup/cdn-waf-seguridad-edge-cloudflare
+~Server Startup
+/cdn-waf-seguridad-edge-cloudflare
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 CDN, WAF y seguridad edge
 Partners oficiales de Cloudflare desde 2019. Auditoría, migración y operación de CDN, WAF y seguridad perimetral, sobre todo en comercio electrónico.
 Audita tu edge
@@ -26,31 +10,45 @@ Cloudflare está configurado. ¿Seguro de que está bien configurado? En muchas 
 Nosotros sabemos por qué está cada una, porque las escribimos, las versionamos con Terraform y las mantenemos en producción.
 WAF ≠ seguridad
 Un firewall no es una estrategia de seguridad, sino una parte de ella. Configuramos Cloudflare como arquitectura, y cada interruptor de este panel tiene un porqué.
-Seguridad · serverstartup.ioACTIVO
-PoPs sirviendo tu web300+
-Workers · latencia al usuario<50 ms
-Plantillas genéricas0
-Reglas WAF a tu medidaAjustadas a tu superficie de ataque real. OWASP Top 10, DDoS, bots. Las plantillas genéricas, fuera.
-Caché y CDNTu origen respira y los tiempos de respuesta se vuelven predecibles. También en la campaña de noviembre.
-Migraciones sin corteDesde Akamai o la CDN que toque, sin parar la tienda.
-Todo en TerraformLa configuración entera como código, versionada y revisada. Nada depende de la memoria de nadie.
-Lógica junto al usuarioWorkers en más de 300 ciudades, a menos de 50 ms. Los primeros los pusimos en producción en 2018.
-Guardia diariaAlertas y comprobaciones que un ingeniero revisa cada mañana. El mismo que escribió tus reglas.
-Modo «lo montó alguien que ya no está»Desactivado desde 2019. Las reglas las escribimos y las mantenemos nosotros.
+Seguridad · serverstartup.io
+ACTIVO
+PoPs sirviendo tu web
+300+
+Workers · latencia al usuario
+<50 ms
+Plantillas genéricas
+0
+Reglas WAF a tu medida
+Ajustadas a tu superficie de ataque real. OWASP Top 10, DDoS, bots. Las plantillas genéricas, fuera.
+Caché y CDN
+Tu origen respira y los tiempos de respuesta se vuelven predecibles. También en la campaña de noviembre.
+Migraciones sin corte
+Desde Akamai o la CDN que toque, sin parar la tienda.
+Todo en Terraform
+La configuración entera como código, versionada y revisada. Nada depende de la memoria de nadie.
+Lógica junto al usuario
+Workers en más de 300 ciudades, a menos de 50 ms. Los primeros los pusimos en producción en 2018.
+Guardia diaria
+Alertas y comprobaciones que un ingeniero revisa cada mañana. El mismo que escribió tus reglas.
+Modo «lo montó alguien que ya no está»
+Desactivado desde 2019. Las reglas las escribimos y las mantenemos nosotros.
 Quien lo configura, lo mantiene
 No montamos Cloudflare y desaparecemos. Vigilamos el tráfico, ajustamos las reglas cuando cambian los patrones de ataque y damos la cara cuando algo se degrada.
 Hemos montado Cloudflare para:
 La plataforma no se acaba en el CDN y el WAF. Zero Trust, Access, Stream, R2. Te ayudamos a decidir qué piezas encajan y cuáles no.
 Esta misma web corre sobre Workers, D1 y R2, detrás del mismo WAF que operamos para clientes. La desmontamos pieza a pieza en Deconstruyendo esta web.
-1 equipo = 6 verticales = Ø 0 traspasos
+1 equipo =
+6 verticales = Ø
+0
+traspasos
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -60,4 +58,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

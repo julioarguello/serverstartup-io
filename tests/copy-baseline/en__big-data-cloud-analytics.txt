@@ -1,23 +1,7 @@
-Big Data & Cloud Analytics — Server Startup
 Skip to content
-~Server Startup/en/big-data-cloud-analytics
+~Server Startup
+/en/big-data-cloud-analytics
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 Big Data & Cloud Analytics
 A data pipeline comes together quickly. A platform that survives years of business, schema changes, campaign peaks and shifting data sources is another story. Medallion architecture, and tests that number in the thousands.
 Let's talk data
@@ -26,7 +10,9 @@ We build them the way serious software gets built. Every transformation versione
 The essence is analytical, and the synergies with the operational side multiply it. We run dbt on both sides of the warehouse.
 dbt ≠ pipeline
 dbt is the T in ELT, and we treat it the way good software gets treated, the pattern the industry calls analytics engineering. But the tool is only one piece: ingestion, orchestration and monitoring live elsewhere, and our value is building and running the whole set.
-reliable_metrics.sql✕▶ RunSave ▾ Schedule Share
+reliable_metrics.sql ✕
+▶ Run
+Save ▾ Schedule Share
 1
 2
 3
@@ -38,22 +24,10 @@ FROM `gold.business_metrics`
 WHERE reliable = TRUE;
 -- guaranteed by 1,646 tests across 111 dbt models
 ✓ Query complete (1.4 s) · every metric's lineage, from ingestion to analysis
-Row
-metric
-lineage
-last_run
-1
-daily_sales
-complete
-4 min ago
-2
-stock_by_warehouse
-complete
-4 min ago
-3
-margin_by_promo
-complete
-4 min ago
+Row metric lineage last_run
+1 daily_sales complete 4 min ago
+2 stock_by_warehouse complete 4 min ago
+3 margin_by_promo complete 4 min ago
 Data that doesn't add up never reaches gold. That's the governance.
 Google Cloud is where we've gone deepest. BigQuery as the warehouse, dbt for the transformations.
 From blueprint to publication. Our definition of done starts long before the code. Database design following the sector's classic modeling, standard naming, homogenization and normalization of the data. It is more analysis than development, and it is where reliability is won.
@@ -66,11 +40,14 @@ Synergies between analytical and operational
 On the analytical side we work with dbt Cloud on BigQuery. And when a transformation belongs in the operational layer, on a relational database like Oracle, we manage it with dbt Core and the adapter Oracle maintains (plus our own improvements, as obvious as they were necessary...).
 The same tests and the same versioning on both sides, with no toll booths between teams. Data reaches the dashboard already proven.
 We connect BigQuery to your e-commerce, to your ERP, and to the edge.
-1 team = 6 verticals = Ø 0 handoffs
+1 team =
+6 verticals = Ø
+0
+handoffs
 Let's talk, engineer to engineer.
 Bring the problem as it is. You'll hear back from the person who'll write the code.
 Tell us about your project
-References
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -84,4 +61,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy

@@ -1,23 +1,7 @@
-Desarrollo greenfield — Server Startup
 Saltar al contenido
-~Server Startup/desarrollo-greenfield
+~Server Startup
+/desarrollo-greenfield
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Desarrollo greenfield
 El código no es el producto: el producto es la obra — el sistema y las personas que lo sostienen — y sigue en producción años después de la demo. SDLC completo, de la especificación a la observabilidad. Trabajamos contract first, con foco en estabilidad, seguridad y gobernanza.
 Hablemos de tu proyecto
@@ -26,8 +10,18 @@ Y hoy pesa otro motivo. Con las capacidades que trae la IA, construir a medida s
 La advertencia, por delante. Si un SaaS te lo resuelve, te lo decimos y no lo construimos. Preferimos perder un proyecto antes que mantener uno que sobra.
 El código no es el producto
 El producto es el sistema que sigue en producción años después de la demo. La disciplina que lo consigue es siempre la misma, esté la IA por medio o no.
-MotorDeNegocio.java — greenfieldJava 21 · 0 warnings
-12345678910
+MotorDeNegocio.java — greenfield
+Java 21 · 0 warnings
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 /**
 * Cuatro reglas y ninguna es opcional.
 *
@@ -50,15 +44,18 @@ Puede que el greenfield sea donde más rinde la IA. Seguro que es donde antes de
 Nuestros frameworks son el perímetro. El agente escribe dentro de esos raíles y un ingeniero firma cada línea que llega a main. El detalle, en el vertical de IA.
 Tu deuda técnica es nuestro problema
 Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos tres ingenieros senior, del primer commit a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.
-1 equipo = 6 verticales = Ø 0 traspasos
+1 equipo =
+6 verticales = Ø
+0
+traspasos
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -68,4 +65,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

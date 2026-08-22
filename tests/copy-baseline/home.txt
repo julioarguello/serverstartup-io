@@ -1,23 +1,6 @@
-Ingeniería de software — Server Startup
 Saltar al contenido
 ~Server Startup
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Ingeniería de software: arquitectura, integración y operación
 Más de veinte años de oficio en comercio electrónico, integración de sistemas y el dato. Partners oficiales de Cloudflare desde 2019.
 En tu proyecto, siempre los mismos tres ingenieros senior. Quien diseña tu arquitectura escribe el código. Y da la cara si algo se rompe.
@@ -57,15 +40,18 @@ La IA es un medio, no un fin. La máquina hace el código repetitivo; nosotros p
 Calidad y rendimiento
 Nuestro oficio es la calidad y el rendimiento donde salen caros: procesos críticos y volúmenes grandes. El pico de campaña, el catálogo que hay que reindexar, la integración que tiene que cerrar el día.
 Esta web es una muestra pequeña de la misma disciplina, aplicada a nuestro propio escaparate. Ninguna versión se publica si el rendimiento baja de 95, o si accesibilidad, buenas prácticas y SEO no dan 100: el control corre en cada cambio y bloquea el despliegue. El umbral está escrito en el repositorio público, y cada ejecución del control también. Mira cómo está hecha.
-1 equipo = 6 verticales = Ø 0 traspasos
+1 equipo =
+6 verticales = Ø
+0
+traspasos
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -75,4 +61,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

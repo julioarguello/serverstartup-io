@@ -1,42 +1,83 @@
-References — Server Startup
 Skip to content
-~Server Startup/en/references
+~Server Startup
+/en/references
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 References
 ls -alh references/
 total 9
-drwxr-xr-x2serverstartupclients96BJan 24 2019.
-drwxr-xr-x5serverstartupserverstartup160BJan 24 2019..
--r-xr-xr-x1serverstartupclients5.5KJan 24 2019
--r-xr-xr-x1serverstartupclients5.4KJan 24 2019
--r-xr-xr-x1serverstartupclients42KJan 24 2019
--r-xr-xr-x1serverstartupclients8.7KJan 24 2019
--r--r--r--1serverstartupcollaborations14KJan 24 2019
--r--r--r--1serverstartupcollaborations5.2KJan 24 2019
--r-xr-xr-x1serverstartupclients6.6KJan 24 2019
--r-xr-xr-x1serverstartupclients6.8KJan 24 2019
--r-xr-xr-x1serverstartupclients27KJan 24 2019
+drwxr-xr-x
+2
+serverstartup
+clients
+96B
+Jan 24 2019
+.
+drwxr-xr-x
+5
+serverstartup
+serverstartup
+160B
+Jan 24 2019
+..
+-r-xr-xr-x
+1
+serverstartup
+clients
+5.5K
+Jan 24 2019
+-r-xr-xr-x
+1
+serverstartup
+clients
+5.4K
+Jan 24 2019
+-r-xr-xr-x
+1
+serverstartup
+clients
+42K
+Jan 24 2019
+-r-xr-xr-x
+1
+serverstartup
+clients
+8.7K
+Jan 24 2019
+-r--r--r--
+1
+serverstartup
+collaborations
+14K
+Jan 24 2019
+-r--r--r--
+1
+serverstartup
+collaborations
+5.2K
+Jan 24 2019
+-r-xr-xr-x
+1
+serverstartup
+clients
+6.6K
+Jan 24 2019
+-r-xr-xr-x
+1
+serverstartup
+clients
+6.8K
+Jan 24 2019
+-r-xr-xr-x
+1
+serverstartup
+clients
+27K
+Jan 24 2019
 All logos belong to their respective owners; shown solely as a factual reference of delivered work.
 Let's talk, engineer to engineer.
 Bring the problem as it is. You'll hear back from the person who'll write the code.
 Tell us about your project
-References
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -50,4 +91,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy

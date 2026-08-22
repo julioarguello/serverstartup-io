@@ -1,23 +1,7 @@
-Artificial Intelligence — Server Startup
 Skip to content
-~Server Startup/en/artificial-intelligence
+~Server Startup
+/en/artificial-intelligence
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 AI
 AI
 Artificial Intelligence
@@ -29,8 +13,10 @@ The repetitive code goes to the machine. Our time goes to judgment and accountab
 Generated ≠ shipped
 An agent is AI that does things, not just answers. To be useful it needs to read the order in SAP, check stock in BigQuery and write the result where your team actually works. That wiring is our home ground.
 Our workflow is this very pull request. The agent proposes; the engineer reviews, approves and signs. Always with minimal permissions, every action logged.
-agent/propuesta → mainOpen
-−git push --force origin main
+agent/propuesta → main
+Open
+−
+git push --force origin main
 +
 Agents with bounded permissions. Built on the Agents SDK, they touch only what they must, and a person can always stop them.
 +
@@ -39,8 +25,12 @@ Inference at the edge. Document classification and extraction with Workers AI, o
 Governed AI traffic. Every model call logged and cost-capped in AI Gateway. You will know which model answered and what it cost.
 +
 Audit before production. Security, business logic and performance. No generated line ships without passing it.
-✓ ci/security✓ ci/business-logic✓ ci/performance
-✔ ApprovedSigned-off-by: Server StartupMerge pull request
+✓ ci/security
+✓ ci/business-logic
+✓ ci/performance
+✔ Approved
+Signed-off-by: Server Startup
+Merge pull request
 We sign the code
 We use AI every day. Claude Code, Cursor, open models on Workers AI. Using it is how we know where it fails.
 The industry's most repeated complaint is code that is almost right, but not quite. On a promotion calculation or a stock feed, "almost" is an incident.
@@ -48,11 +38,14 @@ So we lead with security. Agents run on least-privilege credentials, work in env
 Whoever signs, answers. From August 2026, the EU AI Act also demands human oversight with the competence and authority to override or halt a high-risk system. That is already how we work.
 You won't find an AI product here. We don't have one, and we don't pretend to. What we have is a method made of versioned rules and protocols that steer the agents, distributable and auditable.
 This very website is built that way, by supervised agents, pull request by pull request. And if a chatbot won't solve anything for you, we'll tell you not to build one.
-1 team = 6 verticals = Ø 0 handoffs
+1 team =
+6 verticals = Ø
+0
+handoffs
 Let's talk, engineer to engineer.
 Bring the problem as it is. You'll hear back from the person who'll write the code.
 Tell us about your project
-References
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -66,4 +59,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy

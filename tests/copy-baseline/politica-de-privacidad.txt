@@ -1,23 +1,7 @@
-Política de privacidad — Server Startup
 Saltar al contenido
-~Server Startup/politica-de-privacidad
+~Server Startup
+/politica-de-privacidad
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Política de privacidad
 Tratamos pocos datos y lo contamos en pocas líneas. Esta política se rige por el Reglamento (UE) 2016/679 (RGPD) y por la Ley Orgánica 3/2018 (LOPDGDD).
 Responsable del tratamiento
@@ -36,16 +20,16 @@ Algunos de esos proveedores están establecidos fuera del Espacio Económico Eur
 Conservación
 Conservamos la correspondencia mientras sea necesaria para atenderla y, cuando media facturación, durante los plazos que exige la normativa mercantil y fiscal. Después la suprimimos.
 Tus derechos
-Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiéndonos a la dirección indicada. Si consideras que no hemos atendido tu solicitud correctamente, puedes reclamar ante la Agencia Española de Protección de Datos ( aepd.es ).
+Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición escribiéndonos a la dirección indicada. Si consideras que no hemos atendido tu solicitud correctamente, puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).
 Cookies
 Esta web no utiliza cookies de seguimiento ni de publicidad, y no instala cookies que requieran tu consentimiento. La analítica que empleamos funciona sin cookies y sin identificarte.
 Cambios en esta política
 Si cambia la forma en que tratamos los datos, actualizaremos esta página. La versión publicada es siempre la vigente.
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -55,4 +39,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

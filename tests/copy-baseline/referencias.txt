@@ -1,46 +1,87 @@
-Referencias — Server Startup
 Saltar al contenido
-~Server Startup/referencias
+~Server Startup
+/referencias
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Referencias
 ls -alh referencias/
 total 9
-drwxr-xr-x2serverstartupclientes96B24 ene 2019.
-drwxr-xr-x5serverstartupserverstartup160B24 ene 2019..
--r-xr-xr-x1serverstartupclientes5.5K24 ene 2019
--r-xr-xr-x1serverstartupclientes5.4K24 ene 2019
--r-xr-xr-x1serverstartupclientes42K24 ene 2019
--r-xr-xr-x1serverstartupclientes8.7K24 ene 2019
--r--r--r--1serverstartupcolaboraciones14K24 ene 2019
--r--r--r--1serverstartupcolaboraciones5.2K24 ene 2019
--r-xr-xr-x1serverstartupclientes6.6K24 ene 2019
--r-xr-xr-x1serverstartupclientes6.8K24 ene 2019
--r-xr-xr-x1serverstartupclientes27K24 ene 2019
+drwxr-xr-x
+2
+serverstartup
+clientes
+96B
+24 ene 2019
+.
+drwxr-xr-x
+5
+serverstartup
+serverstartup
+160B
+24 ene 2019
+..
+-r-xr-xr-x
+1
+serverstartup
+clientes
+5.5K
+24 ene 2019
+-r-xr-xr-x
+1
+serverstartup
+clientes
+5.4K
+24 ene 2019
+-r-xr-xr-x
+1
+serverstartup
+clientes
+42K
+24 ene 2019
+-r-xr-xr-x
+1
+serverstartup
+clientes
+8.7K
+24 ene 2019
+-r--r--r--
+1
+serverstartup
+colaboraciones
+14K
+24 ene 2019
+-r--r--r--
+1
+serverstartup
+colaboraciones
+5.2K
+24 ene 2019
+-r-xr-xr-x
+1
+serverstartup
+clientes
+6.6K
+24 ene 2019
+-r-xr-xr-x
+1
+serverstartup
+clientes
+6.8K
+24 ene 2019
+-r-xr-xr-x
+1
+serverstartup
+clientes
+27K
+24 ene 2019
 Los logotipos pertenecen a sus titulares; se muestran únicamente como referencia de proyectos realizados.
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -50,4 +91,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

@@ -1,23 +1,7 @@
-Big Data & Cloud Analytics — Server Startup
 Saltar al contenido
-~Server Startup/big-data-cloud-analytics
+~Server Startup
+/big-data-cloud-analytics
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Big Data & Cloud Analytics
 Un flujo de datos se monta rápido. Una plataforma que aguante años de negocio, cambios de esquema, picos de campaña y fuentes de datos variables es otra historia. Arquitectura medallion y tests que se cuentan por miles.
 Hablemos de tus datos
@@ -26,7 +10,9 @@ Nosotros la construimos como se construye el software serio. Cada transformació
 La esencia es analítica, y las sinergias con lo operacional la multiplican. Usamos dbt a los dos lados del warehouse.
 dbt ≠ pipeline
 dbt es la T del ELT y lo tratamos como se trata el buen software, el patrón que el sector llama analytics engineering. Pero la herramienta es solo una pieza: la ingesta, la orquestación y la vigilancia van aparte, y nuestro valor está en montar y operar el conjunto completo.
-metricas_fiables.sql✕▶ EjecutarGuardar ▾ Programar Compartir
+metricas_fiables.sql ✕
+▶ Ejecutar
+Guardar ▾ Programar Compartir
 1
 2
 3
@@ -38,22 +24,10 @@ FROM `gold.metricas_de_negocio`
 WHERE fiable = TRUE;
 -- lo garantizan 1.646 tests sobre 111 modelos dbt
 ✓ Consulta completada (1,4 s) · el linaje de cada métrica, de la ingesta al análisis
-Fila
-metrica
-linaje
-ultima_ejecucion
-1
-ventas_del_dia
-completo
-hace 4 min
-2
-stock_por_almacen
-completo
-hace 4 min
-3
-margen_por_promocion
-completo
-hace 4 min
+Fila metrica linaje ultima_ejecucion
+1 ventas_del_dia completo hace 4 min
+2 stock_por_almacen completo hace 4 min
+3 margen_por_promocion completo hace 4 min
 El dato que no cuadra no llega a gold. Ahí está el gobierno.
 Donde más hemos profundizado. En el cloud de Google, BigQuery como warehouse y dbt en las transformaciones.
 De la pizarra a la publicación. Nuestra definition of done nace en el blueprint, mucho antes del código. Diseño de la base de datos con el modelado clásico del sector, nomenclatura estándar, homogeneización y normalización del dato. Es más análisis que desarrollo, y es donde se gana la fiabilidad.
@@ -66,15 +40,18 @@ Sinergias entre lo analítico y lo operacional
 En lo analítico trabajamos con dbt Cloud sobre BigQuery. Y cuando la transformación nace en la capa operacional, sobre una base relacional como Oracle, la gestionamos con dbt Core y el adapter que mantiene Oracle (con nuestras mejoras, tan obvias como necesarias...).
 Los mismos tests y el mismo versionado a los dos lados, sin peajes entre equipos. Al cuadro de mando, el dato llega ya probado.
 Conectamos BigQuery con tu e-commerce, con tu ERP y con el edge.
-1 equipo = 6 verticales = Ø 0 traspasos
+1 equipo =
+6 verticales = Ø
+0
+traspasos
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -84,4 +61,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

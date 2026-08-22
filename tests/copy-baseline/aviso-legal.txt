@@ -1,23 +1,7 @@
-Aviso legal — Server Startup
 Saltar al contenido
-~Server Startup/aviso-legal
+~Server Startup
+/aviso-legal
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Aviso legal
 Datos identificativos de Server Startup S.L., condiciones de uso del sitio y legislación aplicable.
 Este aviso legal recoge la información que la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), exige publicar de forma permanente, fácil, directa y gratuita.
@@ -39,11 +23,11 @@ Este aviso legal se rige por la legislación española. Para cualquier controver
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -53,4 +37,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

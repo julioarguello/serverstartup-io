@@ -1,23 +1,7 @@
-Inteligencia artificial — Server Startup
 Saltar al contenido
-~Server Startup/inteligencia-artificial
+~Server Startup
+/inteligencia-artificial
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 AI
 AI
 Inteligencia artificial
@@ -29,8 +13,10 @@ El código repetitivo lo hace la máquina. Nuestro tiempo va al criterio y la re
 Generado ≠ entregado
 Un agente es IA que hace cosas, no solo responde. Y para ser útil necesita leer el pedido en SAP, comprobar el stock en BigQuery y escribir el resultado donde tu equipo trabaja de verdad. Ese cableado es lo nuestro.
 Nuestro flujo es el de este pull request. El agente propone; el ingeniero revisa, aprueba y firma. Siempre con permisos mínimos y cada acción registrada.
-agent/propuesta → mainOpen
-−git push --force origin main
+agent/propuesta → main
+Open
+−
+git push --force origin main
 +
 Agentes con permisos acotados. Construidos sobre el Agents SDK, tocan solo lo que deben y siempre hay una persona que puede pararlos.
 +
@@ -39,8 +25,12 @@ Inferencia en el borde. Clasificación y extracción de documentos con Workers A
 Tráfico de IA gobernado. Cada llamada a un modelo queda registrada y con techo de gasto en AI Gateway. Sabrás qué modelo respondió y cuánto costó.
 +
 Auditoría antes de producción. Seguridad, lógica de negocio y rendimiento. Ninguna línea generada se despliega sin pasarla.
-✓ ci/security✓ ci/business-logic✓ ci/performance
-✔ ApprovedSigned-off-by: Server StartupMerge pull request
+✓ ci/security
+✓ ci/business-logic
+✓ ci/performance
+✔ Approved
+Signed-off-by: Server Startup
+Merge pull request
 Firmamos el código
 Usamos IA a diario. Claude Code, Cursor, modelos abiertos en Workers AI. Y por usarla sabemos dónde falla.
 La queja más repetida del sector es el código «casi correcto, pero no del todo». Ese «casi», en el cálculo de una promoción o en el stock que ve la tienda, es un incidente.
@@ -48,15 +38,18 @@ Por eso trabajamos con la seguridad por delante. Los agentes usan credenciales d
 El que firma, da la cara. Desde agosto de 2026, además, la ley europea de IA exige supervisión humana con competencia y autoridad para corregir o parar un sistema de alto riesgo. Nosotros ya trabajamos así.
 Aquí no vas a encontrar un producto de IA. No lo tenemos y no lo fingimos. Tenemos un método hecho de reglas y protocolos versionados que dirigen a los agentes, distribuible y auditable.
 Esta misma web se construye así, con agentes supervisados, pull request a pull request. Y si un chatbot no te resuelve nada, te diremos que no lo pongas.
-1 equipo = 6 verticales = Ø 0 traspasos
+1 equipo =
+6 verticales = Ø
+0
+traspasos
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -66,4 +59,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

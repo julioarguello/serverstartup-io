@@ -1,23 +1,7 @@
-Software engineering — Server Startup
 Skip to content
-~Server Startup/en
+~Server Startup
+/en
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 Software engineering: architecture, integration and operations
 Over twenty years of craft in e-commerce, systems integration and data. Official Cloudflare partners since 2019.
 On your project, always the same three senior engineers. Whoever designs your architecture writes the code. And answers for it when something breaks.
@@ -57,11 +41,14 @@ AI is a means, not an end. The machine writes the repetitive code; we bring the 
 Quality and performance
 Our craft is quality and performance where they get expensive: critical processes and large volumes. The campaign peak, the catalogue that has to be reindexed, the integration that has to close the day.
 This site is a small sample of the same discipline, applied to our own shop window. No version ships if performance drops below 95, or if accessibility, best practices and SEO are not 100: the check runs on every change and blocks the deploy. The threshold is written in the public repository, and so is every run of the check. See how it is built.
-1 team = 6 verticals = Ø 0 handoffs
+1 team =
+6 verticals = Ø
+0
+handoffs
 Let's talk, engineer to engineer.
 Bring the problem as it is. You'll hear back from the person who'll write the code.
 Tell us about your project
-References
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -75,4 +62,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy

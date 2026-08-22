@@ -1,35 +1,19 @@
-About us — Server Startup
 Skip to content
-~Server Startup/en/about-us
+~Server Startup
+/en/about-us
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 About us
 org.apache.catalina.startup.Catalina.start Server startup in [2019] ms
 A sign of identity. A log line, familiar to some, that says more about us than any corporate deck.
 History
-The name
+THE NAME
 Founded in 2019, Server Startup owes its name to the hybris (now SAP Commerce) trenches. Long hours writing code at home, on planes, in hotels, on metro 3G. Sometimes even at the office... Watching that Tomcat message appear was pure rock'n'roll. The jolt of seeing the system come up.
 Server for backend specialization. We like the guts, the complex logic, the hard problems. Rigor and optimization.
 And Startup as philosophy. This sector never stops, and neither do we. We are no longer a startup, of course (then again, the Pont Neuf, New York City and the Camp Nou were not exactly built yesterday...) but we keep the nerve and excitement of day one.
-The road
+THE ROAD
 The project started as freelance work in 2017. In January 2019 it became a company, from Getxo. Today the pillar is three senior engineers, each with twenty-plus years in production.
 That same 2019 we became an official Cloudflare partner. By 2022 the house motto was “+ Calidad − Cantidad”: more judgment, less volume. Both still stand.
-The cube
+THE CUBE
 If that log line is the spark, the rock'n'roll of our beginnings, the cube channels that energy today. It marks the maturity leap from building complex e-commerce to integrating platforms as demanding as Ocado. Its famous hives, where thousands of robots optimize picking to the millimeter, set the bar for logistics engineering.
 Our logo is born from that grid. A symbol of the precision, rigor and scale that govern our daily work. A mirror to look at ourselves in. It is the same cube that guides you around this site.
 The team
@@ -43,16 +27,24 @@ The team's Jiminy Cricket. Calls out every bend before you take it, which is why
 Julio Argüello
 The captain. Say something cannot be done and he is all ears. He finds the way, with more time or less budget; half-done he cannot do. Rows all day and never misses a sunset with his other crew, the one at home.
 Our values
-Few things, done well. We'd rather say no than deliver late. If a project doesn't fit what we're good at, we tell you in the first meeting.
-No investors. No debt. No hurry. The company runs on its own work, which lets us pick complex projects and long relationships.
-Certainty over speed. We'd rather have a resilient architecture today than technical debt tomorrow.
-Responsibility isn't delegated. Whoever designs the system delivers it and answers for it.
-Technical independence. We prescribe technology on merit, not on vendor agreements.
+Few things, done well.
+We'd rather say no than deliver late. If a project doesn't fit what we're good at, we tell you in the first meeting.
+No investors. No debt. No hurry.
+The company runs on its own work, which lets us pick complex projects and long relationships.
+Certainty over speed.
+We'd rather have a resilient architecture today than technical debt tomorrow.
+Responsibility isn't delegated.
+Whoever designs the system delivers it and answers for it.
+Technical independence.
+We prescribe technology on merit, not on vendor agreements.
 Backing grassroots sport
 We sponsor grassroots sport. Youth teams and the 2026/27 provincial championship.
 Urdaneta under-14 boys. Bizkaia provincial champions 2024/25 and runners-up 2025/26. Photo: the club on Instagram.
-1 team = 6 verticals = Ø 0 handoffs
-References
+1 team =
+6 verticals = Ø
+0
+handoffs
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -66,4 +58,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy
