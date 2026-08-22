@@ -20,8 +20,10 @@ import { getTranslations } from "emdash";
 
 /** Prefix swap for locale-invariant routes. */
 export function routeAlternatePath(pathname: string, locale: string): string {
+	// The EN home is "/en", never "/en/": trailingSlash "never" turns the
+	// slashed form into a hard 404 under Astro 7 (v6 tolerated it).
 	return locale === "es"
-		? `/en${pathname === "/" ? "/" : pathname}`
+		? `/en${pathname === "/" ? "" : pathname}`
 		: pathname.replace(/^\/en/, "") || "/";
 }
 
