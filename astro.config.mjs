@@ -1,6 +1,5 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import sitemap from "@astrojs/sitemap";
 import { d1, r2, sandbox } from "@emdash-cms/cloudflare";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
 import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
@@ -19,6 +18,10 @@ export default defineConfig({
 	redirects: {
 		"/ingenieria-greenfield-y-sistemas-criticos": { status: 301, destination: "/desarrollo-greenfield" },
 		"/en/greenfield-engineering-critical-systems": { status: 301, destination: "/en/greenfield-development" },
+		// #329: the plugin used to emit these two; anything that cached them
+		// keeps working instead of meeting a 404.
+		"/sitemap-index.xml": { status: 301, destination: "/sitemap.xml" },
+		"/sitemap-0.xml": { status: 301, destination: "/sitemap.xml" },
 	},
 	i18n: {
 		defaultLocale: "es",
@@ -41,20 +44,6 @@ export default defineConfig({
 			sandboxed: [webhookNotifierPlugin()],
 			sandboxRunner: sandbox(),
 			marketplace: "https://marketplace.emdashcms.com",
-		}),
-		sitemap({
-			i18n: {
-				defaultLocale: "es",
-				locales: { es: "es-ES", en: "en-US" },
-			},
-			// #335: the admin, plus routes that must not be offered to the index —
-			// internal search results, and blog indexes with no posts (soft-404
-			// candidates until #340 gives them content). A sitemap declares the
-			// URLs you WANT indexed; these carry noindex, so listing them would
-			// be asking Google to crawl what we just told it to skip.
-			filter: (page) =>
-				!page.includes("/_emdash/") &&
-				!/\/(en\/)?(search|posts)\/?$/.test(new URL(page).pathname),
 		}),
 	],
 	fonts: [

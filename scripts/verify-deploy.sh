@@ -32,6 +32,7 @@ ROUTES=(
 	"/desarrollo-greenfield|Desarrollo greenfield"
 	"/deconstruyendo|Deconstruyendo esta web"
 	"/politica-de-privacidad|Política de privacidad"
+	"/aviso-legal|Aviso legal"
 	"/inteligencia-artificial|Inteligencia artificial"
 	"/referencias|Referencias"
 	"/en|Software engineering"
@@ -44,6 +45,7 @@ ROUTES=(
 	"/en/greenfield-development|Greenfield development"
 	"/en/deconstructing|Deconstructing this website"
 	"/en/privacy-policy|Privacy policy"
+	"/en/legal-notice|Legal notice"
 	"/en/artificial-intelligence|Artificial Intelligence"
 	"/en/references|References"
 )
@@ -126,11 +128,75 @@ if curl -s "$BASE/robots.txt" | grep -q "^Sitemap:"; then
 else
 	echo "  FAIL /robots.txt — missing or no Sitemap line" >&2; FAIL=1
 fi
-code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE/sitemap-index.xml")
-if [ "$code" = "200" ]; then
-	echo "  ok   /sitemap-index.xml"
+# Sitemap coverage, BOTH ways (#329). Checking only that the file answers 200
+# is what let it declare 16 URLs while the site served 26 for months: a guard
+# that cannot find a problem and one that finds none look identical.
+#   → every declared URL must answer 200 and must NOT carry noindex
+#   → every public, indexable page must be declared
+# The second half is the one that would have caught it.
+code=$(curl -s -o "$TMP/sitemap.xml" -w "%{http_code}" "$BASE/sitemap.xml")
+if [ "$code" != "200" ]; then
+	echo "  FAIL /sitemap.xml — HTTP $code" >&2; FAIL=1
 else
-	echo "  FAIL /sitemap-index.xml — HTTP $code" >&2; FAIL=1
+	# -E throughout: `\?` is a GNU extension that BSD sed reads as a literal
+	# `?`, so the origin survived and every path became BASE + full URL
+	# EmDash injects its own /sitemap.xml, generic and wrong for this routing.
+	# Ours wins by precedence today; Astro warns that will become a hard error.
+	# Assert the OUTCOME rather than trust the precedence: <urlset> is ours,
+	# <sitemapindex> is theirs.
+	if grep -q "<sitemapindex" "$TMP/sitemap.xml"; then
+		echo "  FAIL /sitemap.xml is serving EmDash's generic index, not the site's own" >&2
+		echo "       (route collision resolved the wrong way — see src/pages/sitemap.xml.ts)" >&2
+		FAIL=1
+	fi
+	declared=$(grep -oE "<loc>[^<]*</loc>" "$TMP/sitemap.xml" \
+		| sed -E -e 's#</?loc>##g' -e 's#^https?://[^/]+##' -e 's#^$#/#' | sort -u)
+	n=$(echo "$declared" | grep -c . || true)
+	echo "  ok   /sitemap.xml ($n URLs)"
+
+	# a) declared → reachable and indexable
+	for path in $declared; do
+		hdr=$(curl -s -o "$TMP/p.html" -w "%{http_code}" "$BASE$path")
+		if [ "$hdr" != "200" ]; then
+			echo "  FAIL sitemap declares $path — HTTP $hdr" >&2; FAIL=1
+		elif grep -qiE '<meta name="robots"[^>]*noindex' "$TMP/p.html"; then
+			echo "  FAIL sitemap declares $path — the page carries noindex" >&2; FAIL=1
+		fi
+	done
+
+	# b) public and indexable → declared. The battery's own route table is the
+	#    inventory: it is the list of pages this site promises to serve.
+	for entry in "${ROUTES[@]}"; do
+		path="${entry%%|*}"
+		curl -s -o "$TMP/p.html" "$BASE$path"
+		# explicit ifs: `grep -q … && continue` returns non-zero on no-match,
+		# which under `set -e` kills the script mid-inventory — and a truncated
+		# inventory reports far fewer problems than exist
+		if grep -qiE '<meta name="robots"[^>]*noindex' "$TMP/p.html"; then
+			continue
+		fi
+		if ! echo "$declared" | grep -qxF "$path"; then
+			echo "  FAIL $path is public and indexable but NOT in the sitemap" >&2; FAIL=1
+		fi
+	done
+	# c) The two lists must agree in BOTH directions, and this is the check that
+	#    keeps the inventory honest. The sitemap is DERIVED from the CMS, so it
+	#    grows by itself; ROUTES is hand-maintained, so it does not. Without
+	#    this, (b) silently degrades: it can only miss what ROUTES forgot, and
+	#    ROUTES had forgotten /aviso-legal — proven by deleting that URL from
+	#    the sitemap and watching the battery pass.
+	for path in $declared; do
+		found=0
+		for entry in "${ROUTES[@]}"; do
+			[ "${entry%%|*}" = "$path" ] && found=1
+		done
+		if [ "$found" = "0" ]; then
+			echo "  FAIL sitemap declares $path — the battery does not know that route" >&2
+			echo "       (add it to ROUTES: a page nobody asserted is a page nobody checks)" >&2
+			FAIL=1
+		fi
+	done
+	if [ "$FAIL" = "0" ]; then echo "  ok   sitemap and route inventory agree, both ways"; fi
 fi
 # Canonical always points at the production origin (site in astro.config),
 # also from preview — asserting the prefix catches a broken site setting.
