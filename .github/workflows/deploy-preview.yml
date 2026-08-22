@@ -68,6 +68,38 @@ jobs:
         # wrangler deploy --env is a no-op against the generated config.
         run: CLOUDFLARE_ENV=preview npx astro build
 
+      # The worker deploys BEFORE the D1 refresh, not after. EmDash applies
+      # its D1 migrations lazily in the request path (guarded by
+      # _emdash_migrations_lock), so on a schema-bumping release only the NEW
+      # worker can bring the remote schema forward — and the refresh writes
+      # rows in the new shape. Measured 2026-08-22 (EmDash 0.6→0.34):
+      # refresh-first died with "_emdash_collections has 17 columns but 23
+      # values were supplied". The seconds of new-worker/old-content between
+      # these steps are a pre-launch preview trade-off, taken knowingly.
+      - name: Deploy preview worker
+        if: steps.gate.outputs.deployed == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: d70cd71aecc76f94c73d7a6f3cc1265d
+          command: deploy
+
+      - name: Apply pending EmDash migrations (first request runs them)
+        if: steps.gate.outputs.deployed == 'true'
+        # One real request makes the fresh worker migrate the remote D1 to its
+        # schema. Tolerates transient non-200s while migrations run; fails if
+        # the preview never answers — refreshing an unmigrated schema would
+        # only fail later with a worse error.
+        run: |
+          for i in $(seq 1 36); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -m 10 "$PREVIEW_URL/") || code=000
+            echo "attempt $i: HTTP $code (measured from the GitHub runner)"
+            if [ "$code" = "200" ]; then exit 0; fi
+            sleep 5
+          done
+          echo "::error::preview never answered 200 after deploy — remote migration state unknown, refusing to refresh D1"
+          exit 1
+
       - name: Refresh preview D1 from seed/seed.json
         if: steps.gate.outputs.deployed == 'true'
         env:
@@ -80,14 +112,6 @@ jobs:
           scripts/ci-local-stack.sh 8787
           lsof -ti :8787 | xargs kill -9 2>/dev/null || true
           scripts/seed-remote-preview.sh www-serverstartup-io-preview
-
-      - name: Deploy preview worker
-        if: steps.gate.outputs.deployed == 'true'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: d70cd71aecc76f94c73d7a6f3cc1265d
-          command: deploy
 
       - name: Summary
         if: always()
