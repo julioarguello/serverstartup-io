@@ -1,23 +1,7 @@
-Greenfield development — Server Startup
 Skip to content
-~Server Startup/en/greenfield-development
+~Server Startup
+/en/greenfield-development
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 Greenfield development
 The code isn't the product: the product is the system and the people who keep it alive, years after the demo. Full SDLC, from specification to observability. We work contract first, focused on stability, security and governance.
 Let's talk about your project
@@ -26,8 +10,18 @@ And there's a newer reason. With the capabilities AI brings, building custom now
 Fair warning first, though. If a SaaS solves it, we'll say so and we won't build it. We'd rather lose a project than maintain one that shouldn't exist.
 Code is not the product
 The product is the system still running years after the demo. The discipline behind that never changes, AI in the loop or not.
-BusinessEngine.java — greenfieldJava 21 · 0 warnings
-12345678910
+BusinessEngine.java — greenfield
+Java 21 · 0 warnings
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 /**
 * Four rules, none of them optional.
 *
@@ -50,11 +44,14 @@ Maybe greenfield is where AI pays off most. It is certainly where it derails fir
 Our frameworks are that perimeter. The agent writes inside the rails, and an engineer signs every line that reaches main. The full story is in our AI vertical.
 Your technical debt is our problem
 Whoever designs the system deploys it and answers for its stability. The same three senior engineers, from first commit to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.
-1 team = 6 verticals = Ø 0 handoffs
+1 team =
+6 verticals = Ø
+0
+handoffs
 Let's talk, engineer to engineer.
 Bring the problem as it is. You'll hear back from the person who'll write the code.
 Tell us about your project
-References
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -68,4 +65,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy

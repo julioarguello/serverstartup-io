@@ -1,23 +1,7 @@
-Privacy policy — Server Startup
 Skip to content
-~Server Startup/en/privacy-policy
+~Server Startup
+/en/privacy-policy
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 Privacy policy
 We process very little data, and we explain it in a few lines. This policy is governed by Regulation (EU) 2016/679 (GDPR) and by Spain's Organic Law 3/2018 (LOPDGDD).
 Data controller
@@ -36,12 +20,12 @@ Some of those providers are established outside the European Economic Area. Wher
 Retention
 We keep correspondence for as long as it takes to deal with it and, where invoicing is involved, for the periods required by commercial and tax law. After that we delete it.
 Your rights
-You may exercise your rights of access, rectification, erasure, restriction of processing, portability and objection by writing to the address above. If you believe your request has not been handled properly, you may lodge a complaint with the Spanish Data Protection Agency ( aepd.es ).
+You may exercise your rights of access, rectification, erasure, restriction of processing, portability and objection by writing to the address above. If you believe your request has not been handled properly, you may lodge a complaint with the Spanish Data Protection Agency (aepd.es).
 Cookies
 This site uses no tracking or advertising cookies, and sets no cookie that would require your consent. The analytics we use work without cookies and without identifying you.
 Changes to this policy
 If the way we process data changes, we will update this page. The published version is always the one in force.
-References
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -55,4 +39,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy

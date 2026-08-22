@@ -1,42 +1,41 @@
-Deconstruyendo esta web — Server Startup
 Saltar al contenido
-~Server Startup/deconstruyendo
+~Server Startup
+/deconstruyendo
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Deconstruyendo esta web
 Esta página explica cómo está construida la web que estás leyendo. No por vanidad. Es nuestra manera de trabajar, aplicada a nuestro propio escaparate. Si te cuentan cómo trabajan y no pueden enseñarte el taller, desconfía.
-SERVERSTARTUP.io manual de montaje · ES/EN · hoja 1 de 1
+SERVERSTARTUP.io
+manual de montaje · ES/EN · hoja 1 de 1
 PIEZAS INCLUIDAS
-Workers + WAF ×1 el escudo
-D1 + R2 ×1 datos y media
-Astro SSR + EmDash ×1 render y CMS
-semillas ×26 todos los textos
-skill de copywriting ×1 la voz con lista negra
-agente ×N redacta nunca decide
-repositorio ×1 mira dentro
-ingenieros ×3 no incluidos: ya estaban
+Workers + WAF ×1
+el escudo
+D1 + R2 ×1
+datos y media
+Astro SSR + EmDash ×1
+render y CMS
+semillas ×26
+todos los textos
+skill de copywriting ×1
+la voz con lista negra
+agente ×N
+redacta nunca decide
+repositorio ×1
+mira dentro
+ingenieros ×3
+no incluidos: ya estaban
 MONTAJE
-01 escribe las semillas
-02 la skill fija la voz
-03 el agente redacta
-04 revisión humana ✋
-05 pull request y merge
-06 deploy al edge
+01
+escribe las semillas
+02
+la skill fija la voz
+03
+el agente redacta
+04
+revisión humana ✋
+05
+pull request y merge
+06
+deploy al edge
 ⚠ Advertencias
 No montar sin el paso 04. El agente redacta, el humano firma.
 El paso 03 nunca hace merge. Nunca.
@@ -54,11 +53,11 @@ Los números
 Lighthouse 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las cuatro plantillas, medido el 6 de agosto de 2026 sobre el build de producción. Validación W3C, cero errores. LCP por debajo de 1,3 segundos en móvil. Cuando cambien, cambiará esta línea.
 El taller, a la vista
 Código, semillas, skills y prompts viven en el repositorio. Mira dentro y dinos si harías algo mejor. Probablemente sí. Así empiezan las buenas conversaciones.
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -68,4 +67,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

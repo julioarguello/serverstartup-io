@@ -1,42 +1,41 @@
-Deconstructing this website — Server Startup
 Skip to content
-~Server Startup/en/deconstructing
+~Server Startup
+/en/deconstructing
 ES
-$ find . -name " " search enter search·esc close
-✕
-$ find . -name " " search enter search
-E-commerce
-Systems Integration
-Big Data & Cloud Analytics
-CDN, WAF & Edge Security
-Greenfield development
-Artificial Intelligence
-Home
-About us
-References
-Contact
-Deconstructing
-AI
-Tap the die
 Deconstructing this website
 This page explains how the website you are reading is built. Not out of vanity. It is how we work, applied to our own shop window. If someone tells you how they work but can't show you the workshop, be suspicious.
-SERVERSTARTUP.io assembly manual · ES/EN · sheet 1 of 1
+SERVERSTARTUP.io
+assembly manual · ES/EN · sheet 1 of 1
 PARTS INCLUDED
-Workers + WAF ×1 the shield
-D1 + R2 ×1 data and media
-Astro SSR + EmDash ×1 render and CMS
-seeds ×26 every text
-copywriting skill ×1 the voice with a blacklist
-agent ×N drafts never decides
-repository ×1 look inside
-engineers ×3 not included: already there
+Workers + WAF ×1
+the shield
+D1 + R2 ×1
+data and media
+Astro SSR + EmDash ×1
+render and CMS
+seeds ×26
+every text
+copywriting skill ×1
+the voice with a blacklist
+agent ×N
+drafts never decides
+repository ×1
+look inside
+engineers ×3
+not included: already there
 ASSEMBLY
-01 write the seeds
-02 the skill sets the voice
-03 the agent drafts
-04 human review ✋
-05 pull request and merge
-06 deploy to the edge
+01
+write the seeds
+02
+the skill sets the voice
+03
+the agent drafts
+04
+human review ✋
+05
+pull request and merge
+06
+deploy to the edge
 ⚠ Warnings
 Do not assemble without step 04. The agent drafts, the human signs.
 Step 03 never merges. Ever.
@@ -54,7 +53,7 @@ The numbers
 Lighthouse 100 in performance, accessibility, best practices and SEO across all four templates, measured on the production build on August 6, 2026. W3C validation, zero errors. LCP under 1.3 seconds on mobile. When these change, this line changes.
 The workshop, in plain sight
 Code, seeds, skills and prompts live in the repository. Look inside and tell us what you would do better. Probably something. That is how good conversations start.
-References
+references
 Areas of expertise
 E-commerce
 CDN, WAF & Edge Security
@@ -68,4 +67,6 @@ About us
 Deconstructing this website
 Email us
 Tell us about your project
-© 2026 Server Startup, S.L. Legal notice Privacy policy
+© 2026 Server Startup, S.L.
+Legal notice
+Privacy policy

@@ -2,7 +2,7 @@
 # seed-remote-preview.sh — reproduce seed/seed.json onto a REMOTE D1, idempotently.
 #
 # Route (each step earned in rehearsal, 2026-08-07/08):
-#   1. Seed a LOCAL sqlite the canonical way (emdash seed applies the 33
+#   1. Seed a LOCAL sqlite the canonical way (emdash seed applies the 69
 #      migrations itself; server must be down — FTS corruption rule).
 #   2. DATA-ONLY refresh: per real table, DELETE FROM + INSERT rows. Replaying
 #      CREATEs breaks on a previously-seeded remote (UNIQUE on

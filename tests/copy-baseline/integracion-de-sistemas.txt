@@ -1,23 +1,7 @@
-Integración de sistemas — Server Startup
 Saltar al contenido
-~Server Startup/integracion-de-sistemas
+~Server Startup
+/integracion-de-sistemas
 EN
-$ find . -name " " buscar enter buscar·esc cerrar
-✕
-$ find . -name " " buscar enter buscar
-Comercio electrónico
-Integración de sistemas
-Big Data & Cloud Analytics
-CDN, WAF y seguridad edge
-Desarrollo greenfield
-Inteligencia artificial
-Inicio
-Quiénes somos
-Referencias
-Contacto
-Deconstruyendo
-AI
-Toca el dado
 Integración de sistemas
 No somos «arquitectos de PowerPoint»: lo que planificamos, lo ejecutamos. Sin exageraciones — lo objetivamente necesario y viable. Un guante, no un martillo, con homogeneidad, metodología, testabilidad y observabilidad absoluta.
 Hablemos de integración
@@ -48,15 +32,18 @@ Quién lo construye, responde
 El stock no cuadra, los pedidos se duplican y nadie sabe muy bien por qué. Lo hemos visto demasiadas veces.
 El equipo senior que diseña la topología en la pizarra es el mismo que escribe el código, afina los brokers y levanta el teléfono si algo falla un viernes a las seis (aunque ya no falle 😉). Conocemos el negocio tan bien como la implementación. Sabemos lo que cuesta un pedido duplicado en plena campaña.
 Si se rompe, no abrimos un ticket: lo arreglamos.
-1 equipo = 6 verticales = Ø 0 traspasos
+1 equipo =
+6 verticales = Ø
+0
+traspasos
 Hablemos de ingeniero a ingeniero.
 Trae el problema como esté. Te responde quien va a escribir el código.
 Cuéntanos tu proyecto
-Referencias
+referencias
 Áreas de especialización
 Comercio electrónico
-Big Data & Cloud Analytics
 CDN, WAF y seguridad edge
+Big Data & Cloud Analytics
 Integración de sistemas
 Desarrollo greenfield
 Inteligencia artificial
@@ -66,4 +53,6 @@ Quiénes somos
 Deconstruyendo esta web
 Escríbenos
 Cuéntanos tu proyecto
-© 2026 Server Startup, S.L. Aviso legal Política de privacidad
+© 2026 Server Startup, S.L.
+Aviso legal
+Política de privacidad

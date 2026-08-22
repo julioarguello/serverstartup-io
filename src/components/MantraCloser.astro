@@ -85,7 +85,9 @@ const nouns = beats.map((b) => b.replace(/^(Un |One |Seis |Six |Cero |Zero )/, "
 				{faces.map((f) => <i style={`background:${f.color}`} title={f.title}></i>)}
 			</span></span
 		>
-		<span class="mantra__n">6</span> {nouns[1]} <b>=</b>
+		{/* the space before Ø must be explicit: under compressHTML: 'jsx' the
+		    newline after </b> is stripped and the equation renders "=Ø" */}
+		<span class="mantra__n">6</span> {nouns[1]} <b>=</b>{" "}
 		<span class="mantra__n mantra__empty" aria-hidden="true">Ø</span>
 		<span class="u-sr">0</span> {nouns[2]}
 	</p>
