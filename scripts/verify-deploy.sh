@@ -212,7 +212,32 @@ else
 	echo "  FAIL hreflang alternates missing on home" >&2; FAIL=1
 fi
 
-# ── 4. W3C Nu spot-check (2 pages, one per locale) ──────────────────────────
+# ── 4. FTS search — a real query, not a row count (#365) ────────────────────
+# The 0.6→0.34 migration rebuilt the FTS5 tables, and equal row counts do not
+# prove the inverted index answers. Structure-based on purpose: the <article>
+# cards ARE the result list (measured 2026-08-23: 6 on "cloudflare", 0 on the
+# control), so CMS label changes cannot break the assertion.
+echo "── FTS search"
+for path in "/search?q=cloudflare" "/en/search?q=cloudflare"; do
+	code=$(curl -s -o "$TMP/s.html" -w "%{http_code}" "$BASE$path")
+	hits=$(grep -c "<article" "$TMP/s.html" || true)
+	if [ "$code" = "200" ] && [ "$hits" -gt 0 ]; then
+		echo "  ok   $path — $hits result cards"
+	else
+		echo "  FAIL $path — HTTP $code, $hits result cards (the FTS index answered nothing)" >&2; FAIL=1
+	fi
+done
+# Negative control: a query that must return zero proves the page can say no.
+# Without it, a page rendering cards unconditionally would pass the positive.
+code=$(curl -s -o "$TMP/s.html" -w "%{http_code}" "$BASE/search?q=zzzqxcontrolnegativo")
+hits=$(grep -c "<article" "$TMP/s.html" || true)
+if [ "$code" = "200" ] && [ "$hits" = "0" ]; then
+	echo "  ok   negative control (zero-hit query) — 0 cards"
+else
+	echo "  FAIL negative control — HTTP $code, $hits cards (expected 200 with zero)" >&2; FAIL=1
+fi
+
+# ── 5. W3C Nu spot-check (2 pages, one per locale) ──────────────────────────
 # Real markup errors fail the battery; an unreachable validator only warns
 # (external dependency downtime must not block a deploy pipeline).
 echo "── W3C Nu spot-check"

@@ -40,5 +40,6 @@ jobs:
             echo "| routes | 20 routes × (200 + title), 404 behavior |"
             echo "| headers | #164 security suite + security.txt |"
             echo "| discovery | robots.txt, sitemap, canonical, hreflang |"
+            echo "| FTS search | real query both locales + zero-hit negative control |"
             echo "| W3C Nu | 2 pages, warn-only on validator downtime |"
           } >> "$GITHUB_STEP_SUMMARY"
