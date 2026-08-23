@@ -1,4 +1,20 @@
 ---
+/**
+ * EmDash preview surface for the `pages` collection (#331).
+ *
+ * This route is NOT part of the public site: EmDash's admin builds its
+ * preview link from the default pattern `/{collection}/{id}` — measured
+ * 2026-08-23, it POSTs to …/preview-url and gets back
+ * `/pages/<ULID>?_preview=<token>`. So the route has to stay, but until
+ * #331 it also answered 200 for `/pages/<slug>` with a canonical pointing
+ * at itself: the same CMS text on two URLs, the duplicate wearing a bare
+ * template, and `/pages/home` exposing the homepage under a second title.
+ *
+ * Now it serves exactly one purpose. A preview request renders (noindex,
+ * belt and braces — the token is unguessable and nothing links here);
+ * anything else is a human or a crawler who should be on the real page,
+ * and gets a 301 there.
+ */
 import { getEmDashEntry, decodeSlug } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
@@ -10,10 +26,21 @@ if (!slug) {
 }
 
 const locale = Astro.currentLocale || "es";
+// The param may be a slug OR the entry ULID (that is what the admin links).
+// Either resolves; `page.id` comes back as the slug in both cases.
 const { entry: page, cacheHint } = await getEmDashEntry("pages", slug, { locale });
 
 if (!page) {
 	return Astro.rewrite("/404");
+}
+
+if (!Astro.url.searchParams.has("_preview")) {
+	// Canonical home of this entry, derived — never a slug→route table:
+	// locale prefix + slug, and `home` is the locale root.
+	const entryLocale = (page.data as { locale?: string }).locale || locale;
+	const prefix = entryLocale === "en" ? "/en" : "";
+	const target = page.id === "home" ? prefix || "/" : `${prefix}/${page.id}`;
+	return Astro.redirect(target, 301);
 }
 
 Astro.cache.set(cacheHint);
@@ -21,6 +48,7 @@ Astro.cache.set(cacheHint);
 
 <Base
 	title={page.data.title}
+	robots="noindex, nofollow"
 	content={{ collection: "pages", id: page.data.id, slug }}
 >
 	<article class="page-article">

@@ -100,6 +100,12 @@ REDIRECTS=(
 	"/contacto/|/contacto"
 	"/en/about-us/|/en/about-us"
 	"/desarrollo-greenfield/|/desarrollo-greenfield"
+	# #331: the EmDash preview surface must never serve the public a second
+	# copy of a CMS page. It stays reachable for the admin (a request carrying
+	# ?_preview renders); everything else lands on the real URL.
+	"/pages/quienes-somos|/quienes-somos"
+	"/pages/contacto|/contacto"
+	"/pages/home|/"
 )
 for entry in "${REDIRECTS[@]}"; do
 	from="${entry%%|*}"; to="${entry##*|}"
@@ -116,6 +122,15 @@ for entry in "${REDIRECTS[@]}"; do
 	fi
 	echo "  ok   $from → $to (301)"
 done
+
+# #331: the preview surface answers for entries only — an invented slug there
+# is as unknown as any other route, and must 404 rather than render a shell.
+code=$(curl -sL -o /dev/null -w "%{http_code}" "$BASE/pages/esta-pagina-no-existe")
+if [ "$code" = "404" ]; then
+	echo "  ok   /pages/<unknown> → 404"
+else
+	echo "  FAIL /pages/<unknown> — HTTP $code (expected 404)" >&2; FAIL=1
+fi
 
 # ── 2. Security headers + security.txt (the #164 suite) ─────────────────────
 echo "── security headers"
