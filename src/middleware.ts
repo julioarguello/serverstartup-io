@@ -1,4 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
+import { getEmDashCollection } from "emdash";
 import { loadAriaLabels, type TFunction } from "./i18n/ui";
 
 /**
@@ -62,6 +63,20 @@ export const onRequest = defineMiddleware(async ({ locals, currentLocale, url, c
 	// changes (EmDash 0.34 has no publish hooks for those); everything else
 	// gets an explicit no-store. Purge-on-publish: src/plugins/cache-purge.ts.
 	if (cache.enabled && cache.tags.length > 0 && !url.pathname.startsWith("/_emdash")) {
+		// Footer tags (services cards, partners, the references banner render on
+		// every page). Their cache.set calls inside Base/components run
+		// mid-stream, AFTER headers — measured: they never reached the edge.
+		// Here, post-next() but pre-applyCacheHeaders, is the last moment that
+		// counts. Only for pages that opted in themselves: adding tags to
+		// /search etc. would silently flip them cacheable.
+		const [svc, part, refs] = await Promise.all([
+			getEmDashCollection("services", { limit: 1, locale }),
+			getEmDashCollection("partners", { limit: 1, locale }),
+			getEmDashCollection("references", { limit: 1, locale }),
+		]);
+		for (const r of [svc, part, refs]) {
+			if (r.cacheHint) cache.set(r.cacheHint);
+		}
 		cache.set({ maxAge: 3600, swr: 60 });
 		if (!response.headers.has("Cache-Control")) {
 			// browsers revalidate; the edge TTL travels in Cloudflare-CDN-Cache-Control

@@ -65,6 +65,9 @@ jobs:
       - name: Design tokens (colour, radius and shadow live in theme.css)
         run: python3 scripts/ci-check-design-tokens.py
 
+      - name: Cache hints (cache.set only where it reaches the headers)
+        run: python3 scripts/ci-check-cache-hints.py
+
       - name: Build
         run: npx astro build
 

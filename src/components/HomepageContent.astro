@@ -37,9 +37,11 @@ const t = Astro.locals.t;
 const locale = Astro.currentLocale || "es";
 const localePrefix = locale === "es" ? "" : `/${locale}`;
 
-const { entry, cacheHint } = await getEmDashEntry("pages", "home", { locale });
+const { entry } = await getEmDashEntry("pages", "home", { locale });
 if (!entry) return Astro.rewrite("/404");
-Astro.cache.set(cacheHint);
+// No cache.set in components: it runs mid-stream, after headers — the home
+// served cf-cache-status BYPASS until the #357 E2E caught it. The hint is
+// set in the index pages' frontmatter; footer tags come from middleware.
 
 const { title, content, excerpt } = entry.data;
 

@@ -25,10 +25,11 @@ interface Props {
 }
 const { title, href, ariaLabel } = Astro.props;
 
-const { entries, cacheHint } = await getEmDashCollection("references", {
+const { entries } = await getEmDashCollection("references", {
 	orderBy: { created_at: "asc" },
 });
-if (cacheHint) Astro.cache.set(cacheHint);
+// No cache.set in components: it runs mid-stream, after headers (measured,
+// #357 E2E). The references tag is added centrally in src/middleware.ts.
 
 const logos = (entries ?? [])
 	.filter((r: any) => Boolean(r.data.featured) && r.data.featured_image?.src)

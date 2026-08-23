@@ -75,9 +75,10 @@ const [settings, siteMenu, servicesResult, partnersResult, labels] = await Promi
 	getUiLabels(locale),
 ]);
 
-// Merge layout-level cacheHints so CDN invalidation covers footer data
-if (servicesResult.cacheHint) Astro.cache.set(servicesResult.cacheHint);
-if (partnersResult.cacheHint) Astro.cache.set(partnersResult.cacheHint);
+// NOTE: no Astro.cache.set here. Layout frontmatter runs mid-stream, after
+// the response headers left — hints set here never reach the edge (measured,
+// #357 E2E). The footer-data tags are added centrally in src/middleware.ts,
+// which runs before the headers are finalized.
 
 const { entries: serviceEntries } = servicesResult;
 const { entries: partnerEntries } = partnersResult;

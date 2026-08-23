@@ -11,7 +11,11 @@ import { homepageJsonLd } from "../utils/jsonld";
 import type { SiteSettings } from "../types";
 
 const locale = Astro.currentLocale || "es";
-const { entry } = await getEmDashEntry("pages", "home", { locale });
+const { entry, cacheHint } = await getEmDashEntry("pages", "home", { locale });
+// The hint MUST be set here, in PAGE frontmatter: HomepageContent's own call
+// runs mid-stream, after the headers left — the home served BYPASS until the
+// verify-purge E2E caught it (2026-08-23). Middleware adds the footer tags.
+Astro.cache.set(cacheHint);
 const { title, excerpt } = entry?.data ?? { title: "Server Startup", excerpt: "" };
 const settings = await getSiteSettings() as SiteSettings;
 const description = excerpt || `${title} — Server Startup`;

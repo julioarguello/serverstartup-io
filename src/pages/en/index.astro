@@ -11,7 +11,10 @@ import { homepageJsonLd } from "../../utils/jsonld";
 import type { SiteSettings } from "../../types";
 
 const locale = "en";
-const { entry } = await getEmDashEntry("pages", "home", { locale });
+const { entry, cacheHint } = await getEmDashEntry("pages", "home", { locale });
+// PAGE frontmatter on purpose — a child component's cache.set runs mid-stream,
+// too late for headers (see index.astro / #357 E2E finding).
+Astro.cache.set(cacheHint);
 const { title, excerpt } = entry?.data ?? { title: "Server Startup", excerpt: "" };
 const settings = await getSiteSettings() as SiteSettings;
 const description = excerpt || `${title} — Server Startup`;
