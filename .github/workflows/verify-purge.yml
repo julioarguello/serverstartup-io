@@ -1,0 +1,42 @@
+name: verify-purge
+
+# E2E proof that purge-on-publish reaches the edge (#357): warm→HIT,
+# publish→MISS, hook-less D1 write→still HIT. Dispatchable because the purge
+# path involves live state no PR gate can exercise, and because workers.dev
+# is not reachable from every operator network — the runner is a vantage
+# that always works and prints itself in the log.
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Deployed base URL to verify"
+        required: false
+        default: "https://www-serverstartup-io-preview.serverstartup-s-partner-demo-account3612.workers.dev"
+      d1_name:
+        description: "Remote D1 database name"
+        required: false
+        default: "www-serverstartup-io-preview"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-purge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Purge E2E (warm → publish → MISS → hook-less control → HIT)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: d70cd71aecc76f94c73d7a6f3cc1265d
+        run: scripts/verify-purge.sh "${{ inputs.base_url }}" "${{ inputs.d1_name }}"
