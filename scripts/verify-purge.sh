@@ -54,12 +54,21 @@ hsh = base64.urlsafe_b64encode(hashlib.sha256(raw.encode()).digest()).decode().r
 print(f"RAW='{raw}'"); print(f"HASH='{hsh}'"); print(f"PREFIX='{raw[:11]}'")
 PYEOF
 )"
-USER_ID=$(d1val "SELECT id FROM users ORDER BY created_at LIMIT 1;")
-[ -n "$USER_ID" ] || { echo "FAIL: no user in remote D1 to own the token" >&2; exit 1; }
-cleanup() { d1 "DELETE FROM _emdash_api_tokens WHERE id='$TOK_ID';" >/dev/null 2>&1 || true; echo "── cleanup: token $TOK_ID deleted"; }
+# The token needs an owner, and the remote may have ZERO users: the deploy
+# refresh reproduces a freshly-seeded local D1, and the seed creates none
+# (measured: run 32650178974 died on exactly this). A throwaway admin user
+# (role 50, the dev-bypass value) makes the test independent of remote state;
+# the FK is ON DELETE CASCADE but cleanup removes both anyway.
+USER_ID="e2e-357-user-$(date +%s)"
+cleanup() {
+	d1 "DELETE FROM _emdash_api_tokens WHERE id='$TOK_ID';" >/dev/null 2>&1 || true
+	d1 "DELETE FROM users WHERE id='$USER_ID';" >/dev/null 2>&1 || true
+	echo "── cleanup: throwaway token and user deleted"
+}
 trap cleanup EXIT
+d1 "INSERT INTO users (id, email, name, role, email_verified) VALUES ('$USER_ID', '$USER_ID@e2e.invalid', 'verify-purge e2e (#357)', 50, 1);" >/dev/null
 d1 "INSERT INTO _emdash_api_tokens (id, name, token_hash, prefix, user_id, scopes) VALUES ('$TOK_ID', 'verify-purge e2e (#357)', '$HASH', '$PREFIX', '$USER_ID', '[\"admin\"]');" >/dev/null
-echo "   token minted for user $USER_ID"
+echo "   throwaway user + token minted ($USER_ID)"
 
 # ── 3. publish (no-op update) → purge → MISS ────────────────────────────────
 echo "── 3. publish fires the purge"
