@@ -15,7 +15,8 @@
 #   4. Rehearse the SQL on a COPY of the local sqlite BEFORE touching remote.
 #   5. Apply to the remote database and verify a count.
 #
-# Usage: scripts/seed-remote-preview.sh [d1-name]   (default www-serverstartup-io-preview)
+# Usage: scripts/seed-remote-preview.sh [d1-name] [--rehearsal-only]
+#        (default d1-name: www-serverstartup-io-preview)
 set -euo pipefail
 
 D1_NAME="${1:-www-serverstartup-io-preview}"
@@ -27,6 +28,15 @@ D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqli
 
 SQL="$WORK/seed.sql"
 : > "$SQL"
+
+# FK-safe bulk replace. The 0.34 schema carries FOREIGN KEYs between system
+# tables, and this file's DELETE order comes from sqlite_master, not from the
+# FK topology — the 2026-08-23 07:21 deploy died on exactly that
+# ("FOREIGN KEY constraint failed"). defer_foreign_keys postpones the checks
+# to commit, by which point DELETE+INSERT has restored consistency. D1
+# supports the pragma; the rehearsal below runs with foreign_keys=ON so it
+# exercises the same semantics instead of the sqlite3 CLI's silent default OFF.
+echo "PRAGMA defer_foreign_keys = true;" >> "$SQL"
 
 # 0. COLLECTION SCHEMA (#326). Collection tables (ec_*) are not created by the
 #    numbered migrations — EmDash creates them from the collections declared in
@@ -46,11 +56,45 @@ sqlite3 "$D1_DB" "
     FROM sqlite_master WHERE type='index' AND tbl_name LIKE 'ec\_%' ESCAPE '\' AND sql IS NOT NULL;
 " >> "$SQL"
 
-sqlite3 "$D1_DB" "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE '\_emdash\_fts\_%' ESCAPE '\' AND name NOT LIKE 'sqlite_%' AND name NOT IN ('_cf_METADATA','_emdash_migrations');" |
+# FK-topological order, computed from the schema itself (the 0.34 migrations
+# added FKs — e.g. every ec_* table references revisions — and sqlite_master
+# order is arbitrary: the 2026-08-23 07:21 deploy died on it). DELETE runs
+# children-first, INSERT parents-first (the same list reversed). Self-refs
+# (taxonomies, comments) are ignored as edges: a full-table DELETE clears
+# parent and child rows in one statement.
+python3 - "$D1_DB" > "$WORK/tables.topo" <<'PYEOF'
+import sqlite3, sys
+db = sqlite3.connect(sys.argv[1])
+tables = [r[0] for r in db.execute(
+    "SELECT name FROM sqlite_master WHERE type='table'"
+    " AND name NOT LIKE '\\_emdash\\_fts\\_%' ESCAPE '\\'"
+    " AND name NOT LIKE 'sqlite_%'"
+    " AND name NOT IN ('_cf_METADATA','_emdash_migrations')")]
+parents = {t: set() for t in tables}
+for t in tables:
+    for row in db.execute(f'PRAGMA foreign_key_list("{t}")'):
+        p = row[2]
+        if p in parents and p != t:
+            parents[t].add(p)
+children = {t: {c for c in tables if t in parents[c]} for t in tables}
+emitted, order = set(), []
+while len(order) < len(tables):
+    ready = sorted(t for t in tables if t not in emitted and children[t] <= emitted)
+    if not ready:
+        sys.exit("ERROR: FK cycle among: " + ", ".join(sorted(set(tables) - emitted)))
+    order.extend(ready); emitted.update(ready)
+print("\n".join(order))
+PYEOF
+
+# children-first DELETEs…
 while read -r t; do
 	echo "DELETE FROM \"$t\";" >> "$SQL"
+done < "$WORK/tables.topo"
+# …then parents-first INSERTs (same order reversed)
+tail -r "$WORK/tables.topo" 2>/dev/null > "$WORK/tables.rev" || tac "$WORK/tables.topo" > "$WORK/tables.rev"
+while read -r t; do
 	sqlite3 "$D1_DB" ".mode insert \"$t\"" "SELECT * FROM \"$t\";" >> "$SQL"
-done
+done < "$WORK/tables.rev"
 sqlite3 "$D1_DB" "SELECT 'INSERT INTO ' || name || '(' || name || ') VALUES(''rebuild'');' FROM sqlite_master WHERE sql LIKE 'CREATE VIRTUAL TABLE%';" >> "$SQL"
 
 # Rehearse on a copy of the local database (schema present, data replaced).
@@ -73,9 +117,21 @@ sqlite3 "$D1_DB" ".backup '$WORK/rehearsal.sqlite'"
 sqlite3 "$WORK/rehearsal.sqlite" \
   "SELECT 'DROP TABLE \"' || name || '\";' FROM sqlite_master
      WHERE type='table' AND name LIKE 'ec\_%' ESCAPE '\';" > "$WORK/drop.sql"
-sqlite3 -cmd "PRAGMA trusted_schema=ON;" "$WORK/rehearsal.sqlite" < "$WORK/drop.sql"
+sqlite3 -bail -cmd "PRAGMA trusted_schema=ON;" "$WORK/rehearsal.sqlite" < "$WORK/drop.sql"
 
-sqlite3 -cmd "PRAGMA trusted_schema=ON;" "$WORK/rehearsal.sqlite" < "$SQL"
+# foreign_keys=ON: D1 enforces FKs, the sqlite3 CLI defaults them OFF — a
+# rehearsal without them waves through DELETE orders the remote will reject.
+sqlite3 -bail -cmd "PRAGMA trusted_schema=ON;" -cmd "PRAGMA foreign_keys=ON;" "$WORK/rehearsal.sqlite" < "$SQL"
+
+# Second rehearsal, different blind spot: the drop-based copy recreates the
+# collection tables EMPTY, so an FK-hostile DELETE order can never violate
+# there (child rows are what violate, and it has none). This copy keeps every
+# row, stands where a POPULATED remote stands, and is what actually fails
+# when the order regresses (the 2026-08-23 07:21 class).
+sqlite3 "$D1_DB" ".backup '$WORK/rehearsal-populated.sqlite'"
+sqlite3 -bail -cmd "PRAGMA trusted_schema=ON;" -cmd "PRAGMA foreign_keys=ON;" "$WORK/rehearsal-populated.sqlite" < "$SQL"
+PAGES_POP=$(sqlite3 "$WORK/rehearsal-populated.sqlite" "SELECT count(*) FROM ec_pages;")
+[ "$PAGES_POP" -gt 0 ] || { echo "ERROR: populated rehearsal produced 0 pages" >&2; exit 1; }
 PAGES_LOCAL=$(sqlite3 "$WORK/rehearsal.sqlite" "SELECT count(*) FROM ec_pages;")
 [ "$PAGES_LOCAL" -gt 0 ] || { echo "ERROR: rehearsal produced 0 pages" >&2; exit 1; }
 
@@ -85,6 +141,14 @@ MISSING=$(sqlite3 "$WORK/rehearsal.sqlite" "
   SELECT group_concat(name, ' ') FROM (
     SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'ec\_%' ESCAPE '\')" )
 echo "rehearsal rebuilt collections: ${MISSING:-NONE}"
+
+# --rehearsal-only: prove generation + rehearsal without touching the remote.
+# Local wrangler sessions can carry OAuth credentials, so "no token" is NOT a
+# safety net — a local test run reached the real preview D1 on 2026-08-23.
+if [ "${2:-}" = "--rehearsal-only" ]; then
+	echo "rehearsal-only: stopping before the remote apply (as requested)"
+	exit 0
+fi
 
 # The remote apply is the one step that can still fail on state we cannot see
 # from here. Say what was attempted and where to look — the failure that took
