@@ -1,4 +1,5 @@
 import cloudflare from "@astrojs/cloudflare";
+import { cacheCloudflare } from "@astrojs/cloudflare/cache";
 import react from "@astrojs/react";
 import { d1, r2, sandbox } from "@emdash-cms/cloudflare";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
@@ -31,6 +32,13 @@ export default defineConfig({
 		},
 	},
 	adapter: cloudflare(),
+	// #332: the 31 Astro.cache.set(cacheHint) calls only emit through a
+	// provider. This one sets Cloudflare-CDN-Cache-Control + Cache-Tag and
+	// purges via cache.purge({tags}) from cloudflare:workers. Edge caching
+	// itself is opted in from wrangler.jsonc ("cache": { enabled: true });
+	// the default-deny policy lives in src/middleware.ts and the
+	// purge-on-publish hooks in src/plugins/cache-purge.ts (#357).
+	cache: { provider: cacheCloudflare() },
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,
@@ -40,7 +48,21 @@ export default defineConfig({
 		emdash({
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
-			plugins: [formsPlugin()],
+			plugins: [
+				formsPlugin(),
+				// #357: purge-on-publish. In-repo on purpose — plugin settings
+				// are not seedable, so an admin-configured alternative would be
+				// silently disarmed by every clean rebuild.
+				{
+					id: "cache-purge",
+					version: "1.0.0",
+					entrypoint: "/src/plugins/cache-purge.ts",
+					format: "standard",
+					// Without content:read the runtime SKIPS every content hook —
+					// silently, with only a dev-log warn (measured 2026-08-23).
+					capabilities: ["content:read"],
+				},
+			],
 			sandboxed: [webhookNotifier],
 			sandboxRunner: sandbox(),
 			marketplace: "https://marketplace.emdashcms.com",

@@ -48,11 +48,28 @@ const SECURITY_HEADERS: Record<string, string> = {
 	"Cross-Origin-Opener-Policy": "same-origin",
 };
 
-export const onRequest = defineMiddleware(async ({ locals, currentLocale, url }, next) => {
+export const onRequest = defineMiddleware(async ({ locals, currentLocale, url, cache }, next) => {
 	const locale = currentLocale || "es";
 	const t = await loadAriaLabels(locale);
 	locals.t = t;
 	const response = await next();
+
+	// ── Edge cache policy (#332/#357): default-deny, opt-in only ──
+	// With Workers Cache enabled, a 200 without Cache-Control is heuristically
+	// cacheable for ~2h (RFC 9111) — admin pages included. So: pages that
+	// opted in through a CMS cacheHint (their accumulated tags prove it) get
+	// a 1h edge TTL, which also bounds the staleness of menu/site-settings
+	// changes (EmDash 0.34 has no publish hooks for those); everything else
+	// gets an explicit no-store. Purge-on-publish: src/plugins/cache-purge.ts.
+	if (cache.enabled && cache.tags.length > 0 && !url.pathname.startsWith("/_emdash")) {
+		cache.set({ maxAge: 3600, swr: 60 });
+		if (!response.headers.has("Cache-Control")) {
+			// browsers revalidate; the edge TTL travels in Cloudflare-CDN-Cache-Control
+			response.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+		}
+	} else if (!response.headers.has("Cache-Control")) {
+		response.headers.set("Cache-Control", "no-store");
+	}
 
 	// Leave the CMS admin UI alone — it ships its own scripts/styles.
 	if (!url.pathname.startsWith("/_emdash")) {

@@ -4,6 +4,10 @@
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
+	// #332: Workers Cache — the cache sits IN FRONT of the worker (a hit
+	// skips the worker entirely). Cacheability is default-deny in
+	// src/middleware.ts; purge-on-publish in src/plugins/cache-purge.ts (#357).
+	"cache": { "enabled": true },
 	"d1_databases": [
 		{
 			"binding": "DB",
@@ -39,6 +43,7 @@
 	"env": {
 		"preview": {
 			"name": "www-serverstartup-io-preview",
+			"cache": { "enabled": true },
 			"d1_databases": [
 				{
 					"binding": "DB",
@@ -66,6 +71,7 @@
 		},
 		"production": {
 			"name": "www-serverstartup-io",
+			"cache": { "enabled": true },
 			"d1_databases": [
 				{
 					"binding": "DB",

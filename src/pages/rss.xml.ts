@@ -3,19 +3,19 @@ import { getEmDashCollection, getSiteSettings } from "emdash";
 
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 
-export const GET: APIRoute = async ({ site, url, currentLocale }) => {
+export const GET: APIRoute = async ({ site, url, currentLocale, cache }) => {
 	const locale = currentLocale || "es";
 	const siteUrl = site?.toString() || url.origin;
 	const { siteTitle, siteTagline } = resolveBlogSiteIdentity(await getSiteSettings());
 
-	// Note: cacheHint is captured but cannot be used — APIRoutes don't have
-	// Astro.cache. The manual Cache-Control header below (max-age=3600) serves
-	// as the fallback TTL for CDN/Worker caching. Proactive invalidation on
-	// publish is not available for API routes; the 1-hour TTL is acceptable.
-	const { entries: posts, cacheHint: _cacheHint } = await getEmDashCollection("posts", {
+	// APIContext exposes `cache` (the old comment here claimed otherwise —
+	// #332 corrected it). With the hint set, the feed gets the same edge TTL
+	// as pages via the middleware policy AND purges when a post publishes.
+	const { entries: posts, cacheHint } = await getEmDashCollection("posts", {
 		orderBy: { published_at: "desc" },
 		limit: 20,
 	});
+	cache.set(cacheHint);
 
 	const items = posts
 		.map((post) => {
