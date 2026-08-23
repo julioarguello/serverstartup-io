@@ -84,20 +84,44 @@ jobs:
           accountId: d70cd71aecc76f94c73d7a6f3cc1265d
           command: deploy
 
-      - name: Apply pending EmDash migrations (first request runs them)
+      - name: Build local canonical D1 (defines the migration target)
         if: steps.gate.outputs.deployed == 'true'
-        # One real request makes the fresh worker migrate the remote D1 to its
-        # schema. Tolerates transient non-200s while migrations run; fails if
-        # the preview never answers — refreshing an unmigrated schema would
-        # only fail later with a worse error.
+        id: canonical
+        # ci-local-stack seeds a fresh local sqlite the canonical way (emdash
+        # applies its migrations). Its _emdash_migrations count IS the target
+        # the remote must reach — derived, never hardcoded.
         run: |
+          scripts/ci-local-stack.sh 8787
+          lsof -ti :8787 | xargs kill -9 2>/dev/null || true
+          D1_DB=$(find .wrangler -name "*.sqlite" -path "*/d1/*" -not -name "metadata.sqlite" | head -1)
+          TARGET=$(sqlite3 "$D1_DB" "SELECT count(*) FROM _emdash_migrations;")
+          echo "target=$TARGET" >> "$GITHUB_OUTPUT"
+          echo "local canonical DB has $TARGET applied migrations"
+
+      - name: Wait until the worker migrates the remote D1
+        if: steps.gate.outputs.deployed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: d70cd71aecc76f94c73d7a6f3cc1265d
+        # The worker applies migrations inside getDatabase() under a lock when
+        # the EmDash runtime initializes — anonymous page requests can take a
+        # cached-binding shortcut, so we poke /_emdash/admin (guaranteed
+        # runtime init) and poll the REAL condition: the remote
+        # _emdash_migrations count reaching the local canonical target.
+        # The first version of this step gated on HTTP 200 of "/" — a proxy
+        # that passed while the schema stayed old (run 32586774068).
+        run: |
+          TARGET=${{ steps.canonical.outputs.target }}
           for i in $(seq 1 36); do
-            code=$(curl -s -o /dev/null -w "%{http_code}" -m 10 "$PREVIEW_URL/") || code=000
-            echo "attempt $i: HTTP $code (measured from the GitHub runner)"
-            if [ "$code" = "200" ]; then exit 0; fi
-            sleep 5
+            curl -s -o /dev/null -m 15 "$PREVIEW_URL/_emdash/admin" || true
+            COUNT=$(npx wrangler d1 execute www-serverstartup-io-preview --remote --json \
+              --command "SELECT count(*) AS c FROM _emdash_migrations;" 2>/dev/null \
+              | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{console.log(JSON.parse(s)[0].results[0].c)}catch{console.log(-1)}})")
+            echo "attempt $i: remote applied=$COUNT target=$TARGET (poked /_emdash/admin from the GitHub runner; count via wrangler d1 API)"
+            if [ "$COUNT" -ge "$TARGET" ] 2>/dev/null; then exit 0; fi
+            sleep 10
           done
-          echo "::error::preview never answered 200 after deploy — remote migration state unknown, refusing to refresh D1"
+          echo "::error::remote D1 never reached $TARGET applied migrations — the worker is not migrating; refusing to refresh content onto a stale schema"
           exit 1
 
       - name: Refresh preview D1 from seed/seed.json
@@ -105,12 +129,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: d70cd71aecc76f94c73d7a6f3cc1265d
-        # ci-local-stack seeds a fresh local sqlite the canonical way (emdash
-        # applies its migrations); seed-remote-preview reproduces it remotely
-        # after rehearsing the generated SQL on a throwaway database.
+        # seed-remote-preview reproduces the canonical local content remotely
+        # after rehearsing the generated SQL on a throwaway database. The
+        # local stack was already built by the canonical step above.
         run: |
-          scripts/ci-local-stack.sh 8787
-          lsof -ti :8787 | xargs kill -9 2>/dev/null || true
           scripts/seed-remote-preview.sh www-serverstartup-io-preview
 
       - name: Summary
