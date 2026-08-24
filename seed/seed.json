@@ -1374,6 +1374,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "rss_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Bitácora — RSS"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "trust_title",
 							"children": [
 								{
@@ -2996,6 +3007,17 @@
 				{
 					"title": "footer_headings",
 					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rss_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Journal — RSS"
+								}
+							]
+						},
 						{
 							"_type": "block",
 							"style": "normal",

@@ -36,7 +36,7 @@ jobs:
             echo "ready=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         if: steps.gate.outputs.ready == 'true'
         with:
           fetch-depth: 0 # the mirror needs the full history of main

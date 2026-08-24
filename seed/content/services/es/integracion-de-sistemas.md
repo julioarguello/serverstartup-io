@@ -1,5 +1,4 @@
 ---
-id: "01KZB2G0MYYT304Q7V42TAJQEQ"
 cta_label: "Hablemos de integración"
 excerpt: "No somos «arquitectos de PowerPoint»: lo que planificamos, lo ejecutamos. Sin exageraciones — lo objetivamente necesario y viable. Un guante, no un martillo, con homogeneidad, metodología, testabilidad y observabilidad absoluta."
 ---

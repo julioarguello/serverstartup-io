@@ -13,7 +13,8 @@
 		"deploy": "astro build && wrangler deploy",
 		"typecheck": "astro check",
 		"bootstrap": "emdash init && emdash seed",
-		"seed": "emdash seed"
+		"seed": "emdash seed",
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^14.2.3",
@@ -35,6 +36,7 @@
 		"axe-core": "^4.13.0",
 		"puppeteer": "^23.11.1",
 		"typescript": "^5.9.3",
+		"vitest": "^4.1.11",
 		"wrangler": "^4.80.0",
 		"y-protocols": "^1.0.7"
 	},

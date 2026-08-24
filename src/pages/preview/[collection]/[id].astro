@@ -1,0 +1,62 @@
+---
+/**
+ * The one preview surface, for every collection (#379).
+ *
+ * EmDash builds preview links from a single pattern, and its default —
+ * `/{collection}/{id}` — only matched our routes by accident: `/pages/<id>`
+ * and `/posts/<id>` happened to exist, `/services/<id>` never did, so the
+ * Preview button 404'd on the six service pages, the most-edited content on
+ * the site. Measured 2026-08-23.
+ *
+ * astro.config points the pattern here instead. This route resolves the entry
+ * and sends the editor to the page a reader would see, carrying the preview
+ * token — so preview shows the real design rather than a bare template, and a
+ * new collection needs a line in PUBLIC_PATH rather than a new route.
+ */
+import { getEmDashEntry } from "emdash";
+
+const { collection, id } = Astro.params;
+
+if (!collection || !id) {
+	return Astro.rewrite("/404");
+}
+
+// Where each collection lives publicly. This is the one place that knows it:
+// pages and services sit at the root by slug, posts hang under /posts/. The
+// collections absent here have no standalone page — they render embedded in
+// others — and preview says so instead of pretending.
+const PUBLIC_PATH: Record<string, (slug: string, prefix: string) => string> = {
+	pages: (slug, prefix) => (slug === "home" ? prefix || "/" : `${prefix}/${slug}`),
+	services: (slug, prefix) => `${prefix}/${slug}`,
+	posts: (slug, prefix) => `${prefix}/posts/${slug}`,
+};
+
+const buildPath = PUBLIC_PATH[collection];
+if (!buildPath) {
+	return new Response(
+		`No standalone page for the "${collection}" collection.\n\n` +
+			`Its entries render inside other pages, so there is nothing to preview on its own.\n` +
+			`Members appear on Quiénes somos; partners and references on their sections.`,
+		{ status: 404, headers: { "Content-Type": "text/plain; charset=utf-8" } },
+	);
+}
+
+// The id may be the entry ULID (what the admin sends) or a slug; either
+// resolves. Measured on 0.34: `entry.id` and `entry.slug` are both the bare
+// slug, in ES and EN alike — but `slug` is the field that MEANS the slug, and
+// sitemap.xml.ts already reads it defensively, so read it the same way here.
+const locale = Astro.currentLocale || "es";
+const { entry } = await getEmDashEntry(collection, id, { locale });
+
+if (!entry) {
+	return Astro.rewrite("/404");
+}
+
+const entryLocale = (entry.data as { locale?: string }).locale || locale;
+const prefix = entryLocale === "en" ? "/en" : "";
+const target = buildPath((entry as { slug?: string }).slug ?? entry.id, prefix);
+
+// 307, not 301: a preview link is momentary and must never be cached as a
+// permanent move. The query string carries the token through.
+return Astro.redirect(`${target}${Astro.url.search}`, 307);
+---

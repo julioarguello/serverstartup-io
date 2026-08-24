@@ -1,5 +1,4 @@
 ---
-id: "01KZB2G0MYR4QS70ETN5SN5W10"
 cta_label: "Audit your e-commerce"
 excerpt: "Over twenty years inside [`SAP Commerce Cloud`](https://www.sap.com/products/crm/commerce-cloud.html). Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty."
 ---

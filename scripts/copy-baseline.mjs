@@ -112,7 +112,13 @@ async function renderText(page, baseUrl, route) {
 }
 
 async function withPage(fn) {
-	const browser = await puppeteer.launch({ headless: "new" });
+	// Same flags as ci-check-a11y.mjs: the GitHub Actions Ubuntu runner has no
+	// usable Chromium sandbox (AppArmor user-namespace restrictions), and
+	// /dev/shm is too small for Chromium's default shared-memory usage.
+	const browser = await puppeteer.launch({
+		headless: "new",
+		args: ["--no-sandbox", "--disable-dev-shm-usage"],
+	});
 	try {
 		const page = await browser.newPage();
 		await page.setViewport(VIEWPORT);
@@ -181,6 +187,27 @@ async function verify(baseUrl) {
 		return 0;
 	});
 }
+
+/*
+ * Re-baselining: the procedure, and why it is not optional
+ * --------------------------------------------------------
+ * `verify` runs as a permanent step of ci.yml (#366). A failure is exactly
+ * one of two things, never a third:
+ *
+ *   1. A REGRESSION — copy changed and nobody meant it. Fix the code.
+ *   2. An INTENDED copy change — then re-capture and commit the new baseline
+ *      IN THE SAME PR, so the diff is reviewed as content:
+ *
+ *          scripts/ci-local-stack.sh 8787
+ *          node scripts/copy-baseline.mjs capture --base-url http://localhost:8787
+ *          git add tests/copy-baseline/   # review this diff like prose
+ *
+ * What must never happen is a re-capture on a red run "to make it pass". This
+ * gate already died once that way: its first version cried wolf on 26 of 26
+ * routes, and a gate that always fires is a gate nobody reads on the day it is
+ * right. If a diff is not obviously one of the two cases above, it is the
+ * first one until proven otherwise.
+ */
 
 const [mode] = process.argv.slice(2);
 const urlFlag = process.argv.indexOf("--base-url");

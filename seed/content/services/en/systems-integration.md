@@ -1,5 +1,4 @@
 ---
-id: "01KZB2G0N109BBQE64HQA0T3SF"
 cta_label: "Let's talk integration"
 excerpt: "We're not “PowerPoint architects”: what we plan is what we ship. No overpromising — the objectively necessary and viable. A glove, not a hammer, with homogeneity, methodology, testability and absolute observability."
 ---

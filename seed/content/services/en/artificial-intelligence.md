@@ -1,5 +1,4 @@
 ---
-id: "01M07525BSMR548PD8FB9BSRW4"
 cta_label: "Tell us your case"
 excerpt: "AI is a means, not an end. The machine writes the repetitive code; we bring the architecture and the judgment, from development to operations — one integral approach, a DevOps profile. The agent proposes; the engineer disposes."
 # evidence traceability in issue 270 and docs/company/04-services-business-model.md

@@ -116,6 +116,11 @@ const defaultCtaLabel = labels.get("footer_headings", "default_cta",
 	s.defaultCtaLabel || (locale === "en" ? "Tell us about your project" : "Cuéntanos tu proyecto"));
 
 // Footer headings from CMS (ui_labels widget area)
+// #336: the feed link was hardcoded to the Spanish /rss.xml on all 14 EN
+// pages, with an untranslated title. Both now come from the locale.
+const rssPath = locale === "en" ? "/en/rss.xml" : "/rss.xml";
+const rssTitle = labels.get("footer_headings", "rss_title",
+	locale === "en" ? "Journal — RSS" : "Bitácora — RSS");
 const trustTitle = labels.get("footer_headings", "trust_title", "Confían en nosotros");
 const servicesTitle = labels.get("footer_headings", "services_title", "Áreas de especialización");
 const partnersTitle = labels.get("footer_headings", "partners_title", "Somos partners");
@@ -201,7 +206,7 @@ const resolvedOgType = ogType || "website";
 	<link rel="apple-touch-icon" href="/assets/icon-192.png" />
 	<link rel="manifest" href="/site.webmanifest" />
 	<meta name="theme-color" content="#1E1E1E" />
-	<link rel="alternate" type="application/rss+xml" title={`${identity.siteTitle} — RSS`} href="/rss.xml" />
+	<link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssPath} />
 </head>
 <body>
 

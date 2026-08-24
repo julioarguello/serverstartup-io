@@ -58,6 +58,48 @@ if [[ -z "$DRY_RUN" ]]; then
   fi
 fi
 
+# ── Resolve slug+locale → id from the LIVE database (#302) ────────────
+# The loader used to trust an `id` in each file's frontmatter. Those ids are
+# frozen snapshots of whichever database existed when the file was written,
+# and a clean rebuild (§3) mints fresh ULIDs — so after the very procedure
+# every text change requires, all 12 files failed with "Content item not
+# found". The stable key was in the path all along: the filename IS the slug
+# and the directory IS the locale. Ask the database who owns that pair.
+declare_index() {
+  [[ -n "$DRY_RUN" ]] && return 0
+  # --limit: the API pages at a default well below a large collection, and a
+  # truncated listing would report every entry past the cut as "no such slug"
+  # — a wrong diagnosis, which is worse than a missing one.
+  INDEX_JSON=$(npx emdash content list "$COLLECTION" -u "$BASE_URL" --limit 500 --json 2>/dev/null) || INDEX_JSON=""
+  INDEX=$(python3 -c "
+import json, sys
+raw = sys.argv[1]
+try:
+    d = json.loads(raw)
+except Exception:
+    sys.exit(0)
+items = d if isinstance(d, list) else (d.get('items') or d.get('entries') or [])
+for it in items:
+    slug, loc, _id = it.get('slug'), it.get('locale'), it.get('id')
+    if slug and _id:
+        print(f\"{loc or ''}/{slug}={_id}\")
+" "$INDEX_JSON")
+  if [[ -z "$INDEX" ]]; then
+    {
+      echo "❌ Could not read the '$COLLECTION' index from $BASE_URL."
+      echo "   Not 'the collection is empty' — the listing returned nothing at all,"
+      echo "   which is also what an unauthenticated CLI looks like."
+      echo "   Check: npx emdash content list $COLLECTION -u $BASE_URL"
+    } >&2
+    exit 1
+  fi
+  echo "  resolved $(echo "$INDEX" | grep -c .) entries by slug+locale from $BASE_URL"
+}
+
+lookup_id() {  # $1 = locale, $2 = slug
+  echo "$INDEX" | awk -F= -v k="$1/$2" '$1==k {print $2; exit}'
+}
+
 # ── Colors ────────────────────────────────────────────────────────────
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -114,6 +156,8 @@ echo "  Source:     ${CONTENT_DIR}/"
 echo "════════════════════════════════════════════════════════════════"
 echo ""
 
+declare_index
+
 for locale_dir in "$CONTENT_DIR"/*/; do
   locale=$(basename "$locale_dir")
   echo "── Locale: ${locale} ──────────────────────────────────────────"
@@ -125,13 +169,21 @@ for locale_dir in "$CONTENT_DIR"/*/; do
 
     # Parse the file
     PARSED=$(parse_md_file "$md_file")
-    FM_ID=$(echo "$PARSED" | python3 -c "import json,sys; print(json.load(sys.stdin)['id'])")
     FIELDS_JSON=$(echo "$PARSED" | python3 -c "import json,sys; print(json.dumps(json.load(sys.stdin)['fields']))")
     BODY=$(echo "$PARSED" | python3 -c "import json,sys; print(json.load(sys.stdin)['body'])")
 
+    # The slug is the filename, the locale is the directory (#302).
+    SLUG="${filename%.md}"
+    if [[ -n "$DRY_RUN" ]]; then
+      FM_ID="(resolved at run time)"
+    else
+      FM_ID=$(lookup_id "$locale" "$SLUG")
+    fi
+
     if [[ -z "$FM_ID" ]]; then
-      echo -e "  ${YELLOW}⊘ SKIP${NC} ${filename} — no 'id' in frontmatter"
-      SKIPPED=$((SKIPPED + 1))
+      echo -e "  ${RED}✗ FAIL${NC} ${filename} — no '$COLLECTION' entry with slug '${SLUG}' in locale '${locale}' at ${BASE_URL}"
+      echo "         (the file names the entry; if the slug changed, rename the file)"
+      FAILED=$((FAILED + 1))
       continue
     fi
 

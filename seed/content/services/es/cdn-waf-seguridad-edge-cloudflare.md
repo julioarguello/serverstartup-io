@@ -1,5 +1,4 @@
 ---
-id: "01KZB2G0MXNZQR7Q35JNHYVZNM"
 cta_label: "Audita tu edge"
 excerpt: "*Partners* oficiales de [`Cloudflare`](https://www.cloudflare.com/es-es/) desde 2019. Auditoría, migración y operación de `CDN`, `WAF` y seguridad perimetral, sobre todo en [comercio electrónico](/comercio-electronico)."
 ---

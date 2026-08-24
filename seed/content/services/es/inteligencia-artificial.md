@@ -1,5 +1,4 @@
 ---
-id: "01M07525BS5E1JAN6X9HBDPNVB"
 cta_label: "Cuéntanos tu caso"
 excerpt: "La IA es un medio, no un fin. La máquina hace el código repetitivo; nosotros ponemos la arquitectura y el criterio, del desarrollo a la operación — enfoque integral, perfil *DevOps*. El agente propone, el ingeniero dispone."
 # evidence traceability in issue 270 and docs/company/04-services-business-model.md

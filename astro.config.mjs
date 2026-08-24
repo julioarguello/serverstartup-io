@@ -86,6 +86,14 @@ export default defineConfig({
 	],
 	devToolbar: { enabled: false },
 	vite: {
+		define: {
+			// #379: EmDash builds every preview link from one pattern, and its
+			// default `/{collection}/{id}` matched our routes only by accident
+			// — services 404'd. Point it at the single preview route, which
+			// forwards to the page a reader would see.
+			"import.meta.env.EMDASH_PREVIEW_PATH_PATTERN":
+				JSON.stringify("/preview/{collection}/{id}"),
+		},
 		build: {
 			// 0 = never inline scripts into the HTML. The middleware CSP is
 			// script-src 'self' (no hashes, no unsafe-inline), so any script

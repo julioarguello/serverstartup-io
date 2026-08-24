@@ -1,5 +1,4 @@
 ---
-id: "01M02XSPBAZDE0QWGW5ASJHMVH"
 cta_label: "Let's talk data"
 excerpt: "A data pipeline comes together quickly. A platform that survives years of business, schema changes, campaign peaks and shifting data sources is another story. [Medallion](https://dataengineering.wiki/Concepts/Medallion+Architecture) architecture, and tests that number in the thousands."
 ---

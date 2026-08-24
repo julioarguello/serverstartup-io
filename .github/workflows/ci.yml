@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # gitleaks scans history of the push range
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -33,22 +33,18 @@ jobs:
         run: npm ci
 
       - name: Secret scan (gitleaks)
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Citability guard
         env:
           FORBIDDEN_NAMES: ${{ secrets.FORBIDDEN_NAMES }}
-        run: |
-          if [ -z "$FORBIDDEN_NAMES" ]; then
-            echo "FORBIDDEN_NAMES secret not present — skipping (public mirror)"; exit 0
-          fi
-          # The tree must never name non-citable clients (policy lives outside the repo).
-          if grep -rIlE "$FORBIDDEN_NAMES" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.wrangler; then
-            echo "::error::Citability violation: forbidden name found in the tree"; exit 1
-          fi
-          echo "citability clean"
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        # Scans the TRACKED tree for non-citable names, proves it can find one
+        # before trusting a clean result, refuses if the secret is missing on
+        # the private repo, and checks the whitelist the other way round (#347).
+        run: python3 scripts/ci-check-citability.py
 
       - name: Types (astro check)
         run: |
@@ -67,6 +63,9 @@ jobs:
 
       - name: Cache hints (cache.set only where it reaches the headers)
         run: python3 scripts/ci-check-cache-hints.py
+
+      - name: Unit tests (accent, panels, excerpt — the silent-failure modules)
+        run: npm test
 
       - name: Build
         run: npx astro build
@@ -91,6 +90,13 @@ jobs:
           npx --yes html-validate --config .htmlvalidate.json /tmp/html/*.html
           echo "html-validate: 0 problems across $(ls /tmp/html | wc -l) templates"
 
+      - name: Rendered copy matches the baseline
+        # F3 of #355: a permanent step, not a one-off. Reuses the puppeteer
+        # the a11y step already installs — no second browser path. A diff here
+        # is either a regression or an intentional copy change whose baseline
+        # was not re-captured; scripts/copy-baseline.mjs documents which.
+        run: node scripts/copy-baseline.mjs verify --base-url http://localhost:8787
+
       - name: Security headers
         run: scripts/ci-check-headers.sh http://localhost:8787
 
@@ -113,6 +119,9 @@ jobs:
             echo "| gitleaks | no leaks |"
             echo "| citability | 0 forbidden names |"
             echo "| cms-text | labels resolve ES+EN, 0 hardcoded copy |"
+            echo "| cache hints | cache.set only where headers still open |"
+            echo "| unit tests | accent · panels · excerpt |"
+            echo "| rendered copy | 26 routes match the baseline |"
             echo "| astro check | 0 errors, 0 warnings |"
             echo "| html-validate | 0 problems, 15 templates |"
             echo "| security headers | full #164 suite |"
