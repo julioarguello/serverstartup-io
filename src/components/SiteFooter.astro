@@ -143,13 +143,23 @@ const privacySlug = (Astro.currentLocale || "es") === "en" ? "privacy-policy" : 
 		</div>
 	</div>
 
-	<!-- Kit Digital banner -->
-	<div class="footer-banner">
+	<!-- Kit Digital acknowledgement (#308). Everything INSIDE the image belongs
+	     to red.es: the five emblems, their order, the endorsement sentence and
+	     even the short rule under it are the "sin banderas" lockup shipped as a
+	     single artefact (LogosEnero2024) — the manual reserves the "con bandera"
+	     version for the header of pages dedicated to the programme, which this
+	     site does not have. So the composition is not ours to re-cut; where it
+	     sits is. It ends at the column like everything else, and the alt says
+	     what the artwork says instead of a sentence of our own. -->
+	<div class="footer-banner container">
 		<img
 			src="/assets/kit-digital-banner.jpg"
 			alt={t("kit_digital")}
 			class="footer-banner-img"
+			width="2560"
+			height="242"
 			loading="lazy"
+			decoding="async"
 		/>
 	</div>
 
@@ -288,13 +298,15 @@ const privacySlug = (Astro.currentLocale || "es") === "en" ? "privacy-policy" : 
 		.footer-logo-img { width: 250px; }
 	}
 
-	/* Kit Digital banner */
+	/* Kit Digital banner (#308). No padding-inline here — .container owns the
+	   horizontal inset, and a shorthand would wipe it. Only the space below is
+	   ours, so the strip stops sitting flush against the legal rule. */
 	.footer-banner {
-		padding: 0;
-		margin: 0;
+		padding-bottom: var(--space-6);
 	}
 	.footer-banner-img {
 		width: 100%;
+		height: auto;
 		display: block;
 	}
 </style>

@@ -2431,7 +2431,7 @@
 							"_type": "block",
 							"_key": "kit_digital",
 							"style": "normal",
-							"children": [{ "_type": "span", "text": "Programa Kit Digital — Financiado por los fondos Next Generation de la Unión Europea" }]
+							"children": [{ "_type": "span", "text": "Programa Kit Digital financiado por los fondos Next Generation del Mecanismo de Recuperación y Resiliencia. Financiado por la Unión Europea — NextGenerationEU; Gobierno de España, Ministerio para la Transformación Digital y de la Función Pública, Secretaría de Estado de Digitalización e Inteligencia Artificial; red.es; Plan de Recuperación, Transformación y Resiliencia." }]
 						},
 						{
 							"_type": "block",
@@ -4343,7 +4343,7 @@
 							"_type": "block",
 							"_key": "kit_digital",
 							"style": "normal",
-							"children": [{ "_type": "span", "text": "Kit Digital Programme — Funded by the European Union's Next Generation funds" }]
+							"children": [{ "_type": "span", "text": "Kit Digital Programme funded by the Next Generation funds of the Recovery and Resilience Facility. Funded by the European Union — NextGenerationEU; Government of Spain, Ministry for Digital Transformation and the Civil Service, Secretary of State for Digitalisation and Artificial Intelligence; red.es; Recovery, Transformation and Resilience Plan." }]
 						},
 						{
 							"_type": "block",

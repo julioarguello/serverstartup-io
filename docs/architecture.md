@@ -104,7 +104,17 @@ All routes exist in both ES and EN:
 - `SiteHeader.astro` — Sticky header (logo, LanguageSwitcher, hamburger)
 - `MenuDialog.astro` — Fullscreen mobile navigation overlay
 - `<slot />` — Page content
-- `SiteFooter.astro` — 4-column footer (services, partners, contact, legal)
+- `SiteFooter.astro` — 4-column footer (services, partners, contact, legal), plus the
+  Kit Digital / NextGenerationEU acknowledgement strip. **Nothing inside that image
+  is ours** — red.es issues the five emblems, the endorsement sentence and the rule
+  under it as one artefact ("sin banderas" variant; the "con bandera" one belongs in
+  the header of a page dedicated to the programme, which this site has none of). Its
+  `alt` must reproduce what the artwork says, not a sentence of our own. The rule is
+  in red.es's [Manual de identidad para digitalizadores](https://sede.red.gob.es/es/procedimientos/anuncio-de-adhesion-de-agentes-digitalizadores-al-programa-de-ayudas-para-la)
+  (Enero 2024, pp. 18–19) and Orden HFP/1030/2021 art. 9.4, which forbids modifying the
+  EU emblem. Measured consequence: the manual's 104×30px minimum for the Kit Digital
+  logo needs a 630px strip, and a 360px phone gives it 328px — recorded, not "fixed" by
+  re-cutting the artwork. Full audit (local KB): `docs/company/10-kit-digital.md`.
 
 ### 4.2 Shared Components
 
