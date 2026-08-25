@@ -412,6 +412,55 @@ PR → quality-gates green → merge to main
   README recording that it came from `cloudflare[bot]`'s import commit on
   2026-04-21 when EmDash was **0.6.0**, and has not been touched since. The
   project runs **0.34.0**, so that README says plainly which parts to distrust.
+- **A stack that dies mid-run says so** (`scripts/lib/stack-probe.mjs`, #390).
+  A `wrangler dev` session died in the middle of a gate run on 2026-08-25. Every
+  guard reported honestly what it saw — a navigation timeout on one route, then
+  `ERR_CONNECTION_REFUSED` — and every one of those messages points at the
+  route, the guard, or the diff under test. None pointed at the stack, because
+  none had looked, and ruling it out cost a full investigation. The guards now
+  spend one HTTP request answering the question `copy-baseline` used to merely
+  ask ("Is the stack up?"), and print wrangler's own last twelve log lines when
+  the answer is no. It adds information and nothing else — no retry, no wider
+  timeout, no changed exit code, because masking the crash would destroy the
+  only signal that reveals it. Two things the break test taught that reading
+  would not: a rejected **top-level `await`** in an entry module does not reach
+  `unhandledRejection` (the a11y guard needs `uncaughtException` as well, or it
+  still dies with a bare puppeteer trace), and a handler that prints only
+  `error.message` trades one blind spot for another on every failure that is
+  *not* a dead stack — so the trace stays. The crash itself remains open: #390
+  can only close on a reproduction, and seven clean sessions the same day say
+  it does not reproduce on demand.
+- **Astro 7's agent endpoints, evaluated and split** (#367). Astro 7.2.4 ships
+  `/_astro/status` and `astro dev --background`, and the parent issue asked
+  whether either lets us delete hand-rolled work. Measured, not reasoned:
+  `/_astro/status` answered 200 **6.2s** after start while `/` did not answer
+  until **15.0s**, and its body is the constant `{"ok":true}` from a Vite
+  middleware with no state behind it. It is a **liveness** probe, not a
+  readiness one, and `scripts/ci-local-stack.sh` runs `wrangler dev` over the
+  built output where Vite does not exist at all — so it is rejected twice over,
+  and adopting it would have replaced a probe that knows when the site works
+  with one that does not. `astro dev --background` is the opposite verdict:
+  `astro dev status` and `astro dev stop` are a real lockfile-backed lifecycle
+  (measured — `stop` freed the port), and they are what `stop_stack()`
+  approximates in forty lines of `pkill`/`lsof` archaeology. They manage **astro
+  dev** servers, though, and the CI stack is wrangler, so the win is for
+  interactive agent sessions rather than for the gate run.
+- **Blind exits 3, found exits 1 — in all seven guards** (#392). The
+  convention was documented before it was uniform: five gates implemented it
+  and `ci-check-cache-hints.py` and `ci-check-citability.py`, which came first,
+  still returned 1 when they went blind. Nothing was unguarded — CI fails on
+  any non-zero — but the two codes answer opposite questions, and a reader
+  debugging a red step would go looking for a violation that was never found.
+  Ten sites in the citability guard moved to 3; the three that report a real
+  finding (an unaccounted opaque file, a forbidden name in the tree, a
+  non-citable reference in the seed) stayed at 1. Every one of the twelve was
+  exercised by breaking it — which turned out to be possible locally after all,
+  the reason the issue was filed rather than fixed on the spot: the guard runs
+  end to end under a **synthetic** `FORBIDDEN_NAMES` (three plain alternatives
+  that appear nowhere in the tree), so its shape, its two positive controls and
+  its scan are all reachable without the real secret. What a synthetic secret
+  cannot check is that the real one still holds the real names, which the
+  script's own comment already explains is uncheckable from inside CI.
 - **The naming gate reads what grep skips** (`ci-check-citability.py`, #324).
   This repository is mirrored publicly and one guard decides who may be named
   in it (§13). `grep -I` stops at the first NUL byte and says nothing, which

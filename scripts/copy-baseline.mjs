@@ -74,6 +74,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
 import { readSeed, localePrefix, seedRoutes } from "./lib/seed-routes.mjs";
+import { stackDiagnosis } from "./lib/stack-probe.mjs";
 
 const REPO = dirname(dirname(fileURLToPath(import.meta.url)));
 const BASELINE_DIR = join(REPO, "tests", "copy-baseline");
@@ -347,7 +348,11 @@ async function verifyMenu(page, baseUrl) {
 			try {
 				menu = await readMenu(page, baseUrl, route);
 			} catch (error) {
-				problems.push(`${route}: the menu could not be opened and read — ${error.message}`);
+				const gone = await stackDiagnosis(baseUrl);
+				problems.push(
+					`${route}: the menu could not be opened and read — ${error.message}` +
+						(gone ? `\n${gone}` : ""),
+				);
 				continue;
 			}
 			problems.push(...rowProblems(`${route} · specialties`, compareRow(want.spec, menu.spec)));
@@ -504,6 +509,10 @@ try {
 } catch (error) {
 	// The observed fact and where to look — never a guessed cause.
 	console.error(`ERROR: could not read ${baseUrl} — ${error.message}`);
-	console.error("  Is the stack up?  scripts/ci-local-stack.sh 8787");
+	console.error(
+		(await stackDiagnosis(baseUrl)) ||
+			"  The stack IS answering, so a dead stack is not the cause.",
+	);
+	console.error("  Boot it with:  scripts/ci-local-stack.sh 8787");
 	process.exit(2);
 }

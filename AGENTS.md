@@ -51,9 +51,9 @@ One convention worth knowing before you add anything to `scripts/`:
 > exists to prove.
 >
 > A blind guard exits **3**, distinct from exit 1 meaning *it found something*.
-> Five of the seven do; `ci-check-cache-hints.py` and `ci-check-citability.py`
-> came first and still say `DEAD GATE` on exit 1. Both refuse to report — only
-> the code is inconsistent, and issue #392 tracks it. Use 3 in anything new.
+> All seven do. They are opposite problems — one says you broke a rule, the
+> other says the rule can no longer be checked — and a run that confuses them
+> sends the next person hunting for a violation that is not there.
 
 If you add a gate, break it on purpose first and watch it fail. A gate never
 observed failing is not known to work.

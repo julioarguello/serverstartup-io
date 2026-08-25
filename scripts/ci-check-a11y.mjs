@@ -18,8 +18,32 @@
 import puppeteer from "puppeteer";
 import { createRequire } from "node:module";
 import { seedRoutes } from "./lib/seed-routes.mjs";
+import { stackDiagnosis } from "./lib/stack-probe.mjs";
 
 const BASE = (process.argv[2] || "http://localhost:8787").replace(/\/$/, "");
+
+// Without this, a stack that dies mid-run surfaces as a raw puppeteer stack
+// trace: a navigation timeout, or a socket error, at whichever route happened
+// to be next. Nothing in that output says the server is gone, so the reader
+// starts by suspecting their own change (#390). Answer the question here, once.
+//
+// BOTH events, and that is not belt-and-braces: a rejected top-level `await`
+// in the entry module does NOT reach `unhandledRejection`. Measured — with
+// only that hook registered, killing the stack still printed a bare puppeteer
+// trace and Node's default handler took the process down.
+const explainStackDeath = async (error) => {
+	// The stack trace stays. This hook exists to ADD the one fact the trace
+	// never carries; swallowing the trace would trade one blind spot for another
+	// on every failure that is not a dead stack.
+	console.error(`\nERROR: ${error?.stack ?? error}`);
+	console.error(
+		(await stackDiagnosis(BASE)) ||
+			"  The stack IS answering, so a dead stack is not the cause.",
+	);
+	process.exit(2);
+};
+process.on("unhandledRejection", explainStackDeath);
+process.on("uncaughtException", explainStackDeath);
 const require = createRequire(import.meta.url);
 const axeSource = require("fs").readFileSync(
 	require.resolve("axe-core/axe.min.js"),

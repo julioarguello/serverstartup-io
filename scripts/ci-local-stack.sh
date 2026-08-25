@@ -12,6 +12,14 @@ set -euo pipefail
 PORT="${1:-8787}"
 LOG="${RUNNER_TEMP:-/tmp}/wrangler-ci.log"
 
+# Astro 7's `/_astro/status` was evaluated as a replacement for this polling
+# and rejected (#367). Two independent reasons, both measured 2026-08-25:
+# it is a Vite dev-server middleware, and this stack runs `wrangler dev` over
+# the BUILT output, where Vite is not in the picture at all; and even under
+# `astro dev` it answered 200 at 6.2s while `/` did not answer until 15.0s,
+# returning the constant `{"ok":true}` with no state behind it. That is a
+# liveness probe, not a readiness one — adopting it would trade a signal that
+# knows when the site works for one that does not.
 wait_http() { # $1 = required status regex ("200" strict, "[0-9]{3}" any response)
 	for _ in $(seq 1 60); do
 		if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$PORT/" | grep -qE "^$1$"; then

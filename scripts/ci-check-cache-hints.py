@@ -56,7 +56,7 @@ def main() -> int:
     if hits_in_allowed == 0:
         print("cache-hints: DEAD GATE — found zero cache.set calls in allowed "
               "locations; the pattern or layout changed", file=sys.stderr)
-        return 1
+        return 3
 
     if violations:
         print("cache-hints: cache.set() outside page frontmatter / middleware "

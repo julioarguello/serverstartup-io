@@ -87,16 +87,22 @@ def tracked_files() -> list[str]:
 
 
 def scan(pattern: str, files: list[str]) -> list[str]:
-    """Tracked files containing the pattern. [] means none."""
+    """Tracked files containing the pattern. [] means none.
+
+    Exits 3, not 1, when it cannot answer at all. The two are opposite
+    problems: 1 says a forbidden name is in the tree, 3 says nobody can
+    currently tell. Reading one as the other sends the next person to look
+    for a name that is not there, or to relax about a scan that never ran.
+    """
     if not files:
         print("citability: DEAD GUARD — no files to scan", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(3)
     proc = subprocess.run(["grep", "-IlE", pattern, "--", *files],
                           cwd=ROOT, capture_output=True, text=True)
     if proc.returncode not in (0, 1):  # 1 = no match; anything else is broken
         print(f"citability: grep failed (exit {proc.returncode}): "
               f"{proc.stderr.strip()[:200]}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(3)
     return [ln for ln in proc.stdout.splitlines() if ln.strip()]
 
 
@@ -187,7 +193,7 @@ def check_opaque(files: list[str]) -> int:
         print("citability: DEAD CHECK — scripts/citability-opaque.txt lists no "
               "rule, so every opaque file would be reported and nobody would "
               "read the output", file=sys.stderr)
-        return 1
+        return 3
 
     opaque = [f for f in files
               if is_opaque(ROOT / f) and (ROOT / f).suffix.lower() not in OOXML]
@@ -228,7 +234,7 @@ def check_forbidden(pattern: str) -> int:
               f"alternative(s); the policy names many more.", file=sys.stderr)
         print("  A truncated or overwritten secret scans clean and proves "
               "nothing. Check the repository secret.", file=sys.stderr)
-        return 1
+        return 3
 
     # ── positive control: the scan must be able to find something ──
     # Two earlier attempts failed against the real secret. A structural
@@ -261,7 +267,7 @@ def check_forbidden(pattern: str) -> int:
               "backslash or a quantifier — none is safe to plant as a "
               "literal positive control. Add one plain-text alternative, "
               "or extend this script's canary construction.", file=sys.stderr)
-        return 1
+        return 3
 
     canary = ROOT / ".citability-canary.tmp"
     try:
@@ -272,7 +278,7 @@ def check_forbidden(pattern: str) -> int:
                   "bare and padded). The secret's regex cannot match "
                   "anything, so a clean result would prove nothing.",
                   file=sys.stderr)
-            return 1
+            return 3
     finally:
         canary.unlink(missing_ok=True)
     print("citability: positive control ok (the scan can find a planted name)")
@@ -294,12 +300,12 @@ def check_forbidden(pattern: str) -> int:
                   "not recovered by the extractor, so the 12 documents it "
                   "claims to read are being scanned as an empty string.",
                   file=sys.stderr)
-            return 1
+            return 3
         if is_opaque(doc) is False:
             print("citability: DEAD GUARD — a real .docx did not read as "
                   "opaque, so is_opaque() no longer selects the files the "
                   "extractor exists for.", file=sys.stderr)
-            return 1
+            return 3
     print("citability: positive control ok (a name planted inside a .docx is "
           "recovered, and .docx still reads as opaque)")
 
@@ -326,7 +332,7 @@ def check_whitelist() -> int:
     if not refs:
         print("citability: DEAD CHECK — the seed declares no references; "
               "this check cannot see anything", file=sys.stderr)
-        return 1
+        return 3
     bad = []
     for r in refs:
         slug = (r.get("slug") or "").strip()
@@ -367,7 +373,7 @@ def main() -> int:
         print("  Refusing to pass: an absent secret and a clean tree produce "
               "the same green, and only one of them is safe.", file=sys.stderr)
         print("  Check the repository secret FORBIDDEN_NAMES.", file=sys.stderr)
-        return 1
+        return 3
 
     return (check_forbidden(pattern) | check_whitelist()
             | check_opaque(tracked_files()))
