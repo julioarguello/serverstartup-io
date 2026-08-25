@@ -1,0 +1,37 @@
+---
+/**
+ * The rebuild, as the console session it actually is (#305).
+ *
+ * Mirrors the `terminal` instrument from ServiceInstrument.astro rather than
+ * extending it: that component is welded to parsePanelSections and the
+ * panel_labels widget, and a seventh `kind` there would couple this page to
+ * the six service pages.
+ *
+ * Dark is legal here for the reason #304 gives: dark is the machine's voice,
+ * and this is literally machine output.
+ */
+interface Props {
+	labels: { get: (widget: string, key: string, fallback: string) => string };
+	label: string;
+}
+const { labels, label } = Astro.props;
+const L = (k: string, fb: string) => labels.get("manual_labels", k, fb);
+
+const host = L("tm_host", "");
+const cmd = L("tm_cmd", "");
+const lines = L("tm_lines", "").split(";").map((l) => l.trim()).filter(Boolean);
+const log = L("tm_log", "");
+---
+
+{cmd && (
+	<div class="inst inst--dark" role="group" aria-label={label}>
+		<div class="inst__bar inst__bar--dots" aria-hidden="true"><i></i><i></i><i></i></div>
+		<div class="term">
+			<p class="term__cmd"><span class="term__prompt">➜ {host}</span>{" "}{cmd}</p>
+			{lines.map((line) => (
+				<p class="term__line"><span class="term__ok" aria-hidden="true">✓</span>{" "}<span class="term__out">{line}</span></p>
+			))}
+			{log && <p class="term__log">╰─ {log}</p>}
+		</div>
+	</div>
+)}

@@ -31,6 +31,13 @@
  * until interaction (the search prompt) is legitimately absent — it is not
  * copy anyone is reading.
  *
+ * `<details>` is the exception, and it is opened before reading. A collapsed
+ * panel IS copy someone reads, one click away, and it is CMS-authored like the
+ * rest; leaving it out would have quietly exempted the six layer panels of
+ * /deconstruyendo from the gate the moment they shipped — measured 2026-08-24,
+ * the baseline captured none of their text. A guard with a hole that shape
+ * looks exactly like a guard.
+ *
  * What it still catches — the reason the gate exists
  * ---------------------------------------------------
  * Under JSX whitespace rules two expressions on adjacent lines GLUE:
@@ -101,6 +108,14 @@ async function renderText(page, baseUrl, route) {
 		throw new Error(`${route} returned HTTP ${response ? response.status() : "no response"}`);
 	}
 	await new Promise((resolve) => setTimeout(resolve, SETTLE_MS));
+	// One shared function for capture and verify, so the two halves cannot
+	// disagree about what counts as rendered copy.
+	const opened = await page.evaluate(() => {
+		const all = [...document.querySelectorAll("details")];
+		for (const d of all) d.open = true;
+		return all.length;
+	});
+	if (opened > 0) await new Promise((resolve) => setTimeout(resolve, 150));
 	const text = await page.evaluate(() => document.body.innerText);
 	return (
 		text

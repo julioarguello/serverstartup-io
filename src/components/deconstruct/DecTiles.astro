@@ -1,0 +1,40 @@
+---
+/**
+ * The numbers, as the dashboard they come from (#305).
+ *
+ * Two kinds of figure live here and they are not the same thing: a CI
+ * THRESHOLD is permanent and cited by the file that enforces it; a
+ * MEASUREMENT is dated in the copy beside it. The tiles carry the
+ * thresholds — the values a build is refused for — because those are the
+ * ones that cannot drift without someone editing a gate.
+ *
+ * The grid is `repeat(3, 1fr)`: use exactly 3 or exactly 6 tiles, or the
+ * last row goes ragged.
+ */
+interface Props {
+	labels: { get: (widget: string, key: string, fallback: string) => string };
+	label: string;
+}
+const { labels, label } = Astro.props;
+const L = (k: string, fb: string) => labels.get("manual_labels", k, fb);
+
+const tiles = L("nm_tiles", "")
+	.split(";")
+	.map((t) => t.split("|").map((c) => c.trim()))
+	.filter(([lbl, val]) => lbl && val);
+---
+
+{tiles.length > 0 && (
+	<div class="inst inst--light" role="group" aria-label={label}>
+		<div class="inst__bar">
+			<svg width="26" height="17" viewBox="0 0 32 20" aria-hidden="true"><path d="M25 15a4.5 4.5 0 0 0 .3-9A7.5 7.5 0 0 0 11 4.6 6 6 0 0 0 6 15Z" fill="#F38020"/></svg>
+			<b>{L("nm_title", "")}</b>
+			<span class="cf__status">{L("nm_status", "")}</span>
+		</div>
+		<div class="cf__tiles">
+			{tiles.map(([lbl, val]) => (
+				<div class="cf__tile"><span class="cf__tile-label">{lbl}</span><span class="cf__tile-value">{val}</span></div>
+			))}
+		</div>
+	</div>
+)}

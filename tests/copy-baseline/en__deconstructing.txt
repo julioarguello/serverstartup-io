@@ -3,25 +3,148 @@ Skip to content
 /en/deconstructing
 ES
 Deconstructing this website
-This page explains how the website you are reading is built. Not out of vanity. It is how we work, applied to our own shop window. If someone tells you how they work but can't show you the workshop, be suspicious.
+If someone tells you how they work and cannot show you the workshop, be suspicious. This is ours.
+The tour runs downwards, from the point of presence that answered your request to the commit that authorised these words. Every layer opens if you want the detail, and everything claimed here is in the repository.
+The architecture
+There are no servers to look after, and that is the least of it. What matters is where the response you are reading was made: at the edge, on Cloudflare Workers. Cache sits in front, and on a hit the code never runs.
+Below that, the CMS is EmDash, which Cloudflare released under an MIT licence as a successor to WordPress, and not a service to call over the network: it is the same application, served by the same worker. And at the bottom of the descent there is no database, there is a text file in Git.
+L5
+the edge
+Workers · cache in front
+A hit returns the page without running any code.
+The Workers cache sits in front of the worker, so a hit answers without running anything. Nothing is cached by default: a page only gets in if it asks to. Once in it lasts an hour, and publishing purges it by tag.
+L4
+the door
+middleware
+Decides what may be cached and adds the security headers.
+One middleware for every response: it resolves the locale, loads the accessibility labels, decides the cache policy and stamps seven security headers. The editing panel is excluded, because it brings its own.
+L3
+the render
+Astro SSR
+Builds the HTML in the same worker that took the request.
+26 public routes, 24 components and 12 stylesheets, on Astro on-demand rendering — Astro has been part of Cloudflare since January 2026. Locales are not separated by prefix but by translated slug, so the alternate route is resolved against the CMS and never guessed: guessing it returns a 404.
+L2
+the CMS
+EmDash
+Runs inside the same worker: no external service to call.
+EmDash is not a service you subscribe to: it is the CMS Cloudflare released in April 2026 under an MIT licence as a successor to WordPress, and has run its own blog since 12 August. Here it injects 183 routes under /_emdash into this very application, with 7 collections and 43 entries: same script, same bindings, no network call. Third-party plugins are the deliberate exception, running in a separate isolate through Worker Loader, with no way out to the internet.
+The panel, editing this page. It runs in the same worker that just served it to you.
+L1
+the data
+D1 · R2 · KV
+Content, images and sessions, at the edge.
+Content in D1, files in R2 and sessions in KV. Static assets never come through here: the asset layer serves them without ever waking the worker.
+L0
+the origin
+seed.json · markdown
+What a person writes. Everything above derives from it.
+A text file in Git, plus the service bodies in markdown. The whole site comes out of it in a rebuild from nothing, which is what continuous integration does before every merge.
+The request comes in at the top. What a person writes lives at the bottom, which is why that is the layer reviewed by hand.
+Content as code
+Almost every text lives in seed/seed.json, with the service bodies in markdown: the filename is the slug, the directory is the locale. A rebuild from nothing remakes the whole site, and continuous integration checks that before every merge.
+Caching inherits the discipline: a page is cached only if it asks to be, and publishing purges it by tag. One gap is worth saying out loud: menus and site settings emit no event, so a one-hour TTL is what bounds their staleness.
+➜ serverstartup.io rebuild --from-nothing
+✓ database created, empty
+✓ seeds applied: 43 entries, two locales
+✓ frozen copy: 26 routes
+✓ rendered copy: matches the frozen baseline
+╰─ done. The rebuild is the proof, and it runs before every merge.
+The agents
+A model writing the first draft is neither impressive nor mysterious. What decides whether this is serious is who has authority over what.
+The agent proposes and cannot merge. The checks refuse and cannot write: their credential is read-only. The human can do both, which is why the human is the only one who can be wrong by name. The small print: the agent not merging is a written rule, not a lock on the server.
+Before a person is asked anything, the branch goes through fifteen steps that can fail. They refuse what a reading by eye does not catch:
+A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The two most delicate carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.
+agent/draft → main
+Open
+−
+publish without anyone reading it
++
+Non-citable names: a client who must not appear in a public repository.
++
+Copy outside the CMS: a label that exists in one locale only, or a sentence burnt into a template.
++
+Colours outside the system: a literal or a new width, which is how seven different measures come back.
++
+Caching in the wrong place: a call placed after the headers have gone, which caches nothing and looks like it does.
++
+Copy that changes by itself: the rendered text of 26 routes is frozen.
++
+Accessibility and contrast: keyboard traversal, reflow at 320 pixels and W3C validation.
+All checks have passed — quality-gates / gates
+✓ gitleaks
+✓ citability
+✓ astro check
+✓ seed schema
+✓ CMS text
+✓ design tokens
+✓ cache hints
+✓ unit tests
+✓ build
+✓ boot the stack
+✓ html-validate
+✓ frozen copy
+✓ headers
+✓ accessibility
+✓ Lighthouse
+✔ Approved
+Signed-off-by: julio.arguello
+Merge pull request
+The numbers
+An undated number is the worst possible place for drift, so there are two kinds here and they never mix. The threshold lives in a file: 95 or more for performance, 100 for accessibility, best practices and SEO, over the median of three runs under mobile emulation.
+The measurement carries its date. On 24 August 2026, against the production build: 100 in all four categories across all five addresses, with the largest content painted in under 1.6 seconds. Each figure is a median, and the bound is the worst of the five.
+Thresholds · continuous integration
+REQUIRED
+performance
+95 or more
+accessibility
+100
+best practices
+100
+SEO
+100
+routes with frozen copy
+26
+steps that can fail
+15
+The workshop, in plain sight
+The repository is public and syncs on every change to the main branch, whole history, unfiltered. Publishing like that has a cost: that is why the non-citable-names guard exists.
+Code, seeds, checks and deployments: it is all there. Look inside and tell us if you would do it differently.
 SERVERSTARTUP.io
 assembly manual · ES/EN · sheet 1 of 1
 PARTS INCLUDED
-Workers + WAF ×1
-the shield
-D1 + R2 ×1
-data and media
-Astro SSR + EmDash ×1
-render and CMS
-seeds ×26
-every text
-copywriting skill ×1
-the voice with a blacklist
-agent ×N
-drafts never decides
-repository ×1
-look inside
-engineers ×3
+L5
+the edge
+×1
+the worker that answers
+src/worker.ts ↗
+L4
+the door
+×7
+the security headers
+src/middleware.ts ↗
+L3
+the render
+×26
+the public routes
+src/pages/ ↗
+L2
+the CMS
+×5
+a plugin of ours on the EmDash API
+src/plugins/cache-purge.ts ↗
+L1
+the data
+×3
+D1, R2 and KV
+wrangler.jsonc ↗
+L0
+the origin
+×43
+the whole corpus
+seed/seed.json ↗
+—
+the engineers
+×3
 not included: already there
 ASSEMBLY
 01
@@ -40,19 +163,12 @@ deploy to the edge
 Do not assemble without step 04. The agent drafts, the human signs.
 Step 03 never merges. Ever.
 ℹ Assembly data
-Estimated time: one afternoon and its commits.
+Assembly time: three weeks, in odd hours.
 Hardware included: zero handoffs.
 View the repository →
-The architecture
-Astro with server-side rendering on Cloudflare Workers. Content lives in EmDash, a CMS running in the same Worker, with the database on D1 and images on R2. No servers to babysit. The page you are reading was served from a point of presence less than 50 ms away from you.
-Content as code
-Every text on this site lives in seed/, versioned in Git. A clean rebuild reproduces the whole site, word for word. When a text changes, there is a commit that tells the story.
-The agents
-The first draft of every text is written by an agent with a copywriting skill. The house voice, a blacklist of forbidden words, and an AI-tell detector with a score. Then a human reads it, corrects it and signs it. The review step is not optional. It is the product.
-The numbers
-Lighthouse 100 in performance, accessibility, best practices and SEO across all four templates, measured on the production build on August 6, 2026. W3C validation, zero errors. LCP under 1.3 seconds on mobile. When these change, this line changes.
-The workshop, in plain sight
-Code, seeds, skills and prompts live in the repository. Look inside and tell us what you would do better. Probably something. That is how good conversations start.
+Let's talk, engineer to engineer.
+Bring the problem as it is. You'll hear back from the person who'll write the code.
+Tell us about your project
 references
 Areas of expertise
 E-commerce

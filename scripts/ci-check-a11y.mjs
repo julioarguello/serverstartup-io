@@ -32,6 +32,14 @@ const ROUTES = [
 	"/quienes-somos",
 	"/contacto",
 	"/referencias",
+	// #305: the layered document carries more bespoke markup than any other
+	// page — a custom diagram plus four instrument panels — and it was not
+	// audited until it did.
+	"/deconstruyendo",
+	// The terminal instrument's own page: adding /deconstruyendo surfaced a
+	// contrast failure in a component this page has rendered all along, and
+	// no route using it was ever audited (#305).
+	"/integracion-de-sistemas",
 	"/search?q=cloudflare",
 	"/en",
 	"/en/about-us",

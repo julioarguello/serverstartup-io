@@ -65,12 +65,18 @@ fi
 # every text change requires, all 12 files failed with "Content item not
 # found". The stable key was in the path all along: the filename IS the slug
 # and the directory IS the locale. Ask the database who owns that pair.
+# The listing API caps --limit at 100 and rejects anything above it with
+# "Invalid request data" (measured 2026-08-24, EmDash 0.34). This asked for 500,
+# so the call failed on EVERY run and 2>/dev/null swallowed the reason: the
+# loader has been dead since the cap arrived, reporting it as a missing index.
+# 100 is therefore the ceiling, and truncation is checked rather than assumed —
+# the response carries no total, no cursor and no hasMore, so a full page is the
+# only signal there is.
+INDEX_LIMIT=100
+
 declare_index() {
   [[ -n "$DRY_RUN" ]] && return 0
-  # --limit: the API pages at a default well below a large collection, and a
-  # truncated listing would report every entry past the cut as "no such slug"
-  # — a wrong diagnosis, which is worse than a missing one.
-  INDEX_JSON=$(npx emdash content list "$COLLECTION" -u "$BASE_URL" --limit 500 --json 2>/dev/null) || INDEX_JSON=""
+  INDEX_JSON=$(npx emdash content list "$COLLECTION" -u "$BASE_URL" --limit "$INDEX_LIMIT" --json 2>&1) || INDEX_JSON=""
   INDEX=$(python3 -c "
 import json, sys
 raw = sys.argv[1]
@@ -89,7 +95,19 @@ for it in items:
       echo "❌ Could not read the '$COLLECTION' index from $BASE_URL."
       echo "   Not 'the collection is empty' — the listing returned nothing at all,"
       echo "   which is also what an unauthenticated CLI looks like."
-      echo "   Check: npx emdash content list $COLLECTION -u $BASE_URL"
+      echo "   The CLI said:"
+      printf '     %s\n' "$INDEX_JSON" | head -5
+      echo "   Check: npx emdash content list $COLLECTION -u $BASE_URL --limit $INDEX_LIMIT"
+    } >&2
+    exit 1
+  fi
+  # A full page means there may be more, and every entry past the cut would be
+  # reported as "no such slug" — a wrong diagnosis, worse than a missing one.
+  if [[ "$(echo "$INDEX" | grep -c .)" -ge "$INDEX_LIMIT" ]]; then
+    {
+      echo "❌ The '$COLLECTION' listing came back full ($INDEX_LIMIT entries), so it may be cut."
+      echo "   Entries past the cut would be reported as 'no such slug'. Page through"
+      echo "   with --cursor before trusting this run."
     } >&2
     exit 1
   fi

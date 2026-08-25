@@ -229,9 +229,38 @@ Basic PWA support via Web App Manifest — enables mobile home screen installati
 
 ## 9. Caching
 
-- Every page that queries CMS content **must** call `Astro.cache.set(cacheHint)`.
-- API routes (RSS) use `Cache-Control: public, max-age=3600` as fallback.
-- Cloudflare CDN provides edge caching. Static assets are served directly.
+Rewritten after #332/#357. The previous version of this section claimed
+"Cloudflare CDN provides edge caching" — measured false: nothing was cached at
+either layer, and the 27 `Astro.cache.set(cacheHint)` calls emitted no headers
+because no provider was configured.
+
+- **Edge**: Workers Cache is opted in from `wrangler.jsonc` (`"cache": { "enabled": true }`,
+  all three environments). It sits **in front of** the worker: on a hit the
+  code does not run.
+- **Provider**: `cacheCloudflare()` from `@astrojs/cloudflare/cache`, declared in
+  `astro.config.mjs`. It turns a `cacheHint` into `Cloudflare-CDN-Cache-Control`
+  plus `Cache-Tag` (the hint's tags, plus an automatic per-path tag).
+- **Policy — default-deny**, in `src/middleware.ts`. With Workers Cache on, a 200
+  without `Cache-Control` is heuristically cacheable for ~2h under RFC 9111,
+  admin pages included. So only a page that opted in — proven by the tags it
+  accumulated from its own `Astro.cache.set(cacheHint)` — gets `maxAge: 3600,
+  swr: 60`. Everything else gets an explicit `no-store`.
+- **Where a hint may be set**: page frontmatter (`src/pages/**`) or the
+  middleware, and nowhere else. A `cache.set` inside a layout or component runs
+  mid-stream, after the response headers have left, and is silently dropped.
+  `scripts/ci-check-cache-hints.py` enforces this.
+- **Footer data** (services, partners, references render on every page) is
+  tagged centrally in the middleware for that same reason.
+- **Purge on publish**: `src/plugins/cache-purge.ts`, an in-repo EmDash plugin
+  (`capabilities: ["content:read"]`, without which the runtime skips every hook
+  silently). It purges tags `[collection, id]` on afterSave-when-published,
+  afterPublish, afterUnpublish, afterDelete and afterRestore — so purging an
+  entry also evicts the pages that merely embed it.
+- **Known gap**: menus and site settings emit no publish hook in EmDash 0.34,
+  so their staleness is bounded by the 1h TTL rather than purged.
+- **Verification**: `cf-cache-status` on a real preview deploy — `wrangler dev`
+  strips the CDN headers and the local emulator implements no purge at all.
+  `scripts/verify-purge.sh` runs the end-to-end proof, negative control included.
 
 ## 10. Deployment
 
@@ -257,8 +286,10 @@ PR → quality-gates green → merge to main
                               │
                               ▼ (automatic, workflow_run)
                     deploy-preview: build CLOUDFLARE_ENV=preview
+                    → wrangler-action deploy (worker FIRST)
+                    → wait until the worker migrates the remote D1
                     → refresh preview D1 from seed/seed.json
-                    → wrangler-action deploy → verify-deploy battery
+                    → verify-deploy battery
                               │
                               ▼ (Julio verifies on the preview URL)
                     deploy-production: workflow_dispatch ONLY
@@ -278,7 +309,18 @@ PR → quality-gates green → merge to main
   D1 rejects), explicit `CREATE VIRTUAL TABLE` + FTS rebuild statements,
   rehearsed on a throwaway sqlite before touching remote. Automatic for
   preview on every deploy; **opt-in and destructive** for production
-  (`seed_d1` input — overwrites CMS edits made live).
+  (`seed_d1` input — overwrites CMS edits made live), and gated:
+  `scripts/ci-guard-prod-seed.sh` counts the rows already in the target and
+  **refuses** unless the database is empty or the operator typed the
+  confirmation string (#358). Per-table counts are printed before anything is
+  written, allowed or refused.
+- **Deploy order matters** (#369/#370): the worker is deployed **before** the D1
+  refresh. EmDash applies its migrations lazily in the request path, so on a
+  schema-bumping release only the new worker can move the remote schema
+  forward; refreshing first fails with a column-count mismatch. The wait step
+  polls the remote `_emdash_migrations` count against a target **derived** from
+  a locally seeded database, never a hardcoded number.
+
 - **Post-deploy verification** (`verify-deploy.yml`, reusable): 20 routes ×
   (200 + served title), 404 behavior, security-header suite, robots/sitemap/
   canonical/hreflang, W3C Nu spot-check (downtime warns, errors fail).

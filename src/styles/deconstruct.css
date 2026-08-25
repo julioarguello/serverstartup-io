@@ -1,36 +1,283 @@
-/* ═══ Deconstructing this website — assembly-manual page (#161) ═══ */
+/* ═══ Deconstructing this website — the layered document (#161, #305) ═══ */
 
-.s-manual {
+.s-doc {
 	padding: calc(80px + var(--space-4)) 0 var(--rhythm-section);
 }
 
-.s-manual__inner {
+.s-doc__inner {
 	/* #304: it is also the .container, which is margin:0 auto — capping it
 	   here centred the whole page and moved the portal's left edge. The
-	   column is the container's own width now; prose caps at --measure-prose. */
+	   column is the container's own width now. */
 	margin-inline: 0;
 }
 
-.s-manual__intro {
+.s-doc__intro {
 	margin-top: 20px;
 }
 
-.s-manual__intro p,
-.s-manual__prose p {
+.s-doc__intro p,
+.s-doc__section p {
 	font-size: var(--text-body);
 	font-weight: 300;
 	line-height: 1.45;
 	margin-block-end: 14px;
 }
 
-.s-manual__prose {
+/* Body links: the sitewide dashed convention (founder 2026-08-15, mirrored in
+   service.css:124 and about.css:20). This page never adopted it — its wrappers
+   are .s-doc__*, which no other sheet names — so a link here fell through to
+   the reset in theme.css:200 and rendered in body colour with no underline.
+   Indistinguishable from prose: "no veo enlaces" was literally true even for
+   the ones that were there. */
+.s-doc__intro a,
+.s-doc__section a,
+.stack__detail a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 4px;
+	text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+.s-doc__intro a:hover,
+.s-doc__section a:hover,
+.stack__detail a:hover {
+	text-decoration-style: solid;
+}
+
+/* Rhythm lives on the top edge only: each section declares the space above
+   it and never below, or two neighbours both claim the same gap (#304). */
+.s-doc__section {
 	margin-top: var(--space-6);
 }
 
-.s-manual__prose h2 {
-	font-size: 32px;
-	line-height: 40px;
-	margin: 36px 0 14px;
+/* h2 size is sitewide since #304 — clamp(28px, 3.2vw, 40px) in theme.css.
+   The 32px override that used to live here was the third heading register
+   the design-token work went looking for. */
+.s-doc__section h2 {
+	margin: 0 0 14px;
+}
+
+/* The global reset drops list markers; the document's PROSE bullets need them
+   back. Same dash the instruments use, so the page has one list voice.
+   The child combinator is load-bearing: a descendant selector also caught the
+   layer stack's <ul>, which is a list of slabs and not of bullets, and hung a
+   stray "–" off the corner of all six (2026-08-24). Instruments draw their own
+   markers; only a list PortableText emitted straight into the section is
+   prose. */
+.s-doc__section > ul {
+	list-style: none;
+	margin: 0 0 14px;
+	padding: 0;
+}
+
+.s-doc__section > ul > li {
+	position: relative;
+	padding-left: 18px;
+	font-size: var(--text-body);
+	font-weight: 300;
+	line-height: 1.45;
+	margin-bottom: 8px;
+}
+
+.s-doc__section > ul > li::before {
+	content: "–";
+	position: absolute;
+	left: 0;
+	color: var(--color-text-muted);
+}
+
+/* ── The layer stack: the architecture as a descent (#305) ──
+   Every cell is placed explicitly. The first version let the grid auto-place
+   four children into three columns, so the note landed in column 1 — the rank
+   column, sized `auto` — and stretched it to the width of a whole sentence.
+   Rank, name and technology were then shoved into the leftover space with no
+   common left edge: the founder's word for it was "cutrísimo" (2026-08-24).
+   One left axis, the technology pinned right on the name's line, the note
+   under the name and never under the rank. */
+.stack {
+	margin: var(--space-5) 0 0;
+}
+
+.stack__layers {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	overflow: hidden;
+	background: var(--color-surface-sheet);
+}
+
+/* A rule here separates data inside an instrument, which is the one job #304
+   still allows a rule to do — and it is what makes six slabs read as strata. */
+.stack__layer + .stack__layer {
+	border-top: 1px solid var(--color-border);
+}
+
+.stack__details {
+	/* the open slab tints, so the reader can see which one they opened
+	   without a second border joining the party */
+	background: transparent;
+}
+
+.stack__details[open] {
+	background: var(--color-tint);
+}
+
+.stack__summary {
+	display: grid;
+	grid-template-columns: 3.25rem minmax(0, 1fr) 1.5rem;
+	column-gap: var(--space-3);
+	row-gap: 2px;
+	align-items: baseline;
+	padding: 14px var(--space-3) 16px;
+	cursor: pointer;
+	list-style: none;
+}
+
+/* the UA triangle would sit beside our own caret */
+.stack__summary::-webkit-details-marker {
+	display: none;
+}
+
+.stack__summary:hover {
+	background: var(--color-surface-soft);
+}
+
+.stack__details[open] .stack__summary:hover {
+	background: transparent;
+}
+
+.stack__rank {
+	grid-column: 1;
+	grid-row: 1;
+	font-family: var(--font-family-mono);
+	font-size: 13px;
+	color: var(--color-text-muted);
+}
+
+.stack__name {
+	grid-column: 2;
+	grid-row: 1;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.stack__tech {
+	grid-column: 2;
+	grid-row: 2;
+	font-family: var(--font-family-mono);
+	font-size: 13px;
+	color: var(--color-text-muted);
+	/* the reflow gate runs at 320px and these are long unbroken tokens */
+	overflow-wrap: anywhere;
+}
+
+.stack__note {
+	grid-column: 2 / -1;
+	grid-row: 3;
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 1.4;
+	margin-top: 2px;
+}
+
+.stack__caret {
+	grid-column: 3;
+	grid-row: 1;
+	justify-self: end;
+	color: var(--color-text-muted);
+	transition: transform 0.15s ease;
+}
+
+.stack__details[open] .stack__caret {
+	transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.stack__caret { transition: none; }
+}
+
+/* On a phone the panel gets the whole slab. The desktop rule below indents it
+   to line up with the NAME, which costs 84px — a third of a 390px column, and
+   it was squeezing the CMS screenshot down to 256px of a 1600px-wide UI
+   (measured 2026-08-24; the founder's word for the result was "pobre"). */
+.stack__detail {
+	padding: 0 var(--space-3) var(--space-4);
+}
+
+/* `.s-doc__section p` sets var(--text-body) directly on the element, so a
+   font-size on this container loses to it and the panel came out in body
+   register — bigger than the note it expands. Same specificity, stated here. */
+.stack__detail p {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.55;
+}
+
+/* The figure breaks out of the panel's own padding: a screenshot of a desktop
+   UI needs every pixel of the column it can get. */
+.stack__shot {
+	margin: var(--space-3) calc(var(--space-3) * -1) 0;
+}
+
+@media (min-width: 768px) {
+	.stack__shot { margin-inline: 0; }
+}
+
+.stack__shot img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+}
+
+.stack__shot figcaption {
+	font-size: 14px;
+	color: var(--color-text-muted);
+	margin-top: var(--space-2);
+}
+
+.stack__caption {
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 1.4;
+	color: var(--color-text-muted);
+	margin-top: 10px;
+}
+
+/* From here the technology fits on the name's line, so it moves up beside it
+   and the note rises into the row the technology has left. */
+@media (min-width: 768px) {
+	.stack__summary {
+		grid-template-columns: 3.25rem minmax(0, 1fr) auto 1.5rem;
+	}
+
+	.stack__tech {
+		grid-column: 3;
+		grid-row: 1;
+		justify-self: end;
+	}
+
+	.stack__note {
+		grid-column: 2 / span 2;
+		grid-row: 2;
+		margin-top: 0;
+	}
+
+	.stack__caret {
+		grid-column: 4;
+	}
+
+	/* Left edge lines up with the NAME, not with the slab: the summary carries
+	   its own --space-3 of padding before the rank column starts. */
+	.stack__detail {
+		padding-left: calc(var(--space-3) + 3.25rem + var(--space-3));
+	}
 }
 
 /* ── The manual sheet ── */
@@ -75,32 +322,135 @@
 	margin: 20px 0 10px;
 }
 
+/* The parts list, recomposed as the descent (#305, founder 2026-08-24). It was
+   a 2×4 grid of equal boxes, which is the shape of an inventory and not of a
+   hierarchy; the layers now run top to bottom with the rank on a single left
+   axis, and each part reveals the repository file it IS. */
 .manual__parts {
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 10px;
+	border: 1px solid var(--color-primary);
 }
 
-.manual__parts li {
-	border: 1px solid var(--color-primary);
-	padding: 10px 12px;
+.manual__part {
+	position: relative;
+	display: grid;
+	grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+	align-items: baseline;
+	column-gap: var(--space-2);
+	padding: 9px 12px 9px 9px;
+	/* the bar is reserved at rest and only takes colour on hover: a border that
+	   appears would push every cell 3px right */
+	border-left: 3px solid transparent;
 	font-size: 13px;
 	line-height: 1.45;
+	transition: background-color 0.12s ease;
+}
+
+.manual__part + .manual__part {
+	border-top: 1px solid var(--color-primary);
+}
+
+.manual__rank {
+	grid-column: 1;
+	font-family: var(--font-family-mono);
+	font-size: 12px;
+	color: var(--color-ink-soft);
+}
+
+.manual__part b {
+	grid-column: 2;
 }
 
 .manual__qty {
+	grid-column: 3;
+	justify-self: end;
 	font-family: var(--font-family-mono);
 	font-size: 12px;
 }
 
-.manual__note {
-	display: block;
-	color: var(--color-ink-soft);
-	font-weight: 300;
+.manual__note,
+.manual__file {
+	grid-column: 2 / -1;
+	grid-row: 2;
 	font-size: 12px;
+	font-weight: 300;
+	line-height: 1.4;
+}
+
+.manual__note {
+	color: var(--color-ink-soft);
+}
+
+.manual__file {
+	font-family: var(--font-family-mono);
+	color: var(--color-primary);
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+	overflow-wrap: anywhere;
+}
+
+/* The reveal itself. Note and file share one grid cell, so the row never
+   changes height when they swap — a list that jumps on hover is unusable.
+   It swaps OPACITY, not visibility, and that is load-bearing: `innerText`
+   honours `visibility: hidden` but ignores `opacity: 0`, so with visibility the
+   rendered text of this page depended on whether `@media (hover: hover)`
+   matched — which the CI runner and this laptop disagreed about. The copy gate
+   caught it (run 32777424987). With opacity the path is in the text in every
+   environment and the reveal is still only visual. */
+@media (hover: hover) {
+	.manual__part--open .manual__file {
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.12s ease;
+	}
+
+	/* The colour is the edge orange, which is what this whole page is about.
+	   It lights the ground and a left bar, never the text: #F38020 on paper is
+	   about 2.3:1, so an orange filename would fail AA in the one page whose
+	   subject is not cutting corners. */
+	.manual__part--open:hover,
+	.manual__part--open:focus-within {
+		background: var(--color-tint-edge);
+		border-left-color: var(--color-edge);
+	}
+
+	.manual__part--open:hover .manual__rank,
+	.manual__part--open:focus-within .manual__rank {
+		color: var(--color-primary);
+		font-weight: 700;
+	}
+
+	.manual__part--open:hover .manual__note,
+	.manual__part--open:focus-within .manual__note {
+		opacity: 0;
+	}
+
+	.manual__part--open:hover .manual__file,
+	.manual__part--open:focus-within .manual__file {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.manual__file { transition: none; }
+}
+
+/* Touch has no hover, so nothing hides: the path sits under the note and the
+   row is two lines taller. The information may not depend on a pointer. */
+@media (hover: none) {
+	.manual__file {
+		grid-row: 3;
+		margin-top: 2px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.manual__part { transition: none; }
 }
 
 .manual__steps {
@@ -174,7 +524,6 @@
 }
 
 @media (min-width: 768px) {
-	.manual__parts { grid-template-columns: repeat(4, 1fr); }
 	.manual__steps { grid-template-columns: repeat(6, 1fr); }
 	.manual__boxes { grid-template-columns: 1fr 1fr; }
 }

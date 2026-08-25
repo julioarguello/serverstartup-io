@@ -1,0 +1,65 @@
+---
+/**
+ * The boundary between drafting and merging, drawn as what it actually is:
+ * a pull request (#305).
+ *
+ * The `+` lines come from the section's own bullet list in the CMS, not from
+ * label keys — list items keep their marks and their links, while a label
+ * cell is a plain-text slot with brittle delimiters. ServiceInstrument does
+ * the same for the AI page.
+ *
+ * The chips are the fifteen failable STEPS of .github/workflows/ci.yml, and
+ * the title is the one check run GitHub actually reports. They used to be seven
+ * invented `ci/*` check contexts — no such context exists anywhere in the repo,
+ * because CI is a single job, so the panel was decorating rather than showing
+ * (caught by the #305 fact-check, 2026-08-24). If a step is renamed there and
+ * not here the panel starts lying again, which is why the names live in the
+ * CMS, where a copy review can see them.
+ */
+import { PortableText } from "emdash/ui";
+import PtLink from "../PtLink.astro";
+
+interface Props {
+	labels: { get: (widget: string, key: string, fallback: string) => string };
+	items: any[];
+	label: string;
+}
+const { labels, items, label } = Astro.props;
+const L = (k: string, fb: string) => labels.get("manual_labels", k, fb);
+const ptComponents = { mark: { link: PtLink } };
+
+const checks = L("rv_checks", "").split(";").map((c) => c.trim()).filter(Boolean);
+const del = L("rv_del", "");
+---
+
+{items.length > 0 && (
+	<div class="inst inst--light inst--pr" role="group" aria-label={label}>
+		<div class="inst__bar pr__bar">
+			<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"/></svg>
+			<b class="pr__title">{L("rv_title", "")}</b>
+			<span class="pr__chip">{L("rv_chip", "")}</span>
+		</div>
+		<div class="pr__diff">
+			{del && (
+				<p class="pr__line pr__line--del"><span class="pr__sign" aria-hidden="true">−</span><span class="pr__code">{del}</span></p>
+			)}
+			{items.map((b) => (
+				<div class="pr__line pr__line--add">
+					<span class="pr__sign" aria-hidden="true">+</span>
+					<div class="pr__code"><PortableText value={[{ ...b, listItem: undefined, level: undefined }]} components={ptComponents} /></div>
+				</div>
+			))}
+		</div>
+		{checks.length > 0 && (
+			<div class="pr__checks">
+				{L("rv_checks_title", "") && <p class="pr__checks-title">{L("rv_checks_title", "")}</p>}
+				{checks.map((c) => <span class="pr__check">✓ {c}</span>)}
+			</div>
+		)}
+		<div class="pr__review">
+			<span class="pr__approved">✔ {L("rv_approved", "")}</span>
+			<span class="pr__signoff">{L("rv_signoff", "")}</span>
+			<span class="pr__merge">{L("rv_merge", "")}</span>
+		</div>
+	</div>
+)}

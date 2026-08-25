@@ -113,18 +113,26 @@ jobs:
         if: always()
         run: |
           {
-            echo "## Quality gates"
+            # One row per failable step above, in order. The page at
+            # /deconstruyendo counts them ("quince pasos que pueden fallar"), so
+            # this table is the artifact that claim is checked against — it
+            # listed eleven and said "8 routes" for a gate covering ten (#305).
+            echo "## Quality gates — 15 steps that can fail"
             echo "| Gate | Target |"
             echo "|---|---|"
             echo "| gitleaks | no leaks |"
             echo "| citability | 0 forbidden names |"
-            echo "| cms-text | labels resolve ES+EN, 0 hardcoded copy |"
-            echo "| cache hints | cache.set only where headers still open |"
-            echo "| unit tests | accent · panels · excerpt |"
-            echo "| rendered copy | 26 routes match the baseline |"
             echo "| astro check | 0 errors, 0 warnings |"
+            echo "| seed schema | seed.json validates |"
+            echo "| cms-text | labels resolve ES+EN, 0 hardcoded copy |"
+            echo "| design tokens | colour, radius, shadow and width from theme.css |"
+            echo "| cache hints | cache.set only where headers still open |"
+            echo "| unit tests | accent · panels · excerpt · doc-sections |"
+            echo "| build | astro build succeeds |"
+            echo "| local stack | boots and serves, seeded from seed.json |"
             echo "| html-validate | 0 problems, 15 templates |"
+            echo "| rendered copy | 26 routes match the baseline |"
             echo "| security headers | full #164 suite |"
-            echo "| a11y | axe 8 routes · keyboard traversal · WCAG 2.1.4 · reflow 320px |"
+            echo "| a11y | axe 10 routes · keyboard traversal · WCAG 2.1.4 · reflow 320px · W3C Nu |"
             echo "| Lighthouse | perf >=95 · a11y 100 · bp 100 · seo 100 |"
           } >> "$GITHUB_STEP_SUMMARY"

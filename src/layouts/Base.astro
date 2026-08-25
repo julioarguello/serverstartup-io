@@ -64,7 +64,15 @@ const t = Astro.locals.t;
 // collection per request. The overhead is negligible.
 const [settings, siteMenu, servicesResult, partnersResult, labels] = await Promise.all([
 	getSiteSettings(),
-	getMenu(`site_${Astro.currentLocale || "es"}`),
+	// The locale is passed explicitly. EmDash 0.34 made menus locale-scoped,
+	// and getMenu() with no options resolves the DEFAULT locale, not the
+	// request's — so an EN page asked for `site_en` and looked for it under
+	// `es`, found nothing, and got null. MenuDialog then dropped every item it
+	// could not map and rendered the specialties alone: the whole site row
+	// disappeared from both locales with no error anywhere (#355 fallout,
+	// caught by the founder 2026-08-24). The other half of the fix is in the
+	// seed — its menus carried no `locale` and landed on the column default.
+	getMenu(`site_${locale}`, { locale }),
 	getEmDashCollection("services", {
 		orderBy: { created_at: "asc" },
 		locale,

@@ -5,7 +5,8 @@
 				"http://localhost:8787/",
 				"http://localhost:8787/comercio-electronico",
 				"http://localhost:8787/cdn-waf-seguridad-edge-cloudflare",
-				"http://localhost:8787/contacto"
+				"http://localhost:8787/contacto",
+				"http://localhost:8787/deconstruyendo"
 			],
 			"numberOfRuns": 3,
 			"settings": {

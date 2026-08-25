@@ -1,13 +1,13 @@
 ---
 /**
- * Deconstructing this website (EN) — mirrors deconstruyendo.astro.
+ * Deconstructing this website (EN) — mirrors deconstruyendo.astro (#305).
  */
 import { getEmDashEntry, getSiteSettings } from "emdash";
 import { entryAlternatePath } from "../../utils/alternate";
-import { PortableText } from "emdash/ui";
 import CubeEmblem from "../../components/CubeEmblem.astro";
 import Base from "../../layouts/Base.astro";
-import AssemblyManual from "../../components/AssemblyManual.astro";
+import CtaGlobal from "../../components/CtaGlobal.astro";
+import DeconstructDoc from "../../components/DeconstructDoc.astro";
 import { getUiLabels } from "../../utils/ui-labels";
 import type { SiteSettings } from "../../types";
 
@@ -15,20 +15,17 @@ const locale = "en";
 let { entry, cacheHint } = await getEmDashEntry("pages", "deconstructing", { locale });
 if (!entry) ({ entry, cacheHint } = await getEmDashEntry("pages", "deconstruyendo", { locale }));
 if (!entry) return Astro.redirect("/en");
+// Stays in the page: ci-check-cache-hints.py allows cache.set only here or in
+// the middleware — a component call runs mid-stream, after the headers left.
 Astro.cache.set(cacheHint);
 
 const { title, content, excerpt } = entry.data;
 const settings = await getSiteSettings() as SiteSettings;
 const labels = await getUiLabels(locale);
 const repoUrl = settings.repoUrl || "";
-
-const blocks: any[] = (content as any[]) || [];
-const firstH2 = blocks.findIndex((b) => b._type === "block" && b.style === "h2");
-const intro = firstH2 === -1 ? blocks : blocks.slice(0, firstH2);
-const prose = firstH2 === -1 ? [] : blocks.slice(firstH2);
 // Slugs are translated across locales — resolve the counterpart via the CMS (#291)
-const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "en") : null;
-
+const altPath = await entryAlternatePath("pages", entry.data.id, "en");
+const accentColor = "var(--color-primary)";
 ---
 
 <Base title={title} description={excerpt || `${title} — Server Startup`} altPath={altPath}>
@@ -36,17 +33,19 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "en") :
 		<CubeEmblem color="var(--color-primary)" faceKey="dec" size={340} />
 	</div>
 
-	<section class="s-manual" aria-label={title}>
-		<div class="container s-manual__inner">
+	<section class="s-doc" aria-label={title}>
+		<div class="container s-doc__inner">
 			<CubeEmblem class="s-emblem-mini" color="var(--color-primary)" faceKey="dec" size={104} />
 			<h1>{title}</h1>
-			{intro.length > 0 && <div class="s-manual__intro"><PortableText value={intro} /></div>}
-			<AssemblyManual labels={labels} repoUrl={repoUrl} />
-			{prose.length > 0 && <div class="s-manual__prose"><PortableText value={prose} /></div>}
+			<DeconstructDoc content={content as any[]} labels={labels} repoUrl={repoUrl} />
 		</div>
 	</section>
+
+	<CtaGlobal />
 </Base>
 
-<style is:global>
+<style is:global define:vars={{ accentColor }}>
+	/* service.css first: the instruments' own chrome, then this page's rules */
+	@import "../../styles/service.css";
 	@import "../../styles/deconstruct.css";
 </style>

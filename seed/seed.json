@@ -324,6 +324,7 @@
 	"menus": [
 		{
 			"name": "primary",
+			"locale": "es",
 			"label": "Navegación principal",
 			"items": [
 				{
@@ -365,6 +366,7 @@
 		},
 		{
 			"name": "site_es",
+			"locale": "es",
 			"label": "Sitio",
 			"items": [
 				{
@@ -380,6 +382,7 @@
 		},
 		{
 			"name": "site_en",
+			"locale": "en",
 			"label": "Site",
 			"items": [
 				{
@@ -702,6 +705,281 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "ly_d5",
+							"children": [
+								{
+									"_type": "span",
+									"text": "La [caché de `Workers`](https://developers.cloudflare.com/workers/runtime-apis/cache/) se sienta delante del `worker`, así que un acierto responde sin ejecutar nada. Por defecto no se cachea: una página solo entra si ella misma lo pide. Cuando entra dura una hora, y al publicar se purga por etiquetas."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d4",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Un único *middleware* para todas las respuestas: resuelve el idioma, carga las etiquetas de accesibilidad, decide la política de caché y estampa siete cabeceras de seguridad. El panel de edición queda fuera, porque trae las suyas."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "26 rutas públicas, 24 componentes y 12 hojas de estilo, con [render bajo demanda](https://docs.astro.build/en/guides/on-demand-rendering/) de `Astro`, que también es de Cloudflare [desde enero de 2026](https://blog.cloudflare.com/astro-joins-cloudflare/). Los idiomas no se separan por prefijo sino por *slug* traducido, así que la ruta alterna se resuelve contra el CMS y nunca se adivina: adivinarla devuelve un 404."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "[`EmDash`](https://blog.cloudflare.com/emdash-wordpress/) no es un servicio contratado: es el CMS que Cloudflare publicó en abril de 2026 con licencia MIT como sucesor de WordPress, y que usa en [su propio blog](https://blog.cloudflare.com/cloudflare-blog-uses-emdash/) desde el 12 de agosto. Aquí inyecta 183 rutas bajo `/_emdash` en esta misma aplicación, con 7 colecciones y 43 entradas: mismo *script*, mismos enlaces de recursos, ninguna llamada de red. Los *plugins* de terceros son la excepción deliberada, y corren en un aislado aparte con [Worker Loader](https://developers.cloudflare.com/workers/runtime-apis/bindings/worker-loader/), sin salida a internet."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El contenido en [`D1`](https://developers.cloudflare.com/d1/), los ficheros en [`R2`](https://developers.cloudflare.com/r2/) y las sesiones en [`KV`](https://developers.cloudflare.com/kv/). Los estáticos no pasan por aquí: los sirve la capa de recursos sin llegar a despertar al `worker`."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d0",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Un fichero de texto en Git, más los cuerpos de los servicios en `markdown`. De ahí sale la web entera en una reconstrucción desde cero, que es lo que hace la integración continua antes de cada fusión."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_shot_alt",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El panel de EmDash editando esta misma página, con el título, el cuerpo y el estado de publicación a la vista."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_shot_caption",
+							"children": [
+								{
+									"_type": "span",
+									"text": "El panel, editando esta página. Corre en el mismo worker que acaba de servírtela."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_rows",
+							"children": [
+								{
+									"_type": "span",
+									"text": "L5|el borde|Workers · caché delante|Un acierto devuelve la página sin ejecutar código.;L4|la puerta|middleware|Decide qué se cachea y añade las cabeceras de seguridad.;L3|el render|Astro SSR|Construye el HTML en el mismo `worker` que recibió la petición.;L2|el CMS|EmDash|Corre dentro del mismo `worker`: no hay servicio externo al que llamar.;L1|los datos|D1 · R2 · KV|Contenido, imágenes y sesiones, en el `edge`.;L0|el origen|seed.json · markdown|Lo que escribe una persona. Todo lo de encima se deriva de aquí."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_caption",
+							"children": [
+								{
+									"_type": "span",
+									"text": "La petición entra por arriba. Abajo vive lo que escribe una persona, y por eso es la capa que se revisa a mano."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_host",
+							"children": [
+								{
+									"_type": "span",
+									"text": "serverstartup.io"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_cmd",
+							"children": [
+								{
+									"_type": "span",
+									"text": "reconstruir --desde-cero"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_lines",
+							"children": [
+								{
+									"_type": "span",
+									"text": "base de datos creada, vacía;semillas aplicadas: 43 entradas, dos idiomas;copia congelada: 26 rutas;copia renderizada: coincide con la congelada"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_log",
+							"children": [
+								{
+									"_type": "span",
+									"text": "listo. La reconstrucción es la prueba, y corre antes de cada fusión."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "agent/draft → main"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_chip",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Open"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_del",
+							"children": [
+								{
+									"_type": "span",
+									"text": "publicar sin que nadie lo lea"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_checks_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "All checks have passed — quality-gates / gates"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_checks",
+							"children": [
+								{
+									"_type": "span",
+									"text": "gitleaks;citabilidad;astro check;esquema de semillas;textos del CMS;tokens de diseño;pistas de caché;tests unitarios;construcción;arranque de la pila;html-validate;copia congelada;cabeceras;accesibilidad;Lighthouse"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_approved",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Approved"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_signoff",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Signed-off-by: julio.arguello"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_merge",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Merge pull request"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "nm_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Umbrales · integración continua"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "nm_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "EXIGIDO"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "nm_tiles",
+							"children": [
+								{
+									"_type": "span",
+									"text": "rendimiento|95 o más;accesibilidad|100;buenas prácticas|100;SEO|100;rutas con copia congelada|26;pasos que pueden fallar|15"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "mn_header",
 							"children": [
 								{
@@ -728,7 +1006,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Workers + WAF,×1,el escudo;D1 + R2,×1,datos y media;Astro SSR + EmDash,×1,render y CMS;semillas,×26,todos los textos;skill de copywriting,×1,la voz con lista negra;agente,×N,redacta nunca decide;repositorio,×1,mira dentro;ingenieros,×3,no incluidos: ya estaban"
+									"text": "L5|el borde|×1|el `worker` que responde|src/worker.ts;L4|la puerta|×7|las cabeceras de seguridad|src/middleware.ts;L3|el render|×26|las rutas públicas|src/pages/;L2|el CMS|×5|un *plugin* nuestro con la API de `EmDash`|src/plugins/cache-purge.ts;L1|los datos|×3|`D1`, `R2` y `KV`|wrangler.jsonc;L0|el origen|×43|el corpus entero|seed/seed.json;—|los ingenieros|×3|no incluidos: ya estaban|"
 								}
 							]
 						},
@@ -805,7 +1083,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Tiempo estimado: una tarde y sus commits."
+									"text": "Tiempo de montaje: tres semanas a ratos."
 								}
 							]
 						},
@@ -2339,6 +2617,281 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "ly_d5",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The [`Workers` cache](https://developers.cloudflare.com/workers/runtime-apis/cache/) sits in front of the `worker`, so a hit answers without running anything. Nothing is cached by default: a page only gets in if it asks to. Once in it lasts an hour, and publishing purges it by tag."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d4",
+							"children": [
+								{
+									"_type": "span",
+									"text": "One *middleware* for every response: it resolves the locale, loads the accessibility labels, decides the cache policy and stamps seven security headers. The editing panel is excluded, because it brings its own."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d3",
+							"children": [
+								{
+									"_type": "span",
+									"text": "26 public routes, 24 components and 12 stylesheets, on `Astro` [on-demand rendering](https://docs.astro.build/en/guides/on-demand-rendering/) — Astro has been part of Cloudflare [since January 2026](https://blog.cloudflare.com/astro-joins-cloudflare/). Locales are not separated by prefix but by translated slug, so the alternate route is resolved against the CMS and never guessed: guessing it returns a 404."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "[`EmDash`](https://blog.cloudflare.com/emdash-wordpress/) is not a service you subscribe to: it is the CMS Cloudflare released in April 2026 under an MIT licence as a successor to WordPress, and has run [its own blog](https://blog.cloudflare.com/cloudflare-blog-uses-emdash/) since 12 August. Here it injects 183 routes under `/_emdash` into this very application, with 7 collections and 43 entries: same *script*, same bindings, no network call. Third-party *plugins* are the deliberate exception, running in a separate isolate through [Worker Loader](https://developers.cloudflare.com/workers/runtime-apis/bindings/worker-loader/), with no way out to the internet."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d1",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Content in [`D1`](https://developers.cloudflare.com/d1/), files in [`R2`](https://developers.cloudflare.com/r2/) and sessions in [`KV`](https://developers.cloudflare.com/kv/). Static assets never come through here: the asset layer serves them without ever waking the `worker`."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_d0",
+							"children": [
+								{
+									"_type": "span",
+									"text": "A text file in Git, plus the service bodies in `markdown`. The whole site comes out of it in a rebuild from nothing, which is what continuous integration does before every merge."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_shot_alt",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The EmDash panel editing this very page, showing the title, the body and the publish state."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_shot_caption",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The panel, editing this page. It runs in the same worker that just served it to you."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_rows",
+							"children": [
+								{
+									"_type": "span",
+									"text": "L5|the edge|Workers · cache in front|A hit returns the page without running any code.;L4|the door|middleware|Decides what may be cached and adds the security headers.;L3|the render|Astro SSR|Builds the HTML in the same `worker` that took the request.;L2|the CMS|EmDash|Runs inside the same `worker`: no external service to call.;L1|the data|D1 · R2 · KV|Content, images and sessions, at the `edge`.;L0|the origin|seed.json · markdown|What a person writes. Everything above derives from it."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ly_caption",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The request comes in at the top. What a person writes lives at the bottom, which is why that is the layer reviewed by hand."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_host",
+							"children": [
+								{
+									"_type": "span",
+									"text": "serverstartup.io"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_cmd",
+							"children": [
+								{
+									"_type": "span",
+									"text": "rebuild --from-nothing"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_lines",
+							"children": [
+								{
+									"_type": "span",
+									"text": "database created, empty;seeds applied: 43 entries, two locales;frozen copy: 26 routes;rendered copy: matches the frozen baseline"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "tm_log",
+							"children": [
+								{
+									"_type": "span",
+									"text": "done. The rebuild is the proof, and it runs before every merge."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "agent/draft → main"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_chip",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Open"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_del",
+							"children": [
+								{
+									"_type": "span",
+									"text": "publish without anyone reading it"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_checks_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "All checks have passed — quality-gates / gates"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_checks",
+							"children": [
+								{
+									"_type": "span",
+									"text": "gitleaks;citability;astro check;seed schema;CMS text;design tokens;cache hints;unit tests;build;boot the stack;html-validate;frozen copy;headers;accessibility;Lighthouse"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_approved",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Approved"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_signoff",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Signed-off-by: julio.arguello"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "rv_merge",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Merge pull request"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "nm_title",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Thresholds · continuous integration"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "nm_status",
+							"children": [
+								{
+									"_type": "span",
+									"text": "REQUIRED"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "nm_tiles",
+							"children": [
+								{
+									"_type": "span",
+									"text": "performance|95 or more;accessibility|100;best practices|100;SEO|100;routes with frozen copy|26;steps that can fail|15"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "mn_header",
 							"children": [
 								{
@@ -2365,7 +2918,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Workers + WAF,×1,the shield;D1 + R2,×1,data and media;Astro SSR + EmDash,×1,render and CMS;seeds,×26,every text;copywriting skill,×1,the voice with a blacklist;agent,×N,drafts never decides;repository,×1,look inside;engineers,×3,not included: already there"
+									"text": "L5|the edge|×1|the `worker` that answers|src/worker.ts;L4|the door|×7|the security headers|src/middleware.ts;L3|the render|×26|the public routes|src/pages/;L2|the CMS|×5|a *plugin* of ours on the `EmDash` API|src/plugins/cache-purge.ts;L1|the data|×3|`D1`, `R2` and `KV`|wrangler.jsonc;L0|the origin|×43|the whole corpus|seed/seed.json;—|the engineers|×3|not included: already there|"
 								}
 							]
 						},
@@ -2442,7 +2995,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Estimated time: one afternoon and its commits."
+									"text": "Assembly time: three weeks, in odd hours."
 								}
 							]
 						},
@@ -14713,115 +15266,702 @@
 				"status": "published",
 				"data": {
 					"title": "Deconstruyendo esta web",
-					"excerpt": "Cómo está montada esta web. Semillas versionadas, un agente que redacta y un humano que firma. Con los números a la vista.",
+					"excerpt": "Cómo está montada esta web, capa por capa: del punto de presencia que respondió a tu petición al *commit* que autorizó estas palabras. Con los umbrales y las mediciones a la vista.",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Esta página explica cómo está construida la web que estás leyendo. No por vanidad. Es nuestra manera de trabajar, aplicada a nuestro propio escaparate. Si te cuentan cómo trabajan y no pueden enseñarte el taller, desconfía."
+									"_key": "k0",
+									"text": "Si te cuentan cómo trabajan y no pueden enseñarte el taller, desconfía. Este es el nuestro.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k6",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "El recorrido va hacia abajo, del punto de presencia que respondió a tu petición al *commit* que autorizó estas palabras. Cada capa se abre si quieres el detalle, y todo lo que se afirma aquí está en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "el repositorio",
+									"marks": [
+										"k3"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "La arquitectura"
+									"_key": "k7",
+									"text": "La arquitectura",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "kf",
 							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kc",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/workers/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Astro con renderizado en servidor sobre Cloudflare Workers. El contenido vive en EmDash, un CMS que corre en el mismo Worker, con la base de datos en D1 y las imágenes en R2. No hay servidores que cuidar. La página que ves se sirvió desde un punto de presencia a menos de 50 ms de ti."
+									"_key": "k9",
+									"text": "No hay servidores que cuidar, y eso es lo de menos. Importa dónde se fabricó la respuesta que estás leyendo: en el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "edge",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": ", sobre ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "`Cloudflare Workers`",
+									"marks": [
+										"kc"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": ". Delante hay caché, y cuando acierta el código ni se ejecuta.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kh",
+									"_type": "link",
+									"href": "https://blog.cloudflare.com/emdash-wordpress/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "Debajo, el CMS es ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "`EmDash`",
+									"marks": [
+										"kh"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": ", que Cloudflare publicó con licencia MIT como sucesor de WordPress, y no un servicio al que llamar por red: es la misma aplicación, servida por el mismo ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "worker",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": ". Y al final del descenso no hay base de datos, hay un fichero de texto en Git.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ko",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Contenido como código"
+									"_key": "kn",
+									"text": "Contenido como código",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k11",
 							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kq",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/seed/seed.json"
+								},
+								{
+									"_key": "kt",
+									"_type": "link",
+									"href": "/desarrollo-greenfield"
+								},
+								{
+									"_key": "ky",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/.github/workflows/ci.yml"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Cada texto de esta web vive en seed/, versionado en Git. Un rebuild desde cero reproduce el sitio entero, palabra a palabra. Si un texto cambia, hay un commit que lo cuenta."
+									"_key": "kp",
+									"text": "Casi cada texto vive en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": "`seed/seed.json`",
+									"marks": [
+										"kq"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": ", y los cuerpos de los ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "servicios",
+									"marks": [
+										"kt"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": " en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "markdown",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": ": el nombre del fichero es el *slug*, el directorio es el idioma. Una reconstrucción desde cero rehace la web entera, y eso lo comprueba la ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kz",
+									"text": "integración continua",
+									"marks": [
+										"ky"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": " antes de cada fusión.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k15",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "La caché hereda la disciplina: una página solo se cachea si lo pide, y al publicar se purga por etiquetas. Queda un hueco y conviene decirlo: los menús y los ajustes no emiten evento, así que su desfase lo acota el ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "TTL",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": " de una hora.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k17",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Los agentes"
+									"_key": "k16",
+									"text": "Los agentes",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k1b",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "La primera versión de cada texto la redacta un agente con una skill de copywriting. La voz de la casa, una lista negra de palabras prohibidas y un detector de tics de IA con puntuación. Después un humano lo lee, lo corrige y lo firma. El paso de revisión no es opcional. Es el producto."
+									"_key": "k18",
+									"text": "Que un modelo redacte el primer borrador no tiene mérito ni misterio. Lo que decide si esto es serio es ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "quién tiene autoridad para qué",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": ".",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k1d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "El agente propone y no fusiona. Las comprobaciones rechazan y no escriben: su credencial es de solo lectura. La persona puede las dos cosas, y por eso es la única que puede equivocarse con nombre y apellidos. La letra pequeña: que el agente no fusione es una regla escrita, no un candado del servidor.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1e",
+									"text": "Antes de preguntarle nada a una persona, la rama pasa por quince pasos que pueden fallar. Se niegan a dejar pasar lo que una revisión a ojo no ve:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": "Nombres no citables:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": " un cliente que no puede salir en un repositorio público.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1l",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "Textos fuera del CMS:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1k",
+									"text": " una etiqueta que solo existe en un idioma, o una frase escrita a fuego en la plantilla.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1o",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": "Colores fuera del sistema:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": " un literal o una anchura nueva, que es como vuelven las siete medidas distintas.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1r",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": "Caché en el sitio equivocado:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": " una llamada puesta donde las cabeceras ya se han ido, que no cachea nada y lo parece.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1x",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1u",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/tree/main/tests/copy-baseline"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "Copia que cambia sola:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": " el texto renderizado de ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": "26 rutas",
+									"marks": [
+										"k1u"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": " está congelado.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k23",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k20",
+									"_type": "link",
+									"href": "https://validator.w3.org/nu/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "Accesibilidad y contraste:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": " tabulador, reflujo a 320 píxeles y validación del ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": "W3C",
+									"marks": [
+										"k20"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "Un guardia solo vale si puede fallar, y uno que no encuentra nada se ve igual que uno que no puede. Los dos más delicados llevan un control positivo que los revienta si dejan de mirar. La última puerta tampoco es automática: producción se despliega a mano.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Los números"
+									"_key": "k26",
+									"text": "Los números",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k2c",
 							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k29",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/lighthouserc.json"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Lighthouse 100 en rendimiento, accesibilidad, buenas prácticas y SEO en las cuatro plantillas, medido el 6 de agosto de 2026 sobre el build de producción. Validación W3C, cero errores. LCP por debajo de 1,3 segundos en móvil. Cuando cambien, cambiará esta línea."
+									"_key": "k28",
+									"text": "Un número sin fecha es el peor sitio para la deriva, así que aquí hay dos clases y no se mezclan. El umbral vive en ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "un fichero",
+									"marks": [
+										"k29"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2b",
+									"text": ": 95 o más en rendimiento, cien en accesibilidad, buenas prácticas y SEO, sobre la mediana de tres pasadas con emulación móvil.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k2e",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "La medición lleva su fecha. El 24 de agosto de 2026, sobre la construcción de producción: cien en las cuatro categorías y en las cinco direcciones, con el mayor contenido pintado por debajo de 1,6 segundos. Es la mediana de cada una, y la cota es la peor de las cinco.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2g",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "El taller, a la vista"
+									"_key": "k2f",
+									"text": "El taller, a la vista",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k2i",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Código, semillas, skills y prompts viven en el repositorio. Mira dentro y dinos si harías algo mejor. Probablemente sí. Así empiezan las buenas conversaciones."
+									"_key": "k2h",
+									"text": "El repositorio es público y se sincroniza con cada cambio en la rama principal, con la historia entera y sin filtrar. Publicar así tiene un coste: por eso existe el guardia de nombres no citables.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2q",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2k",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io"
+								},
+								{
+									"_key": "k2n",
+									"_type": "link",
+									"href": "/contacto"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2j",
+									"text": "Código, semillas, comprobaciones y despliegues: está todo. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2l",
+									"text": "Mira dentro",
+									"marks": [
+										"k2k"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": " y ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2o",
+									"text": "dinos",
+									"marks": [
+										"k2n"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2p",
+									"text": " si harías algo distinto.",
+									"marks": []
 								}
 							]
 						}
@@ -14837,115 +15977,702 @@
 				"translationOf": "page-deconstruyendo",
 				"data": {
 					"title": "Deconstructing this website",
-					"excerpt": "How this site is put together. Versioned seeds, an agent that drafts and a human who signs. Numbers in plain sight.",
+					"excerpt": "How this website is built, layer by layer: from the point of presence that answered your request to the commit that authorised these words. Thresholds and measurements in plain sight.",
 					"content": [
 						{
 							"_type": "block",
+							"_key": "k1",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "This page explains how the website you are reading is built. Not out of vanity. It is how we work, applied to our own shop window. If someone tells you how they work but can't show you the workshop, be suspicious."
+									"_key": "k0",
+									"text": "If someone tells you how they work and cannot show you the workshop, be suspicious. This is ours.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k6",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": "The tour runs downwards, from the point of presence that answered your request to the commit that authorised these words. Every layer opens if you want the detail, and everything claimed here is in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "the repository",
+									"marks": [
+										"k3"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "The architecture"
+									"_key": "k7",
+									"text": "The architecture",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "kf",
 							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kc",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/workers/"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Astro with server-side rendering on Cloudflare Workers. Content lives in EmDash, a CMS running in the same Worker, with the database on D1 and images on R2. No servers to babysit. The page you are reading was served from a point of presence less than 50 ms away from you."
+									"_key": "k9",
+									"text": "There are no servers to look after, and that is the least of it. What matters is where the response you are reading was made: at the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka",
+									"text": "edge",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": ", on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "`Cloudflare Workers`",
+									"marks": [
+										"kc"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": ". Cache sits in front, and on a hit the code never runs.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kh",
+									"_type": "link",
+									"href": "https://blog.cloudflare.com/emdash-wordpress/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kg",
+									"text": "Below that, the CMS is ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ki",
+									"text": "`EmDash`",
+									"marks": [
+										"kh"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": ", which Cloudflare released under an MIT licence as a successor to WordPress, and not a service to call over the network: it is the same application, served by the same ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kk",
+									"text": "worker",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": ". And at the bottom of the descent there is no database, there is a text file in Git.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ko",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Content as code"
+									"_key": "kn",
+									"text": "Content as code",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k11",
 							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kq",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/seed/seed.json"
+								},
+								{
+									"_key": "kt",
+									"_type": "link",
+									"href": "/en/greenfield-development"
+								},
+								{
+									"_key": "ky",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/.github/workflows/ci.yml"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Every text on this site lives in seed/, versioned in Git. A clean rebuild reproduces the whole site, word for word. When a text changes, there is a commit that tells the story."
+									"_key": "kp",
+									"text": "Almost every text lives in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": "`seed/seed.json`",
+									"marks": [
+										"kq"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ks",
+									"text": ", with the ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ku",
+									"text": "service",
+									"marks": [
+										"kt"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": " bodies in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kw",
+									"text": "markdown",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": ": the filename is the slug, the directory is the locale. A rebuild from nothing remakes the whole site, and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kz",
+									"text": "continuous integration",
+									"marks": [
+										"ky"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": " checks that before every merge.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k15",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "Caching inherits the discipline: a page is cached only if it asks to be, and publishing purges it by tag. One gap is worth saying out loud: menus and site settings emit no event, so a one-hour ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "TTL",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": " is what bounds their staleness.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k17",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "The agents"
+									"_key": "k16",
+									"text": "The agents",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k1b",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "The first draft of every text is written by an agent with a copywriting skill. The house voice, a blacklist of forbidden words, and an AI-tell detector with a score. Then a human reads it, corrects it and signs it. The review step is not optional. It is the product."
+									"_key": "k18",
+									"text": "A model writing the first draft is neither impressive nor mysterious. What decides whether this is serious is ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": "who has authority over what",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": ".",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k1d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1c",
+									"text": "The agent proposes and cannot merge. The checks refuse and cannot write: their credential is read-only. The human can do both, which is why the human is the only one who can be wrong by name. The small print: the agent not merging is a written rule, not a lock on the server.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1e",
+									"text": "Before a person is asked anything, the branch goes through fifteen steps that can fail. They refuse what a reading by eye does not catch:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1g",
+									"text": "Non-citable names:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": " a client who must not appear in a public repository.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1l",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "Copy outside the CMS:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1k",
+									"text": " a label that exists in one locale only, or a sentence burnt into a template.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1o",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": "Colours outside the system:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": " a literal or a new width, which is how seven different measures come back.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1r",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": "Caching in the wrong place:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1q",
+									"text": " a call placed after the headers have gone, which caches nothing and looks like it does.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1x",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k1u",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/tree/main/tests/copy-baseline"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "Copy that changes by itself:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": " the rendered text of ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1v",
+									"text": "26 routes",
+									"marks": [
+										"k1u"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": " is frozen.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k23",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k20",
+									"_type": "link",
+									"href": "https://validator.w3.org/nu/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": "Accessibility and contrast:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1z",
+									"text": " keyboard traversal, reflow at 320 pixels and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k21",
+									"text": "W3C",
+									"marks": [
+										"k20"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": " validation.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The two most delicate carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "The numbers"
+									"_key": "k26",
+									"text": "The numbers",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k2c",
 							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k29",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io/blob/main/lighthouserc.json"
+								}
+							],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Lighthouse 100 in performance, accessibility, best practices and SEO across all four templates, measured on the production build on August 6, 2026. W3C validation, zero errors. LCP under 1.3 seconds on mobile. When these change, this line changes."
+									"_key": "k28",
+									"text": "An undated number is the worst possible place for drift, so there are two kinds here and they never mix. The threshold lives in ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "a file",
+									"marks": [
+										"k29"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2b",
+									"text": ": 95 or more for performance, 100 for accessibility, best practices and SEO, over the median of three runs under mobile emulation.",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k2e",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2d",
+									"text": "The measurement carries its date. On 24 August 2026, against the production build: 100 in all four categories across all five addresses, with the largest content painted in under 1.6 seconds. Each figure is a median, and the bound is the worst of the five.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2g",
 							"style": "h2",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "The workshop, in plain sight"
+									"_key": "k2f",
+									"text": "The workshop, in plain sight",
+									"marks": []
 								}
 							]
 						},
 						{
 							"_type": "block",
+							"_key": "k2i",
 							"style": "normal",
+							"markDefs": [],
 							"children": [
 								{
 									"_type": "span",
-									"text": "Code, seeds, skills and prompts live in the repository. Look inside and tell us what you would do better. Probably something. That is how good conversations start."
+									"_key": "k2h",
+									"text": "The repository is public and syncs on every change to the main branch, whole history, unfiltered. Publishing like that has a cost: that is why the non-citable-names guard exists.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2q",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2k",
+									"_type": "link",
+									"href": "https://github.com/julioarguello/serverstartup-io"
+								},
+								{
+									"_key": "k2n",
+									"_type": "link",
+									"href": "/en/contact"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2j",
+									"text": "Code, seeds, checks and deployments: it is all there. ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2l",
+									"text": "Look inside",
+									"marks": [
+										"k2k"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": " and ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2o",
+									"text": "tell us",
+									"marks": [
+										"k2n"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2p",
+									"text": " if you would do it differently.",
+									"marks": []
 								}
 							]
 						}

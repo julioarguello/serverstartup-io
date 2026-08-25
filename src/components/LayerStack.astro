@@ -1,0 +1,125 @@
+---
+/**
+ * LayerStack — the architecture as a descent (#305).
+ *
+ * Reads top-down: where the request arrived, and how far you have to go
+ * before you reach something a human wrote. Each slab names what it decides,
+ * because a layer that decides nothing is not a layer, it is a dependency.
+ *
+ * Each slab OPENS. Closed it is one line — rank, name, technology and a
+ * one-clause note. Open it carries the portal's own architecture at that
+ * level, which is the half the page used to leave out entirely. The first
+ * version drew a decorative chevron at the right edge of every row and wired
+ * nothing to it: the founder clicked all five (2026-08-24). A caret there is
+ * an accordion control in every design system alive, so either it works or it
+ * does not belong — it now works.
+ *
+ * DOM and CSS, deliberately not SVG: the text has to stay real — selectable,
+ * searchable, picked up by the rendered-copy baseline, and able to reflow at
+ * 320px. The only SVG here is the disclosure caret.
+ *
+ * All text comes from the CMS (`manual_labels`), the way AssemblyManual does.
+ * Encoding: rows separated by ";", cells by "|" — NOT by commas, because
+ * these notes are prose and prose has commas (mn_parts had to write
+ * "no incluidos: ya estaban" to dodge exactly that). No cell may contain
+ * "|" or ";". The expanded prose does not fit that encoding — it is long and
+ * comma-heavy — so it lives one key per rank: `ly_d5` … `ly_d0`.
+ *
+ * Notes and panels render through `excerptHtml`, the same markdown-lite pass
+ * the service heroes use: a label slot cannot hold Portable Text, so without it
+ * these strings were the only prose on the site with no links, no code font and
+ * no italicised anglicisms — which the founder spotted from the outside
+ * (2026-08-24). Backticks, *italics* and [text](url) all work here now.
+ */
+import { excerptHtml } from "../utils/excerpt";
+
+interface Props {
+	labels: { get: (widget: string, key: string, fallback: string) => string };
+	/** Rank whose expanded panel carries the CMS screenshot (e.g. "L2"). */
+	figureRank?: string;
+	figureSrc?: string;
+	figureAlt?: string;
+	figureCaption?: string;
+	figureWidth?: number;
+	figureHeight?: number;
+	/** Narrow crop for phones: the wide shot is a desktop UI, and at 358px it
+	    is unreadable, so small screens get the editor column on its own. */
+	figureSrcNarrow?: string;
+	figureNarrowWidth?: number;
+	figureNarrowHeight?: number;
+}
+const {
+	labels, figureRank, figureSrc, figureAlt, figureCaption, figureWidth, figureHeight,
+	figureSrcNarrow, figureNarrowWidth, figureNarrowHeight,
+} = Astro.props;
+/** Matches the stylesheet's own phone breakpoint. */
+const NARROW = "(max-width: 767px)";
+const L = (k: string, fb: string) => labels.get("manual_labels", k, fb);
+
+const rows = L("ly_rows", "")
+	.split(";")
+	.map((r) => r.split("|").map((c) => c.trim()))
+	.filter((cells) => cells.length >= 2 && cells[1]);
+const caption = L("ly_caption", "");
+---
+
+{rows.length > 0 && (
+	<figure class="stack">
+		{/* ul, not ol: html-validate's prefer-native-element wants role="list"
+		    on a <ul>, and the sequence is already explicit in the visible
+		    L5…L0 rank. role="list" is required because the global reset sets
+		    list-style:none, which makes Safari drop list semantics — same
+		    reason AssemblyManual carries it. */}
+		<ul class="stack__layers" role="list">
+			{rows.map(([rank, name, tech, note]) => {
+				const detail = L(`ly_d${rank.replace(/\D/g, "")}`, "");
+				const hasFigure = Boolean(figureRank && figureSrc && rank === figureRank);
+				return (
+					<li class="stack__layer">
+						<details class="stack__details">
+							<summary class="stack__summary">
+								<span class="stack__rank">{rank}</span>
+								<span class="stack__name">{name}</span>
+								{tech && <span class="stack__tech">{tech}</span>}
+								<svg class="stack__caret" width="14" height="14" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+									<path d="M6 9l6 6 6-6" />
+								</svg>
+								{note && <span class="stack__note" set:html={excerptHtml(note)} />}
+							</summary>
+							{(detail || hasFigure) && (
+								<div class="stack__detail">
+									{detail && <p set:html={excerptHtml(detail)} />}
+									{hasFigure && (
+										<figure class="stack__shot">
+											<picture>
+												{figureSrcNarrow && (
+													<source
+														media={NARROW}
+														srcset={figureSrcNarrow}
+														width={figureNarrowWidth}
+														height={figureNarrowHeight}
+													/>
+												)}
+												<img
+													src={figureSrc}
+													alt={figureAlt}
+													width={figureWidth}
+													height={figureHeight}
+													loading="lazy"
+													decoding="async"
+												/>
+											</picture>
+											{figureCaption && <figcaption>{figureCaption}</figcaption>}
+										</figure>
+									)}
+								</div>
+							)}
+						</details>
+					</li>
+				);
+			})}
+		</ul>
+		{caption && <figcaption class="stack__caption">{caption}</figcaption>}
+	</figure>
+)}

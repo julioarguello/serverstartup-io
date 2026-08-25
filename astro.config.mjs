@@ -32,7 +32,7 @@ export default defineConfig({
 		},
 	},
 	adapter: cloudflare(),
-	// #332: the 31 Astro.cache.set(cacheHint) calls only emit through a
+	// #332: the Astro.cache.set(cacheHint) calls only emit through a
 	// provider. This one sets Cloudflare-CDN-Cache-Control + Cache-Tag and
 	// purges via cache.purge({tags}) from cloudflare:workers. Edge caching
 	// itself is opted in from wrangler.jsonc ("cache": { enabled: true });

@@ -1,0 +1,90 @@
+---
+/**
+ * The deconstructing document (#305) — five sections, one per layer of the
+ * descent, each with the instrument that shows rather than claims.
+ *
+ * Both locale pages render through here. They used to carry a copy of the
+ * splitter each, which is two places for the same logic to drift.
+ *
+ * Instruments are dispatched BY INDEX. That is fast to read and it is also
+ * the failure mode worth guarding: if an editor adds or removes an h2 in the
+ * CMS, pairing by index would silently put the terminal under "los números".
+ * So the dispatch only runs when the document has exactly the shape it was
+ * written for; otherwise every section renders as prose and the page is
+ * poorer but never wrong.
+ */
+import { PortableText } from "emdash/ui";
+import PtLink from "./PtLink.astro";
+import AssemblyManual from "./AssemblyManual.astro";
+import LayerStack from "./LayerStack.astro";
+import DecTerminal from "./deconstruct/DecTerminal.astro";
+import DecReview from "./deconstruct/DecReview.astro";
+import DecTiles from "./deconstruct/DecTiles.astro";
+import { splitByHeading } from "../utils/doc-sections";
+
+interface Props {
+	content: any[];
+	labels: { get: (widget: string, key: string, fallback: string) => string };
+	repoUrl: string;
+}
+const { content, labels, repoUrl } = Astro.props;
+const ptComponents = { mark: { link: PtLink } };
+
+const { intro, sections } = splitByHeading(content);
+/** The document was written with five sections; anything else renders plain. */
+const EXPECTED_SECTIONS = 5;
+const withInstruments = sections.length === EXPECTED_SECTIONS;
+
+/** The index whose bullets the PR panel consumes as its `+` lines. */
+const REVIEW_SECTION = 2;
+
+/**
+ * Blocks to render as prose. When an instrument already draws a section's
+ * bullets, the prose must NOT draw them too: the first version passed the
+ * whole section to PortableText *and* the same listItems to DecReview, so six
+ * bullets appeared twice, verbatim, 119 words apart — a third of the section
+ * and the loudest half of the founder's "veo mucha verbosidad" (2026-08-24).
+ * It reached the frozen baseline, because a baseline freezes what renders,
+ * including what renders twice.
+ */
+const proseOf = (section: { blocks: any[] }, i: number) =>
+	withInstruments && i === REVIEW_SECTION
+		? section.blocks.filter((b: any) => !b.listItem)
+		: section.blocks;
+---
+
+{intro.length > 0 && (
+	<div class="s-doc__intro"><PortableText value={intro} components={ptComponents} /></div>
+)}
+
+{sections.map((section, i) => (
+	<section class="s-doc__section">
+		<h2>{section.heading}</h2>
+		<PortableText value={proseOf(section, i)} components={ptComponents} />
+
+		{withInstruments && i === 0 && (
+			<LayerStack
+				labels={labels}
+				figureRank="L2"
+				figureSrc="/assets/emdash-editor-deconstruyendo.webp"
+				figureWidth={1600}
+				figureHeight={1006}
+				figureSrcNarrow="/assets/emdash-editor-deconstruyendo-narrow.webp"
+				figureNarrowWidth={780}
+				figureNarrowHeight={674}
+				figureAlt={labels.get("manual_labels", "ly_shot_alt", "")}
+				figureCaption={labels.get("manual_labels", "ly_shot_caption", "")}
+			/>
+		)}
+		{withInstruments && i === 1 && <DecTerminal labels={labels} label={section.heading} />}
+		{withInstruments && i === REVIEW_SECTION && (
+			<DecReview
+				labels={labels}
+				label={section.heading}
+				items={section.blocks.filter((b: any) => b.listItem)}
+			/>
+		)}
+		{withInstruments && i === 3 && <DecTiles labels={labels} label={section.heading} />}
+		{withInstruments && i === 4 && <AssemblyManual labels={labels} repoUrl={repoUrl} />}
+	</section>
+))}
