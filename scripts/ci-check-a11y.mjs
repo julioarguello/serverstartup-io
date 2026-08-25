@@ -16,13 +16,10 @@
  * Usage: node scripts/ci-check-a11y.mjs [base-url]      default http://localhost:8787
  */
 import puppeteer from "puppeteer";
-import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { seedRoutes } from "./lib/seed-routes.mjs";
 
 const BASE = (process.argv[2] || "http://localhost:8787").replace(/\/$/, "");
-const SEED = join(dirname(dirname(fileURLToPath(import.meta.url))), "seed", "seed.json");
 const require = createRequire(import.meta.url);
 const axeSource = require("fs").readFileSync(
 	require.resolve("axe-core/axe.min.js"),
@@ -40,21 +37,15 @@ const axeSource = require("fs").readFileSync(
  * routes it omits. Deriving it means the audit cannot fall behind the next
  * page the way a transcribed list does — and the count stops being a number
  * anyone has to keep true.
+ *
+ * The derivation itself lives in `lib/seed-routes.mjs`, shared with the copy
+ * baseline: two copies of it meant a change to the seed's shape had to be
+ * caught, and fixed, twice.
  */
 function auditRoutes() {
-	const data = JSON.parse(readFileSync(SEED, "utf8"));
-	const out = [];
-	for (const collection of ["pages", "services"]) {
-		for (const entry of data.content[collection] ?? []) {
-			const slug = entry.slug ?? entry.id;
-			const prefix = entry.locale === "en" ? "/en" : "";
-			out.push(collection === "pages" && slug === "home" ? prefix || "/" : `${prefix}/${slug}`);
-		}
-	}
 	// The search results page is declared by no collection, and it is where both
 	// WCAG failures of 2026-08-20 lived (2.1.1 and 2.1.4).
-	out.push("/search?q=cloudflare", "/en/search?q=cloudflare");
-	return [...new Set(out)].sort();
+	return [...seedRoutes(), "/search?q=cloudflare", "/en/search?q=cloudflare"].sort();
 }
 
 const ROUTES = auditRoutes();
@@ -72,8 +63,9 @@ const ROUTES = auditRoutes();
  * They are genuine, and they are not this change's to decide: the greys belong
  * to the foreign chrome those instruments imitate (the `token-guard: off`
  * regions of §14), so raising them trades fidelity for contrast on a surface
- * the founder owns. Filed rather than silently fixed or silently suppressed —
- * widening this list is the first thing to do once that call is made.
+ * the founder owns. Filed as #387 rather than silently fixed or silently
+ * suppressed — widening this list to ROUTES is the first thing to do once
+ * that call is made, and it is the only reason the list is sampled at all.
  */
 const AXE_ROUTES = [
 	"/",

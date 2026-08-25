@@ -136,9 +136,6 @@ def scan(path: Path) -> tuple[list[tuple[int, str, str]], int]:
 
 # ── positive control ────────────────────────────────────────────────────────
 
-# One planted defect per rule the scanner claims to enforce, plus the two
-# shapes it must NOT flag. Each entry: (line of CSS, substring the finding
-# must mention) — `None` means "this line must produce no finding at all".
 # One planted defect per rule the scanner claims to enforce, plus the three
 # shapes it must NOT flag. Written the way this project writes CSS — one
 # declaration per line — because that is what the scanner reads; a fixture

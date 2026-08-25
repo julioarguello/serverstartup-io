@@ -332,8 +332,10 @@ PR → quality-gates green → merge to main
   median (perf ≥ 95, a11y/bp/seo = 100).
 - **Accessibility gate** (`scripts/ci-check-a11y.mjs`): axe-core over a
   sampled route list, plus the checks a rule engine cannot decide — keyboard
-  traversal over **every** route the seed declares, both locales (26 today,
-  derived like the sitemap so it cannot fall behind a new page), each walked
+  traversal over **every** route the seed declares, both locales, plus the two
+  search pages no collection declares — derived like the sitemap, from
+  `scripts/lib/seed-routes.mjs`, so the list cannot fall behind a new page and
+  the count is not a number anyone has to keep true — each walked
   to the end of the document asserting every stop is visible, carries a focus
   ring and is not under the fixed header; the menu opening with `Enter`,
   holding focus while open, closing with `Escape` and **handing focus back to

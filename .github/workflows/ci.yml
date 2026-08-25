@@ -117,6 +117,10 @@ jobs:
             # /deconstruyendo counts them ("quince pasos que pueden fallar"), so
             # this table is the artifact that claim is checked against — it
             # listed eleven and said "8 routes" for a gate covering ten (#305).
+            # The STEP COUNT is the claim and must stay true. The row text is
+            # prose for a reader: keep it descriptive, and do not transcribe a
+            # count or a file list that something else derives — those rows go
+            # stale silently, and two of them already had (#386).
             echo "## Quality gates — 15 steps that can fail"
             echo "| Gate | Target |"
             echo "|---|---|"
@@ -127,12 +131,12 @@ jobs:
             echo "| cms-text | labels resolve ES+EN, 0 hardcoded copy |"
             echo "| design tokens | colour, radius, shadow and width from theme.css |"
             echo "| cache hints | cache.set only where headers still open |"
-            echo "| unit tests | accent · panels · excerpt · doc-sections · nav · reserved-paths |"
+            echo "| unit tests | every vitest suite in tests/unit |"
             echo "| build | astro build succeeds |"
             echo "| local stack | boots and serves, seeded from seed.json |"
             echo "| html-validate | 0 problems, 15 templates |"
-            echo "| rendered copy | 26 routes match the baseline |"
+            echo "| rendered copy | every seed route matches its baseline · menu links match the seed |"
             echo "| security headers | full #164 suite |"
-            echo "| a11y | axe 10 routes · keyboard traversal · WCAG 2.1.4 · reflow 320px · W3C Nu |"
+            echo "| a11y | axe sample · keyboard traversal, every route · menu focus trap · WCAG 2.1.4 · reflow 320px · W3C Nu |"
             echo "| Lighthouse | perf >=95 · a11y 100 · bp 100 · seo 100 |"
           } >> "$GITHUB_STEP_SUMMARY"
