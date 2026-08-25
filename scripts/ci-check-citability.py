@@ -77,9 +77,11 @@ def tracked_files() -> list[str]:
     """
     proc = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT,
                           capture_output=True, text=True, check=True)
-    # Regular files only: the index also lists symlinks, and .claude/skills is
-    # a symlink to a DIRECTORY (the .agent clone) — grep exits 2 on those,
-    # which would abort the scan rather than report a violation.
+    # Regular files only: the index can also list symlinks, and grep exits 2 on
+    # one pointing at a directory — aborting the scan rather than reporting a
+    # violation. No tracked symlink remains as of #325, which is why this is
+    # written as a guard against the index growing one again, not against a
+    # specific file.
     return [f for f in proc.stdout.split("\0")
             if f and (ROOT / f).is_file() and not (ROOT / f).is_symlink()]
 

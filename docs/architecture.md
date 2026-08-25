@@ -360,6 +360,40 @@ PR → quality-gates green → merge to main
   comparator catches a deleted line, a changed word and a truncation) and
   a11y (a link under a fixed header with its ring suppressed, a 720px block at
   320px, an `<img>` with no alt).
+- **Public agent guide, private rules** (#325). `AGENTS.md` is the file a
+  foreign agent opens by convention, and it is tracked — so it is published.
+  It used to be generated output: an index of eleven paths into a private
+  repository no clone receives, a glob table routing `worker/**`, `Dockerfile`
+  and `application.properties` in a project with none of them, and a tracked
+  `.claude/skills` symlink pointing outside the tree and therefore dangling on
+  every clone. All three fail *silently* — an agent reading them loads nothing
+  and gets no warning, the same failure mode worktrees have. `AGENTS.md` is now
+  hand-owned public content: how to run the site, where the gate table is, and
+  the rules that are not obvious from the code (content in the CMS, both
+  languages, tokens from `theme.css`, one column, who may be named). The
+  private index reaches the agent through `CLAUDE.md`, a real file that is not
+  tracked. `tests/unit/agent-boundary.test.ts` keeps the boundary: no private
+  path in `AGENTS.md`, every relative link resolved **against `git ls-files`
+  rather than the disk** (the private directory exists on a maintainer's
+  machine and nowhere else, so the working tree would answer "fine" for exactly
+  the reader the test protects), and no tracked symlink escaping the
+  repository. The generator that wrote the old file lives in the private repo
+  and can overwrite this one from outside anything CI sees; the test is what
+  turns that into a red build instead of a silent republication. `AGENTS.md`
+  was not the only thing it wrote: the PR template asked every contributor to
+  tick `npm run lint`, a script this project has never had, beside a row about
+  a Cloudflare Worker build in a repository with no `worker/`. A checklist row
+  nobody can satisfy gets ticked anyway. Both are now asserted generically —
+  no tracked file may point *into* the private repository (naming the bare
+  directory is allowed; explaining the `.agents/` rename requires it), and the
+  template may name no npm script that `package.json` does not define.
+- **Vendored, and named so** (#325). The EmDash starter's skill pack sat at
+  `.agents/` — one character from the private `.agent/`, public where the other
+  is private, tracked where the other is excluded, and referenced by nothing.
+  It is now `vendor/emdash-skills/`, beside the other external code, with a
+  README recording that it came from `cloudflare[bot]`'s import commit on
+  2026-04-21 when EmDash was **0.6.0**, and has not been touched since. The
+  project runs **0.34.0**, so that README says plainly which parts to distrust.
 - **The naming gate reads what grep skips** (`ci-check-citability.py`, #324).
   This repository is mirrored publicly and one guard decides who may be named
   in it (§13). `grep -I` stops at the first NUL byte and says nothing, which

@@ -46,6 +46,17 @@ Two local gotchas worth knowing before they cost you an hour:
 - If you have built with `CLOUDFLARE_ENV=preview` at some point, you may have
   two local sqlite files; the seed recipe above targets whichever exists, so
   after switching environments, rebuild with the default env first.
+- If pages redirect to `/404` from a server that looks perfectly healthy, the
+  seed went into the wrong database — `npx emdash seed` writes to `./data.db`
+  by default, and the dev server reads Wrangler's D1 emulator. Ask the database
+  which one has the content:
+
+  ```bash
+  sqlite3 "$D1_DB" "SELECT slug, title FROM ec_pages;"
+  ```
+
+  An empty result means the seed landed somewhere else. Re-run it with the
+  `-d "$D1_DB"` above.
 
 ## Branches, commits, pull requests
 
@@ -122,17 +133,30 @@ the CMS carries every word.
 CI enforces all of this on every PR; run it locally first. Everything is
 reproducible with the scripts in [`scripts/`](scripts/):
 
+The order is the order CI runs them in. **`Secrets` is the one gate with no local
+command** — it is a GitHub Action over the full history, so it cannot be reproduced
+from a working tree; everything else runs here first.
+
 | Gate | Local command | Target |
 | :--- | :--- | :--- |
+| Secrets | — (gitleaks Action, CI only) | no leaks, full history |
+| Citability | `python3 scripts/ci-check-citability.py` | no name outside the policy, in any tracked file — needs the `FORBIDDEN_NAMES` secret |
 | Types | `npm run typecheck` | 0 errors, 0 warnings |
 | Seed schema | `npx emdash seed seed/seed.json --validate` | valid |
 | CMS text | `python3 scripts/ci-check-cms-text.py` | labels resolve in both locales; 0 hardcoded copy |
+| Design tokens | `python3 scripts/ci-check-design-tokens.py` | colour, radius, shadow and width declared only in `theme.css` |
+| Cache hints | `python3 scripts/ci-check-cache-hints.py` | `cache.set()` only where it reaches the headers |
+| Unit tests | `npm test` | every suite in `tests/unit/` |
 | Build | `npm run build` | completes |
 | Seeded boot | `scripts/ci-local-stack.sh 8787` | homepage 200 from seeds alone |
-| HTML | `html-validate` over the 15 rendered routes | 0 problems |
+| HTML | `html-validate` over the rendered routes | 0 problems |
+| Rendered copy | `node scripts/copy-baseline.mjs verify --base-url http://localhost:8787` | every seed route matches its baseline |
 | Headers | `scripts/ci-check-headers.sh http://localhost:8787` | full suite present |
+| Accessibility | `node scripts/ci-check-a11y.mjs http://localhost:8787` | axe sample, keyboard traversal, focus trap, WCAG 2.1.4, reflow at 320px |
 | Lighthouse | `lighthouserc.json` assertions | perf ≥ 95; a11y, BP, SEO = 100 |
-| Secrets | gitleaks (CI) | no leaks, full history |
+
+Not a PR gate, but the same family:
+
 | Post-deploy | `scripts/verify-deploy.sh <base-url>` | 20 routes + headers + W3C Nu, all green |
 
 Two habits that keep these gates meaningful:

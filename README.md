@@ -99,10 +99,15 @@ is the canonical contact. Please report privately before publishing.
 
 ## A note on what you won't find here
 
-The `.agent/` submodule (internal team skills and rules) points to a private
-repository — clones work fine without it. Company knowledge, client details
-and anything not ours to publish stay out of this repository and its history,
-by design.
+Our internal working rules live in a private repository. Nothing here depends
+on it — a clone builds, tests and deploys without it — and it is attached by
+nothing you need to fetch: there is no submodule, and `git submodule update`
+has never had anything to do. Company knowledge, client details and anything
+not ours to publish stay out of this repository and its history, by design.
+
+What an outside contributor or agent actually needs is written down where it
+can be read: [`AGENTS.md`](AGENTS.md) for the rules that are not obvious from
+the code, [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup and the quality bar.
 
 ## Rights
 

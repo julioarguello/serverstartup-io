@@ -3,7 +3,7 @@ description: Reescritura de documentos con estilo Boutique Copywriter manteniend
 ---
 
 1. **Leer el archivo objetivo**: Utiliza `view_file` para leer el contenido del documento original desde `src/frikitek/`.
-2. **Leer la skill**: Utiliza `view_file` para leer las instrucciones de `.agent/skills/boutique_copywriter/SKILL.md`.
+2. **Leer la skill**: Utiliza `view_file` para leer las instrucciones de la skill de copywriting (repositorio de reglas interno, no incluido en este clon).
 3. **Leer principios estratégicos**: Utiliza `view_file` para leer `docs/ai.txt`.
 4. **Reescribir el contenido**:
    - Genera el nuevo contenido aplicando estrictamente la personalidad y reglas del "Boutique Copywriter" (Flat101, Codurance, Paradigma).
