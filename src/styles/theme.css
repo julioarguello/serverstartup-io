@@ -104,6 +104,10 @@
 	   (0.5/0.55/0.65/0.7): the 0.5 ones composited to #8F8F8F, which is
 	   3.0:1 on white — below AA for the small metadata they dressed. */
 	--color-text-muted: #6B6B6B;      /* 5.4:1 on paper */
+	/* …and its counterpart, for the same reduced weight on a dark
+	   instrument. #6B6B6B is 2.84:1 on the javadoc's own bar (#232724):
+	   the ink has to flip, not merely dim (#387). */
+	--color-text-muted-dark: #8C8C8C; /* 4.5:1 on #232724, 5.7:1 on #1b1e1c */
 
 	/* The console is a surface of its own — the machine voice (#304) */
 	--color-console: #101214;         /* terminal window ground */

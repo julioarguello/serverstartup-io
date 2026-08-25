@@ -51,34 +51,22 @@ function auditRoutes() {
 const ROUTES = auditRoutes();
 
 /**
- * axe keeps a sampled list, deliberately, and this is the record of why.
+ * axe runs on every audited route. It did not always: until #387 the list was
+ * a sample of ten, because widening it surfaced four real `color-contrast`
+ * failures (WCAG 1.4.3) that were not the gate's to decide. Three of the greys
+ * belonged to the foreign chrome those instruments imitate — Google's BigQuery
+ * console and a javadoc page — and the fourth was the house muted ink used on
+ * a dark bar it was never measured against.
  *
- * Running axe over all of ROUTES surfaces four real `color-contrast` failures
- * (WCAG 1.4.3), measured 2026-08-25 against the local stack: on the Big Data
- * pages `.bq__menu` at 2.5:1 (#9aa0a6 on #f8f9fa) and `.bq__gutter` at 2.08:1
- * (#b0b4b8 on #ffffff); on the Greenfield pages `.inst__muted` at 2.84:1
- * (#6b6b6b on #232724) and the javadoc tag span at 2.07:1 (#4a524a on
- * #1b1e1c). Both locales, so eight nodes in all.
+ * The founder's call (2026-08-25) was to raise all four to the smallest value
+ * that clears AA, on the reasoning that fidelity here meant reproducing an
+ * interface that fails AA itself. So the sample has no reason to exist, and
+ * the audit is the full route list again.
  *
- * They are genuine, and they are not this change's to decide: the greys belong
- * to the foreign chrome those instruments imitate (the `token-guard: off`
- * regions of §14), so raising them trades fidelity for contrast on a surface
- * the founder owns. Filed as #387 rather than silently fixed or silently
- * suppressed — widening this list to ROUTES is the first thing to do once
- * that call is made, and it is the only reason the list is sampled at all.
+ * Do not narrow it back to make a failure go away. A route dropped from this
+ * list is a route nobody checks, and the drop leaves no trace in a green run.
  */
-const AXE_ROUTES = [
-	"/",
-	"/cdn-waf-seguridad-edge-cloudflare",
-	"/quienes-somos",
-	"/contacto",
-	"/referencias",
-	"/deconstruyendo",
-	"/integracion-de-sistemas",
-	"/search?q=cloudflare",
-	"/en",
-	"/en/about-us",
-];
+const AXE_ROUTES = ROUTES;
 
 // Positive control on the list itself (#385). The founder named twelve routes
 // per locale; the seed declares thirteen. A parse that silently returned fewer

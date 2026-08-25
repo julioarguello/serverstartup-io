@@ -330,8 +330,8 @@ PR → quality-gates green → merge to main
   validation, CMS text integrity, design tokens, build, seeded boot,
   html-validate ×15 routes, header suite, accessibility, Lighthouse 3-run
   median (perf ≥ 95, a11y/bp/seo = 100).
-- **Accessibility gate** (`scripts/ci-check-a11y.mjs`): axe-core over a
-  sampled route list, plus the checks a rule engine cannot decide — keyboard
+- **Accessibility gate** (`scripts/ci-check-a11y.mjs`): axe-core over **every**
+  audited route, plus the checks a rule engine cannot decide — keyboard
   traversal over **every** route the seed declares, both locales, plus the two
   search pages no collection declares — derived like the sitemap, from
   `scripts/lib/seed-routes.mjs`, so the list cannot fall behind a new page and
@@ -343,6 +343,24 @@ PR → quality-gates green → merge to main
   Traversals start by focusing `<body>` — `blur()` clears `activeElement` but
   not the *sequential focus navigation starting point*, so on the autofocusing
   search pages the first Tab otherwise begins mid-document.
+- **The axe list was a sample of ten until #387, and the reason is worth
+  keeping.** Widening it surfaced four real `color-contrast` failures (WCAG
+  1.4.3, eight nodes across both locales), and three of the greys belonged to
+  the foreign chrome those instruments imitate — Google's BigQuery console and
+  a javadoc page — inside the `token-guard: off` regions §10.10 describes.
+  Raising them trades fidelity for contrast, which is not a gate's decision, so
+  the failures were filed rather than fixed or suppressed, and the sample
+  carried the four measurements in its comment. The founder's call (2026-08-25)
+  was to raise all four to the smallest value that clears AA, on the reasoning
+  that fidelity there meant reproducing an interface that fails AA itself:
+  `#9aa0a6 → #6d7379` (2.50 → 4.55:1), `#b0b4b8 → #73777b` (2.09 → 4.51:1),
+  `#4a524a → #7f877f` (2.08 → 4.54:1). The fourth was not foreign at all —
+  `--color-text-muted` (#6B6B6B, 5.4:1 on paper) dressing the javadoc's own
+  dark bar at 2.84:1. Ink at reduced weight has to **flip** on a dark ground,
+  not merely dim, so `theme.css` gained `--color-text-muted-dark` (#8C8C8C) and
+  `.inst--dark .inst__muted` consumes it. The audit is the full route list
+  again; narrowing it to make a failure go away would drop routes nobody would
+  then check, and the drop leaves no trace in a green run.
 - **Every gate carries a positive control** (#385). A check that finds no
   problems and one that *cannot* find problems print the same green line, so
   each gate first plants the exact defect it hunts in a fixture it owns and

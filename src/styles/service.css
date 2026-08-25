@@ -253,6 +253,12 @@
 	font-size: 14px;
 }
 
+/* Same reduced weight, read from the other end of the scale: the muted ink is
+   5.4:1 on paper and 2.84:1 on the javadoc bar it also dresses (#387). */
+.inst--dark .inst__muted {
+	color: var(--color-text-muted-dark);
+}
+
 .inst__bar--dots {
 	background: var(--color-console-bar);
 	border-bottom: none;
@@ -598,7 +604,7 @@
 }
 
 .bq__menu {
-	color: #9aa0a6;
+	color: #6d7379; /* was #9aa0a6 — 2.50:1, below AA (#387) → 4.55:1 */
 	font-size: 12.5px;
 	white-space: pre;
 }
@@ -615,7 +621,7 @@
 
 .bq__gutter {
 	text-align: right;
-	color: #b0b4b8;
+	color: #73777b; /* was #b0b4b8 — 2.09:1, below AA (#387) → 4.51:1 */
 	font-size: 13px;
 	line-height: 2;
 }
@@ -785,7 +791,7 @@
 	display: flex;
 	flex-direction: column;
 	text-align: right;
-	color: #4a524a;
+	color: #7f877f; /* was #4a524a — 2.08:1, below AA (#387) → 4.54:1 */
 	font-size: 13px;
 	line-height: 2;
 }
