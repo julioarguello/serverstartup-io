@@ -172,9 +172,9 @@ Tell us about your project
 references
 Areas of expertise
 E-commerce
-CDN, WAF & Edge Security
-Big Data & Cloud Analytics
 Systems Integration
+Big Data & Cloud Analytics
+CDN, WAF & Edge Security
 Greenfield development
 Artificial Intelligence
 We are partners

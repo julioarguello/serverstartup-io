@@ -22,9 +22,9 @@ traspasos
 referencias
 Áreas de especialización
 Comercio electrónico
-CDN, WAF y seguridad edge
-Big Data & Cloud Analytics
 Integración de sistemas
+Big Data & Cloud Analytics
+CDN, WAF y seguridad edge
 Desarrollo greenfield
 Inteligencia artificial
 Somos partners

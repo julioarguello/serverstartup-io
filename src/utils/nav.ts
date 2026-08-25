@@ -80,6 +80,39 @@ export type DieSlot = "front" | "right" | "back" | "left" | "top" | "bottom";
 /** Menu order of the specialties — the list renders it and the roll walks it. */
 export const FACE_ORDER: FaceKey[] = ["ec", "int", "bd", "cdn", "gf", "ia"];
 
+/**
+ * Rank of a service slug in the canonical order. Unknown slugs sort last,
+ * never first: a new service that nobody mapped should appear at the end of a
+ * list, not silently jump to the top of one.
+ */
+export function faceRank(slug: string): number {
+	const i = FACE_ORDER.indexOf(FACE_BY_SLUG[slug]);
+	return i === -1 ? FACE_ORDER.length : i;
+}
+
+/**
+ * Canonical order for a fetched services collection (#381, founder 2026-08-25).
+ *
+ * The footer used to render whatever `orderBy: { created_at: "asc" }` returned,
+ * and the seeder inserts fast enough that two entries share a millisecond: the
+ * tie broke differently between two clean reseeds of the same seed file, which
+ * failed the frozen-copy gate on a dozen pages at once. Order is now decided by
+ * an explicit list, so it cannot depend on the clock.
+ *
+ * The footer therefore agrees with the menu and the homepage rows, which is the
+ * point: the homepage carried its own literal copy of FACE_ORDER, and two lists
+ * of the same six things are two lists that will eventually disagree.
+ *
+ * The slug tiebreak is not decoration — without it, two UNMAPPED slugs would
+ * tie on `FACE_ORDER.length` and hand the decision back to the clock.
+ */
+export function sortByFace<T extends { id: string; slug?: string }>(entries: T[]): T[] {
+	const key = (e: T) => e.slug ?? e.id;
+	return [...entries].sort(
+		(a, b) => faceRank(key(a)) - faceRank(key(b)) || key(a).localeCompare(key(b)),
+	);
+}
+
 export const DIE_FACE: Record<FaceKey, DieSlot> = {
 	int: "front",
 	ec: "left",

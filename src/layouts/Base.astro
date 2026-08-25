@@ -12,6 +12,7 @@ import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
 import { routeAlternatePath } from "../utils/alternate";
+import { sortByFace } from "../utils/nav";
 import type { SiteSettings } from "../types";
 
 import SiteHeader from "../components/SiteHeader.astro";
@@ -90,7 +91,9 @@ const [settings, siteMenu, servicesResult, partnersResult, labels] = await Promi
 
 const { entries: serviceEntries } = servicesResult;
 const { entries: partnerEntries } = partnersResult;
-const services = serviceEntries ?? [];
+// #381: canonical order, not whatever created_at returned. Sorted HERE so the
+// footer, the menu and anything else fed from this fetch agree by construction.
+const services = sortByFace(serviceEntries ?? []);
 
 const identity = resolveBlogSiteIdentity(settings);
 

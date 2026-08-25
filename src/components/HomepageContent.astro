@@ -24,7 +24,7 @@ import { PortableText } from "emdash/ui";
 import PtLink from "./PtLink.astro";
 import CtaGlobal from "./CtaGlobal.astro";
 import MantraCloser from "./MantraCloser.astro";
-import { FACE_BY_SLUG } from "../utils/nav";
+import { FACE_BY_SLUG, sortByFace } from "../utils/nav";
 import CubeEmblem from "./CubeEmblem.astro";
 import { getUiLabels } from "../utils/ui-labels";
 import { excerptPlain } from "../utils/excerpt";
@@ -164,13 +164,7 @@ const members = memberEntries ?? [];
 		     for its whole thesis. The two-column layout collided once the
 		     #264 excerpts grew — a stacked row cannot overlap by construction. -->
 		<ul class="s-areas__rows" role="list">
-			{[...services]
-				.sort((a, b) => {
-					const order = ["ec", "int", "bd", "cdn", "gf", "ia"];
-					const ka = order.indexOf(FACE_BY_SLUG[(a as any).slug ?? a.id] ?? "");
-					const kb = order.indexOf(FACE_BY_SLUG[(b as any).slug ?? b.id] ?? "");
-					return ka - kb;
-				})
+			{sortByFace(services)
 				.map((svc) => {
 					const d = svc.data;
 					const cardColor = d.color || "#1E1E1E";
