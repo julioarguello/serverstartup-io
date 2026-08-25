@@ -9,7 +9,7 @@
 MCP server processes expose the Cloudflare API Bearer token in plaintext via `ps aux`:
 
 ```
-node mcp-remote https://mcp.cloudflare.com/mcp --header Authorization: Bearer iFc0IENhDb-...
+node mcp-remote https://mcp.cloudflare.com/mcp --header Authorization: Bearer ***
 ```
 
 Any local process or user with `ps` access can read the token. macOS shows all user processes to all users, and crash reporters/logging tools capture command-line arguments.

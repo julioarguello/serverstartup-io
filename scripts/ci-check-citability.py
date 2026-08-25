@@ -49,7 +49,10 @@ from __future__ import annotations
 import json
 import os
 import re
+import fnmatch
 import subprocess
+import tempfile
+import zipfile
 import sys
 from pathlib import Path
 
@@ -93,6 +96,115 @@ def scan(pattern: str, files: list[str]) -> list[str]:
               f"{proc.stderr.strip()[:200]}", file=sys.stderr)
         sys.exit(1)
     return [ln for ln in proc.stdout.splitlines() if ln.strip()]
+
+
+# ── what the text scan cannot read on its own (#324) ────────────────────────
+#
+# `grep -I` stops at the first NUL byte and reports nothing — not a warning,
+# not a count. On a PUBLIC repository whose one naming gate is this scan, that
+# silence covered 125 of 414 tracked files. The issue measured it the honest
+# way: three words provably inside a WordPress export were grepped for in the
+# container, with and without -a, and returned zero. A positive control
+# returning zero means the tool is blind, not that the tree is clean.
+#
+# Two answers, applied in order:
+#   1. READ what can be read. OOXML documents (.docx and friends) are ZIP
+#      containers holding XML; the text comes out with the standard library
+#      alone. That is the 12 WordPress exports — including the legacy site's
+#      own clients-and-references page, which is exactly where a non-citable
+#      name would sit.
+#   2. ACCOUNT for the rest. Anything still opaque must match a glob in
+#      scripts/citability-opaque.txt with a written reason. An opaque file
+#      nobody accounted for fails the gate, so the blind spot cannot grow back
+#      quietly — which is how it got to 30 MB in the first place.
+
+OPAQUE_LIST = ROOT / "scripts" / "citability-opaque.txt"
+
+# ZIP-of-XML documents. The parts differ per format; the shape does not.
+OOXML = {".docx", ".dotx", ".pptx", ".xlsx"}
+OOXML_PARTS = re.compile(r"^(word/|ppt/slides/|xl/sharedStrings)", re.I)
+
+
+def is_opaque(path: Path) -> bool:
+    """Mirror grep's own heuristic: a NUL byte in the first block means binary.
+
+    Deliberately grep's rule and not `file`'s MIME type — the question is not
+    what a file IS, it is what the scan running beside this can SEE. The two
+    disagree: an .svg is `image/svg+xml` to `file` and perfectly readable text
+    to grep, and counting it as unreadable would pad this list with 27 files
+    that were never a blind spot.
+    """
+    try:
+        return b"\0" in path.read_bytes()[:8192]
+    except OSError:
+        return False
+
+
+def ooxml_text(path: Path) -> str:
+    """Readable text out of a ZIP-of-XML document. '' when it will not open."""
+    try:
+        with zipfile.ZipFile(path) as z:
+            parts = [n for n in z.namelist()
+                     if n.endswith(".xml") and OOXML_PARTS.match(n)]
+            return " ".join(
+                re.sub(r"<[^>]+>", " ", z.read(n).decode("utf-8", "replace"))
+                for n in parts)
+    except (zipfile.BadZipFile, KeyError, OSError):
+        return ""
+
+
+def opaque_rules() -> list[tuple[str, str]]:
+    """(glob, reason) from the accounted-for list. Comment-only lines dropped."""
+    out = []
+    for raw in OPAQUE_LIST.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        glob, _, reason = line.partition("#")
+        out.append((glob.strip(), reason.strip()))
+    return out
+
+
+def scan_containers(pattern: str, files: list[str]) -> list[str]:
+    """Forbidden names inside documents grep skipped. Python re, not grep -E:
+    the alternations in the secret are plain enough that the two agree, and
+    shelling out per file to compare would buy nothing."""
+    rx = re.compile(pattern)
+    hits = []
+    for f in files:
+        p = ROOT / f
+        if p.suffix.lower() in OOXML and rx.search(ooxml_text(p)):
+            hits.append(f)
+    return hits
+
+
+def check_opaque(files: list[str]) -> int:
+    """Every unreadable tracked file is either extracted above, or accounted for."""
+    rules = opaque_rules()
+    if not rules:
+        print("citability: DEAD CHECK — scripts/citability-opaque.txt lists no "
+              "rule, so every opaque file would be reported and nobody would "
+              "read the output", file=sys.stderr)
+        return 1
+
+    opaque = [f for f in files
+              if is_opaque(ROOT / f) and (ROOT / f).suffix.lower() not in OOXML]
+    unaccounted = [f for f in opaque
+                   if not any(fnmatch.fnmatch(f, g) for g, _ in rules)]
+    if unaccounted:
+        print(f"citability: {len(unaccounted)} tracked file(s) the scan cannot "
+              "read and nobody has accounted for:", file=sys.stderr)
+        for f in unaccounted[:20]:
+            print(f"  {f}", file=sys.stderr)
+        print("  → this repository is public and this scan is the only gate on "
+              "who gets named in it.", file=sys.stderr)
+        print("  → add a glob and a REASON to scripts/citability-opaque.txt, or "
+              "remove the file. 'binary' is not a reason.", file=sys.stderr)
+        return 1
+
+    print(f"citability: {len(opaque)} unreadable file(s), all accounted for in "
+          f"{OPAQUE_LIST.name} ({len(rules)} rules)")
+    return 0
 
 
 MIN_ALTERNATIVES = 3
@@ -163,14 +275,45 @@ def check_forbidden(pattern: str) -> int:
         canary.unlink(missing_ok=True)
     print("citability: positive control ok (the scan can find a planted name)")
 
+    # ── second control: the container path (#324) ──
+    # The extractor is the whole reason 12 documents stopped being invisible,
+    # so a green from it has to be earned the same way. The fixture is a real
+    # .docx built here, in a temp directory — never in the tree, because a
+    # canary in the tree trips the guard it exists to prove (#347).
+    with tempfile.TemporaryDirectory() as tmp:
+        doc = Path(tmp) / "canary.docx"
+        with zipfile.ZipFile(doc, "w") as z:
+            z.writestr("word/document.xml",
+                       '<?xml version="1.0"?><w:document xmlns:w="x"><w:p><w:r>'
+                       f'<w:t>{core}</w:t></w:r></w:p></w:document>')
+        text = ooxml_text(doc)
+        if core not in text:
+            print("citability: DEAD GUARD — a name planted inside a .docx was "
+                  "not recovered by the extractor, so the 12 documents it "
+                  "claims to read are being scanned as an empty string.",
+                  file=sys.stderr)
+            return 1
+        if is_opaque(doc) is False:
+            print("citability: DEAD GUARD — a real .docx did not read as "
+                  "opaque, so is_opaque() no longer selects the files the "
+                  "extractor exists for.", file=sys.stderr)
+            return 1
+    print("citability: positive control ok (a name planted inside a .docx is "
+          "recovered, and .docx still reads as opaque)")
+
     print(f"citability: scanning {len(files)} tracked files")
     hits = scan(pattern, files)
-    if hits:
+    contained = scan_containers(pattern, files)
+    if contained:
+        print(f"citability: and {len(contained)} inside documents grep skips",
+              file=sys.stderr)
+    if hits or contained:
         print("citability: forbidden name found in the tree:", file=sys.stderr)
-        for h in hits[:20]:
+        for h in [*hits, *contained][:20]:
             print(f"  {h}", file=sys.stderr)
         return 1
-    print("citability: no forbidden name in the tree")
+    print(f"citability: no forbidden name in the tree "
+          f"(text, plus the text inside every OOXML document)")
     return 0
 
 
@@ -205,10 +348,14 @@ def main() -> int:
     repo = os.environ.get("GITHUB_REPOSITORY", "")
     pattern = os.environ.get("FORBIDDEN_NAMES", "")
 
+    # check_opaque runs everywhere, mirror included: it needs no secret, and
+    # the mirror is precisely the tree whose unreadable files are published to
+    # strangers. Called at the return sites so its output lands after the
+    # scans it qualifies, rather than above them.
     if repo == MIRROR_REPO:
         print(f"citability: running on the public mirror ({repo}) — the secret "
               "does not exist there by design; skipping the forbidden-name scan")
-        return check_whitelist()
+        return check_whitelist() | check_opaque(tracked_files())
 
     if not pattern:
         # The observed fact and where to look — never a guessed cause.
@@ -220,7 +367,8 @@ def main() -> int:
         print("  Check the repository secret FORBIDDEN_NAMES.", file=sys.stderr)
         return 1
 
-    return check_forbidden(pattern) | check_whitelist()
+    return (check_forbidden(pattern) | check_whitelist()
+            | check_opaque(tracked_files()))
 
 
 if __name__ == "__main__":

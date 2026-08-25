@@ -125,7 +125,7 @@ jobs:
             echo "| Gate | Target |"
             echo "|---|---|"
             echo "| gitleaks | no leaks |"
-            echo "| citability | 0 forbidden names |"
+            echo "| citability | 0 forbidden names, in text and inside documents · every unreadable file accounted for |"
             echo "| astro check | 0 errors, 0 warnings |"
             echo "| seed schema | seed.json validates |"
             echo "| cms-text | labels resolve ES+EN, 0 hardcoded copy |"

@@ -1,0 +1,45 @@
+# Tracked files the citability scan cannot read, each with the reason it is
+# allowed to stay that way (#324).
+#
+# `grep -I` skips a file the moment it sees a NUL byte, and says nothing. That
+# is 125 of this repository's 414 tracked files — about 30 MB of a PUBLIC tree
+# sitting outside the only gate that checks who gets named. A guard that skips
+# in silence and a tree that is clean produce the same green.
+#
+# So the scan now does three things instead of one: it reads what it can
+# extract (OOXML documents), it refuses the rest unless the reason is written
+# down here, and it fails on anything opaque that nobody has accounted for.
+#
+# Format: one glob per line, then `#` and the reason. Matching is `fnmatch`, so
+# `*` crosses `/` — a rule is a SUBTREE assertion, not a single directory level.
+# That is deliberate (a nested folder of the same material stays accounted for),
+# and it is stated here because a glob that is broader than it looks is the kind
+# of thing this file exists to stop. The reason is
+# the point — "binary" is not a reason, it is a restatement of the problem.
+# Adding a line is a deliberate act: you are asserting this file carries no
+# text that the naming policy (§13) applies to.
+
+# ── site imagery: pixels, no text layer ────────────────────────────────────
+public/assets/*.png        # logos, reference marks and icons shipped by the site
+public/assets/*.jpg        # team photographs and the Kit Digital banner
+public/assets/*.webp       # editor screenshots used on /deconstruyendo
+public/assets/team/*.jpg   # team photographs
+public/fonts/*.woff2       # Computer Modern subset for the mantra (#295)
+
+# ── design evidence: screenshots taken to review a change ──────────────────
+docs/design/screenshots/**/*.png   # rendered pages, captured for review in #156/#161
+
+# ── the legacy archive (#324 (a) is undecided; these are the reasons today) ─
+reference/legacy/media/**   # logo masters, animations and history renders — imagery
+reference/figma-extract/images/**   # Figma image fills, content-addressed, no filenames
+reference/figma-extract/all-frames/*.png   # frame renders — pixels
+reference/figma-extract/renders/*.png      # the same frames as raster
+reference/figma-extract/thumbnail.png      # canvas thumbnail
+reference/figma-extract/renders/*.pdf   # MEASURED 2026-08-25: type is converted to
+                                        # outlines, so there is no text to read. A whole
+                                        # frame decodes to 29 ToUnicode CMap entries and
+                                        # no recoverable word — verified with a positive
+                                        # control over "Cloudflare", "Server", "Startup",
+                                        # "seguridad": zero hits after CMap decoding.
+reference/figma-extract/canvas.fig   # Figma's own binary format (kiwi), no public parser
+reference/server-startup-design.fig  # same

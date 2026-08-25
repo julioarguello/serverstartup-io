@@ -351,7 +351,8 @@ PR → quality-gates green → merge to main
   fixtures live in temporary directories, in-memory strings and a
   `page.setContent` page — never in the repository tree, because a canary in
   the tree trips the very guard it is meant to prove (#347). Controls in
-  place: citability (planted name), cache hints (must see the real call
+  place: citability (a planted name, and a name planted INSIDE a generated
+  `.docx`), cache hints (must see the real call
   sites), design tokens (5 planted CSS defects + 3 shapes it must not flag),
   CMS text (hardcoded attribute, hardcoded text node, unseeded label key),
   security headers (a matcher run over present / absent / wrong-value
@@ -359,6 +360,23 @@ PR → quality-gates green → merge to main
   comparator catches a deleted line, a changed word and a truncation) and
   a11y (a link under a fixed header with its ring suppressed, a 720px block at
   320px, an `<img>` with no alt).
+- **The naming gate reads what grep skips** (`ci-check-citability.py`, #324).
+  This repository is mirrored publicly and one guard decides who may be named
+  in it (§13). `grep -I` stops at the first NUL byte and says nothing, which
+  left 125 of 414 tracked files — around 30 MB, the whole `reference/` archive
+  — outside it: a skipped file and a clean file produced the same green. The
+  issue proved it the honest way, grepping a WordPress export for three words
+  known to be inside it and getting zero. Two answers, in order. **Read what
+  can be read**: OOXML documents are ZIP-of-XML, so the twelve exports are
+  extracted with the standard library and scanned like text — including the
+  legacy site's own clients-and-references page, which is exactly where a
+  non-citable name would sit. **Account for the rest**: anything still opaque
+  must match a glob in `scripts/citability-opaque.txt` *with a written reason*,
+  and an unaccounted opaque file fails the build, so the blind spot cannot grow
+  back quietly. The Figma renders are on that list with a measurement rather
+  than an assumption — their type is converted to outlines, so a whole frame
+  decodes to 29 ToUnicode CMap entries and no recoverable word. What survives
+  in `reference/` at all is a separate decision (#324).
 - **Menu check** (`copy-baseline.mjs`, #384): the frozen-copy baselines read
   `document.body.innerText`, which is the *rendered* text, and the menu lives
   in a `<dialog>` closed at rest — so the baseline of all 26 routes is

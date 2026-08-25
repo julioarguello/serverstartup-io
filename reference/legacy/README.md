@@ -17,6 +17,12 @@ Two versions of the site content created during the initial branding process:
 
 The `serverstartup/` versions are the canonical source for CMS content enrichment.
 
+`frikitek/docx/` holds twelve WordPress exports whose markdown twins sit in the
+directory above them. Measured 2026-08-25: every word inside those `.docx` also
+appears in a plain-text file of this repository, so they carry nothing the
+markdown does not — they are 2.5 MB of format, not of content. They are read by
+the citability gate now (§ below); whether they should be here at all is #324.
+
 ### `docs/`
 
 | File | Content |
@@ -25,10 +31,14 @@ The `serverstartup/` versions are the canonical source for CMS content enrichmen
 | `logo.md` | Logo meaning (cube, Ocado hives, precision) |
 | `ai-manifesto.txt` | Strategic AI manifesto — business model, roles, pricing (17KB) |
 | `boutique-consulting.txt` | Definition of a boutique systems integration consultancy |
-| `business-profile.txt` | Company activity summary (from Gmail analysis) |
-| `gdrive-structure.txt` | Corporate Google Drive organization |
-| `projects-alcampo.csv` | Portfolio of Alcampo projects |
-| `brief-agencia-web.pdf` | Original web agency brief (Frikitek) |
+
+> Four further documents were removed from this archive in #160 because they
+> were company-internal. Their entries stayed in this table for three months,
+> on a repository that is mirrored publicly — an index describing internal
+> documents, with no way for a reader to tell they were gone, which is worse
+> than the files themselves would have been. They are named here by count and
+> not by title on purpose. If you need them, they are in the private knowledge
+> base, not in this tree.
 
 ### `media/`
 
@@ -60,10 +70,25 @@ To create new `seed/content/` files from this material:
 3. Add YAML frontmatter with the CMS entry `id` (from `npx emdash content list`)
 4. Run `./scripts/load-content.sh <collection>` to push to CMS
 
-> **See:** `.agent/skills/emdash-ops/SKILL.md` for the full Content as Code workflow.
+> **See:** `CONTRIBUTING.md` for the dev stack and the seed procedure, and
+> `docs/architecture.md` for how content reaches the CMS.
 
 ## Provenance
 
 - **Source repo:** `github.com/julioarguello/serverstartup.io` (commit `817f097`)
 - **Migration date:** 2026-05-01
 - **Migration issue:** #139
+
+## Why this directory is readable by the naming gate
+
+Nothing here builds, tests or deploys the site; it is an archive. But it is a
+**public** archive, and until #324 about 30 MB of it — every image, every
+document, both Figma files — sat outside `scripts/ci-check-citability.py`,
+which is the only gate on who may be named in this repository (§13 of the
+project rules). `grep -I` stops at the first NUL byte and reports nothing, so
+a skipped file and a clean file produced the same green.
+
+Now the twelve `.docx` are extracted and scanned like any text file, and every
+remaining unreadable file is listed with a reason in
+`scripts/citability-opaque.txt`. A new one that nobody accounts for fails the
+build. What survives in this directory at all is still open — see #324.
