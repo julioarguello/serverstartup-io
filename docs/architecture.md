@@ -328,8 +328,51 @@ PR → quality-gates green → merge to main
   `astro check` 0/0 (TypeScript pinned to 5.x — `astro check` has no
   programmatic API on TS 7 and TS 6 misreports inference errors), seed
   validation, CMS text integrity, design tokens, build, seeded boot,
-  html-validate ×15 routes, header suite, Lighthouse 3-run median
-  (perf ≥ 95, a11y/bp/seo = 100).
+  html-validate ×15 routes, header suite, accessibility, Lighthouse 3-run
+  median (perf ≥ 95, a11y/bp/seo = 100).
+- **Accessibility gate** (`scripts/ci-check-a11y.mjs`): axe-core over a
+  sampled route list, plus the checks a rule engine cannot decide — keyboard
+  traversal over **every** route the seed declares, both locales (26 today,
+  derived like the sitemap so it cannot fall behind a new page), each walked
+  to the end of the document asserting every stop is visible, carries a focus
+  ring and is not under the fixed header; the menu opening with `Enter`,
+  holding focus while open, closing with `Escape` and **handing focus back to
+  the cube**; WCAG 2.1.4 shortcut scoping; reflow at 320px; and W3C Nu.
+  Traversals start by focusing `<body>` — `blur()` clears `activeElement` but
+  not the *sequential focus navigation starting point*, so on the autofocusing
+  search pages the first Tab otherwise begins mid-document.
+- **Every gate carries a positive control** (#385). A check that finds no
+  problems and one that *cannot* find problems print the same green line, so
+  each gate first plants the exact defect it hunts in a fixture it owns and
+  refuses to report anything if it no longer finds it. Failure exits **3** and
+  names which guard went blind, distinct from exit 1 (real findings). The
+  fixtures live in temporary directories, in-memory strings and a
+  `page.setContent` page — never in the repository tree, because a canary in
+  the tree trips the very guard it is meant to prove (#347). Controls in
+  place: citability (planted name), cache hints (must see the real call
+  sites), design tokens (5 planted CSS defects + 3 shapes it must not flag),
+  CMS text (hardcoded attribute, hardcoded text node, unseeded label key),
+  security headers (a matcher run over present / absent / wrong-value
+  responses), copy baseline (routes enumerate, `innerText` returns copy, the
+  comparator catches a deleted line, a changed word and a truncation) and
+  a11y (a link under a fixed header with its ring suppressed, a 720px block at
+  320px, an `<img>` with no alt).
+- **Menu check** (`copy-baseline.mjs`, #384): the frozen-copy baselines read
+  `document.body.innerText`, which is the *rendered* text, and the menu lives
+  in a `<dialog>` closed at rest — so the baseline of all 26 routes is
+  identical whether the menu has eleven links or none. That blind spot let a
+  whole menu row ship to production (#382). The menu therefore has its own
+  **structural** assertion instead of joining the copy contract: the links
+  `seed/seed.json` declares must be the links the menu renders, checked on the
+  home and a service page per locale. Opening the dialog for the capture
+  instead was rejected — `showModal()` makes the document inert and moves
+  focus, and the menu's text would couple all 26 baselines to one component.
+- **`src/fetch.*` is reserved** (#359, `tests/unit/reserved-paths.test.ts`):
+  Astro 7 turns a file at that path into the Advanced Routing entrypoint,
+  taking over the whole request pipeline. Nothing lives there and nothing
+  should arrive there by accident; the guard steps aside when
+  `astro.config.mjs` declares `fetchFile` (renamed, or `null`), which makes
+  the file a deliberate act.
 - **Design-token gate** (`scripts/ci-check-design-tokens.py`): a colour
   literal, a non-token `border-radius`, a non-token `box-shadow` or a bespoke
   `max-width` outside `theme.css` fails the build. The width rule is the

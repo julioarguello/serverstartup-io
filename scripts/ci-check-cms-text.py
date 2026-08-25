@@ -14,13 +14,24 @@ B. Hardcoded text lint — user-visible literals in .astro templates (JSX text
    Fallback literals passed to labels.get()/L()/t() or ORed after a CMS/
    settings lookup are legal by design: they mirror the CMS, not replace it.
 
+Positive control (#385)
+-----------------------
+Both checks run first over a throwaway template of the gate's own making,
+carrying one planted defect of each shape. A regex that stops matching — a new
+attribute spelling, a changed `labels.get` signature, a frontmatter fence
+parsed differently — would otherwise leave this printing "cms-text: clean"
+over templates it is no longer reading. The fixture lives in a temp directory,
+never in `src/`, so it cannot be found by the real scan nor trip the gate.
+
 Exit 0 = clean. Exit 1 = findings, each printed as file:line: reason.
+Exit 3 = the gate is blind: it can no longer find what it exists to find.
 """
 from __future__ import annotations
 
 import json
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -32,7 +43,13 @@ findings: list[str] = []
 
 
 def fail(path: Path, line: int, reason: str) -> None:
-    findings.append(f"{path.relative_to(ROOT)}:{line}: {reason}")
+    # The positive control's fixture lives outside ROOT on purpose, so a path
+    # that cannot be made relative reports itself whole rather than aborting.
+    try:
+        where = path.relative_to(ROOT)
+    except ValueError:
+        where = path
+    findings.append(f"{where}:{line}: {reason}")
 
 
 # ── inputs ──────────────────────────────────────────────────────────────────
@@ -135,7 +152,69 @@ def check_hardcoded(templates: list[Path]) -> None:
 
 # ── main ────────────────────────────────────────────────────────────────────
 
+# ── positive control ────────────────────────────────────────────────────────
+
+# A template carrying one planted defect per shape the lint claims to catch,
+# plus the three shapes it must NOT flag: a CMS-wired attribute whose key is
+# real (`author` exists in both locale areas — so this line also proves the
+# seed parse still finds keys), an ORed settings lookup, and a comment.
+CONTROL_ASTRO = """---
+const canary = 1;
+---
+<button aria-label="canario sin CMS">x</button>
+<p>Texto duro que nadie ha pasado por el CMS</p>
+<p>{labels.get("ui_labels", "__canary_key_that_is_not_in_the_seed__", "ok")}</p>
+<img src="/x.png" alt={t("author")} />
+<span>{settings.phone || "+34"}</span>
+<!-- comentario con palabras, que no cuenta -->
+"""
+
+CONTROL_EXPECTED = (
+    ('hardcoded aria-label: "canario sin CMS"', "the aria-label/alt/placeholder/title lint"),
+    ('hardcoded text node: "Texto duro que nadie ha pasado por el CMS"', "the text-node lint"),
+    ('label "ui_labels:__canary_key_that_is_not_in_the_seed__" missing from ui_labels_es',
+     "label integrity against seed/seed.json"),
+)
+
+
+def positive_control() -> int:
+    """Prove both checks can still see their defects. 0 = sighted, 3 = blind."""
+    global findings
+    real, findings = findings, []
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            fixture = Path(tmp) / "canary.astro"
+            fixture.write_text(CONTROL_ASTRO, encoding="utf-8")
+            check_labels([fixture])
+            check_hardcoded([fixture])
+            planted = findings
+    finally:
+        findings = real
+
+    blind = [what for expected, what in CONTROL_EXPECTED
+             if not any(expected in f for f in planted)]
+    # The fixture's last four lines are legal: a CMS-wired alt, an ORed
+    # settings lookup, a comment. Anything reported there is a false positive.
+    noise = [f for f in planted if "author" in f or "+34" in f or "comentario" in f]
+
+    if blind or noise:
+        print("cms-text: THIS GATE IS BLIND — a clean result proves nothing:", file=sys.stderr)
+        for b in blind:
+            print(f"    {b} found none of its planted defects", file=sys.stderr)
+        for n in noise:
+            print(f"    reported legal, CMS-wired markup: {n}", file=sys.stderr)
+        print("  → a pattern stopped matching (attribute list, labels.get "
+              "signature, frontmatter fence); fix it before trusting a green run.",
+              file=sys.stderr)
+        return 3
+    return 0
+
+
 def main() -> int:
+    blind = positive_control()
+    if blind:
+        return blind
+
     src = ROOT / "src"
     sources = sorted(src.rglob("*.astro")) + sorted(src.rglob("*.ts"))
     templates = sorted(src.rglob("*.astro"))
@@ -146,7 +225,9 @@ def main() -> int:
             print(f, file=sys.stderr)
         print(f"cms-text: {len(findings)} finding(s)", file=sys.stderr)
         return 1
-    print("cms-text: clean (labels resolve in both locales; no hardcoded template text)")
+    print(f"cms-text: clean (labels resolve in both locales; no hardcoded template "
+          f"text) — {len(CONTROL_EXPECTED)} planted defects found first, so the scan is "
+          f"not blind")
     return 0
 
 

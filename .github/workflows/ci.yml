@@ -64,7 +64,7 @@ jobs:
       - name: Cache hints (cache.set only where it reaches the headers)
         run: python3 scripts/ci-check-cache-hints.py
 
-      - name: Unit tests (accent, panels, excerpt — the silent-failure modules)
+      - name: Unit tests (the silent-failure modules, and the repo's own invariants)
         run: npm test
 
       - name: Build
@@ -127,7 +127,7 @@ jobs:
             echo "| cms-text | labels resolve ES+EN, 0 hardcoded copy |"
             echo "| design tokens | colour, radius, shadow and width from theme.css |"
             echo "| cache hints | cache.set only where headers still open |"
-            echo "| unit tests | accent · panels · excerpt · doc-sections |"
+            echo "| unit tests | accent · panels · excerpt · doc-sections · nav · reserved-paths |"
             echo "| build | astro build succeeds |"
             echo "| local stack | boots and serves, seeded from seed.json |"
             echo "| html-validate | 0 problems, 15 templates |"

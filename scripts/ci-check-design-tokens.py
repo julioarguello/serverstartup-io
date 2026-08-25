@@ -34,14 +34,26 @@ Two things are deliberately NOT violations:
     The marker keeps the exception visible at the exact line instead of
     exempting a whole file from a list nobody reads.
 
+Positive control (#385)
+-----------------------
+Before it trusts a clean tree, the gate plants each defect it hunts in a
+throwaway stylesheet of its own and asserts the scanner still finds them. A
+narrowed regex, a renamed property or a broken comment-stripper would
+otherwise leave this printing "✓ colour, radius, shadow and width come from
+theme.css only" over a portal drifting back to five radii — a scan that
+CANNOT find anything looks exactly like a clean tree. The fixture lives in a
+temporary directory, never in the repository: a canary in the tree is how the
+citability guard died the second time (#347).
+
 Usage:  python3 scripts/ci-check-design-tokens.py [--verbose]
-Exit 0 clean · 1 violations found · 2 nothing was inspected.
+Exit 0 clean · 1 violations found · 2 nothing was inspected · 3 the gate is blind.
 """
 
 from __future__ import annotations
 
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -122,8 +134,104 @@ def scan(path: Path) -> tuple[list[tuple[int, str, str]], int]:
     return findings, muted
 
 
+# ── positive control ────────────────────────────────────────────────────────
+
+# One planted defect per rule the scanner claims to enforce, plus the two
+# shapes it must NOT flag. Each entry: (line of CSS, substring the finding
+# must mention) — `None` means "this line must produce no finding at all".
+# One planted defect per rule the scanner claims to enforce, plus the three
+# shapes it must NOT flag. Written the way this project writes CSS — one
+# declaration per line — because that is what the scanner reads; a fixture
+# contorted to match the regex would agree with it by construction.
+CONTROL_CSS = """/* fixture — lives in a temp dir, never in the repository tree */
+.canary-colour {
+	color: #ff00ff;
+}
+.canary-rgba {
+	background: rgba(12, 34, 56, 0.5);
+}
+.canary-radius {
+	border-radius: 8px;
+}
+.canary-shadow {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.canary-width {
+	max-width: 700px;
+}
+.canary-token {
+	color: var(--color-text, #1e1e1e);
+}
+.canary-ok {
+	border-radius: var(--radius);
+	max-width: 100%;
+}
+/* token-guard: off — foreign chrome */
+.canary-fenced {
+	color: #ff0000;
+}
+/* token-guard: on */
+"""
+
+CONTROL_EXPECTED = {
+    "canary-colour": "colour literal",
+    "canary-rgba": "colour literal",
+    "canary-radius": "not var(--radius",
+    "canary-shadow": "not var(--shadow",
+    "canary-width": "a width of its own",
+}
+
+
+def positive_control() -> int:
+    """Prove the scanner can still see each defect. 0 = sighted, 3 = blind."""
+    with tempfile.TemporaryDirectory() as tmp:
+        fixture = Path(tmp) / "canary.css"
+        fixture.write_text(CONTROL_CSS, encoding="utf-8")
+        findings, muted = scan(fixture)
+
+    lines = CONTROL_CSS.splitlines()
+
+    def selector_of(line_no: int) -> str:
+        """The rule a finding sits in — walk back to the nearest selector."""
+        for n in range(line_no - 1, -1, -1):
+            if lines[n].startswith("."):
+                return lines[n].split()[0].lstrip(".")
+        return "<none>"
+
+    seen: dict[str, list[str]] = {}
+    for line_no, prop, reason in findings:
+        seen.setdefault(selector_of(line_no - 1), []).append(reason)
+
+    blind: list[str] = []
+    for selector, expected in CONTROL_EXPECTED.items():
+        reasons = seen.get(selector, [])
+        if not any(expected in r for r in reasons):
+            blind.append(f"planted {selector} ({expected!r}) was NOT reported")
+    for selector in ("canary-token", "canary-ok", "canary-fenced"):
+        if selector in seen:
+            blind.append(f"{selector} is legal CSS but was reported: {seen[selector]}")
+    if muted != 1:
+        blind.append(f"the token-guard fence covered {muted} declaration(s), expected 1")
+
+    if blind:
+        print("✗ design-tokens: THIS GATE IS BLIND — it can no longer find the "
+              "defects it exists to find, so a green run proves nothing:", file=sys.stderr)
+        for b in blind:
+            print(f"    {b}", file=sys.stderr)
+        print("  → the scanner changed (a narrowed regex, a renamed property, the "
+              "comment stripper); fix it before trusting any result.", file=sys.stderr)
+        return 3
+    return 0
+
+
 def main() -> int:
     verbose = "--verbose" in sys.argv
+
+    blind = positive_control()
+    if blind:
+        return blind
+    if verbose:
+        print(f"  ok   positive control — {len(CONTROL_EXPECTED)} planted defects all found")
 
     targets = sorted(
         [p for p in (ROOT / "src" / "styles").rglob("*.css") if p != TOKEN_FILE]
@@ -156,7 +264,8 @@ def main() -> int:
         print("  value belongs to a product being imitated, wrap that region in")
         print("  `/* token-guard: off — reason */ … /* token-guard: on */`.")
         return 1
-    print("✓ colour, radius, shadow and width come from theme.css only.")
+    print(f"✓ colour, radius, shadow and width come from theme.css only "
+          f"({len(CONTROL_EXPECTED)} planted defects found first — the scan is not blind).")
     return 0
 
 
