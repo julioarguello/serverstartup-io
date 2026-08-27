@@ -14,6 +14,8 @@ docs/company/
 # Python bytecode from local scripts
 __pycache__/
 
-# Lighthouse CI raw reports: 25 MB per run, and CI keeps its own via
-# uploadArtifacts. The committed summary lives in docs/audits/ (#305).
+# Lighthouse CI raw reports: 25 MB per run locally, and since #399 CI does not
+# keep its own either — uploadArtifacts is off there, because 219 uploads of
+# them exhausted the repository's artifact quota. The record that survives a
+# run is the summary committed under docs/audits/ (#305).
 .lighthouseci/

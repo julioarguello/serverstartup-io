@@ -36,6 +36,13 @@ jobs:
         uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # The gate is the scan's exit code, never the upload. Observed on PR
+          # #397: "1 commits scanned / no leaks found", then the step died in
+          # CreateArtifact because the artifact quota was full (#399) — a red
+          # secret scan on a clean tree, which is the one lie a security gate
+          # must never tell. Nothing consumed those 236 SARIFs: they were never
+          # fed to code scanning, and no one downloaded one.
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: Citability guard
         env:
@@ -107,7 +114,15 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           configPath: lighthouserc.json
-          uploadArtifacts: true
+          # Off deliberately (#399). The raw reports are ~8.5 MB per run (five
+          # URLs x three runs) and the action exposes no retention input, so 219
+          # of them filled the repo's artifact quota — and a full quota makes
+          # gitleaks-action die uploading its 7 KB SARIF *after* reporting "no
+          # leaks found", which reads as a failed secret scan on a clean tree.
+          # Nothing read these reports: the assertions gate the build and name
+          # the failing category in the log, and the record that survives is the
+          # summary committed under docs/audits/ (#305).
+          uploadArtifacts: false
 
       - name: Summary
         if: always()
