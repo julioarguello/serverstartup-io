@@ -24,16 +24,17 @@ Que un modelo redacte el primer borrador no tiene mérito ni misterio. Lo que de
 
 El agente propone y no fusiona. Las comprobaciones rechazan y no escriben: su credencial es de solo lectura. La persona puede las dos cosas, y por eso es la única que puede equivocarse con nombre y apellidos. La letra pequeña: que el agente no fusione es una regla escrita, no un candado del servidor.
 
-Antes de preguntarle nada a una persona, la rama pasa por quince pasos que pueden fallar. Se niegan a dejar pasar lo que una revisión a ojo no ve:
+Antes de preguntarle nada a una persona, la rama pasa por dieciséis pasos que pueden fallar. Se niegan a dejar pasar lo que una revisión a ojo no ve:
 
 - **Nombres no citables:** un cliente que no puede salir en un repositorio público.
 - **Textos fuera del CMS:** una etiqueta que solo existe en un idioma, o una frase escrita a fuego en la plantilla.
 - **Colores fuera del sistema:** un literal o una anchura nueva, que es como vuelven las siete medidas distintas.
 - **Caché en el sitio equivocado:** una llamada puesta donde las cabeceras ya se han ido, que no cachea nada y lo parece.
 - **Copia que cambia sola:** el texto renderizado de [26 rutas](https://github.com/julioarguello/serverstartup-io/tree/main/tests/copy-baseline) está congelado.
+- **Imágenes que se piden a sí mismas:** una URL absoluta a nuestro propio dominio, que en Cloudflare no puede funcionar y en local no se nota.
 - **Accesibilidad y contraste:** tabulador, reflujo a 320 píxeles y validación del [W3C](https://validator.w3.org/nu/).
 
-Un guardia solo vale si puede fallar, y uno que no encuentra nada se ve igual que uno que no puede. Los dos más delicados llevan un control positivo que los revienta si dejan de mirar. La última puerta tampoco es automática: producción se despliega a mano.
+Un guardia solo vale si puede fallar, y uno que no encuentra nada se ve igual que uno que no puede. Los más delicados llevan un control positivo que los revienta si dejan de mirar. La última puerta tampoco es automática: producción se despliega a mano.
 
 ## Los números
 

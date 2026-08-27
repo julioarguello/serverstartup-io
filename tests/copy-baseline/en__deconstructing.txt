@@ -52,8 +52,8 @@ Caching inherits the discipline: a page is cached only if it asks to be, and pub
 The agents
 A model writing the first draft is neither impressive nor mysterious. What decides whether this is serious is who has authority over what.
 The agent proposes and cannot merge. The checks refuse and cannot write: their credential is read-only. The human can do both, which is why the human is the only one who can be wrong by name. The small print: the agent not merging is a written rule, not a lock on the server.
-Before a person is asked anything, the branch goes through fifteen steps that can fail. They refuse what a reading by eye does not catch:
-A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The two most delicate carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.
+Before a person is asked anything, the branch goes through sixteen steps that can fail. They refuse what a reading by eye does not catch:
+A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The most delicate ones carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.
 agent/draft → main
 Open
 −
@@ -68,6 +68,8 @@ Colours outside the system: a literal or a new width, which is how seven differe
 Caching in the wrong place: a call placed after the headers have gone, which caches nothing and looks like it does.
 +
 Copy that changes by itself: the rendered text of 26 routes is frozen.
++
+Images that ask for themselves: an absolute URL to our own domain, which cannot work on Cloudflare and looks perfectly fine locally.
 +
 Accessibility and contrast: keyboard traversal, reflow at 320 pixels and W3C validation.
 All checks have passed — quality-gates / gates
@@ -84,6 +86,7 @@ All checks have passed — quality-gates / gates
 ✓ html-validate
 ✓ frozen copy
 ✓ headers
+✓ image hrefs
 ✓ accessibility
 ✓ Lighthouse
 ✔ Approved
@@ -105,7 +108,7 @@ SEO
 routes with frozen copy
 26
 steps that can fail
-15
+16
 The workshop, in plain sight
 The repository is public and syncs on every change to the main branch, whole history, unfiltered. Publishing like that has a cost: that is why the non-citable-names guard exists.
 Code, seeds, checks and deployments: it is all there. Look inside and tell us if you would do it differently.

@@ -1,0 +1,19 @@
+# Hosts a /_image href may legitimately point at (#412).
+#
+# scripts/ci-check-image-hrefs.py fails on ANY absolute href, because on
+# Cloudflare an absolute href sends the endpoint down its remote branch, and a
+# Worker asking the edge for its own hostname gets a 17-byte error string back
+# instead of a file (#407). Every image this site carries is served as a PATH:
+# through astro:assets, or off the media binding.
+#
+# EMPTY IS THE CORRECT STATE, and unlike scripts/citability-opaque.txt an empty
+# list here is not a misconfiguration. There is no third-party image in this
+# repository today; the rule closes by default so that adding one is a decision
+# somebody makes on purpose rather than a shape that reappears by accident.
+#
+# One host per line, with the reason after a `#`. A host written here is a
+# promise that it is genuinely someone else's and reachable from the edge —
+# never one of ours, however it is spelled: allowing our own hostname is
+# precisely the bug this gate exists to catch, and it would still be broken.
+#
+# Format:  images.example.com    # why this one is legitimately foreign

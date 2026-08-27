@@ -243,6 +243,15 @@ EmDash's `<Image>`, which reads media-library bytes off the storage binding.
 That second branch is the destination — #410 moves these photographs into the
 media library, and then none of the first branch is needed.
 
+That line is now held by a gate rather than by memory (#412).
+`scripts/ci-check-image-hrefs.py` crawls the sitemap on the local stack and
+fails on any `/_image` href that is an absolute URL. It reads the bytes rather
+than the behaviour on purpose: locally the site *serves* those images perfectly,
+which is exactly why the behavioural checks were green while #407 was live. Any
+absolute href fails, foreign hosts included — the repository carries no
+third-party image, so the rule closes by default and one is written down, with
+a reason, in `scripts/image-remote-allowlist.txt`.
+
 The lesson generalises past images: a Worker cannot reach itself, so anything
 the site needs to read about its own content has to come from a binding, not
 from its own URL.

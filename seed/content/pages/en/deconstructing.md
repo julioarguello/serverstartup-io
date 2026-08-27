@@ -24,16 +24,17 @@ A model writing the first draft is neither impressive nor mysterious. What decid
 
 The agent proposes and cannot merge. The checks refuse and cannot write: their credential is read-only. The human can do both, which is why the human is the only one who can be wrong by name. The small print: the agent not merging is a written rule, not a lock on the server.
 
-Before a person is asked anything, the branch goes through fifteen steps that can fail. They refuse what a reading by eye does not catch:
+Before a person is asked anything, the branch goes through sixteen steps that can fail. They refuse what a reading by eye does not catch:
 
 - **Non-citable names:** a client who must not appear in a public repository.
 - **Copy outside the CMS:** a label that exists in one locale only, or a sentence burnt into a template.
 - **Colours outside the system:** a literal or a new width, which is how seven different measures come back.
 - **Caching in the wrong place:** a call placed after the headers have gone, which caches nothing and looks like it does.
 - **Copy that changes by itself:** the rendered text of [26 routes](https://github.com/julioarguello/serverstartup-io/tree/main/tests/copy-baseline) is frozen.
+- **Images that ask for themselves:** an absolute URL to our own domain, which cannot work on Cloudflare and looks perfectly fine locally.
 - **Accessibility and contrast:** keyboard traversal, reflow at 320 pixels and [W3C](https://validator.w3.org/nu/) validation.
 
-A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The two most delicate carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.
+A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The most delicate ones carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.
 
 ## The numbers
 

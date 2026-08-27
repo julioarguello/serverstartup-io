@@ -107,6 +107,13 @@ jobs:
       - name: Security headers
         run: scripts/ci-check-headers.sh http://localhost:8787
 
+      - name: Image hrefs
+        # #412. The step above proves the transform ANSWERS; this one reads what
+        # was asked for. An absolute /_image href sends the endpoint down its
+        # remote branch, which on Workers is a fetch of our own hostname and
+        # cannot work (#407) — and localhost is precisely where that looks fine.
+        run: python3 scripts/ci-check-image-hrefs.py http://localhost:8787
+
       - name: Accessibility (axe + keyboard + shortcuts + reflow)
         run: node scripts/ci-check-a11y.mjs http://localhost:8787
 
@@ -129,14 +136,15 @@ jobs:
         run: |
           {
             # One row per failable step above, in order. The page at
-            # /deconstruyendo counts them ("quince pasos que pueden fallar"), so
+            # /deconstruyendo counts them ("dieciséis pasos que pueden fallar")
+            # and names them one by one in the review panel's chips, so
             # this table is the artifact that claim is checked against — it
             # listed eleven and said "8 routes" for a gate covering ten (#305).
             # The STEP COUNT is the claim and must stay true. The row text is
             # prose for a reader: keep it descriptive, and do not transcribe a
             # count or a file list that something else derives — those rows go
             # stale silently, and two of them already had (#386).
-            echo "## Quality gates — 15 steps that can fail"
+            echo "## Quality gates — 16 steps that can fail"
             echo "| Gate | Target |"
             echo "|---|---|"
             echo "| gitleaks | no leaks |"
@@ -152,6 +160,7 @@ jobs:
             echo "| html-validate | 0 problems, 15 templates |"
             echo "| rendered copy | every seed route matches its baseline · menu links match the seed |"
             echo "| security headers | full #164 suite |"
+            echo "| image hrefs | every /_image href is a path, never a URL |"
             echo "| a11y | axe sample · keyboard traversal, every route · menu focus trap · WCAG 2.1.4 · reflow 320px · W3C Nu |"
             echo "| Lighthouse | perf >=95 · a11y 100 · bp 100 · seo 100 |"
           } >> "$GITHUB_STEP_SUMMARY"

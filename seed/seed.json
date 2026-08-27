@@ -907,7 +907,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "gitleaks;citabilidad;astro check;esquema de semillas;textos del CMS;tokens de diseño;pistas de caché;tests unitarios;construcción;arranque de la pila;html-validate;copia congelada;cabeceras;accesibilidad;Lighthouse"
+									"text": "gitleaks;citabilidad;astro check;esquema de semillas;textos del CMS;tokens de diseño;pistas de caché;tests unitarios;construcción;arranque de la pila;html-validate;copia congelada;cabeceras;hrefs de imagen;accesibilidad;Lighthouse"
 								}
 							]
 						},
@@ -973,7 +973,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "rendimiento|95 o más;accesibilidad|100;buenas prácticas|100;SEO|100;rutas con copia congelada|26;pasos que pueden fallar|15"
+									"text": "rendimiento|95 o más;accesibilidad|100;buenas prácticas|100;SEO|100;rutas con copia congelada|26;pasos que pueden fallar|16"
 								}
 							]
 						},
@@ -2819,7 +2819,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "gitleaks;citability;astro check;seed schema;CMS text;design tokens;cache hints;unit tests;build;boot the stack;html-validate;frozen copy;headers;accessibility;Lighthouse"
+									"text": "gitleaks;citability;astro check;seed schema;CMS text;design tokens;cache hints;unit tests;build;boot the stack;html-validate;frozen copy;headers;image hrefs;accessibility;Lighthouse"
 								}
 							]
 						},
@@ -2885,7 +2885,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "performance|95 or more;accessibility|100;best practices|100;SEO|100;routes with frozen copy|26;steps that can fail|15"
+									"text": "performance|95 or more;accessibility|100;best practices|100;SEO|100;routes with frozen copy|26;steps that can fail|16"
 								}
 							]
 						},
@@ -15619,7 +15619,7 @@
 								{
 									"_type": "span",
 									"_key": "k1e",
-									"text": "Antes de preguntarle nada a una persona, la rama pasa por quince pasos que pueden fallar. Se niegan a dejar pasar lo que una revisión a ojo no ve:",
+									"text": "Antes de preguntarle nada a una persona, la rama pasa por dieciséis pasos que pueden fallar. Se niegan a dejar pasar lo que una revisión a ojo no ve:",
 									"marks": []
 								}
 							]
@@ -15766,6 +15766,30 @@
 						},
 						{
 							"_type": "block",
+							"_key": "k412a",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k412b",
+									"text": "Imágenes que se piden a sí mismas:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k412c",
+									"text": " una URL absoluta a nuestro propio dominio, que en Cloudflare no puede funcionar y en local no se nota.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
 							"_key": "k23",
 							"style": "normal",
 							"listItem": "bullet",
@@ -15817,7 +15841,7 @@
 								{
 									"_type": "span",
 									"_key": "k24",
-									"text": "Un guardia solo vale si puede fallar, y uno que no encuentra nada se ve igual que uno que no puede. Los dos más delicados llevan un control positivo que los revienta si dejan de mirar. La última puerta tampoco es automática: producción se despliega a mano.",
+									"text": "Un guardia solo vale si puede fallar, y uno que no encuentra nada se ve igual que uno que no puede. Los más delicados llevan un control positivo que los revienta si dejan de mirar. La última puerta tampoco es automática: producción se despliega a mano.",
 									"marks": []
 								}
 							]
@@ -16330,7 +16354,7 @@
 								{
 									"_type": "span",
 									"_key": "k1e",
-									"text": "Before a person is asked anything, the branch goes through fifteen steps that can fail. They refuse what a reading by eye does not catch:",
+									"text": "Before a person is asked anything, the branch goes through sixteen steps that can fail. They refuse what a reading by eye does not catch:",
 									"marks": []
 								}
 							]
@@ -16477,6 +16501,30 @@
 						},
 						{
 							"_type": "block",
+							"_key": "k412d",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k412e",
+									"text": "Images that ask for themselves:",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k412f",
+									"text": " an absolute URL to our own domain, which cannot work on Cloudflare and looks perfectly fine locally.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
 							"_key": "k23",
 							"style": "normal",
 							"listItem": "bullet",
@@ -16528,7 +16576,7 @@
 								{
 									"_type": "span",
 									"_key": "k24",
-									"text": "A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The two most delicate carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.",
+									"text": "A guard is only worth having if it can fail, and one that finds nothing looks like one that cannot. The most delicate ones carry a positive control that blows them up the moment they stop looking. The last door is not automatic either: production is deployed by hand.",
 									"marks": []
 								}
 							]
