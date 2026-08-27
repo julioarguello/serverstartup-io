@@ -1,0 +1,48 @@
+name: track-tech-debt
+
+# The reader for the inline debt vocabulary of docs/rules/dev-tech-debt.md §1
+# (#396): FIXME/TODO/HACK(tech-debt) markers become labelled issues, and the
+# issue closes again when the marker leaves the code. Until this existed,
+# /dev-review §7 wrote markers that nothing ever read.
+#
+# main only. On a feature branch the action re-scans every WIP commit and opens
+# a duplicate issue for the same marker (dev-tech-debt.md §3).
+#
+# This file travels WITH the mirror (see mirror.yml), so the job hard-gates on
+# the source repository — on the public mirror it is inert by construction,
+# and the debt backlog stays in one place.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: track-tech-debt
+  cancel-in-progress: false # a cancelled run silently drops the markers it carried
+
+jobs:
+  todo-to-issue:
+    if: github.repository == 'julioarguello/www-serverstartup-io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Markers → issues
+        uses: alstr/todo-to-issue-action@v5
+        with:
+          # Defaults to false — without it a marker deleted from the source
+          # leaves its issue open forever (dev-tech-debt.md §3).
+          CLOSE_ISSUES: true
+          # Mirrors the severity table of dev-tech-debt.md §1. A bare TODO or
+          # FIXME with no "(tech-debt)" is still picked up by name here — the
+          # rule forbids writing one for debt precisely so the mapping stays
+          # meaningful. The four labels do not exist in the repo yet; the
+          # action creates any label it is asked for.
+          IDENTIFIERS: >
+            [{"name": "FIXME", "labels": ["tech-debt", "priority:medium"]},
+             {"name": "TODO",  "labels": ["tech-debt", "priority:low"]},
+             {"name": "HACK",  "labels": ["tech-debt", "priority:workaround"]}]

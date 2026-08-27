@@ -46,7 +46,7 @@ keeps us honest.
 | [`src/styles/`](src/styles/) | Shared CSS and design tokens (documented in [`docs/design-system.md`](docs/design-system.md)) |
 | [`src/middleware.ts`](src/middleware.ts) | Security headers on every response, CSP included |
 | [`scripts/`](scripts/) | CI helpers (local stack, headers, deploy verification, remote seeding), environment wrappers, content loader, mirror sync |
-| [`.github/workflows/`](.github/workflows/) | Quality gates, preview and production deploys, mirror sync |
+| [`.github/workflows/`](.github/workflows/) | Quality gates, preview and production deploys, mirror sync, tech-debt tracking |
 | [`docs/`](docs/) | Architecture, design system, audit receipts |
 
 ## Running it
