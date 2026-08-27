@@ -99,6 +99,12 @@ whole tree against both on every PR, including the text inside documents that
 | [`tests/`](tests/) | Unit tests, and the frozen copy baselines |
 | [`docs/architecture.md`](docs/architecture.md) | How it fits together, and why each decision was taken |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Setup, the gate table, branching, the release path |
+| [`vendor/emdash-skills/`](vendor/emdash-skills/) | Reference material on EmDash — building a site, writing plugins, driving the CLI |
+
+`vendor/` is imported material, kept verbatim. It is useful and it is **not
+ours**: read it, do not edit it. Each directory's README names the upstream, the
+commit and the date it was taken, so a refresh replaces the directory wholesale
+instead of trying to reconcile local edits nobody recorded.
 
 ## A note on the private half
 
