@@ -7,7 +7,9 @@
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { entryAlternatePath } from "../utils/alternate";
-import { PortableText } from "emdash/ui";
+import { Image, PortableText } from "emdash/ui";
+import { Image as AstroImage } from "astro:assets";
+import sponsorPhoto from "../assets/urdaneta-infantil.webp";
 import PtLink from "../components/PtLink.astro";
 
 // Whitespace-safe link mark (EmDash's default breaks lines before punctuation)
@@ -153,7 +155,13 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") :
 					<li class="team-card">
 						<div class="team-card__photo">
 							{member.data.featured_image?.src
-								? <img src={member.data.featured_image.src} alt={member.data.title} loading="lazy" />
+								? <Image
+										image={member.data.featured_image}
+										alt={member.data.title}
+										width={260}
+										height={195}
+										sizes="(min-width: 1200px) 260px, (min-width: 700px) 220px, 96px"
+									/>
 								: <div class="team-card__placeholder">{member.data.title?.charAt(0) || "?"}</div>
 							}
 						</div>
@@ -189,10 +197,22 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") :
 					<figure class="s-sponsor__figure">
 						{sponsorHref ? (
 							<a href={sponsorHref} target="_blank" rel="noopener noreferrer" aria-label={sponsorCaption}>
-								<img src="/assets/urdaneta-infantil.webp" alt="" width="1200" height="900" loading="lazy" />
+								<AstroImage
+										src={sponsorPhoto}
+										alt=""
+										widths={[328, 656, 728, 852, 1200]}
+										sizes="(min-width: 1200px) 852px, (min-width: 700px) 728px, 91vw"
+										loading="lazy"
+									/>
 							</a>
 						) : (
-							<img src="/assets/urdaneta-infantil.webp" alt="" width="1200" height="900" loading="lazy" />
+							<AstroImage
+										src={sponsorPhoto}
+										alt=""
+										widths={[328, 656, 728, 852, 1200]}
+										sizes="(min-width: 1200px) 852px, (min-width: 700px) 728px, 91vw"
+										loading="lazy"
+									/>
 						)}
 						<figcaption>
 							<PortableText value={sponsorBlocks.slice(-1)} components={ptComponents} />

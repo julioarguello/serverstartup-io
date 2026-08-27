@@ -20,7 +20,7 @@
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import CloudflarePartner from "./CloudflarePartner.astro";
-import { PortableText } from "emdash/ui";
+import { Image, PortableText } from "emdash/ui";
 import PtLink from "./PtLink.astro";
 import CtaGlobal from "./CtaGlobal.astro";
 import MantraCloser from "./MantraCloser.astro";
@@ -137,7 +137,13 @@ const members = memberEntries ?? [];
 				{members.map((m: any) => (
 					<li class="s-team-strip__card">
 						{m.data.featured_image?.src && (
-							<img src={m.data.featured_image.src} alt={m.data.title} width="1200" height="900" loading="lazy" decoding="async" />
+							<Image
+								image={m.data.featured_image}
+								alt={m.data.title}
+								width={270}
+								height={203}
+								sizes="(min-width: 1200px) 270px, (min-width: 700px) 230px, 91vw"
+							/>
 						)}
 						<h3>{m.data.title}</h3>
 						{/* the role is a UI label, like on Contacto — the members

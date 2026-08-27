@@ -35,6 +35,16 @@
 			"binding": "LOADER",
 		},
 	],
+	// #323: Astro's image service transforms through this binding, not through
+	// /cdn-cgi/image/. Measured on the preview host: the zone endpoint answers
+	// 404 there, because Image Transformations is a ZONE feature and both
+	// deploys live on *.workers.dev. The binding runs inside the worker, so it
+	// works on either. The adapter can provision it, but bindings are not
+	// inherited into named environments (see below), so it is declared here and
+	// in each env, like every other binding in this file.
+	"images": {
+		"binding": "IMAGES",
+	},
 
 	// ── CI/CD environments (#191) ─────────────────────────────────────────
 	// Bindings are NOT inherited into named environments: each env declares
@@ -68,6 +78,9 @@
 					"binding": "LOADER",
 				},
 			],
+			"images": {
+				"binding": "IMAGES",
+			},
 		},
 		"production": {
 			"name": "www-serverstartup-io",
@@ -96,6 +109,9 @@
 					"binding": "LOADER",
 				},
 			],
+			"images": {
+				"binding": "IMAGES",
+			},
 		},
 	},
 }

@@ -31,7 +31,21 @@ export default defineConfig({
 			prefixDefaultLocale: false,
 		},
 	},
-	adapter: cloudflare(),
+	// #323: one image pipeline, Astro's. `build: "compile"` optimises what the
+	// build can see (imports under src/assets) with sharp; `runtime:
+	// "cloudflare-binding"` transforms what only exists at request time — the
+	// CMS media in R2 — through the IMAGES binding declared in wrangler.jsonc.
+	//
+	// NOT `imageService: "cloudflare"`. That one emits /cdn-cgi/image/ URLs,
+	// which are a ZONE feature: measured on the preview host, the original
+	// answers 200 and the transformed URL answers 404, because both deploys
+	// live on *.workers.dev. When #162 puts the worker on serverstartup.io
+	// with Transformations enabled, switching is this one line — the markup
+	// does not change, which is the whole point of picking a service over
+	// hand-written srcset.
+	adapter: cloudflare({
+		imageService: { build: "compile", runtime: "cloudflare-binding" },
+	}),
 	// #332: the Astro.cache.set(cacheHint) calls only emit through a
 	// provider. This one sets Cloudflare-CDN-Cache-Control + Cache-Tag and
 	// purges via cache.purge({tags}) from cloudflare:workers. Edge caching
@@ -42,6 +56,20 @@ export default defineConfig({
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,
+		// #323: the CMS points featured_image at files under public/assets/, and
+		// EmDash hands Astro an ABSOLUTE url for them — which Astro classifies as
+		// remote and, unless the host is allowed here, passes through untouched.
+		// Measured before adding this: a srcset of nine identical URLs, one per
+		// width descriptor. Markup that promises variants and serves one file is
+		// worse than no srcset at all.
+		// Listed host by host on purpose: a wildcard would turn /_image into an
+		// open proxy that resizes anything on the internet on our bill.
+		remotePatterns: [
+			{ protocol: "http", hostname: "localhost" },
+			{ protocol: "https", hostname: "www-serverstartup-io.serverstartup-s-partner-demo-account3612.workers.dev" },
+			{ protocol: "https", hostname: "www-serverstartup-io-preview.serverstartup-s-partner-demo-account3612.workers.dev" },
+			{ protocol: "https", hostname: "www.serverstartup.io" },
+		],
 	},
 	integrations: [
 		react(),

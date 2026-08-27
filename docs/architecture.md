@@ -181,6 +181,36 @@ All schemas use CMS data — no hardcoded strings. Validate with [Google Rich Re
 
 CMS images (featured images, inline media) are managed through the EmDash admin UI, which stores them in the R2 bucket bound as `MEDIA` in `wrangler.jsonc`. No manual R2 interaction is needed for CMS content.
 
+**One resizing pipeline, and it is Astro's (#323).** Every image that can be
+resized goes through `<Image>` — EmDash's for CMS media, `astro:assets` for
+anything imported from `src/assets/`. The adapter is configured
+`imageService: { build: "compile", runtime: "cloudflare-binding" }`: sharp for
+what the build can see, the `IMAGES` binding for what only exists at request
+time. Hand-written `srcset` was considered and rejected; a site with two image
+pipelines ends up maintaining neither.
+
+Three things that decided the shape, all measured rather than assumed:
+
+- **Not `imageService: "cloudflare"`.** That emits `/cdn-cgi/image/…` URLs,
+  which are a **zone** feature. Both deploys live on `*.workers.dev`, where the
+  original answers 200 and the transformed URL answers **404**. When the worker
+  moves onto `serverstartup.io` (#162) with Transformations enabled, switching
+  is one line in `astro.config.mjs` and no markup moves.
+- **`image.remotePatterns` is not optional here.** The CMS points
+  `featured_image` at static files under `public/assets/`, and EmDash hands
+  Astro an absolute URL for them, which Astro treats as *remote* and passes
+  through unless the host is allowed. Before the allow-list, the build emitted a
+  `srcset` of nine identical URLs — one per width descriptor. The list is written
+  host by host: a wildcard makes `/_image` an open proxy that resizes anything on
+  the internet at our expense.
+- **`<Image>` carries the SLOT's dimensions, not the file's.** Astro derives its
+  width ladder from `width`, so a 1200px source in a 53px avatar produced a
+  ladder starting at 640. Measure the slot per breakpoint (device emulation, not
+  a bare window size) and let `sizes` say what the layout does.
+
+Deliberately excluded: the Kit Digital strip in the footer. It is red.es's
+artefact and the composition is not ours to re-cut (§4.1, #308).
+
 ### 7.2 Video — Cloudflare Stream
 
 Videos are hosted on **Cloudflare Stream** — a managed platform with automatic transcoding (HLS/DASH), adaptive bitrate, and zero-config playback.

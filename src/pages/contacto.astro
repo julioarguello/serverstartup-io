@@ -10,7 +10,7 @@
  */
 import { getEmDashCollection, getEmDashEntry, getSiteSettings } from "emdash";
 import { entryAlternatePath } from "../utils/alternate";
-import { PortableText } from "emdash/ui";
+import { Image, PortableText } from "emdash/ui";
 import CubeEmblem from "../components/CubeEmblem.astro";
 import Base from "../layouts/Base.astro";
 import ContactAction from "../components/ContactAction.astro";
@@ -89,7 +89,13 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "es") :
 						<li class="s-contact__person">
 							<div class="s-contact__avatar">
 								{m.data.featured_image?.src
-									? <img src={m.data.featured_image.src} alt={m.data.title} loading="lazy" />
+									? <Image
+											image={m.data.featured_image}
+											alt={m.data.title}
+											width={53}
+											height={40}
+											sizes="53px"
+										/>
 									: <span aria-hidden="true">{m.data.title?.charAt(0) || "?"}</span>
 								}
 							</div>
