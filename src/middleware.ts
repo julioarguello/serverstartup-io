@@ -82,10 +82,38 @@ function applyHeaders(response: Response, patch: [string, string][]): Response {
 }
 
 export const onRequest = defineMiddleware(async ({ locals, currentLocale, url, cache }, next) => {
+	// ── /_image: keep the transform off the network (#407) ──
+	// EmDash hands Astro an ABSOLUTE url for CMS media, so the adapter's endpoint
+	// classifies our own static files as *remote* and fetches them over HTTP
+	// instead of reading them off the asset layer. On Cloudflare that fetch is a
+	// Worker asking the edge for its own hostname, and the edge refuses:
+	// instrumented on the deployed preview worker, the subrequest came back
+	// `404 text/plain, 17 bytes` beginning "erro" — an error string — and the
+	// IMAGES binding then failed with `IMAGES_TRANSFORM_ERROR 9412: The requested
+	// file is not an image`. Every image on the site answered 500.
+	//
+	// `wrangler dev` cannot show this: there the same loopback is an ordinary
+	// HTTP request to localhost and it returns the real file. Rewriting the href
+	// to a PATH puts the endpoint on its other branch — `env.ASSETS.fetch()` —
+	// which reads the asset directly, with no subrequest at all.
+	//
+	// The rewrite is handed to the SAME next() the normal path uses, not returned
+	// early from here: `next(payload)` moves on to the route without re-entering
+	// this middleware, so an early return would serve the image with none of the
+	// #164 headers below. Measured — the gate from #405 caught it.
+	let imageHref: URL | undefined;
+	if (url.pathname === "/_image") {
+		const href = url.searchParams.get("href");
+		if (href?.startsWith(`${url.origin}/`)) {
+			imageHref = new URL(url);
+			imageHref.searchParams.set("href", href.slice(url.origin.length));
+		}
+	}
+
 	const locale = currentLocale || "es";
 	const t = await loadAriaLabels(locale);
 	locals.t = t;
-	const response = await next();
+	const response = await next(imageHref);
 
 	// Collected, not written: `response` may be an immutable one straight out of
 	// the Workers cache, and the first `.set()` on those throws. applyHeaders

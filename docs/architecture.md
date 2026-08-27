@@ -208,6 +208,19 @@ Three things that decided the shape, all measured rather than assumed:
   ladder starting at 640. Measure the slot per breakpoint (device emulation, not
   a bare window size) and let `sizes` say what the layout does.
 
+A fifth, and the one that only Cloudflare could teach (#407). Because EmDash
+hands Astro an **absolute** url for CMS media, the endpoint treats our own
+static files as remote and fetches them over HTTP — and on the edge that fetch
+is a Worker asking for its own hostname, which is refused. Measured on the
+deployed preview worker: the subrequest returns `404 text/plain, 17 bytes`, the
+`IMAGES` binding is handed an error string, and every image on the site answers
+500. `wrangler dev` cannot show it, because there the same loopback is an
+ordinary HTTP request that returns the real file. `src/middleware.ts` rewrites
+such hrefs to a **path**, which puts the endpoint on its `env.ASSETS.fetch()`
+branch and takes the network out of the picture. The lesson generalises: a
+Worker cannot reach itself, so anything the site needs to read about its own
+content has to come from a binding, not from its own URL.
+
 A fourth thing, learned after the fact (#405). The adapter's `/_image`
 endpoint caches its own output through `caches.default`, and `cache.put` runs
 **before** the middleware. Two consequences that are easy to meet the hard way:

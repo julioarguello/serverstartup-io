@@ -64,6 +64,14 @@ export default defineConfig({
 		// worse than no srcset at all.
 		// Listed host by host on purpose: a wildcard would turn /_image into an
 		// open proxy that resizes anything on the internet on our bill.
+		//
+		// #407 corrects what this list was believed to do. Allowing our OWN hosts
+		// never made our own images work on Cloudflare and cannot: the endpoint
+		// then FETCHES them, and a Worker asking the edge for its own hostname
+		// gets a 17-byte error string back, not a file. src/middleware.ts rewrites
+		// those hrefs to a path so the endpoint reads them off the asset layer
+		// instead. The entries stay for genuinely remote images and for the build,
+		// and because removing an allow-list entry is not a thing to do casually.
 		remotePatterns: [
 			{ protocol: "http", hostname: "localhost" },
 			{ protocol: "https", hostname: "www-serverstartup-io.serverstartup-s-partner-demo-account3612.workers.dev" },
