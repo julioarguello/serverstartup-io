@@ -208,6 +208,18 @@ Three things that decided the shape, all measured rather than assumed:
   ladder starting at 640. Measure the slot per breakpoint (device emulation, not
   a bare window size) and let `sizes` say what the layout does.
 
+A fourth thing, learned after the fact (#405). The adapter's `/_image`
+endpoint caches its own output through `caches.default`, and `cache.put` runs
+**before** the middleware. Two consequences that are easy to meet the hard way:
+the cached copy never carries the §11 security headers, so the middleware has to
+add them on the way out of a hit; and a response handed back by
+`caches.default.match()` has **immutable** headers, so writing to it throws and
+Astro answers 500 with an empty body. That is why `src/middleware.ts` collects
+its headers and rebuilds the response instead of mutating in place. The failure
+only appeared on the *second* request for a given image, and `curl -I` reported
+200 on it, which is why `scripts/ci-check-headers.sh` now ends with a real GET,
+issued twice.
+
 Deliberately excluded: the Kit Digital strip in the footer. It is red.es's
 artefact and the composition is not ours to re-cut (§4.1, #308).
 

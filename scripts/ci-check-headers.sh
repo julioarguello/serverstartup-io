@@ -72,4 +72,42 @@ else
 	FAIL=1
 fi
 
+# ── the second request for a cached response (#405) ──────────────────────────
+# Everything above is a HEAD, and a HEAD is blind to this class of failure: a
+# throw while writing headers produced a 500 with an EMPTY body, and `curl -I`
+# reported 200 on that very response because there was no body to fail on. It
+# also only showed on the SECOND request for a URL — the first fills the Workers
+# cache, the second is served from it, and only that one comes back immutable.
+#
+# So this check is deliberately the opposite of the others: a real GET, twice,
+# asserting bytes came back and the headers survived the trip through the cache.
+# The target is a transformed image because /_image is the one route that caches
+# through caches.default (the adapter's own endpoint does it, #323).
+# `[^"]+` would swallow a whole srcset attribute — commas, spaces and all — so
+# cut at the first of either: one URL, not the list it may sit in.
+IMG=$(curl -s "$BASE/" | grep -oE '/_image\?[^"]+' | head -1 | sed -e 's/[ ,].*//' -e 's/&amp;/\&/g')
+if [ -z "$IMG" ]; then
+	# Not a pass. Either the homepage stopped routing images through /_image —
+	# in which case this check needs rewriting, not skipping — or / is broken.
+	echo "  FAIL no /_image URL found on / — this check cannot run, and a check that cannot run is not a green one" >&2
+	FAIL=1
+else
+	HDR_FILE=$(mktemp)
+	curl -s -o /dev/null "$BASE$IMG"   # request 1: fills the cache
+	read -r code bytes ctype <<<"$(curl -s -o /dev/null -D "$HDR_FILE" -w '%{http_code} %{size_download} %{content_type}' "$BASE$IMG")"
+	if [ "$code" = "200" ] && [ "${bytes:-0}" -gt 0 ] && [ "${ctype#image/}" != "$ctype" ]; then
+		echo "  ok   second GET of $IMG → $code, $bytes bytes, $ctype"
+	else
+		echo "  FAIL second GET of $IMG → $code, ${bytes:-0} bytes, ${ctype:-none} (expected a non-empty image)" >&2
+		FAIL=1
+	fi
+	if matches "$(cat "$HDR_FILE")" "Content-Security-Policy" "default-src 'self'"; then
+		echo "  ok   second GET keeps the #164 headers"
+	else
+		echo "  FAIL second GET lost the #164 headers — the cached copy predates them" >&2
+		FAIL=1
+	fi
+	rm -f "$HDR_FILE"
+fi
+
 exit $FAIL

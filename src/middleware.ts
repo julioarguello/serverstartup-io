@@ -49,11 +49,48 @@ const SECURITY_HEADERS: Record<string, string> = {
 	"Cross-Origin-Opener-Policy": "same-origin",
 };
 
+/**
+ * Apply this middleware's headers to a response whose own headers may be
+ * IMMUTABLE, rebuilding it if they are.
+ *
+ * `caches.default.match()` hands back a Response with a frozen `Headers`, and
+ * every `.set()` on it throws `TypeError: Can't modify immutable headers` —
+ * which Astro turns into a 500 with an empty body. The Cloudflare adapter's
+ * `/_image` endpoint caches through `caches.default`, so once #323 routed every
+ * image through it, the SECOND request for each transformed image 500'd and the
+ * first did not (#405). Two things hid it: the page renders correctly on the
+ * visit that fills the cache, and a `curl -I` answers 200 because a HEAD has no
+ * body to fail on.
+ *
+ * Rebuilding rather than skipping, because that endpoint's `cache.put` runs
+ * BEFORE this middleware: the cached copy never carried the #164 headers, so a
+ * hit that kept its own would serve an image with no CSP at all.
+ */
+function applyHeaders(response: Response, patch: [string, string][]): Response {
+	try {
+		for (const [k, v] of patch) response.headers.set(k, v);
+		return response;
+	} catch {
+		const headers = new Headers(response.headers);
+		for (const [k, v] of patch) headers.set(k, v);
+		return new Response(response.body, {
+			status: response.status,
+			statusText: response.statusText,
+			headers,
+		});
+	}
+}
+
 export const onRequest = defineMiddleware(async ({ locals, currentLocale, url, cache }, next) => {
 	const locale = currentLocale || "es";
 	const t = await loadAriaLabels(locale);
 	locals.t = t;
 	const response = await next();
+
+	// Collected, not written: `response` may be an immutable one straight out of
+	// the Workers cache, and the first `.set()` on those throws. applyHeaders
+	// below writes in place when it can and rebuilds when it cannot.
+	const patch: [string, string][] = [];
 
 	// ── Edge cache policy (#332/#357): default-deny, opt-in only ──
 	// With Workers Cache enabled, a 200 without Cache-Control is heuristically
@@ -80,17 +117,17 @@ export const onRequest = defineMiddleware(async ({ locals, currentLocale, url, c
 		cache.set({ maxAge: 3600, swr: 60 });
 		if (!response.headers.has("Cache-Control")) {
 			// browsers revalidate; the edge TTL travels in Cloudflare-CDN-Cache-Control
-			response.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+			patch.push(["Cache-Control", "public, max-age=0, must-revalidate"]);
 		}
 	} else if (!response.headers.has("Cache-Control")) {
-		response.headers.set("Cache-Control", "no-store");
+		patch.push(["Cache-Control", "no-store"]);
 	}
 
 	// Leave the CMS admin UI alone — it ships its own scripts/styles.
 	if (!url.pathname.startsWith("/_emdash")) {
 		for (const [k, v] of Object.entries(SECURITY_HEADERS)) {
-			response.headers.set(k, v);
+			patch.push([k, v]);
 		}
 	}
-	return response;
+	return applyHeaders(response, patch);
 });

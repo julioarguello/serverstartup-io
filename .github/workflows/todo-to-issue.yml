@@ -37,11 +37,19 @@ jobs:
           # Defaults to false — without it a marker deleted from the source
           # leaves its issue open forever (dev-tech-debt.md §3).
           CLOSE_ISSUES: true
-          # Mirrors the severity table of dev-tech-debt.md §1. A bare TODO or
-          # FIXME with no "(tech-debt)" is still picked up by name here — the
-          # rule forbids writing one for debt precisely so the mapping stays
-          # meaningful. The four labels do not exist in the repo yet; the
-          # action creates any label it is asked for.
+          # Mirrors the severity table of dev-tech-debt.md §1. Matching is by
+          # NAME, so the "(tech-debt)" suffix the rule mandates is a convention
+          # for whoever reads the code, not a filter the scanner applies —
+          # which is exactly why that rule forbids writing a bare marker for
+          # debt. The four labels did not exist in the repo; the action created
+          # them on its first run, as documented.
+          #
+          # Prose warning, learned the hard way: this scanner reads its own
+          # workflow file. The first version of this comment spelled the three
+          # marker names out in a sentence, and the very first run filed issues
+          # #402 and #403 against the repository, titled with the remainder of
+          # that sentence. Do not write the bare names anywhere in this file
+          # except inside the JSON below.
           IDENTIFIERS: >
             [{"name": "FIXME", "labels": ["tech-debt", "priority:medium"]},
              {"name": "TODO",  "labels": ["tech-debt", "priority:low"]},
