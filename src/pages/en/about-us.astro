@@ -4,7 +4,8 @@
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import { entryAlternatePath } from "../../utils/alternate";
-import { Image, PortableText } from "emdash/ui";
+import { PortableText } from "emdash/ui";
+import TeamPhoto from "../../components/TeamPhoto.astro";
 import { Image as AstroImage } from "astro:assets";
 import sponsorPhoto from "../../assets/urdaneta-infantil.webp";
 import PtLink from "../../components/PtLink.astro";
@@ -153,7 +154,7 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "en") :
 					<li class="team-card">
 						<div class="team-card__photo">
 							{member.data.featured_image?.src
-								? <Image
+								? <TeamPhoto
 										image={member.data.featured_image}
 										alt={member.data.title}
 										width={260}

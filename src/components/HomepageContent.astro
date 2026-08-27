@@ -20,7 +20,8 @@
  */
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import CloudflarePartner from "./CloudflarePartner.astro";
-import { Image, PortableText } from "emdash/ui";
+import { PortableText } from "emdash/ui";
+import TeamPhoto from "./TeamPhoto.astro";
 import PtLink from "./PtLink.astro";
 import CtaGlobal from "./CtaGlobal.astro";
 import MantraCloser from "./MantraCloser.astro";
@@ -137,7 +138,7 @@ const members = memberEntries ?? [];
 				{members.map((m: any) => (
 					<li class="s-team-strip__card">
 						{m.data.featured_image?.src && (
-							<Image
+							<TeamPhoto
 								image={m.data.featured_image}
 								alt={m.data.title}
 								width={270}

@@ -68,10 +68,12 @@ export default defineConfig({
 		// #407 corrects what this list was believed to do. Allowing our OWN hosts
 		// never made our own images work on Cloudflare and cannot: the endpoint
 		// then FETCHES them, and a Worker asking the edge for its own hostname
-		// gets a 17-byte error string back, not a file. src/middleware.ts rewrites
-		// those hrefs to a path so the endpoint reads them off the asset layer
-		// instead. The entries stay for genuinely remote images and for the build,
-		// and because removing an allow-list entry is not a thing to do casually.
+		// gets a 17-byte error string back, not a file. The fix is upstream of
+		// here — src/components/TeamPhoto.astro renders repo-carried photographs
+		// through astro:assets, so the href is a PATH and the endpoint reads it
+		// off the asset layer with no subrequest at all. The entries stay for
+		// genuinely remote images and for the build, and because removing an
+		// allow-list entry is not a thing to do casually.
 		remotePatterns: [
 			{ protocol: "http", hostname: "localhost" },
 			{ protocol: "https", hostname: "www-serverstartup-io.serverstartup-s-partner-demo-account3612.workers.dev" },

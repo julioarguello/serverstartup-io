@@ -8,7 +8,8 @@
  */
 import { getEmDashCollection, getEmDashEntry, getSiteSettings } from "emdash";
 import { entryAlternatePath } from "../../utils/alternate";
-import { Image, PortableText } from "emdash/ui";
+import { PortableText } from "emdash/ui";
+import TeamPhoto from "../../components/TeamPhoto.astro";
 import CubeEmblem from "../../components/CubeEmblem.astro";
 import Base from "../../layouts/Base.astro";
 import ContactAction from "../../components/ContactAction.astro";
@@ -87,7 +88,7 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "en") :
 						<li class="s-contact__person">
 							<div class="s-contact__avatar">
 								{m.data.featured_image?.src
-									? <Image
+									? <TeamPhoto
 											image={m.data.featured_image}
 											alt={m.data.title}
 											width={53}

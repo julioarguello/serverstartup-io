@@ -208,19 +208,6 @@ Three things that decided the shape, all measured rather than assumed:
   ladder starting at 640. Measure the slot per breakpoint (device emulation, not
   a bare window size) and let `sizes` say what the layout does.
 
-A fifth, and the one that only Cloudflare could teach (#407). Because EmDash
-hands Astro an **absolute** url for CMS media, the endpoint treats our own
-static files as remote and fetches them over HTTP — and on the edge that fetch
-is a Worker asking for its own hostname, which is refused. Measured on the
-deployed preview worker: the subrequest returns `404 text/plain, 17 bytes`, the
-`IMAGES` binding is handed an error string, and every image on the site answers
-500. `wrangler dev` cannot show it, because there the same loopback is an
-ordinary HTTP request that returns the real file. `src/middleware.ts` rewrites
-such hrefs to a **path**, which puts the endpoint on its `env.ASSETS.fetch()`
-branch and takes the network out of the picture. The lesson generalises: a
-Worker cannot reach itself, so anything the site needs to read about its own
-content has to come from a binding, not from its own URL.
-
 A fourth thing, learned after the fact (#405). The adapter's `/_image`
 endpoint caches its own output through `caches.default`, and `cache.put` runs
 **before** the middleware. Two consequences that are easy to meet the hard way:
@@ -232,6 +219,33 @@ its headers and rebuilds the response instead of mutating in place. The failure
 only appeared on the *second* request for a given image, and `curl -I` reported
 200 on it, which is why `scripts/ci-check-headers.sh` now ends with a real GET,
 issued twice.
+
+A fifth, and the one that only Cloudflare could teach (#407). Because EmDash
+hands Astro an **absolute** url for CMS media, the endpoint treats our own
+static files as remote and fetches them over HTTP — and on the edge that fetch
+is a Worker asking for its own hostname, which is refused. Measured on the
+deployed preview worker: the subrequest returns `404 text/plain, 17 bytes`, the
+`IMAGES` binding is handed an error string, and every image on the site answers
+500. `wrangler dev` cannot show it, because there the same loopback is an
+ordinary HTTP request that returns the real file.
+
+Rewriting the href inside `src/middleware.ts` looks like the fix and is not:
+`next(payload)` re-routes the request but never replaces the `Request` the
+endpoint reads, so the rewrite is dead code — measured with simultaneous probes
+in the middleware and the endpoint on the deployed worker, and shipped once
+before that was known. The fix has to change what the **markup** asks for. So
+`src/components/TeamPhoto.astro` picks the source per photograph: one the repo
+carries goes through `astro:assets` (via a `import.meta.glob` of
+`public/assets/team/`, so the files do not move and the CMS field keeps
+resolving), which emits a `/_astro/…` **path** and puts the endpoint on its
+`env.ASSETS.fetch()` branch with no subrequest at all; anything else falls to
+EmDash's `<Image>`, which reads media-library bytes off the storage binding.
+That second branch is the destination — #410 moves these photographs into the
+media library, and then none of the first branch is needed.
+
+The lesson generalises past images: a Worker cannot reach itself, so anything
+the site needs to read about its own content has to come from a binding, not
+from its own URL.
 
 Deliberately excluded: the Kit Digital strip in the footer. It is red.es's
 artefact and the composition is not ours to re-cut (§4.1, #308).

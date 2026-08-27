@@ -1,0 +1,38 @@
+---
+/**
+ * One team photograph, from whichever source actually holds it (#407).
+ *
+ * A photograph the repo carries is rendered through `astro:assets`, so the URL
+ * carries a PATH and the image endpoint reads it off the asset layer. Anything
+ * else — a photograph uploaded through the admin, which is where all of them are
+ * heading in #410 — falls to EmDash's own component, which routes media-library
+ * bytes through the storage binding.
+ *
+ * The one shape that does NOT work is a CMS field pointing at a loose file in
+ * `public/`: EmDash absolutises it, the endpoint fetches it over HTTP, and a
+ * Worker cannot fetch its own hostname. That is what #407 was.
+ */
+import { Image as AstroImage } from "astro:assets";
+import type { MediaValue } from "emdash";
+import { Image } from "emdash/ui";
+import { teamPhoto } from "../lib/team-photos";
+
+interface Props {
+	image: MediaValue | string | null | undefined;
+	alt: string;
+	width: number;
+	height: number;
+	sizes: string;
+}
+
+const { image, alt, width, height, sizes } = Astro.props;
+const photo = teamPhoto(typeof image === "string" ? image : image?.src);
+---
+
+{
+	photo ? (
+		<AstroImage src={photo} alt={alt} width={width} height={height} sizes={sizes} />
+	) : (
+		<Image image={image} alt={alt} width={width} height={height} sizes={sizes} />
+	)
+}
