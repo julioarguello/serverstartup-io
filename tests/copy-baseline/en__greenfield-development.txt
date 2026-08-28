@@ -29,7 +29,7 @@ Java 21 · 0 warnings
 * @param contract The contract comes before the code. The API is agreed in writing (Contract First, OpenAPI), with OAuth 2.0 and mTLS in the design, not in a patch.
 * @param governance CI/CD is governance. Tests, static analysis and security checks gate every deploy. You always know what runs on your servers, and why.
 * @param security Security gets compiled in. Fine-grained access control in the code, and Cloudflare's WAF in front.
-* @author the same three engineers, start to finish
+* @author the same engineers, start to finish
 * @since 2019
 */
 public System build(Stack stack, Contract contract) { … }
@@ -43,7 +43,7 @@ AI multiplies. The framework steers.
 Maybe greenfield is where AI pays off most. It is certainly where it derails first. On a blank page, an agent delivers in hours what used to take weeks. Without a frame, every one of those hours is fresh debt.
 Our frameworks are that perimeter. The agent writes inside the rails, and an engineer signs every line that reaches main. The full story is in our AI vertical.
 Your technical debt is our problem
-Whoever designs the system deploys it and answers for its stability. The same three senior engineers, from first commit to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.
+Whoever designs the system deploys it and answers for its stability. The same senior engineers, from first commit to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.
 1 team =
 6 verticals = Ø
 0

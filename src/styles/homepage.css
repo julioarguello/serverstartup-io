@@ -1,19 +1,128 @@
-/* ═══ HERO — mobile-first ═══ */
+/* ═══ HERO — six plates, one object (#413), mobile-first ═══
+   The band used to be `cubo-home.svg` at 60% grey behind a headline: correct
+   with the rest of the site, and inert — nothing said what we do before the
+   first scroll. Now the mark is the SUBJECT of six drawn plates, one per
+   vertical, and the picture rotates while the heading does not.
+
+   Everything dark here is `--color-primary`, the brand ink (founder,
+   2026-08-27: "suave, tinta de marca"). It is deliberately NOT the console's
+   near-black: #304 gave black to the machine voice, and a hero that borrowed
+   it would take the meaning away from the consoles. */
 .s-hero {
+	position: relative;
+	/* the plates and the scrim are painted inside this band and nowhere
+	   else — no z-index of theirs may reach the fixed header */
+	isolation: isolate;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: flex-start;
-	min-height: auto;
-	padding: calc(80px + var(--space-6)) 0 var(--rhythm-section);
-	background-image: url("/assets/cubo-home.svg");
-	background-position: center center;
-	background-repeat: no-repeat;
-	/* The mark is 671×704: at its natural size it is taller than a
-	   content-height hero and the box clips its vertices (founder: "el logo
-	   del background está cortado"). `contain` keeps the whole cube whatever
-	   the hero measures. */
-	background-size: contain;
+	min-height: 100svh;
+	padding: calc(80px + var(--space-6)) 0 var(--space-6);
+	/* the ground the plates are drawn on, and what shows while they load */
+	background-color: var(--color-primary);
+	/* the plates are cropped to the band; `clip` and not `hidden` so this
+	   never becomes a scroll container (§14) */
+	overflow: clip;
+}
+
+.s-hero__stage {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
+
+/* Six plates stacked in one box, cross-fading. Only one is `eager` — the
+   other five are 1–23 KB gzipped each (46 KB for all six, less than a single
+   stock photograph), so the rotation costs less than the picture it replaces. */
+.s-hero__plate {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	/* the drawings put their subject right of centre and the scrim darkens
+	   the left, so the crop keeps the cube out from under the text */
+	object-position: 72% 50%;
+	opacity: 0;
+	animation: s-hero-plate var(--hero-cycle) linear infinite;
+	animation-delay: calc(var(--i) * var(--hero-step) - 0.5s);
+}
+
+/* The first plate is on screen at load, not fading in: it is the LCP element
+   and an opacity ramp would cost the measurement half a second. */
+.s-hero__plate:first-child {
+	opacity: 1;
+	animation-name: s-hero-plate-lead;
+}
+
+.s-hero__scrim {
+	position: absolute;
+	inset: 0;
+	background-image: var(--hero-scrim-portrait);
+}
+
+.s-hero__inner {
+	position: relative;
+	z-index: 1;
+}
+
+/* ── the rotating index line: the vertical's name, and the only button-shaped
+      thing the founder left in the band ("con clicar en el title suficiente") */
+.s-hero__index {
+	display: grid;
+	margin-bottom: var(--space-4);
+}
+
+.s-hero__item {
+	grid-area: 1 / 1;
+	justify-self: start;
+	opacity: 0;
+	visibility: hidden;
+	animation: s-hero-item var(--hero-cycle) linear infinite;
+	animation-delay: calc(var(--i) * var(--hero-step) - 0.5s);
+}
+
+.s-hero__item:first-child {
+	opacity: 1;
+	visibility: visible;
+	animation-name: s-hero-item-lead;
+}
+
+.s-hero__link {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 4px 10px;
+	font-family: var(--font-family-mono);
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--color-secondary);
+}
+
+.s-hero__n {
+	color: var(--color-hero-ink-soft);
+}
+
+.s-hero__name {
+	border-bottom: 1px solid var(--cc);
+	padding-bottom: 3px;
+}
+
+.s-hero__arrow {
+	color: var(--cc);
+}
+
+.s-hero__link:hover .s-hero__name,
+.s-hero__link:focus-visible .s-hero__name {
+	/* the same terminal selection the breadcrumb and the search slot wear */
+	background-color: color-mix(in srgb, var(--cc) 40%, transparent);
+}
+
+/* ── the copy, in paper ── */
+.s-hero h1 {
+	color: var(--color-secondary);
+	text-wrap: pretty;
 }
 
 .s-hero__kicker {
@@ -21,29 +130,253 @@
 }
 
 .s-hero__kicker p {
+	color: var(--color-secondary);
 	font-size: var(--text-sub-size, 26px);
 	font-weight: var(--text-sub-weight, 500);
 	line-height: var(--text-sub-lh, 30px);
+	text-wrap: pretty;
 }
 
-.s-hero__body {
+/* The vertical's own words, changing with its picture. Stacked in one grid
+   cell like the index line, so the six take the height of the longest and the
+   band never jumps as they swap. */
+.s-hero__pitch {
+	display: grid;
 	margin-top: 24px;
+	max-width: var(--measure-statement);
 }
-.s-hero__body p {
+
+.s-hero__pitch-item {
+	grid-area: 1 / 1;
+	color: var(--color-hero-ink-soft);
 	font-size: var(--text-body);
 	font-weight: 300;
 	line-height: 1.45;
-	margin-block-end: 12px;
+	text-wrap: pretty;
+	opacity: 0;
+	visibility: hidden;
+	animation: s-hero-item var(--hero-cycle) linear infinite;
+	animation-delay: calc(var(--i) * var(--hero-step) - 0.5s);
 }
 
-.s-hero .btn {
-	margin-top: 32px;
+.s-hero__pitch-item:first-child {
+	opacity: 1;
+	visibility: visible;
+	animation-name: s-hero-item-lead;
+}
+
+/* ── the ticker: which of the six is showing, and the way to stop it ── */
+.s-hero__ticker {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-top: var(--space-5);
+}
+
+/* The two arrows sit with the dots and the stop, one control cluster rather
+   than chevrons floating over the picture — over a photograph they would need
+   their own scrim to stay legible, and the band already has one. */
+.s-hero__nav {
+	display: grid;
+	place-items: center;
+	width: 26px;
+	height: 26px;
+	padding: 0;
+	border: 0;
+	border-radius: var(--radius);
+	background: none;
+	color: var(--color-hero-ink-soft);
+	cursor: pointer;
+}
+
+.s-hero__nav:hover {
+	color: var(--color-secondary);
+	background-color: var(--color-hero-dot);
+}
+
+.s-hero__dots {
+	display: flex;
+	gap: 6px;
+}
+
+.s-hero__dot {
+	width: 26px;
+	height: 3px;
+	background-color: var(--color-hero-dot);
+	animation: s-hero-dot var(--hero-cycle) steps(1, end) infinite;
+	animation-delay: calc(var(--i) * var(--hero-step) - 0.5s);
+}
+
+.s-hero__dot:first-child {
+	background-color: var(--cc);
+}
+
+/* Invisible but REAL, exactly like the search toggle: Tab reaches it, Space
+   stops the rotation, and a screen reader announces it from its aria-label.
+   Sized 1px rather than display:none, which would take it out of tab order. */
+.s-hero__pause {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.s-hero__pause-btn {
+	display: grid;
+	place-items: center;
+	width: 26px;
+	height: 26px;
+	border-radius: var(--radius);
+	color: var(--color-hero-ink-soft);
+	cursor: pointer;
+}
+
+.s-hero__pause-btn:hover {
+	color: var(--color-secondary);
+	background-color: var(--color-hero-dot);
+}
+
+.s-hero:has(.s-hero__pause:focus-visible) .s-hero__pause-btn {
+	outline: 2px solid var(--color-secondary);
+	outline-offset: 2px;
+}
+
+.s-hero__glyph--go { display: none; }
+.s-hero__pause:checked ~ .s-hero__pause-btn .s-hero__glyph--stop { display: none; }
+.s-hero__pause:checked ~ .s-hero__pause-btn .s-hero__glyph--go { display: block; }
+
+/* ── manual mode: the visitor took the wheel ──
+   The script adds `.is-manual` and `data-slide` the first time an arrow is
+   used. Every animation stops for good — so the stop button has nothing left
+   to stop and steps aside — and the six states are spelled out rather than
+   computed, because a `calc()` comparison between two custom properties would
+   fail CLOSED on an engine that cannot do it: a hero with no picture at all. */
+.s-hero.is-manual .s-hero__plate,
+.s-hero.is-manual .s-hero__item,
+.s-hero.is-manual .s-hero__pitch-item,
+.s-hero.is-manual .s-hero__dot {
+	animation: none;
+}
+
+.s-hero.is-manual .s-hero__plate { opacity: 0; }
+.s-hero.is-manual .s-hero__item,
+.s-hero.is-manual .s-hero__pitch-item { opacity: 0; visibility: hidden; }
+.s-hero.is-manual .s-hero__dot { background-color: var(--color-hero-dot); }
+.s-hero.is-manual .s-hero__pause-btn { display: none; }
+
+.s-hero.is-manual[data-slide="0"] .s-hero__plate:nth-child(1),
+.s-hero.is-manual[data-slide="1"] .s-hero__plate:nth-child(2),
+.s-hero.is-manual[data-slide="2"] .s-hero__plate:nth-child(3),
+.s-hero.is-manual[data-slide="3"] .s-hero__plate:nth-child(4),
+.s-hero.is-manual[data-slide="4"] .s-hero__plate:nth-child(5),
+.s-hero.is-manual[data-slide="5"] .s-hero__plate:nth-child(6) {
+	opacity: 1;
+}
+
+.s-hero.is-manual[data-slide="0"] .s-hero__item:nth-child(1),
+.s-hero.is-manual[data-slide="1"] .s-hero__item:nth-child(2),
+.s-hero.is-manual[data-slide="2"] .s-hero__item:nth-child(3),
+.s-hero.is-manual[data-slide="3"] .s-hero__item:nth-child(4),
+.s-hero.is-manual[data-slide="4"] .s-hero__item:nth-child(5),
+.s-hero.is-manual[data-slide="5"] .s-hero__item:nth-child(6),
+.s-hero.is-manual[data-slide="0"] .s-hero__pitch-item:nth-child(1),
+.s-hero.is-manual[data-slide="1"] .s-hero__pitch-item:nth-child(2),
+.s-hero.is-manual[data-slide="2"] .s-hero__pitch-item:nth-child(3),
+.s-hero.is-manual[data-slide="3"] .s-hero__pitch-item:nth-child(4),
+.s-hero.is-manual[data-slide="4"] .s-hero__pitch-item:nth-child(5),
+.s-hero.is-manual[data-slide="5"] .s-hero__pitch-item:nth-child(6) {
+	opacity: 1;
+	visibility: visible;
+}
+
+.s-hero.is-manual[data-slide="0"] .s-hero__dot:nth-child(1),
+.s-hero.is-manual[data-slide="1"] .s-hero__dot:nth-child(2),
+.s-hero.is-manual[data-slide="2"] .s-hero__dot:nth-child(3),
+.s-hero.is-manual[data-slide="3"] .s-hero__dot:nth-child(4),
+.s-hero.is-manual[data-slide="4"] .s-hero__dot:nth-child(5),
+.s-hero.is-manual[data-slide="5"] .s-hero__dot:nth-child(6) {
+	background-color: var(--cc);
+}
+
+/* WCAG 2.2.2 — the stop, and the courtesy freeze: a keyboard visitor who
+   lands on the index link must not have it slide out from under them. */
+.s-hero:has(.s-hero__pause:checked) .s-hero__plate,
+.s-hero:has(.s-hero__pause:checked) .s-hero__item,
+.s-hero:has(.s-hero__pause:checked) .s-hero__pitch-item,
+.s-hero:has(.s-hero__pause:checked) .s-hero__dot,
+.s-hero:focus-within .s-hero__plate,
+.s-hero:focus-within .s-hero__item,
+.s-hero:focus-within .s-hero__pitch-item,
+.s-hero:focus-within .s-hero__dot {
+	animation-play-state: paused;
+}
+
+@keyframes s-hero-plate {
+	0%, 100% { opacity: 0; }
+	2.7778%, 16.6667% { opacity: 1; }
+	19.4444% { opacity: 0; }
+}
+
+@keyframes s-hero-plate-lead {
+	0%, 16.6667% { opacity: 1; }
+	19.4444%, 100% { opacity: 0; }
+}
+
+@keyframes s-hero-item {
+	0% { opacity: 0; visibility: hidden; }
+	2.7778% { opacity: 1; visibility: visible; }
+	16.6667% { opacity: 1; visibility: visible; }
+	19.4444% { opacity: 0; visibility: hidden; }
+	100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes s-hero-item-lead {
+	0% { opacity: 1; visibility: visible; }
+	16.6667% { opacity: 1; visibility: visible; }
+	19.4444% { opacity: 0; visibility: hidden; }
+	100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes s-hero-dot {
+	0% { background-color: var(--cc); }
+	16.6667% { background-color: var(--color-hero-dot); }
+	100% { background-color: var(--color-hero-dot); }
+}
+
+/* #315's rule, applied to the loudest motion on the site: someone who asked
+   the system for less does not get a slideshow. The first plate stays, the
+   other five never appear, and the ticker goes with them — dots that never
+   advance and a stop button for something that is not moving are furniture. */
+@media (prefers-reduced-motion: reduce) {
+	.s-hero__plate,
+	.s-hero__item,
+	.s-hero__pitch-item,
+	.s-hero__dot {
+		animation: none;
+	}
+	/* The ticker used to disappear whole here, which was right when the arrows
+	   did not exist. Nothing moves, so the STOP has nothing to stop and goes —
+	   but the arrows are now the only way to reach the other five plates, and
+	   the dots are the only thing saying which one you are on. They stay. */
+	.s-hero__pause,
+	.s-hero__pause-btn {
+		display: none;
+	}
 }
 
 @media (min-width: 768px) {
 	.s-hero {
-		padding: calc(80px + var(--space-8)) 0 var(--rhythm-section);
-		min-height: auto;
+		padding: calc(80px + var(--space-8)) 0 var(--space-8);
+	}
+	.s-hero__scrim {
+		background-image: var(--hero-scrim);
+	}
+	.s-hero__index {
+		margin-bottom: var(--space-5);
+	}
+	.s-hero__link {
+		font-size: 13px;
 	}
 }
 
@@ -140,6 +473,29 @@
 }
 
 .s-cf__feature {
+}
+
+/* The band's headings were promoted a level (#416) so the home's outline does
+   not skip from h1 to h3; the sizes below are the ones the design already had,
+   pinned here so a semantic fix stays a semantic fix. */
+.s-cf__card h2 {
+	font-size: 24px;
+	line-height: 30px;
+}
+.s-cf__feature h3 {
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 30px;
+}
+@media (min-width: 768px) {
+	.s-cf__card h2 {
+		font-size: 32px;
+		line-height: 40px;
+	}
+	.s-cf__feature h3 {
+		font-size: 20px;
+		line-height: 28px;
+	}
 }
 
 .s-cf__feature p {

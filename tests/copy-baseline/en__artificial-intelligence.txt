@@ -3,7 +3,6 @@ Skip to content
 /en/artificial-intelligence
 ES
 AI
-AI
 Artificial Intelligence
 AI is a means, not an end. The machine writes the repetitive code; we bring the architecture and the judgment, from development to operations — one integral approach, a DevOps profile. The agent proposes; the engineer disposes.
 Tell us your case

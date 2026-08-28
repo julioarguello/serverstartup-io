@@ -15,8 +15,28 @@ interface Props {
 	promptPath: string; // current pathname ("" on home)
 	accent: string; // section color from CMS, ink for site pages
 	altPath: string | null; // alternate-locale path resolved by Base (#291)
+	/**
+	 * The page opens with a dark image band under the bar (#413). The bar then
+	 * has no ground of its own — paper ink straight on the picture — until
+	 * there IS something under it: on scroll, and when the search opens,
+	 * because that console is light by design and a light strip hanging off a
+	 * transparent bar cuts the image in two.
+	 */
+	overHero?: boolean;
+	/**
+	 * The six vertical colours, in canonical order, when the band under the
+	 * bar rotates through them (the home). The edge rides the SAME clock as
+	 * the plates — one `--hero-cycle`, so the two cannot drift.
+	 */
+	slideColors?: string[];
 }
-const { promptPath, accent, altPath } = Astro.props;
+const { promptPath, accent, altPath, overHero = false, slideColors = [] } = Astro.props;
+
+// The edge's six stops, as custom properties the keyframes read. They come
+// from the CMS service entries (Base sorts them by face), never from a copy
+// of the palette in CSS: two lists of the same six colours are two lists that
+// will eventually disagree.
+const slideVars = slideColors.map((c, i) => `--c${i + 1}:${c}`).join(";");
 
 // The brand prompt is the way back home — locale-aware, or EN visitors
 // land on the Spanish home (#273)
@@ -33,7 +53,11 @@ const cellA = isSection ? `color-mix(in srgb, ${accent} 30%, white)` : "#CED4DA"
 const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB";
 ---
 
-<header class="site-header" id="site-header" style={`--accent:${accent}`}>
+<header
+	class:list={["site-header", overHero && "is-over-hero", slideColors.length > 0 && "is-rotating"]}
+	id="site-header"
+	style={`--accent:${accent};--cell-a:${cellA};--cell-b:${cellB}${slideVars ? ";" + slideVars : ""}`}
+>
 	<div class="container header-inner">
 		<div class="header-brand">
 			<button
@@ -45,9 +69,9 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 				aria-label={t("open_menu")}
 			>
 				<svg class="brand-cube" width="30" height="34" viewBox="0 0 200 228" aria-hidden="true">
-					<polygon points="100,14 186,64 100,114 14,64" fill={cellA}></polygon>
-					<polygon points="14,64 100,114 100,214 14,164" fill={cellA}></polygon>
-					<polygon points="100,114 186,64 186,164 100,214" fill={cellB}></polygon>
+					<polygon class="brand-cube-cell" points="100,14 186,64 100,114 14,64"></polygon>
+					<polygon class="brand-cube-cell" points="14,64 100,114 100,214 14,164"></polygon>
+					<polygon class="brand-cube-cell brand-cube-cell--b" points="100,114 186,64 186,164 100,214"></polygon>
 					<path class="brand-cube-edge" d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
 					<path class="brand-cube-edge" d="M14,64 100,114 186,64 M100,114 100,214"></path>
 					<path class="brand-cube-edge" d="M57,39 143,89 M143,39 57,89"></path>
@@ -102,13 +126,105 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 		left: 0;
 		right: 0;
 		z-index: 100;
-		background-color: var(--color-secondary);
+		/* One switch for the whole bar (#413). Every piece below draws from
+		   these three, so the transparent state over a dark hero is a change
+		   of THREE values and not a second copy of the header's styling. */
+		--bar-bg: var(--color-secondary);
+		--bar-ink: var(--color-primary);
+		--bar-ink-soft: var(--color-text-muted);
+		--bar-ink-invert: var(--color-secondary);
+		--bar-rule: var(--color-border);
+		--bar-surface: var(--color-surface);
+		background-color: var(--bar-bg);
 		border-bottom: 3px solid var(--accent, var(--color-primary));
-		transition: box-shadow 0.3s;
+		transition: background-color 0.3s, box-shadow 0.3s;
 	}
 
 	.site-header.is-sticky {
 		box-shadow: var(--shadow-card);
+	}
+
+	/* ═══════════════════════════════════════════
+	   OVER THE HERO (#413)
+	   The home — and each vertical page that opens with its plate — starts
+	   with a dark image under the bar. The bar then has no ground of its
+	   own: paper ink straight on the picture.
+
+	   It goes back to being the ordinary white bar the moment there is
+	   something under it, and there are exactly two such moments:
+
+	     · `.is-sticky` — the page scrolled, which the existing listener
+	       already tracks. One mechanism, not a second one.
+	     · the search is open. That console is a LIGHT one by design (see
+	       the SEARCH block below: "a dark strip under a white bar was a
+	       hole in the page"), so opening it under a transparent bar would
+	       cut the image with a light strip — the same hole, reversed.
+	   ═══════════════════════════════════════════ */
+	.site-header.is-over-hero:not(.is-sticky):not(:has(.search-toggle:checked)) {
+		--bar-bg: transparent;
+		--bar-ink: var(--color-secondary);
+		--bar-ink-soft: var(--color-hero-ink-soft);
+		--bar-ink-invert: var(--color-primary);
+		--bar-rule: var(--color-hero-rule);
+		--bar-surface: var(--color-hero-dot);
+		box-shadow: none;
+	}
+
+	/* The mark never mutates, but on the picture its cells are cut from the
+	   ground instead of from paper — pale plates over a dark image read as a
+	   white blob, which is the one thing the cube must not become. */
+	.site-header.is-over-hero:not(.is-sticky):not(:has(.search-toggle:checked)) .brand-cube-cell {
+		fill: color-mix(in srgb, var(--accent) 46%, var(--color-primary));
+	}
+	.site-header.is-over-hero:not(.is-sticky):not(:has(.search-toggle:checked)) .brand-cube-cell--b {
+		fill: color-mix(in srgb, var(--accent) 26%, var(--color-primary));
+	}
+
+	/* The edge rides the hero's clock. `--c1…--c6` are the CMS colours Base
+	   passes down; with no rotation (a vertical page) the edge simply keeps
+	   that page's accent, and `--c1` is the resting colour if the animation
+	   never runs — reduced motion, or a browser that skips it. */
+	.site-header.is-over-hero.is-rotating {
+		border-bottom-color: var(--c1, var(--accent));
+	}
+	.site-header.is-over-hero.is-rotating:not(.is-sticky):not(:has(.search-toggle:checked)) {
+		animation: site-header-edge var(--hero-cycle) steps(1, end) infinite;
+		animation-delay: -0.5s;
+	}
+
+	@keyframes site-header-edge {
+		0% { border-bottom-color: var(--c1); }
+		16.6667% { border-bottom-color: var(--c2); }
+		33.3333% { border-bottom-color: var(--c3); }
+		50% { border-bottom-color: var(--c4); }
+		66.6667% { border-bottom-color: var(--c5); }
+		83.3333% { border-bottom-color: var(--c6); }
+		100% { border-bottom-color: var(--c1); }
+	}
+
+	/* Manual mode: the visitor picked a plate, so the clock is over. The edge
+	   stops with it and takes that plate's colour, which the hero's script
+	   parks on the root — the header is outside the component and a custom
+	   property is the only thing that crosses. The `:not()`s are repeated so
+	   this outweighs the animation rule above rather than tying with it. */
+	body:has(.s-hero.is-manual) .site-header.is-over-hero.is-rotating:not(.is-sticky):not(:has(.search-toggle:checked)) {
+		animation: none;
+		border-bottom-color: var(--hero-now, var(--c1));
+	}
+
+	/* …and it stops when the hero stops, or the two drift apart within one
+	   cycle and the bar starts announcing a slide that is not on screen. */
+	body:has(.s-hero__pause:checked) .site-header,
+	body:has(.s-hero:focus-within) .site-header {
+		animation-play-state: paused;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		/* the selector is repeated in full on purpose: a bare `.site-header`
+		   here loses to the six-class rule above and the edge keeps cycling */
+		.site-header.is-over-hero.is-rotating:not(.is-sticky):not(:has(.search-toggle:checked)) {
+			animation: none;
+		}
 	}
 
 	.header-inner {
@@ -144,9 +260,17 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 		transition: transform 0.15s;
 	}
 
+	.brand-cube-cell {
+		fill: var(--cell-a);
+	}
+
+	.brand-cube-cell--b {
+		fill: var(--cell-b);
+	}
+
 	.brand-cube-edge {
 		fill: none;
-		stroke: var(--color-primary);
+		stroke: var(--bar-ink);
 		stroke-width: 13;
 		stroke-linejoin: round;
 		stroke-linecap: round;
@@ -157,7 +281,7 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 		align-items: baseline;
 		min-width: 0;
 		text-decoration: none;
-		color: var(--color-primary);
+		color: var(--bar-ink);
 		font-family: var(--font-mono), monospace;
 		font-size: 0.95rem;
 		font-weight: 700;
@@ -169,7 +293,7 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 		/* Ink text over an accent-tinted "terminal selection" — the color
 		   signal stays while text contrast stays AA (colored glyphs on white
 		   failed color-contrast: #F38020 is 2.4:1). */
-		color: var(--color-primary);
+		color: var(--bar-ink);
 		background: color-mix(in srgb, var(--accent, transparent) 22%, transparent);
 		border-radius: var(--radius);
 		padding-inline: 2px;
@@ -297,11 +421,11 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 		width: 26px;
 		height: 26px;
 		border-radius: var(--radius);
-		color: var(--color-text-muted);
+		color: var(--bar-ink-soft);
 		cursor: pointer;
 		flex: none;
 	}
-	.search-btn:hover { color: var(--color-text); background: var(--color-surface); }
+	.search-btn:hover { color: var(--bar-ink); background: var(--bar-surface); }
 	.site-header:has(.search-toggle:checked) .search-btn {
 		color: var(--color-text);
 		background: var(--color-surface);
@@ -325,11 +449,42 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 	   absent from tablet up, where the header line already exists. */
 	.search-form--menu {
 		display: block;
-		border: 1px solid var(--color-border);
+		border: 1px solid var(--color-console-line);
 		border-radius: var(--radius);
 		margin-bottom: var(--space-3);
+		/* #338 made this console LIGHT, and on a white bar that was right: a
+		   dark strip under it was a hole in the page. The menu went dark in
+		   #417 and the argument inverts with the ground — a light console in
+		   a dark panel is a lit strip, and #304 already says the near-black
+		   is the machine's voice. So the DECISION is unchanged (the console
+		   is the inverse of what it sits on); only the panel moved.
+		   Nothing here escapes .search-form--menu, and that class only
+		   exists below 768px, so the header's own console is untouched. */
+		background: var(--color-console);
+		color: var(--color-console-ink);
 	}
 	.search-form--menu .search-line { padding: 12px 14px; }
+	.search-form--menu .search-chrome,
+	.search-form--menu .search-hint,
+	.search-form--menu .search-mag { color: var(--color-console-ink); }
+	.search-form--menu .search-hint { color: var(--color-console-dim); }
+	.search-form--menu .search-hint kbd {
+		border-color: var(--color-console-line);
+		background: var(--color-console-bar);
+		color: var(--color-console-ink);
+	}
+	/* the slot is a tint of paper, not of the accent: the green prompt glyph
+	   is the console's colour signal and a green wash under the argument
+	   would be the same signal said twice, dimmer */
+	.search-form--menu .search-slot {
+		background: var(--color-console-line);
+		border-bottom-color: var(--color-console-dim);
+	}
+	.search-form--menu .search-slot:focus-within {
+		border-bottom-color: var(--color-console-ok);
+	}
+	.search-form--menu .search-input { color: var(--color-secondary); }
+	.search-form--menu .search-input::placeholder { color: var(--color-console-dim); }
 	@media (min-width: 768px) {
 		.search-form--menu { display: none; }
 	}
@@ -353,7 +508,7 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 	.brand-cursor {
 		width: 0.5em;
 		height: 1.05em;
-		background: var(--color-primary);
+		background: var(--bar-ink);
 		margin-left: 2px;
 		align-self: center;
 		animation: brand-blink 1.2s steps(1) infinite;

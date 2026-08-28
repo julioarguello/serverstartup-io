@@ -13,6 +13,7 @@
 import LogoDie from "./LogoDie.astro";
 import SearchPrompt from "./SearchPrompt.astro";
 import { FACE_BY_SLUG, FACE_ORDER, SITE_BY_PATH } from "../utils/nav";
+import { getUiLabels } from "../utils/ui-labels";
 
 interface ServiceEntry {
 	id: string;
@@ -32,21 +33,40 @@ interface Props {
 const { services, siteItems, currentPath, localePrefix } = Astro.props;
 const t = Astro.locals.t;
 
+/* A phone is 390px wide and "cdn, waf y seguridad edge" is not. It wrapped to
+   two lines, and a two-line item in a six-item menu reads as a mistake
+   (founder, 2026-08-28: "no quiero saltos de línea en un menú tan básico").
+   So each vertical carries a short name too, keyed by its face, and the panel
+   ships BOTH: CSS shows the long one from 701px up and the short one below.
+   Not JS measuring the box — the answer must not depend on which text happens
+   to be there, and a menu has to be right on the first paint. */
+const short = (await getUiLabels(Astro.currentLocale || "es")).getAll("menu_short");
+
 const activeFace = FACE_BY_SLUG[currentPath.replace(/^\/en/, "").replace(/^\//, "")] ?? null;
 const activeSite = SITE_BY_PATH[currentPath] ?? null;
 
 const specLinks = services
 	.map((s) => {
 		const slug = s.slug ?? s.id;
+		const key = FACE_BY_SLUG[slug];
+		const title = s.data.title ?? slug;
 		return {
-			key: FACE_BY_SLUG[slug],
+			key,
 			href: `${localePrefix}/${slug}`,
-			title: s.data.title ?? slug,
+			title,
+			// no short name in the CMS = the long one, never an empty link
+			short: short[key] || title,
 			color: s.data.color ?? "#1E1E1E",
 		};
 	})
 	.filter((l) => l.key)
 	.sort((a, b) => FACE_ORDER.indexOf(a.key) - FACE_ORDER.indexOf(b.key));
+
+/* Direction B paints a 6px edge down the left in the colour of the vertical
+   you opened the menu from — the one thing on the panel that says which page
+   is underneath. Off every other page there is no such colour, and an
+   arbitrary one would be a lie, so the edge simply is not painted. */
+const activeColor = specLinks.find((l) => l.key === activeFace)?.color ?? null;
 
 const siteLinks = siteItems
 	.map((it) => ({
@@ -58,7 +78,12 @@ const siteLinks = siteItems
 ---
 
 <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
-<dialog class="menu-dialog" id="menu-dialog" aria-label={t("main_menu")}>
+<dialog
+	class="menu-dialog"
+	id="menu-dialog"
+	aria-label={t("main_menu")}
+	style={activeColor ? `--menu-edge:${activeColor}` : undefined}
+>
 	<button
 		type="button"
 		class="menu-close"
@@ -66,12 +91,32 @@ const siteLinks = siteItems
 		aria-label={t("close_menu")}
 	>✕</button>
 
+	{/* The panel keeps the site's header line instead of replacing the page
+	    with a blank sheet (#417). It is a PICTURE of the bar, not the bar:
+	    aria-hidden, no links and no language switcher, because a second copy
+	    of those would add tab stops inside a dialog whose keyboard trap the
+	    a11y gate measures. The only real control here is the close button,
+	    which was already here. */}
+	<div class="menu-bar" aria-hidden="true">
+		<div class="menu-bar__inner">
+			<svg class="menu-bar__cube" width="30" height="34" viewBox="0 0 200 228" fill="none">
+				<path class="menu-bar__edge" d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
+				<path class="menu-bar__edge" d="M14,64 100,114 186,64 M100,114 100,214"></path>
+				<path class="menu-bar__edge menu-bar__edge--hair" d="M57,39 143,89 M143,39 57,89"></path>
+				<path class="menu-bar__edge menu-bar__edge--hair" d="M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"></path>
+			</svg>
+			<span class="menu-bar__word">~Server Startup</span>
+			{currentPath && <span class="menu-bar__path">{currentPath}</span>}
+		</div>
+	</div>
+
 	<div class="menu-inner">
 		{/* #338: on phones the header has no room for the command line, so the
 		    menu carries it — full-screen, and the cube is still the only door. */}
-		<SearchPrompt pathname={currentPath} accent="#1E1E1E" place="menu" />
+		<SearchPrompt pathname={currentPath} accent="var(--color-console-ok)" place="menu" />
 		<div class="menu-lists">
 			<nav aria-label={t("nav_specialties")}>
+				<p class="menu-kicker">{t("menu_kicker")}</p>
 				<ul class="menu-spec" role="list">
 					{specLinks.map((l) => (
 						<li>
@@ -83,7 +128,8 @@ const siteLinks = siteItems
 								aria-current={l.key === activeFace ? "page" : undefined}
 							>
 								<span class="spec-mini" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-								<span class="spec-title">{l.title}</span>
+								<span class="spec-title spec-title--long">{l.title}</span>
+								<span class="spec-title spec-title--short">{l.short}</span>
 							</a>
 						</li>
 					))}
@@ -134,7 +180,13 @@ const siteLinks = siteItems
 		height: 100vh;
 		max-width: 100vw;
 		max-height: 100vh;
-		background: var(--color-secondary);
+		/* #417: the panel goes dark, on the hero's own ground. The tie to the
+		   home is the DRAWING, not a colour — `assets/menu/ground.svg` comes
+		   out of the same generator as the six hero plates, so the two cannot
+		   drift the way a hand-copied gradient would. The ink underneath is
+		   what axe measures and what shows if the file ever 404s. */
+		background: var(--color-primary) url("/assets/menu/ground.svg") center /
+			cover no-repeat;
 		border: none;
 		z-index: 200;
 		transform: translateX(100%);
@@ -144,21 +196,105 @@ const siteLinks = siteItems
 		margin: 0;
 	}
 	.menu-dialog::backdrop { background: transparent; }
+	/* A pseudo-element, not a border: the dialog is exactly 100vw and a 6px
+	   border would push it past the viewport. Fixed, so it survives the
+	   panel's own scroll — the transform above is its containing block. */
+	.menu-dialog::before {
+		content: "";
+		position: fixed;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 6px;
+		background: var(--menu-edge, transparent);
+		z-index: 202;
+	}
 	.menu-dialog.is-open { transform: translateX(0); }
 
 	.menu-close {
 		position: fixed;
-		top: 32px;
-		right: 32px;
-		z-index: 201;
+		/* centred in the 76px strip, in a 44px box — the WCAG 2.5.8 target */
+		top: 16px;
+		right: 24px;
+		width: 44px;
+		height: 44px;
+		z-index: 203;
 		background: none;
 		border: none;
 		font-size: 32px;
 		cursor: pointer;
-		color: var(--color-primary);
+		color: var(--menu-ink);
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	/* ── The strip: the header line, kept ── */
+	.menu-bar {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		height: 76px;
+		z-index: 202;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid var(--menu-rule);
+	}
+	.menu-bar__inner {
+		max-width: var(--container-max);
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 24px 0 30px;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		min-width: 0;
+	}
+	.menu-bar__cube { flex: none; }
+	.menu-bar__edge {
+		fill: none;
+		stroke: var(--menu-ink);
+		stroke-width: 13;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+	}
+	.menu-bar__edge--hair {
+		stroke-width: 8;
+		opacity: 0.5;
+	}
+	.menu-bar__word,
+	.menu-bar__path {
+		font-family: var(--font-mono), monospace;
+		font-size: 0.95rem;
+		white-space: nowrap;
+	}
+	.menu-bar__word {
+		font-weight: 700;
+		color: var(--menu-ink);
+	}
+	.menu-bar__path {
+		font-weight: 500;
+		color: var(--menu-ink-soft);
+		background: var(--menu-tint);
+		border-radius: var(--radius);
+		padding-inline: 4px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		/* token-guard: off — truncation, not a measure: the same clamp the
+		   header's breadcrumb wears, so the strip never wraps. */
+		max-width: 34vw;
+		/* token-guard: on */
+	}
+
+	.menu-kicker {
+		margin: 0 0 18px;
+		padding-left: 10px;
+		font-family: var(--font-mono), monospace;
+		font-size: 12px;
+		letter-spacing: 0.08em;
+		text-transform: lowercase;
+		color: var(--menu-ink-muted);
 	}
 
 	.menu-inner {
@@ -181,23 +317,32 @@ const siteLinks = siteItems
 		padding: 0;
 	}
 	.spec-link {
+		/* The fallback comes first on purpose: a browser without relative
+		   colour syntax keeps the mix, which is duller but legible, and one
+		   with it takes the floor on the line below. */
+		--menu-fc: color-mix(in srgb, var(--fc) 40%, white);
+		--menu-fc: oklch(from var(--fc) max(l, var(--menu-face-floor)) c h);
 		display: flex;
 		align-items: center;
 		gap: 14px;
 		font-size: 32px;
 		font-weight: 650;
 		line-height: 1.25;
-		color: var(--color-primary);
+		color: var(--menu-ink);
 		text-decoration: none;
 		padding: 8px 10px;
 		transition: background 0.15s;
 	}
+	/* On paper the tint was the face colour mixed toward white. On ink the
+	   same gesture is the face colour mixed toward the ground, which is what
+	   an alpha does — and it keeps the ground's drawing showing through
+	   instead of stamping a flat swatch over it. */
 	.spec-link:hover,
 	.spec-link:focus-visible {
-		background: color-mix(in srgb, var(--fc) 10%, white);
+		background: color-mix(in srgb, var(--fc) 16%, transparent);
 	}
 	.spec-link[aria-current="page"] {
-		background: color-mix(in srgb, var(--fc) 14%, white);
+		background: color-mix(in srgb, var(--fc) 24%, transparent);
 	}
 	.spec-mini {
 		display: inline-grid;
@@ -206,20 +351,23 @@ const siteLinks = siteItems
 		gap: 2px;
 		width: 26px;
 		height: 26px;
-		border: 2px solid var(--fc);
+		/* three of the six brand hues are dark by design and do not exist on
+		   ink, so the bullet wears the raised hue rather than a second
+		   palette of six literals (--menu-face-floor) */
+		border: 2px solid var(--menu-fc);
 		padding: 2px;
 		flex: none;
 	}
 	.spec-mini i {
-		background: var(--fc);
-		opacity: 0.16;
+		background: var(--menu-fc);
+		opacity: 0.28;
 	}
 	.spec-link[aria-current="page"] .spec-mini i { opacity: 1; }
 
 	.menu-site {
 		margin: 22px 0 0;
 		padding: 16px 10px 0;
-		border-top: 1px dashed var(--color-border);
+		border-top: 1px dashed var(--menu-rule);
 		display: flex;
 		flex-wrap: wrap;
 		gap: 12px 20px;
@@ -230,18 +378,27 @@ const siteLinks = siteItems
 	.die-hint {
 		text-transform: lowercase;
 	}
+	/* "cdn, waf y seguridad edge" does not fit a 390px phone, and a wrapped
+	   item in a six-item menu reads as a mistake (founder, 2026-08-28: "no
+	   quiero saltos de línea en un menú tan básico"). Both names ship and the
+	   breakpoint picks one — not JS measuring the box, because the menu has to
+	   be right on the first paint and the answer must not depend on which
+	   text happens to be there. The two spans are why `nowrap` is safe: the
+	   short one is chosen precisely where the long one would break. */
+	.spec-title--short { display: none; }
+	.spec-title { white-space: nowrap; }
 
 	.site-link {
 		font-size: 16px;
 		font-weight: 500;
-		color: var(--color-text-muted);
+		color: var(--menu-ink-muted);
 		text-decoration: none;
 		flex: none;
 	}
 	.site-link:hover,
 	.site-link:focus-visible,
 	.site-link[aria-current="page"] {
-		color: var(--color-primary);
+		color: var(--menu-ink);
 	}
 
 	/* The grid item must be allowed to shrink below its content's automatic
@@ -264,14 +421,26 @@ const siteLinks = siteItems
 		font-size: 11px;
 		letter-spacing: 0.06em;
 		text-transform: lowercase;
-		color: var(--color-text-muted);
+		color: var(--menu-ink-muted);
 		margin: 0;
 		text-align: center;
 	}
 
+	/* ── The die on ink ──
+	   LogoDie is drawn for paper and is used nowhere else, so the panel
+	   re-inks it here rather than the component branching on a mode it would
+	   have exactly one caller for. Its own rules stay the paper default. */
+	.menu-dialog .logo-stage .plate--dark { background: var(--menu-die-back); }
+	.menu-dialog .logo-stage .plate--light { background: var(--menu-die-plate); }
+	.menu-dialog .logo-stage .cell { fill: var(--menu-die-cell); }
+	.menu-dialog .logo-stage .cface.alive .cell {
+		fill: color-mix(in srgb, var(--fc) 40%, white);
+		fill: oklch(from var(--fc) max(l, var(--menu-face-floor)) c h);
+	}
+
 	/* The die highlights the specialty it lands on when rolled by tap */
 	.spec-link.rolled {
-		background: color-mix(in srgb, var(--fc) 10%, white);
+		background: color-mix(in srgb, var(--fc) 16%, transparent);
 	}
 
 	/* tablet: the approved composition, compressed — die at ×0.85 with air */
@@ -289,6 +458,19 @@ const siteLinks = siteItems
 	   Site links stack vertically (wrapped rows read as clutter and the
 	   last row died half-cut at the viewport edge). */
 	@media (max-width: 700px) {
+		.spec-title--long { display: none; }
+		.spec-title--short { display: inline; }
+		.menu-bar { height: 60px; }
+		.menu-bar__inner { padding: 0 16px 0 22px; gap: 8px; }
+		.menu-bar__cube { width: 24px; height: 27px; }
+		.menu-bar__word,
+		.menu-bar__path { font-size: 0.8rem; }
+		.menu-close {
+			top: 8px;
+			right: 10px;
+			font-size: 26px;
+		}
+		.menu-kicker { display: none; }
 		.menu-inner {
 			grid-template-columns: 1fr;
 			gap: 20px;

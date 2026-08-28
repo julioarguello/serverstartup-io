@@ -2,19 +2,12 @@ Skip to content
 ~Server Startup
 /en
 ES
+01 / 6
+E-commerce
+→
 Software engineering: architecture, integration and operations
 Over twenty years of craft in e-commerce, systems integration and data. Official Cloudflare partners since 2019.
-On your project, always the same three senior engineers. Whoever designs your architecture writes the code. And answers for it when something breaks.
-Our services
-The team
-No middlemen, no handovers.
-The same three engineers cover every layer: whoever designs, writes; whoever writes, operates.
-Daniel Sío
-Engineer
-Ignacio Ibaseta
-Engineer
-Julio Argüello
-Engineer
+Over twenty years inside SAP Commerce Cloud. Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty.
 Official Cloudflare partner
 We speed up and protect your infrastructure with the most advanced services Cloudflare has to offer.
 Global CDN
@@ -41,6 +34,15 @@ AI is a means, not an end. The machine writes the repetitive code; we bring the 
 Quality and performance
 Our craft is quality and performance where they get expensive: critical processes and large volumes. The campaign peak, the catalogue that has to be reindexed, the integration that has to close the day.
 This site is a small sample of the same discipline, applied to our own shop window. No version ships if performance drops below 95, or if accessibility, best practices and SEO are not 100: the check runs on every change and blocks the deploy. The threshold is written in the public repository, and so is every run of the check. See how it is built.
+The team
+No middlemen, no handovers.
+The same engineers cover every layer: whoever designs, writes; whoever writes, operates.
+Daniel Sío
+Engineer
+Ignacio Ibaseta
+Engineer
+Julio Argüello
+Engineer
 1 team =
 6 verticals = Ø
 0

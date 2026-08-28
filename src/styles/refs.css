@@ -97,11 +97,20 @@
 	color: var(--color-console-ink);
 }
 
-/* the filename column IS the logo */
+/* The filename column IS the logo.
+   Sized on BOTH axes intrinsically, never with a declared height (#416): the
+   global `img { max-width: 100% }` clamps the width whenever this column is
+   narrower than the logo wants, and a declared `height` then holds while the
+   width shrinks — the ratio breaks. Measured on a 390px phone: a 480×120 mark
+   rendered 105×32, an 18% squash. With both axes auto and a max on each, the
+   UA picks whichever constraint preserves the ratio (CSS 2.1 §10.4), so a
+   column too narrow scales the logo down whole instead of flattening it. */
 .ls-name img {
 	display: block;
-	height: 40px;
 	width: auto;
+	height: auto;
+	max-height: 40px;
+	max-width: 100%;
 	filter: brightness(0) invert(1) opacity(0.82);
 }
 
@@ -127,7 +136,7 @@
 		display: none;
 	}
 	.ls-name img {
-		height: 32px;
+		max-height: 32px;
 	}
 }
 

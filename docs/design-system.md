@@ -28,6 +28,25 @@
 | `--color-surface` / `--color-surface-soft` / `--color-surface-hover` | `#f5f5f5` / `#fafafa` / `#e8e8e8` | Neutral backgrounds (blog, code blocks) |
 | `--color-ink-soft` | `#3a3a3a` | Dark soft backgrounds (about team section) |
 
+### Over the hero picture (#413)
+
+The rotating hero and the vertical pages' plates put the header and the copy on a dark
+image. Every value that switch needs is a token; none of them is a new colour — the ground is
+`--color-primary` and the rest are paper at an opacity.
+
+| Token | Value | Use |
+| ----- | ----- | --- |
+| `--hero-scrim` / `--hero-scrim-portrait` | `linear-gradient(…rgba(30,30,30,·)…)` | The ramp that keeps the text side readable — sideways on desktop, top-down on a phone |
+| `--color-hero-ink-soft` | `rgba(255,255,255,.82)` | Secondary copy on the picture |
+| `--color-hero-rule` | `rgba(255,255,255,.35)` | Hairlines on the picture (the locale chip's box) |
+| `--color-hero-dot` | `rgba(255,255,255,.22)` | A slide that is not showing; the search button's hover ground |
+| `--hero-cycle` / `--hero-step` | `36s` / `6s` | One clock for the plates, the index, the dots **and** the header's bottom edge |
+
+The header reads its own colours through `--bar-bg` / `--bar-ink` / `--bar-ink-soft` /
+`--bar-ink-invert` / `--bar-rule` / `--bar-surface`. They resolve to the ordinary light bar
+everywhere, and to the tokens above while `.is-over-hero` holds — which is how
+`LanguageSwitcher` flips to paper without knowing the hero exists.
+
 ### The two palette layers
 
 - **UI pastels** (above): what renders on cards today; they came from the Figma

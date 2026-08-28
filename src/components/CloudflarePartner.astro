@@ -4,8 +4,14 @@
  *
  * Fetches the first partner entry with Portable Text content and renders:
  * - Partner logo from featured_image
- * - h3 heading + description from PT blocks
- * - Feature list (h4 + p pairs) from PT blocks
+ * - Section heading + description from PT blocks
+ * - Feature list (title + p pairs) from PT blocks
+ *
+ * The CMS still authors those blocks as `h3` and `h4` — that is the style
+ * name in Portable Text, not the tag rendered here. On the page this band is
+ * the home's second top-level section (#416: the team strip that used to sit
+ * above it moved down), so it renders h2 + h3 and the outline never skips a
+ * level. homepage.css pins the type ramp so the promotion is invisible.
  * - CTA button from cta_label field, linking to partner slug
  */
 import { getEmDashCollection } from "emdash";
@@ -76,7 +82,7 @@ const features = h4Blocks.map((h4: any, i: number) => ({
 					loading="lazy"
 				/>
 			)}
-			<h3>{heading}</h3>
+			<h2>{heading}</h2>
 			{descriptionBlock && (
 				<div class="text-body s-cf__desc">
 					<PortableText value={[descriptionBlock]} components={ptComponents} />
@@ -87,7 +93,7 @@ const features = h4Blocks.map((h4: any, i: number) => ({
 				<ul class="s-cf__features" role="list">
 					{features.map((f: { title: string; desc: string }) => (
 						<li class="s-cf__feature">
-							<h4>{f.title}</h4>
+							<h3>{f.title}</h3>
 							<p class="text-body">{f.desc}</p>
 						</li>
 					))}

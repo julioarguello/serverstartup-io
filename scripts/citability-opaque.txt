@@ -33,6 +33,10 @@ public/fonts/*.woff2       # Computer Modern subset for the mantra (#295)
 
 # ── design evidence: screenshots taken to review a change ──────────────────
 docs/design/screenshots/**/*.png   # rendered pages, captured for review in #156/#161
+docs/design/hero-rotativo/previews/*.jpg   # captures of the built hero (#413). Rendered
+                                           # pages, so the only words in them are the ones
+                                           # the CMS already publishes on / and on the
+                                           # verticals — no client appears on either page.
 
 # ── the legacy archive (#324 (a) is undecided; these are the reasons today) ─
 reference/legacy/media/**   # logo masters, animations and history renders — imagery

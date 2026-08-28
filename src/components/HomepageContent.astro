@@ -14,6 +14,11 @@
  *   [2] areas — heading only
  *   [3] quality and performance — the craft, then this site as its sample
  *
+ * Band order on the page (founder 2026-08-27): hero · Cloudflare partner ·
+ * areas · quality and performance · the team · CTA. The CMS sections are still
+ * read BY POSITION from the PT content — that order is the CMS's, and the one
+ * above is the page's; they are not the same list.
+ *
  * CTA block sourced from cta_global widget area.
  * Service cards derived from services collection.
  * Section 3 (Cloudflare Partner) driven by partners collection.
@@ -29,6 +34,7 @@ import { FACE_BY_SLUG, sortByFace } from "../utils/nav";
 import CubeEmblem from "./CubeEmblem.astro";
 import { getUiLabels } from "../utils/ui-labels";
 import { excerptPlain } from "../utils/excerpt";
+import { HERO_ART } from "../utils/hero-art";
 
 // Whitespace-safe link mark: EmDash's default renderer inserts a space
 // before punctuation that follows a link (#273 — the hero is link-heavy)
@@ -55,7 +61,32 @@ const services = serviceEntries ?? [];
 
 const labels = await getUiLabels(locale);
 const engineerCaption = labels.get("footer_headings", "engineer_caption", locale === "en" ? "Engineer" : "Ingeniero");
-const heroServicesBtn = labels.get("footer_headings", "hero_services_btn", locale === "en" ? "Our services" : "Nuestros servicios");
+
+// ── The rotating hero (#413) ────────────────────────────────────────────
+// Six plates, one per vertical, in the canonical order — the same order the
+// menu, the footer and the rows below use, so the hero cannot disagree with
+// them. Anything not mapped to a face drops out rather than borrowing a
+// picture that belongs to another discipline.
+const heroSlides = sortByFace(services)
+	.map((svc: any) => {
+		const slug = svc.slug ?? svc.id;
+		const face = FACE_BY_SLUG[slug];
+		if (!face) return null;
+		return {
+			href: `${localePrefix}/${slug}`,
+			title: svc.data.title as string,
+			color: (svc.data.color as string) || "#1E1E1E",
+			art: HERO_ART[face],
+			// The picture used to change while the words underneath did not
+			// (founder, 2026-08-27: "cambias la imagen pero no cambian los
+			// copys, eso está profundamente mal"). Plain text, not
+			// excerptHtml: the vertical's name right above is already the
+			// link, and a second link inside a slide that is about to slide
+			// away is one nobody can reach in time.
+			pitch: excerptPlain((svc.data.excerpt as string) || ""),
+		};
+	})
+	.filter((s): s is { href: string; title: string; color: string; art: string; pitch: string } => s !== null);
 
 // Split PT content by h2 headings into named sections
 type Section = { heading: string; blocks: any[] };
@@ -101,25 +132,163 @@ const { entries: memberEntries } = await getEmDashCollection("members", {
 const members = memberEntries ?? [];
 ---
 
-<!-- ══════ SECTION 1: HERO ══════ -->
+<!-- ══════ HERO — six plates, one object (#413) ══════
+     The picture rotates; the <h1> does not. One stable heading is what SEO
+     and a screen reader read, and it is also the only honest one: the six
+     verticals are what the company does, not six different companies.
+     The only link in the band is the vertical's name — the founder removed
+     both CTA buttons ("con clicar en el title suficiente"). -->
 <section class="s-hero" aria-label={t("hero_intro")}>
+	{heroSlides.length > 0 && (
+		<div class="s-hero__stage" aria-hidden="true">
+			{heroSlides.map((slide, i) => (
+				<img
+					class="s-hero__plate"
+					src={slide.art}
+					alt=""
+					width="1440"
+					height="900"
+					style={`--i:${i}`}
+					fetchpriority={i === 0 ? "high" : "low"}
+					loading={i === 0 ? "eager" : "lazy"}
+					decoding="async"
+				/>
+			))}
+			<span class="s-hero__scrim"></span>
+		</div>
+	)}
 	<div class="container s-hero__inner">
+		{heroSlides.length > 0 && (
+			<ul class="s-hero__index" role="list">
+				{heroSlides.map((slide, i) => (
+					<li class="s-hero__item" style={`--i:${i};--cc:${slide.color}`}>
+						<a href={slide.href} class="s-hero__link">
+							<span class="s-hero__n">{`0${i + 1} / ${heroSlides.length}`}</span>
+							<span class="s-hero__name">{slide.title}</span>
+							<span class="s-hero__arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		)}
+		{/* The hybrid the founder asked for (2026-08-27): what the COMPANY is
+		    holds still — the <h1> and the line under it are the same on all six
+		    frames, which is also what SEO and a screen reader read — and what
+		    the PICTURE is showing changes underneath it, in the vertical's own
+		    words. The heading and the sentence below it are the only copy that
+		    survives every frame; everything else in the band agrees with the
+		    plate. */}
 		<h1>{title}</h1>
 		{heroSection?.blocks.length > 0 && (
 			<div class="s-hero__kicker">
 				<PortableText value={[heroSection.blocks[0]]} components={ptComponents} />
 			</div>
 		)}
-		{heroSection?.blocks.length > 1 && (
-			<div class="s-hero__body">
-				<PortableText value={heroSection.blocks.slice(1)} components={ptComponents} />
+		{heroSlides.length > 0 && (
+			<ul class="s-hero__pitch" role="list">
+				{heroSlides.map((slide, i) => (
+					<li class="s-hero__pitch-item" style={`--i:${i}`}>{slide.pitch}</li>
+				))}
+			</ul>
+		)}
+		{heroSlides.length > 1 && (
+			<div class="s-hero__ticker">
+				{/* `hidden` until the script un-hides them: a control that does
+				    nothing is worse than no control, and with no JS the CSS
+				    rotation still carries the band on its own. */}
+				<button type="button" class="s-hero__nav" data-hero-nav="-1" aria-label={t("hero_prev")} hidden>
+					<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path d="M10 2.5 4.5 8l5.5 5.5"></path>
+					</svg>
+				</button>
+				<span class="s-hero__dots" aria-hidden="true">
+					{heroSlides.map((slide, i) => (
+						<span class="s-hero__dot" style={`--i:${i};--cc:${slide.color}`}></span>
+					))}
+				</span>
+				<button type="button" class="s-hero__nav" data-hero-nav="1" aria-label={t("hero_next")} hidden>
+					<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+						<path d="M6 2.5 11.5 8 6 13.5"></path>
+					</svg>
+				</button>
+				{/* WCAG 2.2.2 made real: rotation that lasts more than five
+				    seconds needs a way to stop it, and a system-level motion
+				    preference is not a control the visitor can reach here. A
+				    checkbox drives it in pure CSS (`animation-play-state`), the
+				    same mechanism the search toggle uses — invisible but REAL:
+				    Tab reaches it, Space stops the hero, and it is announced
+				    from its own aria-label. The hero also freezes on
+				    `:focus-within`, so a keyboard user never chases a link. */}
+				<input type="checkbox" id="hero-pause" class="s-hero__pause" aria-label={t("hero_pause")} />
+				<label for="hero-pause" class="s-hero__pause-btn">
+					<svg class="s-hero__glyph s-hero__glyph--stop" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+						<rect x="3.5" y="2.5" width="3" height="11"></rect>
+						<rect x="9.5" y="2.5" width="3" height="11"></rect>
+					</svg>
+					<svg class="s-hero__glyph s-hero__glyph--go" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+						<path d="M4 2.5l9 5.5-9 5.5z"></path>
+					</svg>
+				</label>
 			</div>
 		)}
-		<a href="#areas-especializacion" class="btn btn-dark">{heroServicesBtn}</a>
 	</div>
 </section>
 
-<!-- ══════ SECTION 2: EL EQUIPO — how they work and who they are ══════ -->
+<!-- ══════ CLOUDFLARE PARTNER (CMS-driven) ══════
+     Section order, founder 2026-08-27: the team band moved from second place
+     to the last one before the CTA ("la parte del equipo en la home hay que
+     bajarla, a final de calidad y rendimiento"). What we do comes first; who
+     does it closes. -->
+<CloudflarePartner />
+
+<!-- ══════ ÁREAS DE ESPECIALIZACIÓN (CMS-driven) ══════ -->
+<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || labels.get("footer_headings", "services_title", "Áreas de especialización")}>
+	<div class="container s-areas__inner">
+		<div class="s-areas__header">
+			<h2>{areasSection?.heading || `~ ${labels.get("footer_headings", "services_title", "Áreas de especialización")}`}</h2>
+		</div>
+
+		<!-- Full-width rows (#273): every vertical gets a color bar and room
+		     for its whole thesis. The two-column layout collided once the
+		     #264 excerpts grew — a stacked row cannot overlap by construction. -->
+		<ul class="s-areas__rows" role="list">
+			{sortByFace(services)
+				.map((svc) => {
+					const d = svc.data;
+					const cardColor = d.color || "#1E1E1E";
+					const slug = (svc as any).slug ?? svc.id;
+					return (
+						<li class="area-row" style={`--cc:${cardColor}`}>
+							<a href={`${localePrefix}/${slug}`} class="area-row__link">
+								<CubeEmblem class="area-row__die" color={cardColor} faceKey={FACE_BY_SLUG[slug] ?? undefined} size={54} />
+								<div class="area-row__text">
+									<h3>{d.title}</h3>
+									<p class="text-body">{excerptPlain(d.excerpt || "")}</p>
+								</div>
+							</a>
+						</li>
+					);
+				})}
+		</ul>
+	</div>
+</section>
+
+<!-- ══════ CALIDAD Y RENDIMIENTO — the craft, and this site as its sample ══════ -->
+{proofSection && (
+	<section class="s-proof" aria-label={proofSection.heading}>
+		<div class="container">
+			<div class="s-proof__inner">
+				{/* the deconstruction face: the same mark that page wears, so the
+				    claim and the page that backs it read as one thing */}
+				<CubeEmblem class="s-proof__die" color="var(--color-primary)" faceKey="dec" size={104} />
+				<h2>{proofSection.heading}</h2>
+				<PortableText value={proofSection.blocks} components={ptComponents} />
+			</div>
+		</div>
+	</section>
+)}
+
+<!-- ══════ EL EQUIPO — how they work and who they are (the last band before the CTA) ══════ -->
 {teamSection && members.length > 0 && (
 	<section class="s-team-strip" aria-label={teamSection.heading}>
 		<div class="container">
@@ -157,59 +326,78 @@ const members = memberEntries ?? [];
 	</section>
 )}
 
-<!-- ══════ SECTION 3: CLOUDFLARE PARTNER (CMS-driven) ══════ -->
-<CloudflarePartner />
-
-<!-- ══════ SECTION 4: ÁREAS DE ESPECIALIZACIÓN (CMS-driven) ══════ -->
-<section class="s-areas" id="areas-especializacion" aria-label={areasSection?.heading || labels.get("footer_headings", "services_title", "Áreas de especialización")}>
-	<div class="container s-areas__inner">
-		<div class="s-areas__header">
-			<h2>{areasSection?.heading || `~ ${labels.get("footer_headings", "services_title", "Áreas de especialización")}`}</h2>
-		</div>
-
-		<!-- Full-width rows (#273): every vertical gets a color bar and room
-		     for its whole thesis. The two-column layout collided once the
-		     #264 excerpts grew — a stacked row cannot overlap by construction. -->
-		<ul class="s-areas__rows" role="list">
-			{sortByFace(services)
-				.map((svc) => {
-					const d = svc.data;
-					const cardColor = d.color || "#1E1E1E";
-					const slug = (svc as any).slug ?? svc.id;
-					return (
-						<li class="area-row" style={`--cc:${cardColor}`}>
-							<a href={`${localePrefix}/${slug}`} class="area-row__link">
-								<CubeEmblem class="area-row__die" color={cardColor} faceKey={FACE_BY_SLUG[slug] ?? undefined} size={54} />
-								<div class="area-row__text">
-									<h3>{d.title}</h3>
-									<p class="text-body">{excerptPlain(d.excerpt || "")}</p>
-								</div>
-							</a>
-						</li>
-					);
-				})}
-		</ul>
-	</div>
-</section>
-
-<!-- ══════ SECTION 5: CALIDAD Y RENDIMIENTO — the craft, and this site as its sample ══════ -->
-{proofSection && (
-	<section class="s-proof" aria-label={proofSection.heading}>
-		<div class="container">
-			<div class="s-proof__inner">
-				{/* the deconstruction face: the same mark that page wears, so the
-				    claim and the page that backs it read as one thing */}
-				<CubeEmblem class="s-proof__die" color="var(--color-primary)" faceKey="dec" size={104} />
-				<h2>{proofSection.heading}</h2>
-				<PortableText value={proofSection.blocks} components={ptComponents} />
-			</div>
-		</div>
-	</section>
-)}
-
-<!-- ══════ SECTION 6: CTA (from cta_global widget) ══════ -->
+<!-- ══════ CTA (from cta_global widget) ══════ -->
 <div class="container mantra-wrap">
 	<MantraCloser />
 </div>
 
 <CtaGlobal />
+
+<script>
+	/**
+	 * The hero's manual control (founder, 2026-08-27: "el carrusel me debía de
+	 * permitir moverme yo entre las opciones, con las flechas").
+	 *
+	 * The rotation itself stays in CSS — it is the LCP band and it must run
+	 * with or without this file. All this does is hand the visitor the wheel:
+	 * the two arrows are `hidden` in the markup and only appear once we are
+	 * here to make them work.
+	 *
+	 * Taking manual control ENDS the rotation, which is why the pause button
+	 * hides itself in that state: there is nothing left to pause, and WCAG
+	 * 2.2.2 is satisfied by the thing having stopped.
+	 */
+	const hero = document.querySelector<HTMLElement>(".s-hero");
+	const navs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-hero-nav]"));
+	const dots = Array.from(document.querySelectorAll<HTMLElement>(".s-hero__dot"));
+
+	if (hero && navs.length && dots.length > 1) {
+		const n = dots.length;
+		const colors = dots.map((d) => getComputedStyle(d).getPropertyValue("--cc").trim());
+
+		// The clock is the stylesheet's, read back rather than restated here —
+		// two copies of "36s" is one too many.
+		const secs = (name: string, fallback: number) => {
+			const raw = getComputedStyle(hero).getPropertyValue(name).trim();
+			const v = parseFloat(raw);
+			if (!Number.isFinite(v)) return fallback;
+			return raw.endsWith("ms") ? v / 1000 : v;
+		};
+		const cycle = secs("--hero-cycle", 36);
+		const step = secs("--hero-step", 6);
+		// the plates run at `animation-delay: calc(--i * --step - 0.5s)`, so the
+		// document timeline is half a second ahead of slide 0's start
+		const LEAD = 0.5;
+
+		/** Which plate the CSS animation is showing right now. */
+		const playing = () => {
+			const t = ((document.timeline.currentTime as number) ?? 0) / 1000 + LEAD;
+			return Math.floor((((t % cycle) + cycle) % cycle) / step) % n;
+		};
+
+		const current = () => (hero.dataset.slide ? Number(hero.dataset.slide) : playing());
+
+		const show = (i: number) => {
+			const k = ((i % n) + n) % n;
+			hero.classList.add("is-manual");
+			hero.dataset.slide = String(k);
+			// the header's bottom edge is outside this component, so the colour
+			// travels the only way it can: a custom property on the root
+			document.documentElement.style.setProperty("--hero-now", colors[k]);
+		};
+
+		for (const btn of navs) {
+			btn.hidden = false;
+			btn.addEventListener("click", () => show(current() + Number(btn.dataset.heroNav)));
+		}
+
+		// Arrow keys, but only while focus is inside the band — never a global
+		// shortcut (WCAG 2.1.4, the same reason `/` is scoped to the header).
+		hero.addEventListener("keydown", (e) => {
+			if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+			if (e.metaKey || e.ctrlKey || e.altKey) return;
+			e.preventDefault();
+			show(current() + (e.key === "ArrowRight" ? 1 : -1));
+		});
+	}
+</script>

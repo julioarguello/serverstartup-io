@@ -21,6 +21,7 @@ import { serviceJsonLd, breadcrumbJsonLd } from "../utils/jsonld";
 import { entryAlternatePath } from "../utils/alternate";
 import { getUiLabels } from "../utils/ui-labels";
 import { excerptHtml, excerptPlain } from "../utils/excerpt";
+import { heroArtForSlug } from "../utils/hero-art";
 import type { SiteSettings } from "../types";
 const t = Astro.locals.t;
 
@@ -69,12 +70,18 @@ const ctaLabel = entry.data.cta_label || defaultCtaLabel;
 // Locale-aware URL prefix ("" for ES default, "/en" for English)
 const localePrefix = locale === "es" ? "" : `/${locale}`;
 const labels = await getUiLabels(locale);
+
+// #413: the six verticals own a drawn plate — the same picture the home
+// rotates through, held still. Everything else (contacto, quiénes somos, a
+// blog page) returns null here and keeps the light hero it has always had.
+const heroArt = heroArtForSlug(slug);
 ---
 
 <Base
 	title={title}
 	description={excerpt ? excerptPlain(excerpt) : `${title} — Server Startup`}
 	altPath={altPath}
+	heroOverlay={heroArt !== null}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd({
 		siteUrl: Astro.site?.origin!,
@@ -96,10 +103,26 @@ const labels = await getUiLabels(locale);
 	</div>
 
 	<!-- ══════ HERO — compact, solid cube glyph in the discipline color ══════ -->
-	<section class="s-hero" aria-label={title}>
+	<section class:list={["s-hero", heroArt && "s-hero--art"]} aria-label={title}>
+		{heroArt && (
+			<div class="s-hero__stage" aria-hidden="true">
+				<img
+					class="s-hero__plate"
+					src={heroArt}
+					alt=""
+					width="1440"
+					height="900"
+					fetchpriority="high"
+					decoding="async"
+				/>
+				<span class="s-hero__scrim"></span>
+			</div>
+		)}
 		<div class="container s-hero__inner">
 			<div class="s-hero__copy">
-				<CubeEmblem class="s-emblem-mini" color={accentColor} faceKey={emblemKey} size={104} />
+				{/* the plate IS the mark, drawn at full size in this discipline's
+				    colour — the floated mini would be the same cube twice */}
+				{!heroArt && <CubeEmblem class="s-emblem-mini" color={accentColor} faceKey={emblemKey} size={104} />}
 				<h1>{title}</h1>
 				{excerpt && (
 					<div class="s-hero__body">
@@ -110,7 +133,7 @@ const labels = await getUiLabels(locale);
 				    (the instrument body is long); a plain page's closing band
 				    already carries the same words a screen below. */}
 				{entryCollection === "services" && (
-					<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class="btn btn-dark">{ctaLabel}</a>
+					<a href={`${localePrefix}/${locale === "en" ? "contact" : "contacto"}`} class:list={["btn", heroArt ? "btn-light" : "btn-dark"]}>{ctaLabel}</a>
 				)}
 			</div>
 		</div>

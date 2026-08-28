@@ -12,7 +12,7 @@ import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { getUiLabels } from "../utils/ui-labels";
 import { routeAlternatePath } from "../utils/alternate";
-import { sortByFace } from "../utils/nav";
+import { sortByFace, FACE_BY_SLUG } from "../utils/nav";
 import type { SiteSettings } from "../types";
 
 import SiteHeader from "../components/SiteHeader.astro";
@@ -40,6 +40,13 @@ interface Props {
 	 * alternate homepage.
 	 */
 	altPath?: string | null;
+	/**
+	 * The page opens with a full-bleed dark hero the bar sits ON TOP of
+	 * (#413). The header goes transparent with paper ink until the first
+	 * scroll, and — on the home, where the picture rotates — its bottom edge
+	 * follows the six vertical colours on the hero's own clock.
+	 */
+	heroOverlay?: boolean;
 }
 
 const {
@@ -54,6 +61,7 @@ const {
 	modifiedTime,
 	content: editableContent,
 	altPath: altPathProp,
+	heroOverlay = false,
 } = Astro.props;
 const locale = Astro.currentLocale || "es";
 const t = Astro.locals.t;
@@ -103,6 +111,17 @@ const promptPath = Astro.url.pathname.replace(/\/$/, "");
 const currentSlug = promptPath.replace(/^\/en/, "").replace(/^\//, "");
 const activeService = services.find((s: any) => (s.slug ?? s.id) === currentSlug);
 const headerAccent = activeService?.data?.color || "#1E1E1E";
+
+// The rotating hero's palette, handed to the header so its bottom edge can
+// keep the same clock as the picture (#413). Same list, same order, one
+// fetch: the bar cannot drift from the plate it is sitting on. Only the home
+// rotates — a vertical page has one colour and it is already the accent.
+const heroSlideColors: string[] =
+	heroOverlay && !activeService
+		? services
+				.filter((svc: any) => FACE_BY_SLUG[svc.slug ?? svc.id])
+				.map((svc: any) => svc.data?.color || "#1E1E1E")
+		: [];
 
 // Contact info from site settings
 const s = settings as SiteSettings;
@@ -226,7 +245,7 @@ const resolvedOgType = ogType || "website";
 	     header when it appears — hence the offset, not just `top: 0`. -->
 	<a href="#content" class="skip-link">{Astro.locals.t("skip_to_content")}</a>
 
-	<SiteHeader promptPath={promptPath} accent={headerAccent} altPath={altPath} />
+	<SiteHeader promptPath={promptPath} accent={headerAccent} altPath={altPath} overHero={heroOverlay} slideColors={heroSlideColors} />
 
 	<MenuDialog services={services} siteItems={siteMenuItems} currentPath={promptPath} localePrefix={localePrefix} />
 

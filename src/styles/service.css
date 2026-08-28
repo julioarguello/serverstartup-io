@@ -29,6 +29,87 @@
 	margin-top: 28px;
 }
 
+/* ═══ HERO — the drawn plate (#413) ═══
+   The six verticals get the picture the home rotates through, held still on
+   their own page: the founder's note was that the graphic line vanished the
+   moment you left the home ("en las respectivas secciones se pierde
+   completamente esa línea gráfica"). Everything else — contacto, quiénes
+   somos, a blog page — has no plate and keeps the light hero above.
+
+   The band is dark because the plate is, and the dark is the brand ink
+   (--color-primary), never the console's black: #304 gave black to the
+   machine voice and a picture band that borrowed it would take the
+   consoles' meaning away. */
+.s-hero--art {
+	position: relative;
+	/* the plate and its scrim are painted inside this band and nowhere else
+	   — no z-index of theirs may reach the fixed header */
+	isolation: isolate;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 62svh;
+	padding: calc(80px + var(--space-6)) 0 var(--space-6);
+	/* the ground the plate is drawn on, and what shows while it loads */
+	background-color: var(--color-primary);
+	/* `clip`, not `hidden`: this must never become a scroll container (§14) */
+	overflow: clip;
+	color: var(--color-secondary);
+}
+
+.s-hero--art .s-hero__stage {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
+
+.s-hero--art .s-hero__plate {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	/* the subject sits right of centre and the scrim darkens the left, so
+	   the crop keeps the cube out from under the text. Pushed in a little:
+	   on its own page the plate is a portrait of one discipline, not one
+	   frame of six. */
+	object-position: 70% 48%;
+	transform: scale(1.14);
+}
+
+/* The same gradient the home uses — text side opaque, picture side clear.
+   Two of them: on a phone the copy sits UNDER the subject, not beside it,
+   so the ramp has to run top-to-bottom or the headline lands on the cube. */
+.s-hero--art .s-hero__scrim {
+	position: absolute;
+	inset: 0;
+	background-image: var(--hero-scrim-portrait);
+}
+
+.s-hero--art .s-hero__inner {
+	position: relative;
+	z-index: 1;
+}
+
+.s-hero--art h1 {
+	color: var(--color-secondary);
+}
+
+.s-hero--art .s-hero__body {
+	color: var(--color-hero-ink-soft);
+}
+
+@media (min-width: 768px) {
+	.s-hero--art {
+		min-height: 68svh;
+		padding: calc(100px + var(--space-6)) 0 var(--space-6);
+	}
+
+	.s-hero--art .s-hero__scrim {
+		background-image: var(--hero-scrim);
+	}
+}
+
 /* Cloudflare Partner Network block (dashboard service only): the About
    logo-card pattern — left bar + tinted bg, logo left, partner ¶ right.
    Clear space around the logo ≥ the cloudmark height (partner guidelines). */

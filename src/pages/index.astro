@@ -37,6 +37,7 @@ const schemas = homepageJsonLd({
 <Base
 	title={seoTitle}
 	description={description}
+	heroOverlay
 >
 	{schemas.map((schema) => (
 		<script type="application/ld+json" set:html={JSON.stringify(schema)} />

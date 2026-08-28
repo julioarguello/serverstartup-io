@@ -29,7 +29,7 @@ Java 21 · 0 warnings
 * @param contrato El contrato antes que el código. La API se pacta por escrito (Contract First, OpenAPI) y las credenciales (OAuth 2.0, mTLS) entran en el diseño, no en el parche.
 * @param gobernanza El CI/CD es la gobernanza. Tests, análisis estático y validación de seguridad delante de cada despliegue. Siempre sabes qué corre en tus servidores y por qué.
 * @param seguridad La seguridad se compila. Control de acceso granular en el código y el WAF de Cloudflare delante.
-* @author los mismos tres ingenieros, de principio a fin
+* @author los mismos ingenieros, de principio a fin
 * @since 2019
 */
 public Sistema construir(Pila pila, Contrato contrato) { … }
@@ -43,7 +43,7 @@ La IA multiplica. El framework conduce.
 Puede que el greenfield sea donde más rinde la IA. Seguro que es donde antes descarrila. Sobre una página en blanco, un agente entrega en horas lo que costaba semanas. Sin marco, cada una de esas horas es deuda nueva.
 Nuestros frameworks son el perímetro. El agente escribe dentro de esos raíles y un ingeniero firma cada línea que llega a main. El detalle, en el vertical de IA.
 Tu deuda técnica es nuestro problema
-Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos tres ingenieros senior, del primer commit a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.
+Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos ingenieros senior, del primer commit a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.
 1 equipo =
 6 verticales = Ø
 0

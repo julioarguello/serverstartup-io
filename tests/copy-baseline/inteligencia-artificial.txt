@@ -3,7 +3,6 @@ Saltar al contenido
 /inteligencia-artificial
 EN
 AI
-AI
 Inteligencia artificial
 La IA es un medio, no un fin. La máquina hace el código repetitivo; nosotros ponemos la arquitectura y el criterio, del desarrollo a la operación — enfoque integral, perfil DevOps. El agente propone, el ingeniero dispone.
 Cuéntanos tu caso

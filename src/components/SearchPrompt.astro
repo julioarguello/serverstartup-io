@@ -75,6 +75,18 @@ const hintEsc = labels.get("search", "hint_esc", "cerrar");
 	style={`--accent:${accent}`}
 >
 	<div class:list={[!inMenu && "container", "search-line"]}>
+		{/* Only in the menu. On a phone this console is just THERE, with no
+		    magnifier anywhere and nothing said about it (founder, 2026-08-27:
+		    "no se sabe lo que estás haciendo") — the header's search button,
+		    which is the affordance everywhere else, is `display: none` below
+		    767px. In the header the button is already right there, so a second
+		    magnifier inside the line would be saying it twice. */}
+		{inMenu && (
+			<svg class="search-mag" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+				<circle cx="7" cy="7" r="4.6"></circle>
+				<path d="M10.4 10.4 14 14"></path>
+			</svg>
+		)}
 		<span class="search-ps" aria-hidden="true">$</span>
 		<span class="search-chrome" aria-hidden="true">{cmdOpen}</span>
 		<span class="search-slot">
@@ -136,3 +148,12 @@ const hintEsc = labels.get("search", "hint_esc", "cerrar");
 	}
 </script>
 )}
+
+<style>
+	/* the magnifier reads as the section's mark, like the `$` beside it */
+	.search-mag {
+		flex: none;
+		margin-right: 8px;
+		color: var(--accent);
+	}
+</style>

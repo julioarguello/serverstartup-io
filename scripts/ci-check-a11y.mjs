@@ -128,6 +128,42 @@ const FOCUS_PROBE = () => {
 	};
 };
 
+/**
+ * What the aspect-ratio check measures (#416).
+ *
+ * A stretched logo is not a rounding error, it is a different logo. The one
+ * that shipped was two correct rules meeting: the global `img { max-width:
+ * 100% }` clamped the width, a declared `height` held, and a 480×120 mark
+ * rendered 105×32 on a phone. No rule engine decides this and no static
+ * stylesheet read can either — it depends on how wide the container came out.
+ *
+ * Only `object-fit: fill` (the initial value) can distort. `cover`, `contain`,
+ * `scale-down` and `none` crop, letterbox or overflow — never squash — so a
+ * deliberate crop must not be reported as a defect.
+ */
+const RATIO_PROBE = () => {
+	const out = [];
+	for (const img of document.querySelectorAll("img")) {
+		// naturalWidth is 0 for an unloaded image and for an SVG with no
+		// intrinsic size: nothing to compare against, not a finding.
+		if (!img.naturalWidth || !img.naturalHeight) continue;
+		if (getComputedStyle(img).objectFit !== "fill") continue;
+		const r = img.getBoundingClientRect();
+		if (r.width < 1 || r.height < 1) continue;
+		const nat = img.naturalWidth / img.naturalHeight;
+		const skew = Math.abs(nat - r.width / r.height) / nat;
+		// 2%: below it lies subpixel layout, above it lies a visible squash
+		if (skew <= 0.02) continue;
+		out.push({
+			src: (img.currentSrc || img.src).replace(location.origin, "").slice(-48),
+			nat: `${img.naturalWidth}×${img.naturalHeight}`,
+			box: `${Math.round(r.width)}×${Math.round(r.height)}`,
+			pct: Math.round(skew * 100),
+		});
+	}
+	return out;
+};
+
 /** What the 1.4.10 check measures — same reason it is named. */
 const REFLOW_PROBE = () => {
 	const de = document.documentElement;
@@ -167,11 +203,16 @@ body { margin: 0 }
 #buried { position: absolute; top: 30px; left: 0 }
 #buried:focus { outline: none }
 #wide { width: 720px; height: 10px; background: #ccc }
+#column { width: 105px }
+#squashed { height: 32px; width: auto; max-width: 100% }
+#cropped { width: 105px; height: 32px; object-fit: cover }
 </style></head><body>
 <header class="site-header"><a href="#x" id="inheader">en la cabecera</a></header>
 <main><a href="#y" id="buried">bajo la cabecera, sin anillo</a>
 <div id="wide"></div>
 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+<div id="column"><img id="squashed" alt="marca aplastada" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0ODAnIGhlaWdodD0nMTIwJz48cmVjdCB3aWR0aD0nNDgwJyBoZWlnaHQ9JzEyMCcgZmlsbD0nIzg4OCcvPjwvc3ZnPg=="></div>
+<img id="cropped" alt="marca recortada a proposito" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0ODAnIGhlaWdodD0nMTIwJz48cmVjdCB3aWR0aD0nNDgwJyBoZWlnaHQ9JzEyMCcgZmlsbD0nIzg4OCcvPjwvc3ZnPg==">
 </main></body></html>`;
 
 {
@@ -197,6 +238,21 @@ body { margin: 0 }
 	await desktop.evaluate(() => document.getElementById("inheader").focus());
 	const inHeader = await desktop.evaluate(FOCUS_PROBE);
 	if (inHeader?.obscured) blind.push("the header's own link was reported as obscured by the header");
+
+	// RATIO_PROBE — must see the squashed mark and must NOT accuse the crop.
+	// The negative half is the one that matters: a probe that flags every
+	// `object-fit: cover` photo would be turned off within a week.
+	{
+		const seen = await desktop.evaluate(RATIO_PROBE);
+		if (!seen.some((f) => f.src.endsWith("=") && f.pct >= 15)) {
+			blind.push("a 480×120 mark rendered 105×32 was not reported as stretched (#416) — " +
+				`the probe returned [${seen.map((f) => f.pct + "%").join(", ") || "nothing"}]`);
+		}
+		if (seen.length !== 1) {
+			blind.push(`the deliberate \`object-fit: cover\` crop was reported as a defect ` +
+				`(${seen.length} findings on a fixture carrying one)`);
+		}
+	}
 
 	// axe — must be loaded, running, and finding a violation that is really there
 	await desktop.evaluate(axeSource);
@@ -226,7 +282,7 @@ body { margin: 0 }
 		await browser.close();
 		process.exit(3);
 	}
-	ok("4 planted defects found — obscured focus, missing ring, 320px overflow, image-alt");
+	ok("5 planted defects found — obscured focus, missing ring, 320px overflow, image-alt, squashed logo");
 }
 
 // ── 1. axe-core: the rules a machine can decide, on every audited route ─────
@@ -250,6 +306,11 @@ for (const route of AXE_ROUTES) {
 		}
 	} else {
 		ok(`${route} — 0 violations`);
+	}
+	// #416 rides along: the page is open, loaded and settled, and a stretched
+	// image costs one more evaluate rather than one more navigation.
+	for (const f of await page.evaluate(RATIO_PROBE)) {
+		fail(route, `image stretched ${f.pct}% at 1280px: ${f.nat} rendered ${f.box} — ${f.src}`);
 	}
 	await page.close();
 }
@@ -443,7 +504,227 @@ for (const route of ["/", "/en"]) {
 	await page.close();
 }
 
-// ── 4. WCAG 2.1.4 — a single-character shortcut must be scoped ──────────────
+// ── 4. The OPEN menu, measured — every tone on the dark panel (#417) ───────
+// §1 runs axe on 28 routes and never sees this panel: a closed `<dialog>` is
+// `display: none`, so every node inside it is skipped and the run comes back
+// green having looked at nothing. The menu went dark in #417 — white ink, six
+// raised brand hues, a tinted current row and an inverted console — and that
+// is precisely the change a contrast audit exists to check.
+//
+// axe cannot decide it. The panel's ground is an image (`assets/menu/
+// ground.svg`), so `color-contrast` returns fifteen INCOMPLETE nodes with
+// "background color could not be determined due to a background image" and
+// zero violations. Reporting that as green would be reporting that nobody
+// looked. So axe is still run — it decides names, roles and everything else
+// on the open panel — and the contrast verdict is measured from the rendered
+// pixels instead: the ink is blanked, the panel is photographed, and every
+// text box is compared against the LIGHTEST pixel actually behind it.
+//
+// The routes are read off the menu itself rather than transcribed: the six
+// specialty links ARE the list, and each is visited so the `aria-current`
+// tint of every vertical is measured on its own page, in both locales.
+console.log("── the open menu: contrast on the dark panel");
+{
+	// The ink is removed, not the elements: the boxes must stay exactly where
+	// they are so what is measured is the ground UNDER the text, tint and all.
+	const BLANK_INK =
+		"#menu-dialog, #menu-dialog *, #menu-dialog *::placeholder " +
+		"{ color: transparent !important; -webkit-text-fill-color: transparent !important; }";
+
+	const TEXT_SELECTOR = [
+		".spec-title", ".site-link", ".menu-kicker", ".die-hint",
+		".menu-bar__word", ".menu-bar__path",
+		".search-ps", ".search-chrome", ".search-hint", ".search-input",
+	].map((c) => `#menu-dialog ${c}`).join(", ");
+
+	const readBoxes = (sel) => {
+		const srgb = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+		const out = [];
+		for (const el of document.querySelectorAll(sel)) {
+			const cs = getComputedStyle(el);
+			if (cs.display === "none" || cs.visibility === "hidden") continue;
+			const r = el.getBoundingClientRect();
+			if (r.width < 2 || r.height < 2) continue;
+			if (r.bottom <= 0 || r.top >= innerHeight) continue;
+			// placeholder ink, when that is the only text the element shows
+			const raw = el.tagName === "INPUT" && !el.value
+				? getComputedStyle(el, "::placeholder").color || cs.color
+				: cs.color;
+			const m = raw.match(/[\d.]+/g);
+			if (!m) continue;
+			const [r8, g8, b8] = m.slice(0, 3).map(Number);
+			const size = parseFloat(cs.fontSize);
+			const weight = Number(cs.fontWeight) || 400;
+			out.push({
+				name: (el.className.toString().split(" ")[0] || el.tagName.toLowerCase()),
+				text: (el.textContent || el.getAttribute("placeholder") || "").trim().slice(0, 22),
+				x: Math.max(0, Math.round(r.left)), y: Math.max(0, Math.round(r.top)),
+				w: Math.round(r.width), h: Math.round(r.height),
+				lum: 0.2126 * srgb(r8 / 255) + 0.7152 * srgb(g8 / 255) + 0.0722 * srgb(b8 / 255),
+				// 1.4.3: 3:1 for large text (>=24px, or >=18.66px bold), else 4.5:1
+				need: size >= 24 || (size >= 18.66 && weight >= 700) ? 3 : 4.5,
+			});
+		}
+		return out;
+	};
+
+	// Worst case per box, at the 98th percentile of background lightness.
+	//
+	// Not the single lightest pixel: the ground is a starfield, and one 1.5px
+	// star behind a glyph is a near-white pixel that would score 1.1:1 and
+	// fail every line on the panel. A star is not the background of the text
+	// — a point of light a glyph sits over is not what a reader's eye
+	// integrates. A region that IS too light is thousands of pixels, far
+	// above the 2% this trims: on a 322×40 box, 258 pixels have to be lighter
+	// before the verdict moves, and the whole starfield inside such a box is
+	// well under a hundred. The percentile ignores sparkle and keeps any
+	// real lightening, which is exactly the distinction 1.4.3 cares about.
+	const worstAgainst = async (b64, boxes) => {
+		const img = new Image();
+		img.src = "data:image/png;base64," + b64;
+		await img.decode();
+		const cv = document.createElement("canvas");
+		cv.width = img.width; cv.height = img.height;
+		const ctx = cv.getContext("2d", { willReadFrequently: true });
+		ctx.drawImage(img, 0, 0);
+		const srgb = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+		return boxes.map((b) => {
+			const d = ctx.getImageData(b.x, b.y, Math.max(1, b.w), Math.max(1, b.h)).data;
+			const lums = [], rgbs = [];
+			for (let i = 0; i < d.length; i += 4) {
+				lums.push(0.2126 * srgb(d[i] / 255) + 0.7152 * srgb(d[i + 1] / 255) + 0.0722 * srgb(d[i + 2] / 255));
+				rgbs.push([d[i], d[i + 1], d[i + 2]]);
+			}
+			const order = lums.map((L, i) => i).sort((a, c) => lums[a] - lums[c]);
+			// paper ink → the light tail is the danger; dark ink → the dark tail
+			const dark = b.lum > 0.5;
+			const idx = order[Math.min(order.length - 1,
+				Math.max(0, Math.round((dark ? 0.98 : 0.02) * (order.length - 1))))];
+			const L = lums[idx];
+			const hi = Math.max(L, b.lum), lo = Math.min(L, b.lum);
+			const hex = "#" + rgbs[idx].map((v) => v.toString(16).padStart(2, "0")).join("");
+			return { ...b, ratio: Math.round(((hi + 0.05) / (lo + 0.05)) * 10) / 10, hex };
+		});
+	};
+
+	const menuRoutes = [];
+	for (const home of ["/", "/en"]) {
+		const page = await browser.newPage();
+		await page.setViewport({ width: 1280, height: 900 });
+		await page.goto(BASE + home, { waitUntil: "networkidle2", timeout: 60000 });
+		const hrefs = await page.evaluate(() =>
+			[...document.querySelectorAll(".spec-link")].map((a) => a.getAttribute("href")));
+		await page.close();
+		menuRoutes.push(home, ...hrefs);
+	}
+	// A menu that stopped rendering its links would leave two routes and a
+	// green section. The seed declares six specialties per locale.
+	if (menuRoutes.length < 14) {
+		console.error(`✗ THIS GATE IS BLIND — the menu offered ${menuRoutes.length - 2} specialty ` +
+			"link(s) across both locales, not 12.");
+		console.error("  → MenuDialog stopped rendering .spec-link, or the seed lost a service.");
+		process.exit(3);
+	}
+
+	// Positive control (#385) on the pixel pass, which is the half no library
+	// backs. It reports by finding nothing, and a stale selector, a screenshot
+	// that never blanked the ink and a percentile pointing at the wrong tail
+	// all look exactly like a clean panel. So one panel is deliberately broken
+	// first — the site links repainted a near-black that scores about 1.4:1 on
+	// this ground — and the measurement has to say so before any real route is
+	// trusted. The plant is thrown away with the page.
+	{
+		const page = await browser.newPage();
+		await page.setViewport({ width: 1280, height: 900, deviceScaleFactor: 1 });
+		await page.goto(BASE + "/", { waitUntil: "networkidle2", timeout: 60000 });
+		await page.click("#menu-trigger");
+		await page.waitForFunction(() => document.getElementById("menu-dialog")?.open === true,
+			{ timeout: 5000 });
+		await sleep(600);
+		await page.addStyleTag({ content: "#menu-dialog .site-link { color: #262626 !important; }" });
+		const boxes = await page.evaluate(readBoxes, TEXT_SELECTOR);
+		await page.addStyleTag({ content: BLANK_INK });
+		const shot = await page.screenshot({ encoding: "base64", captureBeyondViewport: false });
+		const rows = await page.evaluate(worstAgainst, shot, boxes);
+		await page.close();
+		const caught = rows.filter((r) => r.name === "site-link" && r.ratio + 0.05 < r.need);
+		const links = rows.filter((r) => r.name === "site-link").length;
+		if (!links || caught.length !== links) {
+			console.error(`✗ THIS GATE IS BLIND — ${links} planted near-black site link(s) on the dark ` +
+				`panel, and the pixel pass called ${caught.length} of them a failure.`);
+			console.error("  → readBoxes/worstAgainst or the blanking style stopped working; " +
+				"a green run below would mean nothing.");
+			process.exit(3);
+		}
+		ok(`control — ${links} planted near-black links all measured under AA ` +
+			`(tightest ${Math.min(...caught.map((r) => r.ratio))}:1)`);
+	}
+
+	let axeSaw = 0, measured = 0, tightest = { ratio: Infinity };
+	// A phone shows what a desktop does not: the console lives inside the menu
+	// only below 768px, and the short labels only below 701px.
+	const SIZES = [{ width: 1280, height: 900 }, { width: 390, height: 844 }];
+	for (const route of menuRoutes) {
+		for (const vp of SIZES) {
+			const page = await browser.newPage();
+			await page.setViewport({ ...vp, deviceScaleFactor: 1 });
+			await page.goto(BASE + route, { waitUntil: "networkidle2", timeout: 60000 });
+			await page.click("#menu-trigger");
+			await page.waitForFunction(() => document.getElementById("menu-dialog")?.open === true,
+				{ timeout: 5000 });
+			await sleep(600); // the panel slides in; mid-transition reads the start frame
+
+			// axe first, while the ink is still on the page
+			await page.evaluate(axeSource);
+			const res = await page.evaluate(async () =>
+				window.axe.run("#menu-dialog", {
+					runOnly: {
+						type: "tag",
+						values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"],
+					},
+				}));
+			for (const bucket of [res.passes, res.incomplete, res.violations]) {
+				const cc = bucket.find((r) => r.id === "color-contrast");
+				axeSaw += cc ? cc.nodes.length : 0;
+			}
+			for (const v of res.violations) {
+				fail(route, `menu open @${vp.width}: ${v.id} (${v.impact}) ×${v.nodes.length} — ${v.help}`);
+			}
+
+			// then the pixels, which is the part axe could not decide
+			const boxes = await page.evaluate(readBoxes, TEXT_SELECTOR);
+			await page.addStyleTag({ content: BLANK_INK });
+			const shot = await page.screenshot({ encoding: "base64", captureBeyondViewport: false });
+			const rows = await page.evaluate(worstAgainst, shot, boxes);
+			measured += rows.length;
+			for (const r of rows) {
+				if (r.ratio < tightest.ratio) tightest = { ...r, route, vp: vp.width };
+				if (r.ratio + 0.05 < r.need) {
+					fail(route, `menu open @${vp.width}: .${r.name} ("${r.text}") is ${r.ratio}:1 against ` +
+						`${r.hex} behind it — 1.4.3 asks ${r.need}:1`);
+				}
+			}
+			await page.close();
+		}
+		ok(`${route} — menu open at 1280 and 390, axe clean, ink measured against the ground`);
+	}
+
+	// Both halves report by NOT firing, and both have a silent way to look at
+	// nothing: axe scoped to an unrendered subtree, and a pixel pass that
+	// collected no boxes. Eleven text boxes per panel is the floor — six
+	// specialty rows plus the site links.
+	const panels = menuRoutes.length * SIZES.length;
+	if (axeSaw < panels * 11 || measured < panels * 11) {
+		console.error(`✗ THIS GATE IS BLIND — across ${panels} open panels axe saw ${axeSaw} ` +
+			`contrast node(s) and the pixel pass measured ${measured} text box(es), below the ~11 each must find.`);
+		console.error("  → the dialog is not actually open when they run, or a selector is stale.");
+		process.exit(3);
+	}
+	ok(`${measured} text boxes measured against the rendered ground; tightest was ` +
+		`.${tightest.name} at ${tightest.ratio}:1 on ${tightest.route} @${tightest.vp}`);
+}
+
+// ── 5. WCAG 2.1.4 — a single-character shortcut must be scoped ──────────────
 // `/` may open the search only when focus is already inside the header.
 console.log("── 2.1.4 character key shortcut");
 {
@@ -470,7 +751,7 @@ console.log("── 2.1.4 character key shortcut");
 	await page.close();
 }
 
-// ── 5. WCAG 1.4.10 — reflow at 320 CSS px, the width the norm names ─────────
+// ── 6. WCAG 1.4.10 — reflow at 320 CSS px, the width the norm names ─────────
 console.log("── 1.4.10 reflow at 320px");
 for (const route of ["/", "/cdn-waf-seguridad-edge-cloudflare", "/referencias", "/search?q=cloudflare"]) {
 	const page = await browser.newPage();
@@ -482,7 +763,30 @@ for (const route of ["/", "/cdn-waf-seguridad-edge-cloudflare", "/referencias", 
 	await page.close();
 }
 
-// ── 6. W3C Nu — the rules html-validate does not carry ─────────────────────
+// ── 7. Aspect ratio at 320px — no image may be squashed (#416) ─────────────
+// Its own loop, and over EVERY route, because narrow is where the defect
+// lives: the global `img { max-width: 100% }` only clamps once the container
+// is too narrow for the image, so a desktop pass sees nothing. The two rules
+// that produced it were each correct in isolation — this measures the outcome
+// instead, comparing every rendered box against its own natural ratio.
+console.log(`── image aspect ratio at 320px — ${ROUTES.length} routes`);
+{
+	const page = await browser.newPage();
+	await page.setViewport({ width: 320, height: 640, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+	let checked = 0;
+	for (const route of ROUTES) {
+		await page.goto(BASE + route, { waitUntil: "networkidle2", timeout: 60000 });
+		const bad = await page.evaluate(RATIO_PROBE);
+		for (const f of bad) {
+			fail(route, `image stretched ${f.pct}% at 320px: ${f.nat} rendered ${f.box} — ${f.src}`);
+		}
+		checked += await page.evaluate(() => document.querySelectorAll("img").length);
+	}
+	await page.close();
+	ok(`${checked} images across ${ROUTES.length} routes keep their ratio`);
+}
+
+// ── 8. W3C Nu — the rules html-validate does not carry ─────────────────────
 // The local suite validates with html-validate; CI additionally runs Nu after
 // the deploy. They disagree, and the gap is not academic: `aria-hidden` on a
 // label bound to a control passed html-validate and was rejected by Nu, after

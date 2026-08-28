@@ -1,19 +1,12 @@
 Saltar al contenido
 ~Server Startup
 EN
+01 / 6
+Comercio electrónico
+→
 Ingeniería de software: arquitectura, integración y operación
 Más de veinte años de oficio en comercio electrónico, integración de sistemas y el dato. Partners oficiales de Cloudflare desde 2019.
-En tu proyecto, siempre los mismos tres ingenieros senior. Quien diseña tu arquitectura escribe el código. Y da la cara si algo se rompe.
-Nuestros servicios
-El equipo
-Sin intermediarios y sin traspasos.
-Los mismos tres ingenieros recorren todas las capas: el que diseña, escribe; el que escribe, opera.
-Daniel Sío
-Ingeniero
-Ignacio Ibaseta
-Ingeniero
-Julio Argüello
-Ingeniero
+Más de veinte años dentro de SAP Commerce Cloud. Extender la plataforma es lo fácil: hacerlo con cada mejora desacoplada del core, ajustada al estándar, para que sobreviva versión tras versión, es lo que casi nadie hace. Y el rendimiento, nuestra especialidad.
 Cloudflare Partner oficial
 Aceleramos y protegemos tu infraestructura con las soluciones más avanzadas de Cloudflare
 CDN global
@@ -40,6 +33,15 @@ La IA es un medio, no un fin. La máquina hace el código repetitivo; nosotros p
 Calidad y rendimiento
 Nuestro oficio es la calidad y el rendimiento donde salen caros: procesos críticos y volúmenes grandes. El pico de campaña, el catálogo que hay que reindexar, la integración que tiene que cerrar el día.
 Esta web es una muestra pequeña de la misma disciplina, aplicada a nuestro propio escaparate. Ninguna versión se publica si el rendimiento baja de 95, o si accesibilidad, buenas prácticas y SEO no dan 100: el control corre en cada cambio y bloquea el despliegue. El umbral está escrito en el repositorio público, y cada ejecución del control también. Mira cómo está hecha.
+El equipo
+Sin intermediarios y sin traspasos.
+Los mismos ingenieros recorren todas las capas: el que diseña, escribe; el que escribe, opera.
+Daniel Sío
+Ingeniero
+Ignacio Ibaseta
+Ingeniero
+Julio Argüello
+Ingeniero
 1 equipo =
 6 verticales = Ø
 0

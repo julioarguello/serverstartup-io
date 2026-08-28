@@ -119,6 +119,72 @@
 	--color-console-line: rgba(255, 255, 255, 0.16);
 	--color-console-ok: #5BB974;      /* the live cursor / OK state */
 
+	/* ── The hero band (#413) ────────────────────────────────────────────
+	   The one place the site goes dark outside the machine voice. The ground
+	   is `--color-primary` itself — the founder chose the soft version over
+	   near-black ("suave, tinta de marca"), so the band introduces no new
+	   colour and #304 keeps its meaning: near-black stays the console's. The
+	   drawn plates in `public/assets/hero/` are generated on the same ink.
+	   The scrim is what makes the headline legible over any of the six: it
+	   sweeps across the picture rather than dimming it flat, so the drawing
+	   survives on the side the text leaves free. Portrait needs its own
+	   angle — a horizontal sweep on a phone darkens the wrong half. */
+	--hero-scrim: linear-gradient(
+		101deg,
+		rgba(30, 30, 30, 0.94) 0%,
+		rgba(30, 30, 30, 0.84) 32%,
+		rgba(30, 30, 30, 0.20) 64%,
+		rgba(30, 30, 30, 0) 100%
+	);
+	--hero-scrim-portrait: linear-gradient(
+		184deg,
+		rgba(30, 30, 30, 0.96) 0%,
+		rgba(30, 30, 30, 0.88) 44%,
+		rgba(30, 30, 30, 0.18) 74%,
+		rgba(30, 30, 30, 0) 100%
+	);
+	/* paper at reduced weight, the counterpart of --color-text-muted: 10.4:1
+	   on the ink ground, so the kicker holds AA over the darkened side */
+	--color-hero-ink-soft: rgba(255, 255, 255, 0.82);
+	--color-hero-rule: rgba(255, 255, 255, 0.35);  /* the locale chip's box */
+	--color-hero-dot: rgba(255, 255, 255, 0.22);   /* a slide not showing */
+	/* Six slides, six seconds each. Named here because the header's edge
+	   rotates on the same clock as the images and the two must not drift. */
+	--hero-cycle: 36s;
+	--hero-step: 6s;
+
+	/* ── The menu panel (#417) ───────────────────────────────────────────
+	   The menu used to be a full-screen sheet of pure white with no header,
+	   no brand and nothing behind it — it did not look like another page, it
+	   WAS one. It goes dark now, on the hero's own ground, and what ties it
+	   to the home is the drawing rather than the colour: `assets/menu/
+	   ground.svg` is emitted by the same generator as the six hero plates.
+	   The console inside it keeps its own tokens (--color-console*): a light
+	   console in a dark panel is a lit strip, and #304 already says the
+	   near-black is the machine's. */
+	--menu-ink: var(--color-secondary);
+	--menu-ink-soft: var(--color-hero-ink-soft);   /* 10.4:1 on the ground */
+	--menu-ink-muted: rgba(255, 255, 255, 0.62);   /* 7.1:1 — the site links */
+	--menu-rule: var(--color-hero-rule);
+	--menu-tint: rgba(255, 255, 255, 0.14);        /* the breadcrumb's chip */
+	/* The die, re-inked. Its resting greys (#1E1E1E over #ced4da) were drawn
+	   for paper: on the panel's own ink the dark plate vanishes and the light
+	   one glares. The cells stay above the plate they sit on so the 2x2 still
+	   reads once nothing in the drawing is light any more. */
+	--menu-die-back: #0B0B0B;
+	--menu-die-plate: #33373D;
+	--menu-die-cell: #3B4048;
+	/* Three of the six brand hues are dark by design (#1D4E89, #3E7D50,
+	   #6B4FBB) and simply do not exist on ink. Rather than six new literals —
+	   a second palette to keep in sync forever — the menu raises whatever the
+	   CMS gave it to a LIGHTNESS FLOOR and leaves hue and chroma alone:
+	   `oklch(from var(--fc) max(l, var(--menu-face-floor)) c h)`.
+	   A floor rather than a mix, because a mix would wash out the three that
+	   are already bright — #F38020 sits at L 0.70 and needs nothing, while
+	   #1D4E89 sits at 0.40 and needs all of it. One rule, one source of
+	   truth, and it treats each colour according to what it actually is. */
+	--menu-face-floor: 0.68;
+
 	/* One radius for the whole portal */
 	--radius: 4px;
 

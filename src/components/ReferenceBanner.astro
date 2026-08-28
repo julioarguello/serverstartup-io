@@ -112,14 +112,19 @@ const logos = (entries ?? [])
 	   /referencias. Inert — no hover restore, referential use only. */
 	.ref-banner__row img {
 		display: block;
-		height: 26px;
 		width: auto;
+		height: auto;
+		max-height: 26px;
+		/* intrinsic on both axes, same reason as the wall at /referencias
+		   (#416): a declared height survives the global `max-width: 100%`
+		   clamp, and the mark comes out squashed */
+		max-width: 100%;
 		filter: grayscale(1) opacity(0.62);
 	}
 
 	@media (max-width: 700px) {
 		.ref-banner { padding: 26px 0 22px; }
 		.ref-banner__row { gap: 8px 22px; }
-		.ref-banner__row img { height: 21px; }
+		.ref-banner__row img { max-height: 21px; }
 	}
 </style>

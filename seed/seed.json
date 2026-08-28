@@ -453,7 +453,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "Ingeniería de sistemas, integración y seguridad edge. Con tres ingenieros senior en el núcleo, desde Getxo y desde 2019."
+									"text": "Ingeniería de sistemas, integración y seguridad edge. Con ingenieros senior en el núcleo, desde Getxo y desde 2019."
 								}
 							]
 						}
@@ -598,6 +598,78 @@
 			"label": "UI Labels (Español)",
 			"description": "Translatable UI micro-copy: footer headings, error pages, search page, and button labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "menu_short",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ec",
+							"children": [
+								{
+									"_type": "span",
+									"text": "E-commerce"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "int",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Integración"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bd",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Big data"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cdn",
+							"children": [
+								{
+									"_type": "span",
+									"text": "CDN y WAF"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "gf",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Greenfield"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ia",
+							"children": [
+								{
+									"_type": "span",
+									"text": "IA"
+								}
+							]
+						}
+					]
+				},
 				{
 					"type": "content",
 					"title": "mantra",
@@ -1364,7 +1436,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "los mismos tres ingenieros, de principio a fin"
+									"text": "los mismos ingenieros, de principio a fin"
 								}
 							]
 						},
@@ -1745,17 +1817,6 @@
 								{
 									"_type": "span",
 									"text": "Política de privacidad"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"_key": "hero_services_btn",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Nuestros servicios"
 								}
 							]
 						},
@@ -2143,6 +2204,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "menu_kicker",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Seis verticales"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "close_menu",
 							"children": [
 								{
@@ -2203,6 +2275,39 @@
 								{
 									"_type": "span",
 									"text": "Introducción"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_pause",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Pausar la rotación de imágenes"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_prev",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ver la especialidad anterior"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_next",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Ver la especialidad siguiente"
 								}
 							]
 						},
@@ -2510,6 +2615,78 @@
 			"label": "UI Labels (English)",
 			"description": "English UI micro-copy — footer headings, error page, search, aria-labels",
 			"widgets": [
+				{
+					"type": "content",
+					"title": "menu_short",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ec",
+							"children": [
+								{
+									"_type": "span",
+									"text": "E-commerce"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "int",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Integration"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "bd",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Big data"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cdn",
+							"children": [
+								{
+									"_type": "span",
+									"text": "CDN & WAF"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "gf",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Greenfield"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "ia",
+							"children": [
+								{
+									"_type": "span",
+									"text": "AI"
+								}
+							]
+						}
+					]
+				},
 				{
 					"type": "content",
 					"title": "mantra",
@@ -3276,7 +3453,7 @@
 							"children": [
 								{
 									"_type": "span",
-									"text": "the same three engineers, start to finish"
+									"text": "the same engineers, start to finish"
 								}
 							]
 						},
@@ -3656,17 +3833,6 @@
 								{
 									"_type": "span",
 									"text": "Privacy policy"
-								}
-							]
-						},
-						{
-							"_type": "block",
-							"style": "normal",
-							"_key": "hero_services_btn",
-							"children": [
-								{
-									"_type": "span",
-									"text": "Our services"
 								}
 							]
 						},
@@ -4055,6 +4221,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "menu_kicker",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Six specialties"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "close_menu",
 							"children": [
 								{
@@ -4115,6 +4292,39 @@
 								{
 									"_type": "span",
 									"text": "Introduction"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_pause",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Pause the image rotation"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_prev",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Show the previous specialty"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_next",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Show the next specialty"
 								}
 							]
 						},
@@ -7987,7 +8197,7 @@
 								{
 									"_type": "span",
 									"_key": "k2l",
-									"text": "Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos tres ingenieros *senior*, del primer *commit* a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.",
+									"text": "Quien diseña el sistema lo despliega y responde por su estabilidad. Los mismos ingenieros *senior*, del primer *commit* a la operación. No entregamos y desaparecemos. Acompañamos la transición y el conocimiento se queda en tu casa, no en la nuestra.",
 									"marks": []
 								}
 							]
@@ -11489,7 +11699,7 @@
 								{
 									"_type": "span",
 									"_key": "k2l",
-									"text": "Whoever designs the system deploys it and answers for its stability. The same three senior engineers, from first *commit* to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.",
+									"text": "Whoever designs the system deploys it and answers for its stability. The same senior engineers, from first *commit* to operations. We don't hand over and vanish. We walk the transition with you, and the knowledge stays in your house, not ours.",
 									"marks": []
 								}
 							]
@@ -12884,7 +13094,7 @@
 				"status": "published",
 				"data": {
 					"title": "Ingeniería de software: arquitectura, integración y operación",
-					"excerpt": "Partners oficiales de Cloudflare desde 2019. Siempre los mismos tres ingenieros senior: quien diseña tu arquitectura escribe el código. Un equipo. Seis verticales. Cero traspasos.",
+					"excerpt": "Partners oficiales de Cloudflare desde 2019. Siempre los mismos ingenieros senior: quien diseña tu arquitectura escribe el código. Un equipo. Seis verticales. Cero traspasos.",
 					"content": [
 						{
 							"_type": "block",
@@ -12981,7 +13191,7 @@
 								},
 								{
 									"_type": "span",
-									"text": "tres ingenieros",
+									"text": "ingenieros",
 									"marks": [
 										"hk5"
 									]
@@ -13043,7 +13253,7 @@
 								},
 								{
 									"_type": "span",
-									"text": "tres ingenieros",
+									"text": "ingenieros",
 									"marks": [
 										"wk1"
 									]
@@ -14132,7 +14342,7 @@
 				"translationOf": "page-home",
 				"data": {
 					"title": "Software engineering: architecture, integration and operations",
-					"excerpt": "Official Cloudflare partners since 2019. Always the same three senior engineers: whoever designs your architecture writes the code. One team. Six verticals. Zero handoffs.",
+					"excerpt": "Official Cloudflare partners since 2019. Always the same senior engineers: whoever designs your architecture writes the code. One team. Six verticals. Zero handoffs.",
 					"content": [
 						{
 							"_type": "block",
@@ -14229,7 +14439,7 @@
 								},
 								{
 									"_type": "span",
-									"text": "three senior engineers",
+									"text": "senior engineers",
 									"marks": [
 										"hk5"
 									]
@@ -14280,7 +14490,7 @@
 								},
 								{
 									"_type": "span",
-									"text": "three engineers",
+									"text": "engineers",
 									"marks": [
 										"wk1"
 									]
