@@ -467,7 +467,14 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 	.search-form--menu .search-chrome,
 	.search-form--menu .search-hint,
 	.search-form--menu .search-mag { color: var(--color-console-ink); }
-	.search-form--menu .search-hint { color: var(--color-console-dim); }
+	/* The hint keeps the console's full ink, not its dim step. `--color-
+	   console-dim` is paper at 55%, which reads 6.1:1 on the console's own
+	   near-black and only 4.2:1 once it sits on the lit slot the menu puts
+	   behind it — a failure §4 could not see until it stopped treating
+	   translucent ink as opaque. There is no fourth alpha to invent here
+	   (#304 consolidated four into one step); the hint simply loses its
+	   dimming on this ground, which costs a hierarchy of four words. */
+	.search-form--menu .search-hint { color: var(--color-console-ink); }
 	.search-form--menu .search-hint kbd {
 		border-color: var(--color-console-line);
 		background: var(--color-console-bar);
@@ -484,7 +491,10 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 		border-bottom-color: var(--color-console-ok);
 	}
 	.search-form--menu .search-input { color: var(--color-secondary); }
-	.search-form--menu .search-input::placeholder { color: var(--color-console-dim); }
+	/* Same ground, same reason as the hint above: the dim step measures 4.8:1
+	   on the lit slot, and a placeholder is the label of an empty field, not
+	   decoration. Still one step below the typed value, which is full paper. */
+	.search-form--menu .search-input::placeholder { color: var(--color-console-ink); }
 	@media (min-width: 768px) {
 		.search-form--menu { display: none; }
 	}

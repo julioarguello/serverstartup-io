@@ -15,7 +15,7 @@ import { serviceJsonLd, breadcrumbJsonLd } from "../../utils/jsonld";
 import { entryAlternatePath } from "../../utils/alternate";
 import { getUiLabels } from "../../utils/ui-labels";
 import { excerptHtml, excerptPlain } from "../../utils/excerpt";
-import { heroArtForSlug } from "../../utils/hero-art";
+import { heroArtForSlug, heroGroundForSlug } from "../../utils/hero-art";
 import type { CacheHint } from "emdash";
 import type { SiteSettings } from "../../types";
 
@@ -62,6 +62,7 @@ const labels = await getUiLabels(locale);
 // rotates through, held still. Everything else (contacto, quiénes somos, a
 // blog page) returns null here and keeps the light hero it has always had.
 const heroArt = heroArtForSlug(slug);
+const heroGround = heroGroundForSlug(slug);
 ---
 
 <Base
@@ -93,6 +94,19 @@ const heroArt = heroArtForSlug(slug);
 	<section class:list={["s-hero", heroArt && "s-hero--art"]} aria-label={title}>
 		{heroArt && (
 			<div class="s-hero__stage" aria-hidden="true">
+				{/* The room the drawing hangs in: this vertical's own NASA
+				    photograph, defocused and darkened at build time. See
+				    docs/design/hero-rotativo/grounds.py for what each one is
+				    and who it is credited to. */}
+				<img
+					class="s-hero__ground"
+					src={heroGround}
+					alt=""
+					width="720"
+					height="450"
+					fetchpriority="high"
+					decoding="async"
+				/>
 				<img
 					class="s-hero__plate"
 					src={heroArt}

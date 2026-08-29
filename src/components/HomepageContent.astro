@@ -34,7 +34,7 @@ import { FACE_BY_SLUG, sortByFace } from "../utils/nav";
 import CubeEmblem from "./CubeEmblem.astro";
 import { getUiLabels } from "../utils/ui-labels";
 import { excerptPlain } from "../utils/excerpt";
-import { HERO_ART } from "../utils/hero-art";
+import { HERO_ART, HERO_GROUND } from "../utils/hero-art";
 
 // Whitespace-safe link mark: EmDash's default renderer inserts a space
 // before punctuation that follows a link (#273 — the hero is link-heavy)
@@ -77,6 +77,7 @@ const heroSlides = sortByFace(services)
 			title: svc.data.title as string,
 			color: (svc.data.color as string) || "#1E1E1E",
 			art: HERO_ART[face],
+			ground: HERO_GROUND[face],
 			// The picture used to change while the words underneath did not
 			// (founder, 2026-08-27: "cambias la imagen pero no cambian los
 			// copys, eso está profundamente mal"). Plain text, not
@@ -86,7 +87,7 @@ const heroSlides = sortByFace(services)
 			pitch: excerptPlain((svc.data.excerpt as string) || ""),
 		};
 	})
-	.filter((s): s is { href: string; title: string; color: string; art: string; pitch: string } => s !== null);
+	.filter((s): s is { href: string; title: string; color: string; art: string; ground: string; pitch: string } => s !== null);
 
 // Split PT content by h2 headings into named sections
 type Section = { heading: string; blocks: any[] };
@@ -141,6 +142,27 @@ const members = memberEntries ?? [];
 <section class="s-hero" aria-label={t("hero_intro")}>
 	{heroSlides.length > 0 && (
 		<div class="s-hero__stage" aria-hidden="true">
+			{/* The room the drawing hangs in: a real NASA photograph per
+			    vertical, out of focus and darkened at build time (see
+			    grounds.py). It carries the same `--i` and the same animation
+			    as the plate above it, so the two halves of a slide turn
+			    together — and it is the LCP element on the home, which is why
+			    only the first one is eager. */}
+			<div class="s-hero__grounds">
+				{heroSlides.map((slide, i) => (
+					<img
+						class="s-hero__ground"
+						src={slide.ground}
+						alt=""
+						width="720"
+						height="450"
+						style={`--i:${i}`}
+						fetchpriority={i === 0 ? "high" : "low"}
+						loading={i === 0 ? "eager" : "lazy"}
+						decoding="async"
+					/>
+				))}
+			</div>
 			{heroSlides.map((slide, i) => (
 				<img
 					class="s-hero__plate"
@@ -158,19 +180,6 @@ const members = memberEntries ?? [];
 		</div>
 	)}
 	<div class="container s-hero__inner">
-		{heroSlides.length > 0 && (
-			<ul class="s-hero__index" role="list">
-				{heroSlides.map((slide, i) => (
-					<li class="s-hero__item" style={`--i:${i};--cc:${slide.color}`}>
-						<a href={slide.href} class="s-hero__link">
-							<span class="s-hero__n">{`0${i + 1} / ${heroSlides.length}`}</span>
-							<span class="s-hero__name">{slide.title}</span>
-							<span class="s-hero__arrow" aria-hidden="true">&rarr;</span>
-						</a>
-					</li>
-				))}
-			</ul>
-		)}
 		{/* The hybrid the founder asked for (2026-08-27): what the COMPANY is
 		    holds still — the <h1> and the line under it are the same on all six
 		    frames, which is also what SEO and a screen reader read — and what
@@ -184,51 +193,86 @@ const members = memberEntries ?? [];
 				<PortableText value={[heroSection.blocks[0]]} components={ptComponents} />
 			</div>
 		)}
+		{/* ── the card: everything that rotates, inside one piece ──
+		    Direction C, chosen by the founder 2026-08-27 ("optamos por C").
+		    Before this, the two LARGEST things in the band never changed and
+		    the two SMALLEST did, so nothing on screen said which half was the
+		    picture's caption — and the pitch was the same string, verbatim,
+		    that `.s-areas` renders further down the page. Gathering the index
+		    line, the vertical's name, its words and the ticker into a panel
+		    with a rule in the vertical's own colour makes the rotating half
+		    one object you can point at. The h1 drops from 72px to 56px so the
+		    name inside the card can be big enough to be read as the subject.
+
+		    One list, not two: the index line and the pitch used to be separate
+		    stacks animated on the same delay, which meant nothing but the
+		    arithmetic kept them showing the same vertical. */}
 		{heroSlides.length > 0 && (
-			<ul class="s-hero__pitch" role="list">
-				{heroSlides.map((slide, i) => (
-					<li class="s-hero__pitch-item" style={`--i:${i}`}>{slide.pitch}</li>
-				))}
-			</ul>
-		)}
-		{heroSlides.length > 1 && (
-			<div class="s-hero__ticker">
-				{/* `hidden` until the script un-hides them: a control that does
-				    nothing is worse than no control, and with no JS the CSS
-				    rotation still carries the band on its own. */}
-				<button type="button" class="s-hero__nav" data-hero-nav="-1" aria-label={t("hero_prev")} hidden>
-					<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-						<path d="M10 2.5 4.5 8l5.5 5.5"></path>
-					</svg>
-				</button>
-				<span class="s-hero__dots" aria-hidden="true">
+			<div class="s-hero__card">
+				{/* The card's rule takes the showing vertical's colour. It is
+				    six stacked bars rather than a border on the card, because
+				    the colour arrives with the slide from the CMS and CSS
+				    keyframes cannot be told it. */}
+				<span class="s-hero__rules" aria-hidden="true">
 					{heroSlides.map((slide, i) => (
-						<span class="s-hero__dot" style={`--i:${i};--cc:${slide.color}`}></span>
+						<i class="s-hero__rule" style={`--i:${i};--cc:${slide.color}`}></i>
 					))}
 				</span>
-				<button type="button" class="s-hero__nav" data-hero-nav="1" aria-label={t("hero_next")} hidden>
-					<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-						<path d="M6 2.5 11.5 8 6 13.5"></path>
-					</svg>
-				</button>
-				{/* WCAG 2.2.2 made real: rotation that lasts more than five
-				    seconds needs a way to stop it, and a system-level motion
-				    preference is not a control the visitor can reach here. A
-				    checkbox drives it in pure CSS (`animation-play-state`), the
-				    same mechanism the search toggle uses — invisible but REAL:
-				    Tab reaches it, Space stops the hero, and it is announced
-				    from its own aria-label. The hero also freezes on
-				    `:focus-within`, so a keyboard user never chases a link. */}
-				<input type="checkbox" id="hero-pause" class="s-hero__pause" aria-label={t("hero_pause")} />
-				<label for="hero-pause" class="s-hero__pause-btn">
-					<svg class="s-hero__glyph s-hero__glyph--stop" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-						<rect x="3.5" y="2.5" width="3" height="11"></rect>
-						<rect x="9.5" y="2.5" width="3" height="11"></rect>
-					</svg>
-					<svg class="s-hero__glyph s-hero__glyph--go" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-						<path d="M4 2.5l9 5.5-9 5.5z"></path>
-					</svg>
-				</label>
+				<ul class="s-hero__index" role="list">
+					{heroSlides.map((slide, i) => (
+						<li class="s-hero__item" style={`--i:${i};--cc:${slide.color}`}>
+							<p class="s-hero__meta">
+								<span class="s-hero__n">{`0${i + 1} / ${heroSlides.length}`}</span>
+								<span class="s-hero__tag">{t("hero_slide_tag")}</span>
+							</p>
+							<a href={slide.href} class="s-hero__link">
+								<span class="s-hero__name">{slide.title}</span>
+								<span class="s-hero__arrow" aria-hidden="true">&rarr;</span>
+							</a>
+							<p class="s-hero__pitch-item">{slide.pitch}</p>
+						</li>
+					))}
+				</ul>
+			{heroSlides.length > 1 && (
+				<div class="s-hero__ticker">
+					{/* `hidden` until the script un-hides them: a control that does
+					    nothing is worse than no control, and with no JS the CSS
+					    rotation still carries the band on its own. */}
+					<button type="button" class="s-hero__nav" data-hero-nav="-1" aria-label={t("hero_prev")} hidden>
+						<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+							<path d="M10 2.5 4.5 8l5.5 5.5"></path>
+						</svg>
+					</button>
+					<span class="s-hero__dots" aria-hidden="true">
+						{heroSlides.map((slide, i) => (
+							<span class="s-hero__dot" style={`--i:${i};--cc:${slide.color}`}></span>
+						))}
+					</span>
+					<button type="button" class="s-hero__nav" data-hero-nav="1" aria-label={t("hero_next")} hidden>
+						<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+							<path d="M6 2.5 11.5 8 6 13.5"></path>
+						</svg>
+					</button>
+					{/* WCAG 2.2.2 made real: rotation that lasts more than five
+					    seconds needs a way to stop it, and a system-level motion
+					    preference is not a control the visitor can reach here. A
+					    checkbox drives it in pure CSS (`animation-play-state`), the
+					    same mechanism the search toggle uses — invisible but REAL:
+					    Tab reaches it, Space stops the hero, and it is announced
+					    from its own aria-label. The hero also freezes on
+					    `:focus-within`, so a keyboard user never chases a link. */}
+					<input type="checkbox" id="hero-pause" class="s-hero__pause" aria-label={t("hero_pause")} />
+					<label for="hero-pause" class="s-hero__pause-btn">
+						<svg class="s-hero__glyph s-hero__glyph--stop" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+							<rect x="3.5" y="2.5" width="3" height="11"></rect>
+							<rect x="9.5" y="2.5" width="3" height="11"></rect>
+						</svg>
+						<svg class="s-hero__glyph s-hero__glyph--go" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+							<path d="M4 2.5l9 5.5-9 5.5z"></path>
+						</svg>
+					</label>
+				</div>
+			)}
 			</div>
 		)}
 	</div>

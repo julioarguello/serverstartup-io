@@ -40,6 +40,7 @@ image. Every value that switch needs is a token; none of them is a new colour â€
 | `--color-hero-ink-soft` | `rgba(255,255,255,.82)` | Secondary copy on the picture |
 | `--color-hero-rule` | `rgba(255,255,255,.35)` | Hairlines on the picture (the locale chip's box) |
 | `--color-hero-dot` | `rgba(255,255,255,.22)` | A slide that is not showing; the search button's hover ground |
+| `--color-hero-card` | `rgba(0,0,0,.22)` | The pane the rotating half of the band sits in â€” deepens the plate rather than lifting it, so the copy over it keeps its measured contrast |
 | `--hero-cycle` / `--hero-step` | `36s` / `6s` | One clock for the plates, the index, the dots **and** the header's bottom edge |
 
 The header reads its own colours through `--bar-bg` / `--bar-ink` / `--bar-ink-soft` /

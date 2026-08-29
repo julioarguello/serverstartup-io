@@ -128,26 +128,60 @@
 	   The scrim is what makes the headline legible over any of the six: it
 	   sweeps across the picture rather than dimming it flat, so the drawing
 	   survives on the side the text leaves free. Portrait needs its own
-	   angle — a horizontal sweep on a phone darkens the wrong half. */
+	   angle — a horizontal sweep on a phone darkens the wrong half.
+
+	   The stops are MEASURED, not judged by eye. The first sweep faded to
+	   0.20 by 64% and to nothing by the frame's edge, which was fine for the
+	   headline (white, 72px) and failed for the pitch (white at 82%, 20px,
+	   weight 300) on the greenfield plate, whose lit cube sits at ~68% and
+	   ran straight under the last two lines: 3.1:1 landscape, 3.5:1 portrait,
+	   against the 4.5:1 that size and weight are owed. The plateau now holds
+	   to 70% (landscape) and 80% (portrait) and the portrait sweep never
+	   reaches zero, because on a phone the copy ends at the bottom edge.
+	   Anything that moves a plate's subject left, or the copy right, must be
+	   re-measured.
+
+	   The portrait tail moved again once §5 stopped reading translucent ink
+	   as opaque: `.s-hero__body` is paper at 82%, not paper, and on the
+	   greenfield plate at 390 it was measuring 4.7:1 against the 4.5:1 it is
+	   owed — a fifth of a point of margin, which is the same nothing this
+	   file refused to accept for the home's pitch. 0.38 → 0.48 buys it back
+	   to 5.5:1 and costs the bottom of a phone-cropped plate, which is the
+	   part of the picture the copy is standing on anyway. */
 	--hero-scrim: linear-gradient(
 		101deg,
 		rgba(30, 30, 30, 0.94) 0%,
-		rgba(30, 30, 30, 0.84) 32%,
-		rgba(30, 30, 30, 0.20) 64%,
+		rgba(30, 30, 30, 0.86) 42%,
+		rgba(30, 30, 30, 0.44) 70%,
 		rgba(30, 30, 30, 0) 100%
 	);
 	--hero-scrim-portrait: linear-gradient(
 		184deg,
 		rgba(30, 30, 30, 0.96) 0%,
-		rgba(30, 30, 30, 0.88) 44%,
-		rgba(30, 30, 30, 0.18) 74%,
-		rgba(30, 30, 30, 0) 100%
+		rgba(30, 30, 30, 0.90) 48%,
+		rgba(30, 30, 30, 0.48) 80%,
+		rgba(30, 30, 30, 0.20) 100%
 	);
 	/* paper at reduced weight, the counterpart of --color-text-muted: 10.4:1
 	   on the ink ground, so the kicker holds AA over the darkened side */
 	--color-hero-ink-soft: rgba(255, 255, 255, 0.82);
 	--color-hero-rule: rgba(255, 255, 255, 0.35);  /* the locale chip's box */
 	--color-hero-dot: rgba(255, 255, 255, 0.22);   /* a slide not showing */
+	/* The card the rotating half of the band lives in (founder's direction C,
+	   2026-08-27). A lift, not a fill: at 7% the plate still shows through, so
+	   the panel reads as a pane laid on the picture rather than a box that
+	   punched a hole in it.
+
+	   BLACK, where the founder's sketch drew white at 7%. A white pane LIFTS
+	   the ground under the copy, and §5 of the a11y gate measures the pitch —
+	   20px at weight 300, the combination AA owes 4.5:1 — straight through it:
+	   white at 7% put the greenfield plate at exactly 4.5:1, the threshold
+	   itself and so no margin at all, and even at 5% it only reached 4.6:1.
+	   Black at 22% is indistinguishable from it on the plate (both sit over a
+	   scrim that is already 0.9 opaque on the card's left half, where only the
+	   coloured rule draws the edge) and it measures 7:1 instead. The pane the
+	   founder asked for, paid for out of the picture rather than the copy. */
+	--color-hero-card: rgba(0, 0, 0, 0.22);
 	/* Six slides, six seconds each. Named here because the header's edge
 	   rotates on the same clock as the images and the two must not drift. */
 	--hero-cycle: 36s;
@@ -167,13 +201,6 @@
 	--menu-ink-muted: rgba(255, 255, 255, 0.62);   /* 7.1:1 — the site links */
 	--menu-rule: var(--color-hero-rule);
 	--menu-tint: rgba(255, 255, 255, 0.14);        /* the breadcrumb's chip */
-	/* The die, re-inked. Its resting greys (#1E1E1E over #ced4da) were drawn
-	   for paper: on the panel's own ink the dark plate vanishes and the light
-	   one glares. The cells stay above the plate they sit on so the 2x2 still
-	   reads once nothing in the drawing is light any more. */
-	--menu-die-back: #0B0B0B;
-	--menu-die-plate: #33373D;
-	--menu-die-cell: #3B4048;
 	/* Three of the six brand hues are dark by design (#1D4E89, #3E7D50,
 	   #6B4FBB) and simply do not exist on ink. Rather than six new literals —
 	   a second palette to keep in sync forever — the menu raises whatever the

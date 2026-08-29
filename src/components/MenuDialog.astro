@@ -75,6 +75,12 @@ const siteLinks = siteItems
 		title: it.label ?? "",
 	}))
 	.filter((l) => l.key);
+
+/* The bar's mark goes home. Taken from the CMS's own site list rather than
+   hardcoded, so it follows the locale the same way the entry below it does;
+   if the list has no home item the bar falls back to being a picture, which
+   is what it was before — a dead `href="/"` would be worse than no link. */
+const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 ---
 
 <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
@@ -92,20 +98,43 @@ const siteLinks = siteItems
 	>✕</button>
 
 	{/* The panel keeps the site's header line instead of replacing the page
-	    with a blank sheet (#417). It is a PICTURE of the bar, not the bar:
-	    aria-hidden, no links and no language switcher, because a second copy
-	    of those would add tab stops inside a dialog whose keyboard trap the
-	    a11y gate measures. The only real control here is the close button,
-	    which was already here. */}
-	<div class="menu-bar" aria-hidden="true">
+	    with a blank sheet (#417). It was a PICTURE of the bar — aria-hidden,
+	    no links — so a second copy of the header's controls would not add tab
+	    stops inside a dialog whose keyboard trap the a11y gate measures.
+
+	    The founder tried to click it (2026-08-28: "en el menú, las migas de
+	    arriba no funciona el enlace y no puedo ir a la home"), which is the
+	    only verdict that matters: a wordmark at the top left of a panel is a
+	    way home in every site anyone has ever used, and drawing one that is
+	    not is a trap. The MARK is a real link now; the breadcrumb beside it
+	    stays plain text, because it names where you already are. One extra
+	    tab stop, first inside the dialog, which is where a home link belongs.
+
+	    The language switcher is still absent — that one really would be a
+	    duplicate control with no unique destination. */}
+	<div class="menu-bar">
 		<div class="menu-bar__inner">
-			<svg class="menu-bar__cube" width="30" height="34" viewBox="0 0 200 228" fill="none">
-				<path class="menu-bar__edge" d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
-				<path class="menu-bar__edge" d="M14,64 100,114 186,64 M100,114 100,214"></path>
-				<path class="menu-bar__edge menu-bar__edge--hair" d="M57,39 143,89 M143,39 57,89"></path>
-				<path class="menu-bar__edge menu-bar__edge--hair" d="M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"></path>
-			</svg>
-			<span class="menu-bar__word">~Server Startup</span>
+			{homeLink ? (
+				<a class="menu-bar__home" href={homeLink.href}>
+					<svg class="menu-bar__cube" width="30" height="34" viewBox="0 0 200 228" fill="none" aria-hidden="true">
+						<path class="menu-bar__edge" d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
+						<path class="menu-bar__edge" d="M14,64 100,114 186,64 M100,114 100,214"></path>
+						<path class="menu-bar__edge menu-bar__edge--hair" d="M57,39 143,89 M143,39 57,89"></path>
+						<path class="menu-bar__edge menu-bar__edge--hair" d="M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"></path>
+					</svg>
+					<span class="menu-bar__word">~Server Startup</span>
+				</a>
+			) : (
+				<span class="menu-bar__home" aria-hidden="true">
+					<svg class="menu-bar__cube" width="30" height="34" viewBox="0 0 200 228" fill="none">
+						<path class="menu-bar__edge" d="M100,14 186,64 186,164 100,214 14,164 14,64 Z"></path>
+						<path class="menu-bar__edge" d="M14,64 100,114 186,64 M100,114 100,214"></path>
+						<path class="menu-bar__edge menu-bar__edge--hair" d="M57,39 143,89 M143,39 57,89"></path>
+						<path class="menu-bar__edge menu-bar__edge--hair" d="M57,89 57,189 M14,114 100,164 M143,89 143,189 M100,164 186,114"></path>
+					</svg>
+					<span class="menu-bar__word">~Server Startup</span>
+				</span>
+			)}
 			{currentPath && <span class="menu-bar__path">{currentPath}</span>}
 		</div>
 	</div>
@@ -250,6 +279,21 @@ const siteLinks = siteItems
 		align-items: center;
 		gap: 12px;
 		min-width: 0;
+	}
+	.menu-bar__home {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		min-width: 0;
+		color: inherit;
+	}
+	.menu-bar__home:focus-visible {
+		outline: 2px solid var(--menu-ink);
+		outline-offset: 4px;
+	}
+	a.menu-bar__home:hover .menu-bar__word {
+		/* the same terminal selection the breadcrumb and the search slot wear */
+		background-color: var(--menu-tint);
 	}
 	.menu-bar__cube { flex: none; }
 	.menu-bar__edge {
@@ -427,12 +471,22 @@ const siteLinks = siteItems
 	}
 
 	/* ── The die on ink ──
-	   LogoDie is drawn for paper and is used nowhere else, so the panel
-	   re-inks it here rather than the component branching on a mode it would
-	   have exactly one caller for. Its own rules stay the paper default. */
-	.menu-dialog .logo-stage .plate--dark { background: var(--menu-die-back); }
-	.menu-dialog .logo-stage .plate--light { background: var(--menu-die-plate); }
-	.menu-dialog .logo-stage .cell { fill: var(--menu-die-cell); }
+	   #417 re-inked the resting die for this ground: the black plate was
+	   lifted to #0B0B0B, the light one dropped to #33373D, the cells to
+	   #3B4048, because on the panel's own ink the black plate all but
+	   vanishes and the silver one glares.
+
+	   That is reverted (founder, 2026-08-28: "el cuadrado cuando está quieto
+	   no tiene los colores originales del logo. Eso tiene que quedar
+	   clavado!! es mi marca"). The resting die is the MARK, and a mark that
+	   is repainted per surface is not a mark — the black plate reading as a
+	   shadow against the ground is how this logo behaves on any dark ground,
+	   including every deck and signature it already appears on. LogoDie's own
+	   colours now apply here unchanged; there is nothing left to override at
+	   rest, which is the point.
+
+	   What survives is the ROLL, below: the six brand hues are the CMS's,
+	   not the logo's, and three of them are dark by design. */
 	.menu-dialog .logo-stage .cface.alive .cell {
 		fill: color-mix(in srgb, var(--fc) 40%, white);
 		fill: oklch(from var(--fc) max(l, var(--menu-face-floor)) c h);

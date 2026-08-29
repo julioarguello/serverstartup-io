@@ -184,6 +184,113 @@ const browser = await puppeteer.launch({
 });
 
 
+// ── Measuring ink against a ground no library can read ─────────────────────
+// Two sections below paint text over a drawn SVG. axe refuses those by
+// design: `color-contrast` returns INCOMPLETE with "background color could
+// not be determined due to a background image", which is honest and useless.
+// These two helpers are the substitute — run in the page, not in node.
+//
+// `readBoxes` collects every visible text box with its ink and the ratio
+// 1.4.3 owes it; `worstAgainst` decodes a screenshot taken with the ink
+// blanked and reports the worst ground behind each box.
+const readBoxes = (sel) => {
+	const srgb = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+	const out = [];
+	for (const el of document.querySelectorAll(sel)) {
+		const cs = getComputedStyle(el);
+		if (cs.display === "none" || cs.visibility === "hidden") continue;
+		// The hero stacks its six frames in one grid cell and fades between
+		// them; the five that are not showing are still laid out. Measuring
+		// ink nobody can see would report failures nobody can hit.
+		if (Number(cs.opacity) < 0.9) continue;
+		const r = el.getBoundingClientRect();
+		if (r.width < 2 || r.height < 2) continue;
+		if (r.bottom <= 0 || r.top >= innerHeight) continue;
+		// placeholder ink, when that is the only text the element shows
+		const raw = el.tagName === "INPUT" && !el.value
+			? getComputedStyle(el, "::placeholder").color || cs.color
+			: cs.color;
+		const m = raw.match(/[\d.]+/g);
+		if (!m) continue;
+		const [r8, g8, b8] = m.slice(0, 3).map(Number);
+		// The ALPHA, which this used to throw away. `--color-hero-ink-soft` is
+		// rgba(255,255,255,.82) and `--menu-ink-soft` is the same token: read
+		// as opaque white they score about a third more contrast than a reader
+		// ever sees, and the gate would sign off on copy that fails. It is
+		// composited over whatever pixel wins the percentile, below.
+		const alpha = m.length > 3 ? Number(m[3]) : 1;
+		// Borders and underlines are DECORATION, not the ground the glyphs sit
+		// on: `.s-hero__name` wears a 1px rule in its vertical's colour, and a
+		// box that includes it reads that colour as the background. Inset by
+		// the border, plus a pixel of antialiasing and three at the baseline.
+		const bl = parseFloat(cs.borderLeftWidth) || 0, bt = parseFloat(cs.borderTopWidth) || 0;
+		const br = parseFloat(cs.borderRightWidth) || 0, bb = parseFloat(cs.borderBottomWidth) || 0;
+		const size = parseFloat(cs.fontSize);
+		const weight = Number(cs.fontWeight) || 400;
+		out.push({
+			name: (el.className.toString().split(" ")[0] || el.tagName.toLowerCase()),
+			text: (el.textContent || el.getAttribute("placeholder") || "").trim().slice(0, 22),
+			x: Math.max(0, Math.round(r.left + bl + 1)), y: Math.max(0, Math.round(r.top + bt + 1)),
+			w: Math.max(1, Math.round(r.width - bl - br - 2)),
+			h: Math.max(1, Math.round(r.height - bt - bb - 4)),
+			ink: [r8, g8, b8],
+			alpha,
+			lum: 0.2126 * srgb(r8 / 255) + 0.7152 * srgb(g8 / 255) + 0.0722 * srgb(b8 / 255),
+			// 1.4.3: 3:1 for large text (>=24px, or >=18.66px bold), else 4.5:1
+			need: size >= 24 || (size >= 18.66 && weight >= 700) ? 3 : 4.5,
+		});
+	}
+	return out;
+};
+
+// Worst case per box, at the 98th percentile of background lightness.
+//
+// Not the single lightest pixel: the ground is a starfield, and one 1.5px
+// star behind a glyph is a near-white pixel that would score 1.1:1 and
+// fail every line on the panel. A star is not the background of the text
+// — a point of light a glyph sits over is not what a reader's eye
+// integrates. A region that IS too light is thousands of pixels, far
+// above the 2% this trims: on a 322×40 box, 258 pixels have to be lighter
+// before the verdict moves, and the whole starfield inside such a box is
+// well under a hundred. The percentile ignores sparkle and keeps any
+// real lightening, which is exactly the distinction 1.4.3 cares about.
+const worstAgainst = async (b64, boxes) => {
+	const img = new Image();
+	img.src = "data:image/png;base64," + b64;
+	await img.decode();
+	const cv = document.createElement("canvas");
+	cv.width = img.width; cv.height = img.height;
+	const ctx = cv.getContext("2d", { willReadFrequently: true });
+	ctx.drawImage(img, 0, 0);
+	const srgb = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+	return boxes.map((b) => {
+		const d = ctx.getImageData(b.x, b.y, Math.max(1, b.w), Math.max(1, b.h)).data;
+		const lums = [], rgbs = [];
+		for (let i = 0; i < d.length; i += 4) {
+			lums.push(0.2126 * srgb(d[i] / 255) + 0.7152 * srgb(d[i + 1] / 255) + 0.0722 * srgb(d[i + 2] / 255));
+			rgbs.push([d[i], d[i + 1], d[i + 2]]);
+		}
+		const order = lums.map((L, i) => i).sort((a, c) => lums[a] - lums[c]);
+		// paper ink → the light tail is the danger; dark ink → the dark tail
+		const dark = b.lum > 0.5;
+		const idx = order[Math.min(order.length - 1,
+			Math.max(0, Math.round((dark ? 0.98 : 0.02) * (order.length - 1))))];
+		const L = lums[idx];
+		// Translucent ink is not its own colour: it is its colour laid over
+		// THIS pixel. Composite before comparing, or 82% paper reads as paper.
+		const a = b.alpha == null ? 1 : b.alpha;
+		const [ir, ig, ib] = b.ink || [0, 0, 0];
+		const [br, bg, bb] = rgbs[idx];
+		const inkL = a >= 1 ? b.lum
+			: 0.2126 * srgb((a * ir + (1 - a) * br) / 255)
+			+ 0.7152 * srgb((a * ig + (1 - a) * bg) / 255)
+			+ 0.0722 * srgb((a * ib + (1 - a) * bb) / 255);
+		const hi = Math.max(L, inkL), lo = Math.min(L, inkL);
+		const hex = "#" + rgbs[idx].map((v) => v.toString(16).padStart(2, "0")).join("");
+		return { ...b, ratio: Math.round(((hi + 0.05) / (lo + 0.05)) * 10) / 10, hex };
+	});
+};
+
 // ── 0. Positive control: prove each probe can still fail ───────────────────
 // #385. The four checks below all report by NOT firing, which is exactly what
 // a broken selector, an unloaded axe or a stale predicate also look like. So
@@ -537,76 +644,6 @@ console.log("── the open menu: contrast on the dark panel");
 		".search-ps", ".search-chrome", ".search-hint", ".search-input",
 	].map((c) => `#menu-dialog ${c}`).join(", ");
 
-	const readBoxes = (sel) => {
-		const srgb = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
-		const out = [];
-		for (const el of document.querySelectorAll(sel)) {
-			const cs = getComputedStyle(el);
-			if (cs.display === "none" || cs.visibility === "hidden") continue;
-			const r = el.getBoundingClientRect();
-			if (r.width < 2 || r.height < 2) continue;
-			if (r.bottom <= 0 || r.top >= innerHeight) continue;
-			// placeholder ink, when that is the only text the element shows
-			const raw = el.tagName === "INPUT" && !el.value
-				? getComputedStyle(el, "::placeholder").color || cs.color
-				: cs.color;
-			const m = raw.match(/[\d.]+/g);
-			if (!m) continue;
-			const [r8, g8, b8] = m.slice(0, 3).map(Number);
-			const size = parseFloat(cs.fontSize);
-			const weight = Number(cs.fontWeight) || 400;
-			out.push({
-				name: (el.className.toString().split(" ")[0] || el.tagName.toLowerCase()),
-				text: (el.textContent || el.getAttribute("placeholder") || "").trim().slice(0, 22),
-				x: Math.max(0, Math.round(r.left)), y: Math.max(0, Math.round(r.top)),
-				w: Math.round(r.width), h: Math.round(r.height),
-				lum: 0.2126 * srgb(r8 / 255) + 0.7152 * srgb(g8 / 255) + 0.0722 * srgb(b8 / 255),
-				// 1.4.3: 3:1 for large text (>=24px, or >=18.66px bold), else 4.5:1
-				need: size >= 24 || (size >= 18.66 && weight >= 700) ? 3 : 4.5,
-			});
-		}
-		return out;
-	};
-
-	// Worst case per box, at the 98th percentile of background lightness.
-	//
-	// Not the single lightest pixel: the ground is a starfield, and one 1.5px
-	// star behind a glyph is a near-white pixel that would score 1.1:1 and
-	// fail every line on the panel. A star is not the background of the text
-	// — a point of light a glyph sits over is not what a reader's eye
-	// integrates. A region that IS too light is thousands of pixels, far
-	// above the 2% this trims: on a 322×40 box, 258 pixels have to be lighter
-	// before the verdict moves, and the whole starfield inside such a box is
-	// well under a hundred. The percentile ignores sparkle and keeps any
-	// real lightening, which is exactly the distinction 1.4.3 cares about.
-	const worstAgainst = async (b64, boxes) => {
-		const img = new Image();
-		img.src = "data:image/png;base64," + b64;
-		await img.decode();
-		const cv = document.createElement("canvas");
-		cv.width = img.width; cv.height = img.height;
-		const ctx = cv.getContext("2d", { willReadFrequently: true });
-		ctx.drawImage(img, 0, 0);
-		const srgb = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
-		return boxes.map((b) => {
-			const d = ctx.getImageData(b.x, b.y, Math.max(1, b.w), Math.max(1, b.h)).data;
-			const lums = [], rgbs = [];
-			for (let i = 0; i < d.length; i += 4) {
-				lums.push(0.2126 * srgb(d[i] / 255) + 0.7152 * srgb(d[i + 1] / 255) + 0.0722 * srgb(d[i + 2] / 255));
-				rgbs.push([d[i], d[i + 1], d[i + 2]]);
-			}
-			const order = lums.map((L, i) => i).sort((a, c) => lums[a] - lums[c]);
-			// paper ink → the light tail is the danger; dark ink → the dark tail
-			const dark = b.lum > 0.5;
-			const idx = order[Math.min(order.length - 1,
-				Math.max(0, Math.round((dark ? 0.98 : 0.02) * (order.length - 1))))];
-			const L = lums[idx];
-			const hi = Math.max(L, b.lum), lo = Math.min(L, b.lum);
-			const hex = "#" + rgbs[idx].map((v) => v.toString(16).padStart(2, "0")).join("");
-			return { ...b, ratio: Math.round(((hi + 0.05) / (lo + 0.05)) * 10) / 10, hex };
-		});
-	};
-
 	const menuRoutes = [];
 	for (const home of ["/", "/en"]) {
 		const page = await browser.newPage();
@@ -724,7 +761,154 @@ console.log("── the open menu: contrast on the dark panel");
 		`.${tightest.name} at ${tightest.ratio}:1 on ${tightest.route} @${tightest.vp}`);
 }
 
-// ── 5. WCAG 2.1.4 — a single-character shortcut must be scoped ──────────────
+// ── 5. The hero band, measured — ink over six drawn plates (#413) ─────────
+// Same blindness as §4 and a bigger surface: the home paints its headline,
+// its kicker and the vertical's own paragraph over one of six drawn SVGs, and
+// every vertical page repeats the trick with its own plate. axe answers
+// INCOMPLETE for all of it, so until this section existed the loudest text on
+// the site was the least audited.
+//
+// It is not hypothetical. The first sweep of the scrim faded to 0.20 by 64%
+// of the frame while the copy column runs to 78%; on the greenfield plate,
+// whose lit cube sits at ~68%, the pitch measured 3.1:1 against a 4.5:1
+// requirement, and it had shipped. The scrim stops being a matter of taste
+// the moment a gate reads it.
+//
+// The carousel is stepped through its own manual state (`.is-manual` +
+// `data-slide`, what the arrows set) rather than by clicking and hoping: the
+// CSS clock is running against the document timeline, so a click lands on
+// whichever plate the wall clock happens to be showing. Setting the state
+// directly makes plate 4 plate 4 on every run.
+console.log("── the hero band: ink over the plates");
+{
+	const BLANK_INK =
+		".s-hero, .s-hero *, .s-hero *::placeholder " +
+		"{ color: transparent !important; -webkit-text-fill-color: transparent !important; }";
+
+	const TEXT_SELECTOR = [
+		"h1", ".s-hero__kicker p", ".s-hero__pitch-item",
+		".s-hero__name", ".s-hero__n", ".s-hero__tag", ".s-hero__body",
+	].map((c) => `.s-hero ${c}`).join(", ");
+
+	// Freeze the band on plate `k`. Returns how many plates the band has, so
+	// a home that lost five of them cannot pass as a home with one.
+	const freeze = (k) => {
+		const hero = document.querySelector(".s-hero");
+		if (!hero) return 0;
+		const plates = hero.querySelectorAll(".s-hero__plate").length;
+		if (plates > 1) {
+			hero.classList.add("is-manual");
+			hero.dataset.slide = String(k);
+		}
+		return plates;
+	};
+
+	const heroRoutes = [];
+	for (const home of ["/", "/en"]) {
+		const page = await browser.newPage();
+		await page.setViewport({ width: 1440, height: 900 });
+		await page.goto(BASE + home, { waitUntil: "networkidle2", timeout: 60000 });
+		const hrefs = await page.evaluate(() =>
+			[...document.querySelectorAll(".spec-link")].map((a) => a.getAttribute("href")));
+		await page.close();
+		heroRoutes.push(home, ...hrefs);
+	}
+	if (heroRoutes.length < 14) {
+		console.error(`✗ THIS GATE IS BLIND — ${heroRoutes.length - 2} specialty route(s) found, not 12.`);
+		process.exit(3);
+	}
+
+	// The control the pixel pass needs (#385): a blanking style that stopped
+	// working, a stale selector or a percentile on the wrong tail all look
+	// exactly like a clean band. The pitch is repainted a near-black that
+	// scores about 1.3:1 on ink, and every frame of it has to be called a
+	// failure before a single real plate is believed.
+	{
+		const page = await browser.newPage();
+		await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+		await page.goto(BASE + "/", { waitUntil: "networkidle2", timeout: 60000 });
+		await page.evaluate(freeze, 0);
+		await sleep(SETTLE_MS);
+		await page.addStyleTag({ content: ".s-hero__pitch-item { color: #3A3A3A !important; }" });
+		const boxes = await page.evaluate(readBoxes, TEXT_SELECTOR);
+		await page.addStyleTag({ content: BLANK_INK });
+		const shot = await page.screenshot({ encoding: "base64", captureBeyondViewport: false });
+		const rows = await page.evaluate(worstAgainst, shot, boxes);
+		await page.close();
+		const planted = rows.filter((r) => r.name === "s-hero__pitch-item");
+		const caught = planted.filter((r) => r.ratio + 0.05 < r.need);
+		if (!planted.length || caught.length !== planted.length) {
+			console.error(`✗ THIS GATE IS BLIND — ${planted.length} planted near-black pitch line(s) ` +
+				`over the plate, and the pixel pass called ${caught.length} of them a failure.`);
+			process.exit(3);
+		}
+		ok(`control — the planted near-black pitch measured ${caught[0].ratio}:1 over the plate`);
+	}
+
+	let measured = 0, frames = 0, tightest = { ratio: Infinity };
+	// 1440 is where the scrim runs sideways and 390 is where it runs down the
+	// picture — two different gradients, so two different verdicts.
+	const SIZES = [{ width: 1440, height: 900 }, { width: 390, height: 844 }];
+	for (const route of heroRoutes) {
+		let worstHere = { ratio: Infinity };
+		for (const vp of SIZES) {
+			const page = await browser.newPage();
+			await page.setViewport({ ...vp, deviceScaleFactor: 1 });
+			await page.goto(BASE + route, { waitUntil: "networkidle2", timeout: 60000 });
+			const plates = await page.evaluate(freeze, 0);
+			if (!plates) {
+				fail(route, "no hero band found — the plate selector is stale");
+				await page.close();
+				continue;
+			}
+			for (let k = 0; k < plates; k++) {
+				await page.evaluate(freeze, k);
+				await sleep(SETTLE_MS);
+				const boxes = await page.evaluate(readBoxes, TEXT_SELECTOR);
+				const blank = await page.addStyleTag({ content: BLANK_INK });
+				const shot = await page.screenshot({ encoding: "base64", captureBeyondViewport: false });
+				// The ink has to come BACK: the six frames are measured on one
+				// page load, and a blanking style left in place would make the
+				// next frame's `color` read `transparent` and every ratio a lie.
+				await blank.evaluate((el) => el.remove());
+				const rows = await page.evaluate(worstAgainst, shot, boxes);
+				measured += rows.length;
+				frames += 1;
+				// A vertical page's band carries two lines — the heading and the
+				// body. The home's carries five, because the index and the
+				// vertical's own sentence ride along with the plate.
+				const floor = plates > 1 ? 4 : 2;
+				if (rows.length < floor) {
+					fail(route, `hero @${vp.width} plate ${k + 1}: ${rows.length} text box(es), under the ` +
+						`${floor} this band has — the copy did not render, or the selector is stale`);
+				}
+				for (const r of rows) {
+					if (r.ratio < worstHere.ratio) worstHere = { ...r, vp: vp.width, plate: k + 1 };
+					if (r.ratio < tightest.ratio) tightest = { ...r, route, vp: vp.width, plate: k + 1 };
+					if (r.ratio + 0.05 < r.need) {
+						fail(route, `hero @${vp.width} plate ${k + 1}: .${r.name} ("${r.text}") is ` +
+							`${r.ratio}:1 against ${r.hex} behind it — 1.4.3 asks ${r.need}:1`);
+					}
+				}
+			}
+			await page.close();
+		}
+		ok(`${route} — hero measured at 1440 and 390; tightest ${worstHere.ratio}:1 ` +
+			`(.${worstHere.name}, plate ${worstHere.plate} @${worstHere.vp})`);
+	}
+
+	// A band that rendered nothing measures nothing and reports green. The
+	// home carries six plates and every vertical one, in both locales.
+	if (frames < 28 || measured < frames * 2) {
+		console.error(`✗ THIS GATE IS BLIND — ${frames} hero frame(s) photographed and ${measured} ` +
+			"text box(es) measured, below the 28 frames and 2 boxes each this site has.");
+		process.exit(3);
+	}
+	ok(`${measured} text boxes over ${frames} plate frames; tightest was .${tightest.name} at ` +
+		`${tightest.ratio}:1 on ${tightest.route} plate ${tightest.plate} @${tightest.vp}`);
+}
+
+// ── 6. WCAG 2.1.4 — a single-character shortcut must be scoped ──────────────
 // `/` may open the search only when focus is already inside the header.
 console.log("── 2.1.4 character key shortcut");
 {
@@ -751,7 +935,7 @@ console.log("── 2.1.4 character key shortcut");
 	await page.close();
 }
 
-// ── 6. WCAG 1.4.10 — reflow at 320 CSS px, the width the norm names ─────────
+// ── 7. WCAG 1.4.10 — reflow at 320 CSS px, the width the norm names ─────────
 console.log("── 1.4.10 reflow at 320px");
 for (const route of ["/", "/cdn-waf-seguridad-edge-cloudflare", "/referencias", "/search?q=cloudflare"]) {
 	const page = await browser.newPage();
@@ -763,7 +947,7 @@ for (const route of ["/", "/cdn-waf-seguridad-edge-cloudflare", "/referencias", 
 	await page.close();
 }
 
-// ── 7. Aspect ratio at 320px — no image may be squashed (#416) ─────────────
+// ── 8. Aspect ratio at 320px — no image may be squashed (#416) ─────────────
 // Its own loop, and over EVERY route, because narrow is where the defect
 // lives: the global `img { max-width: 100% }` only clamps once the container
 // is too narrow for the image, so a desktop pass sees nothing. The two rules
@@ -786,7 +970,7 @@ console.log(`── image aspect ratio at 320px — ${ROUTES.length} routes`);
 	ok(`${checked} images across ${ROUTES.length} routes keep their ratio`);
 }
 
-// ── 8. W3C Nu — the rules html-validate does not carry ─────────────────────
+// ── 9. W3C Nu — the rules html-validate does not carry ─────────────────────
 // The local suite validates with html-validate; CI additionally runs Nu after
 // the deploy. They disagree, and the gap is not academic: `aria-hidden` on a
 // label bound to a control passed html-validate and was rejected by Nu, after

@@ -2,11 +2,12 @@ Skip to content
 ~Server Startup
 /en
 ES
-01 / 6
-E-commerce
-→
 Software engineering: architecture, integration and operations
 Over twenty years of craft in e-commerce, systems integration and data. Official Cloudflare partners since 2019.
+01 / 6
+specialty
+E-commerce
+→
 Over twenty years inside SAP Commerce Cloud. Extending the platform is the easy part: doing it with every improvement decoupled from the core, close to the standard, surviving version after version, is what almost nobody does. And performance is our specialty.
 Official Cloudflare partner
 We speed up and protect your infrastructure with the most advanced services Cloudflare has to offer.

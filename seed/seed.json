@@ -2314,6 +2314,17 @@
 						{
 							"_type": "block",
 							"style": "normal",
+							"_key": "hero_slide_tag",
+							"children": [
+								{
+									"_type": "span",
+									"text": "especialidad"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
 							"_key": "content",
 							"children": [
 								{
@@ -4325,6 +4336,17 @@
 								{
 									"_type": "span",
 									"text": "Show the next specialty"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "hero_slide_tag",
+							"children": [
+								{
+									"_type": "span",
+									"text": "specialty"
 								}
 							]
 						},
