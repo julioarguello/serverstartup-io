@@ -107,11 +107,16 @@ jobs:
       - name: Security headers
         run: scripts/ci-check-headers.sh http://localhost:8787
 
-      - name: Image hrefs
+      - name: Image URLs (href is a path, transform names a quality)
         # #412. The step above proves the transform ANSWERS; this one reads what
         # was asked for. An absolute /_image href sends the endpoint down its
         # remote branch, which on Workers is a fetch of our own hostname and
         # cannot work (#407) — and localhost is precisely where that looks fine.
+        #
+        # Same crawl, second rule (#409): a URL with no `q` reaches the IMAGES
+        # binding with no quality, and the binding then encodes near-losslessly
+        # — four to five times the bytes, and again only in production, where
+        # nobody is looking at the size of a 200.
         run: python3 scripts/ci-check-image-hrefs.py http://localhost:8787
 
       - name: Accessibility (axe + keyboard + shortcuts + reflow)

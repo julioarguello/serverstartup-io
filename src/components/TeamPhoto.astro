@@ -16,6 +16,7 @@ import { Image as AstroImage } from "astro:assets";
 import type { MediaValue } from "emdash";
 import { Image } from "emdash/ui";
 import { teamPhoto } from "../lib/team-photos";
+import { IMAGE_QUALITY } from "../lib/images";
 
 interface Props {
 	image: MediaValue | string | null | undefined;
@@ -31,7 +32,7 @@ const photo = teamPhoto(typeof image === "string" ? image : image?.src);
 
 {
 	photo ? (
-		<AstroImage src={photo} alt={alt} width={width} height={height} sizes={sizes} />
+		<AstroImage src={photo} alt={alt} width={width} height={height} sizes={sizes} quality={IMAGE_QUALITY} />
 	) : (
 		<Image image={image} alt={alt} width={width} height={height} sizes={sizes} />
 	)

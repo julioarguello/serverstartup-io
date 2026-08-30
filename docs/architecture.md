@@ -245,7 +245,10 @@ media library, and then none of the first branch is needed.
 
 That line is now held by a gate rather than by memory (#412).
 `scripts/ci-check-image-hrefs.py` crawls the sitemap on the local stack and
-fails on any `/_image` href that is an absolute URL. It reads the bytes rather
+fails on any `/_image` href that is an absolute URL — and, since #409, on any
+transform that names no quality, because the IMAGES binding has no default of
+its own and answers a `q`-less URL near-losslessly: 489 KB where 117 KB would
+do. The number every call site passes is `IMAGE_QUALITY` in `src/lib/images.ts`. It reads the bytes rather
 than the behaviour on purpose: locally the site *serves* those images perfectly,
 which is exactly why the behavioural checks were green while #407 was live. Any
 absolute href fails, foreign hosts included — the repository carries no

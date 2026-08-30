@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""ci-check-image-hrefs — no /_image href may point at an absolute URL (#412).
+"""ci-check-image-hrefs — what a /_image URL has to say: a path, and a quality.
+
+Two rules over the same markup, read on the same crawl.
+
+## One — the href is a path, never an absolute URL (#412)
 
 #407 was a Worker unable to fetch its own hostname. EmDash hands Astro an
 ABSOLUTE url for CMS media, Astro classifies our own site as remote, and the
@@ -30,6 +34,22 @@ at all, so the rule costs nothing and closes by default. The day a foreign
 image is wanted, this gate goes red and the host is written down, with a
 reason, in scripts/image-remote-allowlist.txt.
 
+## Two — the transform names its quality (#409)
+
+The adapter's endpoint reads `q` off the URL and hands it to the IMAGES
+binding, which applies no default of its own and encodes near-losslessly when
+the parameter is absent. Measured on the deployed preview worker, same URL,
+same transform: the sponsorship photograph at its 852px variant came back
+489 154 bytes, and 116 634 with `&q=85` appended by hand. A team photograph at
+520px: 144 204 against 29 932. Four to five times the bytes, on the pages whose
+whole point was to stop shipping full-size originals.
+
+Astro puts `q` in the URL only when the call site passes `quality`, so this is
+a rule about markup — and markup is what this gate already reads. It is invisible
+anywhere else: the local `compile` build goes through sharp, which has a sensible
+default of its own, and the transform ANSWERS correctly either way. Only the
+size of the answer differs, and only in production.
+
 Usage:  scripts/ci-check-image-hrefs.py [BASE_URL]   (default http://localhost:8787)
 Exit:   0 clean · 1 findings · 2 stack unreachable · 3 THIS GATE IS BLIND
 """
@@ -57,8 +77,8 @@ IMAGE_URL_RE = re.compile(r"/_image\?[^\"'\s,>]+")
 LOC_RE = re.compile(r"<loc>([^<]+)</loc>")
 
 
-def image_hrefs(markup: str) -> list[str]:
-    """Every decoded `href` parameter of every /_image URL in `markup`.
+def image_params(markup: str) -> list[dict[str, str]]:
+    """Every /_image URL in `markup`, decoded into its query parameters.
 
     Separated from where the bytes came from so the positive control can
     exercise this exact function over a fixture instead of a served page.
@@ -68,12 +88,27 @@ def image_hrefs(markup: str) -> list[str]:
     href that is not the first parameter then disappears silently, which reads
     as a clean page.
     """
-    hrefs: list[str] = []
-    for url in IMAGE_URL_RE.findall(html.unescape(markup)):
-        for key, value in parse_qsl(urlsplit(url).query, keep_blank_values=True):
-            if key == "href":
-                hrefs.append(value)
-    return hrefs
+    return [
+        dict(parse_qsl(urlsplit(url).query, keep_blank_values=True))
+        for url in IMAGE_URL_RE.findall(html.unescape(markup))
+    ]
+
+
+def image_hrefs(markup: str) -> list[str]:
+    """Every decoded `href` of every /_image URL — the #407 rule reads in hrefs."""
+    return [p["href"] for p in image_params(markup) if "href" in p]
+
+
+def has_quality(params: dict[str, str]) -> bool:
+    """Whether a transform names a quality at all.
+
+    Presence, not value: Astro emits either a number or one of the named
+    presets the adapter maps through its own table (`low`/`mid`/`high`/`max`),
+    and both reach the binding as an explicit quality. What must never happen
+    is the parameter being absent, which is the one case the binding answers
+    near-losslessly.
+    """
+    return bool(params.get("q", "").strip())
 
 
 def absolute_host(href: str) -> str | None:
@@ -121,32 +156,39 @@ def fetch(path: str) -> tuple[int, str]:
 #   · an href that is NOT the first query parameter must still be found,
 #     which is only true if the entities were unescaped;
 #   · protocol-relative `//host/x` counts as absolute;
-#   · a media URL that is not a transform at all is none of our business.
+#   · a media URL that is not a transform at all is none of our business;
+#   · a transform that names no quality is caught, and the seven that name one
+#     are not.
 CONTROL_HTML = """<!doctype html>
-<img src="/_image?href=%2F_astro%2Fdani.CzQ8.jpg&amp;w=53&amp;h=40&amp;f=webp"
-     srcset="/_image?href=%2F_astro%2Fdani.CzQ8.jpg&amp;w=53&amp;f=webp 53w, /_image?href=%2F_astro%2Fdani.CzQ8.jpg&amp;w=106&amp;f=webp 106w, /_image?href=https%3A%2F%2Fexample.invalid%2Fassets%2Fteam%2Fdani.jpg&amp;w=212&amp;f=webp 212w"
+<img src="/_image?href=%2F_astro%2Fdani.CzQ8.jpg&amp;w=53&amp;h=40&amp;f=webp&amp;q=85"
+     srcset="/_image?href=%2F_astro%2Fdani.CzQ8.jpg&amp;w=53&amp;f=webp&amp;q=85 53w, /_image?href=%2F_astro%2Fdani.CzQ8.jpg&amp;w=106&amp;f=webp&amp;q=85 106w, /_image?href=https%3A%2F%2Fexample.invalid%2Fassets%2Fteam%2Fdani.jpg&amp;w=212&amp;f=webp&amp;q=85 212w"
      alt="a photograph the repository carries">
-<img src="/_image?href=https%3A%2F%2Fpreview.example.workers.dev%2Fassets%2Fteam%2Fana.jpg&amp;w=260&amp;h=195&amp;f=webp"
+<img src="/_image?href=https%3A%2F%2Fpreview.example.workers.dev%2Fassets%2Fteam%2Fana.jpg&amp;w=260&amp;h=195&amp;f=webp&amp;q=85"
      alt="the #407 shape exactly">
-<img src="/_image?href=%2F%2Fcdn.example.invalid%2Flogo.png&amp;w=64&amp;f=webp"
+<img src="/_image?href=%2F%2Fcdn.example.invalid%2Flogo.png&amp;w=64&amp;f=webp&amp;q=85"
      alt="protocol-relative, still absolute">
 <img src="/_emdash/api/media/file/team-dani.jpg" alt="untransformed — not a finding">
-<img src="/_image?f=webp&amp;href=%2F_astro%2Flate.CzQ8.jpg&amp;w=90"
-     alt="href is not the first parameter">
+<img src="/_image?f=webp&amp;href=%2F_astro%2Flate.CzQ8.jpg&amp;w=90&amp;q=high"
+     alt="href is not the first parameter, and the quality is a named preset">
+<img src="/_image?href=%2F_astro%2Fnoq.CzQ8.jpg&amp;w=53&amp;f=webp"
+     alt="the #409 shape: a transform that names no quality">
 """
 
-CONTROL_TOTAL = 7
+CONTROL_TOTAL = 8
 CONTROL_ABSOLUTE = {
     "example.invalid",
     "preview.example.workers.dev",
     "cdn.example.invalid",
 }
+CONTROL_QLESS = {"/_astro/noq.CzQ8.jpg"}
 
 
 def positive_control() -> int:
     """Prove the extractor still sees what it exists to see. 0 sighted, 3 blind."""
+    params = image_params(CONTROL_HTML)
     found = image_hrefs(CONTROL_HTML)
     absolute = {h for h in (absolute_host(f) for f in found) if h}
+    qless = {p.get("href", "") for p in params if not has_quality(p)}
 
     blind: list[str] = []
     if len(found) != CONTROL_TOTAL:
@@ -161,6 +203,10 @@ def positive_control() -> int:
     paths = [f for f in found if not absolute_host(f)]
     if not all(p.startswith("/_astro/") for p in paths):
         blind.append(f"a path href came back mangled: {paths}")
+    for href in CONTROL_QLESS - qless:
+        blind.append(f"planted quality-less transform {href} was NOT reported")
+    for href in qless - CONTROL_QLESS:
+        blind.append(f"{href} names a quality and was reported as missing one")
 
     if blind:
         print("✗ image-hrefs: THIS GATE IS BLIND — it can no longer find the shape "
@@ -203,31 +249,36 @@ def main() -> int:
     blind = positive_control()
     if blind:
         return blind
-    print(f"  ok   positive control — {CONTROL_TOTAL} hrefs extracted, "
-          f"{len(CONTROL_ABSOLUTE)} absolute ones caught")
+    print(f"  ok   positive control — {CONTROL_TOTAL} URLs extracted, "
+          f"{len(CONTROL_ABSOLUTE)} absolute hrefs and "
+          f"{len(CONTROL_QLESS)} quality-less transform(s) caught")
 
     allowed = allowed_hosts()
     routes = routes_from_sitemap()
     print(f"image-hrefs: {BASE} — {len(routes)} routes from the sitemap")
 
     failures: list[str] = []
+    qless: list[str] = []
     seen = 0
     for path in routes:
         status, markup = fetch(path)
         if status != 200:
             failures.append(f"{path}: returned {status}")
             continue
-        for href in image_hrefs(markup):
+        for params in image_params(markup):
             seen += 1
+            href = params.get("href", "")
             host = absolute_host(href)
             if host and host not in allowed:
                 failures.append(f"{path}: absolute href at {host} — {href}")
+            if not has_quality(params):
+                qless.append(f"{path}: no q= — {href or '(a URL with no href at all)'}")
 
     # A clean result over a site that emits no transforms at all proves nothing:
     # the check would report the same silence if /_image stopped being used, or
     # if the extractor stopped matching. Either way it is no longer looking.
     if seen == 0:
-        print("✗ image-hrefs: THIS GATE IS BLIND — not one /_image href on any of "
+        print("✗ image-hrefs: THIS GATE IS BLIND — not one /_image URL on any of "
               f"the {len(routes)} routes, so nothing was actually inspected.",
               file=sys.stderr)
         print("  → either the site stopped routing images through /_image, in which "
@@ -236,17 +287,30 @@ def main() -> int:
         return 3
 
     if failures:
-        print(f"\n{len(failures)} FAILURE(S):", file=sys.stderr)
+        print(f"\n{len(failures)} ABSOLUTE HREF(S):", file=sys.stderr)
         for f in failures:
             print(f"  ✗ {f}", file=sys.stderr)
         print("  → a Worker cannot fetch its own hostname (#407). Render the image "
               "through src/components/TeamPhoto.astro, or off the media library, so "
               "the href is a PATH; add the host to scripts/image-remote-allowlist.txt "
               "only if it is genuinely someone else's.", file=sys.stderr)
+
+    if qless:
+        print(f"\n{len(qless)} TRANSFORM(S) THAT NAME NO QUALITY:", file=sys.stderr)
+        for f in qless[:20]:
+            print(f"  ✗ {f}", file=sys.stderr)
+        if len(qless) > 20:
+            print(f"  ✗ … and {len(qless) - 20} more", file=sys.stderr)
+        print("  → the IMAGES binding has no default and encodes near-losslessly "
+              "without q: 489 KB where 117 KB would do (#409). Pass "
+              "quality={IMAGE_QUALITY} from src/lib/images.ts at the call site.",
+              file=sys.stderr)
+
+    if failures or qless:
         return 1
 
-    print(f"✓ image-hrefs: clean — {seen} /_image href(s) across {len(routes)} routes, "
-          "every one a path")
+    print(f"✓ image-hrefs: clean — {seen} /_image URL(s) across {len(routes)} routes, "
+          "every href a path and every transform with a quality")
     return 0
 
 

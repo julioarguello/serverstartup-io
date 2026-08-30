@@ -8,6 +8,7 @@ import { PortableText } from "emdash/ui";
 import TeamPhoto from "../../components/TeamPhoto.astro";
 import { Image as AstroImage } from "astro:assets";
 import sponsorPhoto from "../../assets/urdaneta-infantil.webp";
+import { IMAGE_QUALITY } from "../../lib/images";
 import PtLink from "../../components/PtLink.astro";
 
 // Whitespace-safe link mark (EmDash's default breaks lines before punctuation)
@@ -202,6 +203,7 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "en") :
 										widths={[328, 656, 728, 852, 1200]}
 										sizes="(min-width: 1200px) 852px, (min-width: 700px) 728px, 91vw"
 										loading="lazy"
+										quality={IMAGE_QUALITY}
 									/>
 							</a>
 						) : (
@@ -211,6 +213,7 @@ const altPath = entry ? await entryAlternatePath("pages", entry.data.id, "en") :
 										widths={[328, 656, 728, 852, 1200]}
 										sizes="(min-width: 1200px) 852px, (min-width: 700px) 728px, 91vw"
 										loading="lazy"
+										quality={IMAGE_QUALITY}
 									/>
 						)}
 						<figcaption>

@@ -152,7 +152,7 @@ from a working tree; everything else runs here first.
 | HTML | `html-validate` over the rendered routes | 0 problems |
 | Rendered copy | `node scripts/copy-baseline.mjs verify --base-url http://localhost:8787` | every seed route matches its baseline |
 | Headers | `scripts/ci-check-headers.sh http://localhost:8787` | full suite present |
-| Image hrefs | `python3 scripts/ci-check-image-hrefs.py http://localhost:8787` | every `/_image` href is a path — an absolute one cannot work on Workers (#407) |
+| Image URLs | `python3 scripts/ci-check-image-hrefs.py http://localhost:8787` | every `/_image` href is a path — an absolute one cannot work on Workers (#407) — and every transform names a quality, or the binding encodes near-losslessly (#409) |
 | Accessibility | `node scripts/ci-check-a11y.mjs http://localhost:8787` | axe sample, keyboard traversal, focus trap, WCAG 2.1.4, reflow at 320px |
 | Lighthouse | `lighthouserc.json` assertions | perf ≥ 95; a11y, BP, SEO = 100 |
 
