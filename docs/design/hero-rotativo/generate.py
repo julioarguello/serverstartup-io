@@ -398,7 +398,7 @@ def img_bd():
              % (hx - 104, hy, hx + 104, hy, hx, hy - 104, hx, hy + 104, C))
     return "".join(s)
 
-# 4 · INTEGRACIÓN — todo pasa por el cubo
+# 4 · INTEGRACIÓN — el cubo por el que pasa todo
 def img_int():
     rng = random.Random(53); C, CL = "#1D4E89", "#5B94DA"
     cx, cy, k = 760, 450, 2.35

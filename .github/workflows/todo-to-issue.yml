@@ -50,6 +50,20 @@ jobs:
           # #402 and #403 against the repository, titled with the remainder of
           # that sentence. Do not write the bare names anywhere in this file
           # except inside the JSON below.
+          #
+          # Same scanner, the other direction (#419): matching is
+          # case-insensitive and the marker may sit ANYWHERE inside the
+          # comment, not only at its start. So a Spanish comment carrying the
+          # everyday adjective «todo» in front of any other word files an issue
+          # whose title is the rest of the sentence — which is precisely what
+          # the section header of the integration plate in
+          # docs/design/hero-rotativo/generate.py did. There is no
+          # case-sensitivity input to turn off (action.yml offers only IGNORE,
+          # a file-path regex, and silencing a path would also stop reading the
+          # real markers in it), so the guard is prosodic: in Spanish comments
+          # keep that adjective at the end of its line, or in guillemets as
+          # this note does. The pattern needs whitespace before it and whitespace or a
+          # colon after it; either shape denies it one.
           IDENTIFIERS: >
             [{"name": "FIXME", "labels": ["tech-debt", "priority:medium"]},
              {"name": "TODO",  "labels": ["tech-debt", "priority:low"]},
