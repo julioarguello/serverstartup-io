@@ -20,6 +20,34 @@ import { join } from "node:path";
 
 const LOG = join(process.env.RUNNER_TEMP || "/tmp", "wrangler-ci.log");
 
+/**
+ * The OTHER way a browser-driven gate dies while the stack is fine (#425).
+ *
+ * Chrome stops answering the debugger — not the server, the browser. Measured
+ * twice on 2026-08-30 on a machine at load 28: `Network.enable timed out` in
+ * the keyboard section, `Runtime.callFunctionOn timed out` in the contrast
+ * section twenty minutes later, and a third identical run green. Puppeteer
+ * 23.11.1 waits `protocolTimeout` = 180 000 ms before giving up, so those are
+ * three full minutes of silence, not a hiccup.
+ *
+ * Without this the run's headline is `FAIL Accessibility`, and the reader goes
+ * looking for what they broke in a11y — when nothing after the last `ok` line
+ * was measured at all. Same lesson as #399: a gate that reports a failure it
+ * did not measure is worse than no gate.
+ *
+ * Returns "" for every other error, so the caller's own message still stands.
+ */
+export function cdpDiagnosis(error) {
+	const timedOut = error?.name === "ProtocolError" && /timed out/i.test(error?.message ?? "");
+	if (!timedOut) return "";
+	return [
+		"  → the stack IS answering: this is a CDP timeout, not a finding. Chrome",
+		"    stopped replying to the debugger, which is what a browser does when it",
+		"    is starved of CPU — check the machine's load before the diff. Nothing",
+		"    after the last `ok` line above was measured. Re-run it (#425).",
+	].join("\n");
+}
+
 /** Did the stack answer at all? Any HTTP status counts — a 404 is a live server. */
 async function answers(baseUrl) {
 	try {

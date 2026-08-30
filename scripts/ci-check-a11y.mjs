@@ -18,7 +18,7 @@
 import puppeteer from "puppeteer";
 import { createRequire } from "node:module";
 import { seedRoutes } from "./lib/seed-routes.mjs";
-import { stackDiagnosis } from "./lib/stack-probe.mjs";
+import { cdpDiagnosis, stackDiagnosis } from "./lib/stack-probe.mjs";
 
 const BASE = (process.argv[2] || "http://localhost:8787").replace(/\/$/, "");
 
@@ -38,6 +38,7 @@ const explainStackDeath = async (error) => {
 	console.error(`\nERROR: ${error?.stack ?? error}`);
 	console.error(
 		(await stackDiagnosis(BASE)) ||
+			cdpDiagnosis(error) ||
 			"  The stack IS answering, so a dead stack is not the cause.",
 	);
 	process.exit(2);
@@ -195,6 +196,11 @@ const ok = (msg) => console.log(`  ok   ${msg}`);
 const browser = await puppeteer.launch({
 	headless: "new",
 	args: ["--no-sandbox", "--disable-dev-shm-usage"],
+	// Puppeteer 23.11.1 defaults this to 180 000 ms, and a loaded machine can
+	// spend all three minutes of it not answering one CDP call (#425). Raised,
+	// not removed: a browser that is genuinely hung still fails the run, and a
+	// retry — the other obvious move — is how a flake becomes invisible.
+	protocolTimeout: 300_000,
 });
 
 

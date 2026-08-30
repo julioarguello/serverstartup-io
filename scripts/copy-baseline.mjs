@@ -74,7 +74,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
 import { readSeed, localePrefix, seedRoutes } from "./lib/seed-routes.mjs";
-import { stackDiagnosis } from "./lib/stack-probe.mjs";
+import { cdpDiagnosis, stackDiagnosis } from "./lib/stack-probe.mjs";
 
 const REPO = dirname(dirname(fileURLToPath(import.meta.url)));
 const BASELINE_DIR = join(REPO, "tests", "copy-baseline");
@@ -138,6 +138,7 @@ async function withPage(fn) {
 	const browser = await puppeteer.launch({
 		headless: "new",
 		args: ["--no-sandbox", "--disable-dev-shm-usage"],
+		protocolTimeout: 300_000, // see ci-check-a11y.mjs — same reason (#425)
 	});
 	try {
 		const page = await browser.newPage();
@@ -511,6 +512,7 @@ try {
 	console.error(`ERROR: could not read ${baseUrl} — ${error.message}`);
 	console.error(
 		(await stackDiagnosis(baseUrl)) ||
+			cdpDiagnosis(error) ||
 			"  The stack IS answering, so a dead stack is not the cause.",
 	);
 	console.error("  Boot it with:  scripts/ci-local-stack.sh 8787");
