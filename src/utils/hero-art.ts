@@ -12,9 +12,9 @@
  * NASA photograph. The founder, 2026-08-29: *"que NO pierda los dibujitos…
  * usemos las fotos como background… pero tendrás que quitarles peso."* So the
  * drawing is still the subject and the photograph is only the room it hangs
- * in — defocused, darkened and tinted at build time, which is also why the
- * six grounds together weigh 53 KB: an out-of-focus sky has nothing left to
- * encode. Both halves are generated, never hand-edited:
+ * in — darkened, desaturated and cropped at build time so the photograph's
+ * own subject lands under the drawing's. Both halves are generated, never
+ * hand-edited:
  * `docs/design/hero-rotativo/generate.py` draws the plates and `grounds.py`
  * treats the photographs (and records what each one is and who to credit).
  *
@@ -36,26 +36,37 @@ export const HERO_ART: Record<FaceKey, string> = {
 };
 
 /**
- * face → the photograph that vertical hangs in. Each was chosen because it
- * already IS roughly that vertical's colour in the archive — measured hue,
- * not a tint applied afterwards — and because its own subject can be cropped
- * into the left of the frame, where the scrim eats it, leaving the
- * right-centre quiet for the drawing to stand on.
+ * Two files per ground, and both are needed: AVIF at 2160x1350 is what every
+ * device actually downloads, and the 720x450 JPEG is the `<img>` inside the
+ * `<picture>` for the browsers that cannot read AVIF. The format is what makes
+ * the resolution affordable — nine times the pixels of the old ground for a
+ * quarter more weight — and the resolution is what stopped the photograph
+ * looking defocused on a retina screen, since a full-bleed band paints far
+ * more device pixels than its viewport is wide.
  */
-export const HERO_GROUND: Record<FaceKey, string> = {
-	ec: "/assets/hero/ground/ec.jpg",
-	cdn: "/assets/hero/ground/cdn.jpg",
-	bd: "/assets/hero/ground/bd.jpg",
-	int: "/assets/hero/ground/int.jpg",
-	gf: "/assets/hero/ground/gf.jpg",
-	ia: "/assets/hero/ground/ia.jpg",
+export type HeroGround = { avif: string; jpg: string };
+
+/**
+ * face → the photograph that vertical hangs in. Each was chosen because it
+ * SAYS what its drawing says — a crowd of stars under a wall of cubes, a deep
+ * field under a point cloud — and each crop is then solved so the thing the
+ * photograph shows lands under the thing the drawing means. See
+ * `docs/design/hero-rotativo/grounds.py` for the anchor of every one.
+ */
+export const HERO_GROUND: Record<FaceKey, HeroGround> = {
+	ec: { avif: "/assets/hero/ground/ec.avif", jpg: "/assets/hero/ground/ec.jpg" },
+	cdn: { avif: "/assets/hero/ground/cdn.avif", jpg: "/assets/hero/ground/cdn.jpg" },
+	bd: { avif: "/assets/hero/ground/bd.avif", jpg: "/assets/hero/ground/bd.jpg" },
+	int: { avif: "/assets/hero/ground/int.avif", jpg: "/assets/hero/ground/int.jpg" },
+	gf: { avif: "/assets/hero/ground/gf.avif", jpg: "/assets/hero/ground/gf.jpg" },
+	ia: { avif: "/assets/hero/ground/ia.avif", jpg: "/assets/hero/ground/ia.jpg" },
 };
 
 /** The plates in the canonical order the home rotates through. */
 export const HERO_ART_ORDER: string[] = FACE_ORDER.map((face) => HERO_ART[face]);
 
 /** The grounds in that same order, so slide `i` and ground `i` cross-fade together. */
-export const HERO_GROUND_ORDER: string[] = FACE_ORDER.map((face) => HERO_GROUND[face]);
+export const HERO_GROUND_ORDER: HeroGround[] = FACE_ORDER.map((face) => HERO_GROUND[face]);
 
 /**
  * The plate a service slug wears, in either locale — `null` for anything that
@@ -69,7 +80,7 @@ export function heroArtForSlug(slug: string | undefined): string | null {
 }
 
 /** The photograph that goes under `heroArtForSlug`, or `null` on the same terms. */
-export function heroGroundForSlug(slug: string | undefined): string | null {
+export function heroGroundForSlug(slug: string | undefined): HeroGround | null {
 	const face = slug ? FACE_BY_SLUG[slug] : undefined;
 	return face ? HERO_GROUND[face] : null;
 }

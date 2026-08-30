@@ -34,7 +34,7 @@ import { FACE_BY_SLUG, sortByFace } from "../utils/nav";
 import CubeEmblem from "./CubeEmblem.astro";
 import { getUiLabels } from "../utils/ui-labels";
 import { excerptPlain } from "../utils/excerpt";
-import { HERO_ART, HERO_GROUND } from "../utils/hero-art";
+import { HERO_ART, HERO_GROUND, type HeroGround } from "../utils/hero-art";
 
 // Whitespace-safe link mark: EmDash's default renderer inserts a space
 // before punctuation that follows a link (#273 — the hero is link-heavy)
@@ -87,7 +87,7 @@ const heroSlides = sortByFace(services)
 			pitch: excerptPlain((svc.data.excerpt as string) || ""),
 		};
 	})
-	.filter((s): s is { href: string; title: string; color: string; art: string; ground: string; pitch: string } => s !== null);
+	.filter((s): s is { href: string; title: string; color: string; art: string; ground: HeroGround; pitch: string } => s !== null);
 
 // Split PT content by h2 headings into named sections
 type Section = { heading: string; blocks: any[] };
@@ -143,24 +143,34 @@ const members = memberEntries ?? [];
 	{heroSlides.length > 0 && (
 		<div class="s-hero__stage" aria-hidden="true">
 			{/* The room the drawing hangs in: a real NASA photograph per
-			    vertical, out of focus and darkened at build time (see
-			    grounds.py). It carries the same `--i` and the same animation
-			    as the plate above it, so the two halves of a slide turn
-			    together — and it is the LCP element on the home, which is why
-			    only the first one is eager. */}
+			    vertical, cropped at build time so what the photograph shows
+			    lands under what the drawing means (see grounds.py). It carries
+			    the same `--i` and the same animation as the plate above it, so
+			    the two halves of a slide turn together — and it is the LCP
+			    element on the home, which is why only the first one is eager.
+
+			    A picture element rather than a bare img, because the ground
+			    has to be 2160 px wide to stop looking defocused on a retina
+			    screen and a JPEG that size is not shippable: AVIF is 210 KB
+			    for all six where JPEG would be 815 KB. The img under it is
+			    the 720 px JPEG, which only the browsers without AVIF ever
+			    download. The cross-fade animates the wrapper, so the
+			    nth-child rules in homepage.css still count six children of
+			    .s-hero__grounds. */}
 			<div class="s-hero__grounds">
 				{heroSlides.map((slide, i) => (
-					<img
-						class="s-hero__ground"
-						src={slide.ground}
-						alt=""
-						width="720"
-						height="450"
-						style={`--i:${i}`}
-						fetchpriority={i === 0 ? "high" : "low"}
-						loading={i === 0 ? "eager" : "lazy"}
-						decoding="async"
-					/>
+					<picture class="s-hero__ground" style={`--i:${i}`}>
+						<source type="image/avif" srcset={slide.ground.avif} />
+						<img
+							src={slide.ground.jpg}
+							alt=""
+							width="2160"
+							height="1350"
+							fetchpriority={i === 0 ? "high" : "low"}
+							loading={i === 0 ? "eager" : "lazy"}
+							decoding="async"
+						/>
+					</picture>
 				))}
 			</div>
 			{heroSlides.map((slide, i) => (

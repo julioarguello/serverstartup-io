@@ -67,20 +67,18 @@
 	z-index: 1;
 }
 
-/* ── the ground: a real photograph, pushed back ──
-   Under every drawing there is now a NASA frame instead of a sky this repo
+/* ── the ground: a real photograph, matched to the drawing on it ──
+   Under every drawing there is a NASA frame instead of a sky this repo
    invented (founder, 2026-08-29: "usemos las fotos como background,
    sustituye al fondo negro con estrellas ficticias de antes… pero tendrás
    que quitarles peso").
 
    All of the pushing back happens at BUILD time, in
-   `docs/design/hero-rotativo/grounds.py`: blurred, darkened, desaturated and
-   nudged toward the vertical's own colour before it is ever encoded. Nothing
-   is done here — no `filter: blur()` on a full-bleed element, which is a
-   composite the GPU would pay for on every frame of the cross-fade, and no
-   overlay div either. A defocused sky is also the cheapest thing a JPEG can
-   hold: the six grounds together are 53 KB, LESS than the six drawings they
-   sit under, so the picture got real and the page got lighter.
+   `docs/design/hero-rotativo/grounds.py`: darkened, desaturated and cropped so
+   the photograph's own subject lands under the drawing's before it is ever
+   encoded. Nothing is done here — no `filter` on a full-bleed element, which
+   is a composite the GPU would pay for on every frame of the cross-fade, and
+   no overlay div either.
 
    The drawing keeps its own bed: each plate lays a soft ellipse of brand ink
    under its cube, in the SVG, so line art still reads over a nebula. Between
@@ -90,19 +88,30 @@
 	inset: 0;
 }
 
-/* Same box, same crop and the SAME animation as the plate above it, keyed off
+/* The animated layer is the <picture>, not the <img> inside it, for two
+   reasons: the six <picture> elements are still six children of
+   .s-hero__grounds, so the nth-child rules further down keep counting slides
+   rather than always matching the only <img> in a wrapper; and the opacity
+   ramp stays on one box per slide instead of one per format candidate.
+
+   Same box, same crop and the SAME animation as the plate above it, keyed off
    the same `--i`: ground and drawing are one slide in two files and must turn
    together. */
 .s-hero__ground {
+	display: block;
 	position: absolute;
 	inset: 0;
+	opacity: 0;
+	animation: s-hero-plate var(--hero-cycle) linear infinite;
+	animation-delay: calc(var(--i) * var(--hero-step) - 0.5s);
+}
+
+.s-hero__ground img {
+	display: block;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: 72% 50%;
-	opacity: 0;
-	animation: s-hero-plate var(--hero-cycle) linear infinite;
-	animation-delay: calc(var(--i) * var(--hero-step) - 0.5s);
 }
 
 .s-hero__ground:first-child {

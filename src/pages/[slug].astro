@@ -108,18 +108,21 @@ const heroGround = heroGroundForSlug(slug);
 		{heroArt && (
 			<div class="s-hero__stage" aria-hidden="true">
 				{/* The room the drawing hangs in: this vertical's own NASA
-				    photograph, defocused and darkened at build time. See
-				    docs/design/hero-rotativo/grounds.py for what each one is
-				    and who it is credited to. */}
-				<img
-					class="s-hero__ground"
-					src={heroGround}
-					alt=""
-					width="720"
-					height="450"
-					fetchpriority="high"
-					decoding="async"
-				/>
+				    photograph, cropped at build time so what it shows sits
+				    under what the drawing means. AVIF at 2160 with the 720
+				    JPEG as the fallback — see grounds.py for what each one
+				    is, what it is anchored to, and who to credit. */}
+				<picture class="s-hero__ground">
+					<source type="image/avif" srcset={heroGround!.avif} />
+					<img
+						src={heroGround!.jpg}
+						alt=""
+						width="2160"
+						height="1350"
+						fetchpriority="high"
+						decoding="async"
+					/>
+				</picture>
 				<img
 					class="s-hero__plate"
 					src={heroArt}

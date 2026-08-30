@@ -58,8 +58,8 @@ def glow(fid, blur=22):
 def bed(key, cx, cy, rx, ry, op=0.62):
     """A soft dark bed under the subject, so line art survives a nebula.
 
-    A 1.4px stroke at 0.3 opacity reads over brand ink and disappears over the
-    Rosette. So each plate lays an out-of-focus ellipse of ink under its OWN
+    A 1.4px stroke at 0.3 opacity reads over brand ink and disappears over a
+    star field. So each plate lays an out-of-focus ellipse of ink under its OWN
     subject before drawing it: the photograph stays a photograph at the edges
     of the frame and gives way exactly where the drawing has to be read. It is
     the same job the scrim does for the headline, done for the picture — and it

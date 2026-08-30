@@ -23,6 +23,11 @@
 public/assets/*.png        # logos, reference marks and icons shipped by the site
 public/assets/*.jpg        # team photographs and the Kit Digital banner
 public/assets/*.webp       # editor screenshots used on /deconstruyendo
+public/assets/*.avif       # the hero grounds (#413). NASA frames, cropped and graded
+                           # by grounds.py, which ends every conversion with `-strip`:
+                           # verified with `magick identify -verbose` — no comment, no
+                           # EXIF, no XMP, no profile. The credits are text and live in
+                           # docs/design/hero-rotativo/grounds.json, not in the file.
 src/assets/*.webp          # the sponsorship photograph. It moved out of public/ in
                            # #323 so the build could see and resize it, and leaving
                            # public/ took it out of the rule above — which is this

@@ -98,9 +98,17 @@
    Same crop and the same 1.14 scale as the plate: the photograph was cropped
    so its own subject falls where the scrim is and the quiet part falls where
    the cube is, and that registration only holds if both layers move as one. */
+/* The ground is a <picture> here too (AVIF with a JPEG fallback), so the box
+   that is positioned and the box that is cropped are two different elements:
+   the wrapper fills the band, the <img> inside it does the covering. */
 .s-hero--art .s-hero__ground {
+	display: block;
 	position: absolute;
 	inset: 0;
+}
+
+.s-hero--art .s-hero__ground img {
+	display: block;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
