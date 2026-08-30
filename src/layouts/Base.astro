@@ -26,7 +26,15 @@ interface Props {
 	description?: string;
 	robots?: string;
 	image?: string;
-	canonical?: string;
+	/**
+	 * `null` emits NO canonical and no hreflang pair at all (#418).
+	 *
+	 * For a response that is not a page: the 404 answers every missed path,
+	 * so a self-referential canonical would declare a URL that does not
+	 * exist, and the alternate would declare a second one. `noindex` already
+	 * says the right thing; these would be saying something else next to it.
+	 */
+	canonical?: string | null;
 	type?: string;
 	publishedTime?: string | null;
 	modifiedTime?: string | null;
@@ -47,6 +55,16 @@ interface Props {
 	 * follows the six vertical colours on the hero's own clock.
 	 */
 	heroOverlay?: boolean;
+	/**
+	 * The locale of the RESPONSE, when the route cannot tell (#418).
+	 *
+	 * `Astro.currentLocale` reports the locale of the ROUTE, and the 404 route
+	 * is a single Spanish-prefixed one that serves every missed path — so an
+	 * `/en/*` miss rendered a page whose copy was English and whose `lang`,
+	 * menu, footer and `og:locale` were Spanish. The page that knows the
+	 * requested locale passes it here; nothing else needs to.
+	 */
+	locale?: string;
 }
 
 const {
@@ -62,8 +80,9 @@ const {
 	content: editableContent,
 	altPath: altPathProp,
 	heroOverlay = false,
+	locale: localeProp,
 } = Astro.props;
-const locale = Astro.currentLocale || "es";
+const locale = localeProp || Astro.currentLocale || "es";
 const t = Astro.locals.t;
 
 // Note: services and partners are also queried in HomepageContent.astro and
@@ -196,22 +215,24 @@ const altLocale = locale === "es" ? "en" : "es";
 const altPath =
 	altPathProp !== undefined ? altPathProp : routeAlternatePath(currentPath, locale);
 const siteOrigin = Astro.site?.origin || "https://www.serverstartup.io";
-const canonicalUrl = canonical || `${siteOrigin}${currentPath}`;
-const altUrl = altPath ? `${siteOrigin}${altPath}` : null;
+// `null` is the explicit "this response is not a page" (#418); `undefined`
+// keeps the self-referential default every real route wants.
+const canonicalUrl = canonical === null ? null : canonical || `${siteOrigin}${currentPath}`;
+const altUrl = canonicalUrl && altPath ? `${siteOrigin}${altPath}` : null;
 const defaultUrl = locale === "es" ? canonicalUrl : altUrl;
 const ogImage = image || `${siteOrigin}/assets/logo-vertical.png`;
 const resolvedOgTitle = ogTitleOverride || pageTitle;
 const resolvedOgType = ogType || "website";
 ---
 
-<html lang={Astro.currentLocale || "es"}>
+<html lang={locale}>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>{pageTitle}</title>
 	<meta name="description" content={pageDescription} />
 	{robots && <meta name="robots" content={robots} />}
-	<link rel="canonical" href={canonicalUrl} />
+	{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 	{altUrl && (
 		<>
 			<link rel="alternate" hreflang={locale} href={canonicalUrl} />
@@ -221,7 +242,7 @@ const resolvedOgType = ogType || "website";
 	)}
 	<meta property="og:title" content={resolvedOgTitle} />
 	<meta property="og:description" content={pageDescription} />
-	<meta property="og:url" content={canonicalUrl} />
+	{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
 	<meta property="og:type" content={resolvedOgType} />
 	{publishedTime && <meta property="article:published_time" content={publishedTime} />}
 	{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}

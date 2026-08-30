@@ -8,6 +8,12 @@
  * No debris, no animation: the break IS the state.
  *
  * Purely decorative (aria-hidden) — the page copy says what happened.
+ *
+ * `class` lands on the svg, but a SCOPED rule in the calling page will not
+ * match it: Astro stamps `data-astro-cid` on the elements written in that
+ * page, and this svg is written here. Size it from a wrapper element, or with
+ * a `:global()` rule, and measure the result — the class alone renders as if
+ * nothing had been set.
  */
 interface Props {
 	class?: string;

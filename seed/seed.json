@@ -1897,6 +1897,188 @@
 									"text": "Al cubo se le han caído estas piezas — te sacan de aquí"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_console",
+							"children": [
+								{
+									"_type": "span",
+									"text": "stderr"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "content",
+					"title": "error_trace",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "head",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Exception in thread \"main\" io.serverstartup.web.PageNotFoundException: {path}"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_resolve",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.edge.Router.resolve(Router.java:404)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_dispatch",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.edge.Router.dispatch(Router.java:118)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_slug",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.cms.ContentResolver.bySlug(ContentResolver.java:73)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_render",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.render.PageRenderer.render(PageRenderer.java:41)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_fetch",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.edge.Worker.fetch(Worker.java:12)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... 23 frames más"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_rot",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Caused by: io.serverstartup.legacy.LinkRotException: el enlace funcionaba en 2019"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_rot_at",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.legacy.WordPressImport.migrate(WordPressImport.java:2019)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_rot_more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... 12 más"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_npe",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Caused by: java.lang.NullPointerException: Cannot invoke \"Page.getTitle()\" because \"page\" is null"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_npe_at",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.cms.ContentResolver.lambda$bySlug$0(ContentResolver.java:74)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_npe_more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... 4 más"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_cube",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Caused by: io.serverstartup.brand.CubeIntegrityException: al cubo se le ha caído una cara"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_cube_more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... y las caras que se le han caído están justo aquí abajo"
+								}
+							]
 						}
 					]
 				},
@@ -3924,9 +4106,191 @@
 									"text": "The cube dropped these pieces — they lead out of here"
 								}
 							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "error_console",
+							"children": [
+								{
+									"_type": "span",
+									"text": "stderr"
+								}
+							]
 						}
 					],
 					"type": "content"
+				},
+				{
+					"type": "content",
+					"title": "error_trace",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "head",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Exception in thread \"main\" io.serverstartup.web.PageNotFoundException: {path}"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_resolve",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.edge.Router.resolve(Router.java:404)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_dispatch",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.edge.Router.dispatch(Router.java:118)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_slug",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.cms.ContentResolver.bySlug(ContentResolver.java:73)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_render",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.render.PageRenderer.render(PageRenderer.java:41)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "at_fetch",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.edge.Worker.fetch(Worker.java:12)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... 23 more frames"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_rot",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Caused by: io.serverstartup.legacy.LinkRotException: this link worked in 2019"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_rot_at",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.legacy.WordPressImport.migrate(WordPressImport.java:2019)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_rot_more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... 12 more"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_npe",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Caused by: java.lang.NullPointerException: Cannot invoke \"Page.getTitle()\" because \"page\" is null"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_npe_at",
+							"children": [
+								{
+									"_type": "span",
+									"text": "at io.serverstartup.cms.ContentResolver.lambda$bySlug$0(ContentResolver.java:74)"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_npe_more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... 4 more"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_cube",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Caused by: io.serverstartup.brand.CubeIntegrityException: the cube dropped one of its faces"
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"_key": "cause_cube_more",
+							"children": [
+								{
+									"_type": "span",
+									"text": "... and the faces it dropped are right below this line"
+								}
+							]
+						}
+					]
 				},
 				{
 					"type": "content",

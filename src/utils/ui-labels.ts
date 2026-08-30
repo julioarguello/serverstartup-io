@@ -36,6 +36,17 @@ export type UiLabels = {
 	 * @param widgetTitle - The widget's title (e.g. "aria_labels")
 	 */
 	getAll(widgetTitle: string): Record<string, string>;
+	/**
+	 * Every label of a widget, in the order the seed declares them (#418).
+	 *
+	 * For copy whose SEQUENCE is the content — a stack trace reads top to
+	 * bottom or it is not a stack trace. `getAll()` cannot promise this:
+	 * it hands back an object, and an object reorders any key that looks
+	 * like an array index, so `"1"`, `"2"` would come back sorted and a
+	 * later rename could silently shuffle the lines. The keys stay
+	 * meaningful, the order stays the seed's.
+	 */
+	getList(widgetTitle: string): string[];
 };
 
 const DEFAULT_LOCALE = "es";
@@ -84,6 +95,16 @@ export async function getUiLabels(locale: string = DEFAULT_LOCALE): Promise<UiLa
 				}
 			}
 			return result;
+		},
+		getList(widgetTitle: string): string[] {
+			const p = prefix(widgetTitle);
+			const lines: string[] = [];
+			// `map` is a Map: insertion order is the seed's order, and it is
+			// preserved here rather than through an intermediate object.
+			for (const [key, value] of map.entries()) {
+				if (key.startsWith(p)) lines.push(value);
+			}
+			return lines;
 		},
 	};
 }

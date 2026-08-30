@@ -85,6 +85,12 @@ export const onRequest = defineMiddleware(async ({ locals, currentLocale, url, c
 	const locale = currentLocale || "es";
 	const t = await loadAriaLabels(locale);
 	locals.t = t;
+
+	// The path the visitor actually asked for, kept here for /404 (#418). A miss
+	// that arrives through `Astro.rewrite("/404")` re-enters this middleware with
+	// the rewritten URL, so only the FIRST pass may write it: without the guard
+	// the trace on the 404 page prints `/404` for every one-segment miss.
+	if (!locals.requestedPath) locals.requestedPath = url.pathname;
 	const response = await next();
 
 	// Collected, not written: `response` may be an immutable one straight out of

@@ -94,6 +94,12 @@ jobs:
             url="${r%%:*}"; name="${r##*:}"
             curl -sf "http://localhost:8787$url" -o "/tmp/html/$name.html"
           done
+          # The 404 is a template too, and no URL above renders it: every route
+          # in that list answers 200 by design. Fetched without `-f`, which
+          # treats the 404 status as a transfer failure and would abort the
+          # step; both locales, because the page renders its own language.
+          curl -s "http://localhost:8787/esta-pagina-no-existe" -o /tmp/html/notfound.html
+          curl -s "http://localhost:8787/en/this-page-does-not-exist" -o /tmp/html/notfound-en.html
           npx --yes html-validate --config .htmlvalidate.json /tmp/html/*.html
           echo "html-validate: 0 problems across $(ls /tmp/html | wc -l) templates"
 
@@ -162,7 +168,7 @@ jobs:
             echo "| unit tests | every vitest suite in tests/unit |"
             echo "| build | astro build succeeds |"
             echo "| local stack | boots and serves, seeded from seed.json |"
-            echo "| html-validate | 0 problems, 15 templates |"
+            echo "| html-validate | 0 problems, 19 templates |"
             echo "| rendered copy | every seed route matches its baseline · menu links match the seed |"
             echo "| security headers | full #164 suite |"
             echo "| image hrefs | every /_image href is a path, never a URL |"

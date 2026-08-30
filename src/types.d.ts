@@ -34,6 +34,9 @@ declare global {
 	namespace App {
 		interface Locals {
 			t: TFunction;
+			/** Path of the original request, stamped once by the middleware so the
+			    404 page can name it after a rewrite has replaced the URL (#418). */
+			requestedPath: string;
 		}
 	}
 }

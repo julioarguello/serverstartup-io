@@ -1,10 +1,30 @@
 ---
 /**
- * 404 — the cracked logo and the pieces that lead out (#216, study v6/V2).
+ * 404 — a stack trace that is a joke, over a real way out (#418, #216).
  *
- * The mark appears broken (BrokenLogo) and, below the home CTA, the six
- * colored cells the cube "dropped" are the menu's mini-dice linking to
- * each specialty — the error page doubles as the site's smallest map.
+ * The founder asked for "un stack trace de java divertido, por consola",
+ * on a page that still obeys every 404 rule. Both halves are literal here:
+ *
+ * · The trace is DECORATION. It is `aria-hidden`, it carries no link and no
+ *   information that is not repeated in plain language underneath it. A
+ *   screen reader meets the `<h1>`, a sentence and the links, and never the
+ *   forty frames — which is the worst possible version of this page.
+ * · The frames are CMS copy, both locales (`error_trace` in `ui_labels_*`),
+ *   never literals in this file. The renderer reads the SHAPE of each line —
+ *   `at …`, `... n more`, `Caused by: …` — so a new frame is a seed edit and
+ *   nothing here changes.
+ *
+ * Two things this page must not do, both easy to do by accident:
+ * · Be cacheable. It used to opt into the edge cache by calling
+ *   `Astro.cache.set()` with the services' hint, which gave every missed URL
+ *   a 1 h TTL at the edge. The query stays (the dropped faces are real
+ *   navigation); the opt-in is gone, so the middleware's default-deny gives
+ *   it `no-store`.
+ * · Answer in the wrong language. The 404 route serves every missed path, and
+ *   `Astro.currentLocale` reports the ROUTE's locale, not the requested one —
+ *   so the locale is derived from the URL and passed to `Base`, which is what
+ *   makes `<html lang>`, the menu, the footer and `og:locale` follow an
+ *   `/en/*` miss.
  */
 import Base from "../layouts/Base.astro";
 import BrokenLogo from "../components/BrokenLogo.astro";
@@ -12,24 +32,50 @@ import { getUiLabels } from "../utils/ui-labels";
 import { getEmDashCollection } from "emdash";
 import { FACE_BY_SLUG, FACE_ORDER } from "../utils/nav";
 
-// The 404 route serves every missed path, but Astro.currentLocale reports
-// the route's own locale (default) — derive it from the REQUESTED url so
-// /en/* misses render the English page (pre-existing bug, surfaced by the
-// #216 verification).
-const locale = /^\/en(\/|$)/.test(Astro.url.pathname) ? "en" : Astro.currentLocale || "es";
+// The path the visitor actually asked for, taken from `Astro.locals`, where the
+// middleware stamped it on the way in (src/middleware.ts). Neither Astro object
+// still carries it by the time this page renders: most misses arrive through
+// `Astro.rewrite("/404")` from a dynamic route, and the rewrite replaces BOTH
+// `Astro.url` AND `Astro.request.url` with the target — measured, both read
+// `/404`. Only a path matching no route at all (`/nope/deeper/still`) renders
+// this page with its own request intact, which is the half that makes the bug
+// look fixed if you probe with deep URLs alone.
+const requestedPath = Astro.locals.requestedPath || new URL(Astro.request.url).pathname;
+const locale = /^\/en(\/|$)/.test(requestedPath) ? "en" : Astro.currentLocale || "es";
 const labels = await getUiLabels(locale);
 const errorTitle = labels.get("error_page", "error_title", "Página no encontrada");
 const errorBody = labels.get("error_page", "error_body", "La página que buscas no existe.");
 const errorCta = labels.get("error_page", "error_cta", "Volver al inicio");
 const errorPieces = labels.get("error_page", "error_pieces", "");
+const errorConsole = labels.get("error_page", "error_console", "stderr");
 const homeHref = locale === "es" ? "/" : `/${locale}/`;
 const localePrefix = locale === "es" ? "" : `/${locale}`;
 
+// The requested path, reflected into the trace the way a real one carries the
+// thing that blew up. Sanitised because it is the ONE part of this page an
+// anonymous visitor writes: Astro escapes the interpolation, so this is not
+// about markup — it is about not turning our 404 into a billboard for
+// whatever someone types in the URL bar. A conservative path alphabet, and a
+// hard cut, which also keeps a 2 000-character URL from setting the layout.
+const tracePath = (requestedPath.replace(/[^A-Za-z0-9/_.-]+/g, "") || "/").slice(0, 48);
+
+/** The shape of a trace line, read off the line itself — never off its key. */
+function traceKind(line: string): "at" | "more" | "cause" | "head" {
+	if (line.startsWith("at ")) return "at";
+	if (line.startsWith("...")) return "more";
+	if (line.startsWith("Caused by:")) return "cause";
+	return "head";
+}
+const trace = labels
+	.getList("error_trace")
+	.map((line) => ({ kind: traceKind(line), text: line.replace("{path}", tracePath) }));
+
+// The dropped faces are navigation, so they are queried like navigation —
+// but WITHOUT `Astro.cache.set(cacheHint)`: see the header note.
 const servicesResult = await getEmDashCollection("services", {
 	orderBy: { created_at: "asc" },
 	locale,
 });
-if (servicesResult.cacheHint) Astro.cache.set(servicesResult.cacheHint);
 const pieces = (servicesResult.entries ?? [])
 	.map((s: any) => {
 		const slug = s.slug ?? s.id;
@@ -44,10 +90,31 @@ const pieces = (servicesResult.entries ?? [])
 	.sort((a: any, b: any) => FACE_ORDER.indexOf(a.key) - FACE_ORDER.indexOf(b.key));
 ---
 
-<Base title={errorTitle} robots="noindex, nofollow">
-	<div class="not-found">
-		<BrokenLogo class="not-found__logo" />
-		<h1>404</h1>
+<Base title={errorTitle} robots="noindex, nofollow" canonical={null} locale={locale}>
+	<div class="not-found container">
+		{trace.length > 0 && (
+			<div class="nf-console" aria-hidden="true">
+				<div class="nf-console__bar">
+					<i></i><i></i><i></i>
+					<span>{errorConsole}</span>
+				</div>
+				<div class="nf-console__trace">
+					{trace.map((line) => (
+						<span class={`nf-l nf-l--${line.kind}`}>{line.text}</span>
+					))}
+				</div>
+			</div>
+		)}
+
+		<!-- The size lives on a wrapper, not on the component. A `class` handed to
+		     a child component does reach its root element, but this file's scoped
+		     rule does not: Astro stamps `data-astro-cid` on elements written in
+		     THIS template, and the svg is written in another one — so
+		     `.not-found__logo { width: 190px }` never matched, and the mark
+		     rendered at the full width of its container (measured on the page this
+		     one replaces: 840px at 1440, against the 190px the rule asks for). -->
+		<div class="not-found__logo"><BrokenLogo /></div>
+		<h1><b>404</b> {errorTitle}</h1>
 		<p class="text-body">{errorBody}</p>
 		<a href={homeHref} class="btn btn-dark">{errorCta}</a>
 		{pieces.length > 0 && errorPieces && (
@@ -70,12 +137,86 @@ const pieces = (servicesResult.entries ?? [])
 <style>
 	.not-found {
 		text-align: center;
-		padding: calc(80px + 40px) 16px 80px;
-		min-height: 60vh;
+		padding-top: calc(80px + 40px);
+		padding-bottom: 80px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+	}
+
+	/* ── the console: the site's own window chrome (service instruments) ── */
+	.nf-console {
+		width: 100%;
+		text-align: left;
+		background: var(--color-console);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow-card);
+		overflow: hidden;
+		margin-bottom: 48px;
+	}
+
+	.nf-console__bar {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 12px 18px;
+		background: var(--color-console-bar);
+	}
+
+	.nf-console__bar i {
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		display: inline-block;
+	}
+
+	/* token-guard: off — the window dots are the console's own signal: everyone
+	   reads them as a terminal, and a palette change must not repaint them.
+	   Same three as .inst__bar--dots in service.css, on purpose. */
+	.nf-console__bar i:nth-child(1) { background: #ea4335; }
+	.nf-console__bar i:nth-child(2) { background: #f38020; }
+	.nf-console__bar i:nth-child(3) { background: #3e7d50; }
+	/* token-guard: on */
+
+	.nf-console__bar span {
+		font-family: var(--font-family-mono);
+		font-size: 12px;
+		letter-spacing: 0.04em;
+		color: var(--color-console-dim);
+		margin-left: 6px;
+	}
+
+	.nf-console__trace {
+		font-family: var(--font-family-mono);
+		font-size: 12px;
+		line-height: 1.7;
+		padding: 18px 20px 22px;
+	}
+
+	/* A trace wraps here, it does not scroll: §14 forbids internal horizontal
+	   scroll, and a stack trace is the easiest thing in the world to make
+	   overflow. The hanging indent is what keeps a wrapped frame reading as one
+	   frame instead of as two. */
+	.nf-l {
+		display: block;
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+		color: var(--color-console-dim);
+	}
+
+	.nf-l--head,
+	.nf-l--cause {
+		color: var(--color-console-ink);
+	}
+
+	.nf-l--cause {
+		margin-top: 10px;
+	}
+
+	.nf-l--at,
+	.nf-l--more {
+		padding-left: 4ch;
+		text-indent: -2ch;
 	}
 
 	.not-found__logo {
@@ -86,15 +227,22 @@ const pieces = (servicesResult.entries ?? [])
 
 	.not-found h1 {
 		font-family: var(--font-family-mono);
-		font-size: 72px;
-		font-weight: 700;
-		line-height: 1;
+		font-size: 28px;
+		font-weight: 600;
+		line-height: 1.2;
 		margin-bottom: 12px;
 	}
 
-	.not-found p {
+	.not-found h1 b {
+		display: block;
+		font-size: 72px;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.not-found > p {
 		margin-bottom: 32px;
-		max-width: 340px;
+		max-width: 100%;
 	}
 
 	.nf-pieces {
@@ -106,7 +254,7 @@ const pieces = (servicesResult.entries ?? [])
 		font-size: 11px;
 		letter-spacing: 0.06em;
 		text-transform: lowercase;
-		color: rgba(30, 30, 30, 0.55);
+		color: var(--color-text-muted);
 		margin-bottom: 14px;
 	}
 
@@ -162,7 +310,8 @@ const pieces = (servicesResult.entries ?? [])
 	}
 
 	@media (min-width: 768px) {
-		.not-found { padding: 150px 20px 80px; }
+		.not-found { padding-top: 150px; }
 		.not-found__logo { width: 210px; }
+		.nf-console__trace { font-size: 13px; padding: 22px 26px 26px; }
 	}
 </style>

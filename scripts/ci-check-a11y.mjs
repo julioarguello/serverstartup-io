@@ -69,7 +69,21 @@ const axeSource = require("fs").readFileSync(
 function auditRoutes() {
 	// The search results page is declared by no collection, and it is where both
 	// WCAG failures of 2026-08-20 lived (2.1.1 and 2.1.4).
-	return [...seedRoutes(), "/search?q=cloudflare", "/en/search?q=cloudflare"].sort();
+	//
+	// The 404 is declared by no collection either, and it is in no sitemap by
+	// design — so nothing derived from the seed will ever reach it, and #418
+	// gave it markup of its own (a console window whose forty frames are the
+	// widest text on the site). Naming it here is what keeps it audited: axe,
+	// keyboard traversal, 1.4.10 reflow and image aspect ratio all read this
+	// list. Both locales, because the page picks its language off the missed
+	// path and that is exactly the part that can regress.
+	return [
+		...seedRoutes(),
+		"/search?q=cloudflare",
+		"/en/search?q=cloudflare",
+		"/404",
+		"/en/404",
+	].sort();
 }
 
 const ROUTES = auditRoutes();
@@ -937,7 +951,10 @@ console.log("── 2.1.4 character key shortcut");
 
 // ── 7. WCAG 1.4.10 — reflow at 320 CSS px, the width the norm names ─────────
 console.log("── 1.4.10 reflow at 320px");
-for (const route of ["/", "/cdn-waf-seguridad-edge-cloudflare", "/referencias", "/search?q=cloudflare"]) {
+// `/404` earns its place here: the stack trace #418 put on it is the longest
+// unbreakable-looking text on the site, and a `pre`-shaped block is the
+// classic way a page starts scrolling sideways at this width.
+for (const route of ["/", "/cdn-waf-seguridad-edge-cloudflare", "/referencias", "/search?q=cloudflare", "/404"]) {
 	const page = await browser.newPage();
 	await page.setViewport({ width: 320, height: 640, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 	await page.goto(BASE + route, { waitUntil: "networkidle2", timeout: 60000 });
