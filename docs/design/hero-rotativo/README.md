@@ -134,8 +134,9 @@ python3 docs/design/hero-rotativo/grounds.py    # the photographs under them
 ```
 
 `generate.py` writes `public/assets/hero/{ec,int,bd,cdn,gf,ia}.svg` — the transparent drawings
-the site serves — plus `public/assets/menu/ground.svg` (the menu panel's ground: the same cube
-lattice, no stars and no subject, #417) and `images.json` next to itself for the design canvas.
+the site serves — and `images.json` next to itself for the design canvas. It used to write a
+seventh file, `public/assets/menu/ground.svg`, for the menu panel; the panel went back to paper
+in #431 and the file is gone.
 The RNG is seeded, so a re-run reproduces the same bytes; change composition **here**, never by
 hand-editing an SVG. Setting `PHOTO_GROUND = False` brings the old self-contained plates back —
 the drawings themselves never changed.

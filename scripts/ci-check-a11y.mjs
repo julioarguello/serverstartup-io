@@ -234,9 +234,11 @@ const readBoxes = (sel) => {
 		if (!m) continue;
 		const [r8, g8, b8] = m.slice(0, 3).map(Number);
 		// The ALPHA, which this used to throw away. `--color-hero-ink-soft` is
-		// rgba(255,255,255,.82) and `--menu-ink-soft` is the same token: read
-		// as opaque white they score about a third more contrast than a reader
-		// ever sees, and the gate would sign off on copy that fails. It is
+		// rgba(255,255,255,.82) — the hero's kicker, and the menu's too until
+		// #431 put that panel back on paper and opaque ink — and read as solid
+		// white it scores about a third more contrast than a reader ever sees,
+		// which is a gate signing off on copy that fails. Every tint on the
+		// open panel is still translucent, so this stays where it is. It is
 		// composited over whatever pixel wins the percentile, below.
 		const alpha = m.length > 3 ? Number(m[3]) : 1;
 		// Borders and underlines are DECORATION, not the ground the glyphs sit
@@ -283,8 +285,20 @@ const worstAgainst = async (b64, boxes) => {
 	const ctx = cv.getContext("2d", { willReadFrequently: true });
 	ctx.drawImage(img, 0, 0);
 	const srgb = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+	// The box is clamped to the IMAGE, not trusted as given. `getImageData`
+	// answers out-of-bounds pixels with transparent black, and a box that
+	// straddles the bottom of the viewport — the last site link on a phone,
+	// with the panel scrolled to the top — is half real ground and half that
+	// black. On the ink panel of #417 the two were indistinguishable and this
+	// never showed; on paper it reported "#000000 behind it" for eleven links
+	// that are perfectly legible once you scroll to them. Sample what was
+	// photographed, and nothing else.
 	return boxes.map((b) => {
-		const d = ctx.getImageData(b.x, b.y, Math.max(1, b.w), Math.max(1, b.h)).data;
+		const x0 = Math.max(0, Math.min(cv.width - 1, Math.round(b.x)));
+		const y0 = Math.max(0, Math.min(cv.height - 1, Math.round(b.y)));
+		const w = Math.max(1, Math.min(Math.round(b.w), cv.width - x0));
+		const h = Math.max(1, Math.min(Math.round(b.h), cv.height - y0));
+		const d = ctx.getImageData(x0, y0, w, h).data;
 		const lums = [], rgbs = [];
 		for (let i = 0; i < d.length; i += 4) {
 			lums.push(0.2126 * srgb(d[i] / 255) + 0.7152 * srgb(d[i + 1] / 255) + 0.0722 * srgb(d[i + 2] / 255));
@@ -631,26 +645,30 @@ for (const route of ["/", "/en"]) {
 	await page.close();
 }
 
-// ── 4. The OPEN menu, measured — every tone on the dark panel (#417) ───────
+// ── 4. The OPEN menu, measured — every tone on the panel (#417, #431) ─────
 // §1 runs axe on 28 routes and never sees this panel: a closed `<dialog>` is
 // `display: none`, so every node inside it is skipped and the run comes back
-// green having looked at nothing. The menu went dark in #417 — white ink, six
-// raised brand hues, a tinted current row and an inverted console — and that
-// is precisely the change a contrast audit exists to check.
+// green having looked at nothing. Whatever the panel is wearing, it is a
+// surface no other section of this gate reaches.
 //
-// axe cannot decide it. The panel's ground is an image (`assets/menu/
-// ground.svg`), so `color-contrast` returns fifteen INCOMPLETE nodes with
-// "background color could not be determined due to a background image" and
-// zero violations. Reporting that as green would be reporting that nobody
-// looked. So axe is still run — it decides names, roles and everything else
-// on the open panel — and the contrast verdict is measured from the rendered
-// pixels instead: the ink is blanked, the panel is photographed, and every
-// text box is compared against the LIGHTEST pixel actually behind it.
+// #417 put it on ink behind a drawing and axe could not decide it at all: a
+// background IMAGE makes `color-contrast` return INCOMPLETE nodes with
+// "background color could not be determined" and zero violations. #431 took
+// the drawing away, so axe can read the ground again — and the pixel pass
+// stays anyway, because the ground under a row is not the panel's colour: it
+// is the panel plus a `color-mix` tint at 16-24%, plus the console's own box,
+// and "the lightest pixel actually behind this text" is the only reading of
+// that which cannot be argued with. The ink is blanked, the panel is
+// photographed, every text box is compared against what is really there.
+//
+// The darkest pixel would be the question on ink and the lightest is the
+// question on paper; `worstAgainst` takes the tail that hurts, so the sense
+// of the measurement did not have to flip with the ground.
 //
 // The routes are read off the menu itself rather than transcribed: the six
 // specialty links ARE the list, and each is visited so the `aria-current`
 // tint of every vertical is measured on its own page, in both locales.
-console.log("── the open menu: contrast on the dark panel");
+console.log("── the open menu: contrast on the paper panel");
 {
 	// The ink is removed, not the elements: the boxes must stay exactly where
 	// they are so what is measured is the ground UNDER the text, tint and all.
@@ -687,9 +705,15 @@ console.log("── the open menu: contrast on the dark panel");
 	// backs. It reports by finding nothing, and a stale selector, a screenshot
 	// that never blanked the ink and a percentile pointing at the wrong tail
 	// all look exactly like a clean panel. So one panel is deliberately broken
-	// first — the site links repainted a near-black that scores about 1.4:1 on
-	// this ground — and the measurement has to say so before any real route is
-	// trusted. The plant is thrown away with the page.
+	// first — the site links repainted a near-PAPER grey that scores about
+	// 1.3:1 on this ground — and the measurement has to say so before any real
+	// route is trusted. The plant is thrown away with the page.
+	//
+	// The plant is ground-bound and that is the point: #417's near-black
+	// (#262626) planted here would score 15:1 on paper and be caught by
+	// nothing, which is exactly what this control announced the day the panel
+	// turned white. A positive control that survives a redesign untouched was
+	// never testing the redesign.
 	{
 		const page = await browser.newPage();
 		await page.setViewport({ width: 1280, height: 900, deviceScaleFactor: 1 });
@@ -698,7 +722,7 @@ console.log("── the open menu: contrast on the dark panel");
 		await page.waitForFunction(() => document.getElementById("menu-dialog")?.open === true,
 			{ timeout: 5000 });
 		await sleep(600);
-		await page.addStyleTag({ content: "#menu-dialog .site-link { color: #262626 !important; }" });
+		await page.addStyleTag({ content: "#menu-dialog .site-link { color: #EDEDED !important; }" });
 		const boxes = await page.evaluate(readBoxes, TEXT_SELECTOR);
 		await page.addStyleTag({ content: BLANK_INK });
 		const shot = await page.screenshot({ encoding: "base64", captureBeyondViewport: false });
@@ -707,13 +731,13 @@ console.log("── the open menu: contrast on the dark panel");
 		const caught = rows.filter((r) => r.name === "site-link" && r.ratio + 0.05 < r.need);
 		const links = rows.filter((r) => r.name === "site-link").length;
 		if (!links || caught.length !== links) {
-			console.error(`✗ THIS GATE IS BLIND — ${links} planted near-black site link(s) on the dark ` +
+			console.error(`✗ THIS GATE IS BLIND — ${links} planted near-paper site link(s) on the ` +
 				`panel, and the pixel pass called ${caught.length} of them a failure.`);
 			console.error("  → readBoxes/worstAgainst or the blanking style stopped working; " +
 				"a green run below would mean nothing.");
 			process.exit(3);
 		}
-		ok(`control — ${links} planted near-black links all measured under AA ` +
+		ok(`control — ${links} planted near-paper links all measured under AA ` +
 			`(tightest ${Math.min(...caught.map((r) => r.ratio))}:1)`);
 	}
 

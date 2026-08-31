@@ -446,55 +446,46 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 	}
 
 	/* The menu copy IS the phone's search: always open inside the dialog, and
-	   absent from tablet up, where the header line already exists. */
+	   absent from tablet up, where the header line already exists.
+
+	   The rule has not changed since #338 — the console is the INVERSE of the
+	   ground it sits on — but the ground has, twice. #417 moved the panel to
+	   ink and this copy went near-black with it; #431 moved it back to paper,
+	   so every one of those overrides is gone and the menu's console is the
+	   header's console again, differing only in that it is a boxed block
+	   instead of a strip under the bar. Nothing to re-derive: the base rules
+	   above already say all of it. */
 	.search-form--menu {
 		display: block;
-		border: 1px solid var(--color-console-line);
+		border: 1px solid var(--color-border);
 		border-radius: var(--radius);
 		margin-bottom: var(--space-3);
-		/* #338 made this console LIGHT, and on a white bar that was right: a
-		   dark strip under it was a hole in the page. The menu went dark in
-		   #417 and the argument inverts with the ground — a light console in
-		   a dark panel is a lit strip, and #304 already says the near-black
-		   is the machine's voice. So the DECISION is unchanged (the console
-		   is the inverse of what it sits on); only the panel moved.
-		   Nothing here escapes .search-form--menu, and that class only
-		   exists below 768px, so the header's own console is untouched. */
-		background: var(--color-console);
-		color: var(--color-console-ink);
 	}
-	.search-form--menu .search-line { padding: 12px 14px; }
-	.search-form--menu .search-chrome,
-	.search-form--menu .search-hint,
-	.search-form--menu .search-mag { color: var(--color-console-ink); }
-	/* The hint keeps the console's full ink, not its dim step. `--color-
-	   console-dim` is paper at 55%, which reads 6.1:1 on the console's own
-	   near-black and only 4.2:1 once it sits on the lit slot the menu puts
-	   behind it — a failure §4 could not see until it stopped treating
-	   translucent ink as opaque. There is no fourth alpha to invent here
-	   (#304 consolidated four into one step); the hint simply loses its
-	   dimming on this ground, which costs a hierarchy of four words. */
-	.search-form--menu .search-hint { color: var(--color-console-ink); }
-	.search-form--menu .search-hint kbd {
-		border-color: var(--color-console-line);
-		background: var(--color-console-bar);
-		color: var(--color-console-ink);
+	/* The line WRAPS here, and only here. At 390 the command plus the key hint
+	   measured 452px inside a 390px viewport on every page whose search word
+	   is long — "carrito-abandonado", "trazabilidad", "alucinación" — and the
+	   hint sat 65px off the right edge. It has been doing that since #338. It
+	   was invisible for the same reason it was unmeasurable: an off-screen
+	   pixel photographs black, the panel was black, and §4 read the hint as
+	   comfortably light-on-dark. On paper it reported "3.9:1 against #000000",
+	   which is the gate describing a layout bug in the only vocabulary it has.
+	   A terminal wraps a long line rather than scrolling it sideways, and §14
+	   forbids the sideways option outright. */
+	.search-form--menu .search-line {
+		padding: 12px 14px;
+		flex-wrap: wrap;
+		row-gap: 8px;
 	}
-	/* the slot is a tint of paper, not of the accent: the green prompt glyph
-	   is the console's colour signal and a green wash under the argument
-	   would be the same signal said twice, dimmer */
-	.search-form--menu .search-slot {
-		background: var(--color-console-line);
-		border-bottom-color: var(--color-console-dim);
-	}
-	.search-form--menu .search-slot:focus-within {
-		border-bottom-color: var(--color-console-ok);
-	}
-	.search-form--menu .search-input { color: var(--color-secondary); }
-	/* Same ground, same reason as the hint above: the dim step measures 4.8:1
-	   on the lit slot, and a placeholder is the label of an empty field, not
-	   decoration. Still one step below the typed value, which is full paper. */
-	.search-form--menu .search-input::placeholder { color: var(--color-console-ink); }
+	/* Placeholder and typed value share one ink. #338's whole point is that
+	   the line is a REAL command whose argument happens to be pre-filled —
+	   "what you type IS the argument, so the line stays a valid `find` while
+	   you type it" — and a dimmed argument is a command that has not been
+	   written yet. It also could not survive the measurement: the one reduced
+	   step is 4.9:1 on the console's own ground and 3.1:1 once the selection
+	   tint is under it, which is what §4 caught. #417 made the same call on
+	   the ink panel for the same reason — a placeholder is the label of an
+	   empty field, not decoration. */
+	.search-form--menu .search-input::placeholder { color: var(--color-text); }
 	@media (min-width: 768px) {
 		.search-form--menu { display: none; }
 	}

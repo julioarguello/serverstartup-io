@@ -187,30 +187,27 @@
 	--hero-cycle: 36s;
 	--hero-step: 6s;
 
-	/* ── The menu panel (#417) ───────────────────────────────────────────
-	   The menu used to be a full-screen sheet of pure white with no header,
-	   no brand and nothing behind it — it did not look like another page, it
-	   WAS one. It goes dark now, on the hero's own ground, and what ties it
-	   to the home is the drawing rather than the colour: `assets/menu/
-	   ground.svg` is emitted by the same generator as the six hero plates.
-	   The console inside it keeps its own tokens (--color-console*): a light
-	   console in a dark panel is a lit strip, and #304 already says the
-	   near-black is the machine's. */
-	--menu-ink: var(--color-secondary);
-	--menu-ink-soft: var(--color-hero-ink-soft);   /* 10.4:1 on the ground */
-	--menu-ink-muted: rgba(255, 255, 255, 0.62);   /* 7.1:1 — the site links */
-	--menu-rule: var(--color-hero-rule);
-	--menu-tint: rgba(255, 255, 255, 0.14);        /* the breadcrumb's chip */
-	/* Three of the six brand hues are dark by design (#1D4E89, #3E7D50,
-	   #6B4FBB) and simply do not exist on ink. Rather than six new literals —
-	   a second palette to keep in sync forever — the menu raises whatever the
-	   CMS gave it to a LIGHTNESS FLOOR and leaves hue and chroma alone:
-	   `oklch(from var(--fc) max(l, var(--menu-face-floor)) c h)`.
-	   A floor rather than a mix, because a mix would wash out the three that
-	   are already bright — #F38020 sits at L 0.70 and needs nothing, while
-	   #1D4E89 sits at 0.40 and needs all of it. One rule, one source of
-	   truth, and it treats each colour according to what it actually is. */
-	--menu-face-floor: 0.68;
+	/* ── The menu panel (#417, re-inked #431) ────────────────────────────
+	   #417 put the panel on ink with the hero's own cube drawing behind it,
+	   to stop the menu from reading as another page. The founder killed both
+	   (2026-08-31: "me parece un error haberlo hecho así con ese fondo y ese
+	   universo… menos llamativo, más minimalista"), and the reason #417 gave
+	   was answered by something else in the same PR: the panel now keeps the
+	   header line, with the mark and the path on it. That strip is what says
+	   "this is a layer over the site". The ground never had to.
+
+	   So the panel is PAPER, flat. The menu is chrome, and the chrome of this
+	   site is the header — white ground, ink type, one coloured edge. Every
+	   token below points at the one the page underneath already uses; not one
+	   of them is a new value, which is the only thing "integrated" can mean.
+	   The face colours come back raw for the same reason: they are the CMS's
+	   six, they were drawn for paper, and the whole lightness-floor apparatus
+	   #417 needed to survive an ink ground has nothing left to correct. */
+	--menu-ink: var(--color-primary);
+	--menu-ink-soft: var(--color-ink-soft);        /* 10.9:1 on paper */
+	--menu-ink-muted: var(--color-text-muted);     /* 5.4:1 — the site links */
+	--menu-rule: var(--color-border);
+	--menu-tint: var(--color-marked);              /* the breadcrumb's chip */
 
 	/* One radius for the whole portal */
 	--radius: 4px;

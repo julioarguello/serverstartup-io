@@ -142,7 +142,12 @@ const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 	<div class="menu-inner">
 		{/* #338: on phones the header has no room for the command line, so the
 		    menu carries it — full-screen, and the cube is still the only door. */}
-		<SearchPrompt pathname={currentPath} accent="var(--color-console-ok)" place="menu" />
+		{/* Ink, not the console's green: on paper the prompt glyph is TEXT on
+		    a light ground, and #5BB974 measures 2.4:1 there. The header's own
+		    console already answers this — its accent is the section colour on
+		    a coloured page and ink everywhere else, and this panel is the
+		    phone's copy of that line, so it takes the quiet end of it. */}
+		<SearchPrompt pathname={currentPath} accent="var(--color-primary)" place="menu" />
 		<div class="menu-lists">
 			<nav aria-label={t("nav_specialties")}>
 				<p class="menu-kicker">{t("menu_kicker")}</p>
@@ -209,13 +214,11 @@ const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 		height: 100vh;
 		max-width: 100vw;
 		max-height: 100vh;
-		/* #417: the panel goes dark, on the hero's own ground. The tie to the
-		   home is the DRAWING, not a colour — `assets/menu/ground.svg` comes
-		   out of the same generator as the six hero plates, so the two cannot
-		   drift the way a hand-copied gradient would. The ink underneath is
-		   what axe measures and what shows if the file ever 404s. */
-		background: var(--color-primary) url("/assets/menu/ground.svg") center /
-			cover no-repeat;
+		/* #431: paper, flat — the same ground as the page it covers. #417's
+		   ink-plus-cube-field is gone; what tells you a layer opened is the
+		   strip below, the ✕, and the fact that the page went away. A drawing
+		   behind a menu is a picture competing with a list of six links. */
+		background: var(--color-secondary);
 		border: none;
 		z-index: 200;
 		transform: translateX(100%);
@@ -361,11 +364,6 @@ const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 		padding: 0;
 	}
 	.spec-link {
-		/* The fallback comes first on purpose: a browser without relative
-		   colour syntax keeps the mix, which is duller but legible, and one
-		   with it takes the floor on the line below. */
-		--menu-fc: color-mix(in srgb, var(--fc) 40%, white);
-		--menu-fc: oklch(from var(--fc) max(l, var(--menu-face-floor)) c h);
 		display: flex;
 		align-items: center;
 		gap: 14px;
@@ -377,10 +375,10 @@ const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 		padding: 8px 10px;
 		transition: background 0.15s;
 	}
-	/* On paper the tint was the face colour mixed toward white. On ink the
-	   same gesture is the face colour mixed toward the ground, which is what
-	   an alpha does — and it keeps the ground's drawing showing through
-	   instead of stamping a flat swatch over it. */
+	/* The tint is the face colour mixed toward the ground, which is what an
+	   alpha does. On paper that lands on the site's own pastel card palette
+	   — the same wash the service cards wear — without a second list of six
+	   colours to keep in sync with the CMS. */
 	.spec-link:hover,
 	.spec-link:focus-visible {
 		background: color-mix(in srgb, var(--fc) 16%, transparent);
@@ -395,15 +393,13 @@ const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 		gap: 2px;
 		width: 26px;
 		height: 26px;
-		/* three of the six brand hues are dark by design and do not exist on
-		   ink, so the bullet wears the raised hue rather than a second
-		   palette of six literals (--menu-face-floor) */
-		border: 2px solid var(--menu-fc);
+		/* the CMS hue, raw: these six were drawn for paper and this is paper */
+		border: 2px solid var(--fc);
 		padding: 2px;
 		flex: none;
 	}
 	.spec-mini i {
-		background: var(--menu-fc);
+		background: var(--fc);
 		opacity: 0.28;
 	}
 	.spec-link[aria-current="page"] .spec-mini i { opacity: 1; }
@@ -411,7 +407,9 @@ const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 	.menu-site {
 		margin: 22px 0 0;
 		padding: 16px 10px 0;
-		border-top: 1px dashed var(--menu-rule);
+		/* a hairline, not a dash: the site separates with `--color-border`
+		   everywhere else, and a dashed rule is a texture, not a boundary */
+		border-top: 1px solid var(--menu-rule);
 		display: flex;
 		flex-wrap: wrap;
 		gap: 12px 20px;
@@ -470,27 +468,17 @@ const homeLink = siteLinks.find((l) => l.key === "home") ?? null;
 		text-align: center;
 	}
 
-	/* ── The die on ink ──
-	   #417 re-inked the resting die for this ground: the black plate was
-	   lifted to #0B0B0B, the light one dropped to #33373D, the cells to
-	   #3B4048, because on the panel's own ink the black plate all but
-	   vanishes and the silver one glares.
+	/* ── The die ──
+	   Nothing to override, and that is the point twice over. #417 repainted
+	   the resting die for its ink ground and the founder rejected it
+	   (2026-08-28: "el cuadrado cuando está quieto no tiene los colores
+	   originales del logo. Eso tiene que quedar clavado!! es mi marca"); what
+	   survived was a lightness floor on the ROLLED faces, because three of the
+	   CMS's six hues do not exist on ink. On paper they do. The mark and the
+	   roll are both LogoDie's own colours here, unqualified.
 
-	   That is reverted (founder, 2026-08-28: "el cuadrado cuando está quieto
-	   no tiene los colores originales del logo. Eso tiene que quedar
-	   clavado!! es mi marca"). The resting die is the MARK, and a mark that
-	   is repainted per surface is not a mark — the black plate reading as a
-	   shadow against the ground is how this logo behaves on any dark ground,
-	   including every deck and signature it already appears on. LogoDie's own
-	   colours now apply here unchanged; there is nothing left to override at
-	   rest, which is the point.
-
-	   What survives is the ROLL, below: the six brand hues are the CMS's,
-	   not the logo's, and three of them are dark by design. */
-	.menu-dialog .logo-stage .cface.alive .cell {
-		fill: color-mix(in srgb, var(--fc) 40%, white);
-		fill: oklch(from var(--fc) max(l, var(--menu-face-floor)) c h);
-	}
+	   And the plates finally read: stacked on ink, only the light one showed
+	   and the dark one was a hole. */
 
 	/* The die highlights the specialty it lands on when rolled by tap */
 	.spec-link.rolled {
