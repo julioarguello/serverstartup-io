@@ -486,6 +486,14 @@ const cellB = isSection ? `color-mix(in srgb, ${accent} 18%, white)` : "#E3E7EB"
 	   the ink panel for the same reason — a placeholder is the label of an
 	   empty field, not decoration. */
 	.search-form--menu .search-input::placeholder { color: var(--color-text); }
+	/* The hint carries `<kbd>enter</kbd>`, and a keycap has a border: on the
+	   ink panel #417 built, that border never met the muted ink. #432 made
+	   the panel paper and put them in one box — `--color-text-muted` is
+	   annotated "5.4:1 on paper", which it is, but against the keycap's
+	   `--color-border` it measures 4.28:1 and 1.4.3 asks 4.5. One step
+	   firmer clears it by 9.2:1, wide enough that a font-metric difference
+	   cannot flip it back the way it flipped this one (#436). */
+	.search-form--menu .search-hint { color: var(--color-ink-soft); }
 	@media (min-width: 768px) {
 		.search-form--menu { display: none; }
 	}
