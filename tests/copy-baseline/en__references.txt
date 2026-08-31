@@ -35,12 +35,6 @@ Jan 24 2019
 1
 serverstartup
 clients
-42K
-Jan 24 2019
--r-xr-xr-x
-1
-serverstartup
-clients
 8.7K
 Jan 24 2019
 -r--r--r--
@@ -66,12 +60,6 @@ Jan 24 2019
 serverstartup
 clients
 6.8K
-Jan 24 2019
--r-xr-xr-x
-1
-serverstartup
-clients
-27K
 Jan 24 2019
 All logos belong to their respective owners; shown solely as a factual reference of delivered work.
 Let's talk, engineer to engineer.
