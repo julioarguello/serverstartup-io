@@ -26,7 +26,7 @@ No montamos `Cloudflare` y desaparecemos. Vigilamos el tráfico, ajustamos las r
 
 Hemos montado `Cloudflare` para:
 
-> b64:[REDACTED-LIST]
+> b64:QWxjYW1wbywgRm9ydW0gU3BvcnQsIEpvYiZUYWxlbnQsIFB1bnQgUm9tYSw=
 
 La plataforma no se acaba en el `CDN` y el `WAF`. `Zero Trust`, `Access`, `Stream`, `R2`. Te ayudamos a decidir qué piezas encajan y cuáles no.
 

@@ -6055,7 +6055,7 @@
 								{
 									"_type": "span",
 									"_key": "k1n",
-									"text": "b64:[REDACTED-LIST]",
+									"text": "b64:QWxjYW1wbywgRm9ydW0gU3BvcnQsIEpvYiZUYWxlbnQsIFB1bnQgUm9tYSw=",
 									"marks": []
 								}
 							]
@@ -9554,7 +9554,7 @@
 								{
 									"_type": "span",
 									"_key": "k1m",
-									"text": "b64:[REDACTED-LIST]",
+									"text": "b64:QWxjYW1wbywgRm9ydW0gU3BvcnQsIEpvYiZUYWxlbnQsIFB1bnQgUm9tYSw=",
 									"marks": []
 								}
 							]
@@ -17805,36 +17805,6 @@
 					"featured_image": {
 						"src": "/assets/ref-jobandtalent.png",
 						"alt": "Job&Talent"
-					},
-					"featured": true
-				}
-			},
-			{
-				"id": "ref-c1",
-				"locale": "es",
-				"slug": "c1",
-				"status": "published",
-				"data": {
-					"title": "c1",
-					"excerpt": "clientes · 42K",
-					"featured_image": {
-						"src": "/assets/ref-c1.png",
-						"alt": ""
-					},
-					"featured": true
-				}
-			},
-			{
-				"id": "ref-t1",
-				"locale": "es",
-				"slug": "t1",
-				"status": "published",
-				"data": {
-					"title": "t1",
-					"excerpt": "clientes · 27K",
-					"featured_image": {
-						"src": "/assets/ref-t1.png",
-						"alt": ""
 					},
 					"featured": true
 				}

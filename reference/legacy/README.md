@@ -1,6 +1,6 @@
 # Legacy Content — `serverstartup.io`
 
-Source material migrated from `julioarguello/serverstartup.io` (private, to be archived).
+Source material migrated from `julioarguello/serverstartup.io` — private, and **archived on 2026-08-30** (#428). Archived, not deleted: it stays readable to its owner, so the provenance below still resolves.
 
 This content serves as **reference** for creating `seed/content/` files — it should NOT be loaded into the CMS directly. Use the `emdash-ops` content loader pattern to transform relevant material into properly formatted markdown with YAML frontmatter.
 
@@ -48,7 +48,7 @@ the citability gate now (§ below); whether they should be here at all is #324.
 | `assets/areas/` | Architectural sketches per service area + AI prompts used to generate them |
 | `assets/history/` | Historical logo versions |
 
-> **Note:** `src/media/misc/` (~115MB of slideshow videos) was NOT migrated — too large for git. Available in the original repo if needed.
+> **Note:** `src/media/misc/` (~115MB of slideshow videos) was NOT migrated — too large for git. Still in the original repo, which is archived: readable, not writable.
 
 ### `agent/`
 
@@ -75,7 +75,7 @@ To create new `seed/content/` files from this material:
 
 ## Provenance
 
-- **Source repo:** `github.com/julioarguello/serverstartup.io` (commit `817f097`)
+- **Source repo:** `github.com/julioarguello/serverstartup.io` (commit `817f097`) — archived 2026-08-30
 - **Migration date:** 2026-05-01
 - **Migration issue:** #139
 

@@ -39,6 +39,6 @@ Use the EmDash admin UI to add a raw HTML block or create a custom block type fo
 
 ## Provenance
 
-- **Source repo:** `github.com/julioarguello/serverstartup.io` (commit `817f097`)
+- **Source repo:** `github.com/julioarguello/serverstartup.io` (commit `817f097`) — archived 2026-08-30
 - **Original path:** `src/media/logo/` and `src/media/misc/`
 - **Migration issue:** #139
